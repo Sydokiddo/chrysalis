@@ -8,7 +8,10 @@
   "authors": [
     "Sydokiddo"
   ],
-  "contact": {},
+  "contact": {
+    "issues": "https://github.com/Sydokiddo/chrysalis/issues",
+    "sources": "https://github.com/Sydokiddo/chrysalis"
+  },
   "license": "MIT",
   "icon": "assets/chrysalis/icon.png",
   "accessWidener": "chrysalis.accesswidener",
