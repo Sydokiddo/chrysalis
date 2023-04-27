@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.sydokiddo.chrysalis.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "PlayerManagerMixin",
+    "blocks.chorus_plant.ChorusFlowerBlockMixin",
+    "blocks.chorus_plant.ChorusPlantBlockMixin",
+    "blocks.nether_portal.PortalShapeMixin",
+    "entities.birds.BirdSeedsMixin",
+    "entities.piglin.PiglinAiMixin",
+    "items.end_crystal.EndCrystalItemMixin",
+    "util.ActivityAccessor",
+    "util.BrewingRecipeRegistryMixin",
+    "util.EnchantmentHelperMixin",
+    "util.MemoryModuleAccessor",
+    "util.SensorTypeAccessor",
+    "util.SimpleParticleTypeAccessor"
+  ],
+  "client": [
+    "util.RenderSystemAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

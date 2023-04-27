@@ -1,4 +1,4 @@
-package net.sydokiddo.example.mixin;
+package net.sydokiddo.chrysalis.mixin;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.network.Connection;
@@ -22,6 +22,6 @@ public class PlayerManagerMixin {
 
     @Inject(method = "placeNewPlayer", at = @At(value = "TAIL"))
     private void endlessEncore_onPlayerConnectToServer(Connection connection, ServerPlayer player, CallbackInfo info) {
-        LOGGER.info(player.getName().getString() + " has Example Mod installed");
+        LOGGER.info(player.getName().getString() + " has Example Chrysalis installed");
     }
 }

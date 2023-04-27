@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "chrysalis",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Chrysalis",
+  "description": "A library mod and shared API for all of Sydokiddo's Minecraft Fabric mods!",
   "authors": [
     "Sydokiddo"
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/modid/icon.png",
-  "accessWidener": "modid.accesswidener",
+  "icon": "assets/chrysalis/icon.png",
+  "accessWidener": "chrysalis.accesswidener",
   "environment": "*",
 
   "entrypoints": {
     "main": [
-      "net.sydokiddo.example.Mod"
+      "net.sydokiddo.chrysalis.Chrysalis"
     ],
     "client": [
-      "net.sydokiddo.example.client.ModClient"
+      "net.sydokiddo.chrysalis.client.ChrysalisClient"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "chrysalis.mixins.json"
   ],
 
   "depends": {

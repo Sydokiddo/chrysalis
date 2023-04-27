@@ -1,18 +1,18 @@
-package net.sydokiddo.example;
+package net.sydokiddo.chrysalis;
 
 import net.fabricmc.api.ModInitializer;
-import net.sydokiddo.example.registry.ModRegistry;
+import net.sydokiddo.chrysalis.registry.ModRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Mod implements ModInitializer {
+public class Chrysalis implements ModInitializer {
 
-	public static final String MOD_ID = "modid";
+	public static final String MOD_ID = "chrysalis";
 	private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
 		ModRegistry.registerAll();
-		LOGGER.info("Thank you for downloading Example Mod");
+		LOGGER.info("Chrysalis library has been initialized!");
 	}
 }
