@@ -1,3 +1,11 @@
-This is an example README file for a Fabric 1.19.4 mod! 
+![github_icon](images/mod_icon.png)
 
-This template uses Mojang Mappings and has the general file format set up to use as a template!
+## **About Chrysalis**
+
+Chrysalis is a small library mod for [Fabric](https://fabricmc.net) 1.19.4 with built-in features to assist with mod development and make modding more accessible for developers!
+
+## **Download**
+
+Chrysalis can be downloaded from these sources:
+
+* (Come back later!)
