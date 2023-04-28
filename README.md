@@ -6,7 +6,7 @@ Chrysalis is a small library mod for [Fabric](https://fabricmc.net) 1.19.4 with 
 
 ## **Information**
 
-For more information about Chrysalis, please check out the [Wiki](https://github.com/Sydokiddo/chrysalis/wiki)!
+For more information about Chrysalis, please check out the [Wiki](https://github.com/Sydokiddo/chrysalis/wiki)! (Wiki not available yet!)
 
 ## **Download**
 
