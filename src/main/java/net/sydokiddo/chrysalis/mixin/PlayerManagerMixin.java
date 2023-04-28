@@ -21,7 +21,7 @@ public class PlayerManagerMixin {
     @Shadow @Mutable @Final private static final Logger LOGGER = LogUtils.getLogger();
 
     @Inject(method = "placeNewPlayer", at = @At(value = "TAIL"))
-    private void endlessEncore_onPlayerConnectToServer(Connection connection, ServerPlayer player, CallbackInfo info) {
-        LOGGER.info(player.getName().getString() + " has Example Chrysalis installed");
+    private void chrysalis_onPlayerConnectToServer(Connection connection, ServerPlayer player, CallbackInfo info) {
+        LOGGER.info(player.getName().getString() + " has Chrysalis installed");
     }
 }

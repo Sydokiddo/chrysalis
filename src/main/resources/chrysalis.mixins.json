@@ -7,18 +7,22 @@
     "PlayerManagerMixin",
     "blocks.chorus_plant.ChorusFlowerBlockMixin",
     "blocks.chorus_plant.ChorusPlantBlockMixin",
+    "blocks.chorus_plant.ChorusPlantFeatureMixin",
     "blocks.nether_portal.PortalShapeMixin",
     "entities.birds.BirdSeedsMixin",
+    "entities.misc.ItemEntityMixin",
     "entities.piglin.PiglinAiMixin",
+    "entities.vehicles.BoatMixin",
     "items.end_crystal.EndCrystalItemMixin",
     "util.ActivityAccessor",
     "util.BrewingRecipeRegistryMixin",
-    "util.EnchantmentHelperMixin",
     "util.MemoryModuleAccessor",
     "util.SensorTypeAccessor",
-    "util.SimpleParticleTypeAccessor"
+    "util.SimpleParticleTypeAccessor",
+    "util.WalkNodeEvaluatorMixin"
   ],
   "client": [
+    "rendering.LevelRendererMixin",
     "util.RenderSystemAccessor"
   ],
   "injectors": {
