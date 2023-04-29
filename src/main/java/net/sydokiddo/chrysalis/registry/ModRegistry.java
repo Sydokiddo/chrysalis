@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.registry;
 
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.misc.util.CreativeTabHelper;
 import net.sydokiddo.chrysalis.registry.items.DebugItems;
 import net.sydokiddo.chrysalis.registry.misc.ModCreativeModeTabs;
 
@@ -15,6 +16,7 @@ public class ModRegistry {
     private static void registerDebugUtilities() {
         DebugItems.registerDebugItems();
         ModCreativeModeTabs.registerCreativeTabs();
+        CreativeTabHelper.init();
         Chrysalis.LOGGER.info("Debug environment detected! Initializing debug utilities for Chrysalis.");
     }
 }
