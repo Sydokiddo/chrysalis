@@ -11,7 +11,7 @@ import java.util.List;
 public class CreativeTabHelper {
 
     @SuppressWarnings("ALL")
-    private static void addInstrumentItem(Item comparedItem, Item instrument, TagKey<Instrument> tagKey, CreativeModeTab.TabVisibility tabVisibility, CreativeModeTab... tabs) {
+    public static void addInstrumentItem(Item comparedItem, Item instrument, TagKey<Instrument> tagKey, CreativeModeTab.TabVisibility tabVisibility, CreativeModeTab... tabs) {
         for (CreativeModeTab tab : tabs) {
             ItemGroupEvents.modifyEntriesEvent(tab).register((entries) -> {
                 List<ItemStack> list = new ArrayList<>();
