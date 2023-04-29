@@ -12,5 +12,7 @@
 
   "item.chrysalis.heal_message": "Set player health to max health",
   "item.chrysalis.fill_hunger_message": "Set player hunger to max food value",
-  "item.chrysalis.teleport_to_spawnpoint_message": "Successfully teleported to spawnpoint"
+  "item.chrysalis.teleport_to_spawnpoint_message": "Successfully teleported to spawnpoint",
+
+  "chrysalis.screenshot.success": "Screenshot copied to clipboard"
 }

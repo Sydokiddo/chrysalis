@@ -10,6 +10,7 @@
     "blocks.chorus_plant.ChorusPlantFeatureMixin",
     "blocks.nether_portal.PortalShapeMixin",
     "entities.birds.BirdSeedsMixin",
+    "entities.misc.BlindnessMixin",
     "entities.misc.ItemEntityMixin",
     "entities.piglin.PiglinAiMixin",
     "entities.vehicles.BoatMixin",
@@ -22,6 +23,8 @@
     "util.WalkNodeEvaluatorMixin"
   ],
   "client": [
+    "misc.ScreenshotMainMixin",
+    "misc.ScreenshotRecorderMixin",
     "rendering.LevelRendererMixin",
     "util.RenderSystemAccessor"
   ],
