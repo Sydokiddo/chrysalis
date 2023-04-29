@@ -15,6 +15,8 @@ public class ChrysalisTags {
     // Item Tags:
 
     public static final TagKey<Item> ELYTRA = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "elytra"));
+    public static final TagKey<Item> FILLED_BOTTLES = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "filled_bottles"));
+    public static final TagKey<Item> FILLED_BUCKETS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "filled_buckets"));
     public static final TagKey<Item> PIGLIN_BARTERING_ITEMS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "piglin_bartering_items"));
     public static final TagKey<Item> SEEDS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "seeds"));
     public static final TagKey<Item> SOUL_SAND_BLOCKS_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "soul_sand_blocks"));
