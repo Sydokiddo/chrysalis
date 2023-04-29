@@ -11,14 +11,16 @@ import net.minecraft.util.Mth;
 @Environment(EnvType.CLIENT)
 public class GlowingSporeParticle extends TextureSheetParticle {
 
-    private GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double d, double e, double f, double g, double h, double i) {
-        super(clientLevel, d, e - 0.125D, f, g, h, i);
+    private GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        super(clientLevel, x, y, z);
         this.setSize(0.001F, 0.001F);
         this.setColor(0.5f, 0.5f, 0.5f);
         this.pickSprite(spriteSet);
         this.lifetime = (int)(8.0 / (Math.random() * 0.8 + 0.2)) + 4;
         this.hasPhysics = true;
-        this.gravity = 0.1F;
+        xd = velocityX;
+        yd = velocityY;
+        zd = velocityZ;
     }
 
     @Override
@@ -66,9 +68,9 @@ public class GlowingSporeParticle extends TextureSheetParticle {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
-            double j = (double)clientLevel.random.nextFloat() * -1.9D * (double)clientLevel.random.nextFloat() * 0.1D;
-            return new GlowingSporeParticle(clientLevel, this.sprite, d, e, f, 0.0D, j, 0.0D);
+        @Override
+        public Particle createParticle(SimpleParticleType parameters, ClientLevel clientLevel, double x, double y, double z, double vx, double vy, double vz) {
+            return new GlowingSporeParticle(clientLevel, sprite, x, y, z, vx, vy, vz);
         }
     }
 }
