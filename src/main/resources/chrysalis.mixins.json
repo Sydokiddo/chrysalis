@@ -9,12 +9,14 @@
     "blocks.chorus_plant.ChorusPlantBlockMixin",
     "blocks.chorus_plant.ChorusPlantFeatureMixin",
     "blocks.nether_portal.PortalShapeMixin",
+    "entities.allay.AllayMixin",
     "entities.birds.BirdSeedsMixin",
     "entities.misc.BlindnessMixin",
     "entities.misc.ItemEntityMixin",
     "entities.piglin.PiglinAiMixin",
     "entities.vehicles.BoatMixin",
     "items.end_crystal.EndCrystalItemMixin",
+    "items.sword.SwordItemMixin",
     "util.ActivityAccessor",
     "util.BrewingRecipeRegistryMixin",
     "util.MemoryModuleAccessor",
@@ -23,6 +25,7 @@
     "util.WalkNodeEvaluatorMixin"
   ],
   "client": [
+    "misc.MinecraftClientMixin",
     "misc.ScreenshotMainMixin",
     "misc.ScreenshotRecorderMixin",
     "rendering.LevelRendererMixin",

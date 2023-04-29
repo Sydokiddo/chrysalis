@@ -3,8 +3,6 @@
   "item.chrysalis.heal.desc": "Sets the player's health to the max value when right-clicked",
   "item.chrysalis.fill_hunger": "Fill Hunger",
   "item.chrysalis.fill_hunger.desc": "Sets the player's hunger bar to the max value when right-clicked",
-  "item.chrysalis.set_spawnpoint": "Set Spawnpoint",
-  "item.chrysalis.set_spawnpoint.desc": "Sets the player's spawnpoint when right-clicked",
   "item.chrysalis.teleport_to_spawnpoint": "Teleport to Spawnpoint",
   "item.chrysalis.teleport_to_spawnpoint.desc": "Teleports the player to their spawnpoint when right-clicked",
   "item.chrysalis.kill_wand": "Kill Wand",

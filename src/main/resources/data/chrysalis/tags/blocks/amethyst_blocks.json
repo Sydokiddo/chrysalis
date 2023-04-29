@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#minecraft:crystal_sound_blocks",
+    "minecraft:small_amethyst_bud",
+    "minecraft:medium_amethyst_bud",
+    "minecraft:large_amethyst_bud",
+    "minecraft:amethyst_cluster",
+    {"id": "minecraft:calibrated_sculk_sensor", "required": false}
+  ]
+}

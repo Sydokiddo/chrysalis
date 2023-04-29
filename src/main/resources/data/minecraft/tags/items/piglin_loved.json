@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#chrysalis:piglin_bartering_items"
+    "#chrysalis:piglin_bartering_items",
+    "#chrysalis:piglin_pacifying_armor"
   ]
 }

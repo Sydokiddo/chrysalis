@@ -39,7 +39,7 @@ public class TeleportToSpawnpointItem extends Item {
         return Component.translatable(this.getDescriptionId() + ".desc");
     }
 
-    // Teleports the player to their spawn when right-clicked
+    // Teleports the player to their spawnpoint when right-clicked
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
@@ -47,12 +47,16 @@ public class TeleportToSpawnpointItem extends Item {
         ItemStack itemStack = player.getItemInHand(interactionHand);
 
         if (!level.isClientSide) {
+
             ServerPlayer serverPlayer = (ServerPlayer)player;
-            player.playNotifySound(SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
-            player.gameEvent(GameEvent.ITEM_INTERACT_START);
-            serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
-            serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.teleport_to_spawnpoint_message"));
-            player.getCooldowns().addCooldown(this, 60);
+
+            if (serverPlayer.getOnPos() != serverPlayer.getRespawnPosition()) {
+                player.playNotifySound(SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
+                player.gameEvent(GameEvent.ITEM_INTERACT_START);
+                serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
+                serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.teleport_to_spawnpoint_message"));
+                player.getCooldowns().addCooldown(this, 60);
+            }
         }
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
     }

@@ -20,9 +20,6 @@ public class DebugItems {
     public static final Item FILL_HUNGER = registerItem("fill_hunger",
         new FillHungerItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
 
-    public static final Item SET_SPAWNPOINT = registerItem("set_spawnpoint",
-        new SetSpawnPointItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
-
     public static final Item TELEPORT_TO_SPAWNPOINT = registerItem("teleport_to_spawnpoint",
         new TeleportToSpawnpointItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
 

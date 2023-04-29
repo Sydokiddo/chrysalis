@@ -2,7 +2,6 @@
   "values": [
     "minecraft:end_crystal",
     "minecraft:fireball",
-    "#c:boats",
-    "#c:minecarts"
+    "#chrysalis:is_vehicle"
   ]
 }
