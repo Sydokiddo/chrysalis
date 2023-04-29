@@ -30,6 +30,7 @@ public class ChrysalisTags {
     public static final TagKey<Block> NETHER_PORTAL_BASE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "nether_portal_base_blocks"));
     public static final TagKey<Block> SOUL_SAND_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "soul_sand_blocks"));
     public static final TagKey<Block> UNSAFE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "unsafe_blocks"));
+    public static final TagKey<Block> FLYING_MOB_UNSAFE_TO_LAND_ON = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "flying_mob_unsafe_to_land_on"));
     public static final TagKey<Block> ENTITIES_SHOULD_WALK_AROUND = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "entities_should_walk_around"));
 
     // Entity Tags:
