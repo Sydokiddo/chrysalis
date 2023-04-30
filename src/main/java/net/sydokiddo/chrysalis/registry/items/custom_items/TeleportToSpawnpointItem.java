@@ -48,14 +48,18 @@ public class TeleportToSpawnpointItem extends Item {
 
         if (!level.isClientSide) {
 
-            ServerPlayer serverPlayer = (ServerPlayer)player;
+            player.gameEvent(GameEvent.ITEM_INTERACT_START);
 
-            if (serverPlayer.getOnPos() != serverPlayer.getRespawnPosition()) {
-                serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
-                player.playNotifySound(SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
-                player.gameEvent(GameEvent.ITEM_INTERACT_START);
-                serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.teleport_to_spawnpoint_message"));
-                player.getCooldowns().addCooldown(this, 60);
+            if (player instanceof ServerPlayer serverPlayer) {
+                if (serverPlayer.getRespawnPosition() != null) {
+                    serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
+                    player.playNotifySound(SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
+                    serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.teleport_to_spawnpoint_message"));
+                    player.getCooldowns().addCooldown(this, 60);
+                } else {
+                    player.playNotifySound(SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 1.0f, 1.0f);
+                    serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.teleport_to_spawnpoint_failed_message"));
+                }
             }
         }
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());

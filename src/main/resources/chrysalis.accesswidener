@@ -1,5 +1,9 @@
 accessWidener   v1  named
 
+# Items
+
+extendable class net/minecraft/world/item/enchantment/EnchantmentCategory
+
 # Damage Sources
 
 accessible method net/minecraft/world/damagesource/DamageSources    source    (Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/world/damagesource/DamageSource;

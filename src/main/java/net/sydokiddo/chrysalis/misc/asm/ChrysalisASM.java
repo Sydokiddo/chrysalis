@@ -4,7 +4,6 @@ import com.chocohead.mm.api.ClassTinkerers;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.MappingResolver;
 
-@SuppressWarnings("ALL")
 public class ChrysalisASM implements Runnable {
 
     @Override
