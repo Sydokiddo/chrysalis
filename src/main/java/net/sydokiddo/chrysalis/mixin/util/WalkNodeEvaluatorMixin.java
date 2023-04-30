@@ -16,7 +16,7 @@ public class WalkNodeEvaluatorMixin {
 
     // Pathfinding Malus Blocks
 
-    @Inject(method = "getBlockPathTypeRaw", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getBlockPathTypeRaw", at = @At("RETURN"), cancellable = true)
     private static void chrysalis_addPathfindingMalusBlocks(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<BlockPathTypes> cir) {
 
         BlockState blockState = blockGetter.getBlockState(blockPos);
