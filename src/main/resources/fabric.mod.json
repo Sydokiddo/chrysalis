@@ -23,6 +23,9 @@
     ],
     "client": [
       "net.sydokiddo.chrysalis.client.ChrysalisClient"
+    ],
+    "mm:early_risers": [
+      "net.sydokiddo.chrysalis.misc.asm.ChrysalisASM"
     ]
   },
   "mixins": [
