@@ -51,9 +51,9 @@ public class TeleportToSpawnpointItem extends Item {
             ServerPlayer serverPlayer = (ServerPlayer)player;
 
             if (serverPlayer.getOnPos() != serverPlayer.getRespawnPosition()) {
+                serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
                 player.playNotifySound(SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
-                serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
                 serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.teleport_to_spawnpoint_message"));
                 player.getCooldowns().addCooldown(this, 60);
             }
