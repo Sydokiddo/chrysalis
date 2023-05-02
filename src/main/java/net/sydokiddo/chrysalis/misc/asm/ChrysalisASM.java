@@ -17,8 +17,5 @@ public class ChrysalisASM implements Runnable {
 
         ClassTinkerers.enumBuilder(enchantmentTarget).addEnumSubclass("ELYTRA", "net.sydokiddo.chrysalis.misc.asm.mixins.enchantment_targets.ElytraEnchantTarget").build();
         ClassTinkerers.enumBuilder(enchantmentTarget).addEnumSubclass("SHIELD", "net.sydokiddo.chrysalis.misc.asm.mixins.enchantment_targets.ShieldEnchantTarget").build();
-        ClassTinkerers.enumBuilder(enchantmentTarget).addEnumSubclass("BRUSH", "net.sydokiddo.chrysalis.misc.asm.mixins.enchantment_targets.BrushEnchantTarget").build();
-        ClassTinkerers.enumBuilder(enchantmentTarget).addEnumSubclass("HORSE_ARMOR", "net.sydokiddo.chrysalis.misc.asm.mixins.enchantment_targets.HorseArmorEnchantTarget").build();
-        ClassTinkerers.enumBuilder(enchantmentTarget).addEnumSubclass("SPYGLASS", "net.sydokiddo.chrysalis.misc.asm.mixins.enchantment_targets.SpyglassEnchantTarget").build();
     }
 }
