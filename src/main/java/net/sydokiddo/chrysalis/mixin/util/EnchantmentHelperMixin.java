@@ -3,7 +3,6 @@ package net.sydokiddo.chrysalis.mixin.util;
 import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -30,12 +29,11 @@ public abstract class EnchantmentHelperMixin {
         currentEnchantment = enchantment;
         itemStack = stack;
     }
+
     @Redirect(method = "getAvailableEnchantmentResults", at =
     @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentCategory;canEnchant(Lnet/minecraft/world/item/Item;)Z"))
     private static boolean chrysalis_redirectCanEnchant(EnchantmentCategory instance, Item item) {
-        if (itemStack.getItem() instanceof ElytraItem){
-            return currentEnchantment.canEnchant(itemStack);
-        } else if (itemStack.getItem() instanceof ShieldItem){
+        if (itemStack.getItem() instanceof ElytraItem) {
             return currentEnchantment.canEnchant(itemStack);
         } else {
             return instance.canEnchant(item);

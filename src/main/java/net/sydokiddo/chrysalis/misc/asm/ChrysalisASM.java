@@ -16,6 +16,5 @@ public class ChrysalisASM implements Runnable {
         String enchantmentTarget = remapper.mapClassName("intermediary", "net.minecraft.class_1886");
 
         ClassTinkerers.enumBuilder(enchantmentTarget).addEnumSubclass("ELYTRA", "net.sydokiddo.chrysalis.misc.asm.mixins.enchantment_targets.ElytraEnchantTarget").build();
-        ClassTinkerers.enumBuilder(enchantmentTarget).addEnumSubclass("SHIELD", "net.sydokiddo.chrysalis.misc.asm.mixins.enchantment_targets.ShieldEnchantTarget").build();
     }
 }
