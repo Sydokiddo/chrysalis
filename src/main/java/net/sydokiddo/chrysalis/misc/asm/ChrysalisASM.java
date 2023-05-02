@@ -2,19 +2,18 @@ package net.sydokiddo.chrysalis.misc.asm;
 
 import com.chocohead.mm.api.ClassTinkerers;
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.MappingResolver;
 
 public class ChrysalisASM implements Runnable {
+
+    private String getIntermediaryClass(String path) {
+        return FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", path);
+    }
 
     @Override
     public void run() {
 
-        MappingResolver remapper = FabricLoader.getInstance().getMappingResolver();
-
         // Enchantment Targets
 
-        String enchantmentTarget = remapper.mapClassName("intermediary", "net.minecraft.class_1886");
-
-        ClassTinkerers.enumBuilder(enchantmentTarget).addEnumSubclass("ELYTRA", "net.sydokiddo.chrysalis.misc.asm.mixins.enchantment_targets.ElytraEnchantTarget").build();
+        ClassTinkerers.enumBuilder(getIntermediaryClass("net.minecraft.class_1886")).addEnumSubclass("ELYTRA", "net.sydokiddo.chrysalis.asm.ElytraEnchantmentTarget").build();
     }
 }
