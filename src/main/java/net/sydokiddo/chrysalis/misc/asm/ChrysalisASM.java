@@ -5,6 +5,7 @@ import net.fabricmc.loader.api.FabricLoader;
 
 public class ChrysalisASM implements Runnable {
 
+    @SuppressWarnings("ALL")
     private String getIntermediaryClass(String path) {
         return FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", path);
     }
@@ -14,6 +15,6 @@ public class ChrysalisASM implements Runnable {
 
         // Enchantment Targets
 
-        ClassTinkerers.enumBuilder(getIntermediaryClass("net.minecraft.class_1886")).addEnumSubclass("ELYTRA", "net.sydokiddo.chrysalis.asm.ElytraEnchantmentTarget").build();
+        ClassTinkerers.enumBuilder(getIntermediaryClass("net.minecraft.class_1886")).addEnumSubclass("ELYTRA", "net.sydokiddo.chrysalis.misc.asm.ElytraEnchantmentTarget").build();
     }
 }

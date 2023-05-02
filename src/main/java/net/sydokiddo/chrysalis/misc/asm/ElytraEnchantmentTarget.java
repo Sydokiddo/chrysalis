@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.misc.asm.mixins;
+package net.sydokiddo.chrysalis.misc.asm;
 
 import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
