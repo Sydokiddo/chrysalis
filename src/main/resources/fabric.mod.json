@@ -9,6 +9,7 @@
     "Sydokiddo"
   ],
   "contact": {
+    "homepage": "https://modrinth.com/mod/chrysalis",
     "issues": "https://github.com/Sydokiddo/chrysalis/issues",
     "sources": "https://github.com/Sydokiddo/chrysalis"
   },
@@ -39,5 +40,11 @@
     "another-mod": "*"
   },
   "breaks": {},
-  "custom": {}
+  "custom": {
+    "modmenu": {
+      "links": {
+        "chrysalis.wiki": "https://github.com/Sydokiddo/chrysalis/wiki"
+      }
+    }
+  }
 }

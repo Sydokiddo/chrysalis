@@ -2,6 +2,7 @@
   "values": [
     "#chrysalis:unsafe_blocks",
     "#minecraft:portals",
-    "minecraft:cobweb"
+    "minecraft:cobweb",
+    "minecraft:water"
   ]
 }

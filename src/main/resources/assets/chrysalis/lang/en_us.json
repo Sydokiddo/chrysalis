@@ -1,4 +1,6 @@
 {
+  "chrysalis.wiki": "Developer Wiki",
+
   "item.chrysalis.heal": "Heal",
   "item.chrysalis.heal.desc": "Sets the player's health to the max value when right-clicked",
   "item.chrysalis.fill_hunger": "Fill Hunger",

@@ -23,7 +23,7 @@ public abstract class ChorusPlantFeatureMixin extends Feature<NoneFeatureConfigu
     }
 
     @Inject(method = "place",at = @At("RETURN"), cancellable = true)
-    private void place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext, CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis_placeChorusPlantFeature(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext, CallbackInfoReturnable<Boolean> cir) {
         WorldGenLevel worldGenLevel = featurePlaceContext.level();
         BlockPos blockPos = featurePlaceContext.origin();
         RandomSource randomSource = featurePlaceContext.random();

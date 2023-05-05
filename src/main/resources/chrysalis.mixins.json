@@ -19,7 +19,6 @@
     "items.sword.SwordItemMixin",
     "util.ActivityAccessor",
     "util.BrewingRecipeRegistryMixin",
-    "util.EnchantmentCategoryMixin",
     "util.MemoryModuleAccessor",
     "util.SensorTypeAccessor",
     "util.SimpleParticleTypeAccessor",

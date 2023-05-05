@@ -14,7 +14,7 @@ public abstract class AllayMixin {
     // Un-hard-codes the items required to duplicate Allays and makes it into a tag
 
     @Inject(at = @At("HEAD"), method = "isDuplicationItem", cancellable = true)
-    private void chrysalis_AllayDuplicationItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis_allayDuplicationItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(itemStack.is(ChrysalisTags.DUPLICATES_ALLAYS));
     }
 }

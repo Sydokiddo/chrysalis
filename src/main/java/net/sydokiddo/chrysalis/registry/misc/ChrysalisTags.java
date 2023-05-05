@@ -24,6 +24,9 @@ public class ChrysalisTags {
     public static final TagKey<Item> SOUL_SAND_BLOCKS_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "soul_sand_blocks"));
     public static final TagKey<Item> TELEPORTING_FOODS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "teleporting_foods"));
     public static final TagKey<Item> IMMUNE_TO_DAMAGE = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "immune_to_damage"));
+    public static final TagKey<Item> IMMUNE_TO_DESPAWNING = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "immune_to_despawning"));
+    public static final TagKey<Item> IMMUNE_TO_EXPLOSIONS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "immune_to_explosions"));
+    public static final TagKey<Item> INCREASED_DESPAWN_TIME = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "increased_despawn_time"));
 
     // Block Tags:
 
