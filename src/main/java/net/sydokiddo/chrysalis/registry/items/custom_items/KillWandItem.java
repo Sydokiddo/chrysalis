@@ -48,12 +48,12 @@ public class KillWandItem extends Item {
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity self) {
         if (!target.isInvulnerable()) {
 
-            target.hurt(target.damageSources().mobAttack(self), target.getMaxHealth() * 2);
+            target.hurt(target.damageSources().mobAttack(self), Float.MAX_VALUE);
 
-            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(self.level);
+            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(self.level());
             lightningBolt.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
             lightningBolt.setVisualOnly(true);
-            self.level.addFreshEntity(lightningBolt);
+            self.level().addFreshEntity(lightningBolt);
 
             return true;
         }

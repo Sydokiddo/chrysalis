@@ -30,10 +30,8 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void chrysalis_makeItemsHaveExtendedLifetime(CallbackInfo ci) {
-        if (!this.getItem().isEmpty()) {
-            if (this.getItem().is(ChrysalisTags.INCREASED_DESPAWN_TIME) && this.firstTick) {
-                this.setExtendedLifetime();
-            }
+        if (!this.getItem().isEmpty() && this.getItem().is(ChrysalisTags.INCREASED_DESPAWN_TIME) && this.firstTick) {
+            this.setExtendedLifetime();
         }
     }
 
@@ -51,15 +49,11 @@ public abstract class ItemEntityMixin extends Entity {
     @Inject(at = @At("HEAD"), method = "hurt", cancellable = true)
     private void chrysalis_makeItemsImmune(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {
         if (!this.getItem().isEmpty()) {
-            if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE)) {
-                if (!damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-                    cir.setReturnValue(false);
-                }
+            if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+                cir.setReturnValue(false);
             }
-            if (this.getItem().is(ChrysalisTags.IMMUNE_TO_EXPLOSIONS)) {
-                if (damageSource.is(DamageTypeTags.IS_EXPLOSION)) {
-                    cir.setReturnValue(false);
-                }
+            if (this.getItem().is(ChrysalisTags.IMMUNE_TO_EXPLOSIONS) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) {
+                cir.setReturnValue(false);
             }
         }
     }

@@ -14,7 +14,7 @@ public class EndCrystalItemMixin {
     // End Crystals are able to be placed on any blocks in the end_crystal_base_blocks tag
 
     @Redirect(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
-    private boolean chrysalis_changeEndCrystalPlacing(BlockState instance, Block block){
-        return instance.is(ChrysalisTags.END_CRYSTAL_BASE_BLOCKS);
+    private boolean chrysalis_changeEndCrystalPlacing(BlockState blockState, Block block){
+        return blockState.is(ChrysalisTags.END_CRYSTAL_BASE_BLOCKS);
     }
 }

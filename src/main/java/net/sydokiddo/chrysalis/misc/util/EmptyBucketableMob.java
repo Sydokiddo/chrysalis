@@ -79,7 +79,7 @@ public interface EmptyBucketableMob {
     static <T extends LivingEntity> Optional<InteractionResult> bucketMobPickup(Player player, InteractionHand interactionHand, T livingEntity) {
 
         ItemStack itemStack = player.getItemInHand(interactionHand);
-        Level level = livingEntity.level;
+        Level level = livingEntity.level();
         ItemStack itemStack2 = ((EmptyBucketableMob) livingEntity).getBucketItemStack();
 
         if (itemStack.getItem() == Items.BUCKET && livingEntity.isAlive()) {

@@ -42,7 +42,7 @@ public abstract class BlindnessMixin extends Entity {
 
         // Mobs are now affected by Blindness, which decreases their visibility depending on the amplifier of the effect
 
-        if (entity instanceof LivingEntity livingEntity && !this.level.isClientSide() && livingEntity.hasEffect(MobEffects.BLINDNESS)) {
+        if (entity instanceof LivingEntity livingEntity && !this.level().isClientSide() && livingEntity.hasEffect(MobEffects.BLINDNESS)) {
 
             int amplifier = Objects.requireNonNull(livingEntity.getEffect(MobEffects.BLINDNESS)).getAmplifier();
 
