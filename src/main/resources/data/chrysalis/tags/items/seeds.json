@@ -4,7 +4,7 @@
     "minecraft:melon_seeds",
     "minecraft:pumpkin_seeds",
     "minecraft:beetroot_seeds",
-    {"id": "minecraft:torchflower_seeds", "required": false},
-    {"id": "minecraft:pitcher_pod", "required": false}
+    "minecraft:torchflower_seeds",
+    "minecraft:pitcher_pod"
   ]
 }

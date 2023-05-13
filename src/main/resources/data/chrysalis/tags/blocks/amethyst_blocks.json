@@ -5,6 +5,6 @@
     "minecraft:medium_amethyst_bud",
     "minecraft:large_amethyst_bud",
     "minecraft:amethyst_cluster",
-    {"id": "minecraft:calibrated_sculk_sensor", "required": false}
+    "minecraft:calibrated_sculk_sensor"
   ]
 }

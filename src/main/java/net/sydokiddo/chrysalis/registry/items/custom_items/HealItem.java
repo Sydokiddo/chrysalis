@@ -9,7 +9,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -18,15 +17,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
-public class HealItem extends Item {
+public class HealItem extends EnchantmentGlintItem {
 
     public HealItem(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    public boolean isFoil(ItemStack itemStack) {
-        return true;
     }
 
     @Override

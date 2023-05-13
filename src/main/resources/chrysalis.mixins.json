@@ -16,6 +16,7 @@
     "entities.piglin.PiglinAiMixin",
     "entities.vehicles.BoatMixin",
     "items.end_crystal.EndCrystalItemMixin",
+    "items.misc.PotionColorMixin",
     "items.sword.SwordItemMixin",
     "util.ActivityAccessor",
     "util.BrewingRecipeRegistryMixin",

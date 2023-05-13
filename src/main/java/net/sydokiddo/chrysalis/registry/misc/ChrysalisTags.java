@@ -27,6 +27,7 @@ public class ChrysalisTags {
     public static final TagKey<Item> IMMUNE_TO_DESPAWNING = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "immune_to_despawning"));
     public static final TagKey<Item> IMMUNE_TO_EXPLOSIONS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "immune_to_explosions"));
     public static final TagKey<Item> INCREASED_DESPAWN_TIME = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "increased_despawn_time"));
+    public static final TagKey<Item> INSTRUMENTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "instruments"));
 
     // Block Tags:
 
