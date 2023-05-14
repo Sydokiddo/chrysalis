@@ -18,6 +18,7 @@
     "items.end_crystal.EndCrystalItemMixin",
     "items.misc.PotionColorMixin",
     "items.sword.SwordItemMixin",
+    "misc.SnowFixMixin",
     "util.ActivityAccessor",
     "util.BrewingRecipeRegistryMixin",
     "util.MemoryModuleAccessor",

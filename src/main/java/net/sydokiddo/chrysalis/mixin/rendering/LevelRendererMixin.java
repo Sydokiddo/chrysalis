@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@SuppressWarnings("ALL")
 @Environment(value= EnvType.CLIENT)
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixin {
@@ -23,13 +22,10 @@ public class LevelRendererMixin {
     @Shadow private @Nullable ClientLevel level;
 
     @Unique
-    private boolean isOverworld() {
-        return this.level != null && this.level.dimension() == Level.OVERWORLD;
-    }
-    @Unique
     private boolean isNether() {
         return this.level != null && this.level.dimension() == Level.NETHER;
     }
+
     @Unique
     private boolean isEnd() {
         return this.level != null && this.level.dimension() == Level.END;
