@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.registry.misc;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
@@ -49,6 +50,10 @@ public class ChrysalisTags {
     public static final TagKey<EntityType<?>> CANNOT_RIDE_BOATS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "cannot_ride_boats"));
     public static final TagKey<EntityType<?>> ENDER_RELATED_MOBS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "ender_related_mobs"));
     public static final TagKey<EntityType<?>> IS_VEHICLE = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "is_vehicle"));
+
+    // Damage Type Tags:
+
+    public static final TagKey<DamageType> IS_MAGIC = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "is_magic"));
 
     // Biome Tags:
 
