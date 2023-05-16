@@ -12,7 +12,7 @@ public class HybridFlyingWalkingMoveControl extends MoveControl {
     private final int maxTurn;
     private final boolean hoversInPlace;
 
-    private HybridFlyingWalkingMoveControl(Mob mob, int i, boolean bl) {
+    public HybridFlyingWalkingMoveControl(Mob mob, int i, boolean bl) {
         super(mob);
         this.maxTurn = i;
         this.hoversInPlace = bl;
