@@ -1,11 +1,128 @@
 package net.sydokiddo.chrysalis.misc.util;
 
+import com.google.common.collect.Sets;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+import net.sydokiddo.chrysalis.mixin.util.BrewingRecipeRegistryMixin;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 
 @SuppressWarnings("all")
-public class LootTableLocations {
+public class RegistryHelpers {
 
-    // Loot Chests
+    public static void init() {}
+
+    // Potion Recipes
+
+    public static void registerBasePotionRecipe(Item ingredient, Potion resultPotion) {
+        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(Potions.AWKWARD, ingredient, resultPotion);
+    }
+
+    public static void registerLongPotionRecipe(Potion startingPotion, Potion resultPotion) {
+        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.REDSTONE, resultPotion);
+    }
+
+    public static void registerStrongPotionRecipe(Potion startingPotion, Potion resultPotion) {
+        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.GLOWSTONE_DUST, resultPotion);
+    }
+
+    // Block Registries
+
+    public static ButtonBlock registerStoneButton() {
+        return new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5f)
+        .pushReaction(PushReaction.DESTROY), BlockSetType.STONE, 20, false);
+    }
+
+    public static ButtonBlock registerWoodenButton(BlockSetType blockSetType) {
+        return new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5f)
+        .pushReaction(PushReaction.DESTROY), blockSetType, 30, true);
+    }
+
+    public static LeavesBlock registerLeaves(SoundType soundType) {
+        return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2f).randomTicks()
+        .sound(soundType).noOcclusion().isValidSpawn(RegistryHelpers::canSpawnOnLeaves).isSuffocating(RegistryHelpers::never)
+        .isViewBlocking(RegistryHelpers::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(RegistryHelpers::never));
+    }
+
+    public static RotatedPillarBlock registerLog(MapColor mapColor, MapColor mapColor2, SoundType soundType) {
+        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? mapColor : mapColor2)
+        .instrument(NoteBlockInstrument.BASS).strength(2.0f).sound(soundType).ignitedByLava());
+    }
+
+    public static Block registerFireProofLog(MapColor mapColor, MapColor mapColor2, SoundType soundType) {
+        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? mapColor : mapColor2)
+        .instrument(NoteBlockInstrument.BASS).strength(2.0f).sound(soundType));
+    }
+
+    // Mob Spawning
+
+    public static Boolean canSpawnOnLeaves(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
+        return entityType == EntityType.OCELOT || entityType == EntityType.PARROT;
+    }
+
+    public static Predicate<BiomeSelectionContext> isValidBiomeForMobSpawning() {
+        return context -> !context.hasTag(ChrysalisTags.WITHOUT_MOB_SPAWNS);
+    }
+
+    public static Predicate<BiomeSelectionContext> isOverworld() {
+        return context -> context.canGenerateIn(LevelStem.OVERWORLD);
+    }
+
+    public static Predicate<BiomeSelectionContext> isNether() {
+        return context -> context.canGenerateIn(LevelStem.NETHER);
+    }
+
+    public static Predicate<BiomeSelectionContext> isEnd() {
+        return context -> context.canGenerateIn(LevelStem.END);
+    }
+
+    // World Generation
+
+    public static List<PlacementModifier> commonOrePlacement(int count, PlacementModifier modifier) {
+        return List.of(CountPlacement.of(count), InSquarePlacement.spread(), modifier, BiomeFilter.biome());
+    }
+
+    public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {
+        context.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
+    }
+
+    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
+        context.register(resourceKey, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeature), List.copyOf(placementModifiers)));
+    }
+
+    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
+        registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
+    }
+
+    // Chest Loot Tables
 
     public static final ResourceLocation MINESHAFT = new ResourceLocation("minecraft", "chests/abandoned_mineshaft");
     public static final ResourceLocation ANCIENT_CITY = new ResourceLocation("minecraft", "chests/ancient_city");
@@ -147,4 +264,37 @@ public class LootTableLocations {
     public static final ResourceLocation ZOMBIE_HORSE = new ResourceLocation("minecraft", "entities/zombie_horse");
     public static final ResourceLocation ZOMBIE_VILLAGER = new ResourceLocation("minecraft", "entities/zombie_villager");
     public static final ResourceLocation ZOMBIFIED_PIGLIN = new ResourceLocation("minecraft", "entities/zombified_piglin");
+
+    // Custom Loot Tables
+
+    public static ResourceLocation registerCustomLootTable(String string) {
+        return registerCustomLootTable(new ResourceLocation(string));
+    }
+
+    public static final Set<ResourceLocation> LOOT_TABLE_LOCATIONS = Sets.newHashSet();
+
+    public static ResourceLocation registerCustomLootTable(ResourceLocation resourceLocation) {
+        if (LOOT_TABLE_LOCATIONS.add(resourceLocation)) {
+            return resourceLocation;
+        }
+        throw new IllegalArgumentException(resourceLocation + " is already a registered built-in loot table");
+    }
+
+    // Misc
+
+    public static Boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
+        return true;
+    }
+
+    public static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return false;
+    }
+
+    public static boolean isBlockStateFree(BlockState blockState) {
+        return blockState.is(BlockTags.REPLACEABLE);
+    }
+
+    public static ToIntFunction<BlockState> blockStateShouldEmitLight(int i) {
+        return blockState -> blockState.getValue(BlockStateProperties.LIT) != false ? i : 0;
+    }
 }
