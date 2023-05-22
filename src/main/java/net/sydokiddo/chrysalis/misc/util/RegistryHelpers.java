@@ -54,6 +54,10 @@ public class RegistryHelpers {
         BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.GLOWSTONE_DUST, resultPotion);
     }
 
+    public static void registerInvertedPotionRecipe(Potion startingPotion, Potion resultPotion) {
+        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.FERMENTED_SPIDER_EYE, resultPotion);
+    }
+
     // Block Registries
 
     public static ButtonBlock registerStoneButton() {
