@@ -18,20 +18,19 @@ import java.util.Optional;
 @SuppressWarnings("ALL")
 public interface EmptyBucketableMob {
 
+    boolean fromBucket();
     void setFromBucket(boolean var1);
-
     void saveToBucketTag(ItemStack var1);
-
     void loadFromBucketTag(CompoundTag var1);
-
     ItemStack getBucketItemStack();
-
     SoundEvent getPickupSound();
 
     @SuppressWarnings("ALL")
     @Deprecated
     static void saveDefaultDataToBucketTag(Mob mob, ItemStack itemStack) {
+
         CompoundTag compoundTag = itemStack.getOrCreateTag();
+
         if (mob.hasCustomName()) {
             itemStack.setHoverName(mob.getCustomName());
         }
@@ -45,11 +44,12 @@ public interface EmptyBucketableMob {
             compoundTag.putBoolean("NoGravity", mob.isNoGravity());
         }
         if (mob.hasGlowingTag()) {
-            compoundTag.putBoolean("Glowing", true);
+            compoundTag.putBoolean("Glowing", mob.hasGlowingTag());
         }
         if (mob.isInvulnerable()) {
             compoundTag.putBoolean("Invulnerable", mob.isInvulnerable());
         }
+
         compoundTag.putFloat("Health", mob.getHealth());
     }
 
@@ -80,22 +80,24 @@ public interface EmptyBucketableMob {
 
         ItemStack itemStack = player.getItemInHand(interactionHand);
         Level level = livingEntity.level();
-        ItemStack itemStack2 = ((EmptyBucketableMob) livingEntity).getBucketItemStack();
+        ItemStack bucketItemStack = ((EmptyBucketableMob) livingEntity).getBucketItemStack();
 
         if (itemStack.getItem() == Items.BUCKET && livingEntity.isAlive()) {
 
             if (!level.isClientSide) {
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer)player, itemStack2);
+                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, bucketItemStack);
             }
 
             livingEntity.playSound(((EmptyBucketableMob) livingEntity).getPickupSound(), 1.0f, 1.0f);
-            ((EmptyBucketableMob) livingEntity).saveToBucketTag(itemStack2);
-            ItemStack itemStack3 = ItemUtils.createFilledResult(itemStack, player, itemStack2, false);
-            player.setItemInHand(interactionHand, itemStack3);
-            livingEntity.discard();
+            ((EmptyBucketableMob) livingEntity).saveToBucketTag(bucketItemStack);
+            ItemStack filledResult = ItemUtils.createFilledResult(itemStack, player, bucketItemStack, false);
+            player.setItemInHand(interactionHand, filledResult);
 
+            livingEntity.discard();
             return Optional.of(InteractionResult.sidedSuccess(level.isClientSide));
+
+        } else {
+            return Optional.empty();
         }
-        return Optional.empty();
     }
 }

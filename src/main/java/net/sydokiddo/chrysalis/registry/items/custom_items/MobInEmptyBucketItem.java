@@ -5,7 +5,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -13,10 +12,12 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.sydokiddo.chrysalis.misc.util.EmptyBucketableMob;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,19 +58,25 @@ public class MobInEmptyBucketItem extends Item implements DispensibleContainerIt
     public InteractionResult useOn(@NotNull UseOnContext useOnContext) {
 
         Player player = useOnContext.getPlayer();
-        InteractionHand hand = useOnContext.getHand();
         assert player != null;
-        ItemStack itemStack = player.getItemInHand(hand);
+        ItemStack itemStack = player.getItemInHand(useOnContext.getHand());
         Level level = useOnContext.getLevel();
-        BlockPos blockPos = useOnContext.getClickedPos();
 
-        this.checkExtraContent(player, level, itemStack, blockPos);
-        level.playSound(null, blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), getEmptySound(), SoundSource.NEUTRAL, getEmptySoundVolume(), getEmptySoundPitch(level));
+        BlockHitResult blockHitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
+        BlockPos usePos = blockHitResult.getBlockPos().relative(blockHitResult.getDirection());
 
-        if (!player.getAbilities().instabuild) {
-            player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.BUCKET)));
+        if (blockHitResult.getType() == HitResult.Type.MISS || blockHitResult.getType() != HitResult.Type.BLOCK) {
+            return InteractionResult.PASS;
+        } else {
+
+            this.checkExtraContent(player, level, itemStack, usePos);
+            level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), getEmptySound(), SoundSource.NEUTRAL, getEmptySoundVolume(), getEmptySoundPitch(level));
+
+            if (!player.getAbilities().instabuild) {
+                player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.BUCKET)));
+            }
+            return InteractionResult.SUCCESS;
         }
-        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -80,14 +87,15 @@ public class MobInEmptyBucketItem extends Item implements DispensibleContainerIt
     }
 
     private void playEmptySound(@Nullable Player player, LevelAccessor levelAccessor, @NotNull BlockPos blockPos) {
-        levelAccessor.playSound(player, blockPos, this.emptySound, SoundSource.NEUTRAL, 1.0f, 1.0f);
+        assert player != null;
+        levelAccessor.playSound(player, blockPos, this.emptySound, SoundSource.NEUTRAL, getEmptySoundVolume(), getEmptySoundPitch(player.level()));
     }
 
     private void spawn(ServerLevel serverLevel, ItemStack itemStack, BlockPos blockPos) {
         Entity entity = this.type.spawn(serverLevel, itemStack, null, blockPos, MobSpawnType.BUCKET, true, false);
-        if (entity instanceof EmptyBucketableMob bucketable) {
-            bucketable.loadFromBucketTag(itemStack.getOrCreateTag());
-            bucketable.setFromBucket(true);
+        if (entity instanceof EmptyBucketableMob emptyBucketableMob) {
+            emptyBucketableMob.loadFromBucketTag(itemStack.getOrCreateTag());
+            emptyBucketableMob.setFromBucket(true);
         }
     }
 }
