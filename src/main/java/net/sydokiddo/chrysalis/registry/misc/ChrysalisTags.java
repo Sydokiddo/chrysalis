@@ -29,6 +29,9 @@ public class ChrysalisTags {
     public static final TagKey<Item> IMMUNE_TO_EXPLOSIONS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "immune_to_explosions"));
     public static final TagKey<Item> INCREASED_DESPAWN_TIME = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "increased_despawn_time"));
     public static final TagKey<Item> INSTRUMENTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "instruments"));
+    public static final TagKey<Item> GLASS_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "glass"));
+    public static final TagKey<Item> GLASS_PANES_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "glass_panes"));
+    public static final TagKey<Item> DYES = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "dyes"));
 
     // Block Tags:
 
@@ -43,13 +46,20 @@ public class ChrysalisTags {
     public static final TagKey<Block> NETHER_PORTAL_BASE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "nether_portal_base_blocks"));
     public static final TagKey<Block> SOUL_SAND_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "soul_sand_blocks"));
     public static final TagKey<Block> UNSAFE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "unsafe_blocks"));
+    public static final TagKey<Block> GLASS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "glass"));
+    public static final TagKey<Block> GLASS_PANES = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "glass_panes"));
 
     // Entity Tags:
 
+    public static final TagKey<EntityType<?>> IS_VEHICLE = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "is_vehicle"));
     public static final TagKey<EntityType<?>> ATTACKABLE_NON_LIVING_ENTITIES = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "attackable_non_living_entities"));
     public static final TagKey<EntityType<?>> CANNOT_RIDE_BOATS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "cannot_ride_boats"));
-    public static final TagKey<EntityType<?>> ENDER_RELATED_MOBS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "ender_related_mobs"));
-    public static final TagKey<EntityType<?>> IS_VEHICLE = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "is_vehicle"));
+    public static final TagKey<EntityType<?>> UNDEAD = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "undead"));
+    public static final TagKey<EntityType<?>> ARTHROPODS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "arthropods"));
+    public static final TagKey<EntityType<?>> AQUATIC = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "aquatic"));
+    public static final TagKey<EntityType<?>> ILLAGERS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "illagers"));
+    public static final TagKey<EntityType<?>> ENDER = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "ender"));
+    public static final TagKey<EntityType<?>> PIGLINS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "piglins"));
 
     // Damage Type Tags:
 
