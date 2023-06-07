@@ -33,7 +33,6 @@
     "misc.ScreenshotMainMixin",
     "misc.ScreenshotRecorderMixin",
     "rendering.LevelRendererMixin",
-    "util.MusicManagerMixin",
     "util.RenderSystemAccessor"
   ],
   "injectors": {
