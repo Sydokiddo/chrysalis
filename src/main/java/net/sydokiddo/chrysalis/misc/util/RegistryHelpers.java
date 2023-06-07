@@ -186,6 +186,12 @@ public class RegistryHelpers {
 
     public static final ResourceLocation END_CITY_JUNK = new ResourceLocation(endlessencore, "chests/end_city_junk");
     public static final ResourceLocation END_SHIP = new ResourceLocation(endlessencore, "chests/end_ship");
+    public static final ResourceLocation STRONGHOLD_BREWERY = new ResourceLocation(endlessencore, "chests/stronghold_brewery");
+    public static final ResourceLocation STRONGHOLD_FORGE = new ResourceLocation(endlessencore, "chests/stronghold_forge");
+    public static final ResourceLocation STRONGHOLD_KITCHEN = new ResourceLocation(endlessencore, "chests/stronghold_kitchen");
+    public static final ResourceLocation STRONGHOLD_NETHER_PORTAL = new ResourceLocation(endlessencore, "chests/stronghold_nether_portal");
+    public static final ResourceLocation STRONGHOLD_PRISON = new ResourceLocation(endlessencore, "chests/stronghold_prison");
+    public static final ResourceLocation STRONGHOLD_SEWER = new ResourceLocation(endlessencore, "chests/stronghold_sewer");
 
     // Archaeology Loot Tables
 
@@ -195,6 +201,10 @@ public class RegistryHelpers {
     public static final ResourceLocation ARCHAEOLOGY_WARM_OCEAN_RUIN = new ResourceLocation(minecraft, "archaeology/ocean_ruin_warm");
     public static final ResourceLocation ARCHAEOLOGY_COMMON_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_common");
     public static final ResourceLocation ARCHAEOLOGY_RARE_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_rare");
+
+    // Compatibility
+
+    public static final ResourceLocation ARCHAEOLOGY_STRONGHOLD = new ResourceLocation(endlessencore, "archaeology/stronghold");
 
     // Gameplay Loot Tables
 

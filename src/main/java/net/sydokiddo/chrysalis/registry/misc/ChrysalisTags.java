@@ -32,6 +32,7 @@ public class ChrysalisTags {
     public static final TagKey<Item> GLASS_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "glass"));
     public static final TagKey<Item> GLASS_PANES_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "glass_panes"));
     public static final TagKey<Item> DYES = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "dyes"));
+    public static final TagKey<Item> REPAIRS_IRON_GOLEMS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "repairs_iron_golems"));
 
     // Block Tags:
 
@@ -48,6 +49,7 @@ public class ChrysalisTags {
     public static final TagKey<Block> UNSAFE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "unsafe_blocks"));
     public static final TagKey<Block> GLASS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "glass"));
     public static final TagKey<Block> GLASS_PANES = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "glass_panes"));
+    public static final TagKey<Block> TURTLE_EGGS_CAN_HATCH_ON = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "turtle_eggs_can_hatch_on"));
 
     // Entity Tags:
 

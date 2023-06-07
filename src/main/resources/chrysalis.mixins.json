@@ -9,8 +9,10 @@
     "blocks.chorus_plant.ChorusPlantBlockMixin",
     "blocks.chorus_plant.ChorusPlantFeatureMixin",
     "blocks.nether_portal.PortalShapeMixin",
+    "blocks.turtle_egg.TurtleEggBlockMixin",
     "entities.allay.AllayMixin",
     "entities.birds.BirdSeedsMixin",
+    "entities.golems.IronGolemMixin",
     "entities.misc.BlindnessMixin",
     "entities.misc.ItemEntityMixin",
     "entities.piglin.PiglinAiMixin",
@@ -31,6 +33,7 @@
     "misc.ScreenshotMainMixin",
     "misc.ScreenshotRecorderMixin",
     "rendering.LevelRendererMixin",
+    "util.MusicManagerMixin",
     "util.RenderSystemAccessor"
   ],
   "injectors": {

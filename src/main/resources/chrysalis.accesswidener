@@ -8,3 +8,7 @@ extendable class net/minecraft/world/item/enchantment/EnchantmentCategory
 
 accessible method net/minecraft/world/damagesource/DamageSources    source    (Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/world/damagesource/DamageSource;
 accessible method net/minecraft/world/damagesource/DamageSources    source    (Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/damagesource/DamageSource;
+
+# Misc
+
+accessible field net/minecraft/client/sounds/MusicManager currentMusic Lnet/minecraft/client/resources/sounds/SoundInstance;
