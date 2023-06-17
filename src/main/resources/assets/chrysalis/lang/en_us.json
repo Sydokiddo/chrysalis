@@ -1,5 +1,6 @@
 {
   "chrysalis.wiki": "Developer Wiki",
+  "pack.chrysalis.emissive_textures": "Emissive Textures",
 
   "item.chrysalis.heal": "Heal",
   "item.chrysalis.heal.desc": "Sets the player's health to the max value when right-clicked",
@@ -15,5 +16,9 @@
   "item.chrysalis.teleport_to_spawnpoint_message": "Successfully teleported to spawnpoint",
   "item.chrysalis.teleport_to_spawnpoint_failed_message": "You have no set spawnpoint",
 
-  "chrysalis.screenshot.success": "Screenshot copied to clipboard"
+  "chrysalis.screenshot.success": "Screenshot copied to clipboard",
+
+  "dimension.minecraft.overworld": "Overworld",
+  "dimension.minecraft.the_nether": "The Nether",
+  "dimension.minecraft.the_end": "The End"
 }

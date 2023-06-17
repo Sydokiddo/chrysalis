@@ -6,6 +6,8 @@
     "minecraft:lightning_rod",
     "minecraft:chain",
     "#minecraft:fences",
-    "#minecraft:walls"
+    "#minecraft:walls",
+    "minecraft:azalea",
+    "minecraft:flowering_azalea"
   ]
 }

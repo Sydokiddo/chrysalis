@@ -12,6 +12,7 @@
     "blocks.turtle_egg.TurtleEggBlockMixin",
     "entities.allay.AllayMixin",
     "entities.birds.BirdSeedsMixin",
+    "entities.birds.ParrotMixin",
     "entities.golems.IronGolemMixin",
     "entities.misc.BlindnessMixin",
     "entities.misc.ItemEntityMixin",

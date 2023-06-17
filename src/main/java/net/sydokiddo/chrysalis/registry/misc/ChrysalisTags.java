@@ -33,6 +33,8 @@ public class ChrysalisTags {
     public static final TagKey<Item> GLASS_PANES_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "glass_panes"));
     public static final TagKey<Item> DYES = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "dyes"));
     public static final TagKey<Item> REPAIRS_IRON_GOLEMS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "repairs_iron_golems"));
+    public static final TagKey<Item> DISC_FRAGMENTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "disc_fragments"));
+    public static final TagKey<Item> POISONS_PARROTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "poisons_parrots"));
 
     // Block Tags:
 
