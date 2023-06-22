@@ -384,13 +384,13 @@ public class RegistryHelpers {
 
     // Dispensers
 
-    public final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
+    public static final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
-    public void playDispenserSound(BlockSource blockSource) {
+    public static void playDispenserSound(BlockSource blockSource) {
         blockSource.getLevel().levelEvent(1000, blockSource.getPos(), 0);
     }
 
-    public void playDispenserAnimation(BlockSource blockSource, Direction direction) {
+    public static void playDispenserAnimation(BlockSource blockSource, Direction direction) {
         blockSource.getLevel().levelEvent(2000, blockSource.getPos(), direction.get3DDataValue());
     }
 }
