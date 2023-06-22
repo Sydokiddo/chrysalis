@@ -15,7 +15,7 @@ import java.util.List;
 @Mixin(Boat.class)
 public abstract class BoatMixin extends Entity {
 
-    public BoatMixin(EntityType<?> entityType, Level level) {
+    private BoatMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 

@@ -5,6 +5,7 @@ import net.sydokiddo.chrysalis.misc.util.CreativeTabHelper;
 import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
 import net.sydokiddo.chrysalis.registry.items.DebugItems;
 import net.sydokiddo.chrysalis.registry.misc.ModCreativeModeTabs;
+import net.sydokiddo.chrysalis.registry.misc.ModDamageSources;
 import net.sydokiddo.chrysalis.registry.misc.ModResourcePacks;
 
 public class ModRegistry {
@@ -14,6 +15,7 @@ public class ModRegistry {
         ModResourcePacks.registerResourcePacks();
         RegistryHelpers.init();
         CreativeTabHelper.init();
+        ModDamageSources.registerDamageSources();
 
         if (Chrysalis.IS_DEBUG) {
             registerDebugUtilities();

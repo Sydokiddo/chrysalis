@@ -5,6 +5,7 @@
     "minecraft:cactus",
     "minecraft:magma_block",
     "minecraft:pointed_dripstone",
-    "minecraft:lava"
+    "minecraft:lava",
+    "minecraft:sculk_shrieker"
   ]
 }

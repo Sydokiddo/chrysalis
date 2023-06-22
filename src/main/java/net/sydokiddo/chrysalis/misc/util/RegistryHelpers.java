@@ -3,7 +3,9 @@ package net.sydokiddo.chrysalis.misc.util;
 import com.google.common.collect.Sets;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -134,6 +136,7 @@ public class RegistryHelpers {
 
     private static String endlessencore = "endlessencore";
     private static String peculia = "peculia";
+    private static String spookiar = "spookiar";
     private static String odyssey = "odyssey";
     private static String combatant = "combatant";
     private static String auditory = "auditory";
@@ -377,5 +380,17 @@ public class RegistryHelpers {
 
     public static ToIntFunction<BlockState> blockStateShouldEmitLight(int i) {
         return blockState -> blockState.getValue(BlockStateProperties.LIT) != false ? i : 0;
+    }
+
+    // Dispensers
+
+    public final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
+
+    public void playDispenserSound(BlockSource blockSource) {
+        blockSource.getLevel().levelEvent(1000, blockSource.getPos(), 0);
+    }
+
+    public void playDispenserAnimation(BlockSource blockSource, Direction direction) {
+        blockSource.getLevel().levelEvent(2000, blockSource.getPos(), direction.get3DDataValue());
     }
 }

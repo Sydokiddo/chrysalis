@@ -38,7 +38,7 @@ public abstract class ItemEntityMixin extends Entity {
     // Items in the immune_to_despawning tag will never despawn
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V"))
-    public void chrysalis_makeItemsNeverDespawn(ItemEntity instance) {
+    private void chrysalis_makeItemsNeverDespawn(ItemEntity instance) {
         if (!this.getItem().is(ChrysalisTags.IMMUNE_TO_DESPAWNING)) {
             this.discard();
         }
@@ -56,5 +56,10 @@ public abstract class ItemEntityMixin extends Entity {
                 cir.setReturnValue(false);
             }
         }
+    }
+
+    @Inject(at = @At("HEAD"), method = "fireImmune", cancellable = true)
+    private void chrysalis_makeItemsFireImmune(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(this.getItem().is(ChrysalisTags.IMMUNE_TO_FIRE));
     }
 }

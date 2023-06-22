@@ -27,7 +27,7 @@ public abstract class ChorusFlowerBlockMixin extends Block {
     @Shadow protected abstract void placeGrownFlower(Level level, BlockPos blockPos, int i);
     @Final @Shadow private ChorusPlantBlock plant;
 
-    public ChorusFlowerBlockMixin(Properties properties) {
+    private ChorusFlowerBlockMixin(Properties properties) {
         super(properties);
     }
 

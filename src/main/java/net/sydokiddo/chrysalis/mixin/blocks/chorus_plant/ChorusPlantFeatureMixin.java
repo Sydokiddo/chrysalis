@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ChorusPlantFeature.class)
 public abstract class ChorusPlantFeatureMixin extends Feature<NoneFeatureConfiguration> {
 
-    public ChorusPlantFeatureMixin(Codec<NoneFeatureConfiguration> codec) {
+    private ChorusPlantFeatureMixin(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
     }
 

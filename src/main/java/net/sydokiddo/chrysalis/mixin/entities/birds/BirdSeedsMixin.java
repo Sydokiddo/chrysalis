@@ -15,7 +15,7 @@ public abstract class BirdSeedsMixin {
     // Un-hard-codes the Seed items that Chickens and Parrots can eat and makes it into a tag
 
     @Inject(at = @At("HEAD"), method = "isFood", cancellable = true)
-    public void chrysalis_seedItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis_seedItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(itemStack.is(ChrysalisTags.SEEDS));
     }
 }
