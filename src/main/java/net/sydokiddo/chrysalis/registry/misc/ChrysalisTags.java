@@ -19,6 +19,7 @@ public class ChrysalisTags {
     public static final TagKey<Item> ELYTRA = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "elytra"));
     public static final TagKey<Item> FILLED_BOTTLES = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "filled_bottles"));
     public static final TagKey<Item> FILLED_BUCKETS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "filled_buckets"));
+    public static final TagKey<Item> FILLED_BOWLS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "filled_bowls"));
     public static final TagKey<Item> PIGLIN_BARTERING_ITEMS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "piglin_bartering_items"));
     public static final TagKey<Item> PIGLIN_PACIFYING_ARMOR = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "piglin_pacifying_armor"));
     public static final TagKey<Item> SEEDS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "seeds"));
@@ -36,6 +37,7 @@ public class ChrysalisTags {
     public static final TagKey<Item> REPAIRS_IRON_GOLEMS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "repairs_iron_golems"));
     public static final TagKey<Item> DISC_FRAGMENTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "disc_fragments"));
     public static final TagKey<Item> POISONS_PARROTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "poisons_parrots"));
+    public static final TagKey<Item> HEADS_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "heads"));
 
     // Block Tags:
 
@@ -53,6 +55,7 @@ public class ChrysalisTags {
     public static final TagKey<Block> GLASS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "glass"));
     public static final TagKey<Block> GLASS_PANES = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "glass_panes"));
     public static final TagKey<Block> TURTLE_EGGS_CAN_HATCH_ON = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "turtle_eggs_can_hatch_on"));
+    public static final TagKey<Block> HEADS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "heads"));
 
     // Entity Tags:
 
@@ -62,9 +65,12 @@ public class ChrysalisTags {
     public static final TagKey<EntityType<?>> UNDEAD = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "undead"));
     public static final TagKey<EntityType<?>> ARTHROPODS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "arthropods"));
     public static final TagKey<EntityType<?>> AQUATIC = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "aquatic"));
+    public static final TagKey<EntityType<?>> VILLAGERS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "villagers"));
     public static final TagKey<EntityType<?>> ILLAGERS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "illagers"));
     public static final TagKey<EntityType<?>> ENDER = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "ender"));
     public static final TagKey<EntityType<?>> PIGLINS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "piglins"));
+    public static final TagKey<EntityType<?>> SLIMES = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "slimes"));
+    public static final TagKey<EntityType<?>> GOLEMS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "golems"));
 
     // Damage Type Tags:
 

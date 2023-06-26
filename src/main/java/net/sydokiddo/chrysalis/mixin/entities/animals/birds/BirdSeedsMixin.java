@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.mixin.entities.birds;
+package net.sydokiddo.chrysalis.mixin.entities.animals.birds;
 
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({Chicken.class, Parrot.class})
-public abstract class BirdSeedsMixin {
+public class BirdSeedsMixin {
 
     // Un-hard-codes the Seed items that Chickens and Parrots can eat and makes it into a tag
 

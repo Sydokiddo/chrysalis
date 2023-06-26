@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.mixin.entities.birds;
+package net.sydokiddo.chrysalis.mixin.entities.animals.birds;
 
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.item.Item;

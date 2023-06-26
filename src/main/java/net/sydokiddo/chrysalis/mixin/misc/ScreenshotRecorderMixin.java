@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
 @Mixin(Screenshot.class)
-public abstract class ScreenshotRecorderMixin {
+public class ScreenshotRecorderMixin {
 
     // Copies screenshot to clipboard upon taking a screenshot
 
@@ -38,7 +38,7 @@ public abstract class ScreenshotRecorderMixin {
             ClipboardImage newImage = new ClipboardImage(lastScreen);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(newImage, null);
-            mc.gui.getChat().addMessage(Component.translatable("chrysalis.screenshot.success"));
+            mc.gui.getChat().addMessage(Component.translatable("gui.chrysalis.screenshot_success"));
         } catch(Exception e) {
             e.printStackTrace();
         }

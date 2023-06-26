@@ -1,5 +1,6 @@
 {
-  "chrysalis.wiki": "Developer Wiki",
+  "gui.chrysalis.wiki": "Developer Wiki",
+  "gui.chrysalis.screenshot_success": "Screenshot copied to clipboard",
   "pack.chrysalis.emissive_textures": "Emissive Textures",
 
   "item.chrysalis.heal": "Heal",
@@ -16,9 +17,11 @@
   "item.chrysalis.teleport_to_spawnpoint_message": "Successfully teleported to spawnpoint",
   "item.chrysalis.teleport_to_spawnpoint_failed_message": "You have no set spawnpoint",
 
-  "chrysalis.screenshot.success": "Screenshot copied to clipboard",
-
   "dimension.minecraft.overworld": "Overworld",
   "dimension.minecraft.the_nether": "The Nether",
-  "dimension.minecraft.the_end": "The End"
+  "dimension.minecraft.the_end": "The End",
+
+  "gamerule.passiveGriefing": "Allow non-destructive world interactions from mobs",
+  "gamerule.dragonGriefing": "Allow for Ender Dragons to destroy blocks",
+  "gamerule.witherGriefing": "Allow for Withers to destroy blocks"
 }

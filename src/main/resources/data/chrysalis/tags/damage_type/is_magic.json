@@ -3,6 +3,8 @@
     "minecraft:magic",
     "minecraft:indirect_magic",
     "minecraft:wither",
-    "minecraft:dragon_breath"
+    "minecraft:dragon_breath",
+    "minecraft:thorns",
+    "minecraft:sonic_boom"
   ]
 }
