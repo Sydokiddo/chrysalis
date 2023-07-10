@@ -22,6 +22,6 @@ public class PlayerManagerMixin {
 
     @Inject(method = "placeNewPlayer", at = @At(value = "TAIL"))
     private void chrysalis_onPlayerConnectToServer(Connection connection, ServerPlayer player, CallbackInfo info) {
-        LOGGER.info(player.getName().getString() + " has Chrysalis installed");
+        LOGGER.info(player.getName().getString() + " has Chrysalis v0.1.1 installed");
     }
 }

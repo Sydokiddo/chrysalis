@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#chrysalis:helmets",
+    "#chrysalis:chestplates",
+    "#chrysalis:leggings",
+    "#chrysalis:boots"
+  ]
+}

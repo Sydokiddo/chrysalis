@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "#chrysalis:base_stone_end"
+    "#chrysalis:base_stone_end",
+    "#chrysalis:concrete",
+    "#chrysalis:copper_blocks",
+    "#chrysalis:furnaces",
+    "#chrysalis:glazed_terracotta",
+    "#chrysalis:lanterns"
   ]
 }

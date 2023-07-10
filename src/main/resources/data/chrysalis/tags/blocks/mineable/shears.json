@@ -25,6 +25,11 @@
     "minecraft:twisting_vines_plant",
     "#minecraft:cave_vines",
     "#minecraft:flowers",
-    "#minecraft:coral_plants"
+    "#minecraft:coral_plants",
+    "#minecraft:saplings",
+    "minecraft:crimson_fungus",
+    "minecraft:warped_fungus",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom"
   ]
 }

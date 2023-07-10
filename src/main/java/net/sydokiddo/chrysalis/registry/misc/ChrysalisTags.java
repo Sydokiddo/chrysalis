@@ -42,6 +42,19 @@ public class ChrysalisTags {
     public static final TagKey<Item> CONCRETE_POWDER_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "concrete_powder"));
     public static final TagKey<Item> GLAZED_TERRACOTTA_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "glazed_terracotta"));
     public static final TagKey<Item> PROTECTS_AGAINST_ENDERMEN = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "protects_against_endermen"));
+    public static final TagKey<Item> FURNACES_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "furnaces"));
+    public static final TagKey<Item> TORCHES_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "torches"));
+    public static final TagKey<Item> LANTERNS_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "lanterns"));
+    public static final TagKey<Item> MEATS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "meats"));
+    public static final TagKey<Item> DUSTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "dusts"));
+    public static final TagKey<Item> INGOTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "ingots"));
+    public static final TagKey<Item> NUGGETS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "nuggets"));
+    public static final TagKey<Item> COPPER_BLOCKS_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "copper_blocks"));
+    public static final TagKey<Item> HELMETS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "helmets"));
+    public static final TagKey<Item> CHESTPLATES = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "chestplates"));
+    public static final TagKey<Item> LEGGINGS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "leggings"));
+    public static final TagKey<Item> BOOTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "boots"));
+    public static final TagKey<Item> HORSE_ARMOR = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "horse_armor"));
 
     // Block Tags:
 
@@ -64,6 +77,10 @@ public class ChrysalisTags {
     public static final TagKey<Block> CONCRETE = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "concrete"));
     public static final TagKey<Block> CONCRETE_POWDER = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "concrete_powder"));
     public static final TagKey<Block> GLAZED_TERRACOTTA = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "glazed_terracotta"));
+    public static final TagKey<Block> FURNACES = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "furnaces"));
+    public static final TagKey<Block> TORCHES = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "torches"));
+    public static final TagKey<Block> LANTERNS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "lanterns"));
+    public static final TagKey<Block> COPPER_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "copper_blocks"));
 
     // Entity Tags:
 
