@@ -13,7 +13,6 @@ public class CoreRegistry<T> {
     private final Registry<T> registry;
     private boolean isPresent;
 
-    @SuppressWarnings("all")
     public CoreRegistry(ResourceKey<Registry<T>> key, String modId) {
         this.key = key;
         this.modId = modId;

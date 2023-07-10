@@ -1,7 +1,6 @@
 package net.sydokiddo.chrysalis.misc.util;
 
 import com.google.common.collect.Sets;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
@@ -32,6 +31,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.sydokiddo.chrysalis.mixin.util.BrewingRecipeRegistryMixin;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import org.quiltmc.qsl.worldgen.biome.api.BiomeSelectionContext;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -95,7 +95,7 @@ public class RegistryHelpers {
     }
 
     public static Predicate<BiomeSelectionContext> isValidBiomeForMobSpawning() {
-        return context -> !context.hasTag(ChrysalisTags.WITHOUT_MOB_SPAWNS);
+        return context -> !context.isIn(ChrysalisTags.WITHOUT_MOB_SPAWNS);
     }
 
     public static Predicate<BiomeSelectionContext> isOverworld() {
@@ -348,6 +348,9 @@ public class RegistryHelpers {
     public static final ResourceLocation MOLDSPAWN = new ResourceLocation(peculia, "entities/moldspawn");
     public static final ResourceLocation MOLDLIN = new ResourceLocation(peculia, "entities/moldlin");
     public static final ResourceLocation BABY_TITAN = new ResourceLocation(peculia, "entities/baby_titan");
+
+    public static final ResourceLocation GHOST = new ResourceLocation(spookiar, "entities/ghost");
+    public static final ResourceLocation WISP = new ResourceLocation(spookiar, "entities/wisp");
 
     // Custom Loot Tables
 

@@ -21,13 +21,13 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+@SuppressWarnings("ALL")
 @Environment(EnvType.CLIENT)
 @Mixin(Screenshot.class)
 public class ScreenshotRecorderMixin {
 
     // Copies screenshot to clipboard upon taking a screenshot
 
-    @SuppressWarnings("ALL")
     @Inject(method = "method_1661", at = @At("TAIL"))
     private static void chrysalis_copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo ci) {
         Minecraft mc = Minecraft.getInstance();
