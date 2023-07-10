@@ -3,6 +3,8 @@
     "#chrysalis:unsafe_blocks",
     "#chrysalis:entities_should_walk_around",
     "#minecraft:portals",
+    "#minecraft:slabs",
+    "#minecraft:stairs",
     "minecraft:cobweb",
     "minecraft:water"
   ]

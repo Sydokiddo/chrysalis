@@ -34,7 +34,7 @@ public abstract class BlindnessMixin extends Entity {
 
         return (entityType == EntityType.SKELETON && itemStack.is(Items.SKELETON_SKULL) || entityType == EntityType.ZOMBIE && itemStack.is(Items.ZOMBIE_HEAD) ||
         entityType == EntityType.PIGLIN && itemStack.is(Items.PIGLIN_HEAD) || entityType == EntityType.PIGLIN_BRUTE && itemStack.is(Items.PIGLIN_HEAD) ||
-        entityType == EntityType.CREEPER && itemStack.is(Items.CREEPER_HEAD) || entityType.is(ChrysalisTags.ENDER) && itemStack.is(Items.CARVED_PUMPKIN));
+        entityType == EntityType.CREEPER && itemStack.is(Items.CREEPER_HEAD) || entityType.is(ChrysalisTags.ENDER) && itemStack.is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN));
     }
 
     @Inject(method = "getVisibilityPercent", at = @At(value = "HEAD"), cancellable = true)
@@ -63,7 +63,7 @@ public abstract class BlindnessMixin extends Entity {
 
         ItemStack itemStack = this.getItemBySlot(EquipmentSlot.HEAD);
         EntityType<?> entityType = entity.getType();
-        if (entityType.is(ChrysalisTags.ENDER) && itemStack.is(Items.CARVED_PUMPKIN)) {
+        if (entityType.is(ChrysalisTags.ENDER) && itemStack.is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN)) {
             cir.setReturnValue(0.5);
         }
     }

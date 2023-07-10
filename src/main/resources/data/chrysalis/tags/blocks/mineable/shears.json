@@ -1,0 +1,30 @@
+{
+  "values": [
+    "minecraft:cobweb",
+    "minecraft:redstone_wire",
+    "minecraft:tripwire",
+    "#minecraft:leaves",
+    "#minecraft:wool",
+    "#minecraft:wool_carpets",
+    "minecraft:glow_lichen",
+    "minecraft:dead_bush",
+    "minecraft:fern",
+    "minecraft:large_fern",
+    "minecraft:grass",
+    "minecraft:tall_grass",
+    "minecraft:crimson_roots",
+    "minecraft:warped_roots",
+    "minecraft:nether_sprouts",
+    "minecraft:seagrass",
+    "minecraft:tall_seagrass",
+    "minecraft:hanging_roots",
+    "minecraft:vine",
+    "minecraft:weeping_vines",
+    "minecraft:weeping_vines_plant",
+    "minecraft:twisting_vines",
+    "minecraft:twisting_vines_plant",
+    "#minecraft:cave_vines",
+    "#minecraft:flowers",
+    "#minecraft:coral_plants"
+  ]
+}

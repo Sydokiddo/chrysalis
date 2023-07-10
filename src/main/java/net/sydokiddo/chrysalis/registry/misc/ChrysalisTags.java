@@ -38,6 +38,10 @@ public class ChrysalisTags {
     public static final TagKey<Item> DISC_FRAGMENTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "disc_fragments"));
     public static final TagKey<Item> POISONS_PARROTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "poisons_parrots"));
     public static final TagKey<Item> HEADS_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "heads"));
+    public static final TagKey<Item> CONCRETE_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "concrete"));
+    public static final TagKey<Item> CONCRETE_POWDER_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "concrete_powder"));
+    public static final TagKey<Item> GLAZED_TERRACOTTA_ITEM = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "glazed_terracotta"));
+    public static final TagKey<Item> PROTECTS_AGAINST_ENDERMEN = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "protects_against_endermen"));
 
     // Block Tags:
 
@@ -48,7 +52,8 @@ public class ChrysalisTags {
     public static final TagKey<Block> END_CRYSTAL_BASE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "end_crystal_base_blocks"));
     public static final TagKey<Block> ENTITIES_SHOULD_WALK_AROUND = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "entities_should_walk_around"));
     public static final TagKey<Block> FLYING_MOB_UNSAFE_TO_LAND_ON = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "flying_mob_unsafe_to_land_on"));
-    public static final TagKey<Block> MINED_FASTER_WITH_SWORDS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "mined_faster_with_swords"));
+    public static final TagKey<Block> MINEABLE_WITH_SWORD = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "mineable/sword"));
+    public static final TagKey<Block> MINEABLE_WITH_SHEARS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "mineable/shears"));
     public static final TagKey<Block> NETHER_PORTAL_BASE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "nether_portal_base_blocks"));
     public static final TagKey<Block> SOUL_SAND_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "soul_sand_blocks"));
     public static final TagKey<Block> UNSAFE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "unsafe_blocks"));
@@ -56,6 +61,9 @@ public class ChrysalisTags {
     public static final TagKey<Block> GLASS_PANES = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "glass_panes"));
     public static final TagKey<Block> TURTLE_EGGS_CAN_HATCH_ON = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "turtle_eggs_can_hatch_on"));
     public static final TagKey<Block> HEADS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "heads"));
+    public static final TagKey<Block> CONCRETE = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "concrete"));
+    public static final TagKey<Block> CONCRETE_POWDER = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "concrete_powder"));
+    public static final TagKey<Block> GLAZED_TERRACOTTA = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "glazed_terracotta"));
 
     // Entity Tags:
 
