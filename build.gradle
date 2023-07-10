@@ -3,12 +3,17 @@ plugins {
 	alias libs.plugins.quilt.loom
 }
 
+base.archivesName = project.archives_base_name
 version = "$project.version+${libs.versions.minecraft.get()}"
 group = project.maven_group
 
 repositories {
 	maven {
 		url 'https://jitpack.io'
+	}
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/'
 	}
 	maven {
 		name = "Modrinth"
@@ -29,6 +34,7 @@ dependencies {
 
 	// Implementations
 
+	modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
 	modImplementation libs.quilt.loader
 	modImplementation libs.quilted.fabric.api
 }

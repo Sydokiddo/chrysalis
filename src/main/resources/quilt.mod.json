@@ -9,15 +9,18 @@
 
     "metadata": {
       "name": "Chrysalis",
-      "description": "A library mod and shared API for all of Sydokiddo's Minecraft Fabric mods!",
+      "description": "A library mod and shared API for all of Sydokiddo's Minecraft Quilt mods!",
       "contributors": {
-        "Sydokiddo": "Lead Developer"
+        "Sydokiddo": "Owner",
+        "Shock Micro": "Emissive Core Shaders",
+        "Discohund": "Emissive Core Shaders"
       },
       "contact": {
         "homepage": "https://modrinth.com/mod/chrysalis",
         "issues": "https://github.com/Sydokiddo/chrysalis/issues",
         "sources": "https://github.com/Sydokiddo/chrysalis"
       },
+      "license": "MIT",
       "icon": "assets/chrysalis/icon.png"
     },
 
@@ -45,12 +48,5 @@
   },
 
   "mixin": "chrysalis.mixins.json",
-
-  "custom": {
-    "modmenu": {
-      "links": {
-        "gui.chrysalis.wiki": "https://github.com/Sydokiddo/chrysalis/wiki"
-      }
-    }
-  }
+  "access_widener": "chrysalis.accesswidener"
 }

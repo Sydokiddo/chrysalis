@@ -55,12 +55,15 @@ public class ChrysalisTags {
     public static final TagKey<Item> LEGGINGS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "leggings"));
     public static final TagKey<Item> BOOTS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "boots"));
     public static final TagKey<Item> HORSE_ARMOR = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "horse_armor"));
+    public static final TagKey<Item> CHARGES_RESPAWN_ANCHORS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "charges_respawn_anchors"));
+    public static final TagKey<Item> TNT_IGNITERS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "tnt_igniters"));
 
     // Block Tags:
 
     public static final TagKey<Block> AMETHYST_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "amethyst_blocks"));
     public static final TagKey<Block> BASE_STONE_END = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "base_stone_end"));
     public static final TagKey<Block> CHORUS_PLANT_CAN_GROW_ON = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "chorus_plant_can_grow_on"));
+    public static final TagKey<Block> NETHER_WART_CAN_GROW_ON = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "nether_wart_can_grow_on"));
     public static final TagKey<Block> CONTAINERS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "containers"));
     public static final TagKey<Block> END_CRYSTAL_BASE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "end_crystal_base_blocks"));
     public static final TagKey<Block> ENTITIES_SHOULD_WALK_AROUND = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "entities_should_walk_around"));
