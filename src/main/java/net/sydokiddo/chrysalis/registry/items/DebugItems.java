@@ -6,7 +6,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.registry.items.custom_items.*;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.FillHungerItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.HealItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.KillWandItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.TeleportToSpawnpointItem;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 @SuppressWarnings("ALL")

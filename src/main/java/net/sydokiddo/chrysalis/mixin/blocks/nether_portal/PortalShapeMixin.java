@@ -13,7 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PortalShape.class)
 public class PortalShapeMixin {
 
-    // Un-hard-codes Nether Portal base blocks and makes it into a tag
+    /**
+     * Blocks used to create Nether Portal frames are now driven by the nether_portal_base_blocks tag.
+     **/
 
     @Inject(at = @At("HEAD"), method = "method_30487", cancellable = true)
     private static void chrysalis_netherPortalBlocksTag(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {

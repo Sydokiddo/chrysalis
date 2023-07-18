@@ -11,9 +11,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(MobEffect.class)
 public abstract class PotionColorMixin {
 
-    // Changes the color of certain status effects
-
     @Shadow @Final private int color;
+
+    /**
+     * Changes the default potion colors of Blindness, Haste, and Mining Fatigue.
+     **/
 
     @Inject(at = @At("RETURN"), method = "getColor", cancellable = true)
     private void chrysalis_changeEffectColors(CallbackInfoReturnable<Integer> cir) {

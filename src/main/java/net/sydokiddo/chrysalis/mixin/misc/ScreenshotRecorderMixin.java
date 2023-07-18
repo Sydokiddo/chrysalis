@@ -26,7 +26,9 @@ import java.util.function.Consumer;
 @Mixin(Screenshot.class)
 public class ScreenshotRecorderMixin {
 
-    // Copies screenshot to clipboard upon taking a screenshot
+    /**
+     * Copies screenshots to the user's clipboard upon taking a screenshot.
+     **/
 
     @Inject(method = "method_1661", at = @At("TAIL"))
     private static void chrysalis_copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo ci) {

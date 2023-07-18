@@ -9,6 +9,10 @@ public class EnchantmentGlintItem extends Item {
         super(properties);
     }
 
+    /**
+     * Any items that extend this class will automatically display the enchantment glint on them.
+     **/
+
     @Override
     public boolean isFoil(ItemStack itemStack) {
         return true;

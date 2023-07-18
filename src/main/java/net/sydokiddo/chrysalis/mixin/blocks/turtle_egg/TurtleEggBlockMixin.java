@@ -12,6 +12,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(TurtleEggBlock.class)
 public class TurtleEggBlockMixin {
 
+    /**
+     * Blocks that Turtle Eggs are able to hatch on is now driven by the turtle_eggs_can_hatch_on tag rather than the sand tag.
+     **/
+
     @Inject(method = "isSand", at = @At("HEAD"), cancellable = true)
     private static void chrysalis_turtleEggsCanHatchOn(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(blockGetter.getBlockState(blockPos).is(ChrysalisTags.TURTLE_EGGS_CAN_HATCH_ON));

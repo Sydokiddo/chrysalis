@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.registry.items.custom_items;
+package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.sydokiddo.chrysalis.registry.items.custom_items.EnchantmentGlintItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
@@ -32,7 +33,9 @@ public class FillHungerItem extends EnchantmentGlintItem {
         return Component.translatable(this.getDescriptionId() + ".desc");
     }
 
-    // Feeds the player when right-clicked
+    /**
+     * Fills the user's hunger bar to the max value when right-clicked with.
+     **/
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {

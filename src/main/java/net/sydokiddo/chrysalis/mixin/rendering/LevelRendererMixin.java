@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@SuppressWarnings("all")
 @Environment(value= EnvType.CLIENT)
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixin {
@@ -32,6 +33,12 @@ public class LevelRendererMixin {
     }
 
     // Prevents rain from rendering in the Nether and the End
+
+    /**
+     * Prevents rain from being able to render in the Nether and the End.
+     * <p>
+     * Fixes a vanilla bug where occasionally when going through portals when the world is loading, rain can sometimes display in dimensions where rain doesn't exist.
+     **/
 
     @Inject(method = "renderSnowAndRain", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis_preventRainRenderingInNetherAndEnd(LightTexture lightTexture, float f, double d, double e, double g, CallbackInfo info) {

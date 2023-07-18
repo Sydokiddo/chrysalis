@@ -8,6 +8,10 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(Activity.class)
 public interface ActivityAccessor {
 
+    /**
+     * Accesses the activity class for mobs.
+     **/
+
     @Invoker("<init>")
     static Activity createActivity(String string) {
         throw new UnsupportedOperationException();

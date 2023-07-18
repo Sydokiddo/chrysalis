@@ -19,7 +19,9 @@ public abstract class BoatMixin extends Entity {
         super(entityType, level);
     }
 
-    // Certain mobs are unable to ride Boats
+    /**
+     * Any mobs in the cannot_ride_boats tag will never be able to mount boats when near them.
+     **/
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;startRiding(Lnet/minecraft/world/entity/Entity;)Z"), cancellable = true)
     private void chrysalis_preventMobsFromRidingBoats(CallbackInfo ci) {

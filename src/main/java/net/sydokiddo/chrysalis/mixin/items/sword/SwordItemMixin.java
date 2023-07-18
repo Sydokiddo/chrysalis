@@ -12,7 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(SwordItem.class)
 public class SwordItemMixin {
 
-    // Any blocks in the mineable/sword tag will be destroyed faster by swords
+    /**
+     * Any blocks in the mineable/sword tag will be mined faster with Swords.
+     **/
 
     @Inject(method = "getDestroySpeed", at = @At(value = "RETURN"), cancellable = true)
     private void chrysalis_getSwordDestroySpeed(ItemStack itemStack, BlockState blockState, CallbackInfoReturnable<Float> cir) {

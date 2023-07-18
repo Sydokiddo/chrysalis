@@ -14,7 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(WalkNodeEvaluator.class)
 public class WalkNodeEvaluatorMixin {
 
-    // Pathfinding Malus Blocks
+    /**
+     * Adds any blocks in the entities_should_walk_around tag to the same pathfinding malus that fences use.
+     **/
 
     @Inject(method = "getBlockPathTypeRaw", at = @At("RETURN"), cancellable = true)
     private static void chrysalis_addPathfindingMalusBlocks(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<BlockPathTypes> cir) {

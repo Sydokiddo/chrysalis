@@ -12,7 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ShearsItem.class)
 public class ShearsItemMixin {
 
-    // Any blocks in the mineable/shears tag will be destroyed faster by shears
+    /**
+     * Any blocks in the mineable/shears tag will be mined faster with Shears.
+     **/
 
     @Inject(method = "getDestroySpeed", at = @At(value = "RETURN"), cancellable = true)
     private void chrysalis_getShearsDestroySpeed(ItemStack itemStack, BlockState blockState, CallbackInfoReturnable<Float> cir) {

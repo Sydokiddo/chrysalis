@@ -25,7 +25,9 @@ public abstract class SnowFixMixin {
         return this.getLevel() != null && this.getLevel().dimension() == Level.END;
     }
 
-    // Prevents a bug where snow can fall in the Nether and End
+    /**
+     * Prevents a bug where snow can fall in the Nether and End if the Y-level can go high enough.
+     **/
 
     @Inject(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/biome/Biome;shouldSnow(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;)Z"), cancellable = true)
     private void chrysalis_preventSnowInNetherAndEnd(LevelChunk levelChunk, int i, CallbackInfo ci) {

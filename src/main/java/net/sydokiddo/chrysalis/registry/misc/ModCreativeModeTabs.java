@@ -7,6 +7,10 @@ import net.sydokiddo.chrysalis.registry.items.DebugItems;
 
 public class ModCreativeModeTabs {
 
+    /**
+     * Registers the debug items in the Creative Mode inventory when in a debug environment.
+     **/
+
     @SuppressWarnings("ALL")
     public static void registerCreativeTabs() {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries ->

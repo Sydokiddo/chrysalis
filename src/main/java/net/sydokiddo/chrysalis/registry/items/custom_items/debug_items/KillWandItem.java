@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.registry.items.custom_items;
+package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -13,6 +13,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.sydokiddo.chrysalis.registry.items.custom_items.EnchantmentGlintItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
@@ -36,6 +37,10 @@ public class KillWandItem extends EnchantmentGlintItem {
     public boolean canAttackBlock(BlockState blockState, Level level, BlockPos blockPos, Player player) {
         return !player.isCreative();
     }
+
+    /**
+     * Any mob that is hurt with this item will automatically deal the max integer amount of damage to it.
+     **/
 
     @SuppressWarnings("ALL")
     @Override

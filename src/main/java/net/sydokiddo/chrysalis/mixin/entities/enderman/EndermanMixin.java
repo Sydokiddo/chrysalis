@@ -11,7 +11,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(EnderMan.class)
 public class EndermanMixin {
 
-    // Items that can be worn to protect against staring at Endermen are now a tag-based system
+    /**
+     * Items that can be worn in the helmet slot to protect against staring at Endermen is now driven by the protects_against_endermen tag.
+     **/
 
     @Redirect(method = "isLookingAtMe", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
     private boolean chrysalis_carvedPumpkinEndermanTag(ItemStack itemStack, Item item) {
