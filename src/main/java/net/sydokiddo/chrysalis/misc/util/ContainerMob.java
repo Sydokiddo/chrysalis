@@ -13,8 +13,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import java.util.Optional;
 
@@ -82,7 +80,7 @@ public interface ContainerMob {
     /**
      * Saves the mob to the item stack when picked up.
      * <p>
-     * Mobs can be picked up in either a Bucket, a Lava Bucket, a Powder Snow Bucket, a Glass Bottle, or a Water Bottle.
+     * Mobs can be picked up in either a Bucket, a Lava Bucket, a Powder Snow Bucket, or a Glass Bottle.
      * <p>
      * Water Buckets are not needed here since the vanilla Bucketable class already allows for this.
      **/
@@ -178,28 +176,6 @@ public interface ContainerMob {
 
             if (!level.isClientSide) {
                 CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
-            }
-
-            doContainerMobPickup(player, interactionHand, livingEntity);
-            return Optional.of(InteractionResult.sidedSuccess(level.isClientSide));
-
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    static <T extends LivingEntity> Optional<InteractionResult> waterBottleMobPickup(Player player, InteractionHand interactionHand, T livingEntity) {
-
-        Item usedItemStack = (Items.POTION).asItem();
-
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        Level level = livingEntity.level();
-        ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
-
-        if (itemStack.getItem() == usedItemStack && PotionUtils.getPotion(itemStack) == Potions.WATER && livingEntity.isAlive()) {
-
-            if (!level.isClientSide) {
-                CriteriaTriggers.PLAYER_INTERACTED_WITH_ENTITY.trigger((ServerPlayer) player, itemStack, livingEntity);
             }
 
             doContainerMobPickup(player, interactionHand, livingEntity);
