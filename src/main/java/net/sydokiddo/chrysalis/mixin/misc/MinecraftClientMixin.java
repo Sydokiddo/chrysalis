@@ -9,7 +9,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Minecraft.class)
 public class MinecraftClientMixin {
 
-    // The menu framerate limit is no longer locked to 60 and now tied to the player's selected framerate limit
+    /**
+     * The main menu's framerate is no longer hardcoded to 60 and now tied to the user's selected framerate limit in the options.
+     **/
 
     @Inject(at=@At("HEAD"), method="getFramerateLimit()I", cancellable=true)
     private void chrysalis_uncap60FPSMenuLimit(CallbackInfoReturnable<Integer> ci) {

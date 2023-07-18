@@ -11,7 +11,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(RespawnAnchorBlock.class)
 public class RespawnAnchorBlockMixin {
 
-    // Items that charge Respawn Anchors is now driven by a tag
+    /**
+     * Items that can charge Respawn Anchors is now driven by the charges_respawn_anchors tag.
+     **/
 
     @Inject(method = "isRespawnFuel", at = @At("HEAD"), cancellable = true)
     private static void chrysalis_chargesRespawnAnchorsTag(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {

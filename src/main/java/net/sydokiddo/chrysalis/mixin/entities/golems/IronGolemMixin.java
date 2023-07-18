@@ -11,7 +11,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(IronGolem.class)
 public class IronGolemMixin {
 
-    // Items that repair Iron Golems is now a tag-based system
+    /**
+     * Items that can repair damaged Iron Golems is now driven by the repairs_iron_golems tag.
+     **/
 
     @Redirect(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
     private boolean chrysalis_ironGolemRepairMaterialTag(ItemStack itemStack, Item item) {

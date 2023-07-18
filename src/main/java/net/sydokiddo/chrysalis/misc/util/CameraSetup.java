@@ -15,6 +15,10 @@ public class CameraSetup {
         this.camera = camera;
     }
 
+    /**
+     * Gets various information about the client's camera.
+     **/
+
     public Camera getInfo() {
         return camera;
     }

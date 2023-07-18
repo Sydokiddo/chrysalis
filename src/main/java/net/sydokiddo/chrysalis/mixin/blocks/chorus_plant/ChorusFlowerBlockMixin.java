@@ -31,7 +31,9 @@ public abstract class ChorusFlowerBlockMixin extends Block {
         super(properties);
     }
 
-    // Chorus Flowers can be placed on any block in the chorus_plant_can_grow_on tag
+    /**
+     * Chorus Flowers are now able to be placed on and tick on any blocks in the chorus_plant_can_grow_on tag.
+     **/
 
     @Inject(method = "canSurvive", at = @At("HEAD"), cancellable = true)
     private void chrysalis_chorusFlowerCanBePlacedOn(BlockState state, LevelReader world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {

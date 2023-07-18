@@ -10,7 +10,9 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(PowderSnowBlock.class)
 public class PowderSnowBlockMixin {
 
-    // Mobs that are on fire destroying Powder Snow is now determined by the passiveGriefing gamerule rather than mobGriefing
+    /**
+     * Mobs that are on fire and destroy Powder Snow when going into it is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     **/
 
     @ModifyArg(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_powderSnowPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {

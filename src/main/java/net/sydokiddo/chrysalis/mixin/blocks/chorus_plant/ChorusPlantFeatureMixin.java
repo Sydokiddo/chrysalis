@@ -22,6 +22,10 @@ public abstract class ChorusPlantFeatureMixin extends Feature<NoneFeatureConfigu
         super(codec);
     }
 
+    /**
+     * Allows for the Chorus Plant configured feature to be placed on any blocks in the chorus_plant_can_grow_on tag.
+     **/
+
     @Inject(method = "place",at = @At("RETURN"), cancellable = true)
     private void chrysalis_placeChorusPlantFeature(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext, CallbackInfoReturnable<Boolean> cir) {
         WorldGenLevel worldGenLevel = featurePlaceContext.level();

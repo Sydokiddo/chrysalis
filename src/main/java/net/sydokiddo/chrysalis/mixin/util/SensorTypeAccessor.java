@@ -10,6 +10,10 @@ import java.util.function.Supplier;
 @Mixin(SensorType.class)
 public interface SensorTypeAccessor {
 
+    /**
+     * Accesses the sensor type class for mobs.
+     **/
+
     @Invoker
     static <U extends Sensor<?>> SensorType<U> callRegister(String string, Supplier<U> supplier) {
         throw new UnsupportedOperationException();

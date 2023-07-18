@@ -10,7 +10,9 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(Mob.class)
 public class MobMixin {
 
-    // Mobs picking up items is now determined by the passiveGriefing gamerule rather than mobGriefing
+    /**
+     * Mobs being able to pick up items is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     **/
 
     @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_mobsPickingUpItemsPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {

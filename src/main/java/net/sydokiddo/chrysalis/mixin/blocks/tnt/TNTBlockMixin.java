@@ -11,7 +11,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(TntBlock.class)
 public class TNTBlockMixin {
 
-    // Items that ignite TNT is now a tag-based system
+    /**
+     * Items that can ignite TNT is now driven by the tnt_igniters tag.
+     **/
 
     @Redirect(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
     private boolean chrysalis_tntIgnitersTag(ItemStack itemStack, Item item) {

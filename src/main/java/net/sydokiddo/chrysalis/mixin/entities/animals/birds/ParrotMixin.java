@@ -11,7 +11,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(Parrot.class)
 public class ParrotMixin {
 
-    // Items that poison Parrots is now a tag-based system
+    /**
+     * Items that poison and kill Parrots is now driven by the poisons_parrots tag.
+     **/
 
     @Redirect(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
     private boolean chrysalis_poisonsParrotsItemTag(ItemStack itemStack, Item item) {

@@ -13,12 +13,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.At;
 
-// Puts a message in the server console to let the user know if a player has the mod installed
-
 @Mixin(PlayerList.class)
 public class PlayerManagerMixin {
 
     @Shadow @Mutable @Final private static final Logger LOGGER = LogUtils.getLogger();
+
+    /**
+     * Puts a message in the server console with the specific Chrysalis version the user has upon joining a world.
+     **/
 
     @Inject(method = "placeNewPlayer", at = @At(value = "TAIL"))
     private void chrysalis_onPlayerConnectToServer(Connection connection, ServerPlayer player, CallbackInfo info) {

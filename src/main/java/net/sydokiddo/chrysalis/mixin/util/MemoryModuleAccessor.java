@@ -10,6 +10,10 @@ import java.util.Optional;
 @Mixin(MemoryModuleType.class)
 public interface MemoryModuleAccessor {
 
+    /**
+     * Accesses the memory module type class for mobs.
+     **/
+
     @Invoker("<init>")
     static <U> MemoryModuleType<U> createMemoryModuleType(Optional<Codec<U>> optional) {
         throw new UnsupportedOperationException();

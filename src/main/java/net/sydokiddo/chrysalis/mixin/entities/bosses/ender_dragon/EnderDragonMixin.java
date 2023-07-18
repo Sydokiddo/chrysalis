@@ -10,7 +10,9 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(EnderDragon.class)
 public class EnderDragonMixin {
 
-    // Ender Dragons destroying blocks is now determined by the dragonGriefing gamerule rather than mobGriefing
+    /**
+     * Ender Dragons being able to destroy blocks is now determined by the dragonGriefing gamerule rather than the mobGriefing gamerule.
+     **/
 
     @ModifyArg(method = "checkWalls", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_enderDragonGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {

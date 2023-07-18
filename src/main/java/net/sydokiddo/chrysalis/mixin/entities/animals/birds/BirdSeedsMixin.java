@@ -12,7 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin({Chicken.class, Parrot.class})
 public class BirdSeedsMixin {
 
-    // Un-hard-codes the Seed items that Chickens and Parrots can eat and makes it into a tag
+    /**
+     * The seed items that Chickens and Parrots can eat is now driven by a tag rather than being a hardcoded list.
+     **/
 
     @Inject(at = @At("HEAD"), method = "isFood", cancellable = true)
     private void chrysalis_seedItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {

@@ -14,14 +14,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Allay.class)
 public class AllayMixin {
 
-    // Un-hard-codes the items required to duplicate Allays and makes it into a tag
+    /**
+     * Items that can duplicate Allays is now driven by the duplicates_allays tag.
+     **/
 
     @Inject(at = @At("HEAD"), method = "isDuplicationItem", cancellable = true)
     private void chrysalis_allayDuplicationItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(itemStack.is(ChrysalisTags.DUPLICATES_ALLAYS));
     }
 
-    // Allays picking up items is now determined by the passiveGriefing gamerule rather than mobGriefing
+    /**
+     * Allays being able to pick up items is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     **/
 
     @ModifyArg(method = "wantsToPickUp", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_allayPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {

@@ -13,6 +13,10 @@ public class ModSmithingTemplateItem extends SmithingTemplateItem {
         super(component, component2, component3, component4, component5, list, list2);
     }
 
+    /**
+     * Class for helping with the creation of custom Smithing Template items.
+     **/
+
     public static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
     public static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
 

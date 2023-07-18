@@ -10,7 +10,9 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(HarvestFarmland.class)
 public class HarvestFarmlandMixin {
 
-    // Farmer Villagers harvesting Farmland is now determined by the passiveGriefing gamerule rather than mobGriefing
+    /**
+     * Farmer Villagers harvesting crops from Farmland is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     **/
 
     @ModifyArg(method = "checkExtraStartConditions(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/npc/Villager;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_villagerPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {

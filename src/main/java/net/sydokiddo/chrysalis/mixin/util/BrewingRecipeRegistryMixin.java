@@ -10,6 +10,10 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(PotionBrewing.class)
 public interface BrewingRecipeRegistryMixin {
 
+    /**
+     * Accesses brewing recipes for easy registering of custom potion recipes.
+     **/
+
     @Invoker("addMix")
     static void invokeRegisterPotionRecipe(Potion input, Item item, Potion output) {
         throw new AssertionError();

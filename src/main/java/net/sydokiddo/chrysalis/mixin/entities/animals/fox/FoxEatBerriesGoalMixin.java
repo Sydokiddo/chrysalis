@@ -10,7 +10,9 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(Fox.FoxEatBerriesGoal.class)
 public class FoxEatBerriesGoalMixin {
 
-    // Foxes eating Sweet Berries or Glow Berries is now determined by the passiveGriefing gamerule rather than mobGriefing
+    /**
+     * Foxes being able to eat Sweet Berries or Glow Berries is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     **/
 
     @ModifyArg(method = "onReachedTarget", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_foxPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {

@@ -10,7 +10,9 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(WitherBoss.class)
 public class WitherMixin {
 
-    // Withers destroying blocks is now determined by the witherGriefing gamerule rather than mobGriefing
+    /**
+     * Withers being able to destroy blocks is now determined by the witherGriefing gamerule rather than the mobGriefing gamerule.
+     **/
 
     @ModifyArg(method = "customServerAiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_witherGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {

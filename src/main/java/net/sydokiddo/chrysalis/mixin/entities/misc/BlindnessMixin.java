@@ -26,6 +26,10 @@ public abstract class BlindnessMixin extends Entity {
         super(entityType, level);
     }
 
+    /**
+     * Checks to see if the user is wearing a mob head for the designated mob that it reduces the visibility percentage of.
+     **/
+
     @Unique
     private boolean hasMobHead(Entity entity) {
 
@@ -37,10 +41,14 @@ public abstract class BlindnessMixin extends Entity {
         entityType == EntityType.CREEPER && itemStack.is(Items.CREEPER_HEAD) || entityType.is(ChrysalisTags.ENDER) && itemStack.is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN));
     }
 
+    /**
+     * Mobs are now affected by the Blindness status effect, which decreases their visibility percentage depending on the amplifier of the effect.
+     * <p>
+     * Additionally, Ender mobs now have reduced visibility of entities wearing anything in their helmet slot that is in the protects_against_endermen tag.
+     **/
+
     @Inject(method = "getVisibilityPercent", at = @At(value = "HEAD"), cancellable = true)
     private void endlessEncore_makeMobsAffectedByBlindness(Entity entity, CallbackInfoReturnable<Double> cir) {
-
-        // Mobs are now affected by Blindness, which decreases their visibility depending on the amplifier of the effect
 
         if (entity instanceof LivingEntity livingEntity && !this.level().isClientSide() && livingEntity.hasEffect(MobEffects.BLINDNESS)) {
 
@@ -58,8 +66,6 @@ public abstract class BlindnessMixin extends Entity {
                 cir.setReturnValue(afterViewDistance);
             }
         }
-
-        // Ender mobs have reduced visibility to players wearing Carved Pumpkins
 
         ItemStack itemStack = this.getItemBySlot(EquipmentSlot.HEAD);
         EntityType<?> entityType = entity.getType();

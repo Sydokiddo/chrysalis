@@ -26,7 +26,9 @@ public abstract class ItemEntityMixin extends Entity {
         super(entityType, level);
     }
 
-    // Items in the increased_despawn_time tag will take longer to despawn
+    /**
+     * Any items in the increased_despawn_time tag will set themselves to have an extended lifetime on the first tick.
+     **/
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void chrysalis_makeItemsHaveExtendedLifetime(CallbackInfo ci) {
@@ -35,7 +37,9 @@ public abstract class ItemEntityMixin extends Entity {
         }
     }
 
-    // Items in the immune_to_despawning tag will never despawn
+    /**
+     * Any items in the immune_to_despawning tag will never be able to despawn.
+     **/
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V"))
     private void chrysalis_makeItemsNeverDespawn(ItemEntity instance) {
@@ -44,7 +48,9 @@ public abstract class ItemEntityMixin extends Entity {
         }
     }
 
-    // Makes various items immune to various damage sources
+    /**
+     * Makes various items immune to various damage sources dependent on what tag they are in.
+     **/
 
     @Inject(at = @At("HEAD"), method = "hurt", cancellable = true)
     private void chrysalis_makeItemsImmune(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {

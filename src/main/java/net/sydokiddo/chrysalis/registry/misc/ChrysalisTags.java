@@ -13,7 +13,9 @@ import net.sydokiddo.chrysalis.Chrysalis;
 @SuppressWarnings("ALL")
 public class ChrysalisTags {
 
-    // Item Tags:
+    /**
+     * Item Tags
+     **/
 
     public static final TagKey<Item> DUPLICATES_ALLAYS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "duplicates_allays"));
     public static final TagKey<Item> ELYTRA = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "elytra"));
@@ -58,7 +60,9 @@ public class ChrysalisTags {
     public static final TagKey<Item> CHARGES_RESPAWN_ANCHORS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "charges_respawn_anchors"));
     public static final TagKey<Item> TNT_IGNITERS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "tnt_igniters"));
 
-    // Block Tags:
+    /**
+     * Block Tags
+     **/
 
     public static final TagKey<Block> AMETHYST_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "amethyst_blocks"));
     public static final TagKey<Block> BASE_STONE_END = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "base_stone_end"));
@@ -85,7 +89,9 @@ public class ChrysalisTags {
     public static final TagKey<Block> LANTERNS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "lanterns"));
     public static final TagKey<Block> COPPER_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "copper_blocks"));
 
-    // Entity Tags:
+    /**
+     * Entity Tags
+     **/
 
     public static final TagKey<EntityType<?>> IS_VEHICLE = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "is_vehicle"));
     public static final TagKey<EntityType<?>> ATTACKABLE_NON_LIVING_ENTITIES = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "attackable_non_living_entities"));
@@ -100,11 +106,15 @@ public class ChrysalisTags {
     public static final TagKey<EntityType<?>> SLIMES = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "slimes"));
     public static final TagKey<EntityType<?>> GOLEMS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "golems"));
 
-    // Damage Type Tags:
+    /**
+     * Damage Type Tags
+     **/
 
     public static final TagKey<DamageType> IS_MAGIC = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Chrysalis.MOD_ID, "is_magic"));
 
-    // Biome Tags:
+    /**
+     * Biome Tags
+     **/
 
     public static final TagKey<Biome> WITHOUT_MOB_SPAWNS = TagKey.create(Registries.BIOME, new ResourceLocation(Chrysalis.MOD_ID, "without_mob_spawns"));
 }

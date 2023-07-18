@@ -26,7 +26,9 @@ public class ChorusPlantBlockMixin extends PipeBlock {
         super(f, properties);
     }
 
-    // Chorus Plants can be placed on any block in the chorus_plant_can_grow_on tag
+    /**
+     * Chorus Plants are now able to be placed on any blocks in the chorus_plant_can_grow_on tag.
+     **/
 
     @Inject(method = "getStateForPlacement(Lnet/minecraft/world/item/context/BlockPlaceContext;)Lnet/minecraft/world/level/block/state/BlockState;", at = @At("RETURN"), cancellable = true)
     private void chrysalis_chorusPlantCanGrowOn(BlockPlaceContext context, CallbackInfoReturnable<BlockState> info) {

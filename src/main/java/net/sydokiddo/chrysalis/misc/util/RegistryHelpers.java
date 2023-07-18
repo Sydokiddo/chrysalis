@@ -42,7 +42,9 @@ public class RegistryHelpers {
 
     public static void init() {}
 
-    // Potion Recipes
+    /**
+     * Registry helpers for registering potion recipes.
+     **/
 
     public static void registerBasePotionRecipe(Item ingredient, Potion resultPotion) {
         BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(Potions.AWKWARD, ingredient, resultPotion);
@@ -60,7 +62,9 @@ public class RegistryHelpers {
         BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.FERMENTED_SPIDER_EYE, resultPotion);
     }
 
-    // Block Registries
+    /**
+     * Registry helpers for registering blocks with specific properties.
+     **/
 
     public static ButtonBlock registerStoneButton() {
         return new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5f)
@@ -88,7 +92,9 @@ public class RegistryHelpers {
         .instrument(NoteBlockInstrument.BASS).strength(2.0f).sound(soundType));
     }
 
-    // Mob Spawning
+    /**
+     * Registry helpers for assisting with mob spawning.
+     **/
 
     public static Boolean canSpawnOnLeaves(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return entityType == EntityType.OCELOT || entityType == EntityType.PARROT;
@@ -110,7 +116,9 @@ public class RegistryHelpers {
         return context -> context.canGenerateIn(LevelStem.END);
     }
 
-    // World Generation
+    /**
+     * Registry helpers for assisting with world generation properties.
+     **/
 
     public static List<PlacementModifier> commonOrePlacement(int count, PlacementModifier modifier) {
         return List.of(CountPlacement.of(count), InSquarePlacement.spread(), modifier, BiomeFilter.biome());
@@ -128,11 +136,11 @@ public class RegistryHelpers {
         registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
     }
 
-    // Namespace Strings
+    /**
+     * Namespace strings for base Minecraft as well as compatibility with various mods.
+     **/
 
     private static String minecraft = "minecraft";
-
-    // Compatibility Namespace Strings
 
     private static String endlessencore = "endlessencore";
     private static String peculia = "peculia";
@@ -142,7 +150,9 @@ public class RegistryHelpers {
     private static String auditory = "auditory";
     private static String lottablocks = "lottablocks";
 
-    // Chest Loot Tables
+    /**
+     * Resource locations for all of the base chest loot tables in the vanilla game.
+     **/
 
     public static final ResourceLocation MINESHAFT = new ResourceLocation(minecraft, "chests/abandoned_mineshaft");
     public static final ResourceLocation ANCIENT_CITY = new ResourceLocation(minecraft, "chests/ancient_city");
@@ -185,7 +195,9 @@ public class RegistryHelpers {
     public static final ResourceLocation VILLAGE_TOOLSMITH = new ResourceLocation(minecraft, "chests/village/village_toolsmith");
     public static final ResourceLocation VILLAGE_WEAPONSMITH = new ResourceLocation(minecraft, "chests/village/village_weaponsmith");
 
-    // Compatibility
+    /**
+     * Resource locations for chest loot tables from various mods.
+     **/
 
     public static final ResourceLocation END_CITY_JUNK = new ResourceLocation(endlessencore, "chests/end_city_junk");
     public static final ResourceLocation END_SHIP = new ResourceLocation(endlessencore, "chests/end_ship");
@@ -196,7 +208,9 @@ public class RegistryHelpers {
     public static final ResourceLocation STRONGHOLD_PRISON = new ResourceLocation(endlessencore, "chests/stronghold_prison");
     public static final ResourceLocation STRONGHOLD_SEWER = new ResourceLocation(endlessencore, "chests/stronghold_sewer");
 
-    // Archaeology Loot Tables
+    /**
+     * Resource locations for all of the base archaeology loot tables in the vanilla game.
+     **/
 
     public static final ResourceLocation ARCHAEOLOGY_DESERT_TEMPLE = new ResourceLocation(minecraft, "archaeology/desert_pyramid");
     public static final ResourceLocation ARCHAEOLOGY_DESERT_WELL = new ResourceLocation(minecraft, "archaeology/desert_well");
@@ -205,11 +219,16 @@ public class RegistryHelpers {
     public static final ResourceLocation ARCHAEOLOGY_COMMON_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_common");
     public static final ResourceLocation ARCHAEOLOGY_RARE_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_rare");
 
-    // Compatibility
+    /**
+     * Resource locations for archaeology loot tables from various mods.
+     **/
 
     public static final ResourceLocation ARCHAEOLOGY_STRONGHOLD = new ResourceLocation(endlessencore, "archaeology/stronghold");
+    public static final ResourceLocation ARCHAEOLOGY_TITAN_NEST = new ResourceLocation(peculia, "archaeology/titan_nest");
 
-    // Gameplay Loot Tables
+    /**
+     * Resource locations for all of the base gameplay loot tables in the vanilla game.
+     **/
 
     public static final ResourceLocation CAT_MORNING_GIFT = new ResourceLocation(minecraft, "gameplay/cat_morning_gift");
     public static final ResourceLocation FISHING = new ResourceLocation(minecraft, "gameplay/fishing");
@@ -232,12 +251,16 @@ public class RegistryHelpers {
     public static final ResourceLocation HERO_OF_THE_VILLAGE_GIFT_TOOLSMITH = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/toolsmith_gift");
     public static final ResourceLocation HERO_OF_THE_VILLAGE_GIFT_WEAPONSMITH = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/weaponsmith_gift");
 
-    // Compatibility
+    /**
+     * Resource locations for gameplay loot tables from various mods.
+     **/
 
     public static final ResourceLocation FLEET_MOULTING = new ResourceLocation(endlessencore, "gameplay/fleet_moulting");
     public static final ResourceLocation GOLDEN_FLEET_MOULTING = new ResourceLocation(endlessencore, "gameplay/golden_fleet_moulting");
 
-    // Entity Loot Tables
+    /**
+     * Resource locations for all of the base entity loot tables in the vanilla game.
+     **/
 
     public static final ResourceLocation BLACK_SHEEP = new ResourceLocation(minecraft, "entities/sheep/black");
     public static final ResourceLocation BLUE_SHEEP = new ResourceLocation(minecraft, "entities/sheep/blue");
@@ -337,13 +360,15 @@ public class RegistryHelpers {
     public static final ResourceLocation ZOMBIE_VILLAGER = new ResourceLocation(minecraft, "entities/zombie_villager");
     public static final ResourceLocation ZOMBIFIED_PIGLIN = new ResourceLocation(minecraft, "entities/zombified_piglin");
 
-    // Compatibility
+    /**
+     * Resource locations for entity loot tables from various mods.
+     **/
 
-    public static final ResourceLocation ENDERSENT = new ResourceLocation(endlessencore, "entities/endersent");
     public static final ResourceLocation FLEET = new ResourceLocation(endlessencore, "entities/fleet");
     public static final ResourceLocation FLEET_GRUB = new ResourceLocation(endlessencore, "entities/fleet_grub");
     public static final ResourceLocation MUSE = new ResourceLocation(endlessencore, "entities/muse");
     public static final ResourceLocation RENDLING = new ResourceLocation(endlessencore, "entities/rendling");
+    public static final ResourceLocation ENDERSENT = new ResourceLocation(endlessencore, "entities/endersent");
 
     public static final ResourceLocation MOLDSPAWN = new ResourceLocation(peculia, "entities/moldspawn");
     public static final ResourceLocation MOLDLIN = new ResourceLocation(peculia, "entities/moldlin");
@@ -351,8 +376,11 @@ public class RegistryHelpers {
 
     public static final ResourceLocation GHOST = new ResourceLocation(spookiar, "entities/ghost");
     public static final ResourceLocation WISP = new ResourceLocation(spookiar, "entities/wisp");
+    public static final ResourceLocation PRIME_SPIRIT = new ResourceLocation(spookiar, "entities/prime_spirit");
 
-    // Custom Loot Tables
+    /**
+     * Registry helpers for assisting with custom loot tables.
+     **/
 
     public static ResourceLocation registerCustomLootTable(String string) {
         return registerCustomLootTable(new ResourceLocation(string));
@@ -367,7 +395,9 @@ public class RegistryHelpers {
         throw new IllegalArgumentException(resourceLocation + " is already a registered built-in loot table");
     }
 
-    // Misc
+    /**
+     * Miscellaneous properties.
+     **/
 
     public static Boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return true;
@@ -385,7 +415,9 @@ public class RegistryHelpers {
         return blockState -> blockState.getValue(BlockStateProperties.LIT) != false ? i : 0;
     }
 
-    // Dispensers
+    /**
+     * Dispenser utility methods.
+     **/
 
     public static final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
