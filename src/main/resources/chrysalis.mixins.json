@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "PlayerManagerMixin",
+    "blocks.beacon.BeaconBlockEntityMixin",
     "blocks.chorus_plant.ChorusFlowerBlockMixin",
     "blocks.chorus_plant.ChorusPlantBlockMixin",
     "blocks.chorus_plant.ChorusPlantFeatureMixin",

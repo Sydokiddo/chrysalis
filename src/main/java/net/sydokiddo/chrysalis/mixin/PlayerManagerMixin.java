@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
+import net.sydokiddo.chrysalis.Chrysalis;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,6 +25,6 @@ public class PlayerManagerMixin {
 
     @Inject(method = "placeNewPlayer", at = @At(value = "TAIL"))
     private void chrysalis_onPlayerConnectToServer(Connection connection, ServerPlayer player, CallbackInfo info) {
-        LOGGER.info(player.getName().getString() + " has Chrysalis v0.1.1 installed");
+        LOGGER.info(player.getName().getString() + " has Chrysalis " + Chrysalis.chrysalisVersion + " installed");
     }
 }
