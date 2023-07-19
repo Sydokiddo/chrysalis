@@ -175,7 +175,7 @@ public interface ContainerMob {
         if (itemStack.getItem() == usedItemStack && livingEntity.isAlive()) {
 
             if (!level.isClientSide) {
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
+                CriteriaTriggers.PLAYER_INTERACTED_WITH_ENTITY.trigger((ServerPlayer) player, itemStack, livingEntity);
             }
 
             doContainerMobPickup(player, interactionHand, livingEntity);

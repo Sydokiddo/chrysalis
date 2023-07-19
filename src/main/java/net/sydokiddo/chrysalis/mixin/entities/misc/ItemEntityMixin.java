@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.sydokiddo.chrysalis.registry.ModRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -58,7 +59,7 @@ public abstract class ItemEntityMixin extends Entity {
             if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
                 cir.setReturnValue(false);
             }
-            if (this.getItem().is(ChrysalisTags.IMMUNE_TO_EXPLOSIONS) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) {
+            if ((this.getItem().is(ChrysalisTags.IMMUNE_TO_EXPLOSIONS) || !this.level().getGameRules().getBoolean(ModRegistry.RULE_EXPLOSION_ITEM_DECAY)) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) {
                 cir.setReturnValue(false);
             }
         }

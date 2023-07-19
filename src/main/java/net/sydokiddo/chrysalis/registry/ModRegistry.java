@@ -33,6 +33,12 @@ public class ModRegistry {
         GameRules.Category.MOBS,
         GameRuleFactory.createBooleanRule(true)
     );
+    public static GameRules.Key<GameRules.BooleanValue> RULE_EXPLOSION_ITEM_DECAY =
+        GameRuleRegistry.register(
+        "explosionItemDecay",
+        GameRules.Category.DROPS,
+        GameRuleFactory.createBooleanRule(true)
+    );
 
     // Registries
 
