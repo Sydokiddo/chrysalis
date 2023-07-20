@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.misc.util;
+package net.sydokiddo.chrysalis.misc.util.mobs;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;

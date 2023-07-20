@@ -22,5 +22,7 @@
 
   "gamerule.passiveGriefing": "Allow non-destructive world interactions from mobs",
   "gamerule.dragonGriefing": "Allow for Ender Dragons to destroy blocks",
-  "gamerule.witherGriefing": "Allow for Withers to destroy blocks"
+  "gamerule.witherGriefing": "Allow for Withers to destroy blocks",
+  "gamerule.explosionItemDecay": "In explosions, most items will be destroyed",
+  "gamerule.explosionItemDecay.description": "Most items caught in explosions are lost in the explosion."
 }
