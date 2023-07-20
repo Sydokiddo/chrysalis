@@ -140,15 +140,15 @@ public class RegistryHelpers {
      * Namespace strings for base Minecraft as well as compatibility with various mods.
      **/
 
-    private static String minecraft = "minecraft";
+    public static String minecraft = "minecraft";
 
-    private static String endlessencore = "endlessencore";
-    private static String peculia = "peculia";
-    private static String spookiar = "spookiar";
-    private static String odyssey = "odyssey";
-    private static String combatant = "combatant";
-    private static String auditory = "auditory";
-    private static String lottablocks = "lottablocks";
+    public static String endlessencore = "endlessencore";
+    public static String peculia = "peculia";
+    public static String spookiar = "spookiar";
+    public static String odyssey = "odyssey";
+    public static String combatant = "combatant";
+    public static String auditory = "auditory";
+    public static String lottablocks = "lottablocks";
 
     /**
      * Resource locations for all of the base chest loot tables in the vanilla game.
