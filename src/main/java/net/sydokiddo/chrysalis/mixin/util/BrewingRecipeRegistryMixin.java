@@ -6,7 +6,6 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@SuppressWarnings("ALL")
 @Mixin(PotionBrewing.class)
 public interface BrewingRecipeRegistryMixin {
 
@@ -14,6 +13,7 @@ public interface BrewingRecipeRegistryMixin {
      * Accesses brewing recipes for easy registering of custom potion recipes.
      **/
 
+    @SuppressWarnings("ALL")
     @Invoker("addMix")
     static void invokeRegisterPotionRecipe(Potion input, Item item, Potion output) {
         throw new AssertionError();

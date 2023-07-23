@@ -11,7 +11,6 @@ public class ModResourcePacks {
 
     // Registry for Resource Packs:
 
-    @SuppressWarnings("ALL")
     public static void registerResourcePacks() {
 
         ResourceLocation emissivePack = new ResourceLocation(Chrysalis.MOD_ID, "emissive_textures");

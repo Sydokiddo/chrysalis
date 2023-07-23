@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import java.util.Optional;
 
-@SuppressWarnings("ALL")
 @Mixin(MemoryModuleType.class)
 public interface MemoryModuleAccessor {
 
@@ -14,6 +13,7 @@ public interface MemoryModuleAccessor {
      * Accesses the memory module type class for mobs.
      **/
 
+    @SuppressWarnings("ALL")
     @Invoker("<init>")
     static <U> MemoryModuleType<U> createMemoryModuleType(Optional<Codec<U>> optional) {
         throw new UnsupportedOperationException();

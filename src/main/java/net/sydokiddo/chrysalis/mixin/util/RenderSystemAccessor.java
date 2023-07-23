@@ -5,7 +5,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import org.spongepowered.asm.mixin.Mixin;
 
-@SuppressWarnings("ALL")
 @Environment(EnvType.CLIENT)
 @Mixin(RenderSystem.class)
 public interface RenderSystemAccessor {}
