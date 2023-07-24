@@ -9,6 +9,10 @@ import net.minecraft.world.entity.animal.FlyingAnimal;
 @SuppressWarnings("all")
 public class HybridWalkingFlyingMoveControl extends MoveControl {
 
+    /**
+     * This move control allows for mobs that integrate it to use both flying and walking pathfinding types
+     **/
+
     public final Mob mob;
     public final int maxTurn;
     public final boolean hoversInPlace;

@@ -8,6 +8,11 @@ import net.minecraft.resources.ResourceLocation;
 @SuppressWarnings("ALL")
 public class CoreRegistry<T> {
 
+    /**
+     * Custom core registry created by ItsBlackGear (https://github.com/ItsBlackGear)
+     * Thank you for that! :)
+     **/
+
     private final ResourceKey<Registry<T>> key;
     private final String modId;
     private final Registry<T> registry;
