@@ -11,6 +11,7 @@
     "blocks.chorus_plant.ChorusPlantFeatureMixin",
     "blocks.nether_portal.PortalShapeMixin",
     "blocks.nether_warts.NetherWartBlockMixin",
+    "blocks.piston.PistonBaseBlockMixin",
     "blocks.powder_snow.PowderSnowBlockMixin",
     "blocks.respawn_anchor.RespawnAnchorBlockMixin",
     "blocks.tnt.TNTBlockMixin",

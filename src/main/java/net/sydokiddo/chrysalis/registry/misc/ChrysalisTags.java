@@ -90,6 +90,7 @@ public class ChrysalisTags {
     public static final TagKey<Block> COPPER_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "copper_blocks"));
     public static final TagKey<Block> ALLOWS_BEACON_BEAM_PASSTHROUGH = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "allows_beacon_beam_passthrough"));
     public static final TagKey<Block> UNBREAKABLE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "unbreakable_blocks"));
+    public static final TagKey<Block> CANNOT_BE_PUSHED_BY_PISTONS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "cannot_be_pushed_by_pistons"));
 
     /**
      * Entity Tags

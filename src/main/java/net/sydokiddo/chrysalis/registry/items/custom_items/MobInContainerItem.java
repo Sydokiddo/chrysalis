@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 public class MobInContainerItem extends Item implements DispensibleContainerItem {
 
     private final EntityType<?> type;
-    private final SoundEvent emptySound;
+    public final SoundEvent emptySound;
 
     public MobInContainerItem(EntityType<?> entityType, SoundEvent soundEvent, Item.Properties properties) {
         super(properties);
