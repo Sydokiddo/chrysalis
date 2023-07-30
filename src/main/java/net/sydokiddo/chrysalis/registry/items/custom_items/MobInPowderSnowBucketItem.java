@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -14,8 +15,8 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("ALL")
 public class MobInPowderSnowBucketItem extends MobInContainerItem {
 
-    public MobInPowderSnowBucketItem(EntityType<?> entityType, SoundEvent soundEvent, Properties properties) {
-        super(entityType, soundEvent, properties);
+    public MobInPowderSnowBucketItem(EntityType<?> entityType, SoundEvent soundEvent, Properties properties, Item item) {
+        super(entityType, soundEvent, properties, item);
     }
 
     @Override

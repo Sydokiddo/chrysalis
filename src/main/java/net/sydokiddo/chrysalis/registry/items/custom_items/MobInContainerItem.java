@@ -24,21 +24,13 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
 
     private final EntityType<?> type;
     public final SoundEvent emptySound;
+    public final Item returnItem;
 
-    public MobInContainerItem(EntityType<?> entityType, SoundEvent soundEvent, Item.Properties properties) {
+    public MobInContainerItem(EntityType<?> entityType, SoundEvent soundEvent, Properties properties, Item item) {
         super(properties);
         this.type = entityType;
         this.emptySound = soundEvent;
-    }
-
-    /**
-     * The used item stack is the base item that is used to right-click on an entity to pick it up.
-     * <p>
-     * For example, if you have a mob that is picked up in an empty bucket, getUsedItemStack would return a Bucket.
-     **/
-
-    public ItemStack getUsedItemStack() {
-        return new ItemStack(Items.BUCKET);
+        this.returnItem = item;
     }
 
     /**
@@ -63,7 +55,7 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
             level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), emptySound, SoundSource.NEUTRAL, 1.0f, 0.8f + level.random.nextFloat() * 0.4f);
 
             if (!player.getAbilities().instabuild) {
-                player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, getUsedItemStack()));
+                player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(returnItem)));
             }
             return InteractionResult.SUCCESS;
         }

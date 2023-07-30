@@ -37,7 +37,7 @@ public class DispenseBucketMobDispenserBehavior implements DispenseItemBehavior 
             if (itemStack.getItem() instanceof MobInContainerItem mobInContainerItem) {
                 level.playSound(null, blockPos, mobInContainerItem.emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
                 mobInContainerItem.checkExtraContent(null, level, itemStack, blockPos);
-                return new ItemStack(mobInContainerItem.getUsedItemStack().getItem());
+                return new ItemStack(mobInContainerItem.returnItem.asItem());
             } else if (itemStack.getItem() instanceof MobBucketItem mobBucketItem) {
                 mobBucketItem.emptyContents(null, level, blockPos, null);
                 mobBucketItem.checkExtraContent(null, level, itemStack, blockPos);

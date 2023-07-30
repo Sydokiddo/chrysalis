@@ -12,8 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 import java.util.Optional;
 
 @SuppressWarnings("ALL")
@@ -79,132 +77,38 @@ public interface ContainerMob {
 
     /**
      * Saves the mob to the item stack when picked up.
-     * <p>
-     * Mobs can be picked up in either a Bucket, a Lava Bucket, a Powder Snow Bucket, a Milk Bucket, or a Glass Bottle.
-     * <p>
-     * Water Buckets are not needed here since the vanilla Bucketable class already allows for this.
      **/
 
-    private static void doContainerMobPickup(Player player, InteractionHand interactionHand, LivingEntity livingEntity) {
+    private static boolean doMobContainerPickUp(Player player, Item containerItem, InteractionHand interactionHand, LivingEntity livingEntity) {
 
         ItemStack itemStack = player.getItemInHand(interactionHand);
-        ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
-
-        livingEntity.playSound(((ContainerMob) livingEntity).getPickupSound(), 1.0f, 1.0f);
-        ((ContainerMob) livingEntity).saveToItemTag(resultItemStack);
-        ItemStack filledResult = ItemUtils.createFilledResult(itemStack, player, resultItemStack, false);
-        player.setItemInHand(interactionHand, filledResult);
-
-        livingEntity.discard();
-    }
-
-    static <T extends LivingEntity> Optional<InteractionResult> emptyBucketMobPickup(Player player, InteractionHand interactionHand, T livingEntity) {
-
-        Item usedItemStack = (Items.BUCKET).asItem();
-
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        Level level = livingEntity.level();
+        Item usedItemStack = containerItem.asItem();
         ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
 
         if (itemStack.getItem() == usedItemStack && livingEntity.isAlive()) {
 
-            if (!level.isClientSide) {
+            if (!livingEntity.level().isClientSide) {
                 CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
             }
 
-            doContainerMobPickup(player, interactionHand, livingEntity);
-            return Optional.of(InteractionResult.sidedSuccess(level.isClientSide));
+            livingEntity.playSound(((ContainerMob) livingEntity).getPickupSound(), 1.0f, 1.0f);
+            ((ContainerMob) livingEntity).saveToItemTag(resultItemStack);
+            ItemStack filledResult = ItemUtils.createFilledResult(itemStack, player, resultItemStack, false);
+            player.setItemInHand(interactionHand, filledResult);
 
+            livingEntity.discard();
+        }
+        return true;
+    }
+
+    static <T extends LivingEntity> Optional<InteractionResult> containerMobPickup(Player player, InteractionHand interactionHand, T livingEntity, Item usedItem) {
+
+        boolean bl = doMobContainerPickUp(player, usedItem.asItem(), interactionHand, livingEntity);
+
+        if (bl) {
+            return Optional.of(InteractionResult.sidedSuccess(livingEntity.level().isClientSide));
         } else {
             return Optional.empty();
         }
     }
-
-    static <T extends LivingEntity> Optional<InteractionResult> lavaBucketMobPickup(Player player, InteractionHand interactionHand, T livingEntity) {
-
-        Item usedItemStack = (Items.LAVA_BUCKET).asItem();
-
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        Level level = livingEntity.level();
-        ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
-
-        if (itemStack.getItem() == usedItemStack && livingEntity.isAlive()) {
-
-            if (!level.isClientSide) {
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
-            }
-
-            doContainerMobPickup(player, interactionHand, livingEntity);
-            return Optional.of(InteractionResult.sidedSuccess(level.isClientSide));
-
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    static <T extends LivingEntity> Optional<InteractionResult> powderSnowBucketMobPickup(Player player, InteractionHand interactionHand, T livingEntity) {
-
-        Item usedItemStack = (Items.POWDER_SNOW_BUCKET).asItem();
-
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        Level level = livingEntity.level();
-        ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
-
-        if (itemStack.getItem() == usedItemStack && livingEntity.isAlive()) {
-
-            if (!level.isClientSide) {
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
-            }
-
-            doContainerMobPickup(player, interactionHand, livingEntity);
-            return Optional.of(InteractionResult.sidedSuccess(level.isClientSide));
-
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    static <T extends LivingEntity> Optional<InteractionResult> milkBucketMobPickup(Player player, InteractionHand interactionHand, T livingEntity) {
-
-        Item usedItemStack = (Items.MILK_BUCKET).asItem();
-
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        Level level = livingEntity.level();
-        ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
-
-        if (itemStack.getItem() == usedItemStack && livingEntity.isAlive()) {
-
-            if (!level.isClientSide) {
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
-            }
-
-            doContainerMobPickup(player, interactionHand, livingEntity);
-            return Optional.of(InteractionResult.sidedSuccess(level.isClientSide));
-
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    static <T extends LivingEntity> Optional<InteractionResult> emptyBottleMobPickup(Player player, InteractionHand interactionHand, T livingEntity) {
-
-        Item usedItemStack = (Items.GLASS_BOTTLE).asItem();
-
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        Level level = livingEntity.level();
-        ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
-
-        if (itemStack.getItem() == usedItemStack && livingEntity.isAlive()) {
-
-            if (!level.isClientSide) {
-                CriteriaTriggers.PLAYER_INTERACTED_WITH_ENTITY.trigger((ServerPlayer) player, itemStack, livingEntity);
-            }
-
-            doContainerMobPickup(player, interactionHand, livingEntity);
-            return Optional.of(InteractionResult.sidedSuccess(level.isClientSide));
-
-        } else {
-            return Optional.empty();
-        }
-    }
-}
+ }

@@ -34,8 +34,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.sydokiddo.chrysalis.mixin.util.BrewingRecipeRegistryMixin;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
-import net.sydokiddo.chrysalis.registry.items.custom_items.MobInGlassBottleItem;
-import net.sydokiddo.chrysalis.registry.items.custom_items.MobInMilkBucketItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInPowderSnowBucketItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import java.util.List;
@@ -116,8 +114,8 @@ public class RegistryHelpers {
        return new SpawnEggItem(entityType, baseColor, accentColor, new FabricItemSettings());
     }
 
-    public static MobInContainerItem registerMobInEmptyBucket(EntityType entityType, SoundEvent soundEvent) {
-        return new MobInContainerItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
+    public static MobInContainerItem registerMobInContainer(EntityType entityType, SoundEvent soundEvent, Item returnItem) {
+        return new MobInContainerItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(returnItem), returnItem);
     }
 
     public static MobBucketItem registerMobInWaterBucket(EntityType entityType, SoundEvent soundEvent) {
@@ -128,16 +126,8 @@ public class RegistryHelpers {
         return new MobBucketItem(entityType, Fluids.LAVA, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
     }
 
-    public static MobInPowderSnowBucketItem registerMobInPowderSnowBucket(EntityType entityType, SoundEvent soundEvent) {
-        return new MobInPowderSnowBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
-    }
-
-    public static MobInMilkBucketItem registerMobInMilkBucket(EntityType entityType, SoundEvent soundEvent) {
-        return new MobInMilkBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
-    }
-
-    public static MobInGlassBottleItem registerMobInGlassBottle(EntityType entityType, SoundEvent soundEvent) {
-        return new MobInGlassBottleItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.GLASS_BOTTLE));
+    public static MobInPowderSnowBucketItem registerMobInPowderSnowBucket(EntityType entityType, SoundEvent soundEvent, Item returnItem) {
+        return new MobInPowderSnowBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(returnItem), returnItem);
     }
 
     /**
