@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:husbandry/wax_on",
+  "criteria": {
+    "wax_off": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "tag": "chrysalis:waxed_blocks"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "tag": "minecraft:axes"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.wax_off.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:stone_axe",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.wax_off.title"
+    }
+  },
+  "requirements": [
+    [
+      "wax_off"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.misc.util;
 
 import com.google.common.collect.Sets;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
@@ -10,10 +11,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.BlockGetter;
@@ -28,9 +29,14 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.sydokiddo.chrysalis.mixin.util.BrewingRecipeRegistryMixin;
+import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.MobInGlassBottleItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.MobInMilkBucketItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.MobInPowderSnowBucketItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import java.util.List;
 import java.util.Set;
@@ -63,6 +69,78 @@ public class RegistryHelpers {
     }
 
     /**
+     * Registry helpers for registering items with specific properties.
+     **/
+
+    public static SwordItem registerSword(Tier tier) {
+        return new SwordItem(tier, 3, -2.4f, new FabricItemSettings());
+    }
+
+    public static PickaxeItem registerPickaxe(Tier tier) {
+        return new PickaxeItem(tier, 1, -2.8f, new FabricItemSettings());
+    }
+
+    public static AxeItem registerAxe(Tier tier) {
+        return new AxeItem(tier, 5.0f, -3.0f, new FabricItemSettings());
+    }
+
+    public static ShovelItem registerShovel(Tier tier) {
+        return new ShovelItem(tier, 1.5f, -3.0f, new FabricItemSettings());
+    }
+
+    public static HoeItem registerHoe(Tier tier) {
+        return new HoeItem(tier, -4, 0.0f, new FabricItemSettings());
+    }
+
+    public static ArmorItem registerHelmet(ArmorMaterial armorMaterial) {
+        return new ArmorItem(armorMaterial, ArmorItem.Type.HELMET, new FabricItemSettings());
+    }
+
+    public static ArmorItem registerChestplate(ArmorMaterial armorMaterial) {
+        return new ArmorItem(armorMaterial, ArmorItem.Type.CHESTPLATE, new FabricItemSettings());
+    }
+
+    public static ArmorItem registerLeggings(ArmorMaterial armorMaterial) {
+        return new ArmorItem(armorMaterial, ArmorItem.Type.LEGGINGS, new FabricItemSettings());
+    }
+
+    public static ArmorItem registerBoots(ArmorMaterial armorMaterial) {
+        return new ArmorItem(armorMaterial, ArmorItem.Type.BOOTS, new FabricItemSettings());
+    }
+
+    public static RecordItem registerMusicDisc(int redstoneOutput, SoundEvent soundEvent, int musicLength) {
+        return new RecordItem(redstoneOutput, soundEvent, new FabricItemSettings().stacksTo(1).rarity(Rarity.RARE), musicLength);
+    }
+
+    public static SpawnEggItem registerSpawnEgg(EntityType entityType, int baseColor, int accentColor) {
+       return new SpawnEggItem(entityType, baseColor, accentColor, new FabricItemSettings());
+    }
+
+    public static MobInContainerItem registerMobInEmptyBucket(EntityType entityType, SoundEvent soundEvent) {
+        return new MobInContainerItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
+    }
+
+    public static MobBucketItem registerMobInWaterBucket(EntityType entityType, SoundEvent soundEvent) {
+        return new MobBucketItem(entityType, Fluids.WATER, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
+    }
+
+    public static MobBucketItem registerMobInLavaBucket(EntityType entityType, SoundEvent soundEvent) {
+        return new MobBucketItem(entityType, Fluids.LAVA, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
+    }
+
+    public static MobInPowderSnowBucketItem registerMobInPowderSnowBucket(EntityType entityType, SoundEvent soundEvent) {
+        return new MobInPowderSnowBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
+    }
+
+    public static MobInMilkBucketItem registerMobInMilkBucket(EntityType entityType, SoundEvent soundEvent) {
+        return new MobInMilkBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
+    }
+
+    public static MobInGlassBottleItem registerMobInGlassBottle(EntityType entityType, SoundEvent soundEvent) {
+        return new MobInGlassBottleItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.GLASS_BOTTLE));
+    }
+
+    /**
      * Registry helpers for registering blocks with specific properties.
      **/
 
@@ -76,21 +154,59 @@ public class RegistryHelpers {
         .pushReaction(PushReaction.DESTROY), blockSetType, 30, true);
     }
 
-    public static LeavesBlock registerLeaves(SoundType soundType) {
-        return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2f).randomTicks()
+    public static PressurePlateBlock registerStonePressurePlate(MapColor mapColor, BlockSetType blockSetType) {
+        return new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.of().mapColor(mapColor)
+        .forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+        .noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), blockSetType);
+    }
+
+    public static PressurePlateBlock registerWoodenPressurePlate(MapColor mapColor, BlockSetType blockSetType) {
+        return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of().mapColor(mapColor)
+        .forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY), blockSetType);
+    }
+
+    public static PressurePlateBlock registerFireProofWoodenPressurePlate(MapColor mapColor, BlockSetType blockSetType) {
+        return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of().mapColor(mapColor)
+        .forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), blockSetType);
+    }
+
+    public static LeavesBlock registerLeaves(SoundType soundType, MapColor mapColor) {
+        return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(mapColor).strength(0.2f).randomTicks()
         .sound(soundType).noOcclusion().isValidSpawn(RegistryHelpers::canSpawnOnLeaves).isSuffocating(RegistryHelpers::never)
         .isViewBlocking(RegistryHelpers::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(RegistryHelpers::never));
     }
 
-    public static RotatedPillarBlock registerLog(MapColor mapColor, MapColor mapColor2, SoundType soundType) {
-        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? mapColor : mapColor2)
+    public static RotatedPillarBlock registerLog(MapColor innerColor, MapColor sideColor, SoundType soundType) {
+        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? innerColor : sideColor)
         .instrument(NoteBlockInstrument.BASS).strength(2.0f).sound(soundType).ignitedByLava());
     }
 
-    public static Block registerFireProofLog(MapColor mapColor, MapColor mapColor2, SoundType soundType) {
-        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? mapColor : mapColor2)
+    public static Block registerFireProofLog(MapColor innerColor, MapColor sideColor, SoundType soundType) {
+        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? innerColor : sideColor)
         .instrument(NoteBlockInstrument.BASS).strength(2.0f).sound(soundType));
     }
+
+    public static RotatedPillarBlock registerBlastResistantLog(MapColor innerColor, MapColor sideColor, SoundType soundType) {
+        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? innerColor : sideColor)
+        .instrument(NoteBlockInstrument.BASS).strength(2.0f, 6.0f).sound(soundType).ignitedByLava());
+    }
+
+    public static float composter30PercentChance = 0.3F;
+    public static float composter50PercentChance = 0.5F;
+    public static float composter65PercentChance = 0.65F;
+    public static float composter85PercentChance = 0.85F;
+    public static float composter100PercentChance = 1.0F;
+
+    public static int furnace50Ticks = 50;
+    public static int furnace100Ticks = 100;
+    public static int furnace150Ticks = 150;
+    public static int furnace200Ticks = 200;
+    public static int furnace300Ticks = 300;
+    public static int furnace1600Ticks = 1600;
+    public static int furnace2400Ticks = 2400;
+    public static int furnace4000Ticks = 4000;
+    public static int furnace16000Ticks = 16000;
+    public static int furnace20000Ticks = 20000;
 
     /**
      * Registry helpers for assisting with mob spawning.
@@ -149,6 +265,7 @@ public class RegistryHelpers {
     public static String combatant = "combatant";
     public static String auditory = "auditory";
     public static String lottablocks = "lottablocks";
+    public static String manic = "manic";
 
     /**
      * Resource locations for all of the base chest loot tables in the vanilla game.
@@ -411,8 +528,8 @@ public class RegistryHelpers {
         return blockState.is(BlockTags.REPLACEABLE);
     }
 
-    public static ToIntFunction<BlockState> blockStateShouldEmitLight(int i) {
-        return blockState -> blockState.getValue(BlockStateProperties.LIT) != false ? i : 0;
+    public static ToIntFunction<BlockState> blockStateShouldEmitLight(int lightAmount) {
+        return blockState -> blockState.getValue(BlockStateProperties.LIT) != false ? lightAmount : 0;
     }
 
     /**

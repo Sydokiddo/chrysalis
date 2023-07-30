@@ -80,7 +80,7 @@ public interface ContainerMob {
     /**
      * Saves the mob to the item stack when picked up.
      * <p>
-     * Mobs can be picked up in either a Bucket, a Lava Bucket, a Powder Snow Bucket, or a Glass Bottle.
+     * Mobs can be picked up in either a Bucket, a Lava Bucket, a Powder Snow Bucket, a Milk Bucket, or a Glass Bottle.
      * <p>
      * Water Buckets are not needed here since the vanilla Bucketable class already allows for this.
      **/
@@ -145,6 +145,28 @@ public interface ContainerMob {
     static <T extends LivingEntity> Optional<InteractionResult> powderSnowBucketMobPickup(Player player, InteractionHand interactionHand, T livingEntity) {
 
         Item usedItemStack = (Items.POWDER_SNOW_BUCKET).asItem();
+
+        ItemStack itemStack = player.getItemInHand(interactionHand);
+        Level level = livingEntity.level();
+        ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
+
+        if (itemStack.getItem() == usedItemStack && livingEntity.isAlive()) {
+
+            if (!level.isClientSide) {
+                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
+            }
+
+            doContainerMobPickup(player, interactionHand, livingEntity);
+            return Optional.of(InteractionResult.sidedSuccess(level.isClientSide));
+
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    static <T extends LivingEntity> Optional<InteractionResult> milkBucketMobPickup(Player player, InteractionHand interactionHand, T livingEntity) {
+
+        Item usedItemStack = (Items.MILK_BUCKET).asItem();
 
         ItemStack itemStack = player.getItemInHand(interactionHand);
         Level level = livingEntity.level();

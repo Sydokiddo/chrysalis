@@ -21,6 +21,7 @@ public class ChrysalisTags {
     public static final TagKey<Item> ELYTRA = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "elytra"));
     public static final TagKey<Item> FILLED_BOTTLES = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "filled_bottles"));
     public static final TagKey<Item> FILLED_BUCKETS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "filled_buckets"));
+    public static final TagKey<Item> FISH_BUCKETS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "fish_buckets"));
     public static final TagKey<Item> FILLED_BOWLS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "filled_bowls"));
     public static final TagKey<Item> PIGLIN_BARTERING_ITEMS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "piglin_bartering_items"));
     public static final TagKey<Item> PIGLIN_PACIFYING_ARMOR = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "piglin_pacifying_armor"));
@@ -59,6 +60,7 @@ public class ChrysalisTags {
     public static final TagKey<Item> HORSE_ARMOR = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "horse_armor"));
     public static final TagKey<Item> CHARGES_RESPAWN_ANCHORS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "charges_respawn_anchors"));
     public static final TagKey<Item> TNT_IGNITERS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "tnt_igniters"));
+    public static final TagKey<Item> POWDER_SNOW_WALKABLE_ITEMS = TagKey.create(Registries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, "powder_snow_walkable_items"));
 
     /**
      * Block Tags
@@ -91,6 +93,8 @@ public class ChrysalisTags {
     public static final TagKey<Block> ALLOWS_BEACON_BEAM_PASSTHROUGH = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "allows_beacon_beam_passthrough"));
     public static final TagKey<Block> UNBREAKABLE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "unbreakable_blocks"));
     public static final TagKey<Block> CANNOT_BE_PUSHED_BY_PISTONS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "cannot_be_pushed_by_pistons"));
+    public static final TagKey<Block> WAXABLE_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "waxable_blocks"));
+    public static final TagKey<Block> WAXED_BLOCKS = TagKey.create(Registries.BLOCK, new ResourceLocation(Chrysalis.MOD_ID, "waxed_blocks"));
 
     /**
      * Entity Tags
