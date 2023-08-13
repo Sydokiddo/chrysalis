@@ -1,6 +1,6 @@
 {
   "values": [
-    "minecraft:obsidian",
+    "#chrysalis:obsidian_blocks",
     "minecraft:bedrock"
   ]
 }

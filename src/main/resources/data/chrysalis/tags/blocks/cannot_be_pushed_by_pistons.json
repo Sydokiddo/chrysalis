@@ -1,7 +1,6 @@
 {
   "values": [
-    "minecraft:obsidian",
-    "minecraft:crying_obsidian",
+    "#chrysalis:obsidian_blocks",
     "minecraft:respawn_anchor",
     "minecraft:reinforced_deepslate",
     "minecraft:end_portal_frame"

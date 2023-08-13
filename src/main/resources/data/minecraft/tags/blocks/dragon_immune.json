@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#chrysalis:unbreakable_blocks",
+    "#chrysalis:obsidian_blocks",
     "minecraft:dragon_egg"
   ]
 }

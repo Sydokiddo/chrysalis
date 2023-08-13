@@ -31,6 +31,7 @@ public class ChrysalisTags {
     public static final TagKey<Item> FILLED_BUCKETS = registerItemTag("filled_buckets");
     public static final TagKey<Item> FISH_BUCKETS = registerItemTag("fish_buckets");
     public static final TagKey<Item> FILLED_BOWLS = registerItemTag("filled_bowls");
+    public static final TagKey<Item> POPPED_CHORUS_FRUITS = registerItemTag("popped_chorus_fruits");
 
     // Block Items
 
@@ -84,6 +85,8 @@ public class ChrysalisTags {
     public static final TagKey<Block> AMETHYST_BLOCKS = registerBlockTag("amethyst_blocks");
     public static final TagKey<Block> SOUL_SAND_BLOCKS = registerBlockTag("soul_sand_blocks");
     public static final TagKey<Block> COPPER_BLOCKS = registerBlockTag("copper_blocks");
+    public static final TagKey<Block> PURPUR_BLOCKS = registerBlockTag("purpur_blocks");
+    public static final TagKey<Block> OBSIDIAN_BLOCKS = registerBlockTag("obsidian_blocks");
     public static final TagKey<Block> GLASS = registerBlockTag("glass");
     public static final TagKey<Block> GLASS_PANES = registerBlockTag("glass_panes");
     public static final TagKey<Block> HEADS = registerBlockTag("heads");
@@ -147,6 +150,7 @@ public class ChrysalisTags {
      **/
 
     public static final TagKey<DamageType> IS_MAGIC = registerDamageTypeTag("is_magic");
+    public static final TagKey<DamageType> IS_RANGED = registerDamageTypeTag("is_ranged");
 
     /**
      * Biome Tags
