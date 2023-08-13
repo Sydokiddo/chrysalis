@@ -15,8 +15,8 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("ALL")
 public class MobInPowderSnowBucketItem extends MobInContainerItem {
 
-    public MobInPowderSnowBucketItem(EntityType<?> entityType, SoundEvent soundEvent, Properties properties, Item item) {
-        super(entityType, soundEvent, properties, item);
+    public MobInPowderSnowBucketItem(EntityType<?> entityType, SoundEvent emptySound, Properties properties, Item returnItem) {
+        super(entityType, emptySound, properties, returnItem);
     }
 
     @Override

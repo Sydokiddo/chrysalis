@@ -28,9 +28,11 @@ public abstract class ChorusPlantFeatureMixin extends Feature<NoneFeatureConfigu
 
     @Inject(method = "place",at = @At("RETURN"), cancellable = true)
     private void chrysalis_placeChorusPlantFeature(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext, CallbackInfoReturnable<Boolean> cir) {
+
         WorldGenLevel worldGenLevel = featurePlaceContext.level();
         BlockPos blockPos = featurePlaceContext.origin();
         RandomSource randomSource = featurePlaceContext.random();
+
         if (worldGenLevel.isEmptyBlock(blockPos) && worldGenLevel.getBlockState(blockPos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
             ChorusFlowerBlock.generatePlant(worldGenLevel, blockPos, randomSource, 8);
             cir.setReturnValue(true);

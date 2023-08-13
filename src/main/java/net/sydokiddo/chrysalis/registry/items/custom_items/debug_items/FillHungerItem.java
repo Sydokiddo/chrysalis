@@ -1,8 +1,6 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -10,27 +8,13 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.sydokiddo.chrysalis.registry.items.custom_items.EnchantmentGlintItem;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import java.util.List;
 
-public class FillHungerItem extends EnchantmentGlintItem {
+public class FillHungerItem extends DebugUtilityItem {
 
     public FillHungerItem(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(this.getDisplayName().withStyle(ChatFormatting.GRAY));
-    }
-
-    private MutableComponent getDisplayName() {
-        return Component.translatable(this.getDescriptionId() + ".desc");
     }
 
     /**

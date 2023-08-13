@@ -9,8 +9,8 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class ModSmithingTemplateItem extends SmithingTemplateItem {
 
-    public ModSmithingTemplateItem(Component component, Component component2, Component component3, Component component4, Component component5, List<ResourceLocation> list, List<ResourceLocation> list2) {
-        super(component, component2, component3, component4, component5, list, list2);
+    public ModSmithingTemplateItem(Component appliesTo, Component ingredients, Component upgradeDescription, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> baseSlotEmptyIcons, List<ResourceLocation> additionalSlotEmptyIcons) {
+        super(appliesTo, ingredients, upgradeDescription, baseSlotDescription, additionsSlotDescription, baseSlotEmptyIcons, additionalSlotEmptyIcons);
     }
 
     /**

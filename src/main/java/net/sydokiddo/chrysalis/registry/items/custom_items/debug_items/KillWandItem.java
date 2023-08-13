@@ -1,36 +1,19 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.sydokiddo.chrysalis.registry.items.custom_items.EnchantmentGlintItem;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import java.util.List;
 
-public class KillWandItem extends EnchantmentGlintItem {
+public class KillWandItem extends DebugUtilityItem {
 
     public KillWandItem(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(this.getDisplayName().withStyle(ChatFormatting.GRAY));
-    }
-
-    private MutableComponent getDisplayName() {
-        return Component.translatable(this.getDescriptionId() + ".desc");
     }
 
     @Override

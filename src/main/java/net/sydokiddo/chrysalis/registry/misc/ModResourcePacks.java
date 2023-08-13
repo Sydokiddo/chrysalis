@@ -13,7 +13,7 @@ public class ModResourcePacks {
 
     public static void registerResourcePacks() {
 
-        ResourceLocation emissivePack = new ResourceLocation(Chrysalis.MOD_ID, "emissive_textures");
+        ResourceLocation emissivePack = Chrysalis.id("emissive_textures");
 
         FabricLoader.getInstance().getModContainer(Chrysalis.MOD_ID).ifPresent(container
         -> ResourceManagerHelper.registerBuiltinResourcePack(emissivePack, container,

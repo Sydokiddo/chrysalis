@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.ChorusFlowerBlock;
 import net.minecraft.world.level.block.ChorusPlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.sydokiddo.chrysalis.misc.util.ModBlocksHelper;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -51,7 +50,7 @@ public abstract class ChorusFlowerBlockMixin extends Block {
                 int i = state.getValue(ChorusFlowerBlock.AGE);
                 if (i < 5) {
                     this.placeGrownFlower(world, up, i + 1);
-                    ModBlocksHelper.setWithoutUpdate(world, pos, plant.defaultBlockState().setValue(ChorusPlantBlock.UP, true).setValue(ChorusPlantBlock.DOWN, true));
+                    world.setBlock(pos, plant.defaultBlockState().setValue(ChorusPlantBlock.UP, true).setValue(ChorusPlantBlock.DOWN, true), 2);
                     info.cancel();
                 }
             }

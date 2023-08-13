@@ -3,7 +3,6 @@ package net.sydokiddo.chrysalis.registry.items;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.sydokiddo.chrysalis.Chrysalis;
@@ -32,7 +31,7 @@ public class DebugItems {
     // Registry for Items:
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Chrysalis.MOD_ID, name), item);
+        return Registry.register(BuiltInRegistries.ITEM, Chrysalis.id(name), item);
     }
 
     public static void registerDebugItems() {}

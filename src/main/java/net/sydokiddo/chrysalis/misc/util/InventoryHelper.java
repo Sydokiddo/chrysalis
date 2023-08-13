@@ -17,8 +17,7 @@ public class InventoryHelper {
 
         CompoundTag tag = stack.getTag();
 
-        if (tag == null || !tag.contains("BlockEntityTag", TAG_COMPOUND))
-            return true;
+        if (tag == null || !tag.contains("BlockEntityTag", TAG_COMPOUND)) return true;
 
         CompoundTag blockEntityTag = tag.getCompound("BlockEntityTag");
         return !blockEntityTag.contains("Items", TAG_LIST) || blockEntityTag.getList("Items", TAG_COMPOUND).isEmpty();

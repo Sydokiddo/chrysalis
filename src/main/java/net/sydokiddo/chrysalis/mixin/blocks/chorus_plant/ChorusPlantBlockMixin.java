@@ -68,19 +68,26 @@ public class ChorusPlantBlockMixin extends PipeBlock {
     @SuppressWarnings("ALL")
     @Override
     public boolean canSurvive(@NotNull BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        BlockState blockState2 = levelReader.getBlockState(blockPos.below());
-        boolean bl = !levelReader.getBlockState(blockPos.above()).isAir() && !blockState2.isAir();
+
+        BlockState belowBlockState = levelReader.getBlockState(blockPos.below());
+        boolean blockIsNotAir = !levelReader.getBlockState(blockPos.above()).isAir() && !belowBlockState.isAir();
+
         for (Direction direction : Direction.Plane.HORIZONTAL) {
-            BlockPos blockPos2 = blockPos.relative(direction);
-            BlockState blockState3 = levelReader.getBlockState(blockPos2);
-            if (!blockState3.is(this)) continue;
-            if (bl) {
+
+            BlockPos relativeBlockPos = blockPos.relative(direction);
+            BlockState relativeBlockState = levelReader.getBlockState(relativeBlockPos);
+
+            if (!relativeBlockState.is(this)) continue;
+
+            if (blockIsNotAir) {
                 return false;
             }
-            BlockState blockState4 = levelReader.getBlockState(blockPos2.below());
-            if (!blockState4.is(this) && !blockState4.is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) continue;
+
+            BlockState belowRelative = levelReader.getBlockState(relativeBlockPos.below());
+            if (!belowRelative.is(this) && !belowRelative.is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) continue;
+
             return true;
         }
-        return blockState2.is(this) || blockState2.is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON);
+        return belowBlockState.is(this) || belowBlockState.is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON);
     }
 }

@@ -69,6 +69,7 @@ public abstract class BlindnessMixin extends Entity {
 
         ItemStack itemStack = this.getItemBySlot(EquipmentSlot.HEAD);
         EntityType<?> entityType = entity.getType();
+
         if (entityType.is(ChrysalisTags.ENDER) && itemStack.is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN)) {
             cir.setReturnValue(0.5);
         }
