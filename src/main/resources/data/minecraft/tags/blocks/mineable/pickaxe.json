@@ -7,7 +7,10 @@
     "#chrysalis:furnaces",
     "#chrysalis:glazed_terracotta",
     "#chrysalis:lanterns",
-    "#chrysalis:purpur_blocks",
-    "#chrysalis:obsidian_blocks"
+    "#chrysalis:purpur",
+    "#chrysalis:obsidian",
+    "#minecraft:cauldrons",
+    "#minecraft:stone_buttons",
+    "#minecraft:stone_pressure_plates"
   ]
 }

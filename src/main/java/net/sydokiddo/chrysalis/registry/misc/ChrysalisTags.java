@@ -18,15 +18,11 @@ public class ChrysalisTags {
 
     // Common Items
 
-    public static final TagKey<Item> DYES = registerItemTag("dyes");
     public static final TagKey<Item> DISC_FRAGMENTS = registerItemTag("disc_fragments");
     public static final TagKey<Item> INSTRUMENTS = registerItemTag("instruments");
     public static final TagKey<Item> SEEDS = registerItemTag("seeds");
     public static final TagKey<Item> TELEPORTING_FOODS = registerItemTag("teleporting_foods");
     public static final TagKey<Item> MEATS = registerItemTag("meats");
-    public static final TagKey<Item> DUSTS = registerItemTag("dusts");
-    public static final TagKey<Item> INGOTS = registerItemTag("ingots");
-    public static final TagKey<Item> NUGGETS = registerItemTag("nuggets");
     public static final TagKey<Item> FILLED_BOTTLES = registerItemTag("filled_bottles");
     public static final TagKey<Item> FILLED_BUCKETS = registerItemTag("filled_buckets");
     public static final TagKey<Item> FISH_BUCKETS = registerItemTag("fish_buckets");
@@ -34,13 +30,13 @@ public class ChrysalisTags {
 
     // Block Items
 
-    public static final TagKey<Item> SOUL_SAND_BLOCK_ITEMS = registerItemTag("soul_sand_blocks");
+    public static final TagKey<Item> SOUL_SAND_ITEMS = registerItemTag("soul_sand");
     public static final TagKey<Item> CONCRETE_ITEMS = registerItemTag("concrete");
     public static final TagKey<Item> CONCRETE_POWDER_ITEMS = registerItemTag("concrete_powder");
     public static final TagKey<Item> GLAZED_TERRACOTTA_ITEMS = registerItemTag("glazed_terracotta");
     public static final TagKey<Item> COPPER_BLOCK_ITEMS = registerItemTag("copper_blocks");
-    public static final TagKey<Item> OBSIDIAN_BLOCK_ITEMS = registerItemTag("obsidian_blocks");
-    public static final TagKey<Item> PURPUR_BLOCK_ITEMS = registerItemTag("purpur_blocks");
+    public static final TagKey<Item> OBSIDIAN_ITEMS = registerItemTag("obsidian");
+    public static final TagKey<Item> PURPUR_ITEMS = registerItemTag("purpur");
     public static final TagKey<Item> HEAD_ITEMS = registerItemTag("heads");
     public static final TagKey<Item> FURNACE_ITEMS = registerItemTag("furnaces");
     public static final TagKey<Item> TORCH_ITEMS = registerItemTag("torches");
@@ -82,10 +78,10 @@ public class ChrysalisTags {
     // Common Blocks
 
     public static final TagKey<Block> AMETHYST_BLOCKS = registerBlockTag("amethyst_blocks");
-    public static final TagKey<Block> SOUL_SAND_BLOCKS = registerBlockTag("soul_sand_blocks");
     public static final TagKey<Block> COPPER_BLOCKS = registerBlockTag("copper_blocks");
-    public static final TagKey<Block> PURPUR_BLOCKS = registerBlockTag("purpur_blocks");
-    public static final TagKey<Block> OBSIDIAN_BLOCKS = registerBlockTag("obsidian_blocks");
+    public static final TagKey<Block> SOUL_SAND = registerBlockTag("soul_sand");
+    public static final TagKey<Block> PURPUR = registerBlockTag("purpur");
+    public static final TagKey<Block> OBSIDIAN = registerBlockTag("obsidian");
     public static final TagKey<Block> HEADS = registerBlockTag("heads");
     public static final TagKey<Block> CONCRETE = registerBlockTag("concrete");
     public static final TagKey<Block> CONCRETE_POWDER = registerBlockTag("concrete_powder");
@@ -136,7 +132,7 @@ public class ChrysalisTags {
     // Non-Living Entitites
 
     public static final TagKey<EntityType<?>> IS_VEHICLE = registerEntityTag("is_vehicle");
-    public static final TagKey<EntityType<?>> ATTACKABLE_NON_LIVING_ENTITIES = registerEntityTag("attackable_non_living_entities");
+    public static final TagKey<EntityType<?>> ATTACKABLE_STATIC_ENTITIES = registerEntityTag("attackable_static_entities");
 
     // Technical
 
