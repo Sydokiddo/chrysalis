@@ -55,6 +55,7 @@ public interface ContainerMob {
     }
 
     static void loadDefaultDataFromItemTag(Mob mob, CompoundTag compoundTag) {
+
         if (compoundTag.contains("NoAI")) {
             mob.setNoAi(compoundTag.getBoolean("NoAI"));
         }
@@ -73,6 +74,7 @@ public interface ContainerMob {
         if (compoundTag.contains("Health", 99)) {
             mob.setHealth(compoundTag.getFloat("Health"));
         }
+        mob.setPersistenceRequired();
     }
 
     /**
@@ -81,11 +83,11 @@ public interface ContainerMob {
 
     private static boolean doMobContainerPickUp(Player player, Item containerItem, InteractionHand interactionHand, LivingEntity livingEntity) {
 
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        Item usedItemStack = containerItem.asItem();
+        ItemStack itemInHand = player.getItemInHand(interactionHand);
+        Item usedItem = containerItem.asItem();
         ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
 
-        if (itemStack.getItem() == usedItemStack && livingEntity.isAlive()) {
+        if (itemInHand.getItem() == usedItem && livingEntity.isAlive()) {
 
             if (!livingEntity.level().isClientSide) {
                 CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
@@ -93,7 +95,7 @@ public interface ContainerMob {
 
             livingEntity.playSound(((ContainerMob) livingEntity).getPickupSound(), 1.0f, 1.0f);
             ((ContainerMob) livingEntity).saveToItemTag(resultItemStack);
-            ItemStack filledResult = ItemUtils.createFilledResult(itemStack, player, resultItemStack, false);
+            ItemStack filledResult = ItemUtils.createFilledResult(itemInHand, player, resultItemStack, false);
             player.setItemInHand(interactionHand, filledResult);
 
             livingEntity.discard();
@@ -103,9 +105,10 @@ public interface ContainerMob {
 
     static <T extends LivingEntity> Optional<InteractionResult> containerMobPickup(Player player, InteractionHand interactionHand, T livingEntity, Item usedItem) {
 
+        ItemStack itemInHand = player.getItemInHand(interactionHand);
         boolean bl = doMobContainerPickUp(player, usedItem.asItem(), interactionHand, livingEntity);
 
-        if (bl) {
+        if (bl && itemInHand.getItem() == usedItem) {
             return Optional.of(InteractionResult.sidedSuccess(livingEntity.level().isClientSide));
         } else {
             return Optional.empty();
