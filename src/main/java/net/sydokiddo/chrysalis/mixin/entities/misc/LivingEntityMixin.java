@@ -9,20 +9,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
 @Mixin(LivingEntity.class)
-public abstract class BlindnessMixin extends Entity {
+public abstract class LivingEntityMixin extends Entity {
 
     @Shadow public abstract ItemStack getItemBySlot(EquipmentSlot var1);
 
-    private BlindnessMixin(EntityType<?> entityType, Level level) {
+    private LivingEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -48,7 +46,7 @@ public abstract class BlindnessMixin extends Entity {
      **/
 
     @Inject(method = "getVisibilityPercent", at = @At(value = "HEAD"), cancellable = true)
-    private void endlessEncore_makeMobsAffectedByBlindness(Entity entity, CallbackInfoReturnable<Double> cir) {
+    private void chrysalis_makeMobsAffectedByBlindness(Entity entity, CallbackInfoReturnable<Double> cir) {
 
         if (entity instanceof LivingEntity livingEntity && !this.level().isClientSide() && livingEntity.hasEffect(MobEffects.BLINDNESS)) {
 

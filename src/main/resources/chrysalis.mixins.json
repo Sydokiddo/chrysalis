@@ -19,7 +19,7 @@
     "entities.hostile.EnderDragonMixin",
     "entities.hostile.EndermanMixin",
     "entities.hostile.WitherMixin",
-    "entities.misc.BlindnessMixin",
+    "entities.misc.LivingEntityMixin",
     "entities.misc.ItemEntityMixin",
     "entities.misc.MiscGoalsMixin",
     "entities.misc.MobMixin",

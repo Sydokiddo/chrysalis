@@ -31,17 +31,16 @@ public class ChrysalisTags {
     public static final TagKey<Item> FILLED_BUCKETS = registerItemTag("filled_buckets");
     public static final TagKey<Item> FISH_BUCKETS = registerItemTag("fish_buckets");
     public static final TagKey<Item> FILLED_BOWLS = registerItemTag("filled_bowls");
-    public static final TagKey<Item> POPPED_CHORUS_FRUITS = registerItemTag("popped_chorus_fruits");
 
     // Block Items
 
-    public static final TagKey<Item> GLASS_ITEMS = registerItemTag("glass");
-    public static final TagKey<Item> GLASS_PANE_ITEMS = registerItemTag("glass_panes");
     public static final TagKey<Item> SOUL_SAND_BLOCK_ITEMS = registerItemTag("soul_sand_blocks");
     public static final TagKey<Item> CONCRETE_ITEMS = registerItemTag("concrete");
     public static final TagKey<Item> CONCRETE_POWDER_ITEMS = registerItemTag("concrete_powder");
     public static final TagKey<Item> GLAZED_TERRACOTTA_ITEMS = registerItemTag("glazed_terracotta");
     public static final TagKey<Item> COPPER_BLOCK_ITEMS = registerItemTag("copper_blocks");
+    public static final TagKey<Item> OBSIDIAN_BLOCK_ITEMS = registerItemTag("obsidian_blocks");
+    public static final TagKey<Item> PURPUR_BLOCK_ITEMS = registerItemTag("purpur_blocks");
     public static final TagKey<Item> HEAD_ITEMS = registerItemTag("heads");
     public static final TagKey<Item> FURNACE_ITEMS = registerItemTag("furnaces");
     public static final TagKey<Item> TORCH_ITEMS = registerItemTag("torches");
@@ -87,8 +86,6 @@ public class ChrysalisTags {
     public static final TagKey<Block> COPPER_BLOCKS = registerBlockTag("copper_blocks");
     public static final TagKey<Block> PURPUR_BLOCKS = registerBlockTag("purpur_blocks");
     public static final TagKey<Block> OBSIDIAN_BLOCKS = registerBlockTag("obsidian_blocks");
-    public static final TagKey<Block> GLASS = registerBlockTag("glass");
-    public static final TagKey<Block> GLASS_PANES = registerBlockTag("glass_panes");
     public static final TagKey<Block> HEADS = registerBlockTag("heads");
     public static final TagKey<Block> CONCRETE = registerBlockTag("concrete");
     public static final TagKey<Block> CONCRETE_POWDER = registerBlockTag("concrete_powder");
