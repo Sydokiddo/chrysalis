@@ -11,14 +11,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class HealItem extends DebugUtilityItem {
+public class ClearEffectsItem extends DebugUtilityItem {
 
-    public HealItem(Properties properties) {
+    public ClearEffectsItem(Properties properties) {
         super(properties);
     }
 
     /**
-     * Sets the user to full health when right-clicked with.
+     * Clears the user's status effects when right-clicked with.
      **/
 
     @Override
@@ -26,13 +26,13 @@ public class HealItem extends DebugUtilityItem {
 
         ItemStack itemStack = player.getItemInHand(interactionHand);
 
-        if (player.getHealth() < player.getMaxHealth()) {
+        if (!player.getActiveEffects().isEmpty()) {
             if (!level.isClientSide) {
                 ServerPlayer serverPlayer = (ServerPlayer) player;
-                player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 1.0f, 1.0f);
+                player.playNotifySound(SoundEvents.BOTTLE_EMPTY, SoundSource.PLAYERS, 1.0f, 1.0f);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
-                player.setHealth(player.getMaxHealth());
-                serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.heal_message"));
+                player.removeAllEffects();
+                serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.clear_effects_message"));
             }
             return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
         }
