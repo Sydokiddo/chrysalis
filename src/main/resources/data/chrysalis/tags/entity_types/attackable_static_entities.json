@@ -2,6 +2,7 @@
   "values": [
     "minecraft:end_crystal",
     "minecraft:fireball",
+    "minecraft:armor_stand",
     "#chrysalis:is_vehicle"
   ]
 }
