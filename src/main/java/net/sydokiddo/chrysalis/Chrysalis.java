@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.ResourceLocation;
-import net.sydokiddo.chrysalis.registry.ModRegistry;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public class Chrysalis implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModRegistry.registerAll();
-		LOGGER.info("Chrysalis library has been initialized!");
+		ChrysalisRegistry.registerAll();
+		LOGGER.info("Chrysalis " + chrysalisVersion + " has been initialized!");
 	}
 }

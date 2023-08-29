@@ -6,7 +6,7 @@ import net.minecraft.world.damagesource.DamageType;
 import net.sydokiddo.chrysalis.Chrysalis;
 
 @SuppressWarnings("ALL")
-public class ModDamageSources {
+public class ChrysalisDamageSources {
 
     // List of Damage Sources:
 

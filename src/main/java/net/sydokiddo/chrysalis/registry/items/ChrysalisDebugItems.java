@@ -9,7 +9,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.*;
 
 @SuppressWarnings("ALL")
-public class DebugItems {
+public class ChrysalisDebugItems {
 
     // List of Debug Items:
 

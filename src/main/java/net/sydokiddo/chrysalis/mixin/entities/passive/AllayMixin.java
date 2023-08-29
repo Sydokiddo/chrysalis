@@ -1,10 +1,15 @@
 package net.sydokiddo.chrysalis.mixin.entities.passive;
 
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.allay.Allay;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
-import net.sydokiddo.chrysalis.registry.ModRegistry;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisCriteriaTriggers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -29,6 +34,17 @@ public class AllayMixin {
 
     @ModifyArg(method = "wantsToPickUp", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_allayPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
-        return ModRegistry.RULE_PASSIVE_GRIEFING;
+        return ChrysalisRegistry.RULE_PASSIVE_GRIEFING;
+    }
+
+    /**
+     * Triggers the 'duplicate_allay' advancement criteria when a player duplicates an Allay
+     **/
+
+    @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/allay/Allay;duplicateAllay()V"))
+    private void chrysalis_allayDuplicationCriteriaTrigger(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            ChrysalisCriteriaTriggers.DUPLICATE_ALLAY.trigger(serverPlayer);
+        }
     }
 }

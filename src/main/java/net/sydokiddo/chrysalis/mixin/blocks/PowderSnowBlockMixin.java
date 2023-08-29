@@ -5,7 +5,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.PowderSnowBlock;
-import net.sydokiddo.chrysalis.registry.ModRegistry;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +22,7 @@ public class PowderSnowBlockMixin {
 
     @ModifyArg(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_powderSnowPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
-        return ModRegistry.RULE_PASSIVE_GRIEFING;
+        return ChrysalisRegistry.RULE_PASSIVE_GRIEFING;
     }
 
     /**

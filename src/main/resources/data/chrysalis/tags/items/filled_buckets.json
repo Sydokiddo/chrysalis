@@ -4,8 +4,8 @@
     "minecraft:lava_bucket",
     "minecraft:powder_snow_bucket",
     "minecraft:milk_bucket",
-    "#chrysalis:fish_buckets",
     "minecraft:axolotl_bucket",
-    "minecraft:tadpole_bucket"
+    "minecraft:tadpole_bucket",
+    "#c:entity_water_buckets"
   ]
 }

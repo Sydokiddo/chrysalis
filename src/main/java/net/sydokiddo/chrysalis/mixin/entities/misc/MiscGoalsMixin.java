@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis.mixin.entities.misc;
 import net.minecraft.world.entity.ai.goal.RemoveBlockGoal;
 import net.minecraft.world.entity.monster.Evoker;
 import net.minecraft.world.level.GameRules;
-import net.sydokiddo.chrysalis.registry.ModRegistry;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -17,6 +17,6 @@ public class MiscGoalsMixin {
 
     @ModifyArg(method = "canUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis_rabbitAndEvokerPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
-        return ModRegistry.RULE_PASSIVE_GRIEFING;
+        return ChrysalisRegistry.RULE_PASSIVE_GRIEFING;
     }
 }

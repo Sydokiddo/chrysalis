@@ -6,12 +6,10 @@ import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.CreativeTabHelper;
 import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
-import net.sydokiddo.chrysalis.registry.items.DebugItems;
-import net.sydokiddo.chrysalis.registry.misc.ModCreativeModeTabs;
-import net.sydokiddo.chrysalis.registry.misc.ModDamageSources;
-import net.sydokiddo.chrysalis.registry.misc.ModResourcePacks;
+import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
+import net.sydokiddo.chrysalis.registry.misc.*;
 
-public class ModRegistry {
+public class ChrysalisRegistry {
 
     // Game Rules
 
@@ -44,10 +42,12 @@ public class ModRegistry {
 
     public static void registerAll() {
 
-        ModResourcePacks.registerResourcePacks();
+        ChrysalisResourcePacks.registerResourcePacks();
         RegistryHelpers.init();
         CreativeTabHelper.init();
-        ModDamageSources.registerDamageSources();
+        ChrysalisDamageSources.registerDamageSources();
+        ChrysalisGameEvents.registerGameEvents();
+        ChrysalisCriteriaTriggers.registerCriteriaTriggers();
 
         if (Chrysalis.IS_DEBUG) {
             registerDebugUtilities();
@@ -55,8 +55,8 @@ public class ModRegistry {
     }
 
     private static void registerDebugUtilities() {
-        DebugItems.registerDebugItems();
-        ModCreativeModeTabs.registerCreativeTabs();
+        ChrysalisDebugItems.registerDebugItems();
+        ChrysalisCreativeModeTabs.registerCreativeTabs();
         Chrysalis.LOGGER.info("Debug environment detected! Initializing debug utilities for Chrysalis.");
     }
 }

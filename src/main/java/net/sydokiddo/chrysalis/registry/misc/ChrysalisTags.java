@@ -27,20 +27,29 @@ public class ChrysalisTags {
     public static final TagKey<Item> FILLED_BUCKETS = registerItemTag("filled_buckets");
     public static final TagKey<Item> FISH_BUCKETS = registerItemTag("fish_buckets");
     public static final TagKey<Item> FILLED_BOWLS = registerItemTag("filled_bowls");
+    public static final TagKey<Item> BRICKS = registerItemTag("bricks");
+    public static final TagKey<Item> BANNER_PATTERNS = registerItemTag("banner_patterns");
 
     // Block Items
 
+    public static final TagKey<Item> AMETHYST_BLOCK_ITEMS = registerItemTag("amethyst_blocks");
     public static final TagKey<Item> SOUL_SAND_ITEMS = registerItemTag("soul_sand");
     public static final TagKey<Item> CONCRETE_ITEMS = registerItemTag("concrete");
     public static final TagKey<Item> CONCRETE_POWDER_ITEMS = registerItemTag("concrete_powder");
     public static final TagKey<Item> GLAZED_TERRACOTTA_ITEMS = registerItemTag("glazed_terracotta");
     public static final TagKey<Item> COPPER_BLOCK_ITEMS = registerItemTag("copper_blocks");
+    public static final TagKey<Item> PRISMARINE_BLOCK_ITEMS = registerItemTag("prismarine_blocks");
     public static final TagKey<Item> OBSIDIAN_ITEMS = registerItemTag("obsidian");
     public static final TagKey<Item> PURPUR_ITEMS = registerItemTag("purpur");
     public static final TagKey<Item> HEAD_ITEMS = registerItemTag("heads");
+    public static final TagKey<Item> CONTAINER_ITEMS = registerItemTag("containers");
     public static final TagKey<Item> FURNACE_ITEMS = registerItemTag("furnaces");
     public static final TagKey<Item> TORCH_ITEMS = registerItemTag("torches");
     public static final TagKey<Item> LANTERN_ITEMS = registerItemTag("lanterns");
+    public static final TagKey<Item> BRUSHABLE_BLOCK_ITEMS = registerItemTag("brushable_blocks");
+    public static final TagKey<Item> CAMPFIRE_ITEMS = registerItemTag("campfires");
+    public static final TagKey<Item> PRESSURE_PLATE_ITEMS = registerItemTag("pressure_plates");
+    public static final TagKey<Item> STONE_PRESSURE_PLATE_ITEMS = registerItemTag("stone_pressure_plates");
 
     // Interactable Items
 
@@ -81,6 +90,7 @@ public class ChrysalisTags {
     public static final TagKey<Block> COPPER_BLOCKS = registerBlockTag("copper_blocks");
     public static final TagKey<Block> SOUL_SAND = registerBlockTag("soul_sand");
     public static final TagKey<Block> PURPUR = registerBlockTag("purpur");
+    public static final TagKey<Block> PRISMARINE_BLOCKS = registerBlockTag("prismarine_blocks");
     public static final TagKey<Block> OBSIDIAN = registerBlockTag("obsidian");
     public static final TagKey<Block> HEADS = registerBlockTag("heads");
     public static final TagKey<Block> CONCRETE = registerBlockTag("concrete");
@@ -93,6 +103,7 @@ public class ChrysalisTags {
     public static final TagKey<Block> UNBREAKABLE_BLOCKS = registerBlockTag("unbreakable_blocks");
     public static final TagKey<Block> WAXABLE_BLOCKS = registerBlockTag("waxable_blocks");
     public static final TagKey<Block> WAXED_BLOCKS = registerBlockTag("waxed_blocks");
+    public static final TagKey<Block> BRUSHABLE_BLOCKS = registerBlockTag("brushable_blocks");
 
     // Technical
 

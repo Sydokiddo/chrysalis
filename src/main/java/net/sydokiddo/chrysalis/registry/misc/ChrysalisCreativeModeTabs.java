@@ -3,9 +3,9 @@ package net.sydokiddo.chrysalis.registry.misc;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
-import net.sydokiddo.chrysalis.registry.items.DebugItems;
+import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 
-public class ModCreativeModeTabs {
+public class ChrysalisCreativeModeTabs {
 
     /**
      * Registers the debug items in the Creative Mode inventory when in a debug environment.
@@ -14,6 +14,6 @@ public class ModCreativeModeTabs {
     @SuppressWarnings("ALL")
     public static void registerCreativeTabs() {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries ->
-        entries.addAfter(Items.DEBUG_STICK, DebugItems.HEAL, DebugItems.FILL_HUNGER, DebugItems.GIVE_RESISTANCE, DebugItems.CLEAR_EFFECTS, DebugItems.TELEPORT_TO_SPAWNPOINT, DebugItems.KILL_WAND));
+        entries.addAfter(Items.DEBUG_STICK, ChrysalisDebugItems.HEAL, ChrysalisDebugItems.FILL_HUNGER, ChrysalisDebugItems.GIVE_RESISTANCE, ChrysalisDebugItems.CLEAR_EFFECTS, ChrysalisDebugItems.TELEPORT_TO_SPAWNPOINT, ChrysalisDebugItems.KILL_WAND));
     }
 }

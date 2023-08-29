@@ -41,6 +41,7 @@
     "items.ShearsItemMixin",
     "items.SwordItemMixin",
     "misc.SnowFixMixin",
+    "misc.VibrationSystemMixin",
     "util.ActivityAccessor",
     "util.BrewingRecipeRegistryMixin",
     "util.MemoryModuleAccessor",

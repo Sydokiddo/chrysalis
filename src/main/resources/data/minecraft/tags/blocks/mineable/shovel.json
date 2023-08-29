@@ -3,6 +3,7 @@
   "values": [
     "#chrysalis:concrete_powder",
     "#chrysalis:soul_sand",
-    "#minecraft:sand"
+    "#minecraft:sand",
+    "#chrysalis:brushable_blocks"
   ]
 }

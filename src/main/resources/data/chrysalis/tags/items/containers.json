@@ -4,7 +4,7 @@
     "minecraft:chest",
     "minecraft:ender_chest",
     "minecraft:trapped_chest",
-    "#minecraft:shulker_boxes",
+    "#c:shulker_boxes",
     "#c:wooden_barrels"
   ]
 }

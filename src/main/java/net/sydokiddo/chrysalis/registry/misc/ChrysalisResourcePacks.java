@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.sydokiddo.chrysalis.Chrysalis;
 
-public class ModResourcePacks {
+public class ChrysalisResourcePacks {
 
     // Registry for Resource Packs:
 

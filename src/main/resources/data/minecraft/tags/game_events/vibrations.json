@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "chrysalis:entity_flutter",
+    "chrysalis:entity_puff",
+    "chrysalis:entity_smash"
+  ]
+}

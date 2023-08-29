@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#minecraft:wooden_pressure_plates",
+    "#chrysalis:stone_pressure_plates",
+    "minecraft:heavy_weighted_pressure_plate",
+    "minecraft:light_weighted_pressure_plate"
+  ]
+}

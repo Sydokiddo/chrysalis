@@ -74,7 +74,6 @@ public interface ContainerMob {
         if (compoundTag.contains("Health", 99)) {
             mob.setHealth(compoundTag.getFloat("Health"));
         }
-        mob.setPersistenceRequired();
     }
 
     /**
