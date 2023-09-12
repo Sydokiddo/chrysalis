@@ -31,9 +31,9 @@ public class ChrysalisRegistry {
         GameRules.Category.MOBS,
         GameRuleFactory.createBooleanRule(true)
     );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_EXPLOSION_ITEM_DECAY =
+    public static GameRules.Key<GameRules.BooleanValue> RULE_DESTROY_ITEMS_IN_EXPLOSIONS =
         GameRuleRegistry.register(
-        "explosionItemDecay",
+        "destroyItemsInExplosions",
         GameRules.Category.DROPS,
         GameRuleFactory.createBooleanRule(true)
     );
@@ -46,7 +46,6 @@ public class ChrysalisRegistry {
         RegistryHelpers.init();
         CreativeTabHelper.init();
         ChrysalisDamageSources.registerDamageSources();
-        ChrysalisGameEvents.registerGameEvents();
         ChrysalisCriteriaTriggers.registerCriteriaTriggers();
 
         if (Chrysalis.IS_DEBUG) {

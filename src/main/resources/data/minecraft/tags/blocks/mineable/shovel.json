@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#chrysalis:concrete_powder",
     "#chrysalis:soul_sand",
     "#minecraft:sand",
     "#chrysalis:brushable_blocks"

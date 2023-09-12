@@ -115,9 +115,7 @@ public class ChrysalisTags {
     public static final TagKey<Block> TURTLE_EGGS_CAN_HATCH_ON = registerBlockTag("turtle_eggs_can_hatch_on");
     public static final TagKey<Block> ALLOWS_BEACON_BEAM_PASSTHROUGH = registerBlockTag("allows_beacon_beam_passthrough");
     public static final TagKey<Block> CANNOT_BE_PUSHED_BY_PISTONS = registerBlockTag("cannot_be_pushed_by_pistons");
-    public static final TagKey<Block> ENTITIES_SHOULD_WALK_AROUND = registerBlockTag("entities_should_walk_around");
-    public static final TagKey<Block> FLYING_MOB_UNSAFE_TO_LAND_ON = registerBlockTag("flying_mob_unsafe_to_land_on");
-    public static final TagKey<Block> UNSAFE_BLOCKS = registerBlockTag("unsafe_blocks");
+    public static final TagKey<Block> MOBS_SHOULD_PATHFIND_AROUND = registerBlockTag("mobs_should_pathfind_around");
 
     // Mineable Block Tags
 

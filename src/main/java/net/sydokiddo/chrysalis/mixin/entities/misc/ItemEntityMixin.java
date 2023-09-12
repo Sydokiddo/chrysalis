@@ -59,7 +59,7 @@ public abstract class ItemEntityMixin extends Entity {
             if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
                 cir.setReturnValue(false);
             }
-            if ((this.getItem().is(ChrysalisTags.IMMUNE_TO_EXPLOSIONS) || !this.level().getGameRules().getBoolean(ChrysalisRegistry.RULE_EXPLOSION_ITEM_DECAY)) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) {
+            if ((this.getItem().is(ChrysalisTags.IMMUNE_TO_EXPLOSIONS) || !this.level().getGameRules().getBoolean(ChrysalisRegistry.RULE_DESTROY_ITEMS_IN_EXPLOSIONS)) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) {
                 cir.setReturnValue(false);
             }
         }

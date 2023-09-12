@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class WalkNodeEvaluatorMixin {
 
     /**
-     * Adds any blocks in the entities_should_walk_around tag to the same pathfinding malus that fences use.
+     * Adds any blocks in the mobs_should_pathfind_around tag to the same pathfinding malus that fences use.
      **/
 
     @Inject(method = "getBlockPathTypeRaw", at = @At("RETURN"), cancellable = true)
@@ -23,7 +23,7 @@ public class WalkNodeEvaluatorMixin {
 
         BlockState blockState = blockGetter.getBlockState(blockPos);
 
-        if (blockState.is(ChrysalisTags.ENTITIES_SHOULD_WALK_AROUND)) {
+        if (blockState.is(ChrysalisTags.MOBS_SHOULD_PATHFIND_AROUND)) {
             cir.setReturnValue(BlockPathTypes.FENCE);
         }
     }
