@@ -1,8 +1,8 @@
 package net.sydokiddo.chrysalis.misc.util.dispenser;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -23,16 +23,16 @@ public class DispenseBucketMobDispenserBehavior implements DispenseItemBehavior 
     @Override
     public ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {
 
-        BlockPos blockPos = blockSource.getPos().relative(blockSource.getBlockState().getValue(DispenserBlock.FACING));
-        ServerLevel level = blockSource.getLevel();
+        BlockPos blockPos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
+        ServerLevel level = blockSource.level();
         BlockState blockState = level.getBlockState(blockPos);
-        Direction direction = blockSource.getBlockState().getValue(DispenserBlock.FACING);
+        Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
 
         if (RegistryHelpers.isBlockStateFree(blockState)) {
 
             RegistryHelpers.playDispenserSound(blockSource);
             RegistryHelpers.playDispenserAnimation(blockSource, direction);
-            level.gameEvent(GameEvent.ENTITY_PLACE, blockPos, GameEvent.Context.of(blockSource.getBlockState()));
+            level.gameEvent(GameEvent.ENTITY_PLACE, blockPos, GameEvent.Context.of(blockSource.state()));
 
             if (itemStack.getItem() instanceof MobInContainerItem mobInContainerItem) {
                 level.playSound(null, blockPos, mobInContainerItem.emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);

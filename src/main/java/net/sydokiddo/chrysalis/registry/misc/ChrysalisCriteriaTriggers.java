@@ -2,13 +2,12 @@ package net.sydokiddo.chrysalis.registry.misc;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.critereon.PlayerTrigger;
-import net.sydokiddo.chrysalis.Chrysalis;
 
 public class ChrysalisCriteriaTriggers extends CriteriaTriggers {
 
     // List of Criteria Triggers:
 
-    public static final PlayerTrigger DUPLICATE_ALLAY = ChrysalisCriteriaTriggers.register(new PlayerTrigger(Chrysalis.id("duplicate_allay")));
+    public static final PlayerTrigger DUPLICATE_ALLAY = ChrysalisCriteriaTriggers.register("duplicate_allay", new PlayerTrigger());
 
     // Registry for Criteria Triggers:
 

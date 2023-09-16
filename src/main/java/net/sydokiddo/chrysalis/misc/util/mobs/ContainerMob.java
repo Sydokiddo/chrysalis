@@ -105,9 +105,9 @@ public interface ContainerMob {
     static <T extends LivingEntity> Optional<InteractionResult> containerMobPickup(Player player, InteractionHand interactionHand, T livingEntity, Item usedItem) {
 
         ItemStack itemInHand = player.getItemInHand(interactionHand);
-        boolean bl = doMobContainerPickUp(player, usedItem.asItem(), interactionHand, livingEntity);
+        boolean success = doMobContainerPickUp(player, usedItem.asItem(), interactionHand, livingEntity);
 
-        if (bl && itemInHand.getItem() == usedItem) {
+        if (success) {
             return Optional.of(InteractionResult.sidedSuccess(livingEntity.level().isClientSide));
         } else {
             return Optional.empty();

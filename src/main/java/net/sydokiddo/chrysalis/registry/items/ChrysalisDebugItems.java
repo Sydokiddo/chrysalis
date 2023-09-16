@@ -14,24 +14,28 @@ public class ChrysalisDebugItems {
     // List of Debug Items:
 
     public static final Item HEAL = registerItem("heal",
-        new HealItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
+        new HealItem(debugUtilitySettings()));
 
     public static final Item FILL_HUNGER = registerItem("fill_hunger",
-        new FillHungerItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
+        new FillHungerItem(debugUtilitySettings()));
 
     public static final Item GIVE_RESISTANCE = registerItem("give_resistance",
-        new GiveResistanceItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
+        new GiveResistanceItem(debugUtilitySettings()));
 
     public static final Item CLEAR_EFFECTS = registerItem("clear_effects",
-        new ClearEffectsItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
+        new ClearEffectsItem(debugUtilitySettings()));
 
     public static final Item TELEPORT_TO_SPAWNPOINT = registerItem("teleport_to_spawnpoint",
-        new TeleportToSpawnpointItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
+        new TeleportToSpawnpointItem(debugUtilitySettings()));
 
     public static final Item KILL_WAND = registerItem("kill_wand",
-        new KillWandItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
+        new KillWandItem(debugUtilitySettings()));
 
     // Registry for Items:
+
+    private static Item.Properties debugUtilitySettings() {
+        return new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC);
+    }
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(BuiltInRegistries.ITEM, Chrysalis.id(name), item);

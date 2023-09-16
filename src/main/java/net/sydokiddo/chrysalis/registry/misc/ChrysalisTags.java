@@ -137,6 +137,7 @@ public class ChrysalisTags {
     public static final TagKey<EntityType<?>> PIGLINS = registerEntityTag("piglins");
     public static final TagKey<EntityType<?>> SLIMES = registerEntityTag("slimes");
     public static final TagKey<EntityType<?>> GOLEMS = registerEntityTag("golems");
+    public static final TagKey<EntityType<?>> CAN_SPAWN_ON_LEAVES = registerEntityTag("can_spawn_on_leaves");
 
     // Non-Living Entitites
 

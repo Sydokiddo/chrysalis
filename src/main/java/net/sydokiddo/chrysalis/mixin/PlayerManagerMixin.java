@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.mixin;
 import com.mojang.logging.LogUtils;
 import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.CommonListenerCookie;
 import net.minecraft.server.players.PlayerList;
 import net.sydokiddo.chrysalis.Chrysalis;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class PlayerManagerMixin {
      **/
 
     @Inject(method = "placeNewPlayer", at = @At(value = "TAIL"))
-    private void chrysalis_onPlayerConnectToServer(Connection connection, ServerPlayer player, CallbackInfo info) {
-        LOGGER.info(player.getName().getString() + " has Chrysalis " + Chrysalis.chrysalisVersion + " installed");
+    private void chrysalis_onPlayerConnectToServer(Connection connection, ServerPlayer serverPlayer, CommonListenerCookie commonListenerCookie, CallbackInfo ci) {
+        LOGGER.info(serverPlayer.getName().getString() + " has Chrysalis " + Chrysalis.chrysalisVersion + " installed");
     }
 }

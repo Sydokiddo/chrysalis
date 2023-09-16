@@ -4,8 +4,8 @@ import com.google.common.collect.Sets;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -162,7 +162,7 @@ public class RegistryHelpers {
 
     public static LeavesBlock registerLeaves(SoundType soundType, MapColor mapColor) {
         return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(mapColor).strength(0.2f).randomTicks()
-        .sound(soundType).noOcclusion().isValidSpawn(RegistryHelpers::canSpawnOnLeaves).isSuffocating(RegistryHelpers::never)
+        .sound(soundType).noOcclusion().isValidSpawn(Blocks::ocelotOrParrot).isSuffocating(RegistryHelpers::never)
         .isViewBlocking(RegistryHelpers::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(RegistryHelpers::never));
     }
 
@@ -201,10 +201,6 @@ public class RegistryHelpers {
     /**
      * Registry helpers for assisting with mob spawning.
      **/
-
-    public static Boolean canSpawnOnLeaves(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
-        return entityType == EntityType.OCELOT || entityType == EntityType.PARROT;
-    }
 
     public static Predicate<BiomeSelectionContext> isValidBiomeForMobSpawning() {
         return context -> !context.getBiomeRegistryEntry().is(ChrysalisTags.WITHOUT_MOB_SPAWNS);
@@ -529,10 +525,10 @@ public class RegistryHelpers {
     public static final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
     public static void playDispenserSound(BlockSource blockSource) {
-        blockSource.getLevel().levelEvent(1000, blockSource.getPos(), 0);
+        blockSource.level().levelEvent(1000, blockSource.pos(), 0);
     }
 
     public static void playDispenserAnimation(BlockSource blockSource, Direction direction) {
-        blockSource.getLevel().levelEvent(2000, blockSource.getPos(), direction.get3DDataValue());
+        blockSource.level().levelEvent(2000, blockSource.pos(), direction.get3DDataValue());
     }
 }
