@@ -37,6 +37,18 @@ public class ChrysalisRegistry {
         GameRules.Category.DROPS,
         GameRuleFactory.createBooleanRule(true)
     );
+    public static GameRules.Key<GameRules.BooleanValue> RULE_DO_NETHER_PORTAL_ACTIVATING =
+        GameRuleRegistry.register(
+        "doNetherPortalActivating",
+        GameRules.Category.UPDATES,
+        GameRuleFactory.createBooleanRule(true)
+    );
+    public static GameRules.Key<GameRules.BooleanValue> RULE_DO_END_PORTAL_ACTIVATING =
+        GameRuleRegistry.register(
+        "doEndPortalActivating",
+        GameRules.Category.UPDATES,
+        GameRuleFactory.createBooleanRule(true)
+    );
 
     // Registries
 

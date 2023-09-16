@@ -13,6 +13,8 @@ import net.minecraft.util.Mth;
 @Environment(EnvType.CLIENT)
 public class FadingTrailParticle extends TextureSheetParticle {
 
+    // Initialization and Ticking
+
     private FadingTrailParticle(ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
         super(clientLevel, d, e, f);
         this.quadSize *= 0.75f;
@@ -21,18 +23,6 @@ public class FadingTrailParticle extends TextureSheetParticle {
         this.xd = g;
         this.yd = h + (double)(this.random.nextFloat() / 500.0f);
         this.zd = i;
-    }
-
-    @Override
-    public void render(VertexConsumer vertexConsumer, Camera camera, float f) {
-        this.alpha = 1.0F - Mth.clamp(((float)this.age + f) / (float)this.lifetime, 0.0F, 1.0F);
-        super.render(vertexConsumer, camera, f);
-    }
-
-    @Override
-    public float getQuadSize(float f) {
-        float g = ((float)this.age + f) / (float)this.lifetime;
-        return this.quadSize * (1.0f - g * g * 0.5f);
     }
 
     @Override
@@ -53,20 +43,37 @@ public class FadingTrailParticle extends TextureSheetParticle {
         }
     }
 
+    // Rendering
+
+    @Override
+    public float getQuadSize(float f) {
+        float g = ((float)this.age + f) / (float)this.lifetime;
+        return this.quadSize * (1.0f - g * g * 0.5f);
+    }
+
+    @Override
+    public void render(VertexConsumer vertexConsumer, Camera camera, float f) {
+        this.alpha = 1.0F - Mth.clamp(((float)this.age + f) / (float)this.lifetime, 0.0F, 1.0F);
+        super.render(vertexConsumer, camera, f);
+    }
+
     @Override
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
+    // Providers
+
     @Environment(EnvType.CLIENT)
-    public static class ModParticleProvider implements ParticleProvider<SimpleParticleType> {
+    public static class FadingTrailProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet sprite;
 
-        public ModParticleProvider(SpriteSet spriteSet) {
+        public FadingTrailProvider(SpriteSet spriteSet) {
             this.sprite = spriteSet;
         }
 
+        @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
             FadingTrailParticle particle = new FadingTrailParticle(clientLevel, d, e, f, g, h, i);
             particle.setAlpha(1.0f);

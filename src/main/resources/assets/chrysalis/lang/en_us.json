@@ -31,5 +31,7 @@
   "gamerule.dragonGriefing": "Allow for Ender Dragons to destroy blocks",
   "gamerule.witherGriefing": "Allow for Withers to destroy blocks",
   "gamerule.destroyItemsInExplosions": "In explosions, most items will be destroyed",
-  "gamerule.destroyItemsInExplosions.description": "Most items caught in explosions are lost in the explosion."
+  "gamerule.destroyItemsInExplosions.description": "Most items caught in explosions are lost in the explosion.",
+  "gamerule.doNetherPortalActivating": "Allow Nether Portal activating",
+  "gamerule.doEndPortalActivating": "Allow End Portal activating"
 }

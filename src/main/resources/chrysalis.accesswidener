@@ -3,17 +3,3 @@ accessWidener   v1  named
 # Items
 
 accessible class net/minecraft/world/item/InstrumentItem
-accessible field net/minecraft/world/item/InstrumentItem instruments Lnet/minecraft/tags/TagKey;
-accessible method net/minecraft/world/item/InstrumentItem getInstrument (Lnet/minecraft/world/item/ItemStack;)Ljava/util/Optional;
-extendable class net/minecraft/world/item/enchantment/EnchantmentCategory
-
-# Entities
-
-accessible method net/minecraft/world/entity/Entity setSharedFlag (IZ)V
-accessible method net/minecraft/world/entity/Entity getSharedFlag (I)Z
-accessible method net/minecraft/world/entity/Entity markHurt ()V
-accessible method net/minecraft/world/entity/LivingEntity getJumpPower ()F
-
-# Misc
-
-accessible field net/minecraft/client/sounds/MusicManager currentMusic Lnet/minecraft/client/resources/sounds/SoundInstance;

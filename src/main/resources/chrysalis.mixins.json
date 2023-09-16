@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "PlayerManagerMixin",
+    "blocks.BaseFireBlockMixin",
     "blocks.BeaconBlockEntityMixin",
     "blocks.NetherPortalShapeMixin",
     "blocks.NetherWartBlockMixin",
@@ -37,6 +38,7 @@
     "entities.passive.VillagerHarvestFarmlandMixin",
     "entities.passive.WolfMixin",
     "items.EndCrystalItemMixin",
+    "items.EyeOfEnderItemMixin",
     "items.PotionColorMixin",
     "items.ShearsItemMixin",
     "items.SwordItemMixin",

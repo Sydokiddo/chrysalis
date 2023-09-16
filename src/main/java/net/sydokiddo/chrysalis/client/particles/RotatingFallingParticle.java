@@ -10,6 +10,8 @@ import net.minecraft.core.particles.SimpleParticleType;
 @Environment(EnvType.CLIENT)
 public class RotatingFallingParticle extends RisingParticle {
 
+    // Initialization and Ticking
+
     private RotatingFallingParticle(ClientLevel level, double x, double y, double z, double velX, double velY, double velZ) {
         super(level, x, y, z, velX, velY, velZ);
         this.scale(1.1F + (float) level.random.nextInt(6) / 10);
@@ -40,20 +42,25 @@ public class RotatingFallingParticle extends RisingParticle {
         }
     }
 
+    // Rendering
+
     @Override
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
+    // Providers
+
     @Environment(EnvType.CLIENT)
-    public static class ModParticleProvider implements ParticleProvider<SimpleParticleType> {
+    public static class FallingParticleProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet sprite;
 
-        public ModParticleProvider(SpriteSet spriteSet) {
+        public FallingParticleProvider(SpriteSet spriteSet) {
             this.sprite = spriteSet;
         }
 
+        @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
             RotatingFallingParticle particle = new RotatingFallingParticle(clientLevel, d, e, f, g, h, i);
             particle.pickSprite(this.sprite);

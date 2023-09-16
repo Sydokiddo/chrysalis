@@ -11,6 +11,8 @@ import net.minecraft.util.Mth;
 @Environment(EnvType.CLIENT)
 public class GlowingSporeParticle extends TextureSheetParticle {
 
+    // Initialization and Ticking
+
     private GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         super(clientLevel, x, y, z);
         this.setSize(0.001F, 0.001F);
@@ -35,10 +37,7 @@ public class GlowingSporeParticle extends TextureSheetParticle {
         super.tick();
     }
 
-    @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
-    }
+    // Rendering
 
     @Override
     public float getQuadSize(float f) {
@@ -59,12 +58,19 @@ public class GlowingSporeParticle extends TextureSheetParticle {
         return j | k << 16;
     }
 
+    @Override
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    }
+
+    // Providers
+
     @Environment(EnvType.CLIENT)
-    public static class ModParticleProvider implements ParticleProvider<SimpleParticleType> {
+    public static class GlowingSporeProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet sprite;
 
-        public ModParticleProvider(SpriteSet spriteSet) {
+        public GlowingSporeProvider(SpriteSet spriteSet) {
             this.sprite = spriteSet;
         }
 
