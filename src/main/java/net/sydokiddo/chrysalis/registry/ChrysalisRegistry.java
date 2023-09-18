@@ -54,7 +54,6 @@ public class ChrysalisRegistry {
 
     public static void registerAll() {
 
-        ChrysalisResourcePacks.registerResourcePacks();
         RegistryHelpers.init();
         CreativeTabHelper.init();
         ChrysalisDamageSources.registerDamageSources();
