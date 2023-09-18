@@ -29,6 +29,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -124,6 +125,10 @@ public class RegistryHelpers {
 
     public static MobBucketItem registerMobInLavaBucket(EntityType entityType, SoundEvent soundEvent) {
         return new MobBucketItem(entityType, Fluids.LAVA, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
+    }
+
+    public static MobBucketItem registerMobInCustomFluidBucket(EntityType entityType, Fluid fluidType, SoundEvent soundEvent) {
+        return new MobBucketItem(entityType, fluidType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
     }
 
     public static MobInPowderSnowBucketItem registerMobInPowderSnowBucket(EntityType entityType, SoundEvent soundEvent, Item returnItem) {

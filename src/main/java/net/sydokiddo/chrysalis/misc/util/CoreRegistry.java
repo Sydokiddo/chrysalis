@@ -35,7 +35,7 @@ public class CoreRegistry<T> {
     }
 
     public void register() {
-        if (this.isPresent) throw new IllegalStateException("Duplication of Registry: " + this.key);
+        if (this.isPresent) throw new IllegalStateException("Duplicate of Registry: " + this.key);
         this.isPresent = true;
     }
 }
