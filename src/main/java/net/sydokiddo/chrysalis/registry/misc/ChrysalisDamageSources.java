@@ -13,6 +13,7 @@ public class ChrysalisDamageSources {
     public static final ResourceKey<DamageType> MOB_ATTACK_BYPASSES_ARMOR = register("mob_attack_bypasses_armor");
     public static final ResourceKey<DamageType> MOB_ATTACK_BYPASSES_ENCHANTMENTS = register("mob_attack_bypasses_enchantments");
     public static final ResourceKey<DamageType> MOB_ATTACK_BYPASSES_SHIELD = register("mob_attack_bypasses_shield");
+    public static final ResourceKey<DamageType> MOB_ATTACK_NO_KNOCKBACK = register("mob_attack_no_knockback");
 
     // Registry for Damage Sources:
 

@@ -6,8 +6,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,6 +35,8 @@ public interface ContainerMob {
 
         CompoundTag compoundTag = itemStack.getOrCreateTag();
 
+        // Saves the default mob tags
+
         if (mob.hasCustomName()) {
             itemStack.setHoverName(mob.getCustomName());
         }
@@ -51,10 +55,25 @@ public interface ContainerMob {
         if (mob.isInvulnerable()) {
             compoundTag.putBoolean("Invulnerable", mob.isInvulnerable());
         }
+
         compoundTag.putFloat("Health", mob.getHealth());
+
+        // If the mob is an ageable mob, save the mob's age
+
+        if (mob instanceof AgeableMob ageableMob) {
+            compoundTag.putInt("Age", ageableMob.getAge());
+        }
+
+        // If the mob is an animal, save the mob's in love time
+
+        if (mob instanceof Animal animal) {
+            compoundTag.putInt("InLove", animal.getInLoveTime());
+        }
     }
 
     static void loadDefaultDataFromItemTag(Mob mob, CompoundTag compoundTag) {
+
+        // Loads the default mob tags
 
         if (compoundTag.contains("NoAI")) {
             mob.setNoAi(compoundTag.getBoolean("NoAI"));
@@ -73,6 +92,18 @@ public interface ContainerMob {
         }
         if (compoundTag.contains("Health", 99)) {
             mob.setHealth(compoundTag.getFloat("Health"));
+        }
+
+        // If the mob is an ageable mob, load the mob's age
+
+        if (mob instanceof AgeableMob ageableMob) {
+            ageableMob.setAge(compoundTag.getInt("Age"));
+        }
+
+        // If the mob is an animal, load the mob's in love time
+
+        if (mob instanceof Animal animal) {
+            animal.setInLoveTime(compoundTag.getInt("InLove"));
         }
     }
 
