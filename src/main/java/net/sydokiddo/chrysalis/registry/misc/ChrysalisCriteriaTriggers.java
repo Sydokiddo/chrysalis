@@ -7,7 +7,7 @@ public class ChrysalisCriteriaTriggers extends CriteriaTriggers {
 
     // List of Criteria Triggers:
 
-    public static final PlayerTrigger DUPLICATE_ALLAY = ChrysalisCriteriaTriggers.register("duplicate_allay", new PlayerTrigger());
+    public static final PlayerTrigger DUPLICATE_ALLAY = ChrysalisCriteriaTriggers.register("chrysalis:duplicate_allay", new PlayerTrigger());
 
     // Registry for Criteria Triggers:
 
