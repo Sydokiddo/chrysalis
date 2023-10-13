@@ -34,8 +34,8 @@ public class ScreenshotRecorderMixin {
     private static void chrysalis_copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo ci) {
         Minecraft mc = Minecraft.getInstance();
         try {
-            File path = new File(mc.gameDirectory.getAbsolutePath() + "\\screenshots\\");
-            Optional<Path> lastFilePath = Files.list(path.toPath()).filter(f -> !Files.isDirectory(f)).max(Comparator.comparingLong(f -> f.toFile().lastModified()));
+            Path path = mc.gameDirectory.toPath().resolve("screenshots");
+            Optional<Path> lastFilePath = Files.list(path).filter(f -> !Files.isDirectory(f)).max(Comparator.comparingLong(f -> f.toFile().lastModified()));
             Image lastScreen = new ImageIcon(lastFilePath.get().toString()).getImage();
             ClipboardImage newImage = new ClipboardImage(lastScreen);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
