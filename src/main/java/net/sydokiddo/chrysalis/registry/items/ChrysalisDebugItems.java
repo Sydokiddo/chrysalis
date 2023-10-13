@@ -11,7 +11,7 @@ import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.*;
 @SuppressWarnings("unused")
 public class ChrysalisDebugItems {
 
-    // List of Debug Items:
+    // region Debug Items
 
     public static final Item HEAL = registerItem("heal",
         new HealItem(debugUtilitySettings()));
@@ -31,7 +31,12 @@ public class ChrysalisDebugItems {
     public static final Item KILL_WAND = registerItem("kill_wand",
         new KillWandItem(debugUtilitySettings()));
 
-    // Registry for Items:
+    public static final Item TAME_MOB = registerItem("tame_mob",
+        new TameMobItem(debugUtilitySettings()));
+
+    // endregion
+
+    // Registry
 
     private static Item.Properties debugUtilitySettings() {
         return new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC);

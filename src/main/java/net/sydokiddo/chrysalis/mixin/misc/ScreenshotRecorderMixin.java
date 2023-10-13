@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import javax.swing.*;
 import com.mojang.blaze3d.platform.NativeImage;
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,10 +39,7 @@ public class ScreenshotRecorderMixin {
             Optional<Path> lastFilePath = Files.list(path.toPath()).filter(f -> !Files.isDirectory(f)).max(Comparator.comparingLong(f -> f.toFile().lastModified()));
             Image lastScreen = new ImageIcon(lastFilePath.get().toString()).getImage();
 
-            ClipboardImage newImage = new ClipboardImage(lastScreen);
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-
-            clipboard.setContents(newImage, null);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new ClipboardImage(lastScreen), null);
             mc.gui.getChat().addMessage(Component.translatable("gui.chrysalis.screenshot_success"));
 
         } catch(Exception e) {

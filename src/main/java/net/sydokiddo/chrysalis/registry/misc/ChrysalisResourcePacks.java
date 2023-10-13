@@ -9,8 +9,6 @@ import net.sydokiddo.chrysalis.Chrysalis;
 
 public class ChrysalisResourcePacks {
 
-    // Registry for Resource Packs:
-
     public static void registerResourcePacks() {
 
         ResourceLocation emissivePack = Chrysalis.id("emissive_textures");

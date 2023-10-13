@@ -9,14 +9,14 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.sydokiddo.chrysalis.Chrysalis;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("all")
 public class ChrysalisTags {
 
     /**
      * Item Tags
      **/
 
-    // Common Items
+    // region Common Items
 
     public static final TagKey<Item> DISC_FRAGMENTS = registerItemTag("disc_fragments");
     public static final TagKey<Item> INSTRUMENTS = registerItemTag("instruments");
@@ -30,7 +30,9 @@ public class ChrysalisTags {
     public static final TagKey<Item> BRICKS = registerItemTag("bricks");
     public static final TagKey<Item> BANNER_PATTERNS = registerItemTag("banner_patterns");
 
-    // Block Items
+    // endregion
+
+    // region Block Items
 
     public static final TagKey<Item> AMETHYST_BLOCK_ITEMS = registerItemTag("amethyst_blocks");
     public static final TagKey<Item> SOUL_SAND_ITEMS = registerItemTag("soul_sand");
@@ -51,7 +53,9 @@ public class ChrysalisTags {
     public static final TagKey<Item> PRESSURE_PLATE_ITEMS = registerItemTag("pressure_plates");
     public static final TagKey<Item> STONE_PRESSURE_PLATE_ITEMS = registerItemTag("stone_pressure_plates");
 
-    // Interactable Items
+    // endregion
+
+    // region Interactable Items
 
     public static final TagKey<Item> DUPLICATES_ALLAYS = registerItemTag("duplicates_allays");
     public static final TagKey<Item> POISONS_PARROTS = registerItemTag("poisons_parrots");
@@ -60,7 +64,9 @@ public class ChrysalisTags {
     public static final TagKey<Item> CHARGES_RESPAWN_ANCHORS = registerItemTag("charges_respawn_anchors");
     public static final TagKey<Item> TNT_IGNITERS = registerItemTag("tnt_igniters");
 
-    // Equippable Items
+    // endregion
+
+    // region Equippable Items
 
     public static final TagKey<Item> HELMETS = registerItemTag("helmets");
     public static final TagKey<Item> CHESTPLATES = registerItemTag("chestplates");
@@ -72,7 +78,9 @@ public class ChrysalisTags {
     public static final TagKey<Item> PROTECTS_AGAINST_ENDERMEN = registerItemTag("protects_against_endermen");
     public static final TagKey<Item> POWDER_SNOW_WALKABLE_ITEMS = registerItemTag("powder_snow_walkable_items");
 
-    // Item Entities
+    // endregion
+
+    // region Item Entities
 
     public static final TagKey<Item> IMMUNE_TO_FIRE = registerItemTag("immune_to_fire");
     public static final TagKey<Item> IMMUNE_TO_EXPLOSIONS = registerItemTag("immune_to_explosions");
@@ -80,11 +88,13 @@ public class ChrysalisTags {
     public static final TagKey<Item> IMMUNE_TO_DESPAWNING = registerItemTag("immune_to_despawning");
     public static final TagKey<Item> INCREASED_DESPAWN_TIME = registerItemTag("increased_despawn_time");
 
+    // endregion
+
     /**
      * Block Tags
      **/
 
-    // Common Blocks
+    // region Common Blocks
 
     public static final TagKey<Block> AMETHYST_BLOCKS = registerBlockTag("amethyst_blocks");
     public static final TagKey<Block> COPPER_BLOCKS = registerBlockTag("copper_blocks");
@@ -105,7 +115,9 @@ public class ChrysalisTags {
     public static final TagKey<Block> WAXED_BLOCKS = registerBlockTag("waxed_blocks");
     public static final TagKey<Block> BRUSHABLE_BLOCKS = registerBlockTag("brushable_blocks");
 
-    // Technical
+    // endregion
+
+    // region Technical
 
     public static final TagKey<Block> BASE_STONE_END = registerBlockTag("base_stone_end");
     public static final TagKey<Block> CHORUS_PLANT_CAN_GROW_ON = registerBlockTag("chorus_plant_can_grow_on");
@@ -117,18 +129,22 @@ public class ChrysalisTags {
     public static final TagKey<Block> CANNOT_BE_PUSHED_BY_PISTONS = registerBlockTag("cannot_be_pushed_by_pistons");
     public static final TagKey<Block> MOBS_SHOULD_PATHFIND_AROUND = registerBlockTag("mobs_should_pathfind_around");
 
-    // Mineable Block Tags
+    // endregion
+
+    // region Mineable Block Tags
 
     public static final TagKey<Block> MINEABLE_WITH_SWORD = registerBlockTag("mineable/sword");
     public static final TagKey<Block> MINEABLE_WITH_SHEARS = registerBlockTag("mineable/shears");
+
+    // endregion
 
     /**
      * Entity Tags
      **/
 
-    // Living Entities
+    // region Living Entities
 
-    public static final TagKey<EntityType<?>> UNDEAD = registerEntityTag("undead");
+    public static final TagKey<EntityType<?>> UNDEAD = registerEntityTag("undead"); // To remove on 1.20.3!
     public static final TagKey<EntityType<?>> ARTHROPODS = registerEntityTag("arthropods");
     public static final TagKey<EntityType<?>> AQUATIC = registerEntityTag("aquatic");
     public static final TagKey<EntityType<?>> VILLAGERS = registerEntityTag("villagers");
@@ -139,14 +155,20 @@ public class ChrysalisTags {
     public static final TagKey<EntityType<?>> GOLEMS = registerEntityTag("golems");
     public static final TagKey<EntityType<?>> CAN_SPAWN_ON_LEAVES = registerEntityTag("can_spawn_on_leaves");
 
-    // Non-Living Entitites
+    // endregion
+
+    // region Non-Living Entitites
 
     public static final TagKey<EntityType<?>> IS_VEHICLE = registerEntityTag("is_vehicle");
     public static final TagKey<EntityType<?>> ATTACKABLE_STATIC_ENTITIES = registerEntityTag("attackable_static_entities");
 
-    // Technical
+    // endregion
+
+    // region Technical
 
     public static final TagKey<EntityType<?>> CANNOT_RIDE_BOATS = registerEntityTag("cannot_ride_boats");
+
+    // endregion
 
     /**
      * Damage Type Tags
@@ -164,6 +186,8 @@ public class ChrysalisTags {
     /**
      * Registries
      **/
+
+    // region Registry
 
     private static TagKey<Item> registerItemTag(String name) {
         return TagKey.create(Registries.ITEM, Chrysalis.id(name));
@@ -184,4 +208,6 @@ public class ChrysalisTags {
     private static TagKey<Biome> registerBiomeTag(String name) {
         return TagKey.create(Registries.BIOME, Chrysalis.id(name));
     }
+
+    // endregion
 }
