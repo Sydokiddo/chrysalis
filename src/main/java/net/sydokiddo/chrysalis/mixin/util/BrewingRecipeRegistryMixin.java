@@ -13,7 +13,7 @@ public interface BrewingRecipeRegistryMixin {
      * Accesses brewing recipes for easy registering of custom potion recipes.
      **/
 
-    @SuppressWarnings("ALL")
+    @SuppressWarnings("unused")
     @Invoker("addMix")
     static void invokeRegisterPotionRecipe(Potion input, Item item, Potion output) {
         throw new AssertionError();

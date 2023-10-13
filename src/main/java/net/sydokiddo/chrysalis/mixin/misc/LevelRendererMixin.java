@@ -31,23 +31,19 @@ public class LevelRendererMixin {
         return this.level != null && this.level.dimension() == Level.END;
     }
 
-    // Prevents rain from rendering in the Nether and the End
-
     /**
-     * Prevents rain from being able to render in the Nether and the End.
-     * <p>
      * Fixes a vanilla bug where occasionally when going through portals when the world is loading, rain can sometimes display in dimensions where rain doesn't exist.
      **/
 
     @Inject(method = "renderSnowAndRain", at = @At(value = "HEAD"), cancellable = true)
-    private void chrysalis_preventRainRenderingInNetherAndEnd(LightTexture lightTexture, float f, double d, double e, double g, CallbackInfo info) {
+    private void chrysalis$preventRainRenderingInNetherAndEnd(LightTexture lightTexture, float f, double d, double e, double g, CallbackInfo info) {
         if (isNether() || isEnd()) {
             info.cancel();
         }
     }
 
     @Inject(method = "tickRain", at = @At(value = "HEAD"), cancellable = true)
-    private void chrysalis_preventRainTickingInNetherAndEnd(Camera camera, CallbackInfo info) {
+    private void chrysalis$preventRainTickingInNetherAndEnd(Camera camera, CallbackInfo info) {
         if (isNether() || isEnd()) {
             info.cancel();
         }

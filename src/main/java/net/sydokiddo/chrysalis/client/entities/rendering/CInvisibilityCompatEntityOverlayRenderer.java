@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.world.entity.Mob;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class CInvisibilityCompatEntityOverlayRenderer<T extends Mob, M extends HierarchicalModel<T>> extends CEntityOverlayRenderer<T, M> {
 

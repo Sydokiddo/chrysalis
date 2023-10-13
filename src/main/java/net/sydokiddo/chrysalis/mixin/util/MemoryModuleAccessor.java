@@ -13,7 +13,7 @@ public interface MemoryModuleAccessor {
      * Accesses the memory module type class for mobs.
      **/
 
-    @SuppressWarnings("ALL")
+    @SuppressWarnings("all")
     @Invoker("<init>")
     static <U> MemoryModuleType<U> createMemoryModuleType(Optional<Codec<U>> optional) {
         throw new UnsupportedOperationException();

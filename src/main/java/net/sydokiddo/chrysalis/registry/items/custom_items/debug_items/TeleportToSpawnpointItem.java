@@ -25,8 +25,6 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
 
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-
         if (!level.isClientSide) {
 
             player.gameEvent(GameEvent.ITEM_INTERACT_START);
@@ -43,6 +41,6 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
                 }
             }
         }
-        return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+        return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
     }
 }

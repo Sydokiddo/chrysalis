@@ -16,7 +16,7 @@ public class ParrotMixin {
      **/
 
     @Redirect(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
-    private boolean chrysalis_poisonsParrotsItemTag(ItemStack itemStack, Item item) {
+    private boolean chrysalis$poisonsParrotsItemTag(ItemStack itemStack, Item item) {
         return itemStack.is(ChrysalisTags.POISONS_PARROTS);
     }
 }

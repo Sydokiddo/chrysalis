@@ -8,7 +8,7 @@ import net.minecraft.world.item.Rarity;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.*;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unused")
 public class ChrysalisDebugItems {
 
     // List of Debug Items:

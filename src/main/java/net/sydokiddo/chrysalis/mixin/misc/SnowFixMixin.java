@@ -30,7 +30,7 @@ public abstract class SnowFixMixin {
      **/
 
     @Inject(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;tickIceAndSnow(ZLnet/minecraft/core/BlockPos;)V"), cancellable = true)
-    private void chrysalis_preventSnowInNetherAndEnd(LevelChunk levelChunk, int i, CallbackInfo ci) {
+    private void chrysalis$preventSnowInNetherAndEnd(LevelChunk levelChunk, int i, CallbackInfo ci) {
         if (isNether() || isEnd()) {
             ci.cancel();
         }

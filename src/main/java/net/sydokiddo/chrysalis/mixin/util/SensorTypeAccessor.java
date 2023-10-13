@@ -13,7 +13,7 @@ public interface SensorTypeAccessor {
      * Accesses the sensor type class for mobs.
      **/
 
-    @SuppressWarnings("ALL")
+    @SuppressWarnings("unused")
     @Invoker
     static <U extends Sensor<?>> SensorType<U> callRegister(String string, Supplier<U> supplier) {
         throw new UnsupportedOperationException();

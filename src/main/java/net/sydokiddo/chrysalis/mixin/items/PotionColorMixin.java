@@ -18,24 +18,18 @@ public abstract class PotionColorMixin {
      **/
 
     @Inject(at = @At("RETURN"), method = "getColor", cancellable = true)
-    private void chrysalis_changeEffectColors(CallbackInfoReturnable<Integer> cir) {
+    private void chrysalis$changeEffectColors(CallbackInfoReturnable<Integer> cir) {
 
         // Blindness
 
-        if (this.color == 2039587) {
-            cir.setReturnValue(5848959);
-        }
+        if (this.color == 2039587) cir.setReturnValue(5848959);
 
         // Haste
 
-        if (this.color == 14270531) {
-            cir.setReturnValue(16758911);
-        }
+        if (this.color == 14270531) cir.setReturnValue(16758911);
 
         // Mining Fatigue
 
-        if (this.color == 4866583) {
-            cir.setReturnValue(5855666);
-        }
+        if (this.color == 4866583) cir.setReturnValue(5855666);
     }
 }

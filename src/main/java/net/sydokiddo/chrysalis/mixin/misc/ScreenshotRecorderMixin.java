@@ -29,18 +29,23 @@ public class ScreenshotRecorderMixin {
      * Copies screenshots to the user's clipboard upon taking a screenshot.
      **/
 
-    @SuppressWarnings("ALL")
+    @SuppressWarnings("all")
     @Inject(method = "method_1661", at = @At("TAIL"))
-    private static void chrysalis_copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo ci) {
+    private static void chrysalis$copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo ci) {
+
         Minecraft mc = Minecraft.getInstance();
+
         try {
             File path = new File(mc.gameDirectory.getAbsolutePath() + "\\screenshots\\");
             Optional<Path> lastFilePath = Files.list(path.toPath()).filter(f -> !Files.isDirectory(f)).max(Comparator.comparingLong(f -> f.toFile().lastModified()));
             Image lastScreen = new ImageIcon(lastFilePath.get().toString()).getImage();
+
             ClipboardImage newImage = new ClipboardImage(lastScreen);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
             clipboard.setContents(newImage, null);
             mc.gui.getChat().addMessage(Component.translatable("gui.chrysalis.screenshot_success"));
+
         } catch(Exception e) {
             e.printStackTrace();
         }

@@ -47,6 +47,8 @@ public class RegistryHelpers {
 
     public static void init() {}
 
+    // region Potion Recipe Registry
+
     /**
      * Registry helpers for registering potion recipes.
      **/
@@ -66,6 +68,10 @@ public class RegistryHelpers {
     public static void registerInvertedPotionRecipe(Potion startingPotion, Potion resultPotion) {
         BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.FERMENTED_SPIDER_EYE, resultPotion);
     }
+
+    // endregion
+
+    // region Item Registry
 
     /**
      * Registry helpers for registering items with specific properties.
@@ -135,6 +141,10 @@ public class RegistryHelpers {
         return new MobInPowderSnowBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(returnItem), returnItem);
     }
 
+    // endregion
+
+    // region Block Registry
+
     /**
      * Registry helpers for registering blocks with specific properties.
      **/
@@ -186,6 +196,10 @@ public class RegistryHelpers {
         .instrument(NoteBlockInstrument.BASS).strength(2.0f, 6.0f).sound(soundType).ignitedByLava());
     }
 
+    // endregion
+
+    // region Composter and Furnace Values
+
     public static float composter30PercentChance = 0.3F;
     public static float composter50PercentChance = 0.5F;
     public static float composter65PercentChance = 0.65F;
@@ -202,6 +216,10 @@ public class RegistryHelpers {
     public static int furnace4000Ticks = 4000;
     public static int furnace16000Ticks = 16000;
     public static int furnace20000Ticks = 20000;
+
+    // endregion
+
+    // region Biome Predicates
 
     /**
      * Registry helpers for assisting with mob spawning.
@@ -223,6 +241,10 @@ public class RegistryHelpers {
         return context -> context.canGenerateIn(LevelStem.END);
     }
 
+    // endregion
+
+    // region World Generation Properties
+
     /**
      * Registry helpers for assisting with world generation properties.
      **/
@@ -243,6 +265,10 @@ public class RegistryHelpers {
         registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
     }
 
+    // endregion
+
+    // region Namespace Strings
+
     /**
      * Namespace strings for base Minecraft as well as compatibility with various mods.
      **/
@@ -257,6 +283,10 @@ public class RegistryHelpers {
     public static String auditory = "auditory";
     public static String lottablocks = "lottablocks";
     public static String manic = "manic";
+
+    // endregion
+
+    // region Chest Loot Tables
 
     /**
      * Resource locations for all of the base chest loot tables in the vanilla game.
@@ -316,6 +346,10 @@ public class RegistryHelpers {
     public static final ResourceLocation STRONGHOLD_PRISON = new ResourceLocation(endlessencore, "chests/stronghold_prison");
     public static final ResourceLocation STRONGHOLD_SEWER = new ResourceLocation(endlessencore, "chests/stronghold_sewer");
 
+    // endregion
+
+    // region Archaeology Loot Tables
+
     /**
      * Resource locations for all of the base archaeology loot tables in the vanilla game.
      **/
@@ -333,6 +367,10 @@ public class RegistryHelpers {
 
     public static final ResourceLocation ARCHAEOLOGY_STRONGHOLD = new ResourceLocation(endlessencore, "archaeology/stronghold");
     public static final ResourceLocation ARCHAEOLOGY_TITAN_NEST = new ResourceLocation(peculia, "archaeology/titan_nest");
+
+    // endregion
+
+    // region Gameplay Loot Tables
 
     /**
      * Resource locations for all of the base gameplay loot tables in the vanilla game.
@@ -365,6 +403,10 @@ public class RegistryHelpers {
 
     public static final ResourceLocation FLEET_MOULTING = new ResourceLocation(endlessencore, "gameplay/fleet_moulting");
     public static final ResourceLocation GOLDEN_FLEET_MOULTING = new ResourceLocation(endlessencore, "gameplay/golden_fleet_moulting");
+
+    // endregion
+
+    // region Entity Loot Tables
 
     /**
      * Resource locations for all of the base entity loot tables in the vanilla game.
@@ -486,6 +528,10 @@ public class RegistryHelpers {
     public static final ResourceLocation WISP = new ResourceLocation(spookiar, "entities/wisp");
     public static final ResourceLocation PRIME_SPIRIT = new ResourceLocation(spookiar, "entities/prime_spirit");
 
+    // endregion
+
+    // region Loot Table Registry
+
     /**
      * Registry helpers for assisting with custom loot tables.
      **/
@@ -502,6 +548,10 @@ public class RegistryHelpers {
         }
         throw new IllegalArgumentException(resourceLocation + " is already a registered built-in loot table");
     }
+
+    // endregion
+
+    // region Miscellanous Properties
 
     /**
      * Miscellaneous properties.
@@ -520,8 +570,12 @@ public class RegistryHelpers {
     }
 
     public static ToIntFunction<BlockState> blockStateShouldEmitLight(int lightAmount) {
-        return blockState -> blockState.getValue(BlockStateProperties.LIT) != false ? lightAmount : 0;
+        return blockState -> blockState.getValue(BlockStateProperties.LIT) ? lightAmount : 0;
     }
+
+    // endregion
+
+    // region Dispenser Utilities
 
     /**
      * Dispenser utility methods.
@@ -533,7 +587,13 @@ public class RegistryHelpers {
         blockSource.level().levelEvent(1000, blockSource.pos(), 0);
     }
 
+    public static void playDispenserShootingSound(BlockSource blockSource) {
+        blockSource.level().levelEvent(1002, blockSource.pos(), 0);
+    }
+
     public static void playDispenserAnimation(BlockSource blockSource, Direction direction) {
         blockSource.level().levelEvent(2000, blockSource.pos(), direction.get3DDataValue());
     }
+
+    // endregion
 }

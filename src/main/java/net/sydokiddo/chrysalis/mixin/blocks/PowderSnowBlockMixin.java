@@ -21,7 +21,7 @@ public class PowderSnowBlockMixin {
      **/
 
     @ModifyArg(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-    private GameRules.Key<GameRules.BooleanValue> chrysalis_powderSnowPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+    private GameRules.Key<GameRules.BooleanValue> chrysalis$powderSnowPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
         return ChrysalisRegistry.RULE_PASSIVE_GRIEFING;
     }
 
@@ -30,7 +30,7 @@ public class PowderSnowBlockMixin {
      **/
 
     @Inject(method = "canEntityWalkOnPowderSnow", at = @At("HEAD"), cancellable = true)
-    private static void chrysalis_powderSnowWalkableItemsTag(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+    private static void chrysalis$powderSnowWalkableItemsTag(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.FEET).is(ChrysalisTags.POWDER_SNOW_WALKABLE_ITEMS)) {
             cir.setReturnValue(true);
         }

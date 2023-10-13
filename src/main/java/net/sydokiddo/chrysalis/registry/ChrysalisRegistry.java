@@ -11,7 +11,7 @@ import net.sydokiddo.chrysalis.registry.misc.*;
 
 public class ChrysalisRegistry {
 
-    // Game Rules
+    // region Game Rules
 
     public static GameRules.Key<GameRules.BooleanValue> RULE_PASSIVE_GRIEFING =
         GameRuleRegistry.register(
@@ -50,7 +50,9 @@ public class ChrysalisRegistry {
         GameRuleFactory.createBooleanRule(true)
     );
 
-    // Registries
+    // endregion
+
+    // Registry
 
     public static void registerAll() {
 

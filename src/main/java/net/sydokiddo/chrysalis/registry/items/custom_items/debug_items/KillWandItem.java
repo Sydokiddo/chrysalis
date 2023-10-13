@@ -25,7 +25,6 @@ public class KillWandItem extends DebugUtilityItem {
      * Any mob that is hurt with this item will automatically deal the max integer amount of damage to it.
      **/
 
-    @SuppressWarnings("ALL")
     @Override
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity self) {
         if (!target.isInvulnerable()) {
@@ -33,6 +32,8 @@ public class KillWandItem extends DebugUtilityItem {
             target.hurt(target.damageSources().mobAttack(self), Float.MAX_VALUE);
 
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(self.level());
+            assert lightningBolt != null;
+
             lightningBolt.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
             lightningBolt.setVisualOnly(true);
             self.level().addFreshEntity(lightningBolt);

@@ -32,7 +32,7 @@ public abstract class ItemEntityMixin extends Entity {
      **/
 
     @Inject(at = @At("HEAD"), method = "tick")
-    private void chrysalis_makeItemsHaveExtendedLifetime(CallbackInfo ci) {
+    private void chrysalis$makeItemsHaveExtendedLifetime(CallbackInfo ci) {
         if (!this.getItem().isEmpty() && this.getItem().is(ChrysalisTags.INCREASED_DESPAWN_TIME) && this.firstTick) {
             this.setExtendedLifetime();
         }
@@ -43,7 +43,7 @@ public abstract class ItemEntityMixin extends Entity {
      **/
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V"))
-    private void chrysalis_makeItemsNeverDespawn(ItemEntity instance) {
+    private void chrysalis$makeItemsNeverDespawn(ItemEntity instance) {
         if (!this.getItem().is(ChrysalisTags.IMMUNE_TO_DESPAWNING)) {
             this.discard();
         }
@@ -54,7 +54,7 @@ public abstract class ItemEntityMixin extends Entity {
      **/
 
     @Inject(at = @At("HEAD"), method = "hurt", cancellable = true)
-    private void chrysalis_makeItemsImmune(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis$makeItemsImmune(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {
         if (!this.getItem().isEmpty()) {
             if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
                 cir.setReturnValue(false);
@@ -66,7 +66,7 @@ public abstract class ItemEntityMixin extends Entity {
     }
 
     @Inject(at = @At("HEAD"), method = "fireImmune", cancellable = true)
-    private void chrysalis_makeItemsFireImmune(CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis$makeItemsFireImmune(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(this.getItem().is(ChrysalisTags.IMMUNE_TO_FIRE));
     }
 }

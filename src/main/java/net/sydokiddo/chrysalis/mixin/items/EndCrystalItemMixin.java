@@ -16,7 +16,7 @@ public class EndCrystalItemMixin {
      **/
 
     @Redirect(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
-    private boolean chrysalis_changeEndCrystalPlacing(BlockState blockState, Block block){
+    private boolean chrysalis$changeEndCrystalPlacing(BlockState blockState, Block block){
         return blockState.is(ChrysalisTags.END_CRYSTAL_BASE_BLOCKS);
     }
 }

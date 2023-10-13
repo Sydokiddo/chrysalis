@@ -35,22 +35,26 @@ public abstract class ChorusFlowerBlockMixin extends Block {
      **/
 
     @Inject(method = "canSurvive", at = @At("HEAD"), cancellable = true)
-    private void chrysalis_chorusFlowerCanBePlacedOn(BlockState state, LevelReader world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
-        if (world.getBlockState(pos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
+    private void chrysalis$chorusFlowerCanBePlacedOn(BlockState blockState, LevelReader levelReader, BlockPos blockPos, CallbackInfoReturnable<Boolean> info) {
+        if (levelReader.getBlockState(blockPos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
             info.setReturnValue(true);
             info.cancel();
         }
     }
 
     @Inject(method = "randomTick", at = @At("HEAD"), cancellable = true)
-    private void chrysalis_chorusFlowerRandomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo info) {
-        if (world.getBlockState(pos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
-            BlockPos up = pos.above();
-            if (world.isEmptyBlock(up) && up.getY() < world.getMaxBuildHeight()) {
-                int i = state.getValue(ChorusFlowerBlock.AGE);
-                if (i < 5) {
-                    this.placeGrownFlower(world, up, i + 1);
-                    world.setBlock(pos, plant.defaultBlockState().setValue(ChorusPlantBlock.UP, true).setValue(ChorusPlantBlock.DOWN, true), 2);
+    private void chrysalis$chorusFlowerRandomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo info) {
+        if (serverLevel.getBlockState(blockPos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
+
+            BlockPos abovePos = blockPos.above();
+
+            if (serverLevel.isEmptyBlock(abovePos) && abovePos.getY() < serverLevel.getMaxBuildHeight()) {
+
+                int age = blockState.getValue(ChorusFlowerBlock.AGE);
+
+                if (age < 5) {
+                    this.placeGrownFlower(serverLevel, abovePos, age + 1);
+                    serverLevel.setBlock(blockPos, plant.defaultBlockState().setValue(ChorusPlantBlock.UP, true).setValue(ChorusPlantBlock.DOWN, true), 2);
                     info.cancel();
                 }
             }
@@ -58,11 +62,13 @@ public abstract class ChorusFlowerBlockMixin extends Block {
     }
 
     @Inject(method = "placeDeadFlower", at = @At("HEAD"), cancellable = true)
-    private void chrysalis_placeDeadChorusFlower(Level world, BlockPos pos, CallbackInfo info) {
-        BlockState belowPos = world.getBlockState(pos.below());
+    private void chrysalis$placeDeadChorusFlower(Level level, BlockPos blockPos, CallbackInfo info) {
+
+        BlockState belowPos = level.getBlockState(blockPos.below());
+
         if (belowPos.is(Blocks.CHORUS_PLANT) || belowPos.is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
-            world.setBlock(pos, this.defaultBlockState().setValue(BlockStateProperties.AGE_5, 5), 2);
-            world.levelEvent(1034, pos, 0);
+            level.setBlock(blockPos, this.defaultBlockState().setValue(BlockStateProperties.AGE_5, 5), 2);
+            level.levelEvent(1034, blockPos, 0);
         }
         info.cancel();
     }

@@ -15,7 +15,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unused")
 public class DispenseBucketMobDispenserBehavior implements DispenseItemBehavior {
 
     public static final DispenseBucketMobDispenserBehavior INSTANCE = new DispenseBucketMobDispenserBehavior();
@@ -25,13 +25,11 @@ public class DispenseBucketMobDispenserBehavior implements DispenseItemBehavior 
 
         BlockPos blockPos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
         ServerLevel level = blockSource.level();
-        BlockState blockState = level.getBlockState(blockPos);
-        Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
 
-        if (RegistryHelpers.isBlockStateFree(blockState)) {
+        if (RegistryHelpers.isBlockStateFree(level.getBlockState(blockPos))) {
 
             RegistryHelpers.playDispenserSound(blockSource);
-            RegistryHelpers.playDispenserAnimation(blockSource, direction);
+            RegistryHelpers.playDispenserAnimation(blockSource, blockSource.state().getValue(DispenserBlock.FACING));
             level.gameEvent(GameEvent.ENTITY_PLACE, blockPos, GameEvent.Context.of(blockSource.state()));
 
             if (itemStack.getItem() instanceof MobInContainerItem mobInContainerItem) {

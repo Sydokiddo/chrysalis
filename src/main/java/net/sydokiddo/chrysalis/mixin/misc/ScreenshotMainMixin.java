@@ -17,7 +17,7 @@ public class ScreenshotMainMixin {
      **/
 
     @Inject(method = "main", at = @At("HEAD"), remap = false)
-    private static void chrysalis_setScreenshotProperty(CallbackInfo ci) {
+    private static void chrysalis$setScreenshotProperty(CallbackInfo ci) {
         System.setProperty("java.awt.headless", "false");
     }
 }

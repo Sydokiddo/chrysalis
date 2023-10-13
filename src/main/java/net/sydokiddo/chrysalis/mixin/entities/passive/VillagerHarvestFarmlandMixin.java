@@ -15,7 +15,7 @@ public class VillagerHarvestFarmlandMixin {
      **/
 
     @ModifyArg(method = "checkExtraStartConditions(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/npc/Villager;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-    private GameRules.Key<GameRules.BooleanValue> chrysalis_villagerPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+    private GameRules.Key<GameRules.BooleanValue> chrysalis$villagerPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
         return ChrysalisRegistry.RULE_PASSIVE_GRIEFING;
     }
 }

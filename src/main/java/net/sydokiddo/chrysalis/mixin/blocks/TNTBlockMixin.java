@@ -16,7 +16,7 @@ public class TNTBlockMixin {
      **/
 
     @Redirect(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
-    private boolean chrysalis_tntIgnitersTag(ItemStack itemStack, Item item) {
+    private boolean chrysalis$tntIgnitersTag(ItemStack itemStack, Item item) {
         return itemStack.is(ChrysalisTags.TNT_IGNITERS);
     }
 }

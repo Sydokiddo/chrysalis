@@ -6,11 +6,11 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class RotatingFallingParticle extends RisingParticle {
 
-    // Initialization and Ticking
+    // region Initialization and Ticking
 
     private RotatingFallingParticle(ClientLevel level, double x, double y, double z, double velX, double velY, double velZ) {
         super(level, x, y, z, velX, velY, velZ);
@@ -42,14 +42,18 @@ public class RotatingFallingParticle extends RisingParticle {
         }
     }
 
-    // Rendering
+    // endregion
+
+    // region Rendering
 
     @Override
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    // Providers
+    // endregion
+
+    // region Providers
 
     @Environment(EnvType.CLIENT)
     public static class FallingParticleProvider implements ParticleProvider<SimpleParticleType> {
@@ -67,4 +71,6 @@ public class RotatingFallingParticle extends RisingParticle {
             return particle;
         }
     }
+
+    // endregion
 }

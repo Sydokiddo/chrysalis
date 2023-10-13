@@ -16,7 +16,7 @@ public class EndermanMixin {
      **/
 
     @Redirect(method = "isLookingAtMe", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
-    private boolean chrysalis_carvedPumpkinEndermanTag(ItemStack itemStack, Item item) {
+    private boolean chrysalis$carvedPumpkinEndermanTag(ItemStack itemStack, Item item) {
         return itemStack.is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN);
     }
 }

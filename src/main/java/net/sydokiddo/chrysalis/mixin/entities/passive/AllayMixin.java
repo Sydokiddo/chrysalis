@@ -24,7 +24,7 @@ public class AllayMixin {
      **/
 
     @Inject(at = @At("HEAD"), method = "isDuplicationItem", cancellable = true)
-    private void chrysalis_allayDuplicationItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis$allayDuplicationItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(itemStack.is(ChrysalisTags.DUPLICATES_ALLAYS));
     }
 
@@ -33,7 +33,7 @@ public class AllayMixin {
      **/
 
     @ModifyArg(method = "wantsToPickUp", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-    private GameRules.Key<GameRules.BooleanValue> chrysalis_allayPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+    private GameRules.Key<GameRules.BooleanValue> chrysalis$allayPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
         return ChrysalisRegistry.RULE_PASSIVE_GRIEFING;
     }
 
@@ -42,7 +42,7 @@ public class AllayMixin {
      **/
 
     @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/allay/Allay;duplicateAllay()V"))
-    private void chrysalis_allayDuplicationCriteriaTrigger(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
+    private void chrysalis$allayDuplicationCriteriaTrigger(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
         if (player instanceof ServerPlayer serverPlayer) {
             ChrysalisCriteriaTriggers.DUPLICATE_ALLAY.trigger(serverPlayer);
         }

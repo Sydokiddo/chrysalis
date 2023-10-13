@@ -15,7 +15,7 @@ public class EnderDragonMixin {
      **/
 
     @ModifyArg(method = "checkWalls", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-    private GameRules.Key<GameRules.BooleanValue> chrysalis_enderDragonGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+    private GameRules.Key<GameRules.BooleanValue> chrysalis$enderDragonGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
         return ChrysalisRegistry.RULE_DRAGON_GRIEFING;
     }
 }

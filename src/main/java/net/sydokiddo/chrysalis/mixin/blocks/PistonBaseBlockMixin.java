@@ -19,7 +19,7 @@ public class PistonBaseBlockMixin {
      **/
 
     @Inject(method = "isPushable", at = @At("HEAD"), cancellable = true)
-    private static void chrysalis_preventPistonPushing(BlockState blockState, Level level, BlockPos blockPos, Direction direction, boolean bl, Direction direction2, CallbackInfoReturnable<Boolean> cir) {
+    private static void chrysalis$preventPistonPushing(BlockState blockState, Level level, BlockPos blockPos, Direction direction, boolean bl, Direction direction2, CallbackInfoReturnable<Boolean> cir) {
         if (blockState.is(ChrysalisTags.CANNOT_BE_PUSHED_BY_PISTONS)) {
             cir.setReturnValue(false);
         }

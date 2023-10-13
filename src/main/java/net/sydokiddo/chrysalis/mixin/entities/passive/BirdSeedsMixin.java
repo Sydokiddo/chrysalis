@@ -17,7 +17,7 @@ public class BirdSeedsMixin {
      **/
 
     @Inject(at = @At("HEAD"), method = "isFood", cancellable = true)
-    private void chrysalis_seedItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis$seedItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(itemStack.is(ChrysalisTags.SEEDS));
     }
 }

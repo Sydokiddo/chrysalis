@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import java.util.Optional;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unused")
 public interface ContainerMob {
 
     boolean fromItem();
@@ -50,7 +50,7 @@ public interface ContainerMob {
             compoundTag.putBoolean("NoGravity", mob.isNoGravity());
         }
         if (mob.hasGlowingTag()) {
-            compoundTag.putBoolean("Glowing", mob.hasGlowingTag());
+            compoundTag.putBoolean("Glowing", true);
         }
         if (mob.isInvulnerable()) {
             compoundTag.putBoolean("Invulnerable", mob.isInvulnerable());
@@ -114,19 +114,17 @@ public interface ContainerMob {
     private static boolean doMobContainerPickUp(Player player, Item containerItem, InteractionHand interactionHand, LivingEntity livingEntity) {
 
         ItemStack itemInHand = player.getItemInHand(interactionHand);
-        Item usedItem = containerItem.asItem();
         ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
 
-        if (itemInHand.getItem() == usedItem && livingEntity.isAlive()) {
+        if (itemInHand.getItem() == containerItem.asItem() && livingEntity.isAlive()) {
 
             if (!livingEntity.level().isClientSide) {
                 CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
             }
 
-            livingEntity.playSound(((ContainerMob) livingEntity).getPickupSound(), 1.0f, 1.0f);
+            livingEntity.playSound(((ContainerMob) livingEntity).getPickupSound(), 1.0F, 1.0F);
             ((ContainerMob) livingEntity).saveToItemTag(resultItemStack);
-            ItemStack filledResult = ItemUtils.createFilledResult(itemInHand, player, resultItemStack, false);
-            player.setItemInHand(interactionHand, filledResult);
+            player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemInHand, player, resultItemStack, false));
 
             livingEntity.discard();
         }
@@ -134,11 +132,7 @@ public interface ContainerMob {
     }
 
     static <T extends LivingEntity> Optional<InteractionResult> containerMobPickup(Player player, InteractionHand interactionHand, T livingEntity, Item usedItem) {
-
-        ItemStack itemInHand = player.getItemInHand(interactionHand);
-        boolean success = doMobContainerPickUp(player, usedItem.asItem(), interactionHand, livingEntity);
-
-        if (success) {
+        if (doMobContainerPickUp(player, usedItem.asItem(), interactionHand, livingEntity)) {
             return Optional.of(InteractionResult.sidedSuccess(livingEntity.level().isClientSide));
         } else {
             return Optional.empty();

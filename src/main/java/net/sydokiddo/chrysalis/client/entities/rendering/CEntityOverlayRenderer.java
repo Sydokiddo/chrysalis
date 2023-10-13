@@ -14,7 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class CEntityOverlayRenderer<T extends Mob, M extends HierarchicalModel<T>> extends RenderLayer<T, M> {
 

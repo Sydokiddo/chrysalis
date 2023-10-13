@@ -3,10 +3,9 @@ package net.sydokiddo.chrysalis.misc.util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("all")
 public class InventoryHelper {
 
-    private static final int TAG_LIST = 9;
     private static final int TAG_COMPOUND = 10;
 
     /**
@@ -20,6 +19,6 @@ public class InventoryHelper {
         if (tag == null || !tag.contains("BlockEntityTag", TAG_COMPOUND)) return true;
 
         CompoundTag blockEntityTag = tag.getCompound("BlockEntityTag");
-        return !blockEntityTag.contains("Items", TAG_LIST) || blockEntityTag.getList("Items", TAG_COMPOUND).isEmpty();
+        return !blockEntityTag.contains("Items", 9) || blockEntityTag.getList("Items", TAG_COMPOUND).isEmpty();
     }
 }

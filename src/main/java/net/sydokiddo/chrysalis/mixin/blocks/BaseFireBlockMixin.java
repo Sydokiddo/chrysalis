@@ -16,7 +16,7 @@ public class BaseFireBlockMixin {
      **/
 
     @Inject(at = @At("HEAD"), method = "inPortalDimension", cancellable = true)
-    private static void chrysalis_preventNetherPortalActivating(Level level, CallbackInfoReturnable<Boolean> cir) {
+    private static void chrysalis$preventNetherPortalActivating(Level level, CallbackInfoReturnable<Boolean> cir) {
         if (!level.getGameRules().getBoolean(ChrysalisRegistry.RULE_DO_NETHER_PORTAL_ACTIVATING)) {
             cir.setReturnValue(false);
         }

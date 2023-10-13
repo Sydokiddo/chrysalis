@@ -1,7 +1,6 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -28,11 +27,10 @@ public class ClearEffectsItem extends DebugUtilityItem {
 
         if (!player.getActiveEffects().isEmpty()) {
             if (!level.isClientSide) {
-                ServerPlayer serverPlayer = (ServerPlayer) player;
-                player.playNotifySound(SoundEvents.BOTTLE_EMPTY, SoundSource.PLAYERS, 1.0f, 1.0f);
+                player.playNotifySound(SoundEvents.BOTTLE_EMPTY, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
                 player.removeAllEffects();
-                serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.clear_effects_message"));
+                player.sendSystemMessage(Component.translatable("item.chrysalis.clear_effects_message"));
             }
             return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
         }

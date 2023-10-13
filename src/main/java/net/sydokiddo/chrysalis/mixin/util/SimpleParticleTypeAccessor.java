@@ -11,7 +11,7 @@ public interface SimpleParticleTypeAccessor {
      * Accesses the simple particle type class.
      **/
 
-    @SuppressWarnings("ALL")
+    @SuppressWarnings("unused")
     @Invoker("<init>")
     static SimpleParticleType createSimpleParticleType(boolean bl) {
         throw new UnsupportedOperationException();

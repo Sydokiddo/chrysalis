@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class CameraSetup {
 

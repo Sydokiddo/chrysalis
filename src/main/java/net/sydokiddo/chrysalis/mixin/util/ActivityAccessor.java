@@ -11,7 +11,7 @@ public interface ActivityAccessor {
      * Accesses the activity class for mobs.
      **/
 
-    @SuppressWarnings("ALL")
+    @SuppressWarnings("unused")
     @Invoker("<init>")
     static Activity createActivity(String string) {
         throw new UnsupportedOperationException();

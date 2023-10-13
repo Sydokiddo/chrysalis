@@ -15,7 +15,7 @@ public class WitherMixin {
      **/
 
     @ModifyArg(method = "customServerAiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-    private GameRules.Key<GameRules.BooleanValue> chrysalis_witherGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+    private GameRules.Key<GameRules.BooleanValue> chrysalis$witherGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
         return ChrysalisRegistry.RULE_WITHER_GRIEFING;
     }
 }

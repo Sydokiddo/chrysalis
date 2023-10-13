@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class AxolotlMixin {
 
     @Redirect(method = "usePlayerItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
-    private boolean chrysalis_giveBackBucketWhenFeedingAxolotl(ItemStack itemStack, Item item) {
+    private boolean chrysalis$giveBackBucketWhenFeedingAxolotl(ItemStack itemStack, Item item) {
         return itemStack.is(ChrysalisTags.FILLED_BUCKETS);
     }
 }

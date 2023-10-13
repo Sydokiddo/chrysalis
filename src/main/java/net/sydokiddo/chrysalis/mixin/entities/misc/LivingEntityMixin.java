@@ -34,9 +34,14 @@ public abstract class LivingEntityMixin extends Entity {
         ItemStack itemStack = this.getItemBySlot(EquipmentSlot.HEAD);
         EntityType<?> entityType = entity.getType();
 
-        return (entityType == EntityType.SKELETON && itemStack.is(Items.SKELETON_SKULL) || entityType == EntityType.ZOMBIE && itemStack.is(Items.ZOMBIE_HEAD) ||
-        entityType == EntityType.PIGLIN && itemStack.is(Items.PIGLIN_HEAD) || entityType == EntityType.PIGLIN_BRUTE && itemStack.is(Items.PIGLIN_HEAD) ||
-        entityType == EntityType.CREEPER && itemStack.is(Items.CREEPER_HEAD) || entityType.is(ChrysalisTags.ENDER) && itemStack.is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN));
+        return (
+            entityType == EntityType.SKELETON && itemStack.is(Items.SKELETON_SKULL) ||
+            entityType == EntityType.ZOMBIE && itemStack.is(Items.ZOMBIE_HEAD) ||
+            entityType == EntityType.PIGLIN && itemStack.is(Items.PIGLIN_HEAD) ||
+            entityType == EntityType.PIGLIN_BRUTE && itemStack.is(Items.PIGLIN_HEAD) ||
+            entityType == EntityType.CREEPER && itemStack.is(Items.CREEPER_HEAD) ||
+            entityType.is(ChrysalisTags.ENDER) && itemStack.is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN)
+        );
     }
 
     /**
@@ -46,17 +51,14 @@ public abstract class LivingEntityMixin extends Entity {
      **/
 
     @Inject(method = "getVisibilityPercent", at = @At(value = "HEAD"), cancellable = true)
-    private void chrysalis_makeMobsAffectedByBlindness(Entity entity, CallbackInfoReturnable<Double> cir) {
+    private void chrysalis$makeMobsAffectedByBlindness(Entity entity, CallbackInfoReturnable<Double> cir) {
 
         if (entity instanceof LivingEntity livingEntity && !this.level().isClientSide() && livingEntity.hasEffect(MobEffects.BLINDNESS)) {
 
             int amplifier = Objects.requireNonNull(livingEntity.getEffect(MobEffects.BLINDNESS)).getAmplifier();
 
-            double beforeViewDistance = 1.0;
-            double beforeViewDistanceWithHeadOn = 0.5;
-
-            double afterViewDistance = beforeViewDistance / (2 * (amplifier + 1));
-            double afterViewDistanceWithHeadOn = beforeViewDistanceWithHeadOn / (2 * (amplifier + 1));
+            double afterViewDistance = 1.0 / (2 * (amplifier + 1));
+            double afterViewDistanceWithHeadOn = 0.5 / (2 * (amplifier + 1));
 
             if (hasMobHead(entity)) {
                 cir.setReturnValue(afterViewDistanceWithHeadOn);
@@ -65,10 +67,7 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
 
-        ItemStack itemStack = this.getItemBySlot(EquipmentSlot.HEAD);
-        EntityType<?> entityType = entity.getType();
-
-        if (entityType.is(ChrysalisTags.ENDER) && itemStack.is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN)) {
+        if (entity.getType().is(ChrysalisTags.ENDER) && this.getItemBySlot(EquipmentSlot.HEAD).is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN)) {
             cir.setReturnValue(0.5);
         }
     }

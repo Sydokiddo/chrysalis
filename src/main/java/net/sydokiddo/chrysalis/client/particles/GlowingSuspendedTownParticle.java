@@ -7,18 +7,18 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class GlowingSuspendedTownParticle extends TextureSheetParticle {
 
-    // Initialization and Ticking
+    // region Initialization and Ticking
 
     private GlowingSuspendedTownParticle(ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
         super(clientLevel, d, e, f, g, h, i);
-        float j = this.random.nextFloat() * 0.1F + 0.2F;
-        this.rCol = j;
-        this.gCol = j;
-        this.bCol = j;
+        float random = this.random.nextFloat() * 0.1F + 0.2F;
+        this.rCol = random;
+        this.gCol = random;
+        this.bCol = random;
         this.setSize(0.02F, 0.02F);
         this.quadSize *= this.random.nextFloat() * 0.6F + 0.5F;
         this.xd *= 0.019999999552965164;
@@ -29,9 +29,11 @@ public class GlowingSuspendedTownParticle extends TextureSheetParticle {
 
     @Override
     public void tick() {
+
         this.xo = this.x;
         this.yo = this.y;
         this.zo = this.z;
+
         if (this.lifetime-- <= 0) {
             this.remove();
         } else {
@@ -53,7 +55,7 @@ public class GlowingSuspendedTownParticle extends TextureSheetParticle {
     @Override
     public int getLightColor(float f) {
         float g = ((float)this.age) / (float)this.lifetime;
-        g = Mth.clamp(g, 1.0f, 0.0f);
+        g = Mth.clamp(g, 1.0F, 0.0F);
         int i = super.getLightColor(f);
         int j = i & 0xFF;
         int k = i >> 16 & 0xFF;
@@ -68,7 +70,9 @@ public class GlowingSuspendedTownParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    // Providers
+    // endregion
+
+    // region Providers
 
     @Environment(EnvType.CLIENT)
     public static class GlowingParticleProvider implements ParticleProvider<SimpleParticleType> {
@@ -87,4 +91,6 @@ public class GlowingSuspendedTownParticle extends TextureSheetParticle {
             return particle;
         }
     }
+
+    // endregion
 }

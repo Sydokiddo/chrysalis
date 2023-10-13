@@ -17,7 +17,7 @@ public class EyeOfEnderItemMixin {
      **/
 
     @Inject(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/EndPortalFrameBlock;getOrCreatePortalShape()Lnet/minecraft/world/level/block/state/pattern/BlockPattern;"), cancellable = true)
-    private void chrysalis_preventEndPortalActivating(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
+    private void chrysalis$preventEndPortalActivating(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         if (!useOnContext.getLevel().getGameRules().getBoolean(ChrysalisRegistry.RULE_DO_END_PORTAL_ACTIVATING)) {
             cir.cancel();
             cir.setReturnValue(InteractionResult.PASS);

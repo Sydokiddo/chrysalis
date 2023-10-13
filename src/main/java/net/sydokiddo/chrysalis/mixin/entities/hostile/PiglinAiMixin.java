@@ -17,7 +17,7 @@ public class PiglinAiMixin {
      **/
 
     @Inject(at = @At("HEAD"), method = "isBarterCurrency", cancellable = true)
-    private static void chrysalis_piglinBarteringItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
+    private static void chrysalis$piglinBarteringItemsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(itemStack.is(ChrysalisTags.PIGLIN_BARTERING_ITEMS));
     }
 
@@ -26,9 +26,8 @@ public class PiglinAiMixin {
      **/
 
     @Inject(at = @At("RETURN"), method = "isWearingGold", cancellable = true)
-    private static void chrysalis_isValidPiglinPacifyingArmor(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
-        Iterable<ItemStack> iterable = livingEntity.getArmorSlots();
-        for (ItemStack itemStack : iterable) {
+    private static void chrysalis$isValidPiglinPacifyingArmor(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
+        for (ItemStack itemStack : livingEntity.getArmorSlots()) {
             if (itemStack.is(ChrysalisTags.PIGLIN_PACIFYING_ARMOR)) {
                 cir.setReturnValue(true);
             }

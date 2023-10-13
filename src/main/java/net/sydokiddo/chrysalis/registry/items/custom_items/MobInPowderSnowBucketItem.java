@@ -12,7 +12,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("ALL")
 public class MobInPowderSnowBucketItem extends MobInContainerItem {
 
     public MobInPowderSnowBucketItem(EntityType<?> entityType, SoundEvent emptySound, Properties properties, Item returnItem) {

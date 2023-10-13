@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
@@ -31,55 +30,55 @@ public class ChorusPlantBlockMixin extends PipeBlock {
      **/
 
     @Inject(method = "getStateForPlacement(Lnet/minecraft/world/item/context/BlockPlaceContext;)Lnet/minecraft/world/level/block/state/BlockState;", at = @At("RETURN"), cancellable = true)
-    private void chrysalis_chorusPlantCanGrowOn(BlockPlaceContext context, CallbackInfoReturnable<BlockState> info) {
-        BlockPos pos = context.getClickedPos();
-        Level world = context.getLevel();
+    private void chrysalis$chorusPlantGetStateForPlacement(BlockPlaceContext context, CallbackInfoReturnable<BlockState> info) {
+
         BlockState plant = info.getReturnValue();
-        if (context.canPlace() && plant.is(Blocks.CHORUS_PLANT) && world.getBlockState(pos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
+
+        if (context.canPlace() && plant.is(Blocks.CHORUS_PLANT) && context.getLevel().getBlockState(context.getClickedPos().below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
             info.setReturnValue(plant.setValue(BlockStateProperties.DOWN, true));
         }
     }
 
     @Inject(method = "Lnet/minecraft/world/level/block/ChorusPlantBlock;getStateForPlacement" + "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)" + "Lnet/minecraft/world/level/block/state/BlockState;", at = @At("RETURN"), cancellable = true)
-    private void chrysalis_chorusPlantCanGrowOn(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<BlockState> info) {
+    private void chrysalis$chorusPlantGetStateForPlacement(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<BlockState> info) {
+
         BlockState plant = info.getReturnValue();
+
         if (plant.is(Blocks.CHORUS_PLANT) && blockGetter.getBlockState(blockPos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
             info.setReturnValue(plant.setValue(BlockStateProperties.DOWN, true));
         }
     }
 
     @Inject(method = "canSurvive", at = @At("HEAD"), cancellable = true)
-    private void chrysalis_chorusPlantCanGrowOn(BlockState state, LevelReader world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
-        BlockState down = world.getBlockState(pos.below());
-        if (down.is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
+    private void chrysalis$chorusPlantCanSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos, CallbackInfoReturnable<Boolean> info) {
+        if (levelReader.getBlockState(blockPos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
             info.setReturnValue(true);
         }
     }
 
     @Inject(method = "updateShape", at = @At("RETURN"), cancellable = true)
-    private void chrysalis_chorusPlantCanGrowOn(BlockState state, Direction direction, BlockState newState, LevelAccessor world, BlockPos pos, BlockPos posFrom, CallbackInfoReturnable<BlockState> info) {
+    private void chrysalis$chorusPlantUpdateShape(BlockState currentState, Direction direction, BlockState newState, LevelAccessor levelAccessor, BlockPos pos, BlockPos posFrom, CallbackInfoReturnable<BlockState> info) {
+
         BlockState plant = info.getReturnValue();
-        if (plant.is(Blocks.CHORUS_PLANT) && world.getBlockState(pos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
+
+        if (plant.is(Blocks.CHORUS_PLANT) && levelAccessor.getBlockState(pos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
             plant = plant.setValue(BlockStateProperties.DOWN, true);
             info.setReturnValue(plant);
         }
     }
 
-    @SuppressWarnings("ALL")
+    @SuppressWarnings("deprecation")
     @Override
     public boolean canSurvive(@NotNull BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
 
         BlockState belowBlockState = levelReader.getBlockState(blockPos.below());
-        boolean blockIsNotAir = !levelReader.getBlockState(blockPos.above()).isAir() && !belowBlockState.isAir();
 
         for (Direction direction : Direction.Plane.HORIZONTAL) {
 
             BlockPos relativeBlockPos = blockPos.relative(direction);
-            BlockState relativeBlockState = levelReader.getBlockState(relativeBlockPos);
+            if (!levelReader.getBlockState(relativeBlockPos).is(this)) continue;
 
-            if (!relativeBlockState.is(this)) continue;
-
-            if (blockIsNotAir) {
+            if (!levelReader.getBlockState(blockPos.above()).isAir() && !belowBlockState.isAir()) {
                 return false;
             }
 

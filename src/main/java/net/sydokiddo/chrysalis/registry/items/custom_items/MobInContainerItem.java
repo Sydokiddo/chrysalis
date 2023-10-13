@@ -5,9 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
@@ -52,7 +50,7 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
             return InteractionResult.PASS;
         } else {
             this.checkExtraContent(player, level, itemStack, usePos);
-            level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), emptySound, SoundSource.NEUTRAL, 1.0f, 0.8f + level.random.nextFloat() * 0.4f);
+            level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 
             if (!player.getAbilities().instabuild) {
                 player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(returnItem)));
@@ -76,8 +74,15 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
     }
 
     private void spawn(ServerLevel serverLevel, ItemStack itemStack, BlockPos blockPos) {
+
         Entity entity = this.type.spawn(serverLevel, itemStack, null, blockPos, MobSpawnType.BUCKET, true, false);
+
         if (entity instanceof ContainerMob containerMob) {
+
+            if (containerMob instanceof Mob mob) {
+                mob.setPersistenceRequired();
+            }
+
             containerMob.loadFromItemTag(itemStack.getOrCreateTag());
             containerMob.setFromItem(true);
         }

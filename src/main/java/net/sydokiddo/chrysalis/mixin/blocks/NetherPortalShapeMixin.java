@@ -18,7 +18,7 @@ public class NetherPortalShapeMixin {
      **/
 
     @Inject(at = @At("HEAD"), method = "method_30487", cancellable = true)
-    private static void chrysalis_netherPortalBlocksTag(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
+    private static void chrysalis$netherPortalBlocksTag(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(blockState.is(ChrysalisTags.NETHER_PORTAL_BASE_BLOCKS));
     }
 }

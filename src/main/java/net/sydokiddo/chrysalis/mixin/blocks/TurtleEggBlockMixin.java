@@ -17,7 +17,7 @@ public class TurtleEggBlockMixin {
      **/
 
     @Inject(method = "isSand", at = @At("HEAD"), cancellable = true)
-    private static void chrysalis_turtleEggsCanHatchOn(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
+    private static void chrysalis$turtleEggsCanHatchOn(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(blockGetter.getBlockState(blockPos).is(ChrysalisTags.TURTLE_EGGS_CAN_HATCH_ON));
     }
 }

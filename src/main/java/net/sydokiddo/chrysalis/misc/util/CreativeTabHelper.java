@@ -15,7 +15,7 @@ public class CreativeTabHelper {
      * Assists with adding Instrument items and their NBT variants to any Creative Mode tab
      **/
 
-    @SuppressWarnings("ALL")
+    @SuppressWarnings("all")
     public static void addInstrumentItem(Item comparedItem, Item instrument, TagKey<Instrument> tagKey, CreativeModeTab.TabVisibility tabVisibility, ResourceKey<CreativeModeTab> creativeModeTabs) {
         ItemGroupEvents.modifyEntriesEvent(creativeModeTabs).register((entries) -> {
             List<ItemStack> list = new ArrayList<>();

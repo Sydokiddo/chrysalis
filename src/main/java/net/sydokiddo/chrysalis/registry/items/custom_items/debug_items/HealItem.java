@@ -1,7 +1,6 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -28,11 +27,10 @@ public class HealItem extends DebugUtilityItem {
 
         if (player.getHealth() < player.getMaxHealth()) {
             if (!level.isClientSide) {
-                ServerPlayer serverPlayer = (ServerPlayer) player;
-                player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 1.0f, 1.0f);
+                player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
                 player.setHealth(player.getMaxHealth());
-                serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.heal_message"));
+                player.sendSystemMessage(Component.translatable("item.chrysalis.heal_message"));
             }
             return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
         }

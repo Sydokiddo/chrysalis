@@ -16,7 +16,7 @@ public class BeaconBlockEntityMixin {
      **/
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
-    private static boolean chrysalis_allowsBeaconBeamPassthroughTag(BlockState blockState, Block block) {
+    private static boolean chrysalis$allowsBeaconBeamPassthroughTag(BlockState blockState, Block block) {
         return blockState.is(ChrysalisTags.ALLOWS_BEACON_BEAM_PASSTHROUGH);
     }
 }
