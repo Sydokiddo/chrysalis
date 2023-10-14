@@ -12,7 +12,7 @@ public class Chrysalis implements ModInitializer {
 	public static final String MOD_ID = "chrysalis";
 	public static final String chrysalisVersion = "v0.2.1";
 
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final Logger LOGGER = LoggerFactory.getLogger("Chrysalis");
 	public static final boolean IS_DEBUG = FabricLoader.getInstance().isDevelopmentEnvironment();
 
 	@SuppressWarnings("unused")

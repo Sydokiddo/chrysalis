@@ -1,6 +1,5 @@
 {
   "gui.chrysalis.wiki": "Developer Wiki",
-  "gui.chrysalis.screenshot_success": "Screenshot copied to clipboard",
   "pack.chrysalis.emissive_textures": "Emissive Textures",
 
   "item.chrysalis.heal": "Heal",
@@ -18,21 +17,22 @@
   "item.chrysalis.tame_mob": "Tame Mob",
   "item.chrysalis.tame_mob.desc": "Automatically Tames Mob",
 
-  "item.chrysalis.heal_message": "Successfully healed %1$s",
-  "item.chrysalis.fill_hunger_message": "Successfully nourished %1$s",
-  "item.chrysalis.give_resistance_message": "Applied infinite resistance to %1$s",
-  "item.chrysalis.clear_effects_message": "Cleared all status effects from %1$s",
-  "item.chrysalis.teleport_to_spawnpoint_message": "Successfully teleported to spawnpoint",
-  "item.chrysalis.teleport_to_spawnpoint_failed_message": "You have no set spawnpoint",
-  "item.chrysalis.tame_mob_message": "%1$s has successfully been tamed",
+  "gui.chrysalis.heal_message": "Successfully healed %1$s",
+  "gui.chrysalis.fill_hunger_message": "Successfully nourished %1$s",
+  "gui.chrysalis.give_resistance_message": "Applied infinite resistance to %1$s",
+  "gui.chrysalis.clear_effects_message": "Cleared all status effects from %1$s",
+  "gui.chrysalis.teleport_to_spawnpoint_message": "Successfully teleported to spawnpoint",
+  "gui.chrysalis.teleport_to_spawnpoint_failed_message": "You have no set spawnpoint",
+  "gui.chrysalis.tame_mob_message": "%1$s has successfully been tamed",
+
+  "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
+  "gui.chrysalis.item.when_used": "When Used with %1$s:",
+  "gui.chrysalis.item.when_eaten": "When Eaten:",
+  "gui.chrysalis.item.when_drank": "When Drank:",
 
   "dimension.minecraft.overworld": "Overworld",
   "dimension.minecraft.the_nether": "The Nether",
   "dimension.minecraft.the_end": "The End",
-
-  "gui.chrysalis.item.when_used": "When Used with %1$s:",
-  "gui.chrysalis.item.when_eaten": "When Eaten:",
-  "gui.chrysalis.item.when_drank": "When Drank:",
 
   "gamerule.passiveGriefing": "Allow non-destructive world interactions from mobs",
   "gamerule.dragonGriefing": "Allow for Ender Dragons to destroy blocks",

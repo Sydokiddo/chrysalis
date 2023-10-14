@@ -44,11 +44,11 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
                 if (serverPlayer.getRespawnPosition() != null) {
                     serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
                     player.playNotifySound(SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.teleport_to_spawnpoint_message"));
+                    serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_message"));
                     player.getCooldowns().addCooldown(this, 60);
                 } else {
                     player.playNotifySound(SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    serverPlayer.sendSystemMessage(Component.translatable("item.chrysalis.teleport_to_spawnpoint_failed_message"));
+                    serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_failed_message"));
                 }
             }
         }

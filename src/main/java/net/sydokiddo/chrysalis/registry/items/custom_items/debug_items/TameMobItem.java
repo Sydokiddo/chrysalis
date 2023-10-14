@@ -31,11 +31,14 @@ public class TameMobItem extends DebugUtilityItem {
         super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
     }
 
+    /**
+     * Automatically tames any tamable mob when the mob is right-clicked with the item.
+     **/
+
     @Override
     public InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
         if (!livingEntity.level().isClientSide() && livingEntity instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame()) {
             tamableAnimal.tame(player);
-            player.swing(interactionHand);
             playTameEvents(player, tamableAnimal);
             return InteractionResult.SUCCESS;
         }
@@ -56,6 +59,6 @@ public class TameMobItem extends DebugUtilityItem {
             }
         }
 
-        player.sendSystemMessage(Component.translatable("item.chrysalis.tame_mob_message", tamedMob.getName().getString()));
+        player.sendSystemMessage(Component.translatable("gui.chrysalis.tame_mob_message", tamedMob.getName().getString()));
     }
 }

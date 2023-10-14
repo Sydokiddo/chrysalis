@@ -90,6 +90,7 @@ public class ChrysalisRegistry {
         CreativeTabHelper.init();
         ChrysalisDamageSources.registerDamageSources();
         ChrysalisCriteriaTriggers.registerCriteriaTriggers();
+        ChrysalisSoundEvents.registerSounds();
 
         if (Chrysalis.IS_DEBUG) {
             registerDebugUtilities();

@@ -41,7 +41,7 @@ public class ClearEffectsItem extends DebugUtilityItem {
                 player.playNotifySound(SoundEvents.BOTTLE_EMPTY, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
                 player.removeAllEffects();
-                player.sendSystemMessage(Component.translatable("item.chrysalis.clear_effects_message", player.getName().getString()));
+                player.sendSystemMessage(Component.translatable("gui.chrysalis.clear_effects_message", player.getName().getString()));
             }
             return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
         }

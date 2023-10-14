@@ -41,7 +41,7 @@ public class HealItem extends DebugUtilityItem {
                 player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
                 player.setHealth(player.getMaxHealth());
-                player.sendSystemMessage(Component.translatable("item.chrysalis.heal_message", player.getName().getString()));
+                player.sendSystemMessage(Component.translatable("gui.chrysalis.heal_message", player.getName().getString()));
             }
             return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
         }

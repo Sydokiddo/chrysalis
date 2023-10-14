@@ -18,8 +18,12 @@ public abstract class WolfMixin extends TamableAnimal {
         super(entityType, level);
     }
 
+    /**
+     * Any food items in the meats tag can be eaten by wolves.
+     **/
+
     @Inject(at = @At("HEAD"), method = "isFood", cancellable = true)
-    public void chrysalis$isWolfFood(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis$isWolfFood(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
         if (itemStack.is(ChrysalisTags.MEATS) && itemStack.getItem().isEdible()) {
             cir.setReturnValue(true);
         }

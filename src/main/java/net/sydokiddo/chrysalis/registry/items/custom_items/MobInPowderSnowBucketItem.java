@@ -18,6 +18,10 @@ public class MobInPowderSnowBucketItem extends MobInContainerItem {
         super(entityType, emptySound, properties, returnItem);
     }
 
+    /**
+     * Places Powder Snow alongside spawning the mob in the container.
+     **/
+
     @Override
     public void checkExtraContent(@Nullable Player player, @NotNull Level level, @NotNull ItemStack itemStack, @NotNull BlockPos blockPos) {
 

@@ -1,0 +1,10 @@
+{
+  "ui.screenshot.success": {
+    "sounds": [
+      {
+        "name": "chrysalis:ui/screenshot",
+        "stream": true
+      }
+    ]
+  }
+}

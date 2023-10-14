@@ -11,6 +11,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(Axolotl.class)
 public class AxolotlMixin {
 
+    /**
+     * If an Axolotl is fed any items in the filled_buckets tag, it will return a Water Bucket
+     **/
+
     @Redirect(method = "usePlayerItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
     private boolean chrysalis$giveBackBucketWhenFeedingAxolotl(ItemStack itemStack, Item item) {
         return itemStack.is(ChrysalisTags.FILLED_BUCKETS);

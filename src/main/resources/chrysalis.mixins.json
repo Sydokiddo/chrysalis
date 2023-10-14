@@ -38,6 +38,7 @@
     "entities.passive.IronGolemMixin",
     "entities.passive.ParrotMixin",
     "entities.passive.SnowGolemMixin",
+    "entities.passive.TamableAnimalMixin",
     "entities.passive.VillagerHarvestFarmlandMixin",
     "entities.passive.WolfMixin",
     "items.EndCrystalItemMixin",

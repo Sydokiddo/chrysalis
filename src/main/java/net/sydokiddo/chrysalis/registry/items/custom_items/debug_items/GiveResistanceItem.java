@@ -39,7 +39,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
             player.playNotifySound(SoundEvents.IRON_GOLEM_REPAIR, SoundSource.PLAYERS, 1.0F, 1.0F);
             player.gameEvent(GameEvent.ITEM_INTERACT_START);
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, -1, 255, false, false, true));
-            player.sendSystemMessage(Component.translatable("item.chrysalis.give_resistance_message", player.getName().getString()));
+            player.sendSystemMessage(Component.translatable("gui.chrysalis.give_resistance_message", player.getName().getString()));
         }
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
     }

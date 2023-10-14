@@ -1,7 +1,6 @@
 package net.sydokiddo.chrysalis.misc.util.dispenser;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
@@ -10,15 +9,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MobBucketItem;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 
 @SuppressWarnings("unused")
-public class DispenseBucketMobDispenserBehavior implements DispenseItemBehavior {
+public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavior {
 
-    public static final DispenseBucketMobDispenserBehavior INSTANCE = new DispenseBucketMobDispenserBehavior();
+    public static final DispenseContainerMobDispenserBehavior INSTANCE = new DispenseContainerMobDispenserBehavior();
+
+    /**
+     * Dispenses any mob container item.
+     **/
 
     @Override
     public ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {
