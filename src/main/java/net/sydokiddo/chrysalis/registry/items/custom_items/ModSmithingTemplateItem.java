@@ -17,19 +17,23 @@ public class ModSmithingTemplateItem extends SmithingTemplateItem {
      * Class for helping with the creation of custom Smithing Template items.
      **/
 
-    public static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
-    public static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
+    public static final ChatFormatting
+        TITLE_FORMAT = ChatFormatting.GRAY,
+        DESCRIPTION_FORMAT = ChatFormatting.BLUE
+    ;
 
-    public static final ResourceLocation EMPTY_SLOT_HELMET = new ResourceLocation("item/empty_armor_slot_helmet");
-    public static final ResourceLocation EMPTY_SLOT_CHESTPLATE = new ResourceLocation("item/empty_armor_slot_chestplate");
-    public static final ResourceLocation EMPTY_SLOT_LEGGINGS = new ResourceLocation("item/empty_armor_slot_leggings");
-    public static final ResourceLocation EMPTY_SLOT_BOOTS = new ResourceLocation("item/empty_armor_slot_boots");
+    public static final ResourceLocation
+        EMPTY_SLOT_HELMET = new ResourceLocation("item/empty_armor_slot_helmet"),
+        EMPTY_SLOT_CHESTPLATE = new ResourceLocation("item/empty_armor_slot_chestplate"),
+        EMPTY_SLOT_LEGGINGS = new ResourceLocation("item/empty_armor_slot_leggings"),
+        EMPTY_SLOT_BOOTS = new ResourceLocation("item/empty_armor_slot_boots"),
 
-    public static final ResourceLocation EMPTY_SLOT_SWORD = new ResourceLocation("item/empty_slot_sword");
-    public static final ResourceLocation EMPTY_SLOT_PICKAXE = new ResourceLocation("item/empty_slot_pickaxe");
-    public static final ResourceLocation EMPTY_SLOT_AXE = new ResourceLocation("item/empty_slot_axe");
-    public static final ResourceLocation EMPTY_SLOT_SHOVEL = new ResourceLocation("item/empty_slot_shovel");
-    public static final ResourceLocation EMPTY_SLOT_HOE = new ResourceLocation("item/empty_slot_hoe");
+        EMPTY_SLOT_SWORD = new ResourceLocation("item/empty_slot_sword"),
+        EMPTY_SLOT_PICKAXE = new ResourceLocation("item/empty_slot_pickaxe"),
+        EMPTY_SLOT_AXE = new ResourceLocation("item/empty_slot_axe"),
+        EMPTY_SLOT_SHOVEL = new ResourceLocation("item/empty_slot_shovel"),
+        EMPTY_SLOT_HOE = new ResourceLocation("item/empty_slot_hoe"),
 
-    public static final ResourceLocation EMPTY_SLOT_INGOT = new ResourceLocation("item/empty_slot_ingot");
+        EMPTY_SLOT_INGOT = new ResourceLocation("item/empty_slot_ingot")
+    ;
 }

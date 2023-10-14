@@ -21,8 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ChorusPlantBlock.class)
 public class ChorusPlantBlockMixin extends PipeBlock {
 
-    private ChorusPlantBlockMixin(float f, Properties properties) {
-        super(f, properties);
+    private ChorusPlantBlockMixin(float shape, Properties properties) {
+        super(shape, properties);
     }
 
     /**
