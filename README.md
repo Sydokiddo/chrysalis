@@ -2,7 +2,7 @@
 
 ## **About Chrysalis**
 
-Chrysalis is a small library mod for [Fabric](https://fabricmc.net) 1.20.1 with built-in features to assist with mod development and make modding more accessible for developers!
+Chrysalis is a small library mod for [Fabric](https://fabricmc.net) 1.20.2 with built-in features to assist with mod development and make modding more accessible for developers!
 
 ## **Information**
 
@@ -12,4 +12,4 @@ For more information about Chrysalis, please check out the [Wiki](https://github
 
 Chrysalis can be downloaded from these sources:
 
-* [Modrinth](https://modrinth.com/mod/chrysalis) [Current Version: 0.1.8]
+* [Modrinth](https://modrinth.com/mod/chrysalis) [Current Version: 0.2.1]
