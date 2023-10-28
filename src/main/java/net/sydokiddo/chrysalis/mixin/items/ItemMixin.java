@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -22,7 +23,7 @@ public class ItemMixin {
     private void chrysalis$addDebugStickTooltip(ItemStack itemStack, Level level, List<Component> tooltip, TooltipFlag tooltipFlag, CallbackInfo ci) {
         if (itemStack.is(Items.DEBUG_STICK)) {
             ChrysalisRegistry.addUseTooltip(tooltip);
-            tooltip.add(Component.translatable("item.chrysalis.debug_stick.desc").withStyle(ChatFormatting.BLUE));
+            tooltip.add(CommonComponents.space().append(Component.translatable("item.chrysalis.debug_stick.desc").withStyle(ChatFormatting.BLUE)));
         }
     }
 }

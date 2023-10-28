@@ -86,13 +86,13 @@ public class ChrysalisRegistry {
     }
 
     public static void addCoordinatesTooltip(List<Component> tooltip, int x, int y, int z) {
-        tooltip.add(Component.translatable("gui.chrysalis.coordinates", x, y, z).withStyle(ChatFormatting.BLUE));
+        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.coordinates", x, y, z).withStyle(ChatFormatting.BLUE)));
     }
 
     public static void addDirectionTooltip(List<Component> tooltip, Minecraft minecraft) {
         if (minecraft.player != null) {
             Component direction = Component.translatable("gui.chrysalis.direction." + minecraft.player.getDirection().getName()).withStyle(ChatFormatting.BLUE);
-            tooltip.add(Component.translatable("gui.chrysalis.facing_direction", direction).withStyle(ChatFormatting.BLUE));
+            tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.facing_direction", direction).withStyle(ChatFormatting.BLUE)));
         }
     }
 
@@ -100,12 +100,12 @@ public class ChrysalisRegistry {
         String registryKey = dimension.split(":")[0];
         String registryPath = dimension.split(":")[1];
 
-        tooltip.add(Component.translatable("gui.chrysalis.dimension",
-        Component.translatable("dimension." + registryKey + "." + registryPath).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE));
+        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension",
+        Component.translatable("dimension." + registryKey + "." + registryPath).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
     }
 
     public static void addNullTooltip(List<Component> tooltip) {
-        tooltip.add(Component.translatable("gui.chrysalis.none").withStyle(ChatFormatting.BLUE));
+        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.none").withStyle(ChatFormatting.BLUE)));
     }
 
     // endregion
