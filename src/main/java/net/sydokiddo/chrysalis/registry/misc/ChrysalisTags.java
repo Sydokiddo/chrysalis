@@ -152,7 +152,6 @@ public class ChrysalisTags {
 
         // region Living Entities
 
-        UNDEAD = registerEntityTag("undead"), // To remove on 1.20.3!
         ARTHROPODS = registerEntityTag("arthropods"),
         AQUATIC = registerEntityTag("aquatic"),
         VILLAGERS = registerEntityTag("villagers"),

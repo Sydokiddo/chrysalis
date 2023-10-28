@@ -44,20 +44,14 @@ public abstract class ChorusFlowerBlockMixin extends Block {
 
     @Inject(method = "randomTick", at = @At("HEAD"), cancellable = true)
     private void chrysalis$chorusFlowerRandomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo info) {
-        if (serverLevel.getBlockState(blockPos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) {
 
-            BlockPos abovePos = blockPos.above();
+        BlockPos abovePos = blockPos.above();
+        int age = blockState.getValue(ChorusFlowerBlock.AGE);
 
-            if (serverLevel.isEmptyBlock(abovePos) && abovePos.getY() < serverLevel.getMaxBuildHeight()) {
-
-                int age = blockState.getValue(ChorusFlowerBlock.AGE);
-
-                if (age < 5) {
-                    this.placeGrownFlower(serverLevel, abovePos, age + 1);
-                    serverLevel.setBlock(blockPos, plant.defaultBlockState().setValue(ChorusPlantBlock.UP, true).setValue(ChorusPlantBlock.DOWN, true), 2);
-                    info.cancel();
-                }
-            }
+        if (serverLevel.getBlockState(blockPos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON) && serverLevel.isEmptyBlock(abovePos) && abovePos.getY() < serverLevel.getMaxBuildHeight() && age < 5) {
+            this.placeGrownFlower(serverLevel, abovePos, age + 1);
+            serverLevel.setBlock(blockPos, plant.defaultBlockState().setValue(ChorusPlantBlock.UP, true).setValue(ChorusPlantBlock.DOWN, true), 2);
+            info.cancel();
         }
     }
 

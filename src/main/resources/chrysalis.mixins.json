@@ -43,6 +43,7 @@
     "entities.passive.WolfMixin",
     "items.EndCrystalItemMixin",
     "items.EyeOfEnderItemMixin",
+    "items.ItemMixin",
     "items.PotionColorMixin",
     "items.ShearsItemMixin",
     "items.SwordItemMixin",
