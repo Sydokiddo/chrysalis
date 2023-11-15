@@ -26,12 +26,14 @@ public abstract class ItemStackMixin {
 
     @Redirect(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;appendEnchantmentNames(Ljava/util/List;Lnet/minecraft/nbt/ListTag;)V"))
     private void chrysalis$changeEnchantmentTooltipLines(List<Component> tooltip, ListTag listTag) {
-        if (this.getTag() != null && this.getTag().contains(ArmorTrim.TAG_TRIM_ID)) {
-            tooltip.add(CommonComponents.EMPTY);
-        }
+
         if (this.isEnchanted() && this.getEnchantmentTags() != null && (this.getHideFlags() & ItemStack.TooltipPart.ENCHANTMENTS.getMask()) == 0) {
+            if (this.getTag() != null && this.getTag().contains(ArmorTrim.TAG_TRIM_ID)) {
+                tooltip.add(CommonComponents.EMPTY);
+            }
             tooltip.add(Component.translatable("gui.chrysalis.item.enchantments").withStyle(ChatFormatting.GRAY));
         }
+
         for (int i = 0; i < listTag.size(); ++i) {
             CompoundTag compoundTag = listTag.getCompound(i);
             BuiltInRegistries.ENCHANTMENT.getOptional(EnchantmentHelper.getEnchantmentId(compoundTag)).ifPresent(enchantment -> tooltip.add(CommonComponents.space().append(enchantment.getFullname(EnchantmentHelper.getEnchantmentLevel(compoundTag)))));
