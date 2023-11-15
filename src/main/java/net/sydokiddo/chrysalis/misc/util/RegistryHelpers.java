@@ -149,9 +149,9 @@ public class RegistryHelpers {
      * Registry helpers for registering blocks with specific properties.
      **/
 
-    public static ButtonBlock registerStoneButton() {
+    public static ButtonBlock registerStoneButton(BlockSetType blockSetType) {
         return new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5F)
-        .pushReaction(PushReaction.DESTROY), BlockSetType.STONE, 20, false);
+        .pushReaction(PushReaction.DESTROY), blockSetType, 20, false);
     }
 
     public static ButtonBlock registerWoodenButton(BlockSetType blockSetType) {

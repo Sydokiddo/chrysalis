@@ -13,7 +13,7 @@ public class Chrysalis implements ModInitializer {
 
 	public static final String
 		MOD_ID = "chrysalis",
-		CHRYSALIS_VERSION = "v0.2.4"
+		CHRYSALIS_VERSION = "v0.2.5"
 	;
 
 	@SuppressWarnings("unused")
