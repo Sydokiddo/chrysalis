@@ -11,10 +11,13 @@ public class ChrysalisCreativeModeTabs {
      * Registers the debug items in the Creative Mode inventory when in a debug environment.
      **/
 
-    @SuppressWarnings("all")
     public static void registerCreativeTabs() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries ->
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries -> {
+
+        if (!entries.shouldShowOpRestrictedItems()) return;
+
         entries.addAfter(Items.DEBUG_STICK, ChrysalisDebugItems.HEAL, ChrysalisDebugItems.FILL_HUNGER, ChrysalisDebugItems.GIVE_RESISTANCE,
-        ChrysalisDebugItems.CLEAR_EFFECTS, ChrysalisDebugItems.TELEPORT_TO_SPAWNPOINT, ChrysalisDebugItems.KILL_WAND, ChrysalisDebugItems.TAME_MOB));
+        ChrysalisDebugItems.CLEAR_EFFECTS, ChrysalisDebugItems.TELEPORT_TO_SPAWNPOINT, ChrysalisDebugItems.KILL_WAND, ChrysalisDebugItems.TAME_MOB);
+        });
     }
 }
