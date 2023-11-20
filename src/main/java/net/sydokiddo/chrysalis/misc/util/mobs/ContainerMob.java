@@ -20,9 +20,9 @@ import java.util.Optional;
 public interface ContainerMob {
 
     boolean fromItem();
-    void setFromItem(boolean var1);
-    void saveToItemTag(ItemStack var1);
-    void loadFromItemTag(CompoundTag var1);
+    void setFromItem(boolean fromItem);
+    void saveToItemTag(ItemStack itemStack);
+    void loadFromItemTag(CompoundTag compoundTag);
 
     ItemStack getResultItemStack();
     SoundEvent getPickupSound();

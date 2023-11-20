@@ -8,7 +8,7 @@ import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 public class ChrysalisCreativeModeTabs {
 
     /**
-     * Registers the debug items in the Creative Mode inventory when in a debug environment.
+     * Registers the debug items in the Creative Mode inventory.
      **/
 
     public static void registerCreativeTabs() {

@@ -5,11 +5,11 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.sydokiddo.chrysalis.Chrysalis;
 
-@SuppressWarnings("unused")
 public class ChrysalisDamageSources {
 
     // Damage Sources
 
+    @SuppressWarnings("unused")
     public static final ResourceKey<DamageType>
         MOB_ATTACK_BYPASSES_ARMOR = register("mob_attack_bypasses_armor"),
         MOB_ATTACK_BYPASSES_ENCHANTMENTS = register("mob_attack_bypasses_enchantments"),

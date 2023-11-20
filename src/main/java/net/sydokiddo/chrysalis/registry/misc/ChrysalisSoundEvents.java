@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
 
-@SuppressWarnings("unused")
 public class ChrysalisSoundEvents {
 
     // Sound Events

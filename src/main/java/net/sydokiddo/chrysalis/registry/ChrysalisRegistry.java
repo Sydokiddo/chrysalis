@@ -8,7 +8,6 @@ import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
 
-@SuppressWarnings("unused")
 public class ChrysalisRegistry {
 
     // region Game Rules

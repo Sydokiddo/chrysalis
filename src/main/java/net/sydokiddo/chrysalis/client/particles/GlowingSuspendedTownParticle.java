@@ -56,10 +56,10 @@ public class GlowingSuspendedTownParticle extends TextureSheetParticle {
     public int getLightColor(float f) {
         float g = ((float)this.age) / (float)this.lifetime;
         g = Mth.clamp(g, 1.0F, 0.0F);
-        int i = super.getLightColor(f);
-        int j = i & 0xFF;
-        int k = i >> 16 & 0xFF;
-        if ((j += (int)(g * 15.0f * 16.0f)) > 240) {
+        int lightColor = super.getLightColor(f);
+        int j = lightColor & 0xFF;
+        int k = lightColor >> 16 & 0xFF;
+        if ((j += (int)(g * 15.0F * 16.0F)) > 240) {
             j = 240;
         }
         return j | k << 16;

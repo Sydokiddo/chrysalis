@@ -270,12 +270,12 @@ public class RegistryHelpers {
         context.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
     }
 
-    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
-        context.register(resourceKey, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeature), List.copyOf(placementModifiers)));
-    }
-
     public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
         registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
+    }
+
+    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
+        context.register(resourceKey, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeature), List.copyOf(placementModifiers)));
     }
 
     // endregion
@@ -307,7 +307,7 @@ public class RegistryHelpers {
      * Miscellaneous properties.
      **/
 
-    public static Boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
+    public static boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return true;
     }
 
@@ -428,6 +428,7 @@ public class RegistryHelpers {
         combatant = "combatant",
         peculia = "peculia",
         spookiar = "spookiar",
+        deeds = "deeds",
         lottablocks = "lottablocks",
         manic = "manic"
     ;
