@@ -11,7 +11,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
@@ -24,7 +24,7 @@ public class KillWandItem extends DebugUtilityItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-        ChrysalisRegistry.addAttackTooltip(tooltip);
+        RegistryHelpers.addAttackTooltip(tooltip);
         super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
     }
 

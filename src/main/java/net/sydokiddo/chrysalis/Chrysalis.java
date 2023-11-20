@@ -11,9 +11,10 @@ public class Chrysalis implements ModInitializer {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger("Chrysalis");
 
+	@SuppressWarnings("all")
 	public static final String
 		MOD_ID = "chrysalis",
-		CHRYSALIS_VERSION = "v0.2.6"
+		CHRYSALIS_VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).get().getMetadata().getVersion().getFriendlyString()
 	;
 
 	@SuppressWarnings("unused")
@@ -29,6 +30,6 @@ public class Chrysalis implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ChrysalisRegistry.registerAll();
-		LOGGER.info("Chrysalis " + CHRYSALIS_VERSION + " has been initialized!");
+		LOGGER.info("Chrysalis v" + CHRYSALIS_VERSION + " has been initialized!");
 	}
 }

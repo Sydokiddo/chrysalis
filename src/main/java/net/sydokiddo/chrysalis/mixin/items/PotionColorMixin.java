@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import java.awt.*;
 
 @Mixin(MobEffect.class)
 public abstract class PotionColorMixin {
@@ -22,14 +23,14 @@ public abstract class PotionColorMixin {
 
         // Blindness
 
-        if (this.color == 2039587) cir.setReturnValue(5848959);
+        if (this.color == 2039587) cir.setReturnValue(Color.decode("#593F7F").getRGB());
 
         // Haste
 
-        if (this.color == 14270531) cir.setReturnValue(16758911);
+        if (this.color == 14270531) cir.setReturnValue(Color.decode("#FFB87F").getRGB());
 
         // Mining Fatigue
 
-        if (this.color == 4866583) cir.setReturnValue(5855666);
+        if (this.color == 4866583) cir.setReturnValue(Color.decode("#5959B2").getRGB());
     }
 }

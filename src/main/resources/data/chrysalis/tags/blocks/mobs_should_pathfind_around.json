@@ -10,6 +10,12 @@
     "#minecraft:slabs",
     "#minecraft:walls",
     "minecraft:azalea",
-    "minecraft:flowering_azalea"
+    "minecraft:flowering_azalea",
+    "minecraft:bamboo",
+    "minecraft:sea_pickle",
+    "minecraft:iron_bars",
+    "#minecraft:candles",
+    "#chrysalis:lanterns",
+    "#chrysalis:heads"
   ]
 }
