@@ -59,5 +59,12 @@
   "gamerule.destroyItemsInExplosions": "In explosions, most items will be destroyed",
   "gamerule.destroyItemsInExplosions.description": "Most items caught in explosions are lost in the explosion.",
   "gamerule.doNetherPortalActivating": "Allow Nether Portal activating",
-  "gamerule.doEndPortalActivating": "Allow End Portal activating"
+  "gamerule.doEndPortalActivating": "Allow End Portal activating",
+
+  "subtitles.item.heal.use": "Player heals",
+  "subtitles.item.fill_hunger.use": "Player nourishes",
+  "subtitles.item.give_resistance.use": "Player fortifies",
+  "subtitles.item.clear_effects.use": "Player clears effects",
+  "subtitles.item.teleport_to_spawnpoint.fail": "Teleportation fails",
+  "subtitles.item.tame_mob.use": "Mob tamed"
 }

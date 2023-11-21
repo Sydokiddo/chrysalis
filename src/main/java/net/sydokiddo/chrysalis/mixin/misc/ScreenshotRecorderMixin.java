@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.mixin.misc;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -34,6 +35,8 @@ public class ScreenshotRecorderMixin {
     @SuppressWarnings("all")
     @Inject(method = "method_1661", at = @At("TAIL"))
     private static void chrysalis$copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo ci) {
+
+        if (FabricLoader.getInstance().isModLoaded("essential-container")) return;
 
         Minecraft mc = Minecraft.getInstance();
 

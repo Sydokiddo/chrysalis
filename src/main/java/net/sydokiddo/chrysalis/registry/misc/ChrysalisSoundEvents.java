@@ -13,7 +13,20 @@ public class ChrysalisSoundEvents {
 
     public static final Holder.Reference<SoundEvent> UI_SCREENSHOT_SUCCESS = registerForHolder("ui.screenshot.success");
 
+    public static final SoundEvent HEAL_USE = registerSoundEvent("item.heal.use");
+    public static final SoundEvent FILL_HUNGER_USE = registerSoundEvent("item.fill_hunger.use");
+    public static final SoundEvent GIVE_RESISTANCE_USE = registerSoundEvent("item.give_resistance.use");
+    public static final SoundEvent CLEAR_EFFECTS_USE = registerSoundEvent("item.clear_effects.use");
+    public static final SoundEvent TELEPORT_TO_SPAWNPOINT_FAIL = registerSoundEvent("item.teleport_to_spawnpoint.fail");
+    public static final SoundEvent TAME_MOB_USE = registerSoundEvent("item.tame_mob.use");
+
     // Registry
+
+    private static SoundEvent registerSoundEvent(String name) {
+        ResourceLocation resourceLocation = new ResourceLocation(Chrysalis.MOD_ID, name);
+        SoundEvent soundEvent = SoundEvent.createVariableRangeEvent(resourceLocation);
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, resourceLocation, soundEvent);
+    }
 
     @SuppressWarnings("all")
     private static Holder.Reference<SoundEvent> registerForHolder(String name) {
