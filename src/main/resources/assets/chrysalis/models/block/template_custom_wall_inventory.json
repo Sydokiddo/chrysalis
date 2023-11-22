@@ -6,7 +6,7 @@
 	},
 	"elements": [
 		{
-			"name": "Center post",
+			"name": "Center Post",
 			"from": [4, 0, 4],
 			"to": [12, 16, 12],
 			"faces": {
@@ -19,7 +19,7 @@
 			}
 		},
 		{
-			"name": "Full wall",
+			"name": "Full Wall",
 			"from": [5, 0, 0],
 			"to": [11, 13, 16],
 			"faces": {

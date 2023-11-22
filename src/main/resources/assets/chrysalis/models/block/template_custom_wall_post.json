@@ -4,7 +4,7 @@
 	},
 	"elements": [
 		{
-			"name": "Center post",
+			"name": "Center Post",
 			"from": [4, 0, 4],
 			"to": [12, 16, 12],
 			"faces": {
