@@ -2,6 +2,7 @@
   "values": [
     "minecraft:end_crystal",
     "minecraft:fireball",
+    "minecraft:tnt",
     "#chrysalis:is_vehicle"
   ]
 }
