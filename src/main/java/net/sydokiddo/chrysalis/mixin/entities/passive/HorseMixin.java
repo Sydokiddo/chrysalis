@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Horse.class)
-public abstract class HorseMixin extends AbstractHorse {
+public class HorseMixin extends AbstractHorse {
 
     /**
      * Automatically tames Horses with the Tame Mob debug item.

@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChorusPlantFeature.class)
 public class ChorusPlantFeatureMixin {
+
     /**
      * Allows for the Chorus Plant configured feature to be placed on any blocks in the chorus_plant_can_grow_on tag.
      **/

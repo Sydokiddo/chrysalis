@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.awt.*;
 
 @Mixin(MobEffect.class)
-public abstract class PotionColorMixin {
+public class PotionColorMixin {
 
     @Shadow @Final private int color;
 
