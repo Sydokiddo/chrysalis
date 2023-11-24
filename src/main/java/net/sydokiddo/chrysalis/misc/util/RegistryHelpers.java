@@ -317,6 +317,10 @@ public class RegistryHelpers {
         return new BigDecimal(saturationAmount).setScale(1, RoundingMode.DOWN);
     }
 
+    public static boolean hasEnchantmentOrTrim(ItemStack itemStack) {
+        return (itemStack.isEnchanted() || itemStack.getTag() != null && itemStack.getTag().contains(ArmorTrim.TAG_TRIM_ID));
+    }
+
     // endregion
 
     // region Custom Tooltips
@@ -370,7 +374,7 @@ public class RegistryHelpers {
     }
 
     public static void addSpaceOnTooltipIfEnchantedOrTrimmed(ItemStack itemStack, List<Component> tooltip) {
-        if (itemStack.isEnchanted() || itemStack.getTag() != null && itemStack.getTag().contains(ArmorTrim.TAG_TRIM_ID)) {
+        if (hasEnchantmentOrTrim(itemStack)) {
             tooltip.add(CommonComponents.EMPTY);
         }
     }
