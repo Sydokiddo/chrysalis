@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.misc.util.mobs;
+package net.sydokiddo.chrysalis.misc.util.entities;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,7 +14,7 @@ public class EntityDataHelper {
      **/
 
     public static boolean isPlayerStarving(ServerPlayer serverPlayer) {
-        return serverPlayer.getFoodData().getFoodLevel() <= 6.0F;
+        return serverPlayer.getFoodData().getFoodLevel() <= 6.0F && !serverPlayer.getAbilities().instabuild;
     }
 
     public static boolean isEntityMoving(LivingEntity livingEntity) {

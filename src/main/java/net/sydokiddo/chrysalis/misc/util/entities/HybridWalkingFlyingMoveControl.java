@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.misc.util.mobs;
+package net.sydokiddo.chrysalis.misc.util.entities;
 
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
