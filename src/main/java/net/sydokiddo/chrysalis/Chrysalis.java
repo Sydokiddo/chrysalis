@@ -23,8 +23,8 @@ public class Chrysalis implements ModInitializer {
 		CHRYSALIS_INITIALIZED = FabricLoader.getInstance().isModLoaded(MOD_ID)
 	;
 
-	public static ResourceLocation id(String path) {
-		return new ResourceLocation(MOD_ID, path);
+	public static ResourceLocation id(String name) {
+		return new ResourceLocation(MOD_ID, name);
 	}
 
 	@Override
