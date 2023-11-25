@@ -62,8 +62,7 @@
   "client": [
     "misc.LevelRendererMixin",
     "misc.ScreenshotMainMixin",
-    "misc.ScreenshotRecorderMixin",
-    "util.RenderSystemAccessor"
+    "misc.ScreenshotRecorderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

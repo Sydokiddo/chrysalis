@@ -14,8 +14,8 @@ public class RotatingFallingParticle extends RisingParticle {
 
     private RotatingFallingParticle(ClientLevel level, double x, double y, double z, double velX, double velY, double velZ) {
         super(level, x, y, z, velX, velY, velZ);
-        this.scale(1.1F + (float) level.getRandom().nextInt(6) / 10);
-        this.roll = oRoll = level.getRandom().nextFloat() * (float) (2 * Math.PI);
+        this.scale(1.1F + (float) this.random.nextInt(6) / 10);
+        this.roll = oRoll = this.random.nextFloat() * (float) (2 * Math.PI);
         this.yd = -0.25D;
         this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 12;
     }

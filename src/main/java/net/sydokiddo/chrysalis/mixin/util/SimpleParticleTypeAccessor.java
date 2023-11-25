@@ -13,7 +13,7 @@ public interface SimpleParticleTypeAccessor {
 
     @SuppressWarnings("unused")
     @Invoker("<init>")
-    static SimpleParticleType createSimpleParticleType(boolean bl) {
+    static SimpleParticleType createSimpleParticleType(boolean alwaysSpawn) {
         throw new UnsupportedOperationException();
     }
 }
