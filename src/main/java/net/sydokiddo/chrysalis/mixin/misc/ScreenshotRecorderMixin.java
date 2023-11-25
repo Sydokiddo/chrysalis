@@ -37,20 +37,23 @@ public class ScreenshotRecorderMixin {
 
         if (FabricLoader.getInstance().isModLoaded("essential")) return;
 
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
         try {
+            minecraft.getSoundManager().play(SimpleSoundInstance.forUI(ChrysalisSoundEvents.UI_SCREENSHOT_SUCCESS, 1.0F));
 
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ChrysalisSoundEvents.UI_SCREENSHOT_SUCCESS, 1.0F));
-
-            Path path = mc.gameDirectory.toPath().resolve(Screenshot.SCREENSHOT_DIR);
+            Path path = minecraft.gameDirectory.toPath().resolve(Screenshot.SCREENSHOT_DIR);
             Optional<Path> lastFilePath = Files.list(path).filter(directory -> !Files.isDirectory(directory)).max(Comparator.comparingLong(directory -> directory.toFile().lastModified()));
 
             if (lastFilePath.isEmpty()) return;
 
             Image lastScreenShot = new ImageIcon(lastFilePath.get().toString()).getImage();
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new ClipboardImage(lastScreenShot), null);
-            mc.gui.getChat().addMessage(Component.translatable("gui.chrysalis.screenshot_copied"));
+
+            Component message = Component.translatable("gui.chrysalis.screenshot_copied");
+
+            minecraft.gui.getChat().addMessage(message);
+            minecraft.getNarrator().sayNow(message);
 
         } catch (Exception exception) {
             Chrysalis.LOGGER.warn("Failed to copy screenshot to clipboard", exception);
