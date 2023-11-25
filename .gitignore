@@ -9,14 +9,14 @@ classes/
 
 *.launch
 
-# IntelliJ Idea
+# Idea
 
 .idea/
 *.iml
 *.ipr
 *.iws
 
-# Visual Studio Code
+# VSCode
 
 .settings/
 .vscode/
@@ -24,7 +24,7 @@ bin/
 .classpath
 .project
 
-# macOS
+# MacOS
 
 *.DS_Store
 
