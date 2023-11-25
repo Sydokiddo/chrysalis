@@ -432,15 +432,15 @@ public class RegistryHelpers {
 
     // endregion
 
+    // region Loot Table Resource Locations
+
     /**
-     * Resource locations for all of the base chest loot tables in the vanilla game.
+     * Resource locations for all of the base loot tables in the vanilla game.
      **/
 
     public static final ResourceLocation
 
-        // Chests:
-
-        // region Vanilla Chest Loot Tables
+        // region Chest Loot Tables
 
         MINESHAFT = new ResourceLocation(minecraft, "chests/abandoned_mineshaft"),
         ANCIENT_CITY = new ResourceLocation(minecraft, "chests/ancient_city"),
@@ -492,22 +492,7 @@ public class RegistryHelpers {
 
         // endregion
 
-        // region Modded Chest Loot Tables
-
-        END_CITY_JUNK = new ResourceLocation(endlessencore, "chests/end_city_junk"),
-        END_SHIP = new ResourceLocation(endlessencore, "chests/end_ship"),
-        STRONGHOLD_BREWERY = new ResourceLocation(endlessencore, "chests/stronghold_brewery"),
-        STRONGHOLD_FORGE = new ResourceLocation(endlessencore, "chests/stronghold_forge"),
-        STRONGHOLD_KITCHEN = new ResourceLocation(endlessencore, "chests/stronghold_kitchen"),
-        STRONGHOLD_NETHER_PORTAL = new ResourceLocation(endlessencore, "chests/stronghold_nether_portal"),
-        STRONGHOLD_PRISON = new ResourceLocation(endlessencore, "chests/stronghold_prison"),
-        STRONGHOLD_SEWER = new ResourceLocation(endlessencore, "chests/stronghold_sewer"),
-
-        // endregion
-
-        // Dispensers:
-
-        // region Vanilla Dispenser Loot Tables
+        // region Dispenser Loot Tables
 
         TRIAL_CHAMBERS_CHAMBER = new ResourceLocation(minecraft, "dispensers/trial_chambers/chamber"),
         TRIAL_CHAMBERS_CORRIDOR_DISPENSER = new ResourceLocation(minecraft, "dispensers/trial_chambers/corridor"),
@@ -515,26 +500,20 @@ public class RegistryHelpers {
 
         // endregion
 
-        // Pots:
-
-        // region Vanilla Pot Loot Tables
+        // region Pot Loot Tables
 
         TRIAL_CHAMBERS_CORRIDOR_POT = new ResourceLocation(minecraft, "pots/trial_chambers/corridor"),
 
         // endregion
 
-        // Spawners:
-
-        // region Vanilla Spawner Loot Tables
+        // region Spawner Loot Tables
 
         TRIAL_CHAMBERS_CONSUMABLES = new ResourceLocation(minecraft, "spawners/trial_chamber/consumables"),
         TRIAL_CHAMBERS_KEY = new ResourceLocation(minecraft, "spawners/trial_chamber/key"),
 
         // endregion
 
-        // Archaeology:
-
-        // region Vanilla Archaeology Loot Tables
+        // region Archaeology Loot Tables
 
         ARCHAEOLOGY_DESERT_TEMPLE = new ResourceLocation(minecraft, "archaeology/desert_pyramid"),
         ARCHAEOLOGY_DESERT_WELL = new ResourceLocation(minecraft, "archaeology/desert_well"),
@@ -545,16 +524,7 @@ public class RegistryHelpers {
 
         // endregion
 
-        // region Modded Archaeology Loot Tables
-
-        ARCHAEOLOGY_STRONGHOLD = new ResourceLocation(endlessencore, "archaeology/stronghold"),
-        ARCHAEOLOGY_TITAN_NEST = new ResourceLocation(peculia, "archaeology/titan_nest"),
-
-        // endregion
-
-        // Gameplay:
-
-        // region Vanilla Gameplay Loot Tables
+        // region Gameplay Loot Tables
 
         CAT_MORNING_GIFT = new ResourceLocation(minecraft, "gameplay/cat_morning_gift"),
         FISHING = new ResourceLocation(minecraft, "gameplay/fishing"),
@@ -579,16 +549,7 @@ public class RegistryHelpers {
 
         // endregion
 
-        // region Modded Gameplay Loot Tables
-
-        FLEET_MOULTING = new ResourceLocation(endlessencore, "gameplay/fleet_moulting"),
-        GOLDEN_FLEET_MOULTING = new ResourceLocation(endlessencore, "gameplay/golden_fleet_moulting"),
-
-        // endregion
-
-        // Entities:
-
-        // region Vanilla Entity Loot Tables
+        // region Entity Loot Tables
 
         BLACK_SHEEP = new ResourceLocation(minecraft, "entities/sheep/black"),
         BLUE_SHEEP = new ResourceLocation(minecraft, "entities/sheep/blue"),
@@ -686,27 +647,10 @@ public class RegistryHelpers {
         ZOMBIE = new ResourceLocation(minecraft, "entities/zombie"),
         ZOMBIE_HORSE = new ResourceLocation(minecraft, "entities/zombie_horse"),
         ZOMBIE_VILLAGER = new ResourceLocation(minecraft, "entities/zombie_villager"),
-        ZOMBIFIED_PIGLIN = new ResourceLocation(minecraft, "entities/zombified_piglin"),
-
-        // endregion
-
-        // region Modded Entity Loot Tables
-
-        FLEET = new ResourceLocation(endlessencore, "entities/fleet"),
-        FLEET_GRUB = new ResourceLocation(endlessencore, "entities/fleet_grub"),
-        MUSE = new ResourceLocation(endlessencore, "entities/muse"),
-        RENDLING = new ResourceLocation(endlessencore, "entities/rendling"),
-        ENDERSENT = new ResourceLocation(endlessencore, "entities/endersent"),
-        ENDERBYTE = new ResourceLocation(endlessencore, "entities/enderbyte"),
-
-        MOLDSPAWN = new ResourceLocation(peculia, "entities/moldspawn"),
-        MOLDLIN = new ResourceLocation(peculia, "entities/moldlin"),
-        BABY_TITAN = new ResourceLocation(peculia, "entities/baby_titan"),
-
-        GHOST = new ResourceLocation(spookiar, "entities/ghost"),
-        WISP = new ResourceLocation(spookiar, "entities/wisp"),
-        PRIME_SPIRIT = new ResourceLocation(spookiar, "entities/prime_spirit");
+        ZOMBIFIED_PIGLIN = new ResourceLocation(minecraft, "entities/zombified_piglin")
 
         // endregion
     ;
+
+    // endregion
 }
