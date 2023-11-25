@@ -37,7 +37,7 @@ public class ClearEffectsItem extends DebugUtilityItem {
         ItemStack itemStack = player.getItemInHand(interactionHand);
 
         if (!player.getActiveEffects().isEmpty()) {
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 player.playNotifySound(ChrysalisSoundEvents.CLEAR_EFFECTS_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
                 player.removeAllEffects();

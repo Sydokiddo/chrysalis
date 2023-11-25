@@ -37,7 +37,7 @@ public class FillHungerItem extends DebugUtilityItem {
         ItemStack itemStack = player.getItemInHand(interactionHand);
 
         if (player.getFoodData().needsFood()) {
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 player.playNotifySound(ChrysalisSoundEvents.FILL_HUNGER_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
                 player.getFoodData().setFoodLevel(20);

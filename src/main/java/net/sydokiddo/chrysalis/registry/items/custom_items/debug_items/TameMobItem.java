@@ -52,9 +52,9 @@ public class TameMobItem extends DebugUtilityItem {
 
         if (tamedMob.level() instanceof ServerLevel serverLevel) {
             for (int i = 0; i < 7; ++i) {
-                double d = tamedMob.level().random.nextGaussian() * 0.02D;
-                double e = tamedMob.level().random.nextGaussian() * 0.02D;
-                double f = tamedMob.level().random.nextGaussian() * 0.02D;
+                double d = tamedMob.level().getRandom().nextGaussian() * 0.02D;
+                double e = tamedMob.level().getRandom().nextGaussian() * 0.02D;
+                double f = tamedMob.level().getRandom().nextGaussian() * 0.02D;
                 serverLevel.sendParticles(ParticleTypes.HEART, tamedMob.getRandomX(1.0D), tamedMob.getRandomY() + 0.5D, tamedMob.getRandomZ(1.0D), 1, 0.0, d, e, f);
             }
         }

@@ -37,7 +37,7 @@ public class HealItem extends DebugUtilityItem {
         ItemStack itemStack = player.getItemInHand(interactionHand);
 
         if (player.getHealth() < player.getMaxHealth()) {
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 player.playNotifySound(ChrysalisSoundEvents.HEAL_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
                 player.setHealth(player.getMaxHealth());

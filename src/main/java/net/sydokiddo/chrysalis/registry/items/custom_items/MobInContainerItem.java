@@ -50,12 +50,12 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
             return InteractionResult.PASS;
         } else {
             this.checkExtraContent(player, level, itemStack, usePos);
-            level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+            level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
 
             if (!player.getAbilities().instabuild) {
                 player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(returnItem)));
             }
-            return InteractionResult.SUCCESS;
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
     }
 

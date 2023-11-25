@@ -37,7 +37,7 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
 
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
 
             player.gameEvent(GameEvent.ITEM_INTERACT_START);
 

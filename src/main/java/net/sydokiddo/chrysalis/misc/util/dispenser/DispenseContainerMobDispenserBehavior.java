@@ -35,7 +35,7 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
             level.gameEvent(GameEvent.ENTITY_PLACE, blockPos, GameEvent.Context.of(blockSource.state()));
 
             if (itemStack.getItem() instanceof MobInContainerItem mobInContainerItem) {
-                level.playSound(null, blockPos, mobInContainerItem.emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                level.playSound(null, blockPos, mobInContainerItem.emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
                 mobInContainerItem.checkExtraContent(null, level, itemStack, blockPos);
                 return new ItemStack(mobInContainerItem.returnItem.asItem());
             } else if (itemStack.getItem() instanceof MobBucketItem mobBucketItem) {

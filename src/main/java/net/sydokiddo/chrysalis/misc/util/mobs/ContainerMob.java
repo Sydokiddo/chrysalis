@@ -118,7 +118,7 @@ public interface ContainerMob {
 
         if (itemInHand.getItem() == containerItem.asItem() && livingEntity.isAlive()) {
 
-            if (!livingEntity.level().isClientSide) {
+            if (!livingEntity.level().isClientSide()) {
                 CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
             }
 
@@ -133,7 +133,7 @@ public interface ContainerMob {
 
     static <T extends LivingEntity> Optional<InteractionResult> containerMobPickup(Player player, InteractionHand interactionHand, T livingEntity, Item usedItem) {
         if (doMobContainerPickUp(player, usedItem.asItem(), interactionHand, livingEntity)) {
-            return Optional.of(InteractionResult.sidedSuccess(livingEntity.level().isClientSide));
+            return Optional.of(InteractionResult.sidedSuccess(livingEntity.level().isClientSide()));
         } else {
             return Optional.empty();
         }

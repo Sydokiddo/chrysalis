@@ -28,7 +28,7 @@ public abstract class TamableAnimalMixin extends Animal {
 
     @Inject(at = @At("HEAD"), method = "mobInteract", cancellable = true)
     private void chrysalis$allowPetInteractionWithTameMobItem(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (this.level().isClientSide && player.getItemInHand(interactionHand).getItem() instanceof TameMobItem) {
+        if (this.level().isClientSide() && player.getItemInHand(interactionHand).getItem() instanceof TameMobItem) {
             cir.setReturnValue(InteractionResult.SUCCESS);
         }
     }
