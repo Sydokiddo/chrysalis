@@ -7,8 +7,8 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.armortrim.ArmorTrim;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,12 +23,13 @@ public abstract class ItemStackMixin {
     @Shadow protected abstract int getHideFlags();
     @Shadow public abstract ListTag getEnchantmentTags();
     @Shadow public abstract boolean isEnchanted();
+    @Shadow public abstract ItemStack copy();
 
     @Redirect(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;appendEnchantmentNames(Ljava/util/List;Lnet/minecraft/nbt/ListTag;)V"))
     private void chrysalis$changeEnchantmentTooltipLines(List<Component> tooltip, ListTag listTag) {
 
         if (this.isEnchanted() && this.getEnchantmentTags() != null && (this.getHideFlags() & ItemStack.TooltipPart.ENCHANTMENTS.getMask()) == 0) {
-            if (this.getTag() != null && this.getTag().contains(ArmorTrim.TAG_TRIM_ID)) {
+            if (RegistryHelpers.hasArmorTrim(this.copy())) {
                 tooltip.add(CommonComponents.EMPTY);
             }
             tooltip.add(Component.translatable("gui.chrysalis.item.enchantments").withStyle(ChatFormatting.GRAY));

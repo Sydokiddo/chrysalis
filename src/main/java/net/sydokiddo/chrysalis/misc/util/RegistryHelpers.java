@@ -317,8 +317,12 @@ public class RegistryHelpers {
         return new BigDecimal(saturationAmount).setScale(1, RoundingMode.DOWN);
     }
 
+    public static boolean hasArmorTrim(ItemStack itemStack) {
+        return itemStack.getTag() != null && itemStack.getTag().contains(ArmorTrim.TAG_TRIM_ID);
+    }
+
     public static boolean hasEnchantmentOrTrim(ItemStack itemStack) {
-        return (itemStack.isEnchanted() || itemStack.getTag() != null && itemStack.getTag().contains(ArmorTrim.TAG_TRIM_ID));
+        return (itemStack.isEnchanted() || hasArmorTrim(itemStack));
     }
 
     // endregion
@@ -434,6 +438,8 @@ public class RegistryHelpers {
 
     public static final ResourceLocation
 
+        // Chests:
+
         // region Vanilla Chest Loot Tables
 
         MINESHAFT = new ResourceLocation(minecraft, "chests/abandoned_mineshaft"),
@@ -448,6 +454,7 @@ public class RegistryHelpers {
         END_CITY_TREASURE = new ResourceLocation(minecraft, "chests/end_city_treasure"),
         IGLOO_CHEST = new ResourceLocation(minecraft, "chests/igloo_chest"),
         JUNGLE_TEMPLE = new ResourceLocation(minecraft, "chests/jungle_temple"),
+        JUNGLE_TEMPLE_DISPENSER = new ResourceLocation(minecraft, "chests/jungle_temple_dispenser"),
         NETHER_FORTRESS_BRIDGE = new ResourceLocation(minecraft, "chests/nether_bridge"),
         PILLAGER_OUTPOST = new ResourceLocation(minecraft, "chests/pillager_outpost"),
         RUINED_PORTAL = new ResourceLocation(minecraft, "chests/ruined_portal"),
@@ -476,6 +483,12 @@ public class RegistryHelpers {
         VILLAGE_TEMPLE = new ResourceLocation(minecraft, "chests/village/village_temple"),
         VILLAGE_TOOLSMITH = new ResourceLocation(minecraft, "chests/village/village_toolsmith"),
         VILLAGE_WEAPONSMITH = new ResourceLocation(minecraft, "chests/village/village_weaponsmith"),
+        TRIAL_CHAMBERS_CORRIDOR_CHEST = new ResourceLocation(minecraft, "chests/trial_chambers/corridor"),
+        TRIAL_CHAMBERS_ENTRANCE = new ResourceLocation(minecraft, "chests/trial_chambers/entrance"),
+        TRIAL_CHAMBERS_INTERSECTION = new ResourceLocation(minecraft, "chests/trial_chambers/intersection"),
+        TRIAL_CHAMBERS_INTERSECTION_BARREL = new ResourceLocation(minecraft, "chests/trial_chambers/intersection_barrel"),
+        TRIAL_CHAMBERS_REWARD = new ResourceLocation(minecraft, "chests/trial_chambers/reward"),
+        TRIAL_CHAMBERS_SUPPLY = new ResourceLocation(minecraft, "chests/trial_chambers/supply"),
 
         // endregion
 
@@ -491,6 +504,35 @@ public class RegistryHelpers {
         STRONGHOLD_SEWER = new ResourceLocation(endlessencore, "chests/stronghold_sewer"),
 
         // endregion
+
+        // Dispensers:
+
+        // region Vanilla Dispenser Loot Tables
+
+        TRIAL_CHAMBERS_CHAMBER = new ResourceLocation(minecraft, "dispensers/trial_chambers/chamber"),
+        TRIAL_CHAMBERS_CORRIDOR_DISPENSER = new ResourceLocation(minecraft, "dispensers/trial_chambers/corridor"),
+        TRIAL_CHAMBERS_WATER = new ResourceLocation(minecraft, "dispensers/trial_chambers/water"),
+
+        // endregion
+
+        // Pots:
+
+        // region Vanilla Pot Loot Tables
+
+        TRIAL_CHAMBERS_CORRIDOR_POT = new ResourceLocation(minecraft, "pots/trial_chambers/corridor"),
+
+        // endregion
+
+        // Spawners:
+
+        // region Vanilla Spawner Loot Tables
+
+        TRIAL_CHAMBERS_CONSUMABLES = new ResourceLocation(minecraft, "spawners/trial_chamber/consumables"),
+        TRIAL_CHAMBERS_KEY = new ResourceLocation(minecraft, "spawners/trial_chamber/key"),
+
+        // endregion
+
+        // Archaeology:
 
         // region Vanilla Archaeology Loot Tables
 
@@ -509,6 +551,8 @@ public class RegistryHelpers {
         ARCHAEOLOGY_TITAN_NEST = new ResourceLocation(peculia, "archaeology/titan_nest"),
 
         // endregion
+
+        // Gameplay:
 
         // region Vanilla Gameplay Loot Tables
 
@@ -541,6 +585,8 @@ public class RegistryHelpers {
         GOLDEN_FLEET_MOULTING = new ResourceLocation(endlessencore, "gameplay/golden_fleet_moulting"),
 
         // endregion
+
+        // Entities:
 
         // region Vanilla Entity Loot Tables
 
