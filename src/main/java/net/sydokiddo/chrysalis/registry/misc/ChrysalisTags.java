@@ -42,6 +42,7 @@ public class ChrysalisTags {
         CONCRETE_POWDER_ITEMS = registerItemTag("concrete_powder"),
         GLAZED_TERRACOTTA_ITEMS = registerItemTag("glazed_terracotta"),
         COPPER_BLOCK_ITEMS = registerItemTag("copper_blocks"),
+        COPPER_GRATE_ITEMS = registerItemTag("copper_grates"),
         PRISMARINE_BLOCK_ITEMS = registerItemTag("prismarine_blocks"),
         OBSIDIAN_ITEMS = registerItemTag("obsidian"),
         PURPUR_ITEMS = registerItemTag("purpur"),
@@ -103,6 +104,7 @@ public class ChrysalisTags {
 
         AMETHYST_BLOCKS = registerBlockTag("amethyst_blocks"),
         COPPER_BLOCKS = registerBlockTag("copper_blocks"),
+        COPPER_GRATES = registerBlockTag("copper_grates"),
         SOUL_SAND = registerBlockTag("soul_sand"),
         PURPUR = registerBlockTag("purpur"),
         PRISMARINE_BLOCKS = registerBlockTag("prismarine_blocks"),

@@ -29,7 +29,7 @@ public abstract class SnowFixMixin {
      * Prevents a bug where snow can fall in the Nether and End if the Y-level can go high enough.
      **/
 
-    @Inject(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;tickIceAndSnow(ZLnet/minecraft/core/BlockPos;)V"), cancellable = true)
+    @Inject(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;tickPrecipitation(Lnet/minecraft/core/BlockPos;)V"), cancellable = true)
     private void chrysalis$preventSnowInNetherAndEnd(LevelChunk levelChunk, int i, CallbackInfo ci) {
         if (isNether() || isEnd()) {
             ci.cancel();

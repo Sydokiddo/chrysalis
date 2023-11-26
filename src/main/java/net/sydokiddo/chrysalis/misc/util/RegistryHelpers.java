@@ -156,29 +156,26 @@ public class RegistryHelpers {
      **/
 
     public static ButtonBlock registerStoneButton(BlockSetType blockSetType) {
-        return new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5F)
-        .pushReaction(PushReaction.DESTROY), blockSetType, 20, false);
+        return new ButtonBlock(blockSetType, 20, BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
     public static ButtonBlock registerWoodenButton(BlockSetType blockSetType) {
-        return new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5F)
-        .pushReaction(PushReaction.DESTROY), blockSetType, 30, true);
+        return new ButtonBlock(blockSetType, 30, BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
-    public static PressurePlateBlock registerStonePressurePlate(MapColor mapColor, BlockSetType blockSetType) {
-        return new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.of().mapColor(mapColor)
-        .forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
-        .noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), blockSetType);
+    public static PressurePlateBlock registerStonePressurePlate(BlockSetType blockSetType, MapColor mapColor) {
+        return new PressurePlateBlock(blockSetType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn()
+        .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
-    public static PressurePlateBlock registerWoodenPressurePlate(MapColor mapColor, BlockSetType blockSetType) {
-        return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of().mapColor(mapColor)
-        .forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY), blockSetType);
+    public static PressurePlateBlock registerWoodenPressurePlate(BlockSetType blockSetType, MapColor mapColor) {
+        return new PressurePlateBlock(blockSetType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn()
+        .instrument(NoteBlockInstrument.BASS).ignitedByLava().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
-    public static PressurePlateBlock registerFireProofWoodenPressurePlate(MapColor mapColor, BlockSetType blockSetType) {
-        return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of().mapColor(mapColor)
-        .forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), blockSetType);
+    public static PressurePlateBlock registerFireProofWoodenPressurePlate(BlockSetType blockSetType, MapColor mapColor) {
+        return new PressurePlateBlock(blockSetType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn()
+        .instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
     public static LeavesBlock registerLeaves(SoundType soundType, MapColor mapColor) {

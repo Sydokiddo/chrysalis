@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ChorusFlowerBlockMixin extends Block {
 
     @Shadow protected abstract void placeGrownFlower(Level level, BlockPos blockPos, int i);
-    @Final @Shadow private ChorusPlantBlock plant;
+    @Shadow @Final private Block plant;
 
     private ChorusFlowerBlockMixin(Properties properties) {
         super(properties);
@@ -50,7 +50,7 @@ public abstract class ChorusFlowerBlockMixin extends Block {
 
         if (serverLevel.getBlockState(blockPos.below()).is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON) && serverLevel.isEmptyBlock(abovePos) && abovePos.getY() < serverLevel.getMaxBuildHeight() && age < 5) {
             this.placeGrownFlower(serverLevel, abovePos, age + 1);
-            serverLevel.setBlock(blockPos, plant.defaultBlockState().setValue(ChorusPlantBlock.UP, true).setValue(ChorusPlantBlock.DOWN, true), 2);
+            serverLevel.setBlock(blockPos, this.plant.defaultBlockState().setValue(ChorusPlantBlock.UP, true).setValue(ChorusPlantBlock.DOWN, true), 2);
             info.cancel();
         }
     }
