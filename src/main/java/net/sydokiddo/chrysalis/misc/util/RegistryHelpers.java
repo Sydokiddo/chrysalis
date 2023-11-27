@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
@@ -16,11 +17,15 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.armortrim.ArmorTrim;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -295,7 +300,7 @@ public class RegistryHelpers {
 
     // endregion
 
-    // region Miscellanous Properties
+    // region Miscellanous Properties and Methods
 
     /**
      * Miscellaneous properties.
@@ -307,6 +312,20 @@ public class RegistryHelpers {
 
     public static ToIntFunction<BlockState> blockStateShouldEmitLight(int lightAmount) {
         return blockState -> blockState.getValue(BlockStateProperties.LIT) ? lightAmount : 0;
+    }
+
+    public static void popResourceBelow(Level level, BlockPos blockPos, ItemStack itemStack, double itemDropOffset) {
+
+        double itemHeight = (double) EntityType.ITEM.getHeight() / 2.0;
+        double x = (double)blockPos.getX() + 0.5 + Mth.nextDouble(level.getRandom(), -0.25, 0.25);
+        double y = (double)blockPos.getY() - itemDropOffset + Mth.nextDouble(level.getRandom(), -0.25, 0.25) - itemHeight;
+        double z = (double)blockPos.getZ() + 0.5 + Mth.nextDouble(level.getRandom(), -0.25, 0.25);
+
+        if (!level.isClientSide() && !itemStack.isEmpty() && level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
+            ItemEntity itemEntity = new ItemEntity(level, x, y, z, itemStack);
+            itemEntity.setDefaultPickUpDelay();
+            level.addFreshEntity(itemEntity);
+        }
     }
 
     public static BigDecimal getFoodSaturation(ItemStack itemStack) {
