@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.misc.util.CreativeTabHelper;
 import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
+import net.sydokiddo.chrysalis.misc.util.entities.ChrysalisMemoryModules;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
 
@@ -61,5 +62,6 @@ public class ChrysalisRegistry {
         ChrysalisSoundEvents.registerSounds();
         ChrysalisDebugItems.registerDebugItems();
         ChrysalisCreativeModeTabs.registerCreativeTabs();
+        ChrysalisMemoryModules.MEMORY_MODULES.register();
     }
 }

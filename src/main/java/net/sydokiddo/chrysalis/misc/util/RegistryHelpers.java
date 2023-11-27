@@ -417,6 +417,10 @@ public class RegistryHelpers {
         blockSource.level().levelEvent(1000, blockSource.pos(), 0);
     }
 
+    public static void playDispenserFailSound(BlockSource blockSource) {
+        blockSource.level().levelEvent(1001, blockSource.pos(), 0);
+    }
+
     public static void playDispenserShootingSound(BlockSource blockSource) {
         blockSource.level().levelEvent(1002, blockSource.pos(), 0);
     }
