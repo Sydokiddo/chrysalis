@@ -36,7 +36,7 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
      **/
 
     @Override
-    public InteractionResult useOn(@NotNull UseOnContext useOnContext) {
+    public @NotNull InteractionResult useOn(@NotNull UseOnContext useOnContext) {
 
         Player player = useOnContext.getPlayer();
         assert player != null;

@@ -32,7 +32,7 @@ public class FillHungerItem extends DebugUtilityItem {
      **/
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
 
         ItemStack itemStack = player.getItemInHand(interactionHand);
 

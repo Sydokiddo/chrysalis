@@ -31,7 +31,7 @@ public abstract class ChorusFlowerBlockMixin extends Block {
     }
 
     /**
-     * Chorus Flowers are now able to be placed on and tick on any blocks in the chorus_plant_can_grow_on tag.
+     * Chorus Flowers are now placeable on and tick on any blocks in the chorus_plant_can_grow_on tag.
      **/
 
     @Inject(method = "canSurvive", at = @At("HEAD"), cancellable = true)

@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavior {
@@ -23,7 +24,7 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
      **/
 
     @Override
-    public ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {
+    public @NotNull ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {
 
         BlockPos blockPos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
         ServerLevel level = blockSource.level();

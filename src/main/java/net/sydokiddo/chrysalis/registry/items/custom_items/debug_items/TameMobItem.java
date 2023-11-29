@@ -36,7 +36,7 @@ public class TameMobItem extends DebugUtilityItem {
      **/
 
     @Override
-    public InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
+    public @NotNull InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
         if (!livingEntity.level().isClientSide() && livingEntity instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame()) {
             tamableAnimal.tame(player);
             playTameEvents(player, tamableAnimal);

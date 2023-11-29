@@ -34,7 +34,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
      **/
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         if (!level.isClientSide()) {
             player.playNotifySound(ChrysalisSoundEvents.GIVE_RESISTANCE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
             player.gameEvent(GameEvent.ITEM_INTERACT_START);

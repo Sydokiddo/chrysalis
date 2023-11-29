@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
@@ -47,7 +48,7 @@ public class RotatingFallingParticle extends RisingParticle {
     // region Rendering
 
     @Override
-    public ParticleRenderType getRenderType() {
+    public @NotNull ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 

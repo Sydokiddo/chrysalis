@@ -75,8 +75,8 @@ public class ChrysalisTags {
         CHESTPLATES = registerItemTag("chestplates"),
         LEGGINGS = registerItemTag("leggings"),
         BOOTS = registerItemTag("boots"),
-        HORSE_ARMOR = registerItemTag("horse_armor"),
         ELYTRA = registerItemTag("elytra"),
+        HORSE_ARMOR = registerItemTag("horse_armor"),
         PIGLIN_PACIFYING_ARMOR = registerItemTag("piglin_pacifying_armor"),
         PROTECTS_AGAINST_ENDERMEN = registerItemTag("protects_against_endermen"),
         POWDER_SNOW_WALKABLE_ITEMS = registerItemTag("powder_snow_walkable_items"),
@@ -89,7 +89,7 @@ public class ChrysalisTags {
         IMMUNE_TO_EXPLOSIONS = registerItemTag("immune_to_explosions"),
         IMMUNE_TO_DAMAGE = registerItemTag("immune_to_damage"),
         IMMUNE_TO_DESPAWNING = registerItemTag("immune_to_despawning"),
-        INCREASED_DESPAWN_TIME = registerItemTag("increased_despawn_time");
+        INCREASED_DESPAWN_TIME = registerItemTag("increased_despawn_time")
 
         // endregion
     ;
@@ -186,7 +186,7 @@ public class ChrysalisTags {
 
     public static final TagKey<DamageType>
         IS_MAGIC = registerDamageTypeTag("is_magic"),
-        IS_RANGED = registerDamageTypeTag("is_ranged");
+        IS_RANGED = registerDamageTypeTag("is_ranged")
     ;
 
     /**
@@ -194,7 +194,7 @@ public class ChrysalisTags {
      **/
 
     public static final TagKey<Biome>
-        WITHOUT_MOB_SPAWNS = registerBiomeTag("without_mob_spawns");
+        WITHOUT_MOB_SPAWNS = registerBiomeTag("without_mob_spawns")
     ;
 
     /**

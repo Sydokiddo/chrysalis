@@ -34,14 +34,14 @@ public class EntityDataHelper {
     }
 
     public static boolean isMobInOverworld(Mob mob) {
-        return mob.level() != null && mob.level().dimension() == Level.OVERWORLD;
+        return mob.level().dimension() == Level.OVERWORLD;
     }
 
     public static boolean isMobInNether(Mob mob) {
-        return mob.level() != null && mob.level().dimension() == Level.NETHER;
+        return mob.level().dimension() == Level.NETHER;
     }
 
     public static boolean isMobInEnd(Mob mob) {
-        return mob.level() != null && mob.level().dimension() == Level.END;
+        return mob.level().dimension() == Level.END;
     }
 }

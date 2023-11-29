@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class NetherWartBlockMixin {
 
     /**
-     * Nether Warts are now able to be placed on any blocks in the nether_wart_can_grow_on tag.
+     * Nether Warts are now placeable on any blocks in the nether_wart_can_grow_on tag.
      **/
 
     @Inject(method = "mayPlaceOn", at = @At("HEAD"), cancellable = true)

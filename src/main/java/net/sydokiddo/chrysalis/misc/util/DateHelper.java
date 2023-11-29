@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis.misc.util;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("all")
 public class DateHelper {
 
     /**
