@@ -15,14 +15,14 @@ public record ClipboardImage(Image image) implements Transferable {
      **/
 
     @Override
-    public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
-        if (isDataFlavorSupported(flavor)) return image;
-        throw new UnsupportedFlavorException(flavor);
+    public Object getTransferData(DataFlavor dataFlavor) throws UnsupportedFlavorException {
+        if (isDataFlavorSupported(dataFlavor)) return image;
+        throw new UnsupportedFlavorException(dataFlavor);
     }
 
     @Override
-    public boolean isDataFlavorSupported(DataFlavor flavor) {
-        return flavor == DataFlavor.imageFlavor;
+    public boolean isDataFlavorSupported(DataFlavor dataFlavor) {
+        return DataFlavor.imageFlavor.equals(dataFlavor);
     }
 
     @Override

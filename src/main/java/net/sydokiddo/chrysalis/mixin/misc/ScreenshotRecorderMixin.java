@@ -36,7 +36,7 @@ public class ScreenshotRecorderMixin {
     @Inject(method = "method_1661", at = @At("TAIL"))
     private static void chrysalis$copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo ci) {
 
-        if (FabricLoader.getInstance().isModLoaded("essential")) return;
+        if (FabricLoader.getInstance().isModLoaded("essential") || FabricLoader.getInstance().isModLoaded("optifine") || FabricLoader.getInstance().isModLoaded("optifabric")) return;
 
         Minecraft minecraft = Minecraft.getInstance();
 

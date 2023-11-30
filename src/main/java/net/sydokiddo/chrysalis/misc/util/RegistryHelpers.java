@@ -206,31 +206,6 @@ public class RegistryHelpers {
 
     // endregion
 
-    // region Composter and Furnace Values
-
-    public static float
-        composter30PercentChance = 0.3F,
-        composter50PercentChance = 0.5F,
-        composter65PercentChance = 0.65F,
-        composter85PercentChance = 0.85F,
-        composter100PercentChance = 1.0F
-    ;
-
-    public static int
-        furnace50Ticks = 50,
-        furnace100Ticks = 100,
-        furnace150Ticks = 150,
-        furnace200Ticks = 200,
-        furnace300Ticks = 300,
-        furnace1600Ticks = 1600,
-        furnace2400Ticks = 2400,
-        furnace4000Ticks = 4000,
-        furnace16000Ticks = 16000,
-        furnace20000Ticks = 20000
-    ;
-
-    // endregion
-
     // region Biome Predicates
 
     /**

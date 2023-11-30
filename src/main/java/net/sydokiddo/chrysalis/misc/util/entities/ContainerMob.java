@@ -21,6 +21,7 @@ public interface ContainerMob {
 
     boolean fromItem();
     void setFromItem(boolean fromItem);
+
     void saveToItemTag(ItemStack itemStack);
     void loadFromItemTag(CompoundTag compoundTag);
 
@@ -35,76 +36,64 @@ public interface ContainerMob {
 
         CompoundTag compoundTag = itemStack.getOrCreateTag();
 
-        // Saves the default mob tags
+        // region Default Mob Tags
 
-        if (mob.hasCustomName()) {
-            itemStack.setHoverName(mob.getCustomName());
-        }
-        if (mob.isNoAi()) {
-            compoundTag.putBoolean("NoAI", mob.isNoAi());
-        }
-        if (mob.isSilent()) {
-            compoundTag.putBoolean("Silent", mob.isSilent());
-        }
-        if (mob.isNoGravity()) {
-            compoundTag.putBoolean("NoGravity", mob.isNoGravity());
-        }
-        if (mob.hasGlowingTag()) {
-            compoundTag.putBoolean("Glowing", true);
-        }
-        if (mob.isInvulnerable()) {
-            compoundTag.putBoolean("Invulnerable", mob.isInvulnerable());
-        }
+        if (mob.hasCustomName()) itemStack.setHoverName(mob.getCustomName());
+
+        if (mob.isCustomNameVisible()) compoundTag.putBoolean("CustomNameVisible", true);
+
+        if (mob.isNoAi()) compoundTag.putBoolean("NoAI", true);
+
+        if (mob.isSilent()) compoundTag.putBoolean("Silent", true);
+
+        if (mob.isNoGravity()) compoundTag.putBoolean("NoGravity", true);
+
+        if (mob.hasGlowingTag()) compoundTag.putBoolean("Glowing", true);
+
+        if (mob.isInvulnerable()) compoundTag.putBoolean("Invulnerable", true);
 
         compoundTag.putFloat("Health", mob.getHealth());
 
-        // If the mob is an ageable mob, save the mob's age
+        // endregion
 
-        if (mob instanceof AgeableMob ageableMob) {
-            compoundTag.putInt("Age", ageableMob.getAge());
-        }
+        // region Animal Tags
 
-        // If the mob is an animal, save the mob's in love time
+        if (mob instanceof AgeableMob ageableMob) compoundTag.putInt("Age", ageableMob.getAge());
 
-        if (mob instanceof Animal animal) {
-            compoundTag.putInt("InLove", animal.getInLoveTime());
-        }
+        if (mob instanceof Animal animal) compoundTag.putInt("InLove", animal.getInLoveTime());
+
+        // endregion
     }
 
     static void loadDefaultDataFromItemTag(Mob mob, CompoundTag compoundTag) {
 
-        // Loads the default mob tags
+        String health = "Health";
 
-        if (compoundTag.contains("NoAI")) {
-            mob.setNoAi(compoundTag.getBoolean("NoAI"));
-        }
-        if (compoundTag.contains("Silent")) {
-            mob.setSilent(compoundTag.getBoolean("Silent"));
-        }
-        if (compoundTag.contains("NoGravity")) {
-            mob.setNoGravity(compoundTag.getBoolean("NoGravity"));
-        }
-        if (compoundTag.contains("Glowing")) {
-            mob.setGlowingTag(compoundTag.getBoolean("Glowing"));
-        }
-        if (compoundTag.contains("Invulnerable")) {
-            mob.setInvulnerable(compoundTag.getBoolean("Invulnerable"));
-        }
-        if (compoundTag.contains("Health", 99)) {
-            mob.setHealth(compoundTag.getFloat("Health"));
-        }
+        // region Default Mob Tags
 
-        // If the mob is an ageable mob, load the mob's age
+        if (compoundTag.contains("CustomNameVisible")) mob.setCustomNameVisible(true);
 
-        if (mob instanceof AgeableMob ageableMob) {
-            ageableMob.setAge(compoundTag.getInt("Age"));
-        }
+        if (compoundTag.contains("NoAI")) mob.setNoAi(true);
 
-        // If the mob is an animal, load the mob's in love time
+        if (compoundTag.contains("Silent")) mob.setSilent(true);
 
-        if (mob instanceof Animal animal) {
-            animal.setInLoveTime(compoundTag.getInt("InLove"));
-        }
+        if (compoundTag.contains("NoGravity")) mob.setNoGravity(true);
+
+        if (compoundTag.contains("Glowing")) mob.setGlowingTag(true);
+
+        if (compoundTag.contains("Invulnerable")) mob.setInvulnerable(true);
+
+        if (compoundTag.contains(health, 99)) mob.setHealth(compoundTag.getFloat(health));
+
+        // endregion
+
+        // region Animal Tags
+
+        if (mob instanceof AgeableMob ageableMob) ageableMob.setAge(compoundTag.getInt("Age"));
+
+        if (mob instanceof Animal animal) animal.setInLoveTime(compoundTag.getInt("InLove"));
+
+        // endregion
     }
 
     /**

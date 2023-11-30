@@ -10,12 +10,12 @@ public class InventoryHelper {
      * Checks to see if a block entity as an item is empty when in the user's inventory.
      **/
 
-    public static boolean containerIsEmpty(ItemStack stack) {
+    public static boolean containerIsEmpty(ItemStack itemStack) {
 
         String blockEntityTagString = "BlockEntityTag";
         String itemsString = "Items";
         int TAG_COMPOUND = 10;
-        CompoundTag tag = stack.getTag();
+        CompoundTag tag = itemStack.getTag();
 
         if (tag == null || !tag.contains(blockEntityTagString, TAG_COMPOUND)) return true;
 
