@@ -260,8 +260,8 @@ public class RegistryHelpers {
      * Registry helpers for assisting with custom loot tables.
      **/
 
-    public static ResourceLocation registerCustomLootTable(String string) {
-        return registerCustomLootTable(new ResourceLocation(string));
+    public static ResourceLocation registerCustomLootTable(String name) {
+        return registerCustomLootTable(new ResourceLocation(name));
     }
 
     public static final Set<ResourceLocation> LOOT_TABLE_LOCATIONS = Sets.newHashSet();

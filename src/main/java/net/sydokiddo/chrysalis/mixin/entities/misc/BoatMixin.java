@@ -24,13 +24,13 @@ public abstract class BoatMixin extends Entity {
      **/
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;startRiding(Lnet/minecraft/world/entity/Entity;)Z"), cancellable = true)
-    private void chrysalis$preventMobsFromRidingBoats(CallbackInfo ci) {
+    private void chrysalis$preventMobsFromRidingBoats(CallbackInfo info) {
 
         List<Entity> nearbyEntities = this.level().getEntities(this, this.getBoundingBox().inflate(0.2F, -0.01F, 0.2F), EntitySelector.pushableBy(this));
 
         for (Entity entity : nearbyEntities) {
             if (entity.getType().is(ChrysalisTags.CANNOT_RIDE_BOATS)) {
-                ci.cancel();
+                info.cancel();
             }
         }
     }

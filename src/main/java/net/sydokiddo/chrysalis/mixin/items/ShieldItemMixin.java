@@ -18,7 +18,7 @@ import java.util.List;
 public class ShieldItemMixin {
 
     @Inject(method = "appendHoverText", at = @At("TAIL"))
-    private void chrysalis$addSpaceOnShieldBannerTooltip(ItemStack itemStack, Level level, List<Component> tooltip, TooltipFlag tooltipFlag, CallbackInfo ci) {
+    private void chrysalis$addSpaceOnShieldBannerTooltip(ItemStack itemStack, Level level, List<Component> tooltip, TooltipFlag tooltipFlag, CallbackInfo info) {
 
         CompoundTag compoundTag = BlockItem.getBlockEntityData(itemStack);
 

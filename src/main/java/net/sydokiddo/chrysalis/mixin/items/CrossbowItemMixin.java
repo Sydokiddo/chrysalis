@@ -17,7 +17,7 @@ import java.util.List;
 public class CrossbowItemMixin {
 
     @Inject(method = "appendHoverText", at = @At("TAIL"))
-    private void chrysalis$addSpaceBeforeCrossbowEnchantments(ItemStack itemStack, @Nullable Level level, List<Component> tooltip, TooltipFlag tooltipFlag, CallbackInfo ci) {
+    private void chrysalis$addSpaceBeforeCrossbowEnchantments(ItemStack itemStack, @Nullable Level level, List<Component> tooltip, TooltipFlag tooltipFlag, CallbackInfo info) {
         RegistryHelpers.addSpaceOnTooltipIfEnchantedOrTrimmed(itemStack, tooltip);
     }
 }

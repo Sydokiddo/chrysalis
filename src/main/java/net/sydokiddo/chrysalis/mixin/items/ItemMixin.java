@@ -20,7 +20,7 @@ public class ItemMixin {
      **/
 
     @Inject(method = "appendHoverText", at = @At("RETURN"))
-    private void chrysalis$addDebugStickTooltip(ItemStack itemStack, Level level, List<Component> tooltip, TooltipFlag tooltipFlag, CallbackInfo ci) {
+    private void chrysalis$addDebugStickTooltip(ItemStack itemStack, Level level, List<Component> tooltip, TooltipFlag tooltipFlag, CallbackInfo info) {
         if (itemStack.is(Items.DEBUG_STICK)) {
             RegistryHelpers.addUseTooltip(tooltip);
             tooltip.add(CommonComponents.space().append(Component.translatable("item.chrysalis.debug_stick.desc").withStyle(ChatFormatting.BLUE)));

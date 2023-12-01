@@ -32,7 +32,7 @@ public abstract class ItemEntityMixin extends Entity {
      **/
 
     @Inject(at = @At("HEAD"), method = "tick")
-    private void chrysalis$makeItemsHaveExtendedLifetime(CallbackInfo ci) {
+    private void chrysalis$makeItemsHaveExtendedLifetime(CallbackInfo info) {
         if (!this.getItem().isEmpty() && this.getItem().is(ChrysalisTags.INCREASED_DESPAWN_TIME) && this.firstTick) {
             this.setExtendedLifetime();
         }

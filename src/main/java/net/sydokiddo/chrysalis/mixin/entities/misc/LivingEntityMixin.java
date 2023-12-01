@@ -18,7 +18,7 @@ import java.util.Objects;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 
-    @Shadow public abstract ItemStack getItemBySlot(EquipmentSlot var1);
+    @Shadow public abstract ItemStack getItemBySlot(EquipmentSlot equipmentSlot);
 
     private LivingEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
