@@ -16,7 +16,7 @@ public class RespawnAnchorBlockMixin {
      **/
 
     @Inject(method = "isRespawnFuel", at = @At("HEAD"), cancellable = true)
-    private static void chrysalis$chargesRespawnAnchorsTag(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(stack.is(ChrysalisTags.CHARGES_RESPAWN_ANCHORS));
+    private static void chrysalis$chargesRespawnAnchorsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(itemStack.is(ChrysalisTags.CHARGES_RESPAWN_ANCHORS));
     }
 }

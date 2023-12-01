@@ -34,7 +34,7 @@ public class ScreenshotRecorderMixin {
 
     @SuppressWarnings("all")
     @Inject(method = "method_1661", at = @At("TAIL"))
-    private static void chrysalis$copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo ci) {
+    private static void chrysalis$copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo info) {
 
         if (FabricLoader.getInstance().isModLoaded("essential") || FabricLoader.getInstance().isModLoaded("optifine") || FabricLoader.getInstance().isModLoaded("optifabric")) return;
 

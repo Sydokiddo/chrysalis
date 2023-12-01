@@ -43,7 +43,7 @@ public abstract class ItemEntityMixin extends Entity {
      **/
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V"))
-    private void chrysalis$makeItemsNeverDespawn(ItemEntity instance) {
+    private void chrysalis$makeItemsNeverDespawn(ItemEntity itemEntity) {
         if (!this.getItem().is(ChrysalisTags.IMMUNE_TO_DESPAWNING)) {
             this.discard();
         }
@@ -54,7 +54,7 @@ public abstract class ItemEntityMixin extends Entity {
      **/
 
     @Inject(at = @At("HEAD"), method = "hurt", cancellable = true)
-    private void chrysalis$makeItemsImmune(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis$makeItemsImmune(DamageSource damageSource, float damageAmount, CallbackInfoReturnable<Boolean> cir) {
         if (!this.getItem().isEmpty()) {
             if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
                 cir.setReturnValue(false);

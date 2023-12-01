@@ -18,7 +18,7 @@ public class NetherWartBlockMixin {
      **/
 
     @Inject(method = "mayPlaceOn", at = @At("HEAD"), cancellable = true)
-    private void chrysalis$netherWartCanGrowOnTag(BlockState floor, BlockGetter world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(floor.is(ChrysalisTags.NETHER_WART_CAN_GROW_ON));
+    private void chrysalis$netherWartCanGrowOnTag(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(blockState.is(ChrysalisTags.NETHER_WART_CAN_GROW_ON));
     }
 }
