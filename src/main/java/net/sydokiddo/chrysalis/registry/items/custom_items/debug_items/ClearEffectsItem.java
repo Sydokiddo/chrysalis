@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -42,6 +43,7 @@ public class ClearEffectsItem extends DebugUtilityItem {
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
                 player.removeAllEffects();
                 player.sendSystemMessage(Component.translatable("gui.chrysalis.clear_effects_message", player.getName().getString()));
+                player.awardStat(Stats.ITEM_USED.get(this));
             }
             return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
         }

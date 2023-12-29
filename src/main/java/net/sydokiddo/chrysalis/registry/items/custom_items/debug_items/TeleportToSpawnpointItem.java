@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -40,6 +41,7 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
         if (!level.isClientSide()) {
 
             player.gameEvent(GameEvent.ITEM_INTERACT_START);
+            player.awardStat(Stats.ITEM_USED.get(this));
 
             if (player instanceof ServerPlayer serverPlayer) {
                 if (serverPlayer.getRespawnPosition() != null) {

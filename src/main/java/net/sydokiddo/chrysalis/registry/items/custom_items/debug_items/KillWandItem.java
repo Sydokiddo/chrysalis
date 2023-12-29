@@ -42,7 +42,7 @@ public class KillWandItem extends DebugUtilityItem {
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity self) {
         if (!target.isInvulnerable()) {
 
-            target.hurt(target.damageSources().source(ChrysalisDamageSources.KILL_WAND, target), Float.MAX_VALUE);
+            target.hurt(target.damageSources().source(ChrysalisDamageSources.KILL_WAND, self), Float.MAX_VALUE);
 
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(self.level());
             assert lightningBolt != null;

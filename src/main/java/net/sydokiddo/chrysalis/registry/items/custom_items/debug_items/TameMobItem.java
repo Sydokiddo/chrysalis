@@ -4,6 +4,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,6 +41,7 @@ public class TameMobItem extends DebugUtilityItem {
         if (!livingEntity.level().isClientSide() && livingEntity instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame()) {
             tamableAnimal.tame(player);
             playTameEvents(player, tamableAnimal);
+            player.awardStat(Stats.ITEM_USED.get(this));
             return InteractionResult.SUCCESS;
         }
         return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);

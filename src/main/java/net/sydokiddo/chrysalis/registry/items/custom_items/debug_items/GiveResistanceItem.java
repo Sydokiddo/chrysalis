@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -40,6 +41,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
             player.gameEvent(GameEvent.ITEM_INTERACT_START);
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, -1, 255, false, false, true));
             player.sendSystemMessage(Component.translatable("gui.chrysalis.give_resistance_message", player.getName().getString()));
+            player.awardStat(Stats.ITEM_USED.get(this));
         }
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
     }

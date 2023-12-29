@@ -1,9 +1,12 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
@@ -49,12 +52,18 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
         if (blockHitResult.getType() == HitResult.Type.MISS || blockHitResult.getType() != HitResult.Type.BLOCK) {
             return InteractionResult.PASS;
         } else {
+
             this.checkExtraContent(player, level, itemStack, usePos);
+            player.awardStat(Stats.ITEM_USED.get(this));
             level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
 
+            if (player instanceof ServerPlayer serverPlayer) {
+                CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, usePos, itemStack);
+            }
             if (!player.getAbilities().instabuild) {
                 player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(returnItem)));
             }
+
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
     }
