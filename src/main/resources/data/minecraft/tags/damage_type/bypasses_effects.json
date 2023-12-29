@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "chrysalis:mob_attack_bypasses_armor",
     "chrysalis:kill_wand"
   ]
 }

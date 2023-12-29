@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
@@ -41,7 +42,7 @@ public class KillWandItem extends DebugUtilityItem {
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity self) {
         if (!target.isInvulnerable()) {
 
-            target.hurt(target.damageSources().mobAttack(self), Float.MAX_VALUE);
+            target.hurt(target.damageSources().source(ChrysalisDamageSources.KILL_WAND, target), Float.MAX_VALUE);
 
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(self.level());
             assert lightningBolt != null;
