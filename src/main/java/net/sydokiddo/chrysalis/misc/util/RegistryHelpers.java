@@ -82,6 +82,10 @@ public class RegistryHelpers {
         BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.FERMENTED_SPIDER_EYE, resultPotion);
     }
 
+    public static void registerUniquePotionRecipe(Potion startingPotion, Item ingredient, Potion resultPotion) {
+        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, ingredient, resultPotion);
+    }
+
     // endregion
 
     // region Item Registry
@@ -168,6 +172,10 @@ public class RegistryHelpers {
 
     public static ButtonBlock registerWoodenButton(BlockSetType blockSetType) {
         return new ButtonBlock(blockSetType, 30, BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
+    }
+
+    public static ButtonBlock registerCustomPulseTimeButton(BlockSetType blockSetType, int ticksToStayPressed) {
+        return new ButtonBlock(blockSetType, ticksToStayPressed, BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
     public static PressurePlateBlock registerStonePressurePlate(BlockSetType blockSetType, MapColor mapColor) {

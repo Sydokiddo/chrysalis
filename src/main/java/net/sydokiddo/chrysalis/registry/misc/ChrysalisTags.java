@@ -75,7 +75,6 @@ public class ChrysalisTags {
         CHESTPLATES = registerItemTag("chestplates"),
         LEGGINGS = registerItemTag("leggings"),
         BOOTS = registerItemTag("boots"),
-        ELYTRA = registerItemTag("elytra"),
         HORSE_ARMOR = registerItemTag("horse_armor"),
         PIGLIN_PACIFYING_ARMOR = registerItemTag("piglin_pacifying_armor"),
         PROTECTS_AGAINST_ENDERMEN = registerItemTag("protects_against_endermen"),
@@ -121,6 +120,8 @@ public class ChrysalisTags {
         WAXABLE_BLOCKS = registerBlockTag("waxable_blocks"),
         WAXED_BLOCKS = registerBlockTag("waxed_blocks"),
         BRUSHABLE_BLOCKS = registerBlockTag("brushable_blocks"),
+        CROPS = registerBlockTag("crops"),
+        SNIFFER_PLANT_CROPS = registerBlockTag("sniffer_plant_crops"),
 
         // endregion
 

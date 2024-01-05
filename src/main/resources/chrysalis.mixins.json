@@ -46,6 +46,7 @@
     "items.CrossbowItemMixin",
     "items.EndCrystalItemMixin",
     "items.EyeOfEnderItemMixin",
+    "items.HoneyBottleItemMixin",
     "items.ItemMixin",
     "items.ItemStackMixin",
     "items.PotionColorMixin",

@@ -1,7 +1,9 @@
 package net.sydokiddo.chrysalis.misc.util.entities;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
@@ -43,5 +45,21 @@ public class EntityDataHelper {
 
     public static boolean isMobInEnd(Mob mob) {
         return mob.level().dimension() == Level.END;
+    }
+
+    public static boolean isMobInDimension(Mob mob, ResourceKey<Level> dimension) {
+        return mob.level().dimension() == dimension;
+    }
+
+    public static boolean isLookingUp(Entity entity) {
+        return entity.getXRot() < -45;
+    }
+
+    public static boolean isLookingForward(Entity entity) {
+        return entity.getXRot() > -45 && entity.getXRot() < 45;
+    }
+
+    public static boolean isLookingDown(Entity entity) {
+        return entity.getXRot() > 45;
     }
 }
