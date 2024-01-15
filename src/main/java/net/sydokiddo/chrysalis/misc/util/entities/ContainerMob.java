@@ -111,6 +111,10 @@ public interface ContainerMob {
                 CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
             }
 
+            if (livingEntity instanceof Mob mob && mob.isLeashed()) {
+                mob.dropLeash(true, true);
+            }
+
             livingEntity.playSound(((ContainerMob) livingEntity).getPickupSound(), 1.0F, 1.0F);
             ((ContainerMob) livingEntity).saveToItemTag(resultItemStack);
             player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemInHand, player, resultItemStack, false));

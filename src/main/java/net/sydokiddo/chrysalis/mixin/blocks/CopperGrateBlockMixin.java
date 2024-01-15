@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(HalfTransparentBlock.class)
 public class CopperGrateBlockMixin extends Block {
 
-    public CopperGrateBlockMixin(Properties properties) {
+    private CopperGrateBlockMixin(Properties properties) {
         super(properties);
     }
 

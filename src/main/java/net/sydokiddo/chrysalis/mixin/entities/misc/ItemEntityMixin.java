@@ -23,7 +23,7 @@ public abstract class ItemEntityMixin extends Entity {
     @Shadow public abstract ItemStack getItem();
     @Shadow public abstract void setExtendedLifetime();
 
-    public ItemEntityMixin(EntityType<?> entityType, Level level) {
+    private ItemEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
