@@ -7,9 +7,7 @@ bool check_alpha(float textureAlpha, float targetAlpha) {
 	float targetLess = targetAlpha - 0.01;
 	float targetMore = targetAlpha + 0.01;
 	return (textureAlpha > targetLess && textureAlpha < targetMore);
-	
 }
-
 
 // For cases in which you want something to have a lower light level, but still be bright when in light.
 
@@ -20,11 +18,9 @@ vec4 apply_partial_emissivity(vec4 inputColor, vec4 originalLightColor, vec3 min
 	newLightColor.g = max(originalLightColor.g, minimumLightColor.g);
 	newLightColor.b = max(originalLightColor.b, minimumLightColor.b);
 	return inputColor * newLightColor;
-	
 }
 
-
-// The meat and bones of the pack, does all the work for making things emissive.
+// Makes all colors with an opacity of 252 emissive.
 
 vec4 make_emissive(vec4 inputColor, vec4 lightColor, vec4 maxLightColor, float vertexDistance, float inputAlpha) {
 	
@@ -35,9 +31,7 @@ vec4 make_emissive(vec4 inputColor, vec4 lightColor, vec4 maxLightColor, float v
 	else if (check_alpha(inputAlpha, 250.0)) return inputColor; // You can copy & this line and change the function to add a new emissive type. Used in the example pack for lime concrete. 
 	
 	else return inputColor * lightColor; // If none of the pixels are supposed to be emissive, then it adds the light.
-	
 }
-
 
 // Gets the dimension that an object is in, -1 for The Nether, 0 for The Overworld, 1 for The End.
 
@@ -46,9 +40,7 @@ float get_dimension(vec4 minLightColor) {
 	if (minLightColor.r == minLightColor.g && minLightColor.g == minLightColor.b) return 0.0; // Shadows are grayscale in The Overworld
 	else if (minLightColor.r > minLightColor.g) return -1.0; // Shadows are more red in The Nether
 	else return 1.0; // Shadows are slightly green in The End
-	
 }
-
 
 // Gets the face lighting of a block. Credits to Venaxsys for the original function.
 
@@ -77,16 +69,13 @@ vec4 get_face_lighting(vec3 normal, float dimension) {
 	return faceLighting;
 }
 
-
 // Checks the alpha and removes face lighting if required.
 
 vec4 face_lighting_check(vec3 normal, float inputAlpha, float dimension) {
 
 	if (check_alpha(inputAlpha, 250.0)) return get_face_lighting(normal, dimension); // Checks for alpha 250, and runs it through the remove_face_lighting() function if it is. Used in the example pack for lime concrete.
 	else return vec4(1.0, 1.0, 1.0, 1.0); // If the block doesn't need to have its face lighting removed, returns 1.0 so nothing gets divided.
-	
 }
-
 
 // Makes sure transparent things don't become solid and vice versa.
 
@@ -97,5 +86,4 @@ float remap_alpha(float inputAlpha) {
 	else if (check_alpha(inputAlpha, 250.0)) return 255.0; // Used in the example pack for lime concrete.
 	
 	else return inputAlpha; // If a pixel doesn't need to have its alpha changed then it simply does not change.
-	
 }
