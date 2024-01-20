@@ -30,6 +30,7 @@
     "entities.misc.LivingEntityMixin",
     "entities.misc.MiscGoalsMixin",
     "entities.misc.MobMixin",
+    "entities.misc.PlayerMixin",
     "entities.passive.AllayMixin",
     "entities.passive.AxolotlMixin",
     "entities.passive.BirdSeedsMixin",

@@ -136,6 +136,7 @@ public class ChrysalisTags {
         ALLOWS_BEACON_BEAM_PASSTHROUGH = registerBlockTag("allows_beacon_beam_passthrough"),
         CANNOT_BE_PUSHED_BY_PISTONS = registerBlockTag("cannot_be_pushed_by_pistons"),
         MOBS_SHOULD_PATHFIND_AROUND = registerBlockTag("mobs_should_pathfind_around"),
+        ALLOWS_USE_WHILE_SNEAKING = registerBlockTag("allows_use_while_sneaking"),
 
         // endregion
 
