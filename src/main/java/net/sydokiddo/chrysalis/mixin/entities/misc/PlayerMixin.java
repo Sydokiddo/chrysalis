@@ -40,7 +40,7 @@ public abstract class PlayerMixin extends LivingEntity {
         return level().clip(new ClipContext(eyePosition, vec3, ClipContext.Block.OUTLINE, ClipContext.Fluid.SOURCE_ONLY, this));
     }
 
-    @Inject(method = "isSecondaryUseActive", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "isSecondaryUseActive", at = @At(value = "RETURN"), cancellable = true)
     private void chrysalis$allowBlockUseWhileSneaking(CallbackInfoReturnable<Boolean> cir) {
 
         BlockHitResult blockHitResult = this.getPlayerPOVHitResult();
