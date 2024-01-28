@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 public class CoreRegistry<T> {
 
     /**
-     * Custom core registry created by ItsBlackGear (https://github.com/ItsBlackGear)
+     * Custom core registry created by ItsBlackGear (<a href="https://github.com/ItsBlackGear">...</a>)
      * Thank you for that! :)
      **/
 

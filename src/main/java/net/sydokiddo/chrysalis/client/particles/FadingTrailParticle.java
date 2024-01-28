@@ -22,7 +22,7 @@ public class FadingTrailParticle extends TextureSheetParticle {
         this.lifetime = 30;
         this.gravity = 3.0E-6F;
         this.xd = g;
-        this.yd = h + (double)(this.random.nextFloat() / 500.0F);
+        this.yd = h + (double) (this.random.nextFloat() / 500.0F);
         this.zd = i;
     }
 
@@ -35,8 +35,8 @@ public class FadingTrailParticle extends TextureSheetParticle {
 
         if (this.age++ < this.lifetime && !(this.alpha <= 0.0F)) {
 
-            this.xd += this.random.nextFloat() / 5000.0F * (float)(this.random.nextBoolean() ? 1 : -1);
-            this.zd += this.random.nextFloat() / 5000.0F * (float)(this.random.nextBoolean() ? 1 : -1);
+            this.xd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
+            this.zd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
             this.yd -= this.gravity;
 
             this.move(this.xd, this.yd, this.zd);
@@ -55,13 +55,13 @@ public class FadingTrailParticle extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float f) {
-        float g = ((float)this.age + f) / (float)this.lifetime;
+        float g = ((float) this.age + f) / (float)this.lifetime;
         return this.quadSize * (1.0F - g * g * 0.5F);
     }
 
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float f) {
-        this.alpha = 1.0F - Mth.clamp(((float)this.age + f) / (float)this.lifetime, 0.0F, 1.0F);
+        this.alpha = 1.0F - Mth.clamp(((float) this.age + f) / (float) this.lifetime, 0.0F, 1.0F);
         super.render(vertexConsumer, camera, f);
     }
 

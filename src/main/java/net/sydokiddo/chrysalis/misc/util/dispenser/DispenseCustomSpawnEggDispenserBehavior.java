@@ -8,7 +8,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
+import net.sydokiddo.chrysalis.misc.util.helpers.BlockHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,8 +33,8 @@ public class DispenseCustomSpawnEggDispenserBehavior implements DispenseItemBeha
             return ItemStack.EMPTY;
         }
 
-        RegistryHelpers.playDispenserSound(blockSource);
-        RegistryHelpers.playDispenserAnimation(blockSource, direction);
+        BlockHelper.playDispenserSound(blockSource);
+        BlockHelper.playDispenserAnimation(blockSource, direction);
 
         itemStack.shrink(1);
         blockSource.level().gameEvent(null, GameEvent.ENTITY_PLACE, blockSource.pos());

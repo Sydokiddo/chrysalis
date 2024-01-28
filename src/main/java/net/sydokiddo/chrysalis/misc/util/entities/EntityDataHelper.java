@@ -35,20 +35,20 @@ public class EntityDataHelper {
         return (mob.hasCustomName() && name.equals(ChatFormatting.stripFormatting(mob.getName().getString())));
     }
 
-    public static boolean isMobInOverworld(Mob mob) {
-        return mob.level().dimension() == Level.OVERWORLD;
+    public static boolean isMobInOverworld(Entity entity) {
+        return entity.level().dimension() == Level.OVERWORLD;
     }
 
-    public static boolean isMobInNether(Mob mob) {
-        return mob.level().dimension() == Level.NETHER;
+    public static boolean isMobInNether(Entity entity) {
+        return entity.level().dimension() == Level.NETHER;
     }
 
-    public static boolean isMobInEnd(Mob mob) {
-        return mob.level().dimension() == Level.END;
+    public static boolean isMobInEnd(Entity entity) {
+        return entity.level().dimension() == Level.END;
     }
 
-    public static boolean isMobInDimension(Mob mob, ResourceKey<Level> dimension) {
-        return mob.level().dimension() == dimension;
+    public static boolean isMobInDimension(Entity entity, ResourceKey<Level> dimension) {
+        return entity.level().dimension() == dimension;
     }
 
     public static boolean isLookingUp(Entity entity) {

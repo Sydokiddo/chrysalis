@@ -22,11 +22,11 @@ public class ChrysalisMemoryModules {
 
     // Registry
 
-    private static <U> MemoryModuleType<U> registerMemoryModuleWithCodec(String id, Codec<U> codec) {
-        return MEMORY_MODULES.register(id, net.sydokiddo.chrysalis.mixin.util.MemoryModuleAccessor.createMemoryModuleType(Optional.of(codec)));
+    private static <U> MemoryModuleType<U> registerMemoryModuleWithCodec(String name, Codec<U> codec) {
+        return MEMORY_MODULES.register(name, net.sydokiddo.chrysalis.mixin.util.MemoryModuleAccessor.createMemoryModuleType(Optional.of(codec)));
     }
 
-    private static <U> MemoryModuleType<U> registerMemoryModuleWithoutCodec(String id) {
-        return MEMORY_MODULES.register(id, MemoryModuleAccessor.createMemoryModuleType(Optional.empty()));
+    private static <U> MemoryModuleType<U> registerMemoryModuleWithoutCodec(String name) {
+        return MEMORY_MODULES.register(name, MemoryModuleAccessor.createMemoryModuleType(Optional.empty()));
     }
 }

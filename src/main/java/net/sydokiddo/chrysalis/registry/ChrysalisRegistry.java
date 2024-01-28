@@ -3,8 +3,7 @@ package net.sydokiddo.chrysalis.registry;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.level.GameRules;
-import net.sydokiddo.chrysalis.misc.util.CreativeTabHelper;
-import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
+import net.sydokiddo.chrysalis.misc.util.helpers.CreativeTabHelper;
 import net.sydokiddo.chrysalis.misc.util.entities.ChrysalisMemoryModules;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
@@ -55,7 +54,6 @@ public class ChrysalisRegistry {
     // Registry
 
     public static void registerAll() {
-        RegistryHelpers.init();
         CreativeTabHelper.init();
         ChrysalisDamageSources.registerDamageSources();
         ChrysalisCriteriaTriggers.registerCriteriaTriggers();

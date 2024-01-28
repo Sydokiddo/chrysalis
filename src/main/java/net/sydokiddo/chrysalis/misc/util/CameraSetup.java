@@ -23,11 +23,11 @@ public class CameraSetup {
         return camera;
     }
 
-    public void setRoll(float roll) {
-        this.roll = roll;
-    }
-
     public float getRoll() {
         return roll;
+    }
+
+    public void setRoll(float roll) {
+        this.roll = roll;
     }
 }

@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.sydokiddo.chrysalis.misc.util.RegistryHelpers;
+import net.sydokiddo.chrysalis.misc.util.helpers.BlockHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
 import org.jetbrains.annotations.NotNull;
@@ -28,10 +28,10 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
         BlockPos blockPos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
         ServerLevel level = blockSource.level();
 
-        if (RegistryHelpers.isBlockStateFree(level.getBlockState(blockPos))) {
+        if (BlockHelper.isBlockStateFree(level.getBlockState(blockPos))) {
 
-            RegistryHelpers.playDispenserSound(blockSource);
-            RegistryHelpers.playDispenserAnimation(blockSource, blockSource.state().getValue(DispenserBlock.FACING));
+            BlockHelper.playDispenserSound(blockSource);
+            BlockHelper.playDispenserAnimation(blockSource, blockSource.state().getValue(DispenserBlock.FACING));
             level.gameEvent(GameEvent.ENTITY_PLACE, blockPos, GameEvent.Context.of(blockSource.state()));
 
             if (itemStack.getItem() instanceof MobInContainerItem mobInContainerItem) {
@@ -44,6 +44,6 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
                 return new ItemStack(Items.BUCKET);
             }
         }
-        return RegistryHelpers.defaultDispenseItemBehavior.dispense(blockSource, itemStack);
+        return BlockHelper.defaultDispenseItemBehavior.dispense(blockSource, itemStack);
     }
 }

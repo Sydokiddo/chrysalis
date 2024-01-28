@@ -44,22 +44,22 @@ public class HybridWalkingFlyingMoveControl extends MoveControl {
                     return;
                 }
 
-                float h = (float)(Mth.atan2(z, x) * 57.2957763671875D) - 90.0F;
+                float h = (float) (Mth.atan2(z, x) * 57.2957763671875D) - 90.0F;
                 this.mob.setYRot(this.rotlerp(this.mob.getYRot(), h, 90.0F));
                 float i;
 
                 if (this.mob.onGround()) {
-                    i = (float)(this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                    i = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
                 } else {
-                    i = (float)(this.speedModifier * this.mob.getAttributeValue(Attributes.FLYING_SPEED));
+                    i = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.FLYING_SPEED));
                 }
 
                 this.mob.setSpeed(i);
                 double j = Math.sqrt(x * x + z * z);
 
                 if (Math.abs(y) > 9.999999747378752E-6D || Math.abs(j) > 9.999999747378752E-6D) {
-                    float k = (float)(-(Mth.atan2(y, j) * 57.2957763671875D));
-                    this.mob.setXRot(this.rotlerp(this.mob.getXRot(), k, (float)this.maxTurn));
+                    float k = (float) (-(Mth.atan2(y, j) * 57.2957763671875D));
+                    this.mob.setXRot(this.rotlerp(this.mob.getXRot(), k, (float) this.maxTurn));
                     this.mob.setYya(y > 0.0D ? i : -i);
                 }
 

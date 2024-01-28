@@ -1,44 +1,28 @@
-package net.sydokiddo.chrysalis.misc.util;
+package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import com.google.common.collect.Sets;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.Direction;
-import net.minecraft.core.dispenser.BlockSource;
-import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.armortrim.ArmorTrim;
-import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.sydokiddo.chrysalis.mixin.util.BrewingRecipeRegistryMixin;
@@ -46,19 +30,11 @@ import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInPowderSnowBucketItem;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.function.Predicate;
-import java.util.function.ToIntFunction;
 
 @SuppressWarnings("all")
-public class RegistryHelpers {
-
-    public static void init() {}
+public class RegistryHelper {
 
     // region Potion Recipe Registry
 
@@ -142,20 +118,12 @@ public class RegistryHelpers {
         return new MobInContainerItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(returnItem), returnItem);
     }
 
-    public static MobInFluidBucketItem registerMobInWaterBucket(EntityType entityType, SoundEvent soundEvent) {
-        return new MobInFluidBucketItem(entityType, Fluids.WATER, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
-    }
-
-    public static MobInFluidBucketItem registerMobInLavaBucket(EntityType entityType, SoundEvent soundEvent) {
-        return new MobInFluidBucketItem(entityType, Fluids.LAVA, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
-    }
-
-    public static MobInFluidBucketItem registerMobInCustomFluidBucket(EntityType entityType, Fluid fluidType, SoundEvent soundEvent) {
+    public static MobInFluidBucketItem registerMobInFluidContainer(EntityType entityType, Fluid fluidType, SoundEvent soundEvent) {
         return new MobInFluidBucketItem(entityType, fluidType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
     }
 
-    public static MobInPowderSnowBucketItem registerMobInPowderSnowBucket(EntityType entityType, SoundEvent soundEvent, Item returnItem) {
-        return new MobInPowderSnowBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(returnItem), returnItem);
+    public static MobInPowderSnowBucketItem registerMobInPowderSnowBucket(EntityType entityType, SoundEvent soundEvent) {
+        return new MobInPowderSnowBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET), Items.BUCKET);
     }
 
     // endregion
@@ -166,15 +134,7 @@ public class RegistryHelpers {
      * Registry helpers for registering blocks with specific properties.
      **/
 
-    public static ButtonBlock registerStoneButton(BlockSetType blockSetType) {
-        return new ButtonBlock(blockSetType, 20, BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
-    }
-
-    public static ButtonBlock registerWoodenButton(BlockSetType blockSetType) {
-        return new ButtonBlock(blockSetType, 30, BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
-    }
-
-    public static ButtonBlock registerCustomPulseTimeButton(BlockSetType blockSetType, int ticksToStayPressed) {
+    public static ButtonBlock registerButton(BlockSetType blockSetType, int ticksToStayPressed) {
         return new ButtonBlock(blockSetType, ticksToStayPressed, BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
@@ -185,12 +145,11 @@ public class RegistryHelpers {
 
     public static PressurePlateBlock registerWoodenPressurePlate(BlockSetType blockSetType, MapColor mapColor) {
         return new PressurePlateBlock(blockSetType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn()
-        .instrument(NoteBlockInstrument.BASS).ignitedByLava().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
+        .instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
-    public static PressurePlateBlock registerFireProofWoodenPressurePlate(BlockSetType blockSetType, MapColor mapColor) {
-        return new PressurePlateBlock(blockSetType, BlockBehaviour.Properties.of().mapColor(mapColor).forceSolidOn()
-        .instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
+    public static PressurePlateBlock registerBurnableWoodenPressurePlate(BlockSetType blockSetType, MapColor mapColor) {
+        return new PressurePlateBlock(blockSetType, FabricBlockSettings.copyOf(registerWoodenPressurePlate(blockSetType, mapColor)).ignitedByLava());
     }
 
     public static LeavesBlock registerLeaves(SoundType soundType, MapColor mapColor) {
@@ -201,65 +160,11 @@ public class RegistryHelpers {
 
     public static RotatedPillarBlock registerLog(MapColor innerColor, MapColor sideColor, SoundType soundType) {
         return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? innerColor : sideColor)
-        .instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava());
-    }
-
-    public static Block registerFireProofLog(MapColor innerColor, MapColor sideColor, SoundType soundType) {
-        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? innerColor : sideColor)
         .instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType));
     }
 
-    public static RotatedPillarBlock registerBlastResistantLog(MapColor innerColor, MapColor sideColor, SoundType soundType) {
-        return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? innerColor : sideColor)
-        .instrument(NoteBlockInstrument.BASS).strength(2.0F, 6.0F).sound(soundType).ignitedByLava());
-    }
-
-    // endregion
-
-    // region Biome Predicates
-
-    /**
-     * Registry helpers for assisting with mob spawning.
-     **/
-
-    public static Predicate<BiomeSelectionContext> isValidBiomeForMobSpawning() {
-        return context -> !context.getBiomeRegistryEntry().is(ChrysalisTags.WITHOUT_MOB_SPAWNS);
-    }
-
-    public static Predicate<BiomeSelectionContext> isOverworld() {
-        return context -> context.canGenerateIn(LevelStem.OVERWORLD);
-    }
-
-    public static Predicate<BiomeSelectionContext> isNether() {
-        return context -> context.canGenerateIn(LevelStem.NETHER);
-    }
-
-    public static Predicate<BiomeSelectionContext> isEnd() {
-        return context -> context.canGenerateIn(LevelStem.END);
-    }
-
-    // endregion
-
-    // region World Generation Properties
-
-    /**
-     * Registry helpers for assisting with world generation properties.
-     **/
-
-    public static List<PlacementModifier> commonOrePlacement(int count, PlacementModifier modifier) {
-        return List.of(CountPlacement.of(count), InSquarePlacement.spread(), modifier, BiomeFilter.biome());
-    }
-
-    public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {
-        context.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
-    }
-
-    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
-        registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
-    }
-
-    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
-        context.register(resourceKey, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeature), List.copyOf(placementModifiers)));
+    public static RotatedPillarBlock registerBurnableLog(MapColor innerColor, MapColor sideColor, SoundType soundType) {
+        return new RotatedPillarBlock(FabricBlockSettings.copyOf(registerLog(innerColor, sideColor, soundType)).ignitedByLava());
     }
 
     // endregion
@@ -285,155 +190,23 @@ public class RegistryHelpers {
 
     // endregion
 
-    // region Miscellanous Properties and Methods
+    // region Misc Registry
 
     /**
-     * Miscellaneous properties.
+     * Miscellaneous registry helpers.
      **/
 
-    public static boolean isBlockStateFree(BlockState blockState) {
-        return blockState.is(BlockTags.REPLACEABLE);
+    public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {
+        context.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
     }
 
-    public static ToIntFunction<BlockState> blockStateShouldEmitLight(int lightAmount) {
-        return blockState -> blockState.getValue(BlockStateProperties.LIT) ? lightAmount : 0;
+    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
+        registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
     }
 
-    public static void popResourceBelow(Level level, BlockPos blockPos, ItemStack itemStack, double itemDropOffset) {
-
-        double itemHeight = (double) EntityType.ITEM.getHeight() / 2.0;
-        double x = (double)blockPos.getX() + 0.5 + Mth.nextDouble(level.getRandom(), -0.25, 0.25);
-        double y = (double)blockPos.getY() - itemDropOffset + Mth.nextDouble(level.getRandom(), -0.25, 0.25) - itemHeight;
-        double z = (double)blockPos.getZ() + 0.5 + Mth.nextDouble(level.getRandom(), -0.25, 0.25);
-
-        if (!level.isClientSide() && !itemStack.isEmpty() && level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
-            ItemEntity itemEntity = new ItemEntity(level, x, y, z, itemStack);
-            itemEntity.setDefaultPickUpDelay();
-            level.addFreshEntity(itemEntity);
-        }
+    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
+        context.register(resourceKey, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeature), List.copyOf(placementModifiers)));
     }
-
-    public static BigDecimal getFoodSaturation(ItemStack itemStack) {
-        float saturationAmount = Objects.requireNonNull(itemStack.getItem().getFoodProperties()).getNutrition() * Objects.requireNonNull(itemStack.getItem().getFoodProperties()).getSaturationModifier() * 2.0F;
-        return new BigDecimal(saturationAmount).setScale(1, RoundingMode.DOWN);
-    }
-
-    public static boolean hasArmorTrim(ItemStack itemStack) {
-        return itemStack.getTag() != null && itemStack.getTag().contains(ArmorTrim.TAG_TRIM_ID);
-    }
-
-    public static boolean hasEnchantmentOrTrim(ItemStack itemStack) {
-        return (itemStack.isEnchanted() || hasArmorTrim(itemStack));
-    }
-
-    // endregion
-
-    // region Custom Tooltips
-
-    /**
-     * Custom tooltips for items.
-     **/
-
-    public static void addAttackTooltip(List<Component> tooltip) {
-        tooltip.add(CommonComponents.EMPTY);
-        tooltip.add(Component.translatable("gui.chrysalis.item.when_used", Minecraft.getInstance().options.keyAttack.getTranslatedKeyMessage()).withStyle(ChatFormatting.GRAY));
-    }
-
-    public static void addUseTooltip(List<Component> tooltip) {
-        tooltip.add(CommonComponents.EMPTY);
-        tooltip.add(Component.translatable("gui.chrysalis.item.when_used", Minecraft.getInstance().options.keyUse.getTranslatedKeyMessage()).withStyle(ChatFormatting.GRAY));
-    }
-
-    public static void addHoldingTooltip(List<Component> tooltip) {
-        tooltip.add(CommonComponents.EMPTY);
-        tooltip.add(Component.translatable("gui.chrysalis.item.when_held").withStyle(ChatFormatting.GRAY));
-    }
-
-    public static void addFoodTooltip(List<Component> tooltip) {
-        tooltip.add(CommonComponents.EMPTY);
-        tooltip.add(Component.translatable("gui.chrysalis.item.when_eaten").withStyle(ChatFormatting.GRAY));
-    }
-
-    public static void addDrinkTooltip(List<Component> tooltip) {
-        tooltip.add(CommonComponents.EMPTY);
-        tooltip.add(Component.translatable("gui.chrysalis.item.when_drank").withStyle(ChatFormatting.GRAY));
-    }
-
-    public static void addCoordinatesTooltip(List<Component> tooltip, int x, int y, int z) {
-        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.coordinates", x, y, z).withStyle(ChatFormatting.BLUE)));
-    }
-
-    public static void addDirectionTooltip(List<Component> tooltip, Minecraft minecraft) {
-        if (minecraft.player != null) {
-            Component direction = Component.translatable("gui.chrysalis.direction." + minecraft.player.getDirection().getName()).withStyle(ChatFormatting.BLUE);
-            tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.facing_direction", direction).withStyle(ChatFormatting.BLUE)));
-        }
-    }
-
-    public static void addDimensionTooltip(List<Component> tooltip, String dimension) {
-        String registryKey = dimension.split(":")[0];
-        String registryPath = dimension.split(":")[1];
-
-        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension",
-        Component.translatable("dimension." + registryKey + "." + registryPath).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
-    }
-
-    public static void addSpaceOnTooltipIfEnchantedOrTrimmed(ItemStack itemStack, List<Component> tooltip) {
-        if (hasEnchantmentOrTrim(itemStack)) {
-            tooltip.add(CommonComponents.EMPTY);
-        }
-    }
-
-    public static void addNullTooltip(List<Component> tooltip) {
-        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.none").withStyle(ChatFormatting.BLUE)));
-    }
-
-    // endregion
-
-    // region Dispenser Utilities
-
-    /**
-     * Dispenser utility methods.
-     **/
-
-    public static final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
-
-    public static void playDispenserSound(BlockSource blockSource) {
-        blockSource.level().levelEvent(1000, blockSource.pos(), 0);
-    }
-
-    public static void playDispenserFailSound(BlockSource blockSource) {
-        blockSource.level().levelEvent(1001, blockSource.pos(), 0);
-    }
-
-    public static void playDispenserShootingSound(BlockSource blockSource) {
-        blockSource.level().levelEvent(1002, blockSource.pos(), 0);
-    }
-
-    public static void playDispenserAnimation(BlockSource blockSource, Direction direction) {
-        blockSource.level().levelEvent(2000, blockSource.pos(), direction.get3DDataValue());
-    }
-
-    // endregion
-
-    // region Namespace Strings
-
-    /**
-     * Namespace strings for base Minecraft as well as compatibility with various mods.
-     **/
-
-    public static String
-        minecraft = "minecraft",
-        odyssey = "odyssey",
-        endlessencore = "endlessencore",
-        auditory = "auditory",
-        combatant = "combatant",
-        peculia = "peculia",
-        spookiar = "spookiar",
-        deeds = "deeds",
-        lottablocks = "lottablocks",
-        manic = "manic"
-    ;
 
     // endregion
 
@@ -442,6 +215,8 @@ public class RegistryHelpers {
     /**
      * Resource locations for all of the base loot tables in the vanilla game.
      **/
+
+    public static String minecraft = "minecraft";
 
     public static final ResourceLocation
 
@@ -654,10 +429,9 @@ public class RegistryHelpers {
         ZOMBIE = new ResourceLocation(minecraft, "entities/zombie"),
         ZOMBIE_HORSE = new ResourceLocation(minecraft, "entities/zombie_horse"),
         ZOMBIE_VILLAGER = new ResourceLocation(minecraft, "entities/zombie_villager"),
-        ZOMBIFIED_PIGLIN = new ResourceLocation(minecraft, "entities/zombified_piglin")
+        ZOMBIFIED_PIGLIN = new ResourceLocation(minecraft, "entities/zombified_piglin");
 
         // endregion
-    ;
 
     // endregion
 }

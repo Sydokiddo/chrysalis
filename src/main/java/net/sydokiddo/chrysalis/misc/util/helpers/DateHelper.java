@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.misc.util;
+package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
