@@ -12,4 +12,4 @@ For more information about Chrysalis, please check out the [Wiki](https://github
 
 Chrysalis can be downloaded from these sources:
 
-* [Modrinth](https://modrinth.com/mod/chrysalis) [Current Version: 0.2.8]
+* [Modrinth](https://modrinth.com/mod/chrysalis) [Current Version: 0.3.0]
