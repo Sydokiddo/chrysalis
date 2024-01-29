@@ -19,7 +19,7 @@ public class ChorusPlantFeatureMixin {
      * Allows for the Chorus Plant configured feature to be placed on any blocks in the chorus_plant_can_grow_on tag.
      **/
 
-    @Inject(method = "place",at = @At("RETURN"), cancellable = true)
+    @Inject(method = "place", at = @At("RETURN"), cancellable = true)
     private void chrysalis$placeChorusPlantFeature(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext, CallbackInfoReturnable<Boolean> cir) {
 
         WorldGenLevel worldGenLevel = featurePlaceContext.level();
