@@ -29,6 +29,4 @@ public class CreativeTabHelper {
             entries.addBefore(comparedItem, list, tabVisibility);
         });
     }
-
-    public static void init() {}
 }

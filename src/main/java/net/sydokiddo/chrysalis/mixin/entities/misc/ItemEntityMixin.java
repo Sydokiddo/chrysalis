@@ -42,7 +42,7 @@ public abstract class ItemEntityMixin extends Entity {
      * Any items in the immune_to_despawning tag will never be able to despawn.
      **/
 
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V"))
+    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V", ordinal = 1))
     private void chrysalis$makeItemsNeverDespawn(ItemEntity itemEntity) {
         if (!this.getItem().is(ChrysalisTags.IMMUNE_TO_DESPAWNING)) {
             this.discard();
