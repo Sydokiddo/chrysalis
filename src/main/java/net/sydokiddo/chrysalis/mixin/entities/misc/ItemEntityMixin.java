@@ -22,6 +22,7 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Shadow public abstract ItemStack getItem();
     @Shadow public abstract void setExtendedLifetime();
+    @Shadow private int pickupDelay;
 
     private ItemEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -33,7 +34,7 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void chrysalis$makeItemsHaveExtendedLifetime(CallbackInfo info) {
-        if (!this.getItem().isEmpty() && this.getItem().is(ChrysalisTags.INCREASED_DESPAWN_TIME) && this.firstTick) {
+        if (!this.getItem().isEmpty() && this.firstTick && this.getItem().is(ChrysalisTags.INCREASED_DESPAWN_TIME)) {
             this.setExtendedLifetime();
         }
     }
@@ -44,9 +45,8 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V", ordinal = 1))
     private void chrysalis$makeItemsNeverDespawn(ItemEntity itemEntity) {
-        if (!this.getItem().is(ChrysalisTags.IMMUNE_TO_DESPAWNING)) {
-            this.discard();
-        }
+        if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DESPAWNING) && this.pickupDelay != Short.MAX_VALUE) return;
+        this.discard();
     }
 
     /**
