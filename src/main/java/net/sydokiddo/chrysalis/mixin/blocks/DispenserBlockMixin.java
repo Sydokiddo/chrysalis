@@ -22,11 +22,7 @@ public class DispenserBlockMixin {
 
         Item item = itemStack.getItem();
 
-        if (item instanceof CSpawnEggItem) {
-            cir.setReturnValue(DispenseCustomSpawnEggDispenserBehavior.INSTANCE);
-        }
-        if (item instanceof MobInContainerItem || item instanceof MobInFluidBucketItem) {
-            cir.setReturnValue(DispenseContainerMobDispenserBehavior.INSTANCE);
-        }
+        if (item instanceof CSpawnEggItem) cir.setReturnValue(DispenseCustomSpawnEggDispenserBehavior.INSTANCE);
+        if (item instanceof MobInContainerItem || item instanceof MobInFluidBucketItem) cir.setReturnValue(DispenseContainerMobDispenserBehavior.INSTANCE);
     }
 }

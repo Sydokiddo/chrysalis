@@ -19,11 +19,7 @@ public class ShieldItemMixin {
 
     @Inject(method = "appendHoverText", at = @At("TAIL"))
     private void chrysalis$addSpaceOnShieldBannerTooltip(ItemStack itemStack, Level level, List<Component> tooltip, TooltipFlag tooltipFlag, CallbackInfo info) {
-
         CompoundTag compoundTag = BlockItem.getBlockEntityData(itemStack);
-
-        if (itemStack.isEnchanted() && (compoundTag != null && compoundTag.contains("Patterns"))) {
-            tooltip.add(CommonComponents.EMPTY);
-        }
+        if (itemStack.isEnchanted() && (compoundTag != null && compoundTag.contains("Patterns"))) tooltip.add(CommonComponents.EMPTY);
     }
 }

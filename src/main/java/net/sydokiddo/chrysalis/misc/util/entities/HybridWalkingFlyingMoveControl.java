@@ -64,9 +64,7 @@ public class HybridWalkingFlyingMoveControl extends MoveControl {
                 }
 
             } else {
-                if (!this.hoversInPlace) {
-                    this.mob.setNoGravity(false);
-                }
+                if (!this.hoversInPlace) this.mob.setNoGravity(false);
                 this.mob.setYya(0.0F);
                 this.mob.setZza(0.0F);
             }

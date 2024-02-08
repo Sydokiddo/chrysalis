@@ -36,6 +36,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+
         if (!level.isClientSide()) {
             player.playNotifySound(ChrysalisSoundEvents.GIVE_RESISTANCE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
             player.gameEvent(GameEvent.ITEM_INTERACT_START);
@@ -43,6 +44,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
             player.sendSystemMessage(Component.translatable("gui.chrysalis.give_resistance_message", player.getName().getString()));
             player.awardStat(Stats.ITEM_USED.get(this));
         }
+
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
     }
 }

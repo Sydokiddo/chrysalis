@@ -19,8 +19,6 @@ public class CInvisibilityCompatEntityOverlayRenderer<T extends Mob, M extends H
 
     @Override
     public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int i, @NotNull T entity, float f, float g, float h, float j, float k, float l) {
-        if (!entity.isInvisible()) {
-            super.render(poseStack, multiBufferSource, i, entity, f, g, h, j, k, l);
-        }
+        if (!entity.isInvisible()) super.render(poseStack, multiBufferSource, i, entity, f, g, h, j, k, l);
     }
 }

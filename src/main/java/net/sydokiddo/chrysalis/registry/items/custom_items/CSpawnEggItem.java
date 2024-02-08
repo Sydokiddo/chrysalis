@@ -26,26 +26,18 @@ public class CSpawnEggItem extends SpawnEggItem {
     @Override
     public @NotNull Optional<Mob> spawnOffspringFromSpawnEgg(Player player, Mob mob, EntityType<? extends Mob> entityType, ServerLevel serverLevel, Vec3 vec3, ItemStack itemStack) {
 
-        if (this.mobOffspring == null) {
-            return super.spawnOffspringFromSpawnEgg(player, mob, entityType, serverLevel, vec3, itemStack);
-        }
+        if (this.mobOffspring == null) return super.spawnOffspringFromSpawnEgg(player, mob, entityType, serverLevel, vec3, itemStack);
 
         Mob babyMob = this.mobOffspring.create(serverLevel);
 
-        if (babyMob == null || entityType == mobOffspring) {
-            return Optional.empty();
-        }
+        if (babyMob == null || entityType == mobOffspring) return Optional.empty();
 
         babyMob.setBaby(true);
         babyMob.moveTo(vec3.x(), vec3.y(), vec3.z(), 0.0F, 0.0F);
         serverLevel.addFreshEntityWithPassengers(babyMob);
 
-        if (itemStack.hasCustomHoverName()) {
-            babyMob.setCustomName(itemStack.getHoverName());
-        }
-        if (!player.getAbilities().instabuild) {
-            itemStack.shrink(1);
-        }
+        if (itemStack.hasCustomHoverName()) babyMob.setCustomName(itemStack.getHoverName());
+        if (!player.getAbilities().instabuild) itemStack.shrink(1);
 
         return Optional.of(babyMob);
     }

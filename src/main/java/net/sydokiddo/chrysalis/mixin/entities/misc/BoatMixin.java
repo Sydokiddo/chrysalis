@@ -29,9 +29,7 @@ public abstract class BoatMixin extends Entity {
         List<Entity> nearbyEntities = this.level().getEntities(this, this.getBoundingBox().inflate(0.2F, -0.01F, 0.2F), EntitySelector.pushableBy(this));
 
         for (Entity entity : nearbyEntities) {
-            if (entity.getType().is(ChrysalisTags.CANNOT_RIDE_BOATS)) {
-                info.cancel();
-            }
+            if (entity.getType().is(ChrysalisTags.CANNOT_RIDE_BOATS)) info.cancel();
         }
     }
 }

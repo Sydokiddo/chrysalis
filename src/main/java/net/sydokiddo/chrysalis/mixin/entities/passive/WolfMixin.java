@@ -24,8 +24,6 @@ public abstract class WolfMixin extends TamableAnimal {
 
     @Inject(at = @At("HEAD"), method = "isFood", cancellable = true)
     private void chrysalis$isWolfFood(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
-        if (itemStack.is(ChrysalisTags.MEATS) && itemStack.getItem().isEdible()) {
-            cir.setReturnValue(true);
-        }
+        if (itemStack.is(ChrysalisTags.MEATS) && itemStack.getItem().isEdible()) cir.setReturnValue(true);
     }
 }

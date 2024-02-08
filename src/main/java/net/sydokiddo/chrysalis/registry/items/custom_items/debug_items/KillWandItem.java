@@ -40,6 +40,7 @@ public class KillWandItem extends DebugUtilityItem {
 
     @Override
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity self) {
+
         if (!target.isInvulnerable()) {
 
             target.hurt(target.damageSources().source(ChrysalisDamageSources.KILL_WAND, self), Float.MAX_VALUE);
@@ -53,6 +54,7 @@ public class KillWandItem extends DebugUtilityItem {
 
             return true;
         }
+
         return false;
     }
 }

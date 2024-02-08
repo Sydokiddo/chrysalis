@@ -24,8 +24,6 @@ public class CopperGrateBlockMixin extends Block {
 
         TagKey<Block> copperGrates = ChrysalisTags.COPPER_GRATES;
 
-        if (blockState.is(copperGrates)) {
-            cir.setReturnValue(adjacentBlock.is(copperGrates) || super.skipRendering(blockState, adjacentBlock, direction));
-        }
+        if (blockState.is(copperGrates)) cir.setReturnValue(adjacentBlock.is(copperGrates) || super.skipRendering(blockState, adjacentBlock, direction));
     }
 }

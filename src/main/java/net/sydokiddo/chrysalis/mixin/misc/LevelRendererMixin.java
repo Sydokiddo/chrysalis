@@ -37,15 +37,11 @@ public class LevelRendererMixin {
 
     @Inject(method = "renderSnowAndRain", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$preventRainRenderingInNetherAndEnd(LightTexture lightTexture, float f, double d, double e, double g, CallbackInfo info) {
-        if (isNether() || isEnd()) {
-            info.cancel();
-        }
+        if (this.isNether() || this.isEnd()) info.cancel();
     }
 
     @Inject(method = "tickRain", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$preventRainTickingInNetherAndEnd(Camera camera, CallbackInfo info) {
-        if (isNether() || isEnd()) {
-            info.cancel();
-        }
+        if (this.isNether() || this.isEnd()) info.cancel();
     }
 }

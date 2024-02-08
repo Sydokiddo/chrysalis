@@ -38,6 +38,7 @@ public class FillHungerItem extends DebugUtilityItem {
         ItemStack itemStack = player.getItemInHand(interactionHand);
 
         if (player.getFoodData().needsFood()) {
+
             if (!level.isClientSide()) {
                 player.playNotifySound(ChrysalisSoundEvents.FILL_HUNGER_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
@@ -46,8 +47,10 @@ public class FillHungerItem extends DebugUtilityItem {
                 player.sendSystemMessage(Component.translatable("gui.chrysalis.fill_hunger_message", player.getName().getString()));
                 player.awardStat(Stats.ITEM_USED.get(this));
             }
+
             return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
         }
+
         return InteractionResultHolder.pass(itemStack);
     }
 }

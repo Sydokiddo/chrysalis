@@ -107,13 +107,8 @@ public interface ContainerMob {
 
         if (itemInHand.getItem() == containerItem.asItem() && livingEntity.isAlive()) {
 
-            if (!livingEntity.level().isClientSide()) {
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
-            }
-
-            if (livingEntity instanceof Mob mob && mob.isLeashed()) {
-                mob.dropLeash(true, true);
-            }
+            if (!livingEntity.level().isClientSide()) CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
+            if (livingEntity instanceof Mob mob && mob.isLeashed()) mob.dropLeash(true, true);
 
             livingEntity.playSound(((ContainerMob) livingEntity).getPickupSound(), 1.0F, 1.0F);
             ((ContainerMob) livingEntity).saveToItemTag(resultItemStack);
@@ -121,6 +116,7 @@ public interface ContainerMob {
 
             livingEntity.discard();
         }
+
         return true;
     }
 

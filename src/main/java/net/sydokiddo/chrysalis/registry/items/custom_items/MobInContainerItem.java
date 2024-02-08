@@ -57,12 +57,8 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
             player.awardStat(Stats.ITEM_USED.get(this));
             level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
 
-            if (player instanceof ServerPlayer serverPlayer) {
-                CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, usePos, itemStack);
-            }
-            if (!player.getAbilities().instabuild) {
-                player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(returnItem)));
-            }
+            if (player instanceof ServerPlayer serverPlayer) CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, usePos, itemStack);
+            if (!player.getAbilities().instabuild) player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(returnItem)));
 
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
@@ -87,11 +83,7 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
         Entity entity = this.type.spawn(serverLevel, itemStack, null, blockPos, MobSpawnType.BUCKET, true, false);
 
         if (entity instanceof ContainerMob containerMob) {
-
-            if (containerMob instanceof Mob mob) {
-                mob.setPersistenceRequired();
-            }
-
+            if (containerMob instanceof Mob mob) mob.setPersistenceRequired();
             containerMob.loadFromItemTag(itemStack.getOrCreateTag());
             containerMob.setFromItem(true);
         }

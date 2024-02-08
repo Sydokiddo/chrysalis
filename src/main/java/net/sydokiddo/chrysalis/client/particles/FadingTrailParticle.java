@@ -44,6 +44,7 @@ public class FadingTrailParticle extends TextureSheetParticle {
             if (this.age >= this.lifetime - 60 && this.alpha > 0.01F) {
                 this.alpha -= 0.015F;
             }
+
         } else {
             this.remove();
         }

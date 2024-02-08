@@ -44,6 +44,7 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
             player.awardStat(Stats.ITEM_USED.get(this));
 
             if (player instanceof ServerPlayer serverPlayer) {
+
                 if (serverPlayer.getRespawnPosition() != null) {
                     serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
                     player.playNotifySound(SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
@@ -55,6 +56,7 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
                 }
             }
         }
+
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
     }
 }

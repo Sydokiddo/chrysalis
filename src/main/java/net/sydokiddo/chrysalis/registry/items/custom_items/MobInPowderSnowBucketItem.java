@@ -28,12 +28,8 @@ public class MobInPowderSnowBucketItem extends MobInContainerItem {
         super.checkExtraContent(player, level, itemStack, blockPos);
 
         if (level.isInWorldBounds(blockPos) && level.isEmptyBlock(blockPos)) {
-
             level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos);
-
-            if (!level.isClientSide()) {
-                level.setBlock(blockPos, Blocks.POWDER_SNOW.defaultBlockState(), 3);
-            }
+            if (!level.isClientSide()) level.setBlock(blockPos, Blocks.POWDER_SNOW.defaultBlockState(), 3);
         }
     }
 }

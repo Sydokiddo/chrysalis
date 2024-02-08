@@ -43,8 +43,6 @@ public class AllayMixin {
 
     @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/allay/Allay;duplicateAllay()V"))
     private void chrysalis$allayDuplicationCriteriaTrigger(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (player instanceof ServerPlayer serverPlayer) {
-            ChrysalisCriteriaTriggers.DUPLICATE_ALLAY.trigger(serverPlayer);
-        }
+        if (player instanceof ServerPlayer serverPlayer) ChrysalisCriteriaTriggers.DUPLICATE_ALLAY.trigger(serverPlayer);
     }
 }

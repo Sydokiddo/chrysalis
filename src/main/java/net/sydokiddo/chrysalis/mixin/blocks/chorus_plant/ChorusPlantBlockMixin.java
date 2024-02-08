@@ -75,15 +75,14 @@ public abstract class ChorusPlantBlockMixin extends PipeBlock {
             BlockPos relativeBlockPos = blockPos.relative(direction);
             if (!levelReader.getBlockState(relativeBlockPos).is(this)) continue;
 
-            if (!levelReader.getBlockState(blockPos.above()).isAir() && !belowBlockState.isAir()) {
-                return false;
-            }
+            if (!levelReader.getBlockState(blockPos.above()).isAir() && !belowBlockState.isAir()) return false;
 
             BlockState belowRelative = levelReader.getBlockState(relativeBlockPos.below());
             if (!belowRelative.is(this) && !belowRelative.is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON)) continue;
 
             return true;
         }
+
         return belowBlockState.is(this) || belowBlockState.is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON);
     }
 }

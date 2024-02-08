@@ -31,8 +31,6 @@ public abstract class SnowFixMixin {
 
     @Inject(method = "tickPrecipitation", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$preventSnowInNetherAndEnd(BlockPos blockPos, CallbackInfo info) {
-        if (isNether() || isEnd()) {
-            info.cancel();
-        }
+        if (this.isNether() || this.isEnd()) info.cancel();
     }
 }

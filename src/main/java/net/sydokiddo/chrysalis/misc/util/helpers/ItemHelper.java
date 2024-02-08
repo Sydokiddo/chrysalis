@@ -122,9 +122,7 @@ public class ItemHelper {
     }
 
     public static void addSpaceOnTooltipIfEnchantedOrTrimmed(ItemStack itemStack, List<Component> tooltip) {
-        if (hasEnchantmentOrTrim(itemStack)) {
-            tooltip.add(CommonComponents.EMPTY);
-        }
+        if (hasEnchantmentOrTrim(itemStack)) tooltip.add(CommonComponents.EMPTY);
     }
 
     public static void addNullTooltip(List<Component> tooltip) {

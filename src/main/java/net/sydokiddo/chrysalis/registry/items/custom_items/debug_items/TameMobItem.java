@@ -38,12 +38,16 @@ public class TameMobItem extends DebugUtilityItem {
 
     @Override
     public @NotNull InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
+
         if (!livingEntity.level().isClientSide() && livingEntity instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame()) {
+
             tamableAnimal.tame(player);
             playTameEvents(player, tamableAnimal);
             player.awardStat(Stats.ITEM_USED.get(this));
+
             return InteractionResult.SUCCESS;
         }
+
         return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);
     }
 
@@ -58,6 +62,7 @@ public class TameMobItem extends DebugUtilityItem {
                 serverLevel.sendParticles(ParticleTypes.HEART, tamedMob.getRandomX(1.0D), tamedMob.getRandomY() + 0.5D, tamedMob.getRandomZ(1.0D), 1, 0.0, random, random, random);
             }
         }
+
         player.sendSystemMessage(Component.translatable("gui.chrysalis.tame_mob_message", tamedMob.getName().getString()));
     }
 }

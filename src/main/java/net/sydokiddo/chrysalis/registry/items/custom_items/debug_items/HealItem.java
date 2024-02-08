@@ -38,6 +38,7 @@ public class HealItem extends DebugUtilityItem {
         ItemStack itemStack = player.getItemInHand(interactionHand);
 
         if (player.getHealth() < player.getMaxHealth()) {
+
             if (!level.isClientSide()) {
                 player.playNotifySound(ChrysalisSoundEvents.HEAL_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.gameEvent(GameEvent.ITEM_INTERACT_START);
@@ -45,8 +46,10 @@ public class HealItem extends DebugUtilityItem {
                 player.sendSystemMessage(Component.translatable("gui.chrysalis.heal_message", player.getName().getString()));
                 player.awardStat(Stats.ITEM_USED.get(this));
             }
+
             return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
         }
+
         return InteractionResultHolder.pass(itemStack);
     }
 }
