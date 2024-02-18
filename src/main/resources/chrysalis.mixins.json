@@ -12,7 +12,6 @@
     "blocks.DispenserBlockMixin",
     "blocks.NetherPortalShapeMixin",
     "blocks.NetherWartBlockMixin",
-    "blocks.PistonBaseBlockMixin",
     "blocks.PowderSnowBlockMixin",
     "blocks.RespawnAnchorBlockMixin",
     "blocks.TNTBlockMixin",
@@ -60,8 +59,7 @@
     "util.BrewingRecipeRegistryMixin",
     "util.MemoryModuleAccessor",
     "util.SensorTypeAccessor",
-    "util.SimpleParticleTypeAccessor",
-    "util.WalkNodeEvaluatorMixin"
+    "util.SimpleParticleTypeAccessor"
   ],
   "client": [
     "misc.LevelRendererMixin",

@@ -134,8 +134,6 @@ public class ChrysalisTags {
         NETHER_PORTAL_BASE_BLOCKS = registerBlockTag("nether_portal_base_blocks"),
         TURTLE_EGGS_CAN_HATCH_ON = registerBlockTag("turtle_eggs_can_hatch_on"),
         ALLOWS_BEACON_BEAM_PASSTHROUGH = registerBlockTag("allows_beacon_beam_passthrough"),
-        CANNOT_BE_PUSHED_BY_PISTONS = registerBlockTag("cannot_be_pushed_by_pistons"),
-        MOBS_SHOULD_PATHFIND_AROUND = registerBlockTag("mobs_should_pathfind_around"),
         ALLOWS_USE_WHILE_SNEAKING = registerBlockTag("allows_use_while_sneaking"),
 
         // endregion
