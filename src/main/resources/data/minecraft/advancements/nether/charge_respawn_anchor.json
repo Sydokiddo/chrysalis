@@ -29,15 +29,19 @@
     }
   },
   "display": {
+    "title": {
+      "translate": "advancements.nether.charge_respawn_anchor.title"
+    },
     "description": {
       "translate": "advancements.nether.charge_respawn_anchor.description"
     },
     "icon": {
       "item": "minecraft:respawn_anchor"
     },
-    "title": {
-      "translate": "advancements.nether.charge_respawn_anchor.title"
-    }
+    "frame": "task",
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": true
   },
   "requirements": [
     [

@@ -28,20 +28,20 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "title": {
+      "translate": "advancements.adventure.walk_on_powder_snow_with_leather_boots.title"
+    },
     "description": {
       "translate": "advancements.adventure.walk_on_powder_snow_with_leather_boots.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "minecraft:leather_boots",
       "nbt": "{Damage:0}"
     },
+    "frame": "task",
+    "hidden": false,
     "show_toast": true,
-    "title": {
-      "translate": "advancements.adventure.walk_on_powder_snow_with_leather_boots.title"
-    }
+    "announce_to_chat": true
   },
   "requirements": [
     [

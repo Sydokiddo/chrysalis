@@ -11,19 +11,19 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "title": {
+      "translate": "advancements.husbandry.tactical_fishing.title"
+    },
     "description": {
       "translate": "advancements.husbandry.tactical_fishing.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "minecraft:pufferfish_bucket"
     },
+    "frame": "task",
+    "hidden": false,
     "show_toast": true,
-    "title": {
-      "translate": "advancements.husbandry.tactical_fishing.title"
-    }
+    "announce_to_chat": true
   },
   "requirements": [
     [

@@ -26,19 +26,19 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "title": {
+      "translate": "advancements.husbandry.wax_on.title"
+    },
     "description": {
       "translate": "advancements.husbandry.wax_on.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "minecraft:honeycomb"
     },
+    "frame": "task",
+    "hidden": false,
     "show_toast": true,
-    "title": {
-      "translate": "advancements.husbandry.wax_on.title"
-    }
+    "announce_to_chat": true
   },
   "requirements": [
     [

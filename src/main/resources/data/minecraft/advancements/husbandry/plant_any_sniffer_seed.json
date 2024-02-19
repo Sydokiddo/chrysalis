@@ -18,16 +18,19 @@
     }
   },
   "display": {
+    "title": {
+      "translate": "advancements.husbandry.plant_any_sniffer_seed.title"
+    },
     "description": {
       "translate": "advancements.husbandry.plant_any_sniffer_seed.description"
     },
-    "hidden": true,
     "icon": {
       "item": "minecraft:pitcher_pod"
     },
-    "title": {
-      "translate": "advancements.husbandry.plant_any_sniffer_seed.title"
-    }
+    "frame": "task",
+    "hidden": true,
+    "show_toast": true,
+    "announce_to_chat": true
   },
   "requirements": [
     [

@@ -13,20 +13,20 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "title": {
+      "translate": "advancements.adventure.salvage_sherd.title"
+    },
     "description": {
       "translate": "advancements.adventure.salvage_sherd.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "minecraft:brush",
       "nbt": "{Damage:0}"
     },
+    "frame": "task",
+    "hidden": false,
     "show_toast": true,
-    "title": {
-      "translate": "advancements.adventure.salvage_sherd.title"
-    }
+    "announce_to_chat": true
   },
   "requirements": [
     [

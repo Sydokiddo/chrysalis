@@ -30,19 +30,19 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "title": {
+      "translate": "advancements.adventure.sniper_duel.title"
+    },
     "description": {
       "translate": "advancements.adventure.sniper_duel.description"
     },
-    "frame": "challenge",
-    "hidden": false,
     "icon": {
       "item": "minecraft:arrow"
     },
+    "frame": "challenge",
+    "hidden": false,
     "show_toast": true,
-    "title": {
-      "translate": "advancements.adventure.sniper_duel.title"
-    }
+    "announce_to_chat": true
   },
   "requirements": [
     [

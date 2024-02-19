@@ -18,15 +18,19 @@
     }
   },
   "display": {
+    "title": {
+      "translate": "advancements.husbandry.plant_seed.title"
+    },
     "description": {
       "translate": "advancements.husbandry.plant_seed.description"
     },
     "icon": {
       "item": "minecraft:wheat"
     },
-    "title": {
-      "translate": "advancements.husbandry.plant_seed.title"
-    }
+    "frame": "task",
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": true
   },
   "requirements": [
     [
