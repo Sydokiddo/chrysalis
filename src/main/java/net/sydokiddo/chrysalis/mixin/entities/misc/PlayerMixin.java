@@ -37,7 +37,7 @@ public abstract class PlayerMixin extends LivingEntity {
         float cosTimesCos = yCos * xCos;
 
         Vec3 vec3 = eyePosition.add((double) sinTimesCos * 5.0, (double) xSin * 5.0, (double) cosTimesCos * 5.0);
-        return level().clip(new ClipContext(eyePosition, vec3, ClipContext.Block.OUTLINE, ClipContext.Fluid.SOURCE_ONLY, this));
+        return this.level().clip(new ClipContext(eyePosition, vec3, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, this));
     }
 
     @Inject(method = "isSecondaryUseActive", at = @At(value = "RETURN"), cancellable = true)
