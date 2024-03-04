@@ -45,7 +45,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
         BlockHitResult blockHitResult = this.getPlayerPOVHitResult();
 
-        if (this.getMainHandItem().isEmpty() && level().getBlockState(blockHitResult.getBlockPos()).is(ChrysalisTags.ALLOWS_USE_WHILE_SNEAKING)) {
+        if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(ChrysalisTags.ALLOWS_USE_WHILE_SNEAKING)) {
             cir.setReturnValue(false);
         }
     }

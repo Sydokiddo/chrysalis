@@ -26,7 +26,7 @@ public class ChestedHorseMixin extends AbstractHorse {
 
     @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/horse/AbstractChestedHorse;makeMad()V"), cancellable = true)
     private void chrysalis$automaticallyTameChestedHorse(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!level().isClientSide() && player.getItemInHand(interactionHand).getItem() instanceof TameMobItem && !this.isTamed()) {
+        if (!this.level().isClientSide() && player.getItemInHand(interactionHand).getItem() instanceof TameMobItem && !this.isTamed()) {
             this.tameWithName(player);
             TameMobItem.playTameEvents(player, this);
             cir.setReturnValue(InteractionResult.SUCCESS);

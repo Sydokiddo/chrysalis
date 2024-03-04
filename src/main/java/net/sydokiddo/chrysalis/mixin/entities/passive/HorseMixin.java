@@ -25,7 +25,7 @@ public class HorseMixin extends AbstractHorse {
 
     @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/horse/Horse;makeMad()V"), cancellable = true)
     private void chrysalis$automaticallyTameHorse(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!level().isClientSide() && player.getItemInHand(interactionHand).getItem() instanceof TameMobItem && !this.isTamed()) {
+        if (!this.level().isClientSide() && player.getItemInHand(interactionHand).getItem() instanceof TameMobItem && !this.isTamed()) {
             this.tameWithName(player);
             TameMobItem.playTameEvents(player, this);
             cir.setReturnValue(InteractionResult.SUCCESS);
