@@ -28,9 +28,7 @@ public class PiglinAiMixin {
     @Inject(at = @At("RETURN"), method = "isWearingGold", cancellable = true)
     private static void chrysalis$isValidPiglinPacifyingArmor(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
         for (ItemStack itemStack : livingEntity.getArmorSlots()) {
-            if (itemStack.is(ChrysalisTags.PIGLIN_PACIFYING_ARMOR)) {
-                cir.setReturnValue(true);
-            }
+            if (itemStack.is(ChrysalisTags.PIGLIN_PACIFYING_ARMOR)) cir.setReturnValue(true);
         }
     }
 }

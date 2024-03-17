@@ -16,7 +16,7 @@ public record ClipboardImage(Image image) implements Transferable {
 
     @Override
     public Object getTransferData(DataFlavor dataFlavor) throws UnsupportedFlavorException {
-        if (isDataFlavorSupported(dataFlavor)) return image;
+        if (this.isDataFlavorSupported(dataFlavor)) return this.image;
         throw new UnsupportedFlavorException(dataFlavor);
     }
 

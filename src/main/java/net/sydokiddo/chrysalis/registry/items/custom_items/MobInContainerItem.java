@@ -55,10 +55,10 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
 
             this.checkExtraContent(player, level, itemStack, usePos);
             player.awardStat(Stats.ITEM_USED.get(this));
-            level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
+            level.playSound(null, usePos.getX(), usePos.getY(), usePos.getZ(), this.emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
 
             if (player instanceof ServerPlayer serverPlayer) CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, usePos, itemStack);
-            if (!player.getAbilities().instabuild) player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(returnItem)));
+            if (!player.getAbilities().instabuild) player.setItemInHand(useOnContext.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(this.returnItem)));
 
             return InteractionResult.sidedSuccess(level.isClientSide());
         }

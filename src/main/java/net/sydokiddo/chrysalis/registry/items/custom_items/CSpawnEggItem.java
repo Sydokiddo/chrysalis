@@ -30,7 +30,7 @@ public class CSpawnEggItem extends SpawnEggItem {
 
         Mob babyMob = this.mobOffspring.create(serverLevel);
 
-        if (babyMob == null || entityType == mobOffspring) return Optional.empty();
+        if (babyMob == null || entityType == this.mobOffspring) return Optional.empty();
 
         babyMob.setBaby(true);
         babyMob.moveTo(vec3.x(), vec3.y(), vec3.z(), 0.0F, 0.0F);
