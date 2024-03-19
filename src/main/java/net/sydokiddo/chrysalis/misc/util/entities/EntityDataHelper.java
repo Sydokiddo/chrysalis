@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 @SuppressWarnings("unused")
@@ -29,6 +30,10 @@ public class EntityDataHelper {
 
     public static boolean isEntityInFluid(LivingEntity livingEntity) {
         return (livingEntity.isUnderWater() || livingEntity.isInPowderSnow || livingEntity.isInLava());
+    }
+
+    public static boolean targetIsImmunePlayer(Entity self, Entity target) {
+        return target instanceof Player playerTarget && self instanceof Player playerOwner && !playerOwner.canHarmPlayer(playerTarget);
     }
 
     public static boolean getCustomNameTagName(String name, Mob mob) {
