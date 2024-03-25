@@ -67,7 +67,15 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
     @Override
     public void checkExtraContent(@Nullable Player player, @NotNull Level level, @NotNull ItemStack itemStack, @NotNull BlockPos blockPos) {
         if (level instanceof ServerLevel serverLevel) {
-            this.spawn(serverLevel, itemStack, blockPos);
+
+            Entity entity = this.type.spawn(serverLevel, itemStack, null, blockPos, MobSpawnType.BUCKET, true, false);
+
+            if (entity instanceof ContainerMob containerMob) {
+                if (containerMob instanceof Mob mob) mob.setPersistenceRequired();
+                containerMob.loadFromItemTag(itemStack.getOrCreateTag());
+                containerMob.setFromItem(true);
+            }
+
             level.gameEvent(player, GameEvent.ENTITY_PLACE, blockPos);
         }
     }
@@ -75,16 +83,5 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
     @Override
     public boolean emptyContents(@Nullable Player player, @NotNull Level level, @NotNull BlockPos blockPos, @Nullable BlockHitResult blockHitResult) {
         return blockHitResult != null && this.emptyContents(player, level, blockHitResult.getBlockPos().relative(blockHitResult.getDirection()), null);
-    }
-
-    private void spawn(ServerLevel serverLevel, ItemStack itemStack, BlockPos blockPos) {
-
-        Entity entity = this.type.spawn(serverLevel, itemStack, null, blockPos, MobSpawnType.BUCKET, true, false);
-
-        if (entity instanceof ContainerMob containerMob) {
-            if (containerMob instanceof Mob mob) mob.setPersistenceRequired();
-            containerMob.loadFromItemTag(itemStack.getOrCreateTag());
-            containerMob.setFromItem(true);
-        }
     }
 }
