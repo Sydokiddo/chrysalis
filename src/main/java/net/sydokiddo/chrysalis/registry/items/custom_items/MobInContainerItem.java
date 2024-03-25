@@ -46,7 +46,7 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
         ItemStack itemStack = player.getItemInHand(useOnContext.getHand());
         Level level = useOnContext.getLevel();
 
-        BlockHitResult blockHitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
+        BlockHitResult blockHitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
         BlockPos usePos = blockHitResult.getBlockPos().relative(blockHitResult.getDirection());
 
         if (blockHitResult.getType() == HitResult.Type.MISS || blockHitResult.getType() != HitResult.Type.BLOCK) {
@@ -66,15 +66,14 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
 
     @Override
     public void checkExtraContent(@Nullable Player player, @NotNull Level level, @NotNull ItemStack itemStack, @NotNull BlockPos blockPos) {
-        if (level instanceof ServerLevel) {
-            this.spawn((ServerLevel)level, itemStack, blockPos);
+        if (level instanceof ServerLevel serverLevel) {
+            this.spawn(serverLevel, itemStack, blockPos);
             level.gameEvent(player, GameEvent.ENTITY_PLACE, blockPos);
         }
     }
 
     @Override
     public boolean emptyContents(@Nullable Player player, @NotNull Level level, @NotNull BlockPos blockPos, @Nullable BlockHitResult blockHitResult) {
-        level.getBlockState(blockPos);
         return blockHitResult != null && this.emptyContents(player, level, blockHitResult.getBlockPos().relative(blockHitResult.getDirection()), null);
     }
 
