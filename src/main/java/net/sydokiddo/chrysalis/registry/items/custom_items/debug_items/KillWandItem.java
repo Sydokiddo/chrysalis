@@ -41,7 +41,7 @@ public class KillWandItem extends DebugUtilityItem {
     @Override
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity self) {
 
-        if (!target.isInvulnerable()) {
+        if (self instanceof Player player && player.isCreative() || !target.isInvulnerable()) {
 
             target.hurt(target.damageSources().source(ChrysalisDamageSources.KILL_WAND, self), Float.MAX_VALUE);
 
