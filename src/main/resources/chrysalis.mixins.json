@@ -53,6 +53,7 @@
     "items.ShearsItemMixin",
     "items.ShieldItemMixin",
     "items.SwordItemMixin",
+    "items.TooltipMixin",
     "items.TridentItemMixin",
     "misc.EnchantmentMixin",
     "misc.SnowFixMixin",
