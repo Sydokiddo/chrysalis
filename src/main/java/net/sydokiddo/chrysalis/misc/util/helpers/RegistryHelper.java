@@ -2,7 +2,6 @@ package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import com.google.common.collect.Sets;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -31,7 +30,6 @@ import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInPowderSnowBucketItem;
 import java.util.List;
-import java.util.Set;
 
 @SuppressWarnings("all")
 public class RegistryHelper {
@@ -148,10 +146,6 @@ public class RegistryHelper {
         .instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
-    public static PressurePlateBlock registerBurnableWoodenPressurePlate(BlockSetType blockSetType, MapColor mapColor) {
-        return new PressurePlateBlock(blockSetType, FabricBlockSettings.copyOf(registerWoodenPressurePlate(blockSetType, mapColor)).ignitedByLava());
-    }
-
     public static LeavesBlock registerLeaves(SoundType soundType, MapColor mapColor) {
         return new LeavesBlock(BlockBehaviour.Properties.of().mapColor(mapColor).strength(0.2F).randomTicks()
         .sound(soundType).noOcclusion().isValidSpawn(Blocks::ocelotOrParrot).isSuffocating(Blocks::never)
@@ -161,10 +155,6 @@ public class RegistryHelper {
     public static RotatedPillarBlock registerLog(MapColor innerColor, MapColor sideColor, SoundType soundType) {
         return new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? innerColor : sideColor)
         .instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType));
-    }
-
-    public static RotatedPillarBlock registerBurnableLog(MapColor innerColor, MapColor sideColor, SoundType soundType) {
-        return new RotatedPillarBlock(FabricBlockSettings.copyOf(registerLog(innerColor, sideColor, soundType)).ignitedByLava());
     }
 
     // endregion
@@ -179,10 +169,8 @@ public class RegistryHelper {
         return registerCustomLootTable(new ResourceLocation(name));
     }
 
-    public static final Set<ResourceLocation> LOOT_TABLE_LOCATIONS = Sets.newHashSet();
-
     public static ResourceLocation registerCustomLootTable(ResourceLocation resourceLocation) {
-        if (LOOT_TABLE_LOCATIONS.add(resourceLocation)) {
+        if (Sets.newHashSet().add(resourceLocation)) {
             return resourceLocation;
         }
         throw new IllegalArgumentException(resourceLocation + " is already a registered built-in loot table");
@@ -219,6 +207,17 @@ public class RegistryHelper {
     public static String minecraft = "minecraft";
 
     public static final ResourceLocation
+
+        // region Archaeology Loot Tables
+
+        ARCHAEOLOGY_DESERT_TEMPLE = new ResourceLocation(minecraft, "archaeology/desert_pyramid"),
+        ARCHAEOLOGY_DESERT_WELL = new ResourceLocation(minecraft, "archaeology/desert_well"),
+        ARCHAEOLOGY_COLD_OCEAN_RUIN = new ResourceLocation(minecraft, "archaeology/ocean_ruin_cold"),
+        ARCHAEOLOGY_WARM_OCEAN_RUIN = new ResourceLocation(minecraft, "archaeology/ocean_ruin_warm"),
+        ARCHAEOLOGY_COMMON_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_common"),
+        ARCHAEOLOGY_RARE_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_rare"),
+
+        // endregion
 
         // region Chest Loot Tables
 
@@ -268,6 +267,13 @@ public class RegistryHelper {
         TRIAL_CHAMBERS_INTERSECTION = new ResourceLocation(minecraft, "chests/trial_chambers/intersection"),
         TRIAL_CHAMBERS_INTERSECTION_BARREL = new ResourceLocation(minecraft, "chests/trial_chambers/intersection_barrel"),
         TRIAL_CHAMBERS_REWARD = new ResourceLocation(minecraft, "chests/trial_chambers/reward"),
+        TRIAL_CHAMBERS_REWARD_COMMON = new ResourceLocation(minecraft, "chests/trial_chambers/reward_common"),
+        TRIAL_CHAMBERS_REWARD_OMINOUS = new ResourceLocation(minecraft, "chests/trial_chambers/reward_ominous"),
+        TRIAL_CHAMBERS_REWARD_OMINOUS_COMMON = new ResourceLocation(minecraft, "chests/trial_chambers/reward_ominous_common"),
+        TRIAL_CHAMBERS_REWARD_OMINOUS_RARE = new ResourceLocation(minecraft, "chests/trial_chambers/reward_ominous_rare"),
+        TRIAL_CHAMBERS_REWARD_OMINOUS_UNIQUE = new ResourceLocation(minecraft, "chests/trial_chambers/reward_ominous_unique"),
+        TRIAL_CHAMBERS_REWARD_RARE = new ResourceLocation(minecraft, "chests/trial_chambers/reward_rare"),
+        TRIAL_CHAMBERS_REWARD_UNIQUE = new ResourceLocation(minecraft, "chests/trial_chambers/reward_unique"),
         TRIAL_CHAMBERS_SUPPLY = new ResourceLocation(minecraft, "chests/trial_chambers/supply"),
 
         // endregion
@@ -277,55 +283,6 @@ public class RegistryHelper {
         TRIAL_CHAMBERS_CHAMBER = new ResourceLocation(minecraft, "dispensers/trial_chambers/chamber"),
         TRIAL_CHAMBERS_CORRIDOR_DISPENSER = new ResourceLocation(minecraft, "dispensers/trial_chambers/corridor"),
         TRIAL_CHAMBERS_WATER = new ResourceLocation(minecraft, "dispensers/trial_chambers/water"),
-
-        // endregion
-
-        // region Pot Loot Tables
-
-        TRIAL_CHAMBERS_CORRIDOR_POT = new ResourceLocation(minecraft, "pots/trial_chambers/corridor"),
-
-        // endregion
-
-        // region Spawner Loot Tables
-
-        TRIAL_CHAMBERS_CONSUMABLES = new ResourceLocation(minecraft, "spawners/trial_chamber/consumables"),
-        TRIAL_CHAMBERS_KEY = new ResourceLocation(minecraft, "spawners/trial_chamber/key"),
-
-        // endregion
-
-        // region Archaeology Loot Tables
-
-        ARCHAEOLOGY_DESERT_TEMPLE = new ResourceLocation(minecraft, "archaeology/desert_pyramid"),
-        ARCHAEOLOGY_DESERT_WELL = new ResourceLocation(minecraft, "archaeology/desert_well"),
-        ARCHAEOLOGY_COLD_OCEAN_RUIN = new ResourceLocation(minecraft, "archaeology/ocean_ruin_cold"),
-        ARCHAEOLOGY_WARM_OCEAN_RUIN = new ResourceLocation(minecraft, "archaeology/ocean_ruin_warm"),
-        ARCHAEOLOGY_COMMON_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_common"),
-        ARCHAEOLOGY_RARE_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_rare"),
-
-        // endregion
-
-        // region Gameplay Loot Tables
-
-        CAT_MORNING_GIFT = new ResourceLocation(minecraft, "gameplay/cat_morning_gift"),
-        FISHING = new ResourceLocation(minecraft, "gameplay/fishing"),
-        PIGLIN_BARTERING = new ResourceLocation(minecraft, "gameplay/piglin_bartering"),
-        SNIFFER_DIGGING = new ResourceLocation(minecraft, "gameplay/sniffer_digging"),
-        FISHING_FISH = new ResourceLocation(minecraft, "gameplay/fishing/fish"),
-        FISHING_JUNK = new ResourceLocation(minecraft, "gameplay/fishing/junk"),
-        FISHING_TREASURE = new ResourceLocation(minecraft, "gameplay/fishing/treasure"),
-        HERO_OF_THE_VILLAGE_GIFT_ARMORER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/armorer_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_BUTCHER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/butcher_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_CARTOGRAPHER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/cartographer_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_CLERIC = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/cleric_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_FARMER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/farmer_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_FISHERMAN = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/fisherman_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_FLETCHER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/fletcher_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_LEATHERWORKER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/leatherworker_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_LIBRARIAN = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/librarian_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_MASON = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/mason_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_SHEPHERD = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/shepherd_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_TOOLSMITH = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/toolsmith_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_WEAPONSMITH = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/weaponsmith_gift"),
 
         // endregion
 
@@ -354,6 +311,7 @@ public class RegistryHelper {
         BAT = new ResourceLocation(minecraft, "entities/bat"),
         BEE = new ResourceLocation(minecraft, "entities/bee"),
         BLAZE = new ResourceLocation(minecraft, "entities/blaze"),
+        BOGGED = new ResourceLocation(minecraft, "entities/bogged"),
         BREEZE = new ResourceLocation(minecraft, "entities/breeze"),
         CAMEL = new ResourceLocation(minecraft, "entities/camel"),
         CAT = new ResourceLocation(minecraft, "entities/cat"),
@@ -429,9 +387,63 @@ public class RegistryHelper {
         ZOMBIE = new ResourceLocation(minecraft, "entities/zombie"),
         ZOMBIE_HORSE = new ResourceLocation(minecraft, "entities/zombie_horse"),
         ZOMBIE_VILLAGER = new ResourceLocation(minecraft, "entities/zombie_villager"),
-        ZOMBIFIED_PIGLIN = new ResourceLocation(minecraft, "entities/zombified_piglin");
+        ZOMBIFIED_PIGLIN = new ResourceLocation(minecraft, "entities/zombified_piglin"),
 
         // endregion
+
+        // region Equipment Loot Tables
+
+        EQUIPMENT_TRIAL_CHAMBER = new ResourceLocation(minecraft, "equipment/trial_chamber"),
+        EQUIPMENT_TRIAL_CHAMBER_MELEE = new ResourceLocation(minecraft, "equipment/trial_chamber_melee"),
+        EQUIPMENT_TRIAL_CHAMBER_RANGED = new ResourceLocation(minecraft, "equipment/trial_chamber_ranged"),
+
+        // endregion
+
+        // region Gameplay Loot Tables
+
+        CAT_MORNING_GIFT = new ResourceLocation(minecraft, "gameplay/cat_morning_gift"),
+        FISHING = new ResourceLocation(minecraft, "gameplay/fishing"),
+        PANDA_SNEEZE = new ResourceLocation(minecraft, "gameplay/panda_sneeze"),
+        PIGLIN_BARTERING = new ResourceLocation(minecraft, "gameplay/piglin_bartering"),
+        SNIFFER_DIGGING = new ResourceLocation(minecraft, "gameplay/sniffer_digging"),
+        FISHING_FISH = new ResourceLocation(minecraft, "gameplay/fishing/fish"),
+        FISHING_JUNK = new ResourceLocation(minecraft, "gameplay/fishing/junk"),
+        FISHING_TREASURE = new ResourceLocation(minecraft, "gameplay/fishing/treasure"),
+        HERO_OF_THE_VILLAGE_GIFT_ARMORER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/armorer_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_BUTCHER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/butcher_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_CARTOGRAPHER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/cartographer_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_CLERIC = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/cleric_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_FARMER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/farmer_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_FISHERMAN = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/fisherman_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_FLETCHER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/fletcher_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_LEATHERWORKER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/leatherworker_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_LIBRARIAN = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/librarian_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_MASON = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/mason_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_SHEPHERD = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/shepherd_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_TOOLSMITH = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/toolsmith_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_WEAPONSMITH = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/weaponsmith_gift"),
+
+        // endregion
+
+        // region Pot Loot Tables
+
+        TRIAL_CHAMBERS_CORRIDOR_POT = new ResourceLocation(minecraft, "pots/trial_chambers/corridor"),
+
+        // endregion
+
+        // region Shearing Loot Tables
+
+        SHEARING_BOGGED = new ResourceLocation(minecraft, "shearing/bogged"),
+
+        // endregion
+
+        // region Spawner Loot Tables
+
+        TRIAL_CHAMBERS_CONSUMABLES = new ResourceLocation(minecraft, "spawners/trial_chamber/consumables"),
+        TRIAL_CHAMBERS_KEY = new ResourceLocation(minecraft, "spawners/trial_chamber/key")
+
+        // endregion
+    ;
 
     // endregion
 }

@@ -2,8 +2,9 @@
   "values": [
     "minecraft:end_crystal",
     "minecraft:fireball",
+    "minecraft:wind_charge",
     "minecraft:item_frame",
     "minecraft:glow_item_frame",
-    "#chrysalis:is_vehicle"
+    "#chrysalis:vehicle"
   ]
 }

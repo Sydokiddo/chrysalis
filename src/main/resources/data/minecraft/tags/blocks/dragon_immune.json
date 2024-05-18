@@ -2,8 +2,8 @@
   "replace": false,
   "values": [
     "#chrysalis:base_stone_end",
-    "#chrysalis:unbreakable_blocks",
     "#chrysalis:obsidian",
+    "#chrysalis:unbreakable_blocks",
     "minecraft:dragon_egg"
   ]
 }

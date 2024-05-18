@@ -60,7 +60,7 @@ public abstract class LivingEntityMixin extends Entity {
             double afterViewDistance = 1.0 / (2 * (amplifier + 1));
             double afterViewDistanceWithHeadOn = 0.5 / (2 * (amplifier + 1));
 
-            if (hasMobHead(entity)) {
+            if (this.hasMobHead(entity)) {
                 cir.setReturnValue(afterViewDistanceWithHeadOn);
             } else {
                 cir.setReturnValue(afterViewDistance);

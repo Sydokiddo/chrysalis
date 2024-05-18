@@ -32,17 +32,14 @@
     "entities.misc.PlayerMixin",
     "entities.passive.AllayMixin",
     "entities.passive.AxolotlMixin",
-    "entities.passive.BirdSeedsMixin",
     "entities.passive.ChestedHorseMixin",
     "entities.passive.EatBlockGoalMixin",
     "entities.passive.FoxEatBerriesGoalMixin",
     "entities.passive.HorseMixin",
     "entities.passive.IronGolemMixin",
-    "entities.passive.ParrotMixin",
     "entities.passive.SnowGolemMixin",
     "entities.passive.TamableAnimalMixin",
     "entities.passive.VillagerHarvestFarmlandMixin",
-    "entities.passive.WolfMixin",
     "items.CrossbowItemMixin",
     "items.EndCrystalItemMixin",
     "items.EyeOfEnderItemMixin",
@@ -66,7 +63,8 @@
   "client": [
     "misc.LevelRendererMixin",
     "misc.ScreenshotMainMixin",
-    "misc.ScreenshotRecorderMixin"
+    "misc.ScreenshotRecorderMixin",
+    "misc.WorldOpenFlowsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
