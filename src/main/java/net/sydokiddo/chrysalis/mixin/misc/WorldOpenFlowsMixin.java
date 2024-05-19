@@ -14,11 +14,13 @@ public class WorldOpenFlowsMixin {
 
     @ModifyVariable(method = "confirmWorldCreation", at = @At("HEAD"), argsOnly = true, index = 4)
     private static boolean chrysalis$removeExperimentalAdviceOnCreation(boolean original) {
-        return Chrysalis.IS_DEBUG;
+        if (Chrysalis.IS_DEBUG) return true;
+        return original;
     }
 
     @ModifyVariable(method = "loadLevel", at = @At("HEAD"), argsOnly = true, index = 4)
     private boolean chrysalis$removeExperimentalAdviceOnLoad(boolean original) {
-        return !Chrysalis.IS_DEBUG;
+        if (Chrysalis.IS_DEBUG) return false;
+        return original;
     }
 }
