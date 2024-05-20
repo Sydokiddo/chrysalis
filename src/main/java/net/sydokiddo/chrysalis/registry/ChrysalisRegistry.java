@@ -12,6 +12,8 @@ import net.sydokiddo.chrysalis.registry.misc.*;
 
 public class ChrysalisRegistry {
 
+    // Test
+
     // region Game Rules
 
     public static GameRules.Key<GameRules.BooleanValue> RULE_PASSIVE_GRIEFING =
