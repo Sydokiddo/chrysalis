@@ -1,18 +1,23 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
@@ -47,6 +52,27 @@ public abstract class PlayerMixin extends LivingEntity {
 
         if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(ChrysalisTags.ALLOWS_USE_WHILE_SNEAKING)) {
             cir.setReturnValue(false);
+        }
+    }
+
+    @Redirect(method = "dropEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;dropAll()V"))
+    private void chrysalis$setDeathItemsToNeverDespawn(Inventory inventory) {
+        if (this.level().getGameRules().getBoolean(ChrysalisRegistry.RULE_PLAYER_DEATH_ITEM_DESPAWNING)) {
+            inventory.dropAll();
+        } else {
+            inventory.compartments.forEach((getInventory) -> getInventory.forEach(itemStack -> {
+
+                ItemEntity droppedItem = inventory.player.drop(itemStack, true, false);
+                inventory.removeItem(itemStack);
+
+                CompoundTag compoundTag = new CompoundTag();
+
+                if (droppedItem != null) {
+                    droppedItem.addAdditionalSaveData(compoundTag);
+                    if (inventory.player.isDeadOrDying()) compoundTag.putInt("Age", -32768);
+                    droppedItem.readAdditionalSaveData(compoundTag);
+                }
+            }));
         }
     }
 }

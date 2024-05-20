@@ -38,6 +38,12 @@ public class ChrysalisRegistry {
         GameRules.Category.DROPS,
         GameRuleFactory.createBooleanRule(true)
     );
+    public static GameRules.Key<GameRules.BooleanValue> RULE_PLAYER_DEATH_ITEM_DESPAWNING =
+        GameRuleRegistry.register(
+        "playerDeathItemDespawning",
+        GameRules.Category.PLAYER,
+        GameRuleFactory.createBooleanRule(true)
+    );
     public static GameRules.Key<GameRules.BooleanValue> RULE_DO_NETHER_PORTAL_ACTIVATING =
         GameRuleRegistry.register(
         "doNetherPortalActivating",

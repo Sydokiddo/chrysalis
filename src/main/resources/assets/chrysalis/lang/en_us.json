@@ -63,6 +63,8 @@
   "gamerule.witherGriefing": "Allow for Withers to destroy blocks",
   "gamerule.destroyItemsInExplosions": "In explosions, most items will be destroyed",
   "gamerule.destroyItemsInExplosions.description": "Most items caught in explosions are lost in the explosion.",
+  "gamerule.playerDeathItemDespawning": "Death-dropped items despawn",
+  "gamerule.playerDeathItemDespawning.description": "Items dropped by dead players will despawn after a short period of time.",
   "gamerule.doNetherPortalActivating": "Allow Nether Portal activating",
   "gamerule.doEndPortalActivating": "Allow End Portal activating",
 
