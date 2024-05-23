@@ -14,28 +14,27 @@ public class GlowingSporeParticle extends TextureSheetParticle {
 
     // region Initialization and Ticking
 
-    private GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+    public GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         super(clientLevel, x, y, z);
         this.setSize(0.001F, 0.001F);
         this.setColor(0.5F, 0.5F, 0.5F);
-        this.pickSprite(spriteSet);
         this.lifetime = (int) (8.0 / (Math.random() * 0.8 + 0.2)) + 4;
         this.hasPhysics = true;
-        xd = velocityX;
-        yd = velocityY;
-        zd = velocityZ;
+        this.xd = velocityX;
+        this.yd = velocityY;
+        this.zd = velocityZ;
+        this.pickSprite(spriteSet);
     }
 
     @Override
     public void tick() {
-        if (age > (lifetime / 2)) {
-            if (alpha > 0.1F) {
-                alpha -= 0.015F;
-            } else {
-                remove();
-            }
-        }
+
         super.tick();
+
+        if (this.age > (this.lifetime / 2)) {
+            if (this.alpha > 0.1F) this.alpha -= 0.015F;
+            else this.remove();
+        }
     }
 
     // endregion
@@ -43,22 +42,26 @@ public class GlowingSporeParticle extends TextureSheetParticle {
     // region Rendering
 
     @Override
-    public float getQuadSize(float f) {
-        float g = ((float)this.age + f) / (float) this.lifetime;
-        return this.quadSize * (1.0F - g * g * 0.5F);
+    public float getQuadSize(float tickRate) {
+        float divider = ((float) this.age + tickRate) / (float) this.lifetime;
+        return this.quadSize * (1.0F - divider * divider * 0.5F);
     }
 
     @Override
-    public int getLightColor(float f) {
-        float g = ((float)this.age + f) / (float) this.lifetime;
-        g = Mth.clamp(g, 1.0F, 0.0F);
-        int lightColor = super.getLightColor(f);
-        int j = lightColor & 0xFF;
-        int k = lightColor >> 16 & 0xFF;
-        if ((j += (int) (g * 15.0F * 16.0F)) > 240) {
-            j = 240;
+    public int getLightColor(float tickRate) {
+
+        float divider = ((float) this.age) / (float) this.lifetime;
+        divider = Mth.clamp(divider, 1.0F, 0.0F);
+
+        int lightColor = super.getLightColor(tickRate);
+        int int1 = lightColor & 0xFF;
+        int int2 = lightColor >> 16 & 0xFF;
+
+        if ((int1 += (int) (divider * 15.0F * 16.0F)) > 240) {
+            int1 = 240;
         }
-        return j | k << 16;
+
+        return int1 | int2 << 16;
     }
 
     @Override
@@ -73,15 +76,15 @@ public class GlowingSporeParticle extends TextureSheetParticle {
     @Environment(EnvType.CLIENT)
     public static class GlowingSporeProvider implements ParticleProvider<SimpleParticleType> {
 
-        private final SpriteSet sprite;
+        private final SpriteSet spriteSet;
 
         public GlowingSporeProvider(SpriteSet spriteSet) {
-            this.sprite = spriteSet;
+            this.spriteSet = spriteSet;
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType parameters, ClientLevel clientLevel, double x, double y, double z, double vx, double vy, double vz) {
-            return new GlowingSporeParticle(clientLevel, sprite, x, y, z, vx, vy, vz);
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+            return new GlowingSporeParticle(clientLevel, this.spriteSet, x, y, z, velocityX, velocityY, velocityZ);
         }
     }
 

@@ -13,12 +13,12 @@ public class RotatingFallingParticle extends RisingParticle {
 
     // region Initialization and Ticking
 
-    private RotatingFallingParticle(ClientLevel level, double x, double y, double z, double velX, double velY, double velZ) {
-        super(level, x, y, z, velX, velY, velZ);
+    public RotatingFallingParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        super(level, x, y, z, velocityX, velocityY, velocityZ);
         this.scale(1.1F + (float) this.random.nextInt(6) / 10);
+        this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 12;
         this.roll = oRoll = this.random.nextFloat() * (float) (2 * Math.PI);
         this.yd = -0.25D;
-        this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 12;
     }
 
     @Override
@@ -30,17 +30,17 @@ public class RotatingFallingParticle extends RisingParticle {
             this.setAlpha(1.0F - ((float) this.age - (float) (this.lifetime / 2)) / (float) this.lifetime);
         }
 
-        if (age == 1) {
-            this.xd = xd + (Math.random() * 2.0D - 1.0D) * 0.2D;
-            this.yd = 0.3D + (double) level.getRandom().nextInt(11) / 100;
-            this.zd = zd + (Math.random() * 2.0D - 1.0D) * 0.2D;
+        if (this.age == 1) {
+            this.xd = this.xd + (Math.random() * 2.0D - 1.0D) * 0.2D;
+            this.yd = 0.3D + (double) this.level.getRandom().nextInt(11) / 100;
+            this.zd = this.zd + (Math.random() * 2.0D - 1.0D) * 0.2D;
+        } else if (this.age <= 10) {
+            this.yd = yd - (0.05D + (double) this.age / 200);
         }
-
-        else if (age <= 10) this.yd = yd - (0.05D + (double) age / 200);
 
         if (this.onGround) {
             this.setParticleSpeed(0D, 0D, 0D);
-            this.setPos(xo, yo + 0.1D, zo);
+            this.setPos(this.xo, this.yo + 0.1D, this.zo);
         }
     }
 
@@ -60,16 +60,16 @@ public class RotatingFallingParticle extends RisingParticle {
     @Environment(EnvType.CLIENT)
     public static class FallingParticleProvider implements ParticleProvider<SimpleParticleType> {
 
-        private final SpriteSet sprite;
+        private final SpriteSet spriteSet;
 
         public FallingParticleProvider(SpriteSet spriteSet) {
-            this.sprite = spriteSet;
+            this.spriteSet = spriteSet;
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
-            RotatingFallingParticle particle = new RotatingFallingParticle(clientLevel, d, e, f, g, h, i);
-            particle.pickSprite(this.sprite);
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+            RotatingFallingParticle particle = new RotatingFallingParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ);
+            particle.pickSprite(this.spriteSet);
             return particle;
         }
     }
