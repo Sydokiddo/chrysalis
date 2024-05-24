@@ -8,6 +8,7 @@
     "blocks.BaseFireBlockMixin",
     "blocks.BeaconBlockEntityMixin",
     "blocks.BlocksRegistryMixin",
+    "blocks.BlockStateBaseMixin",
     "blocks.CopperGrateBlockMixin",
     "blocks.DispenserBlockMixin",
     "blocks.NetherPortalShapeMixin",
