@@ -1,10 +1,10 @@
 package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import com.google.common.collect.Sets;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.mixin.content.registry.BrewingRecipeRegistryBuilderMixin;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -24,7 +24,6 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.sydokiddo.chrysalis.mixin.util.BrewingRecipeRegistryMixin;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
@@ -41,23 +40,33 @@ public class RegistryHelper {
      **/
 
     public static void registerBasePotionRecipe(Item ingredient, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(Potions.AWKWARD, ingredient, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Potions.AWKWARD, ingredient, Holder.direct(resultPotion));
+        });
     }
 
     public static void registerLongPotionRecipe(Potion startingPotion, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.REDSTONE, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Holder.direct(startingPotion),  Items.REDSTONE, Holder.direct(resultPotion));
+        });
     }
 
     public static void registerStrongPotionRecipe(Potion startingPotion, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.GLOWSTONE_DUST, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Holder.direct(startingPotion),  Items.GLOWSTONE_DUST, Holder.direct(resultPotion));
+        });
     }
 
     public static void registerInvertedPotionRecipe(Potion startingPotion, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.FERMENTED_SPIDER_EYE, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Holder.direct(startingPotion),  Items.FERMENTED_SPIDER_EYE, Holder.direct(resultPotion));
+        });
     }
 
     public static void registerUniquePotionRecipe(Potion startingPotion, Item ingredient, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, ingredient, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Holder.direct(startingPotion),  ingredient, Holder.direct(resultPotion));
+        });
     }
 
     // endregion
@@ -69,59 +78,77 @@ public class RegistryHelper {
      **/
 
     public static SwordItem registerSword(Tier tier) {
-        return new SwordItem(tier, 3, -2.4F, new FabricItemSettings());
+        return new SwordItem(tier,
+                new Item.Properties().attributes(SwordItem.createAttributes(tier, 3, -2.4F))
+        );
     }
 
     public static PickaxeItem registerPickaxe(Tier tier) {
-        return new PickaxeItem(tier, 1, -2.8F, new FabricItemSettings());
+        return new PickaxeItem(tier,
+                new Item.Properties().attributes(PickaxeItem.createAttributes(tier, 1, -2.8F))
+        );
     }
 
     public static AxeItem registerAxe(Tier tier) {
-        return new AxeItem(tier, 5.0F, -3.0F, new FabricItemSettings());
+        return new AxeItem(tier,
+                new Item.Properties().attributes(AxeItem.createAttributes(tier, 5, -3))
+        );
     }
 
     public static ShovelItem registerShovel(Tier tier) {
-        return new ShovelItem(tier, 1.5F, -3.0F, new FabricItemSettings());
+        return new ShovelItem(tier,
+                new Item.Properties().attributes(ShovelItem.createAttributes(tier, 1.5F, -3))
+        );
     }
 
     public static HoeItem registerHoe(Tier tier) {
-        return new HoeItem(tier, -4, 0.0F, new FabricItemSettings());
+        return new HoeItem(tier,
+                new Item.Properties().attributes(HoeItem.createAttributes(tier, -4, 0))
+        );
     }
 
     public static ArmorItem registerHelmet(ArmorMaterial armorMaterial) {
-        return new ArmorItem(armorMaterial, ArmorItem.Type.HELMET, new FabricItemSettings());
+        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.HELMET,
+                new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(5))
+        );
     }
 
     public static ArmorItem registerChestplate(ArmorMaterial armorMaterial) {
-        return new ArmorItem(armorMaterial, ArmorItem.Type.CHESTPLATE, new FabricItemSettings());
+        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.CHESTPLATE,
+                new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(5))
+        );
     }
 
     public static ArmorItem registerLeggings(ArmorMaterial armorMaterial) {
-        return new ArmorItem(armorMaterial, ArmorItem.Type.LEGGINGS, new FabricItemSettings());
+        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.LEGGINGS,
+                new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(5))
+        );
     }
 
     public static ArmorItem registerBoots(ArmorMaterial armorMaterial) {
-        return new ArmorItem(armorMaterial, ArmorItem.Type.BOOTS, new FabricItemSettings());
+        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.BOOTS,
+                new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(5))
+        );
     }
 
     public static RecordItem registerMusicDisc(int redstoneOutput, SoundEvent soundEvent, int musicLength) {
-        return new RecordItem(redstoneOutput, soundEvent, new FabricItemSettings().stacksTo(1).rarity(Rarity.RARE), musicLength);
+        return new RecordItem(redstoneOutput, soundEvent, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), musicLength);
     }
 
     public static CSpawnEggItem registerSpawnEgg(EntityType entityType, int baseColor, int spotsColor, EntityType mobOffspring) {
-       return new CSpawnEggItem(entityType, baseColor, spotsColor, mobOffspring, new FabricItemSettings());
+       return new CSpawnEggItem(entityType, baseColor, spotsColor, mobOffspring, new Item.Properties());
     }
 
     public static MobInContainerItem registerMobInContainer(EntityType entityType, SoundEvent soundEvent, Item returnItem) {
-        return new MobInContainerItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(returnItem), returnItem);
+        return new MobInContainerItem(entityType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(returnItem), returnItem);
     }
 
     public static MobInFluidBucketItem registerMobInFluidContainer(EntityType entityType, Fluid fluidType, SoundEvent soundEvent) {
-        return new MobInFluidBucketItem(entityType, fluidType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
+        return new MobInFluidBucketItem(entityType, fluidType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET));
     }
 
     public static MobInPowderSnowBucketItem registerMobInPowderSnowBucket(EntityType entityType, SoundEvent soundEvent) {
-        return new MobInPowderSnowBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET), Items.BUCKET);
+        return new MobInPowderSnowBucketItem(entityType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET), Items.BUCKET);
     }
 
     // endregion
@@ -184,17 +211,19 @@ public class RegistryHelper {
      * Miscellaneous registry helpers.
      **/
 
-    public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {
-        context.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
-    }
+    // TODO i think these arent required anymore, arent features fully data driven now?
 
-    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
-        registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
-    }
-
-    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
-        context.register(resourceKey, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeature), List.copyOf(placementModifiers)));
-    }
+//    public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {
+//        context.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
+//    }
+//
+//    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
+//        registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
+//    }
+//
+//    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
+//        context.register(resourceKey, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeature), List.copyOf(placementModifiers)));
+//    }
 
     // endregion
 
