@@ -6,7 +6,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.EnchantedGlintItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,9 +23,7 @@ public class DebugUtilityItem extends EnchantedGlintItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
         tooltip.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + ".desc").withStyle(ChatFormatting.BLUE)));
-        tooltip.add(CommonComponents.EMPTY);
-        ItemHelper.addChrysalisTooltip(tooltip);
+        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
     }
 }
