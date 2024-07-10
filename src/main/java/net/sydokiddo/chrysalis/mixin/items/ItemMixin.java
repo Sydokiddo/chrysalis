@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -30,7 +31,7 @@ public abstract class ItemMixin {
             tooltip.add(CommonComponents.space().append(Component.translatable("item.chrysalis.debug_stick.desc").withStyle(ChatFormatting.BLUE)));
         }
 
-        if (this.getDescriptionId().contains(Chrysalis.MOD_ID)) {
+        if (this.getDescriptionId().contains(Chrysalis.MOD_ID) && Screen.hasShiftDown()) {
             if (!tooltip.isEmpty()) tooltip.add(CommonComponents.EMPTY);
             MutableComponent chrysalisIcon = ChrysalisRegistry.CHRYSALIS_ICON;
             ChrysalisRegistry.setTooltipIconsFont(chrysalisIcon);
