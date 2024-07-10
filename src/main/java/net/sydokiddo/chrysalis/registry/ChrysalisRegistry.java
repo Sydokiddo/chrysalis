@@ -3,12 +3,16 @@ package net.sydokiddo.chrysalis.registry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.GameRules;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.commands.CooldownCommand;
 import net.sydokiddo.chrysalis.misc.util.commands.HealCommand;
 import net.sydokiddo.chrysalis.misc.util.entities.ChrysalisMemoryModules;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
+import java.awt.*;
 
 public class ChrysalisRegistry {
 
@@ -56,6 +60,22 @@ public class ChrysalisRegistry {
         GameRules.Category.UPDATES,
         GameRuleFactory.createBooleanRule(true)
     );
+
+    // endregion
+
+    // region Colors and Fonts
+
+    public static final Color
+        CHRYSALIS_COLOR = Color.decode("#A27FFF")
+    ;
+
+    public static MutableComponent
+        CHRYSALIS_ICON = Component.translatable("gui.icon.chrysalis")
+    ;
+
+    public static void setTooltipIconsFont(MutableComponent mutableComponent) {
+        mutableComponent.setStyle(mutableComponent.getStyle().withFont(Chrysalis.id("tooltip_icons")));
+    }
 
     // endregion
 

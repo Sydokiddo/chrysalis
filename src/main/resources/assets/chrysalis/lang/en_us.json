@@ -1,6 +1,9 @@
 {
+  "mod.chrysalis": "Chrysalis",
   "gui.chrysalis.wiki": "Developer Wiki",
   "pack.chrysalis.emissive_textures": "Emissive Textures",
+
+  "gui.icon.chrysalis": "\ua000",
 
   "item.chrysalis.heal": "Heal",
   "item.chrysalis.heal.desc": "Sets to Maximum Health",

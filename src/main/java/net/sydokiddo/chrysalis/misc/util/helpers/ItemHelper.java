@@ -5,11 +5,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.armortrim.ArmorTrim;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -76,6 +79,13 @@ public class ItemHelper {
     /**
      * Custom tooltips for items.
      **/
+
+    public static void addChrysalisTooltip(List<Component> tooltip) {
+        MutableComponent chrysalisIcon = ChrysalisRegistry.CHRYSALIS_ICON;
+        ChrysalisRegistry.setTooltipIconsFont(chrysalisIcon);
+        Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(new ResourceLocation("minecraft:five")).withColor(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB())));
+        tooltip.add(chrysalisTooltip);
+    }
 
     public static void addHoldingTooltip(List<Component> tooltip) {
         tooltip.add(CommonComponents.EMPTY);
