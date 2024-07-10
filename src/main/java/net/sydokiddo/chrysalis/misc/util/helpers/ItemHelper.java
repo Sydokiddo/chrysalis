@@ -129,5 +129,9 @@ public class ItemHelper {
         tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.none").withStyle(ChatFormatting.BLUE)));
     }
 
+    public static Component addTooltipWithIcon(Component icon, Component tooltip) {
+        return Component.translatable("gui.chrysalis.item.tooltip_with_icon", icon, tooltip);
+    }
+
     // endregion
 }
