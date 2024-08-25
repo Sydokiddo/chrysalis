@@ -21,9 +21,11 @@ public class DebugUtilityItem extends EnchantedGlintItem {
      * Adds a description tooltip to any of the Debug Utility items.
      **/
 
-    @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
-        tooltip.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + ".desc").withStyle(ChatFormatting.BLUE)));
-    }
+    // TODO finish this
+//    @Override
+//    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
+//        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
+//        tooltip.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + ".desc").withStyle(ChatFormatting.BLUE)));
+//    }
+
 }

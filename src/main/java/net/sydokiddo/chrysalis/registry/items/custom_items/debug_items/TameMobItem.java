@@ -26,11 +26,12 @@ public class TameMobItem extends DebugUtilityItem {
         super(properties);
     }
 
-    @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-        ItemHelper.addUseTooltip(tooltip);
-        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
-    }
+    // TODO finish
+//    @Override
+//    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
+//        ItemHelper.addUseTooltip(tooltip);
+//        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
+//    }
 
     /**
      * Automatically tames any tamable mob when the mob is right-clicked with the item.

@@ -23,11 +23,12 @@ public class KillWandItem extends DebugUtilityItem {
         super(properties);
     }
 
-    @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-        ItemHelper.addAttackTooltip(tooltip);
-        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
-    }
+    // TODO KILL
+//    @Override
+//    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
+//        ItemHelper.addAttackTooltip(tooltip);
+//        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
+//    }
 
     @Override
     public boolean canAttackBlock(BlockState blockState, Level level, BlockPos blockPos, Player player) {

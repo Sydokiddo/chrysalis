@@ -24,11 +24,12 @@ public class GiveResistanceItem extends DebugUtilityItem {
         super(properties);
     }
 
-    @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-        ItemHelper.addUseTooltip(tooltip);
-        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
-    }
+    // TODO finish this
+//    @Override
+//    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
+//        ItemHelper.addUseTooltip(tooltip);
+//        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
+//    }
 
     /**
      * Gives the user infinite resistance when right-clicked with.

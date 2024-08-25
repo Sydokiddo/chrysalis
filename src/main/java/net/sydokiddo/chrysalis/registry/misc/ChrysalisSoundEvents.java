@@ -23,7 +23,7 @@ public class ChrysalisSoundEvents {
     // Registry
 
     private static SoundEvent registerSoundEvent(String name) {
-        ResourceLocation resourceLocation = new ResourceLocation(Chrysalis.MOD_ID, name);
+        ResourceLocation resourceLocation = Chrysalis.id(name);
         SoundEvent soundEvent = SoundEvent.createVariableRangeEvent(resourceLocation);
         return Registry.register(BuiltInRegistries.SOUND_EVENT, resourceLocation, soundEvent);
     }
