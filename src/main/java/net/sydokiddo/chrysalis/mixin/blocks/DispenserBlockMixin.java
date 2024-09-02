@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.mixin.blocks;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.sydokiddo.chrysalis.misc.util.dispenser.DispenseContainerMobDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.dispenser.DispenseCustomSpawnEggDispenserBehavior;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class DispenserBlockMixin {
 
     @Inject(method = "getDispenseMethod", at = @At("HEAD"), cancellable = true)
-    private void chrysalis$addNewDispenserMethods(ItemStack itemStack, CallbackInfoReturnable<DispenseItemBehavior> cir) {
+    private void chrysalis$addNewDispenserMethods(Level level, ItemStack itemStack, CallbackInfoReturnable<DispenseItemBehavior> cir) {
 
         Item item = itemStack.getItem();
 

@@ -16,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import java.util.Optional;
 
-@SuppressWarnings("unused")
 public interface ContainerMob {
 
     boolean fromItem();
@@ -127,4 +126,5 @@ public interface ContainerMob {
             return Optional.empty();
         }
     }
+
  }

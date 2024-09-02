@@ -23,17 +23,17 @@ public class ModSmithingTemplateItem extends SmithingTemplateItem {
     ;
 
     public static final ResourceLocation
-        EMPTY_SLOT_HELMET = new ResourceLocation("item/empty_armor_slot_helmet"),
-        EMPTY_SLOT_CHESTPLATE = new ResourceLocation("item/empty_armor_slot_chestplate"),
-        EMPTY_SLOT_LEGGINGS = new ResourceLocation("item/empty_armor_slot_leggings"),
-        EMPTY_SLOT_BOOTS = new ResourceLocation("item/empty_armor_slot_boots"),
+        EMPTY_SLOT_HELMET = ResourceLocation.parse("item/empty_armor_slot_helmet"),
+        EMPTY_SLOT_CHESTPLATE = ResourceLocation.parse("item/empty_armor_slot_chestplate"),
+        EMPTY_SLOT_LEGGINGS = ResourceLocation.parse("item/empty_armor_slot_leggings"),
+        EMPTY_SLOT_BOOTS = ResourceLocation.parse("item/empty_armor_slot_boots"),
 
-        EMPTY_SLOT_SWORD = new ResourceLocation("item/empty_slot_sword"),
-        EMPTY_SLOT_PICKAXE = new ResourceLocation("item/empty_slot_pickaxe"),
-        EMPTY_SLOT_AXE = new ResourceLocation("item/empty_slot_axe"),
-        EMPTY_SLOT_SHOVEL = new ResourceLocation("item/empty_slot_shovel"),
-        EMPTY_SLOT_HOE = new ResourceLocation("item/empty_slot_hoe"),
+        EMPTY_SLOT_SWORD = ResourceLocation.parse("item/empty_slot_sword"),
+        EMPTY_SLOT_PICKAXE = ResourceLocation.parse("item/empty_slot_pickaxe"),
+        EMPTY_SLOT_AXE = ResourceLocation.parse("item/empty_slot_axe"),
+        EMPTY_SLOT_SHOVEL = ResourceLocation.parse("item/empty_slot_shovel"),
+        EMPTY_SLOT_HOE = ResourceLocation.parse("item/empty_slot_hoe"),
 
-        EMPTY_SLOT_INGOT = new ResourceLocation("item/empty_slot_ingot")
+        EMPTY_SLOT_INGOT = ResourceLocation.parse("item/empty_slot_ingot")
     ;
 }

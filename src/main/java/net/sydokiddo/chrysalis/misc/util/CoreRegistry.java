@@ -30,7 +30,7 @@ public class CoreRegistry<T> {
     }
 
     public <E extends T> E register(String key, E entry) {
-        Registry.register(this.registry, new ResourceLocation(this.modId, key), entry);
+        Registry.register(this.registry, ResourceLocation.fromNamespaceAndPath(this.modId, key), entry);
         return entry;
     }
 

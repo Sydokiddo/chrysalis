@@ -2,14 +2,18 @@ package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.armortrim.ArmorTrim;
+import net.minecraft.world.item.component.ItemContainerContents;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -25,15 +29,9 @@ public class ItemHelper {
      **/
 
     public static boolean containerIsEmpty(ItemStack itemStack) {
-
-        String blockEntityTagString = "BlockEntityTag";
-        String itemsString = "Items";
-        CompoundTag compoundTag = itemStack.getTag();
-
-        if (compoundTag == null || !compoundTag.contains(blockEntityTagString, TAG_COMPOUND)) return true;
-
-        CompoundTag blockEntityTag = compoundTag.getCompound(blockEntityTagString);
-        return !blockEntityTag.contains(itemsString, TAG_LIST) || blockEntityTag.getList(itemsString, TAG_COMPOUND).isEmpty();
+        ItemContainerContents component = itemStack.get(DataComponents.CONTAINER);
+        if (component == null) return true;
+        return component.nonEmptyStream().toList().isEmpty();
     }
 
     /**
@@ -55,7 +53,9 @@ public class ItemHelper {
      **/
 
     public static BigDecimal getFoodSaturation(ItemStack itemStack) {
-        float saturationAmount = Objects.requireNonNull(itemStack.getItem().getFoodProperties()).getNutrition() * Objects.requireNonNull(itemStack.getItem().getFoodProperties()).getSaturationModifier() * 2.0F;
+        FoodProperties component = itemStack.get(DataComponents.FOOD);
+        if (component == null) return new BigDecimal(0);
+        float saturationAmount = component.nutrition() * component.saturation() * 2.0F;
         return new BigDecimal(saturationAmount).setScale(1, RoundingMode.DOWN);
     }
 
@@ -64,7 +64,7 @@ public class ItemHelper {
      **/
 
     public static boolean hasArmorTrim(ItemStack itemStack) {
-        return itemStack.getTag() != null && itemStack.getTag().contains(ArmorTrim.TAG_TRIM_ID);
+        return itemStack.has(DataComponents.TRIM);
     }
 
     public static boolean hasEnchantmentOrTrim(ItemStack itemStack) {

@@ -24,7 +24,7 @@ public class DispenseCustomSpawnEggDispenserBehavior implements DispenseItemBeha
     public @NotNull ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {
 
         Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
-        EntityType<?> entityType = ((CSpawnEggItem)itemStack.getItem()).getType(itemStack.getTag());
+        EntityType<?> entityType = ((CSpawnEggItem)itemStack.getItem()).getType(itemStack);
 
         try {
             entityType.spawn(blockSource.level(), itemStack, null, blockSource.pos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
