@@ -1,10 +1,10 @@
 package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import com.google.common.collect.Sets;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.mixin.content.registry.BrewingRecipeRegistryBuilderMixin;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -24,7 +24,6 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.sydokiddo.chrysalis.mixin.util.BrewingRecipeRegistryMixin;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
@@ -41,23 +40,33 @@ public class RegistryHelper {
      **/
 
     public static void registerBasePotionRecipe(Item ingredient, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(Potions.AWKWARD, ingredient, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Potions.AWKWARD, ingredient, Holder.direct(resultPotion));
+        });
     }
 
     public static void registerLongPotionRecipe(Potion startingPotion, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.REDSTONE, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Holder.direct(startingPotion),  Items.REDSTONE, Holder.direct(resultPotion));
+        });
     }
 
     public static void registerStrongPotionRecipe(Potion startingPotion, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.GLOWSTONE_DUST, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Holder.direct(startingPotion),  Items.GLOWSTONE_DUST, Holder.direct(resultPotion));
+        });
     }
 
     public static void registerInvertedPotionRecipe(Potion startingPotion, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, Items.FERMENTED_SPIDER_EYE, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Holder.direct(startingPotion),  Items.FERMENTED_SPIDER_EYE, Holder.direct(resultPotion));
+        });
     }
 
     public static void registerUniquePotionRecipe(Potion startingPotion, Item ingredient, Potion resultPotion) {
-        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(startingPotion, ingredient, resultPotion);
+        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
+            builder.addMix(Holder.direct(startingPotion),  ingredient, Holder.direct(resultPotion));
+        });
     }
 
     // endregion
@@ -69,59 +78,77 @@ public class RegistryHelper {
      **/
 
     public static SwordItem registerSword(Tier tier) {
-        return new SwordItem(tier, 3, -2.4F, new FabricItemSettings());
+        return new SwordItem(tier,
+                new Item.Properties().attributes(SwordItem.createAttributes(tier, 3, -2.4F))
+        );
     }
 
     public static PickaxeItem registerPickaxe(Tier tier) {
-        return new PickaxeItem(tier, 1, -2.8F, new FabricItemSettings());
+        return new PickaxeItem(tier,
+                new Item.Properties().attributes(PickaxeItem.createAttributes(tier, 1, -2.8F))
+        );
     }
 
     public static AxeItem registerAxe(Tier tier) {
-        return new AxeItem(tier, 5.0F, -3.0F, new FabricItemSettings());
+        return new AxeItem(tier,
+                new Item.Properties().attributes(AxeItem.createAttributes(tier, 5, -3))
+        );
     }
 
     public static ShovelItem registerShovel(Tier tier) {
-        return new ShovelItem(tier, 1.5F, -3.0F, new FabricItemSettings());
+        return new ShovelItem(tier,
+                new Item.Properties().attributes(ShovelItem.createAttributes(tier, 1.5F, -3))
+        );
     }
 
     public static HoeItem registerHoe(Tier tier) {
-        return new HoeItem(tier, -4, 0.0F, new FabricItemSettings());
+        return new HoeItem(tier,
+                new Item.Properties().attributes(HoeItem.createAttributes(tier, -4, 0))
+        );
     }
 
     public static ArmorItem registerHelmet(ArmorMaterial armorMaterial) {
-        return new ArmorItem(armorMaterial, ArmorItem.Type.HELMET, new FabricItemSettings());
+        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.HELMET,
+                new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(5))
+        );
     }
 
     public static ArmorItem registerChestplate(ArmorMaterial armorMaterial) {
-        return new ArmorItem(armorMaterial, ArmorItem.Type.CHESTPLATE, new FabricItemSettings());
+        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.CHESTPLATE,
+                new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(5))
+        );
     }
 
     public static ArmorItem registerLeggings(ArmorMaterial armorMaterial) {
-        return new ArmorItem(armorMaterial, ArmorItem.Type.LEGGINGS, new FabricItemSettings());
+        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.LEGGINGS,
+                new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(5))
+        );
     }
 
     public static ArmorItem registerBoots(ArmorMaterial armorMaterial) {
-        return new ArmorItem(armorMaterial, ArmorItem.Type.BOOTS, new FabricItemSettings());
+        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.BOOTS,
+                new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(5))
+        );
     }
 
-    public static RecordItem registerMusicDisc(int redstoneOutput, SoundEvent soundEvent, int musicLength) {
-        return new RecordItem(redstoneOutput, soundEvent, new FabricItemSettings().stacksTo(1).rarity(Rarity.RARE), musicLength);
+    public static Item registerMusicDisc(int redstoneOutput, ResourceKey<JukeboxSong> song) {
+        return new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(song));
     }
 
     public static CSpawnEggItem registerSpawnEgg(EntityType entityType, int baseColor, int spotsColor, EntityType mobOffspring) {
-       return new CSpawnEggItem(entityType, baseColor, spotsColor, mobOffspring, new FabricItemSettings());
+       return new CSpawnEggItem(entityType, baseColor, spotsColor, mobOffspring, new Item.Properties());
     }
 
     public static MobInContainerItem registerMobInContainer(EntityType entityType, SoundEvent soundEvent, Item returnItem) {
-        return new MobInContainerItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(returnItem), returnItem);
+        return new MobInContainerItem(entityType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(returnItem), returnItem);
     }
 
     public static MobInFluidBucketItem registerMobInFluidContainer(EntityType entityType, Fluid fluidType, SoundEvent soundEvent) {
-        return new MobInFluidBucketItem(entityType, fluidType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET));
+        return new MobInFluidBucketItem(entityType, fluidType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET));
     }
 
     public static MobInPowderSnowBucketItem registerMobInPowderSnowBucket(EntityType entityType, SoundEvent soundEvent) {
-        return new MobInPowderSnowBucketItem(entityType, soundEvent, new FabricItemSettings().stacksTo(1).craftRemainder(Items.BUCKET), Items.BUCKET);
+        return new MobInPowderSnowBucketItem(entityType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET), Items.BUCKET);
     }
 
     // endregion
@@ -166,7 +193,7 @@ public class RegistryHelper {
      **/
 
     public static ResourceLocation registerCustomLootTable(String name) {
-        return registerCustomLootTable(new ResourceLocation(name));
+        return registerCustomLootTable(ResourceLocation.parse(name));
     }
 
     public static ResourceLocation registerCustomLootTable(ResourceLocation resourceLocation) {
@@ -184,17 +211,19 @@ public class RegistryHelper {
      * Miscellaneous registry helpers.
      **/
 
-    public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {
-        context.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
-    }
+    // TODO i think these arent required anymore, arent features fully data driven now?
 
-    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
-        registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
-    }
-
-    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
-        context.register(resourceKey, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeature), List.copyOf(placementModifiers)));
-    }
+//    public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {
+//        context.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
+//    }
+//
+//    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
+//        registerPlacedFeature(context, resourceKey, configuredFeature, List.of(placementModifiers));
+//    }
+//
+//    public static void registerPlacedFeature(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> resourceKey, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
+//        context.register(resourceKey, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeature), List.copyOf(placementModifiers)));
+//    }
 
     // endregion
 
@@ -210,237 +239,237 @@ public class RegistryHelper {
 
         // region Archaeology Loot Tables
 
-        ARCHAEOLOGY_DESERT_TEMPLE = new ResourceLocation(minecraft, "archaeology/desert_pyramid"),
-        ARCHAEOLOGY_DESERT_WELL = new ResourceLocation(minecraft, "archaeology/desert_well"),
-        ARCHAEOLOGY_COLD_OCEAN_RUIN = new ResourceLocation(minecraft, "archaeology/ocean_ruin_cold"),
-        ARCHAEOLOGY_WARM_OCEAN_RUIN = new ResourceLocation(minecraft, "archaeology/ocean_ruin_warm"),
-        ARCHAEOLOGY_COMMON_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_common"),
-        ARCHAEOLOGY_RARE_TRAIL_RUINS = new ResourceLocation(minecraft, "archaeology/trail_ruins_rare"),
+        ARCHAEOLOGY_DESERT_TEMPLE = ResourceLocation.withDefaultNamespace("archaeology/desert_pyramid"),
+        ARCHAEOLOGY_DESERT_WELL = ResourceLocation.withDefaultNamespace("archaeology/desert_well"),
+        ARCHAEOLOGY_COLD_OCEAN_RUIN = ResourceLocation.withDefaultNamespace("archaeology/ocean_ruin_cold"),
+        ARCHAEOLOGY_WARM_OCEAN_RUIN = ResourceLocation.withDefaultNamespace("archaeology/ocean_ruin_warm"),
+        ARCHAEOLOGY_COMMON_TRAIL_RUINS = ResourceLocation.withDefaultNamespace("archaeology/trail_ruins_common"),
+        ARCHAEOLOGY_RARE_TRAIL_RUINS = ResourceLocation.withDefaultNamespace("archaeology/trail_ruins_rare"),
 
         // endregion
 
         // region Chest Loot Tables
 
-        MINESHAFT = new ResourceLocation(minecraft, "chests/abandoned_mineshaft"),
-        ANCIENT_CITY = new ResourceLocation(minecraft, "chests/ancient_city"),
-        ANCIENT_CITY_ICE_BOX = new ResourceLocation(minecraft, "chests/ancient_city_ice_box"),
-        BASTION_BRIDGE = new ResourceLocation(minecraft, "chests/bastion_bridge"),
-        BASTION_HOGLIN_STABLE = new ResourceLocation(minecraft, "chests/bastion_hoglin_stable"),
-        BASTION_OTHER = new ResourceLocation(minecraft, "chests/bastion_other"),
-        BASTION_TREASURE = new ResourceLocation(minecraft, "chests/bastion_treasure"),
-        BURIED_TREASURE = new ResourceLocation(minecraft, "chests/buried_treasure"),
-        DESERT_TEMPLE = new ResourceLocation(minecraft, "chests/desert_pyramid"),
-        END_CITY_TREASURE = new ResourceLocation(minecraft, "chests/end_city_treasure"),
-        IGLOO_CHEST = new ResourceLocation(minecraft, "chests/igloo_chest"),
-        JUNGLE_TEMPLE = new ResourceLocation(minecraft, "chests/jungle_temple"),
-        JUNGLE_TEMPLE_DISPENSER = new ResourceLocation(minecraft, "chests/jungle_temple_dispenser"),
-        NETHER_FORTRESS_BRIDGE = new ResourceLocation(minecraft, "chests/nether_bridge"),
-        PILLAGER_OUTPOST = new ResourceLocation(minecraft, "chests/pillager_outpost"),
-        RUINED_PORTAL = new ResourceLocation(minecraft, "chests/ruined_portal"),
-        SHIPWRECK_MAP = new ResourceLocation(minecraft, "chests/shipwreck_map"),
-        SHIPWRECK_SUPPLY = new ResourceLocation(minecraft, "chests/shipwreck_supply"),
-        SHIPWRECK_TREASURE = new ResourceLocation(minecraft, "chests/shipwreck_treasure"),
-        DUNGEON = new ResourceLocation(minecraft, "chests/simple_dungeon"),
-        BONUS_CHEST = new ResourceLocation(minecraft, "chests/spawn_bonus_chest"),
-        STRONGHOLD_CORRIDOR = new ResourceLocation(minecraft, "chests/stronghold_corridor"),
-        STRONGHOLD_CROSSING = new ResourceLocation(minecraft, "chests/stronghold_crossing"),
-        STRONGHOLD_LIBRARY = new ResourceLocation(minecraft, "chests/stronghold_library"),
-        UNDERWATER_RUIN_BIG = new ResourceLocation(minecraft, "chests/underwater_ruin_big"),
-        UNDERWATER_RUIN_SMALL = new ResourceLocation(minecraft, "chests/underwater_ruin_small"),
-        WOODLAND_MANSION = new ResourceLocation(minecraft, "chests/woodland_mansion"),
-        VILLAGE_ARMORER = new ResourceLocation(minecraft, "chests/village/village_armorer"),
-        VILLAGE_BUTCHER = new ResourceLocation(minecraft, "chests/village/village_butcher"),
-        VILLAGE_CARTOGRAPHER = new ResourceLocation(minecraft, "chests/village/village_cartographer"),
-        VILLAGE_DESERT_HOUSE = new ResourceLocation(minecraft, "chests/village/village_desert_house"),
-        VILLAGE_FISHER = new ResourceLocation(minecraft, "chests/village/village_fisher"),
-        VILLAGE_FLETCHER = new ResourceLocation(minecraft, "chests/village/village_fletcher"),
-        VILLAGE_MASON = new ResourceLocation(minecraft, "chests/village/village_mason"),
-        VILLAGE_PLAINS_HOUSE = new ResourceLocation(minecraft, "chests/village/village_plains_house"),
-        VILLAGE_SAVANNA_HOUSE = new ResourceLocation(minecraft, "chests/village/village_savanna_house"),
-        VILLAGE_TAIGA_HOUSE = new ResourceLocation(minecraft, "chests/village/village_taiga_house"),
-        VILLAGE_TANNERY = new ResourceLocation(minecraft, "chests/village/village_tannery"),
-        VILLAGE_TEMPLE = new ResourceLocation(minecraft, "chests/village/village_temple"),
-        VILLAGE_TOOLSMITH = new ResourceLocation(minecraft, "chests/village/village_toolsmith"),
-        VILLAGE_WEAPONSMITH = new ResourceLocation(minecraft, "chests/village/village_weaponsmith"),
-        TRIAL_CHAMBERS_CORRIDOR_CHEST = new ResourceLocation(minecraft, "chests/trial_chambers/corridor"),
-        TRIAL_CHAMBERS_ENTRANCE = new ResourceLocation(minecraft, "chests/trial_chambers/entrance"),
-        TRIAL_CHAMBERS_INTERSECTION = new ResourceLocation(minecraft, "chests/trial_chambers/intersection"),
-        TRIAL_CHAMBERS_INTERSECTION_BARREL = new ResourceLocation(minecraft, "chests/trial_chambers/intersection_barrel"),
-        TRIAL_CHAMBERS_REWARD = new ResourceLocation(minecraft, "chests/trial_chambers/reward"),
-        TRIAL_CHAMBERS_REWARD_COMMON = new ResourceLocation(minecraft, "chests/trial_chambers/reward_common"),
-        TRIAL_CHAMBERS_REWARD_OMINOUS = new ResourceLocation(minecraft, "chests/trial_chambers/reward_ominous"),
-        TRIAL_CHAMBERS_REWARD_OMINOUS_COMMON = new ResourceLocation(minecraft, "chests/trial_chambers/reward_ominous_common"),
-        TRIAL_CHAMBERS_REWARD_OMINOUS_RARE = new ResourceLocation(minecraft, "chests/trial_chambers/reward_ominous_rare"),
-        TRIAL_CHAMBERS_REWARD_OMINOUS_UNIQUE = new ResourceLocation(minecraft, "chests/trial_chambers/reward_ominous_unique"),
-        TRIAL_CHAMBERS_REWARD_RARE = new ResourceLocation(minecraft, "chests/trial_chambers/reward_rare"),
-        TRIAL_CHAMBERS_REWARD_UNIQUE = new ResourceLocation(minecraft, "chests/trial_chambers/reward_unique"),
-        TRIAL_CHAMBERS_SUPPLY = new ResourceLocation(minecraft, "chests/trial_chambers/supply"),
+        MINESHAFT = ResourceLocation.withDefaultNamespace("chests/abandoned_mineshaft"),
+        ANCIENT_CITY = ResourceLocation.withDefaultNamespace("chests/ancient_city"),
+        ANCIENT_CITY_ICE_BOX = ResourceLocation.withDefaultNamespace("chests/ancient_city_ice_box"),
+        BASTION_BRIDGE = ResourceLocation.withDefaultNamespace("chests/bastion_bridge"),
+        BASTION_HOGLIN_STABLE = ResourceLocation.withDefaultNamespace("chests/bastion_hoglin_stable"),
+        BASTION_OTHER = ResourceLocation.withDefaultNamespace("chests/bastion_other"),
+        BASTION_TREASURE = ResourceLocation.withDefaultNamespace("chests/bastion_treasure"),
+        BURIED_TREASURE = ResourceLocation.withDefaultNamespace("chests/buried_treasure"),
+        DESERT_TEMPLE = ResourceLocation.withDefaultNamespace("chests/desert_pyramid"),
+        END_CITY_TREASURE = ResourceLocation.withDefaultNamespace("chests/end_city_treasure"),
+        IGLOO_CHEST = ResourceLocation.withDefaultNamespace("chests/igloo_chest"),
+        JUNGLE_TEMPLE = ResourceLocation.withDefaultNamespace("chests/jungle_temple"),
+        JUNGLE_TEMPLE_DISPENSER = ResourceLocation.withDefaultNamespace("chests/jungle_temple_dispenser"),
+        NETHER_FORTRESS_BRIDGE = ResourceLocation.withDefaultNamespace("chests/nether_bridge"),
+        PILLAGER_OUTPOST = ResourceLocation.withDefaultNamespace("chests/pillager_outpost"),
+        RUINED_PORTAL = ResourceLocation.withDefaultNamespace("chests/ruined_portal"),
+        SHIPWRECK_MAP = ResourceLocation.withDefaultNamespace("chests/shipwreck_map"),
+        SHIPWRECK_SUPPLY = ResourceLocation.withDefaultNamespace("chests/shipwreck_supply"),
+        SHIPWRECK_TREASURE = ResourceLocation.withDefaultNamespace("chests/shipwreck_treasure"),
+        DUNGEON = ResourceLocation.withDefaultNamespace("chests/simple_dungeon"),
+        BONUS_CHEST = ResourceLocation.withDefaultNamespace("chests/spawn_bonus_chest"),
+        STRONGHOLD_CORRIDOR = ResourceLocation.withDefaultNamespace("chests/stronghold_corridor"),
+        STRONGHOLD_CROSSING = ResourceLocation.withDefaultNamespace("chests/stronghold_crossing"),
+        STRONGHOLD_LIBRARY = ResourceLocation.withDefaultNamespace("chests/stronghold_library"),
+        UNDERWATER_RUIN_BIG = ResourceLocation.withDefaultNamespace("chests/underwater_ruin_big"),
+        UNDERWATER_RUIN_SMALL = ResourceLocation.withDefaultNamespace("chests/underwater_ruin_small"),
+        WOODLAND_MANSION = ResourceLocation.withDefaultNamespace("chests/woodland_mansion"),
+        VILLAGE_ARMORER = ResourceLocation.withDefaultNamespace("chests/village/village_armorer"),
+        VILLAGE_BUTCHER = ResourceLocation.withDefaultNamespace("chests/village/village_butcher"),
+        VILLAGE_CARTOGRAPHER = ResourceLocation.withDefaultNamespace("chests/village/village_cartographer"),
+        VILLAGE_DESERT_HOUSE = ResourceLocation.withDefaultNamespace("chests/village/village_desert_house"),
+        VILLAGE_FISHER = ResourceLocation.withDefaultNamespace("chests/village/village_fisher"),
+        VILLAGE_FLETCHER = ResourceLocation.withDefaultNamespace("chests/village/village_fletcher"),
+        VILLAGE_MASON = ResourceLocation.withDefaultNamespace("chests/village/village_mason"),
+        VILLAGE_PLAINS_HOUSE = ResourceLocation.withDefaultNamespace("chests/village/village_plains_house"),
+        VILLAGE_SAVANNA_HOUSE = ResourceLocation.withDefaultNamespace("chests/village/village_savanna_house"),
+        VILLAGE_TAIGA_HOUSE = ResourceLocation.withDefaultNamespace("chests/village/village_taiga_house"),
+        VILLAGE_TANNERY = ResourceLocation.withDefaultNamespace("chests/village/village_tannery"),
+        VILLAGE_TEMPLE = ResourceLocation.withDefaultNamespace("chests/village/village_temple"),
+        VILLAGE_TOOLSMITH = ResourceLocation.withDefaultNamespace("chests/village/village_toolsmith"),
+        VILLAGE_WEAPONSMITH = ResourceLocation.withDefaultNamespace("chests/village/village_weaponsmith"),
+        TRIAL_CHAMBERS_CORRIDOR_CHEST = ResourceLocation.withDefaultNamespace("chests/trial_chambers/corridor"),
+        TRIAL_CHAMBERS_ENTRANCE = ResourceLocation.withDefaultNamespace("chests/trial_chambers/entrance"),
+        TRIAL_CHAMBERS_INTERSECTION = ResourceLocation.withDefaultNamespace("chests/trial_chambers/intersection"),
+        TRIAL_CHAMBERS_INTERSECTION_BARREL = ResourceLocation.withDefaultNamespace("chests/trial_chambers/intersection_barrel"),
+        TRIAL_CHAMBERS_REWARD = ResourceLocation.withDefaultNamespace("chests/trial_chambers/reward"),
+        TRIAL_CHAMBERS_REWARD_COMMON = ResourceLocation.withDefaultNamespace("chests/trial_chambers/reward_common"),
+        TRIAL_CHAMBERS_REWARD_OMINOUS = ResourceLocation.withDefaultNamespace("chests/trial_chambers/reward_ominous"),
+        TRIAL_CHAMBERS_REWARD_OMINOUS_COMMON = ResourceLocation.withDefaultNamespace("chests/trial_chambers/reward_ominous_common"),
+        TRIAL_CHAMBERS_REWARD_OMINOUS_RARE = ResourceLocation.withDefaultNamespace("chests/trial_chambers/reward_ominous_rare"),
+        TRIAL_CHAMBERS_REWARD_OMINOUS_UNIQUE = ResourceLocation.withDefaultNamespace("chests/trial_chambers/reward_ominous_unique"),
+        TRIAL_CHAMBERS_REWARD_RARE = ResourceLocation.withDefaultNamespace("chests/trial_chambers/reward_rare"),
+        TRIAL_CHAMBERS_REWARD_UNIQUE = ResourceLocation.withDefaultNamespace("chests/trial_chambers/reward_unique"),
+        TRIAL_CHAMBERS_SUPPLY = ResourceLocation.withDefaultNamespace("chests/trial_chambers/supply"),
 
         // endregion
 
         // region Dispenser Loot Tables
 
-        TRIAL_CHAMBERS_CHAMBER = new ResourceLocation(minecraft, "dispensers/trial_chambers/chamber"),
-        TRIAL_CHAMBERS_CORRIDOR_DISPENSER = new ResourceLocation(minecraft, "dispensers/trial_chambers/corridor"),
-        TRIAL_CHAMBERS_WATER = new ResourceLocation(minecraft, "dispensers/trial_chambers/water"),
+        TRIAL_CHAMBERS_CHAMBER = ResourceLocation.withDefaultNamespace("dispensers/trial_chambers/chamber"),
+        TRIAL_CHAMBERS_CORRIDOR_DISPENSER = ResourceLocation.withDefaultNamespace("dispensers/trial_chambers/corridor"),
+        TRIAL_CHAMBERS_WATER = ResourceLocation.withDefaultNamespace("dispensers/trial_chambers/water"),
 
         // endregion
 
         // region Entity Loot Tables
 
-        BLACK_SHEEP = new ResourceLocation(minecraft, "entities/sheep/black"),
-        BLUE_SHEEP = new ResourceLocation(minecraft, "entities/sheep/blue"),
-        BROWN_SHEEP = new ResourceLocation(minecraft, "entities/sheep/brown"),
-        CYAN_SHEEP = new ResourceLocation(minecraft, "entities/sheep/cyan"),
-        GRAY_SHEEP = new ResourceLocation(minecraft, "entities/sheep/gray"),
-        GREEN_SHEEP = new ResourceLocation(minecraft, "entities/sheep/green"),
-        LIGHT_BLUE_SHEEP = new ResourceLocation(minecraft, "entities/sheep/light_blue"),
-        LIGHT_GRAY_SHEEP = new ResourceLocation(minecraft, "entities/sheep/light_gray"),
-        LIME_SHEEP = new ResourceLocation(minecraft, "entities/sheep/lime"),
-        MAGENTA_SHEEP = new ResourceLocation(minecraft, "entities/sheep/magenta"),
-        ORANGE_SHEEP = new ResourceLocation(minecraft, "entities/sheep/orange"),
-        PINK_SHEEP = new ResourceLocation(minecraft, "entities/sheep/pink"),
-        PURPLE_SHEEP = new ResourceLocation(minecraft, "entities/sheep/purple"),
-        RED_SHEEP = new ResourceLocation(minecraft, "entities/sheep/red"),
-        WHITE_SHEEP = new ResourceLocation(minecraft, "entities/sheep/white"),
-        YELLOW_SHEEP = new ResourceLocation(minecraft, "entities/sheep/yellow"),
-        ALLAY = new ResourceLocation(minecraft, "entities/allay"),
-        ARMADILLO = new ResourceLocation(minecraft, "entities/armadillo"),
-        ARMOR_STAND = new ResourceLocation(minecraft, "entities/armor_stand"),
-        AXOLOTL = new ResourceLocation(minecraft, "entities/axolotl"),
-        BAT = new ResourceLocation(minecraft, "entities/bat"),
-        BEE = new ResourceLocation(minecraft, "entities/bee"),
-        BLAZE = new ResourceLocation(minecraft, "entities/blaze"),
-        BOGGED = new ResourceLocation(minecraft, "entities/bogged"),
-        BREEZE = new ResourceLocation(minecraft, "entities/breeze"),
-        CAMEL = new ResourceLocation(minecraft, "entities/camel"),
-        CAT = new ResourceLocation(minecraft, "entities/cat"),
-        CAVE_SPIDER = new ResourceLocation(minecraft, "entities/cave_spider"),
-        CHICKEN = new ResourceLocation(minecraft, "entities/chicken"),
-        COD = new ResourceLocation(minecraft, "entities/cod"),
-        COW = new ResourceLocation(minecraft, "entities/cow"),
-        CREEPER = new ResourceLocation(minecraft, "entities/creeper"),
-        DOLPHIN = new ResourceLocation(minecraft, "entities/dolphin"),
-        DONKEY = new ResourceLocation(minecraft, "entities/donkey"),
-        DROWNED = new ResourceLocation(minecraft, "entities/drowned"),
-        ELDER_GUARDIAN = new ResourceLocation(minecraft, "entities/elder_guardian"),
-        ENDER_DRAGON = new ResourceLocation(minecraft, "entities/ender_dragon"),
-        ENDERMAN = new ResourceLocation(minecraft, "entities/enderman"),
-        ENDERMITE = new ResourceLocation(minecraft, "entities/endermite"),
-        EVOKER = new ResourceLocation(minecraft, "entities/evoker"),
-        FOX = new ResourceLocation(minecraft, "entities/fox"),
-        FROG = new ResourceLocation(minecraft, "entities/frog"),
-        GHAST = new ResourceLocation(minecraft, "entities/ghast"),
-        GIANT = new ResourceLocation(minecraft, "entities/giant"),
-        GLOW_SQUID = new ResourceLocation(minecraft, "entities/glow_squid"),
-        GOAT = new ResourceLocation(minecraft, "entities/goat"),
-        GUARDIAN = new ResourceLocation(minecraft, "entities/guardian"),
-        HOGLIN = new ResourceLocation(minecraft, "entities/hoglin"),
-        HORSE = new ResourceLocation(minecraft, "entities/horse"),
-        HUSK = new ResourceLocation(minecraft, "entities/husk"),
-        ILLUSIONER = new ResourceLocation(minecraft, "entities/illusioner"),
-        IRON_GOLEM = new ResourceLocation(minecraft, "entities/iron_golem"),
-        LLAMA = new ResourceLocation(minecraft, "entities/llama"),
-        MAGMA_CUBE = new ResourceLocation(minecraft, "entities/magma_cube"),
-        MOOSHROOM = new ResourceLocation(minecraft, "entities/mooshroom"),
-        MULE = new ResourceLocation(minecraft, "entities/mule"),
-        OCELOT = new ResourceLocation(minecraft, "entities/ocelot"),
-        PANDA = new ResourceLocation(minecraft, "entities/panda"),
-        PARROT = new ResourceLocation(minecraft, "entities/parrot"),
-        PHANTOM = new ResourceLocation(minecraft, "entities/phantom"),
-        PIG = new ResourceLocation(minecraft, "entities/pig"),
-        PIGLIN = new ResourceLocation(minecraft, "entities/piglin"),
-        PIGLIN_BRUTE = new ResourceLocation(minecraft, "entities/piglin_brute"),
-        PILLAGER = new ResourceLocation(minecraft, "entities/pillager"),
-        PLAYER = new ResourceLocation(minecraft, "entities/player"),
-        POLAR_BEAR = new ResourceLocation(minecraft, "entities/polar_bear"),
-        PUFFERFISH = new ResourceLocation(minecraft, "entities/pufferfish"),
-        RABBIT = new ResourceLocation(minecraft, "entities/rabbit"),
-        RAVAGER = new ResourceLocation(minecraft, "entities/ravager"),
-        SALMON = new ResourceLocation(minecraft, "entities/salmon"),
-        SHEEP = new ResourceLocation(minecraft, "entities/sheep"),
-        SHULKER = new ResourceLocation(minecraft, "entities/shulker"),
-        SILVERFISH = new ResourceLocation(minecraft, "entities/silverfish"),
-        SKELETON = new ResourceLocation(minecraft, "entities/skeleton"),
-        SKELETON_HORSE = new ResourceLocation(minecraft, "entities/skeleton_horse"),
-        SLIME = new ResourceLocation(minecraft, "entities/slime"),
-        SNIFFER = new ResourceLocation(minecraft, "entities/sniffer"),
-        SNOW_GOLEM = new ResourceLocation(minecraft, "entities/snow_golem"),
-        SPIDER = new ResourceLocation(minecraft, "entities/spider"),
-        SQUID = new ResourceLocation(minecraft, "entities/squid"),
-        STRAY = new ResourceLocation(minecraft, "entities/stray"),
-        STRIDER = new ResourceLocation(minecraft, "entities/strider"),
-        TADPOLE = new ResourceLocation(minecraft, "entities/tadpole"),
-        TRADER_LLAMA = new ResourceLocation(minecraft, "entities/trader_llama"),
-        TROPICAL_FISH = new ResourceLocation(minecraft, "entities/tropical_fish"),
-        TURTLE = new ResourceLocation(minecraft, "entities/turtle"),
-        VEX = new ResourceLocation(minecraft, "entities/vex"),
-        VILLAGER = new ResourceLocation(minecraft, "entities/villager"),
-        VINDICATOR = new ResourceLocation(minecraft, "entities/vindicator"),
-        WANDERING_TRADER = new ResourceLocation(minecraft, "entities/wandering_trader"),
-        WARDEN = new ResourceLocation(minecraft, "entities/warden"),
-        WITCH = new ResourceLocation(minecraft, "entities/witch"),
-        WITHER = new ResourceLocation(minecraft, "entities/wither"),
-        WITHER_SKELETON = new ResourceLocation(minecraft, "entities/wither_skeleton"),
-        WOLF = new ResourceLocation(minecraft, "entities/wolf"),
-        ZOGLIN = new ResourceLocation(minecraft, "entities/zoglin"),
-        ZOMBIE = new ResourceLocation(minecraft, "entities/zombie"),
-        ZOMBIE_HORSE = new ResourceLocation(minecraft, "entities/zombie_horse"),
-        ZOMBIE_VILLAGER = new ResourceLocation(minecraft, "entities/zombie_villager"),
-        ZOMBIFIED_PIGLIN = new ResourceLocation(minecraft, "entities/zombified_piglin"),
+        BLACK_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/black"),
+        BLUE_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/blue"),
+        BROWN_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/brown"),
+        CYAN_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/cyan"),
+        GRAY_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/gray"),
+        GREEN_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/green"),
+        LIGHT_BLUE_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/light_blue"),
+        LIGHT_GRAY_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/light_gray"),
+        LIME_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/lime"),
+        MAGENTA_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/magenta"),
+        ORANGE_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/orange"),
+        PINK_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/pink"),
+        PURPLE_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/purple"),
+        RED_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/red"),
+        WHITE_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/white"),
+        YELLOW_SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep/yellow"),
+        ALLAY = ResourceLocation.withDefaultNamespace("entities/allay"),
+        ARMADILLO = ResourceLocation.withDefaultNamespace("entities/armadillo"),
+        ARMOR_STAND = ResourceLocation.withDefaultNamespace("entities/armor_stand"),
+        AXOLOTL = ResourceLocation.withDefaultNamespace("entities/axolotl"),
+        BAT = ResourceLocation.withDefaultNamespace("entities/bat"),
+        BEE = ResourceLocation.withDefaultNamespace("entities/bee"),
+        BLAZE = ResourceLocation.withDefaultNamespace("entities/blaze"),
+        BOGGED = ResourceLocation.withDefaultNamespace("entities/bogged"),
+        BREEZE = ResourceLocation.withDefaultNamespace("entities/breeze"),
+        CAMEL = ResourceLocation.withDefaultNamespace("entities/camel"),
+        CAT = ResourceLocation.withDefaultNamespace("entities/cat"),
+        CAVE_SPIDER = ResourceLocation.withDefaultNamespace("entities/cave_spider"),
+        CHICKEN = ResourceLocation.withDefaultNamespace("entities/chicken"),
+        COD = ResourceLocation.withDefaultNamespace("entities/cod"),
+        COW = ResourceLocation.withDefaultNamespace("entities/cow"),
+        CREEPER = ResourceLocation.withDefaultNamespace("entities/creeper"),
+        DOLPHIN = ResourceLocation.withDefaultNamespace("entities/dolphin"),
+        DONKEY = ResourceLocation.withDefaultNamespace("entities/donkey"),
+        DROWNED = ResourceLocation.withDefaultNamespace("entities/drowned"),
+        ELDER_GUARDIAN = ResourceLocation.withDefaultNamespace("entities/elder_guardian"),
+        ENDER_DRAGON = ResourceLocation.withDefaultNamespace("entities/ender_dragon"),
+        ENDERMAN = ResourceLocation.withDefaultNamespace("entities/enderman"),
+        ENDERMITE = ResourceLocation.withDefaultNamespace("entities/endermite"),
+        EVOKER = ResourceLocation.withDefaultNamespace("entities/evoker"),
+        FOX = ResourceLocation.withDefaultNamespace("entities/fox"),
+        FROG = ResourceLocation.withDefaultNamespace("entities/frog"),
+        GHAST = ResourceLocation.withDefaultNamespace("entities/ghast"),
+        GIANT = ResourceLocation.withDefaultNamespace("entities/giant"),
+        GLOW_SQUID = ResourceLocation.withDefaultNamespace("entities/glow_squid"),
+        GOAT = ResourceLocation.withDefaultNamespace("entities/goat"),
+        GUARDIAN = ResourceLocation.withDefaultNamespace("entities/guardian"),
+        HOGLIN = ResourceLocation.withDefaultNamespace("entities/hoglin"),
+        HORSE = ResourceLocation.withDefaultNamespace("entities/horse"),
+        HUSK = ResourceLocation.withDefaultNamespace("entities/husk"),
+        ILLUSIONER = ResourceLocation.withDefaultNamespace("entities/illusioner"),
+        IRON_GOLEM = ResourceLocation.withDefaultNamespace("entities/iron_golem"),
+        LLAMA = ResourceLocation.withDefaultNamespace("entities/llama"),
+        MAGMA_CUBE = ResourceLocation.withDefaultNamespace("entities/magma_cube"),
+        MOOSHROOM = ResourceLocation.withDefaultNamespace("entities/mooshroom"),
+        MULE = ResourceLocation.withDefaultNamespace("entities/mule"),
+        OCELOT = ResourceLocation.withDefaultNamespace("entities/ocelot"),
+        PANDA = ResourceLocation.withDefaultNamespace("entities/panda"),
+        PARROT = ResourceLocation.withDefaultNamespace("entities/parrot"),
+        PHANTOM = ResourceLocation.withDefaultNamespace("entities/phantom"),
+        PIG = ResourceLocation.withDefaultNamespace("entities/pig"),
+        PIGLIN = ResourceLocation.withDefaultNamespace("entities/piglin"),
+        PIGLIN_BRUTE = ResourceLocation.withDefaultNamespace("entities/piglin_brute"),
+        PILLAGER = ResourceLocation.withDefaultNamespace("entities/pillager"),
+        PLAYER = ResourceLocation.withDefaultNamespace("entities/player"),
+        POLAR_BEAR = ResourceLocation.withDefaultNamespace("entities/polar_bear"),
+        PUFFERFISH = ResourceLocation.withDefaultNamespace("entities/pufferfish"),
+        RABBIT = ResourceLocation.withDefaultNamespace("entities/rabbit"),
+        RAVAGER = ResourceLocation.withDefaultNamespace("entities/ravager"),
+        SALMON = ResourceLocation.withDefaultNamespace("entities/salmon"),
+        SHEEP = ResourceLocation.withDefaultNamespace("entities/sheep"),
+        SHULKER = ResourceLocation.withDefaultNamespace("entities/shulker"),
+        SILVERFISH = ResourceLocation.withDefaultNamespace("entities/silverfish"),
+        SKELETON = ResourceLocation.withDefaultNamespace("entities/skeleton"),
+        SKELETON_HORSE = ResourceLocation.withDefaultNamespace("entities/skeleton_horse"),
+        SLIME = ResourceLocation.withDefaultNamespace("entities/slime"),
+        SNIFFER = ResourceLocation.withDefaultNamespace("entities/sniffer"),
+        SNOW_GOLEM = ResourceLocation.withDefaultNamespace("entities/snow_golem"),
+        SPIDER = ResourceLocation.withDefaultNamespace("entities/spider"),
+        SQUID = ResourceLocation.withDefaultNamespace("entities/squid"),
+        STRAY = ResourceLocation.withDefaultNamespace("entities/stray"),
+        STRIDER = ResourceLocation.withDefaultNamespace("entities/strider"),
+        TADPOLE = ResourceLocation.withDefaultNamespace("entities/tadpole"),
+        TRADER_LLAMA = ResourceLocation.withDefaultNamespace("entities/trader_llama"),
+        TROPICAL_FISH = ResourceLocation.withDefaultNamespace("entities/tropical_fish"),
+        TURTLE = ResourceLocation.withDefaultNamespace("entities/turtle"),
+        VEX = ResourceLocation.withDefaultNamespace("entities/vex"),
+        VILLAGER = ResourceLocation.withDefaultNamespace("entities/villager"),
+        VINDICATOR = ResourceLocation.withDefaultNamespace("entities/vindicator"),
+        WANDERING_TRADER = ResourceLocation.withDefaultNamespace("entities/wandering_trader"),
+        WARDEN = ResourceLocation.withDefaultNamespace("entities/warden"),
+        WITCH = ResourceLocation.withDefaultNamespace("entities/witch"),
+        WITHER = ResourceLocation.withDefaultNamespace("entities/wither"),
+        WITHER_SKELETON = ResourceLocation.withDefaultNamespace("entities/wither_skeleton"),
+        WOLF = ResourceLocation.withDefaultNamespace("entities/wolf"),
+        ZOGLIN = ResourceLocation.withDefaultNamespace("entities/zoglin"),
+        ZOMBIE = ResourceLocation.withDefaultNamespace("entities/zombie"),
+        ZOMBIE_HORSE = ResourceLocation.withDefaultNamespace("entities/zombie_horse"),
+        ZOMBIE_VILLAGER = ResourceLocation.withDefaultNamespace("entities/zombie_villager"),
+        ZOMBIFIED_PIGLIN = ResourceLocation.withDefaultNamespace("entities/zombified_piglin"),
 
         // endregion
 
         // region Equipment Loot Tables
 
-        EQUIPMENT_TRIAL_CHAMBER = new ResourceLocation(minecraft, "equipment/trial_chamber"),
-        EQUIPMENT_TRIAL_CHAMBER_MELEE = new ResourceLocation(minecraft, "equipment/trial_chamber_melee"),
-        EQUIPMENT_TRIAL_CHAMBER_RANGED = new ResourceLocation(minecraft, "equipment/trial_chamber_ranged"),
+        EQUIPMENT_TRIAL_CHAMBER = ResourceLocation.withDefaultNamespace("equipment/trial_chamber"),
+        EQUIPMENT_TRIAL_CHAMBER_MELEE = ResourceLocation.withDefaultNamespace("equipment/trial_chamber_melee"),
+        EQUIPMENT_TRIAL_CHAMBER_RANGED = ResourceLocation.withDefaultNamespace("equipment/trial_chamber_ranged"),
 
         // endregion
 
         // region Gameplay Loot Tables
 
-        CAT_MORNING_GIFT = new ResourceLocation(minecraft, "gameplay/cat_morning_gift"),
-        FISHING = new ResourceLocation(minecraft, "gameplay/fishing"),
-        PANDA_SNEEZE = new ResourceLocation(minecraft, "gameplay/panda_sneeze"),
-        PIGLIN_BARTERING = new ResourceLocation(minecraft, "gameplay/piglin_bartering"),
-        SNIFFER_DIGGING = new ResourceLocation(minecraft, "gameplay/sniffer_digging"),
-        FISHING_FISH = new ResourceLocation(minecraft, "gameplay/fishing/fish"),
-        FISHING_JUNK = new ResourceLocation(minecraft, "gameplay/fishing/junk"),
-        FISHING_TREASURE = new ResourceLocation(minecraft, "gameplay/fishing/treasure"),
-        HERO_OF_THE_VILLAGE_GIFT_ARMORER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/armorer_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_BUTCHER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/butcher_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_CARTOGRAPHER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/cartographer_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_CLERIC = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/cleric_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_FARMER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/farmer_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_FISHERMAN = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/fisherman_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_FLETCHER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/fletcher_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_LEATHERWORKER = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/leatherworker_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_LIBRARIAN = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/librarian_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_MASON = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/mason_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_SHEPHERD = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/shepherd_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_TOOLSMITH = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/toolsmith_gift"),
-        HERO_OF_THE_VILLAGE_GIFT_WEAPONSMITH = new ResourceLocation(minecraft, "gameplay/hero_of_the_village/weaponsmith_gift"),
+        CAT_MORNING_GIFT = ResourceLocation.withDefaultNamespace("gameplay/cat_morning_gift"),
+        FISHING = ResourceLocation.withDefaultNamespace("gameplay/fishing"),
+        PANDA_SNEEZE = ResourceLocation.withDefaultNamespace("gameplay/panda_sneeze"),
+        PIGLIN_BARTERING = ResourceLocation.withDefaultNamespace("gameplay/piglin_bartering"),
+        SNIFFER_DIGGING = ResourceLocation.withDefaultNamespace("gameplay/sniffer_digging"),
+        FISHING_FISH = ResourceLocation.withDefaultNamespace("gameplay/fishing/fish"),
+        FISHING_JUNK = ResourceLocation.withDefaultNamespace("gameplay/fishing/junk"),
+        FISHING_TREASURE = ResourceLocation.withDefaultNamespace("gameplay/fishing/treasure"),
+        HERO_OF_THE_VILLAGE_GIFT_ARMORER = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/armorer_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_BUTCHER = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/butcher_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_CARTOGRAPHER = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/cartographer_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_CLERIC = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/cleric_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_FARMER = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/farmer_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_FISHERMAN = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/fisherman_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_FLETCHER = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/fletcher_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_LEATHERWORKER = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/leatherworker_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_LIBRARIAN = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/librarian_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_MASON = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/mason_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_SHEPHERD = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/shepherd_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_TOOLSMITH = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/toolsmith_gift"),
+        HERO_OF_THE_VILLAGE_GIFT_WEAPONSMITH = ResourceLocation.withDefaultNamespace("gameplay/hero_of_the_village/weaponsmith_gift"),
 
         // endregion
 
         // region Pot Loot Tables
 
-        TRIAL_CHAMBERS_CORRIDOR_POT = new ResourceLocation(minecraft, "pots/trial_chambers/corridor"),
+        TRIAL_CHAMBERS_CORRIDOR_POT = ResourceLocation.withDefaultNamespace("pots/trial_chambers/corridor"),
 
         // endregion
 
         // region Shearing Loot Tables
 
-        SHEARING_BOGGED = new ResourceLocation(minecraft, "shearing/bogged"),
+        SHEARING_BOGGED = ResourceLocation.withDefaultNamespace("shearing/bogged"),
 
         // endregion
 
         // region Spawner Loot Tables
 
-        TRIAL_CHAMBERS_CONSUMABLES = new ResourceLocation(minecraft, "spawners/trial_chamber/consumables"),
-        TRIAL_CHAMBERS_KEY = new ResourceLocation(minecraft, "spawners/trial_chamber/key")
+        TRIAL_CHAMBERS_CONSUMABLES = ResourceLocation.withDefaultNamespace("spawners/trial_chamber/consumables"),
+        TRIAL_CHAMBERS_KEY = ResourceLocation.withDefaultNamespace("spawners/trial_chamber/key")
 
         // endregion
     ;

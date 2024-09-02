@@ -17,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.sydokiddo.chrysalis.misc.util.entities.ContainerMob;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -70,11 +69,12 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
 
             Entity entity = this.type.spawn(serverLevel, itemStack, null, blockPos, MobSpawnType.BUCKET, true, false);
 
-            if (entity instanceof ContainerMob containerMob) {
-                if (containerMob instanceof Mob mob) mob.setPersistenceRequired();
-                containerMob.loadFromItemTag(itemStack.getOrCreateTag());
-                containerMob.setFromItem(true);
-            }
+            // TODO something something components
+//            if (entity instanceof ContainerMob containerMob) {
+//                if (containerMob instanceof Mob mob) mob.setPersistenceRequired();
+//                containerMob.loadFromItemTag(itemStack.getOrCreateTag());
+//                containerMob.setFromItem(true);
+//            }
 
             level.gameEvent(player, GameEvent.ENTITY_PLACE, blockPos);
         }

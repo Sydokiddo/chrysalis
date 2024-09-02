@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(TridentItem.class)
 public class TridentItemMixin {
 
-    @Inject(method = "releaseUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;startAutoSpinAttack(I)V"))
+    @Inject(method = "releaseUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;startAutoSpinAttack(IFLnet/minecraft/world/item/ItemStack;)V"))
     private void chrysalis$useRiptideTridentCriteriaTrigger(ItemStack itemStack, Level level, LivingEntity livingEntity, int usedTicks, CallbackInfo info) {
         if (livingEntity instanceof ServerPlayer serverPlayer) ChrysalisCriteriaTriggers.USE_RIPTIDE_TRIDENT.trigger(serverPlayer);
     }

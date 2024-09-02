@@ -1,6 +1,5 @@
 package net.sydokiddo.chrysalis.registry.items;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
@@ -31,7 +30,7 @@ public class ChrysalisDebugItems {
     // Registry
 
     private static Item.Properties debugUtilitySettings() {
-        return new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC);
+        return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC);
     }
 
     private static Item registerItem(String name, Item item) {

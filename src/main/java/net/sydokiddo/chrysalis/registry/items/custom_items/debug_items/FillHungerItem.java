@@ -22,11 +22,12 @@ public class FillHungerItem extends DebugUtilityItem {
         super(properties);
     }
 
-    @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-        ItemHelper.addUseTooltip(tooltip);
-        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
-    }
+    // TODO fix this
+//    @Override
+//    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
+//        ItemHelper.addUseTooltip(tooltip);
+//        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
+//    }
 
     /**
      * Fills the user's hunger bar to the max value when right-clicked with.

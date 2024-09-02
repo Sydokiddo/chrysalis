@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -36,7 +37,7 @@ public class CSpawnEggItem extends SpawnEggItem {
         babyMob.moveTo(vec3.x(), vec3.y(), vec3.z(), 0.0F, 0.0F);
         serverLevel.addFreshEntityWithPassengers(babyMob);
 
-        if (itemStack.hasCustomHoverName()) babyMob.setCustomName(itemStack.getHoverName());
+        if (itemStack.has(DataComponents.CUSTOM_NAME)) babyMob.setCustomName(itemStack.getHoverName());
         if (!player.getAbilities().instabuild) itemStack.shrink(1);
 
         return Optional.of(babyMob);

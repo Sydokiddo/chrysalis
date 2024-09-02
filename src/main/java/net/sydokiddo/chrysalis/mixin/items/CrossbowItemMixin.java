@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.mixin.items;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -17,7 +18,7 @@ import java.util.List;
 public class CrossbowItemMixin {
 
     @Inject(method = "appendHoverText", at = @At("TAIL"))
-    private void chrysalis$addSpaceBeforeCrossbowEnchantments(ItemStack itemStack, @Nullable Level level, List<Component> tooltip, TooltipFlag tooltipFlag, CallbackInfo info) {
-        ItemHelper.addSpaceOnTooltipIfEnchantedOrTrimmed(itemStack, tooltip);
+    private void chrysalis$addSpaceBeforeCrossbowEnchantments(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo ci) {
+        ItemHelper.addSpaceOnTooltipIfEnchantedOrTrimmed(itemStack, list);
     }
 }
