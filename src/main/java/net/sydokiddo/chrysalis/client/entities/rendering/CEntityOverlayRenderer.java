@@ -24,8 +24,7 @@ public class CEntityOverlayRenderer<T extends Mob, M extends HierarchicalModel<T
     @Override
     public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int i, @NotNull T entity, float f, float g, float h, float j, float k, float l) {
         RenderType renderType = this.renderType(entity);
-        // TODO mojmaps be cursed
-//        if (renderType != null) this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), i, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+        if (renderType != null) this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), i, LivingEntityRenderer.getOverlayCoords(entity, 0.0F));
     }
 
     public RenderType renderType(@NotNull LivingEntity livingEntity) {

@@ -2,9 +2,7 @@ package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.minecraft.world.level.dimension.LevelStem;
-import net.minecraft.world.level.levelgen.placement.*;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
-import java.util.List;
 import java.util.function.Predicate;
 
 @SuppressWarnings("unused")
@@ -28,9 +26,5 @@ public class WorldGenHelper {
 
     public static Predicate<BiomeSelectionContext> isEnd() {
         return context -> context.canGenerateIn(LevelStem.END);
-    }
-
-    public static List<PlacementModifier> commonOrePlacement(int count, PlacementModifier modifier) {
-        return List.of(CountPlacement.of(count), InSquarePlacement.spread(), modifier, BiomeFilter.biome());
     }
 }

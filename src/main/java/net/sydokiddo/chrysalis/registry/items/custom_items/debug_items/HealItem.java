@@ -22,12 +22,11 @@ public class HealItem extends DebugUtilityItem {
         super(properties);
     }
 
-    // TODO RAAAAAAH
-//    @Override
-//    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-//        ItemHelper.addUseTooltip(tooltip);
-//        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
-//    }
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
+        ItemHelper.addUseTooltip(tooltip);
+        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
+    }
 
     /**
      * Sets the user to full health when right-clicked with.

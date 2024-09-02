@@ -18,7 +18,6 @@ public class CopperGrateBlockMixin extends Block {
         super(properties);
     }
 
-    @SuppressWarnings("deprecation")
     @Inject(at = @At("HEAD"), method = "skipRendering", cancellable = true)
     private void chrysalis$occludeCopperGrateFaces(BlockState blockState, BlockState adjacentBlock, Direction direction, CallbackInfoReturnable<Boolean> cir) {
 

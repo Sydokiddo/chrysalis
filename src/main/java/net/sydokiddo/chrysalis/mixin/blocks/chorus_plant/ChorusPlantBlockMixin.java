@@ -64,7 +64,6 @@ public abstract class ChorusPlantBlockMixin extends PipeBlock {
      * @reason Overrides the base canSurvive method and allows for Chorus Plants to grow on the chorus_plant_can_grow_on tag
      */
 
-    @SuppressWarnings("deprecation")
     @Overwrite
     public boolean canSurvive(@NotNull BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
 

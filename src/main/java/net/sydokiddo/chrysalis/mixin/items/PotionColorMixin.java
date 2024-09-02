@@ -18,7 +18,6 @@ public class PotionColorMixin {
      * Changes the default potion colors of Blindness, Haste, and Mining Fatigue.
      **/
 
-    // TODO should this be removed with the potion color rework? change the colors here if not
     @Inject(at = @At("RETURN"), method = "getColor", cancellable = true)
     private void chrysalis$changeEffectColors(CallbackInfoReturnable<Integer> cir) {
         if (this.color == 2039587) cir.setReturnValue(Color.decode("#593F7F").getRGB()); // Blindness

@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.misc.util;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -15,7 +16,7 @@ public record ClipboardImage(Image image) implements Transferable {
      **/
 
     @Override
-    public Object getTransferData(DataFlavor dataFlavor) throws UnsupportedFlavorException {
+    public @NotNull Object getTransferData(DataFlavor dataFlavor) throws UnsupportedFlavorException {
         if (this.isDataFlavorSupported(dataFlavor)) return this.image;
         throw new UnsupportedFlavorException(dataFlavor);
     }

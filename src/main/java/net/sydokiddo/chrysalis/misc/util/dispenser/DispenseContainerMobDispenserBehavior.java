@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.helpers.BlockHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
@@ -32,7 +31,6 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
 
             BlockHelper.playDispenserSound(blockSource);
             BlockHelper.playDispenserAnimation(blockSource, blockSource.state().getValue(DispenserBlock.FACING));
-            level.gameEvent(GameEvent.ENTITY_PLACE, blockPos, GameEvent.Context.of(blockSource.state()));
 
             if (itemStack.getItem() instanceof MobInContainerItem mobInContainerItem) {
 

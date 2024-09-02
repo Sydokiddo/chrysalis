@@ -1,8 +1,0 @@
-{
-   "pack":{
-      "pack_format": 22,
-      "description": [
-		{"text": "Enables emissive textures for Chrysalis", "color": "gray"}
-	  ]
-   }
-}

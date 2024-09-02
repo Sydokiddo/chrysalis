@@ -22,12 +22,11 @@ public class ClearEffectsItem extends DebugUtilityItem {
         super(properties);
     }
 
-    // TODO fix this
-//    @Override
-//    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-//        ItemHelper.addUseTooltip(tooltip);
-//        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
-//    }
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
+        ItemHelper.addUseTooltip(tooltip);
+        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
+    }
 
     /**
      * Clears the user's status effects when right-clicked with.

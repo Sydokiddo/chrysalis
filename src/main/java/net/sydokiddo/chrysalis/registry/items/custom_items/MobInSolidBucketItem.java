@@ -7,19 +7,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MobInPowderSnowBucketItem extends MobInContainerItem {
+public class MobInSolidBucketItem extends MobInContainerItem {
 
-    public MobInPowderSnowBucketItem(EntityType<?> entityType, SoundEvent emptySound, Properties properties, Item returnItem) {
+    private final Block blockType;
+
+    public MobInSolidBucketItem(EntityType<?> entityType, Block blockType, SoundEvent emptySound, Properties properties, Item returnItem) {
         super(entityType, emptySound, properties, returnItem);
+        this.blockType = blockType;
     }
 
     /**
-     * Places Powder Snow alongside spawning the mob in the container.
+     * Places a block alongside spawning the mob in the container.
      **/
 
     @Override
@@ -29,7 +32,7 @@ public class MobInPowderSnowBucketItem extends MobInContainerItem {
 
         if (level.isInWorldBounds(blockPos) && level.isEmptyBlock(blockPos)) {
             level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos);
-            if (!level.isClientSide()) level.setBlock(blockPos, Blocks.POWDER_SNOW.defaultBlockState(), 3);
+            if (!level.isClientSide()) level.setBlock(blockPos, this.blockType.defaultBlockState(), 3);
         }
     }
 }

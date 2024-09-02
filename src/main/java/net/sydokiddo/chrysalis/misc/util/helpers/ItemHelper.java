@@ -3,7 +3,6 @@ package net.sydokiddo.chrysalis.misc.util.helpers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -11,15 +10,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.armortrim.ArmorTrim;
 import net.minecraft.world.item.component.ItemContainerContents;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-import java.util.Objects;
-import static net.minecraft.nbt.Tag.TAG_COMPOUND;
-import static net.minecraft.nbt.Tag.TAG_LIST;
 
 @SuppressWarnings("unused")
 public class ItemHelper {
@@ -55,8 +49,7 @@ public class ItemHelper {
     public static BigDecimal getFoodSaturation(ItemStack itemStack) {
         FoodProperties component = itemStack.get(DataComponents.FOOD);
         if (component == null) return new BigDecimal(0);
-        float saturationAmount = component.nutrition() * component.saturation() * 2.0F;
-        return new BigDecimal(saturationAmount).setScale(1, RoundingMode.DOWN);
+        return BigDecimal.valueOf(component.nutrition() * component.saturation() * 2.0F).setScale(1, RoundingMode.DOWN);
     }
 
     /**

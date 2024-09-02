@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.commands.CooldownCommand;
@@ -69,8 +70,12 @@ public class ChrysalisRegistry {
         CHRYSALIS_COLOR = Color.decode("#A27FFF")
     ;
 
-    public static MutableComponent
+    public static final MutableComponent
         CHRYSALIS_ICON = Component.translatable("gui.icon.chrysalis")
+    ;
+
+    public static final ResourceLocation
+        MINECRAFT_FIVE_FONT = ResourceLocation.withDefaultNamespace("five")
     ;
 
     public static void setTooltipIconsFont(MutableComponent mutableComponent) {

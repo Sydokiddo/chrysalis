@@ -25,12 +25,11 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
         super(properties);
     }
 
-    // TODO do
-//    @Override
-//    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-//        ItemHelper.addUseTooltip(tooltip);
-//        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
-//    }
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
+        ItemHelper.addUseTooltip(tooltip);
+        super.appendHoverText(itemStack, level, tooltip, tooltipFlag);
+    }
 
     /**
      * Teleports the user to their spawnpoint when right-clicked with.

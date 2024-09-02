@@ -1,11 +1,9 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.Chrysalis;
@@ -31,11 +29,11 @@ public abstract class ItemMixin {
             tooltip.add(CommonComponents.space().append(Component.translatable("item.chrysalis.debug_stick.desc").withStyle(ChatFormatting.BLUE)));
         }
 
-        if (this.getDescriptionId().contains(Chrysalis.MOD_ID) && Screen.hasShiftDown()) {
+        if (this.getDescriptionId().contains(Chrysalis.MOD_ID)) {
             if (!tooltip.isEmpty()) tooltip.add(CommonComponents.EMPTY);
             MutableComponent chrysalisIcon = ChrysalisRegistry.CHRYSALIS_ICON;
             ChrysalisRegistry.setTooltipIconsFont(chrysalisIcon);
-            Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(new ResourceLocation("minecraft:five")).withColor(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB())));
+            Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(ChrysalisRegistry.MINECRAFT_FIVE_FONT).withColor(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB())));
             tooltip.add(chrysalisTooltip);
         }
     }

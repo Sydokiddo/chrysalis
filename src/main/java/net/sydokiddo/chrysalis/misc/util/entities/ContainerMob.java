@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.misc.util.entities;
 
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -14,8 +15,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.component.CustomData;
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public interface ContainerMob {
 
     boolean fromItem();
@@ -28,103 +31,65 @@ public interface ContainerMob {
     SoundEvent getPickupSound();
 
     /**
-     * Gets the NBT of the mob and saves it to the item stack.
+     * Gets the data of the mob and saves it to the item stack.
      **/
 
     static void saveDefaultDataToItemTag(Mob mob, ItemStack itemStack) {
 
-        CompoundTag compoundTag = itemStack.getOrCreateTag();
+        itemStack.set(DataComponents.CUSTOM_NAME, mob.getCustomName());
 
-        // region Default Mob Tags
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA, itemStack, (compoundTag) -> {
 
-        if (mob.hasCustomName()) itemStack.setHoverName(mob.getCustomName());
+            if (mob.isNoAi()) compoundTag.putBoolean("NoAI", true);
+            if (mob.isSilent()) compoundTag.putBoolean("Silent", true);
+            if (mob.isNoGravity()) compoundTag.putBoolean("NoGravity", true);
+            if (mob.hasGlowingTag()) compoundTag.putBoolean("Glowing", true);
+            if (mob.isInvulnerable()) compoundTag.putBoolean("Invulnerable", true);
 
-        if (mob.isCustomNameVisible()) compoundTag.putBoolean("CustomNameVisible", true);
+            compoundTag.putFloat("Health", mob.getHealth());
 
-        if (mob.isNoAi()) compoundTag.putBoolean("NoAI", true);
-
-        if (mob.isSilent()) compoundTag.putBoolean("Silent", true);
-
-        if (mob.isNoGravity()) compoundTag.putBoolean("NoGravity", true);
-
-        if (mob.hasGlowingTag()) compoundTag.putBoolean("Glowing", true);
-
-        if (mob.isInvulnerable()) compoundTag.putBoolean("Invulnerable", true);
-
-        compoundTag.putFloat("Health", mob.getHealth());
-
-        // endregion
-
-        // region Animal Tags
-
-        if (mob instanceof AgeableMob ageableMob) compoundTag.putInt("Age", ageableMob.getAge());
-
-        if (mob instanceof Animal animal) compoundTag.putInt("InLove", animal.getInLoveTime());
-
-        // endregion
+            if (mob instanceof AgeableMob ageableMob) compoundTag.putInt("Age", ageableMob.getAge());
+            if (mob instanceof Animal animal) compoundTag.putInt("InLove", animal.getInLoveTime());
+        });
     }
 
     static void loadDefaultDataFromItemTag(Mob mob, CompoundTag compoundTag) {
 
-        String health = "Health";
-
-        // region Default Mob Tags
-
-        if (compoundTag.contains("CustomNameVisible")) mob.setCustomNameVisible(true);
-
         if (compoundTag.contains("NoAI")) mob.setNoAi(true);
-
         if (compoundTag.contains("Silent")) mob.setSilent(true);
-
         if (compoundTag.contains("NoGravity")) mob.setNoGravity(true);
-
         if (compoundTag.contains("Glowing")) mob.setGlowingTag(true);
-
         if (compoundTag.contains("Invulnerable")) mob.setInvulnerable(true);
 
+        String health = "Health";
         if (compoundTag.contains(health, 99)) mob.setHealth(compoundTag.getFloat(health));
 
-        // endregion
-
-        // region Animal Tags
-
         if (mob instanceof AgeableMob ageableMob) ageableMob.setAge(compoundTag.getInt("Age"));
-
         if (mob instanceof Animal animal) animal.setInLoveTime(compoundTag.getInt("InLove"));
-
-        // endregion
     }
 
     /**
      * Saves the mob to the item stack when picked up.
      **/
 
-    private static boolean doMobContainerPickUp(Player player, Item containerItem, InteractionHand interactionHand, LivingEntity livingEntity) {
+    static <T extends LivingEntity> Optional<InteractionResult> containerMobPickup(Player player, Item containerItem, InteractionHand interactionHand, T livingEntity) {
 
         ItemStack itemInHand = player.getItemInHand(interactionHand);
         ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
 
         if (itemInHand.getItem() == containerItem.asItem() && livingEntity.isAlive()) {
 
-            if (!livingEntity.level().isClientSide()) CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
-            if (livingEntity instanceof Mob mob && mob.isLeashed()) mob.dropLeash(true, true);
-
             livingEntity.playSound(((ContainerMob) livingEntity).getPickupSound(), 1.0F, 1.0F);
             ((ContainerMob) livingEntity).saveToItemTag(resultItemStack);
             player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemInHand, player, resultItemStack, false));
 
+            if (!livingEntity.level().isClientSide()) CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
+            if (livingEntity instanceof Mob mob && mob.isLeashed()) mob.dropLeash(true, true);
             livingEntity.discard();
-        }
-
-        return true;
-    }
-
-    static <T extends LivingEntity> Optional<InteractionResult> containerMobPickup(Player player, InteractionHand interactionHand, T livingEntity, Item usedItem) {
-        if (doMobContainerPickUp(player, usedItem.asItem(), interactionHand, livingEntity)) {
             return Optional.of(InteractionResult.sidedSuccess(livingEntity.level().isClientSide()));
+
         } else {
             return Optional.empty();
         }
     }
-
  }

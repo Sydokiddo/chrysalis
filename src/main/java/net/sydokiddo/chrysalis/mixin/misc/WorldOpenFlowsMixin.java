@@ -18,10 +18,9 @@ public class WorldOpenFlowsMixin {
         return original;
     }
 
-    // TODO fix
-//    @ModifyVariable(method = "loadLevel", at = @At("HEAD"), argsOnly = true, index = 4)
-//    private boolean chrysalis$removeExperimentalAdviceOnLoad(boolean original) {
-//        if (Chrysalis.IS_DEBUG) return false;
-//        return original;
-//    }
+    @ModifyVariable(method = "loadLevel", at = @At("HEAD"), argsOnly = true, index = 4)
+    private boolean chrysalis$removeExperimentalAdviceOnLoad(boolean original) {
+        if (Chrysalis.IS_DEBUG) return false;
+        return original;
+    }
 }

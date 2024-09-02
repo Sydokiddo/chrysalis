@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.mixin.components;
+package net.sydokiddo.chrysalis.mixin.items;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import java.util.function.Consumer;
 
 @Mixin(ItemEnchantments.class)
