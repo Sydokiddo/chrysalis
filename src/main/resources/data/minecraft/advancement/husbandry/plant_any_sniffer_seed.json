@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:husbandry/feed_snifflet",
+  "criteria": {
+    "plant_sniffer_plant_crop": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#chrysalis:sniffer_plant_crops"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "title": {
+      "translate": "advancements.husbandry.plant_any_sniffer_seed.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.plant_any_sniffer_seed.description"
+    },
+    "icon": {
+      "id": "minecraft:pitcher_pod",
+      "count": 1
+    },
+    "frame": "task",
+    "hidden": true,
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "plant_sniffer_plant_crop"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

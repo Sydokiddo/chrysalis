@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "has_sherd": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:decorated_pot_sherds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "title": {
+      "translate": "advancements.adventure.salvage_sherd.title"
+    },
+    "description": {
+      "translate": "advancements.adventure.salvage_sherd.description"
+    },
+    "icon": {
+      "id": "minecraft:brush",
+      "count": 1
+    },
+    "frame": "task",
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "has_sherd"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

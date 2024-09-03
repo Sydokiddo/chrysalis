@@ -3,12 +3,10 @@ package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.registry.items.custom_items.EnchantedGlintItem;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class DebugUtilityItem extends EnchantedGlintItem {
@@ -22,8 +20,8 @@ public class DebugUtilityItem extends EnchantedGlintItem {
      **/
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> tooltip, @NotNull TooltipFlag tooltipFlag) {
-        tooltip.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + ".desc").withStyle(ChatFormatting.BLUE)));
-        super.appendHoverText(itemStack, (TooltipContext) level, tooltip, tooltipFlag);
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+        list.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + ".desc").withStyle(ChatFormatting.BLUE)));
+        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }
 }

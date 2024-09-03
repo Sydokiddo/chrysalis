@@ -21,11 +21,9 @@ public class ChrysalisTags {
         // region Common Items
 
         BANNER_PATTERNS = registerItemTag("banner_patterns"),
-        BRICKS = registerItemTag("bricks"),
         DISC_FRAGMENTS = registerItemTag("disc_fragments"),
         FILLED_BOTTLES = registerItemTag("filled_bottles"),
         FILLED_BOWLS = registerItemTag("filled_bowls"),
-        FILLED_BUCKETS = registerItemTag("filled_buckets"),
         FISH_BUCKETS = registerItemTag("fish_buckets"),
         INSTRUMENTS = registerItemTag("instruments"),
         TELEPORTING_FOODS = registerItemTag("teleporting_foods"),
@@ -37,14 +35,9 @@ public class ChrysalisTags {
         AMETHYST_BLOCK_ITEMS = registerItemTag("amethyst_blocks"),
         BRUSHABLE_BLOCK_ITEMS = registerItemTag("brushable_blocks"),
         CAMPFIRE_ITEMS = registerItemTag("campfires"),
-        CONCRETE_ITEMS = registerItemTag("concrete"),
-        CONCRETE_POWDER_ITEMS = registerItemTag("concrete_powder"),
         CONTAINER_ITEMS = registerItemTag("containers"),
         COPPER_BLOCK_ITEMS = registerItemTag("copper_blocks"),
         COPPER_GRATE_ITEMS = registerItemTag("copper_grates"),
-        FURNACE_ITEMS = registerItemTag("furnaces"),
-        GLAZED_TERRACOTTA_ITEMS = registerItemTag("glazed_terracotta"),
-        HEAD_ITEMS = registerItemTag("heads"),
         LANTERN_ITEMS = registerItemTag("lanterns"),
         OBSIDIAN_ITEMS = registerItemTag("obsidian"),
         PRESSURE_PLATE_ITEMS = registerItemTag("pressure_plates"),
@@ -68,11 +61,7 @@ public class ChrysalisTags {
 
         // region Equipable Items
 
-        BOOTS = registerItemTag("boots"),
-        CHESTPLATES = registerItemTag("chestplates"),
-        HELMETS = registerItemTag("helmets"),
         HORSE_ARMOR = registerItemTag("horse_armor"),
-        LEGGINGS = registerItemTag("leggings"),
         PIGLIN_PACIFYING_ARMOR = registerItemTag("piglin_pacifying_armor"),
         POWDER_SNOW_WALKABLE_ITEMS = registerItemTag("powder_snow_walkable_items"),
         PROTECTS_AGAINST_ENDERMEN = registerItemTag("protects_against_endermen"),
@@ -100,14 +89,9 @@ public class ChrysalisTags {
 
         AMETHYST_BLOCKS = registerBlockTag("amethyst_blocks"),
         BRUSHABLE_BLOCKS = registerBlockTag("brushable_blocks"),
-        CONCRETE = registerBlockTag("concrete"),
         CONTAINERS = registerBlockTag("containers"),
         COPPER_BLOCKS = registerBlockTag("copper_blocks"),
         COPPER_GRATES = registerBlockTag("copper_grates"),
-        CROPS = registerBlockTag("crops"),
-        FURNACES = registerBlockTag("furnaces"),
-        GLAZED_TERRACOTTA = registerBlockTag("glazed_terracotta"),
-        HEADS = registerBlockTag("heads"),
         LANTERNS = registerBlockTag("lanterns"),
         OBSIDIAN = registerBlockTag("obsidian"),
         PRISMARINE_BLOCKS = registerBlockTag("prismarine_blocks"),

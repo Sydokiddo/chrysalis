@@ -19,6 +19,6 @@ public class PlayerManagerMixin {
 
     @Inject(method = "placeNewPlayer", at = @At(value = "TAIL"))
     private void chrysalis$onPlayerConnectToServer(Connection connection, ServerPlayer serverPlayer, CommonListenerCookie commonListenerCookie, CallbackInfo info) {
-        Chrysalis.LOGGER.info(serverPlayer.getName().getString() + " has " + Chrysalis.LOGGER.getName() + " v" + Chrysalis.CHRYSALIS_VERSION + " installed");
+        Chrysalis.LOGGER.info("{} has {} v{} installed", serverPlayer.getName().getString(), Chrysalis.LOGGER.getName(), Chrysalis.CHRYSALIS_VERSION);
     }
 }

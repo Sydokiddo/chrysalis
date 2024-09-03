@@ -45,16 +45,14 @@
 		"items.EndCrystalItemMixin",
 		"items.EyeOfEnderItemMixin",
 		"items.HoneyBottleItemMixin",
-		"items.ItemEnchantmentsMixin",
 		"items.ItemMixin",
-		"items.ItemStackMixin",
 		"items.PotionColorMixin",
 		"items.ShearsItemMixin",
 		"items.ShieldItemMixin",
 		"items.SwordItemMixin",
 		"items.TooltipMixin",
 		"items.TridentItemMixin",
-		"misc.EnchantmentMixin",
+		"misc.LevelSummaryMixin",
 		"misc.SnowFixMixin",
 		"util.ActivityAccessor",
 		"util.MemoryModuleAccessor",
@@ -64,8 +62,7 @@
 	"client": [
 		"misc.LevelRendererMixin",
 		"misc.ScreenshotMainMixin",
-		"misc.ScreenshotRecorderMixin",
-		"misc.WorldOpenFlowsMixin"
+		"misc.ScreenshotRecorderMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

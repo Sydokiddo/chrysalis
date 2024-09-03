@@ -1,0 +1,50 @@
+{
+  "parent": "minecraft:husbandry/safely_harvest_honey",
+  "criteria": {
+    "wax_on": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#chrysalis:waxable_blocks"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "minecraft:honeycomb"
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "title": {
+      "translate": "advancements.husbandry.wax_on.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.wax_on.description"
+    },
+    "icon": {
+      "id": "minecraft:honeycomb",
+      "count": 1
+    },
+    "frame": "task",
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "wax_on"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

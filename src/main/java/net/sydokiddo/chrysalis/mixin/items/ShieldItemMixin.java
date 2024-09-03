@@ -1,6 +1,6 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
@@ -14,8 +14,7 @@ import java.util.List;
 public class ShieldItemMixin {
 
     @Inject(method = "appendHoverText", at = @At("TAIL"))
-    private void chrysalis$addSpaceOnShieldBannerTooltip(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo ci) {
-        CompoundTag compoundTag = BlockItem.getBlockEntityData(itemStack);
-        if (itemStack.isEnchanted() && (compoundTag != null && compoundTag.contains("Patterns"))) tooltip.add(CommonComponents.EMPTY);
+    private void chrysalis$addSpaceOnShieldBannerTooltip(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
+        if (itemStack.isEnchanted() && itemStack.get(DataComponents.BANNER_PATTERNS) != null) list.add(CommonComponents.EMPTY);
     }
 }

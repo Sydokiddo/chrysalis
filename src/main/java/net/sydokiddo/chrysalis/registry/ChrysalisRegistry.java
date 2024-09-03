@@ -74,8 +74,10 @@ public class ChrysalisRegistry {
         CHRYSALIS_ICON = Component.translatable("gui.icon.chrysalis")
     ;
 
+    @SuppressWarnings("unused")
     public static final ResourceLocation
-        MINECRAFT_FIVE_FONT = ResourceLocation.withDefaultNamespace("five")
+        FIVE_FONT = Chrysalis.id("five"),
+        FIVE_ALT_FONT = Chrysalis.id("five_alt")
     ;
 
     public static void setTooltipIconsFont(MutableComponent mutableComponent) {

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#chrysalis:amethyst_blocks",
+    "#chrysalis:base_stone_end",
+    "#chrysalis:copper_blocks",
+    "#chrysalis:lanterns",
+    "#chrysalis:obsidian",
+    "#chrysalis:prismarine_blocks",
+    "#chrysalis:purpur",
+    "#minecraft:cauldrons",
+    "#minecraft:stone_buttons",
+    "#minecraft:stone_pressure_plates"
+  ]
+}

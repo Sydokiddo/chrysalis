@@ -30,6 +30,6 @@ public class Chrysalis implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ChrysalisRegistry.registerAll();
-		LOGGER.info(LOGGER.getName() + " v" + CHRYSALIS_VERSION + " has been initialized!");
+        LOGGER.info("{} v{} has been initialized!", LOGGER.getName(), CHRYSALIS_VERSION);
 	}
 }

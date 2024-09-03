@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "chrysalis:mob_attack_bypasses_armor",
+    "chrysalis:mob_attack_bypasses_enchantments",
+    "chrysalis:mob_attack_bypasses_shield",
+    "chrysalis:mob_attack_no_knockback"
+  ]
+}

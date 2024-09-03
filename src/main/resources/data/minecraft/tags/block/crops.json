@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:nether_wart",
+    "#chrysalis:sniffer_plant_crops"
+  ]
+}
