@@ -19,6 +19,7 @@ public class ChrysalisSoundEvents {
     public static final SoundEvent CLEAR_EFFECTS_USE = registerSoundEvent("item.clear_effects.use");
     public static final SoundEvent TELEPORT_TO_SPAWNPOINT_FAIL = registerSoundEvent("item.teleport_to_spawnpoint.fail");
     public static final SoundEvent TAME_MOB_USE = registerSoundEvent("item.tame_mob.use");
+    public static final SoundEvent RIDE_MOB_USE = registerSoundEvent("item.ride_mob.use");
 
     // Registry
 

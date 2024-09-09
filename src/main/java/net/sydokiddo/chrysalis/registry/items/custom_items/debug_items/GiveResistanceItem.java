@@ -1,10 +1,12 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -38,11 +40,14 @@ public class GiveResistanceItem extends DebugUtilityItem {
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
 
         if (!level.isClientSide()) {
+
             player.playNotifySound(ChrysalisSoundEvents.GIVE_RESISTANCE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
             player.gameEvent(GameEvent.ITEM_INTERACT_START);
-            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, -1, 255, false, false, true));
-            player.sendSystemMessage(Component.translatable("gui.chrysalis.give_resistance_message", player.getName().getString()));
             player.awardStat(Stats.ITEM_USED.get(this));
+
+            Holder<MobEffect> resistance = MobEffects.DAMAGE_RESISTANCE;
+            player.addEffect(new MobEffectInstance(resistance, -1, 255, false, false, true));
+            player.sendSystemMessage(Component.translatable("commands.effect.give.success.single", resistance.value().getDisplayName(), player.getName().getString()));
         }
 
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());

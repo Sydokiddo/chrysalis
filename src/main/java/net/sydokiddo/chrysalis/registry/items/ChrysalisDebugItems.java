@@ -18,6 +18,7 @@ public class ChrysalisDebugItems {
     public static final Item TELEPORT_TO_SPAWNPOINT = registerItem("teleport_to_spawnpoint", new TeleportToSpawnpointItem(debugUtilitySettings()));
     public static final Item KILL_WAND = registerItem("kill_wand", new KillWandItem(debugUtilitySettings()));
     public static final Item TAME_MOB = registerItem("tame_mob", new TameMobItem(debugUtilitySettings()));
+    public static final Item RIDE_MOB = registerItem("ride_mob", new RideMobItem(debugUtilitySettings()));
 
     // endregion
 

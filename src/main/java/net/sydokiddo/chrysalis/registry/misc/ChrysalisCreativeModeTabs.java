@@ -17,7 +17,8 @@ public class ChrysalisCreativeModeTabs {
         if (!entries.shouldShowOpRestrictedItems()) return;
 
         entries.addAfter(Items.DEBUG_STICK, ChrysalisDebugItems.HEAL, ChrysalisDebugItems.FILL_HUNGER, ChrysalisDebugItems.GIVE_RESISTANCE,
-        ChrysalisDebugItems.CLEAR_EFFECTS, ChrysalisDebugItems.TELEPORT_TO_SPAWNPOINT, ChrysalisDebugItems.KILL_WAND, ChrysalisDebugItems.TAME_MOB);
+        ChrysalisDebugItems.CLEAR_EFFECTS, ChrysalisDebugItems.TELEPORT_TO_SPAWNPOINT, ChrysalisDebugItems.KILL_WAND,
+        ChrysalisDebugItems.TAME_MOB, ChrysalisDebugItems.RIDE_MOB);
         });
     }
 }

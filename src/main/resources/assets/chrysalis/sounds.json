@@ -47,5 +47,11 @@
       "minecraft:random/orb"
     ],
     "subtitle": "subtitles.item.tame_mob.use"
+  },
+  "item.ride_mob.use": {
+    "sounds": [
+      "minecraft:mob/horse/leather"
+    ],
+    "subtitle": "subtitles.item.ride_mob.use"
   }
 }
