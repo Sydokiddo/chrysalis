@@ -47,12 +47,8 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "isSecondaryUseActive", at = @At(value = "RETURN"), cancellable = true)
     private void chrysalis$allowBlockUseWhileSneaking(CallbackInfoReturnable<Boolean> cir) {
-
         BlockHitResult blockHitResult = this.getPlayerPOVHitResult();
-
-        if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(ChrysalisTags.ALLOWS_USE_WHILE_SNEAKING)) {
-            cir.setReturnValue(false);
-        }
+        if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(ChrysalisTags.ALLOWS_USE_WHILE_SNEAKING)) cir.setReturnValue(false);
     }
 
     @Redirect(method = "dropEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;dropAll()V"))

@@ -60,15 +60,10 @@ public abstract class LivingEntityMixin extends Entity {
             double afterViewDistance = 1.0 / (2 * (amplifier + 1));
             double afterViewDistanceWithHeadOn = 0.5 / (2 * (amplifier + 1));
 
-            if (this.hasMobHead(entity)) {
-                cir.setReturnValue(afterViewDistanceWithHeadOn);
-            } else {
-                cir.setReturnValue(afterViewDistance);
-            }
-        }
+            if (this.hasMobHead(entity)) cir.setReturnValue(afterViewDistanceWithHeadOn);
+            else cir.setReturnValue(afterViewDistance);
 
-        if (entity.getType().is(ChrysalisTags.ENDER) && this.getItemBySlot(EquipmentSlot.HEAD).is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN)) {
-            cir.setReturnValue(0.5);
+            if (entity.getType().is(ChrysalisTags.ENDER) && this.getItemBySlot(EquipmentSlot.HEAD).is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN)) cir.setReturnValue(0.5);
         }
     }
 }

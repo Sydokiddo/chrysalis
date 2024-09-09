@@ -31,8 +31,6 @@ public class PowderSnowBlockMixin {
 
     @Inject(method = "canEntityWalkOnPowderSnow", at = @At("HEAD"), cancellable = true)
     private static void chrysalis$powderSnowWalkableItemsTag(Entity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.FEET).is(ChrysalisTags.POWDER_SNOW_WALKABLE_ITEMS)) {
-            cir.setReturnValue(true);
-        }
+        if (entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.FEET).is(ChrysalisTags.POWDER_SNOW_WALKABLE_ITEMS)) cir.setReturnValue(true);
     }
 }

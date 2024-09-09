@@ -48,11 +48,8 @@ public class HybridWalkingFlyingMoveControl extends MoveControl {
                 this.mob.setYRot(this.rotlerp(this.mob.getYRot(), h, 90.0F));
                 float i;
 
-                if (this.mob.onGround()) {
-                    i = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                } else {
-                    i = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.FLYING_SPEED));
-                }
+                if (this.mob.onGround()) i = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                else i = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.FLYING_SPEED));
 
                 this.mob.setSpeed(i);
                 double j = Math.sqrt(x * x + z * z);
