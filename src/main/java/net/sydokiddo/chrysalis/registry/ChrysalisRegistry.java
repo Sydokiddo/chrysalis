@@ -1,8 +1,15 @@
 package net.sydokiddo.chrysalis.registry;
 
+import com.mojang.blaze3d.platform.InputConstants;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +20,9 @@ import net.sydokiddo.chrysalis.misc.util.commands.HealCommand;
 import net.sydokiddo.chrysalis.misc.util.entities.ChrysalisMemoryModules;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
+import org.lwjgl.glfw.GLFW;
 import java.awt.*;
+import java.io.File;
 
 public class ChrysalisRegistry {
 
@@ -86,16 +95,46 @@ public class ChrysalisRegistry {
 
     // endregion
 
+    // region Miscellaneous
+
+    public static final KeyMapping PANORAMIC_SCREENSHOT_KEY = new KeyMapping("key.chrysalis.panoramic_screenshot", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_F4, "key.categories.misc");
+
+    // endregion
+
     // Registry
 
     public static void registerAll() {
+
+        // Base Registries
+
         ChrysalisDamageSources.registerDamageSources();
         ChrysalisCriteriaTriggers.registerCriteriaTriggers();
         ChrysalisSoundEvents.registerSounds();
         ChrysalisDebugItems.registerDebugItems();
         ChrysalisCreativeModeTabs.registerCreativeTabs();
         ChrysalisMemoryModules.MEMORY_MODULES.register();
+
+        // Commands
+
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> HealCommand.register(commandDispatcher));
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> CooldownCommand.register(commandDispatcher, commandBuildContext));
+
+        // Panoramic Screenshots
+
+        KeyBindingHelper.registerKeyBinding(PANORAMIC_SCREENSHOT_KEY);
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (PANORAMIC_SCREENSHOT_KEY.consumeClick()) {
+
+                client.grabPanoramixScreenshot(new File(FabricLoader.getInstance().getGameDir().toString()), 1024, 1024);
+
+                Component panoramaTakenText = Component.literal("panorama_0.png – panorama_5.png").withStyle(ChatFormatting.UNDERLINE)
+                .withStyle((style) -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, new File(FabricLoader.getInstance().getGameDir().toString() + "/screenshots/").getAbsolutePath())));
+
+                Component message = Component.translatable("screenshot.success", panoramaTakenText);
+                client.gui.getChat().addMessage(message);
+                client.getNarrator().sayNow(message);
+            }
+        });
     }
 }

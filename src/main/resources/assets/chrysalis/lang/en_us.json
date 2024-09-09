@@ -4,6 +4,9 @@
 
   "gui.icon.chrysalis": "\ua000",
 
+  "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
+  "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
+
   "item.chrysalis.heal": "Heal",
   "item.chrysalis.heal.desc": "Sets to Maximum Health",
   "item.chrysalis.fill_hunger": "Fill Hunger",
@@ -18,9 +21,9 @@
   "item.chrysalis.kill_wand.desc": "Instantly Kills Targeted Mob",
   "item.chrysalis.tame_mob": "Tame Mob",
   "item.chrysalis.tame_mob.desc": "Automatically Tames Mob",
+  "item.chrysalis.ride_mob": "Tame Mob",
+  "item.chrysalis.ride_mob.desc": "Mounts Targeted Mob",
   "item.chrysalis.debug_stick.desc": "Cycles Between Block States",
-
-  "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
 
   "gui.chrysalis.heal_message": "Successfully healed %s",
   "gui.chrysalis.fill_hunger_message": "Successfully nourished %s",
@@ -76,6 +79,7 @@
   "subtitles.item.clear_effects.use": "Player clears effects",
   "subtitles.item.teleport_to_spawnpoint.fail": "Teleportation fails",
   "subtitles.item.tame_mob.use": "Mob tamed",
+  "subtitles.item.ride_mob.use": "Mob mounted",
 
   "tag.block.chrysalis.mineable.shears": "Mineable With Shears",
   "tag.block.chrysalis.mineable.sword": "Mineable With Swords",

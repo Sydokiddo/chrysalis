@@ -37,7 +37,6 @@ public class ScreenshotRecorderMixin {
     private static void chrysalis$copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo info) {
 
         if (FabricLoader.getInstance().isModLoaded("essential") || FabricLoader.getInstance().isModLoaded("optifine") || FabricLoader.getInstance().isModLoaded("optifabric") || Minecraft.ON_OSX) return;
-
         Minecraft minecraft = Minecraft.getInstance();
 
         try {
@@ -52,7 +51,6 @@ public class ScreenshotRecorderMixin {
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new ClipboardImage(lastScreenShot), null);
 
             Component message = Component.translatable("gui.chrysalis.screenshot_copied");
-
             minecraft.gui.getChat().addMessage(message);
             minecraft.getNarrator().sayNow(message);
 
