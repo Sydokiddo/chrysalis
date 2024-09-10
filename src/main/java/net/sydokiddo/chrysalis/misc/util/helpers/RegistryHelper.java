@@ -1,7 +1,7 @@
 package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import com.google.common.collect.Sets;
-import net.fabricmc.fabric.mixin.content.registry.BrewingRecipeRegistryBuilderMixin;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -11,6 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -23,7 +24,7 @@ import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInSolidBucketItem;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused, unchecked, rawtypes")
 public class RegistryHelper {
 
     // region Potion Recipe Registry
@@ -32,34 +33,24 @@ public class RegistryHelper {
      * Registry helpers for registering potion recipes.
      **/
 
-    public static void registerBasePotionRecipe(Item ingredient, Potion resultPotion) {
-        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
-            builder.addMix(Potions.AWKWARD, ingredient, Holder.direct(resultPotion));
-        });
+    public static void registerBasePotionRecipe(Item ingredient, Holder<Potion> resultPotion) {
+        registerPotionRecipe(Potions.AWKWARD, ingredient, resultPotion);
     }
 
-    public static void registerLongPotionRecipe(Potion startingPotion, Potion resultPotion) {
-        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
-            builder.addMix(Holder.direct(startingPotion),  Items.REDSTONE, Holder.direct(resultPotion));
-        });
+    public static void registerLongPotionRecipe(Holder<Potion> startingPotion, Holder<Potion> resultPotion) {
+        registerPotionRecipe(startingPotion, Items.REDSTONE, resultPotion);
     }
 
-    public static void registerStrongPotionRecipe(Potion startingPotion, Potion resultPotion) {
-        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
-            builder.addMix(Holder.direct(startingPotion),  Items.GLOWSTONE_DUST, Holder.direct(resultPotion));
-        });
+    public static void registerStrongPotionRecipe(Holder<Potion> startingPotion, Holder<Potion> resultPotion) {
+        registerPotionRecipe(startingPotion, Items.GLOWSTONE_DUST, resultPotion);
     }
 
-    public static void registerInvertedPotionRecipe(Potion startingPotion, Potion resultPotion) {
-        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
-            builder.addMix(Holder.direct(startingPotion),  Items.FERMENTED_SPIDER_EYE, Holder.direct(resultPotion));
-        });
+    public static void registerInvertedPotionRecipe(Holder<Potion> startingPotion, Holder<Potion> resultPotion) {
+        registerPotionRecipe(startingPotion, Items.FERMENTED_SPIDER_EYE, resultPotion);
     }
 
-    public static void registerUniquePotionRecipe(Potion startingPotion, Item ingredient, Potion resultPotion) {
-        BrewingRecipeRegistryBuilderMixin.BUILD.register(builder -> {
-            builder.addMix(Holder.direct(startingPotion),  ingredient, Holder.direct(resultPotion));
-        });
+    public static void registerPotionRecipe(Holder<Potion> startingPotion, Item ingredient, Holder<Potion> resultPotion) {
+        FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> builder.registerPotionRecipe(startingPotion, Ingredient.of(ingredient), resultPotion));
     }
 
     // endregion
@@ -69,6 +60,8 @@ public class RegistryHelper {
     /**
      * Registry helpers for registering items with specific properties.
      **/
+
+    // region Tools
 
     public static SwordItem registerSword(Tier tier, float attackDamage, float attackSpeed) {
         return new SwordItem(tier, new Item.Properties().attributes(SwordItem.createAttributes(tier, (int) attackDamage, attackSpeed)));
@@ -90,21 +83,33 @@ public class RegistryHelper {
         return new HoeItem(tier, new Item.Properties().attributes(HoeItem.createAttributes(tier, attackDamage, attackSpeed)));
     }
 
+    // endregion
+
+    // region Armor
+
     public static ArmorItem registerHelmet(ArmorMaterial armorMaterial, int durability) {
-        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(durability)));
+        return registerArmor(ArmorItem.Type.HELMET, armorMaterial, durability);
     }
 
     public static ArmorItem registerChestplate(ArmorMaterial armorMaterial, int durability) {
-        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(durability)));
+        return registerArmor(ArmorItem.Type.CHESTPLATE, armorMaterial, durability);
     }
 
     public static ArmorItem registerLeggings(ArmorMaterial armorMaterial, int durability) {
-        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(durability)));
+        return registerArmor(ArmorItem.Type.LEGGINGS, armorMaterial, durability);
     }
 
     public static ArmorItem registerBoots(ArmorMaterial armorMaterial, int durability) {
-        return new ArmorItem(Holder.direct(armorMaterial), ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(durability)));
+        return registerArmor(ArmorItem.Type.BOOTS, armorMaterial, durability);
     }
+
+    public static ArmorItem registerArmor(ArmorItem.Type armorType, ArmorMaterial armorMaterial, int durability) {
+        return new ArmorItem(Holder.direct(armorMaterial), armorType, new Item.Properties().durability(armorType.getDurability(durability)));
+    }
+
+    // endregion
+
+    // region Miscellaneous
 
     public static Item registerMusicDisc(Rarity rarity, ResourceKey<JukeboxSong> jukeboxSong) {
         return new Item(new Item.Properties().stacksTo(1).rarity(rarity).jukeboxPlayable(jukeboxSong));
@@ -125,6 +130,8 @@ public class RegistryHelper {
     public static MobInSolidBucketItem registerMobInSolidBucket(EntityType entityType, Block blockType, SoundEvent soundEvent) {
         return new MobInSolidBucketItem(entityType, blockType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET), Items.BUCKET);
     }
+
+    // endregion
 
     // endregion
 
@@ -172,8 +179,8 @@ public class RegistryHelper {
     }
 
     public static ResourceLocation registerCustomLootTable(ResourceLocation resourceLocation) {
-        if (Sets.newHashSet().add(resourceLocation)) return resourceLocation;
-        throw new IllegalArgumentException(resourceLocation + " is already a registered built-in loot table");
+        Sets.newHashSet().add(resourceLocation);
+        return resourceLocation;
     }
 
     // endregion

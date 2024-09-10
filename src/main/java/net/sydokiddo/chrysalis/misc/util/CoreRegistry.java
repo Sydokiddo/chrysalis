@@ -5,7 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unchecked, rawtypes")
 public class CoreRegistry<T> {
 
     /**
