@@ -1,16 +1,22 @@
 package net.sydokiddo.chrysalis.misc.util.helpers;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -53,8 +59,20 @@ public class ItemHelper {
     }
 
     /**
-     * Checks to see if an item has an armor trim on it.
+     * Checks for enchantments or armor trims.
      **/
+
+    public static int getEnchantmentLevel(ItemStack itemStack, ResourceKey<Enchantment> enchantment) {
+        int noEnchantments = 0;
+        ItemEnchantments itemEnchantments = itemStack.get(DataComponents.ENCHANTMENTS);
+        if (itemEnchantments == null || itemEnchantments.isEmpty()) return noEnchantments;
+
+        for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
+            if (entry.getKey().is(enchantment)) return EnchantmentHelper.getItemEnchantmentLevel(entry.getKey(), itemStack);
+            return noEnchantments;
+        }
+        return noEnchantments;
+    }
 
     public static boolean hasArmorTrim(ItemStack itemStack) {
         return itemStack.has(DataComponents.TRIM);
