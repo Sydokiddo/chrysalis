@@ -74,11 +74,11 @@ public class GlowingSporeParticle extends TextureSheetParticle {
     // region Providers
 
     @Environment(EnvType.CLIENT)
-    public static class GlowingSporeProvider implements ParticleProvider<SimpleParticleType> {
+    public static class GlowingSporeParticleProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
 
-        public GlowingSporeProvider(SpriteSet spriteSet) {
+        public GlowingSporeParticleProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

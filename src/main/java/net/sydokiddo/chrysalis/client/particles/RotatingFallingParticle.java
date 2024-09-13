@@ -58,11 +58,11 @@ public class RotatingFallingParticle extends RisingParticle {
     // region Providers
 
     @Environment(EnvType.CLIENT)
-    public static class FallingParticleProvider implements ParticleProvider<SimpleParticleType> {
+    public static class RotatingFallingParticleProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
 
-        public FallingParticleProvider(SpriteSet spriteSet) {
+        public RotatingFallingParticleProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

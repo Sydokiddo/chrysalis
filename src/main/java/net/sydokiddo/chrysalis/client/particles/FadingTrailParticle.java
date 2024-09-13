@@ -73,11 +73,11 @@ public class FadingTrailParticle extends TextureSheetParticle {
     // region Providers
 
     @Environment(EnvType.CLIENT)
-    public static class FadingTrailProvider implements ParticleProvider<SimpleParticleType> {
+    public static class FadingTrailParticleProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
 
-        public FadingTrailProvider(SpriteSet spriteSet) {
+        public FadingTrailParticleProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

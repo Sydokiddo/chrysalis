@@ -54,11 +54,11 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
     // region Providers
 
     @Environment(EnvType.CLIENT)
-    public static class GlowingParticleProvider implements ParticleProvider<SimpleParticleType> {
+    public static class GlowingSuspendedTownParticleProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
 
-        public GlowingParticleProvider(SpriteSet spriteSet) {
+        public GlowingSuspendedTownParticleProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 
