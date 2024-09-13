@@ -55,9 +55,6 @@
     "items.TridentItemMixin",
     "misc.LevelSummaryMixin",
     "misc.SnowFixMixin",
-    "util.ActivityAccessor",
-    "util.MemoryModuleAccessor",
-    "util.SensorTypeAccessor",
     "util.SimpleParticleTypeAccessor"
   ],
   "client": [

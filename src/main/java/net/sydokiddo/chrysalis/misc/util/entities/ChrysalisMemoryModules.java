@@ -1,12 +1,13 @@
 package net.sydokiddo.chrysalis.misc.util.entities;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.CoreRegistry;
-import net.sydokiddo.chrysalis.mixin.util.MemoryModuleAccessor;
 import java.util.Optional;
 
 @SuppressWarnings("all")
@@ -23,10 +24,10 @@ public class ChrysalisMemoryModules {
     // Registry
 
     private static <U> MemoryModuleType<U> registerMemoryModuleWithCodec(String name, Codec<U> codec) {
-        return MEMORY_MODULES.register(name, net.sydokiddo.chrysalis.mixin.util.MemoryModuleAccessor.createMemoryModuleType(Optional.of(codec)));
+        return Registry.register(BuiltInRegistries.MEMORY_MODULE_TYPE, Chrysalis.id(name), new MemoryModuleType<U>(Optional.of(codec)));
     }
 
     private static <U> MemoryModuleType<U> registerMemoryModuleWithoutCodec(String name) {
-        return MEMORY_MODULES.register(name, MemoryModuleAccessor.createMemoryModuleType(Optional.empty()));
+        return Registry.register(BuiltInRegistries.MEMORY_MODULE_TYPE, Chrysalis.id(name), new MemoryModuleType<U>(Optional.empty()));
     }
 }
