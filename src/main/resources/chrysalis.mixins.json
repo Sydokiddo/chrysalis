@@ -18,6 +18,7 @@
     "blocks.NetherWartBlockMixin",
     "blocks.PowderSnowBlockMixin",
     "blocks.RespawnAnchorBlockMixin",
+    "blocks.StructureVoidBlockMixin",
     "blocks.TNTBlockMixin",
     "blocks.TurtleEggBlockMixin",
     "entities.hostile.EnderDragonMixin",
@@ -58,6 +59,7 @@
     "util.SimpleParticleTypeAccessor"
   ],
   "client": [
+    "misc.ClientLevelMixin",
     "misc.LevelRendererMixin",
     "misc.ScreenshotMainMixin",
     "misc.ScreenshotRecorderMixin"
