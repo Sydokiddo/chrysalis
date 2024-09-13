@@ -12,8 +12,8 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
 
     // region Initialization and Ticking
 
-    public GlowingSuspendedTownParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteSet spriteSet) {
-        super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet);
+    public GlowingSuspendedTownParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteSet spriteSet, boolean animateTextures) {
+        super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet, animateTextures);
         this.setSize(0.02F, 0.02F);
         this.quadSize *= this.random.nextFloat() * 0.6F + 0.5F;
         this.lifetime = (int) (20.0 / (Math.random() * 0.8 + 0.2));
@@ -64,7 +64,7 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
 
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            GlowingSuspendedTownParticle particle = new GlowingSuspendedTownParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, this.spriteSet);
+            GlowingSuspendedTownParticle particle = new GlowingSuspendedTownParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, this.spriteSet, false);
             particle.pickSprite(this.spriteSet);
             particle.setColor(1.0F, 1.0F, 1.0F);
             return particle;
