@@ -38,7 +38,7 @@ public class AllayMixin {
     }
 
     /**
-     * Triggers the 'duplicate_allay' advancement criteria when a player duplicates an Allay
+     * Triggers the 'duplicate_allay' advancement criteria when a player duplicates an Allay.
      **/
 
     @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/allay/Allay;duplicateAllay()V"))

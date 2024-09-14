@@ -14,7 +14,7 @@ public class ModSmithingTemplateItem extends SmithingTemplateItem {
     }
 
     /**
-     * Class for helping with the creation of custom Smithing Template items.
+     * Class for assisting with the creation of custom Smithing Template items.
      **/
 
     public static final ChatFormatting

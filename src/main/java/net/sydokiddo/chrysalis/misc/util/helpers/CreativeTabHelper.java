@@ -15,7 +15,7 @@ import java.util.List;
 public class CreativeTabHelper {
 
     /**
-     * Assists with adding Instrument items and their variants to any Creative Mode tab
+     * Assists with adding Instrument items and their variants to any Creative Mode tab.
      **/
 
     public static void addInstrumentItem(Item comparedItem, Item instrument, TagKey<Instrument> tagKey, CreativeModeTab.TabVisibility tabVisibility, ResourceKey<CreativeModeTab> creativeModeTab) {
@@ -32,6 +32,10 @@ public class CreativeTabHelper {
         });
     }
 
+    /**
+     * Assists with adding each Firework Rocket duration to any Creative Mode tab.
+     **/
+
     public static void addFireworkRockets(Item comparedItem, ResourceKey<CreativeModeTab> creativeModeTab) {
         ItemGroupEvents.modifyEntriesEvent(creativeModeTab).register((entries) -> {
             for (byte fireworkDurations : FireworkRocketItem.CRAFTABLE_DURATIONS) {
@@ -41,6 +45,10 @@ public class CreativeTabHelper {
             }
         });
     }
+
+    /**
+     * Assists with adding each Ominous Bottle variant to any Creative Mode tab.
+     **/
 
     private static void addOminousBottles(int maxAmplifierValue, Item comparedItem, ResourceKey<CreativeModeTab> creativeModeTab) {
         ItemGroupEvents.modifyEntriesEvent(creativeModeTab).register((entries) -> {

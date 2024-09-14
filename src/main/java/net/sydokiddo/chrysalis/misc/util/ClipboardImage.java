@@ -12,7 +12,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 public record ClipboardImage(Image image) implements Transferable {
 
     /**
-     * Gets various data from the taken screenshot in order to copy it to the user's clipboard
+     * Gets various data from the taken screenshot in order to copy it to the user's clipboard.
      **/
 
     @Override

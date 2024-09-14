@@ -15,7 +15,7 @@ public class PotionColorMixin {
     @Shadow @Final private int color;
 
     /**
-     * Changes the default potion colors of Blindness, Haste, and Mining Fatigue.
+     * Changes the default potion colors of Blindness, Haste, Mining Fatigue, and Wither.
      **/
 
     @Inject(at = @At("RETURN"), method = "getColor", cancellable = true)
@@ -23,5 +23,6 @@ public class PotionColorMixin {
         if (this.color == 2039587) cir.setReturnValue(Color.decode("#593F7F").getRGB()); // Blindness
         if (this.color == 14270531) cir.setReturnValue(Color.decode("#FFB87F").getRGB()); // Haste
         if (this.color == 4866583) cir.setReturnValue(Color.decode("#5959B2").getRGB()); // Mining Fatigue
+        if (this.color == 7561558) cir.setReturnValue(Color.decode("#764857").getRGB()); // Wither
     }
 }

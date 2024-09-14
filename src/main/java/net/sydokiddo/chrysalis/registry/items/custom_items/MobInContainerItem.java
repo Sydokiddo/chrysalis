@@ -38,7 +38,7 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
     }
 
     /**
-     * Spawns the mob as long as open space exists when the item is used on a block
+     * Spawns the mob as long as open space exists when the item is used on a block.
      **/
 
     @Override

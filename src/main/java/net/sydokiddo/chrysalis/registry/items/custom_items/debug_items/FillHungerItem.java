@@ -29,7 +29,7 @@ public class FillHungerItem extends DebugUtilityItem {
     }
 
     /**
-     * Fills the user's hunger bar to the max value when right-clicked with.
+     * Fills the user's hunger bar to the maximum value when right-clicked with.
      **/
 
     @Override

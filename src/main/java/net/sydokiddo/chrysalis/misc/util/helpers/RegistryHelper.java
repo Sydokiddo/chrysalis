@@ -30,6 +30,10 @@ public class RegistryHelper {
 
     // region Music Registry
 
+    /**
+     * Registry for custom structure-specific music.
+     **/
+
     public static void registerStructureMusic(String structureName, String soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
         ChrysalisRegistry.registeredStructures.put(structureName, new ChrysalisRegistry.StructureMusicSound(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
     }
