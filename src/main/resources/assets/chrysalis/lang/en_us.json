@@ -35,6 +35,13 @@
   "gui.chrysalis.commands.heal_fail": "Target could not be healed",
   "gui.chrysalis.commands.cooldown_add": "Added a cooldown length of %s to %s for %s",
   "gui.chrysalis.commands.cooldown_remove": "Removed cooldown of %s for %s",
+  "gui.chrysalis.commands.hat_success": "Placed %1$s on %2$s's head",
+  "gui.chrysalis.commands.hat_fail_empty": "You are not holding a valid item to place on your head",
+  "gui.chrysalis.commands.hat_fail_invalid": "Could not place %1$s on %2$s's head",
+  "gui.chrysalis.commands.showcase_success": "%1$s is showcasing %2$s",
+  "gui.chrysalis.commands.showcase_fail": "You are not holding a valid item to showcase",
+  "gui.chrysalis.commands.surface_success": "Teleported %1$s to the highest block position",
+  "gui.chrysalis.commands.surface_fail": "You are already at the highest block position",
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",

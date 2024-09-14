@@ -21,8 +21,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.misc.util.commands.CooldownCommand;
-import net.sydokiddo.chrysalis.misc.util.commands.HealCommand;
+import net.sydokiddo.chrysalis.misc.util.commands.*;
 import net.sydokiddo.chrysalis.misc.util.entities.ChrysalisMemoryModules;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureMusic;
@@ -116,11 +115,6 @@ public class ChrysalisRegistry {
     // region Structure Music Registry
 
     public static Map<String, StructureMusicSound> registeredStructures = new HashMap<>();
-
-    public static void registerStructureMusic(String structureName, String soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
-        registeredStructures.put(structureName, new StructureMusicSound(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
-    }
-
     public record StructureMusicSound(String name, int minDelay, int maxDelay, boolean replaceCurrentMusic) {}
 
     // endregion
@@ -143,6 +137,9 @@ public class ChrysalisRegistry {
 
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> HealCommand.register(commandDispatcher));
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> CooldownCommand.register(commandDispatcher, commandBuildContext));
+        CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> HatCommand.register(commandDispatcher));
+        CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> ShowcaseCommand.register(commandDispatcher));
+        CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> SurfaceCommand.register(commandDispatcher));
 
         // endregion
 

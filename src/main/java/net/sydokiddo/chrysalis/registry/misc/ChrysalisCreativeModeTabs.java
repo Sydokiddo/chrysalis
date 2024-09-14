@@ -19,6 +19,8 @@ public class ChrysalisCreativeModeTabs {
         entries.addAfter(Items.DEBUG_STICK, ChrysalisDebugItems.HEAL, ChrysalisDebugItems.FILL_HUNGER, ChrysalisDebugItems.GIVE_RESISTANCE,
         ChrysalisDebugItems.CLEAR_EFFECTS, ChrysalisDebugItems.TELEPORT_TO_SPAWNPOINT, ChrysalisDebugItems.KILL_WAND,
         ChrysalisDebugItems.TAME_MOB, ChrysalisDebugItems.RIDE_MOB);
+
+        entries.addAfter(Items.PAINTING, Items.ENDER_DRAGON_SPAWN_EGG, Items.WITHER_SPAWN_EGG);
         });
     }
 }

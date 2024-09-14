@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
@@ -26,6 +27,14 @@ import net.sydokiddo.chrysalis.registry.items.custom_items.MobInSolidBucketItem;
 
 @SuppressWarnings("unused, unchecked, rawtypes")
 public class RegistryHelper {
+
+    // region Music Registry
+
+    public static void registerStructureMusic(String structureName, String soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
+        ChrysalisRegistry.registeredStructures.put(structureName, new ChrysalisRegistry.StructureMusicSound(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
+    }
+
+    // endregion
 
     // region Potion Recipe Registry
 
