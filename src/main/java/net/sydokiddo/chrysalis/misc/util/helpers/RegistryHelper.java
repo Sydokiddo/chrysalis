@@ -34,8 +34,8 @@ public class RegistryHelper {
      * Registry for custom structure-specific music.
      **/
 
-    public static void registerStructureMusic(String structureName, String soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
-        ChrysalisRegistry.registeredStructures.put(structureName, new ChrysalisRegistry.StructureMusicSound(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
+    public static void registerStructureMusic(String structureName, Holder.Reference<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
+        ChrysalisRegistry.registeredStructures.put(structureName, new ChrysalisRegistry.StructureMusicSound(soundEvent.getRegisteredName(), minDelay, maxDelay, replaceCurrentMusic));
     }
 
     // endregion
@@ -132,16 +132,16 @@ public class RegistryHelper {
        return new CSpawnEggItem(entityType, baseColor, spotsColor, mobOffspring, new Item.Properties());
     }
 
-    public static MobInContainerItem registerMobInContainer(EntityType entityType, SoundEvent soundEvent, Item returnItem) {
-        return new MobInContainerItem(entityType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(returnItem), returnItem);
+    public static MobInContainerItem registerMobInContainer(EntityType entityType, SoundEvent soundEvent, Item returnItem, Rarity rarity) {
+        return new MobInContainerItem(entityType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(returnItem).rarity(rarity), returnItem);
     }
 
-    public static MobInFluidBucketItem registerMobInFluidBucket(EntityType entityType, Fluid fluidType, SoundEvent soundEvent) {
-        return new MobInFluidBucketItem(entityType, fluidType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET));
+    public static MobInFluidBucketItem registerMobInFluidBucket(EntityType entityType, Fluid fluidType, SoundEvent soundEvent, Rarity rarity) {
+        return new MobInFluidBucketItem(entityType, fluidType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).rarity(rarity));
     }
 
-    public static MobInSolidBucketItem registerMobInSolidBucket(EntityType entityType, Block blockType, SoundEvent soundEvent) {
-        return new MobInSolidBucketItem(entityType, blockType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET), Items.BUCKET);
+    public static MobInSolidBucketItem registerMobInSolidBucket(EntityType entityType, Block blockType, SoundEvent soundEvent, Rarity rarity) {
+        return new MobInSolidBucketItem(entityType, blockType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).rarity(rarity), Items.BUCKET);
     }
 
     // endregion
