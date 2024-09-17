@@ -17,6 +17,8 @@
   "item.chrysalis.clear_effects.desc": "Clears All Effects",
   "item.chrysalis.teleport_to_spawnpoint": "Teleport to Spawnpoint",
   "item.chrysalis.teleport_to_spawnpoint.desc": "Teleports to Spawn Position",
+  "item.chrysalis.teleport_wand": "Teleport Wand",
+  "item.chrysalis.teleport_wand.desc": "Teleports to Targeted Position",
   "item.chrysalis.kill_wand": "Kill Wand",
   "item.chrysalis.kill_wand.desc": "Instantly Kills Targeted Mob",
   "item.chrysalis.tame_mob": "Tame Mob",

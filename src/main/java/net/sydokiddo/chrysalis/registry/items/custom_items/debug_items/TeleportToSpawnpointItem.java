@@ -47,6 +47,7 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
 
                 if (serverPlayer.getRespawnPosition() != null) {
                     serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
+                    level.gameEvent(GameEvent.TELEPORT, serverPlayer.position(), GameEvent.Context.of(serverPlayer));
                     player.playNotifySound(SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
                     serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_message"));
                     player.getCooldowns().addCooldown(this, 60);
