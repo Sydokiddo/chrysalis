@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:ochre_froglight",
+    "minecraft:verdant_froglight",
+    "minecraft:pearlescent_froglight",
+    "minecraft:frogspawn",
+    "minecraft:slime_block",
+    "minecraft:honey_block",
+    "minecraft:honeycomb_block",
+    "#minecraft:candles",
+    "minecraft:sea_pickle",
+    "minecraft:cake",
+    "#minecraft:candle_cakes",
+    "minecraft:tnt"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:beds",
+    "#chrysalis:torches",
+    "minecraft:tripwire_hook",
+    "minecraft:cactus",
+    "minecraft:bamboo_sapling",
+    "#minecraft:flowers",
+    "minecraft:seagrass",
+    "minecraft:tall_seagrass",
+    "minecraft:kelp",
+    "#minecraft:coral_plants"
+  ]
+}

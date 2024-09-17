@@ -9,7 +9,20 @@
     "#chrysalis:prismarine_blocks",
     "#chrysalis:purpur",
     "#minecraft:cauldrons",
+    "#minecraft:flower_pots",
     "#minecraft:stone_buttons",
-    "#minecraft:stone_pressure_plates"
+    "#minecraft:stone_pressure_plates",
+    "#c:skulls",
+    "#c:glass_blocks",
+    "#c:glass_panes",
+    "minecraft:glowstone",
+    "minecraft:redstone_lamp",
+    "minecraft:sea_lantern",
+    "minecraft:beacon",
+    "minecraft:turtle_egg",
+    "minecraft:sniffer_egg",
+    "minecraft:lever",
+    "minecraft:repeater",
+    "minecraft:comparator"
   ]
 }
