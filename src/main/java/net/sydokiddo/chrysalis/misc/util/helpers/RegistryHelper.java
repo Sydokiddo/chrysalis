@@ -124,8 +124,8 @@ public class RegistryHelper {
 
     // region Miscellaneous
 
-    public static Item registerMusicDisc(Rarity rarity, ResourceKey<JukeboxSong> jukeboxSong) {
-        return new Item(new Item.Properties().stacksTo(1).rarity(rarity).jukeboxPlayable(jukeboxSong));
+    public static Item registerMusicDisc(ResourceKey<JukeboxSong> jukeboxSong, Rarity rarity) {
+        return new Item(new Item.Properties().stacksTo(1).jukeboxPlayable(jukeboxSong).rarity(rarity));
     }
 
     public static CSpawnEggItem registerSpawnEgg(EntityType entityType, int baseColor, int spotsColor, EntityType mobOffspring) {

@@ -18,6 +18,6 @@ public class DebugHelper {
     }
 
     public static void sendWaxedDebugMessage(Level level, String blockString, Player player, BlockPos blockPos) {
-        if (Chrysalis.IS_DEBUG && !level.isClientSide()) Chrysalis.LOGGER.info("{} has been successfully waxed by {} at {}", blockString, player.getName().getString(), blockPos);
+        if (Chrysalis.IS_DEBUG && !level.isClientSide()) Chrysalis.LOGGER.info("{} has been waxed by {} at {}", blockString, player.getName().getString(), blockPos);
     }
 }
