@@ -44,6 +44,8 @@
   "gui.chrysalis.commands.showcase_fail": "You are not holding a valid item to showcase",
   "gui.chrysalis.commands.surface_success": "Teleported %1$s to the highest block position",
   "gui.chrysalis.commands.surface_fail": "You are already at the highest block position",
+  "gui.chrysalis.commands.clear_spawnpoint_success": "Cleared %1$s's spawn point",
+  "gui.chrysalis.commands.clear_spawnpoint_fail": "%1$s does not have a specified spawn point",
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",

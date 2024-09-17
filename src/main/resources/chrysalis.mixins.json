@@ -60,6 +60,7 @@
   ],
   "client": [
     "misc.ClientLevelMixin",
+    "misc.GuiMixin",
     "misc.LevelRendererMixin",
     "misc.MinecraftMixin",
     "misc.ScreenshotMainMixin",
