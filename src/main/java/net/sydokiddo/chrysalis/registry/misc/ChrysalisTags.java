@@ -18,6 +18,12 @@ public class ChrysalisTags {
 
     public static final TagKey<Item>
 
+        // region Chrysalis Items
+
+        DEBUG_UTILITY_ITEMS = registerItemTag("debug_utility_items"),
+
+        // endregion
+
         // region Common Items
 
         BANNER_PATTERNS = registerItemTag("banner_patterns"),
