@@ -6,8 +6,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import java.util.Optional;
+import java.util.UUID;
 
 @SuppressWarnings("unused")
 public class EntityDataHelper {
@@ -32,8 +36,18 @@ public class EntityDataHelper {
         return (livingEntity.isUnderWater() || livingEntity.isInPowderSnow || livingEntity.isInLava());
     }
 
-    public static boolean targetIsImmunePlayer(Entity self, Entity target) {
-        return target instanceof Player playerTarget && self instanceof Player playerOwner && !playerOwner.canHarmPlayer(playerTarget);
+    public static boolean targetIsImmunePlayer(Entity target, Entity player) {
+        return target instanceof Player playerTarget && player instanceof Player playerOwner && !playerOwner.canHarmPlayer(playerTarget);
+    }
+
+    public static boolean targetIsAttachedToLead(Entity target, Player player) {
+        return target instanceof Mob mob && mob.isLeashed() && mob.getLeashHolder() == player;
+    }
+
+    public static boolean targetIsLinkedAllay(Entity target, Player player) {
+        if (!(target instanceof Allay allay)) return false;
+        Optional<UUID> optional = allay.getBrain().getMemory(MemoryModuleType.LIKED_PLAYER);
+        return optional.isPresent() && player.getUUID().equals(optional.get());
     }
 
     public static boolean getCustomNameTagName(String name, Mob mob) {
