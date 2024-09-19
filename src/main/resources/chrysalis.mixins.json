@@ -54,6 +54,7 @@
     "items.SwordItemMixin",
     "items.TooltipMixin",
     "items.TridentItemMixin",
+    "misc.EnchantCommandMixin",
     "misc.LevelSummaryMixin",
     "misc.SnowFixMixin",
     "util.SimpleParticleTypeAccessor"

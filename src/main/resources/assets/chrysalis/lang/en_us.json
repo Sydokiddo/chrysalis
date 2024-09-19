@@ -52,6 +52,7 @@
   "gui.chrysalis.commands.disenchant_fail_no_item": "%s is not holding any item",
   "gui.chrysalis.commands.disenchant_fail_no_enchantments": "%s's held item does not have any enchantments to remove",
   "gui.chrysalis.commands.disenchant_fail_invalid_entity": "%s is not a valid entity for this command",
+  "gui.chrysalis.commands.enchant_fail_low_level": "The value of that enchantment is lower than or equal to the value that is already on the item",
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",
