@@ -15,7 +15,7 @@ import java.util.Objects;
 public class SurfaceCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
-        commandDispatcher.register(Commands.literal("surface").executes(SurfaceCommand::teleportPlayerToSurface));
+        commandDispatcher.register(Commands.literal("surface").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).executes(SurfaceCommand::teleportPlayerToSurface));
     }
 
     private static int teleportPlayerToSurface(CommandContext<CommandSourceStack> context) {

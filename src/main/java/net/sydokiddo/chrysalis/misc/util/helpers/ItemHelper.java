@@ -10,15 +10,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -46,16 +43,6 @@ public class ItemHelper {
             }
         }
         return false;
-    }
-
-    /**
-     * Checks for a food item's saturation amount.
-     **/
-
-    public static BigDecimal getFoodSaturation(ItemStack itemStack) {
-        FoodProperties component = itemStack.get(DataComponents.FOOD);
-        if (component == null) return new BigDecimal(0);
-        return BigDecimal.valueOf(component.nutrition() * component.saturation() * 2.0F).setScale(1, RoundingMode.DOWN);
     }
 
     /**
@@ -127,9 +114,7 @@ public class ItemHelper {
     public static void addDimensionTooltip(List<Component> tooltip, String dimension) {
         String registryKey = dimension.split(":")[0];
         String registryPath = dimension.split(":")[1];
-
-        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension",
-                Component.translatable("dimension." + registryKey + "." + registryPath).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
+        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension", Component.translatable("dimension." + registryKey + "." + registryPath).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
     }
 
     public static void addSpaceOnTooltipIfEnchantedOrTrimmed(ItemStack itemStack, List<Component> tooltip) {

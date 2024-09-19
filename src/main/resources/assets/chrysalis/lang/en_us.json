@@ -46,6 +46,12 @@
   "gui.chrysalis.commands.surface_fail": "You are already at the highest block position",
   "gui.chrysalis.commands.clear_spawnpoint_success": "Cleared %1$s's spawn point",
   "gui.chrysalis.commands.clear_spawnpoint_fail": "%1$s does not have a specified spawn point",
+  "gui.chrysalis.commands.disenchant_success_single": "Removed all enchantments from %s's item",
+  "gui.chrysalis.commands.disenchant_success_multiple": "Removed all enchantments from %s entities",
+  "gui.chrysalis.commands.disenchant_fail": "Nothing changed. Targets either have no item in their hands or the item could not be disenchanted.",
+  "gui.chrysalis.commands.disenchant_fail_no_item": "%s is not holding any item",
+  "gui.chrysalis.commands.disenchant_fail_no_enchantments": "%s's held item does not have any enchantments to remove",
+  "gui.chrysalis.commands.disenchant_fail_invalid_entity": "%s is not a valid entity for this command",
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",

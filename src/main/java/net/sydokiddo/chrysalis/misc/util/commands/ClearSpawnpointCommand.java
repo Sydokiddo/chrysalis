@@ -14,7 +14,7 @@ import java.util.Objects;
 public class ClearSpawnpointCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
-        commandDispatcher.register(Commands.literal("clearspawnpoint").executes(ClearSpawnpointCommand::clearSpawnpoint));
+        commandDispatcher.register(Commands.literal("clearspawnpoint").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).executes(ClearSpawnpointCommand::clearSpawnpoint));
     }
 
     private static int clearSpawnpoint(CommandContext<CommandSourceStack> context) {

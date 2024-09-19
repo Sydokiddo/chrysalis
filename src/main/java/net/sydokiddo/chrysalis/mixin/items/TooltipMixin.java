@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
-@Mixin({DiscFragmentItem.class, BannerItem.class, BannerPatternItem.class, CrossbowItem.class, FireworkRocketItem.class, MobBucketItem.class, WrittenBookItem.class, PotionItem.class})
+@Mixin({DiscFragmentItem.class, BannerItem.class, BannerPatternItem.class, ShieldItem.class, CrossbowItem.class, FireworkRocketItem.class, MobBucketItem.class, WrittenBookItem.class, PotionItem.class})
 public class TooltipMixin extends Item {
 
     private TooltipMixin(Properties properties) {
@@ -16,7 +16,7 @@ public class TooltipMixin extends Item {
     }
 
     @Inject(method = "appendHoverText", at = @At("HEAD"))
-    private void chrysalis$allowOriginalTooltips(ItemStack itemStack, TooltipContext context, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo ci) {
+    private void chrysalis$allowOriginalTooltips(ItemStack itemStack, TooltipContext context, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
         super.appendHoverText(itemStack, context, list, tooltipFlag);
     }
 }
