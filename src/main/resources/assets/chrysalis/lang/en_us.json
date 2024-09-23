@@ -2,7 +2,8 @@
   "mod.chrysalis": "Chrysalis",
   "gui.chrysalis.wiki": "Developer Wiki",
 
-  "gui.icon.chrysalis": "\ua000",
+  "gui.icon.chrysalis.mod_icon": "\ua000",
+  "gui.icon.chrysalis.warning": "\ua001",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",

@@ -79,8 +79,10 @@ public class ChrysalisRegistry {
         CHRYSALIS_COLOR = Color.decode("#A27FFF")
     ;
 
+    @SuppressWarnings("unused")
     public static final MutableComponent
-        CHRYSALIS_ICON = Component.translatable("gui.icon.chrysalis")
+        CHRYSALIS_ICON = Component.translatable("gui.icon.chrysalis.mod_icon"),
+        WARNING_ICON = Component.translatable("gui.icon.chrysalis.warning")
     ;
 
     @SuppressWarnings("unused")

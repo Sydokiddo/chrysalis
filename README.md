@@ -14,4 +14,4 @@ _Do note that the wiki is slightly outdated, so information presented on there m
 
 Chrysalis can be downloaded from these sources:
 
-* [Modrinth](https://modrinth.com/mod/chrysalis) [Current Version: 0.4.3]
+* [Modrinth](https://modrinth.com/mod/chrysalis) [Current Version: 0.4.4]
