@@ -54,6 +54,12 @@
   "gui.chrysalis.commands.disenchant_fail_no_enchantments": "%s's held item does not have any enchantments to remove",
   "gui.chrysalis.commands.disenchant_fail_invalid_entity": "%s is not a valid entity for this command",
   "gui.chrysalis.commands.enchant_fail_low_level": "The value of that enchantment is lower than or equal to the value that is already on the item",
+  "gui.chrysalis.commands.durability_success_single": "Adjusted the durability of %1$s's item by %2$s points, and set the repair cost to %3$s",
+  "gui.chrysalis.commands.durability_success_multiple": "Adjusted the durability of items for %1$s entities by %2$s points, and set the repair cost to %3$s",
+  "gui.chrysalis.commands.durability_fail": "Nothing changed. Targets either have no item in their hands or the item could not have its durability adjusted.",
+  "gui.chrysalis.commands.durability_fail_no_item": "%s is not holding any item",
+  "gui.chrysalis.commands.durability_fail_no_durability": "%s's held item does not have any durability to be adjusted",
+  "gui.chrysalis.commands.durability_fail_invalid_entity": "%s is not a valid entity for this command",
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",
