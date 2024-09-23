@@ -60,6 +60,7 @@
   "gui.chrysalis.commands.durability_fail_no_item": "%s is not holding any item",
   "gui.chrysalis.commands.durability_fail_no_durability": "%s's held item does not have any durability to be adjusted",
   "gui.chrysalis.commands.durability_fail_invalid_entity": "%s is not a valid entity for this command",
+  "gui.chrysalis.commands.explosion_success": "Created an explosion caused by %1$s with a power of %2$s",
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",
