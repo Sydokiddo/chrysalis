@@ -21,8 +21,8 @@ public class ShowcaseCommand {
         Player player = Objects.requireNonNull(context.getSource().getPlayer());
         ItemStack itemStack = player.getMainHandItem();
 
-        Component successText = Component.translatable("gui.chrysalis.commands.showcase_success", player.getDisplayName(), itemStack.getDisplayName());
-        Component failText = Component.translatable("gui.chrysalis.commands.showcase_fail").withStyle(ChatFormatting.RED);
+        Component successText = Component.translatable("gui.chrysalis.commands.showcase.success", player.getDisplayName(), itemStack.getDisplayName());
+        Component failText = Component.translatable("gui.chrysalis.commands.showcase.fail").withStyle(ChatFormatting.RED);
 
         if (!itemStack.isEmpty()) context.getSource().getServer().getPlayerList().broadcastSystemMessage(successText, false);
         else player.sendSystemMessage(failText);

@@ -34,13 +34,13 @@ public class CooldownCommand {
 
     private static int addCooldown(CommandSourceStack commandSourceStack, Player player, ItemInput itemInput, int cooldownLength) {
         player.getCooldowns().addCooldown(itemInput.getItem(), cooldownLength);
-        commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.cooldown_add", cooldownLength, itemInput.getItem().getDefaultInstance().getDisplayName(), player.getDisplayName()), true);
+        commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.cooldown.add", cooldownLength, itemInput.getItem().getDefaultInstance().getDisplayName(), player.getDisplayName()), true);
         return 1;
     }
 
     private static int removeCooldown(CommandSourceStack commandSourceStack, Player player, ItemInput itemInput) {
         player.getCooldowns().removeCooldown(itemInput.getItem());
-        commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.cooldown_remove", itemInput.getItem().getDefaultInstance().getDisplayName(), player.getDisplayName()), true);
+        commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.cooldown.remove", itemInput.getItem().getDefaultInstance().getDisplayName(), player.getDisplayName()), true);
         return 1;
     }
 }

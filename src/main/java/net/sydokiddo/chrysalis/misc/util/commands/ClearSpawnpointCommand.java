@@ -23,8 +23,8 @@ public class ClearSpawnpointCommand {
 
         if (player instanceof ServerPlayer serverPlayer) {
 
-            Component successText = Component.translatable("gui.chrysalis.commands.clear_spawnpoint_success", player.getDisplayName());
-            Component failText = Component.translatable("gui.chrysalis.commands.clear_spawnpoint_fail", player.getDisplayName()).withStyle(ChatFormatting.RED);
+            Component successText = Component.translatable("gui.chrysalis.commands.clear_spawnpoint.success", player.getDisplayName());
+            Component failText = Component.translatable("gui.chrysalis.commands.clear_spawnpoint.fail", player.getDisplayName()).withStyle(ChatFormatting.RED);
 
             if (serverPlayer.getRespawnPosition() != null) {
                 serverPlayer.setRespawnPosition(Level.OVERWORLD, null, 0.0F, false, false);

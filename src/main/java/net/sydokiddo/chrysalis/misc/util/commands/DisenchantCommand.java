@@ -31,10 +31,10 @@ public class DisenchantCommand {
 
         int returnValue = 0;
 
-        SimpleCommandExceptionType failGeneric = new SimpleCommandExceptionType(Component.translatable("gui.chrysalis.commands.disenchant_fail"));
-        DynamicCommandExceptionType failNoItem = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant_fail_no_item", object));
-        DynamicCommandExceptionType failNoEnchantments = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant_fail_no_enchantments", object));
-        DynamicCommandExceptionType failInvalidEntity = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant_fail_invalid_entity", object));
+        SimpleCommandExceptionType failGeneric = new SimpleCommandExceptionType(Component.translatable("gui.chrysalis.commands.disenchant.fail"));
+        DynamicCommandExceptionType failNoItem = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant.fail_no_item", object));
+        DynamicCommandExceptionType failNoEnchantments = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant.fail_no_enchantments", object));
+        DynamicCommandExceptionType failInvalidEntity = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant.fail_invalid_entity", object));
 
         for (Entity entity : entities) {
 
@@ -66,8 +66,8 @@ public class DisenchantCommand {
         }
 
         if (returnValue == 0) throw failGeneric.create();
-        if (entities.size() == 1) commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.disenchant_success_single", entities.iterator().next().getDisplayName()), true);
-        else commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.disenchant_success_multiple", entities.size()), true);
+        if (entities.size() == 1) commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.disenchant.success_single", entities.iterator().next().getDisplayName()), true);
+        else commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.disenchant.success_multiple", entities.size()), true);
         return returnValue;
     }
 }

@@ -32,8 +32,8 @@ public class SurfaceCommand {
         BlockPos highestBlockPos = new BlockPos(x, highestYValue, z);
         BlockState highestBlockState = player.level().getBlockState(highestBlockPos.below());
 
-        Component successText = Component.translatable("gui.chrysalis.commands.surface_success", player.getDisplayName());
-        Component failText = Component.translatable("gui.chrysalis.commands.surface_fail").withStyle(ChatFormatting.RED);
+        Component successText = Component.translatable("gui.chrysalis.commands.surface.success", player.getDisplayName());
+        Component failText = Component.translatable("gui.chrysalis.commands.surface.fail").withStyle(ChatFormatting.RED);
 
         if (highestYValue != y && !highestBlockState.isAir() && !highestBlockState.getCollisionShape(player.level(), highestBlockPos).isEmpty()) {
             player.teleportTo(playerPos.getX(), highestYValue, playerPos.getZ());

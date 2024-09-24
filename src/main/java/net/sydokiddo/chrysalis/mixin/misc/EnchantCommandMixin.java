@@ -48,7 +48,7 @@ public class EnchantCommandMixin {
     private static void chrysalis$preventEnchantingIfValueIsTooLow(CommandSourceStack commandSourceStack, Collection<? extends Entity> collection, Holder<Enchantment> holder, int enchantmentLevel, CallbackInfoReturnable<Integer> cir) {
         for (Entity entity : collection) {
             if (entity instanceof LivingEntity livingEntity && enchantmentLevel <= EnchantmentHelper.getItemEnchantmentLevel(holder, livingEntity.getMainHandItem())) {
-                Objects.requireNonNull(commandSourceStack.getPlayer()).sendSystemMessage(Component.translatable("gui.chrysalis.commands.enchant_fail_low_level").withStyle(ChatFormatting.RED));
+                Objects.requireNonNull(commandSourceStack.getPlayer()).sendSystemMessage(Component.translatable("gui.chrysalis.commands.enchant.fail_low_level").withStyle(ChatFormatting.RED));
                 cir.setReturnValue(0);
             }
         }

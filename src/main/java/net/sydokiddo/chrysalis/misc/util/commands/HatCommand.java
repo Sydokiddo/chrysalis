@@ -28,14 +28,14 @@ public class HatCommand {
         ItemStack heldItem = player.getMainHandItem();
         ItemStack currentHeadItem = player.getItemBySlot(EquipmentSlot.HEAD);
 
-        Component successText = Component.translatable("gui.chrysalis.commands.hat_success", heldItem.getDisplayName(), player.getDisplayName());
-        Component failEmptyText = Component.translatable("gui.chrysalis.commands.hat_fail_empty").withStyle(ChatFormatting.RED);
-        Component failInvalidText = Component.translatable("gui.chrysalis.commands.hat_fail_invalid", heldItem.getDisplayName(), player.getDisplayName()).withStyle(ChatFormatting.RED);
+        Component successText = Component.translatable("gui.chrysalis.commands.hat.success", heldItem.getDisplayName(), player.getDisplayName());
+        Component failNoItemText = Component.translatable("gui.chrysalis.commands.hat.fail_no_item").withStyle(ChatFormatting.RED);
+        Component failInvalidItemText = Component.translatable("gui.chrysalis.commands.hat.fail_invalid_item", heldItem.getDisplayName(), player.getDisplayName()).withStyle(ChatFormatting.RED);
 
         if (heldItem.isEmpty()) {
-            player.sendSystemMessage(failEmptyText);
+            player.sendSystemMessage(failNoItemText);
         } else if (ItemHelper.getEnchantmentLevel(heldItem, Enchantments.BINDING_CURSE) > 0) {
-            player.sendSystemMessage(failInvalidText);
+            player.sendSystemMessage(failInvalidItemText);
         } else {
 
             if (!player.level().isClientSide() && !player.isSpectator() && !player.isSilent()) {

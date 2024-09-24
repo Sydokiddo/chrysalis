@@ -37,7 +37,7 @@ public class ExplosionCommand {
         commandSourceStack.getLevel().explode(causingEntity, Explosion.getDefaultDamageSource(commandSourceStack.getLevel(), causingEntity), null, position.x(), position.y(), position.z(), power, createsFire, Level.ExplosionInteraction.TNT);
 
         if (commandSourceStack.getPlayer() != null) {
-            Component successText = Component.translatable("gui.chrysalis.commands.explosion_success", causingEntity.getName().getString(), power);
+            Component successText = Component.translatable("gui.chrysalis.commands.explosion.success", causingEntity.getDisplayName(), power);
             commandSourceStack.getPlayer().sendSystemMessage(successText);
         }
 
