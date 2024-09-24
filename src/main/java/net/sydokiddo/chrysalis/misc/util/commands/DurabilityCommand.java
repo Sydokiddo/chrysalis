@@ -182,8 +182,11 @@ public class DurabilityCommand {
         ItemStack itemStack = new ItemStack(Items.AIR);
 
         for (Entity entity : entities) {
+
             if (entity instanceof LivingEntity livingEntity) itemStack = livingEntity.getMainHandItem();
             else throw failInvalidEntity.create(entity.getName().getString());
+
+            if (repairCostAmount > itemStack.getOrDefault(DataComponents.REPAIR_COST, 0)) throw failNoDurability.create(entity.getName().getString());
         }
 
         return changeItemProperties(commandSourceStack, entities, itemStack.getOrDefault(DataComponents.REPAIR_COST, 0) - repairCostAmount, true,
