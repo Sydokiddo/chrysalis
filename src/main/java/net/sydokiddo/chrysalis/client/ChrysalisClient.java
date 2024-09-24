@@ -13,6 +13,9 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.Music;
+import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeHandler;
+import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
+import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +32,8 @@ public class ChrysalisClient implements ClientModInitializer {
     public void onInitializeClient() {
 
         ClientPlayNetworking.registerGlobalReceiver(StructureChangedPayload.TYPE, ((payload, context) -> context.client().execute(() -> setStructureMusic(payload.structureName().toString()))));
+        ClientPlayNetworking.registerGlobalReceiver(CameraShakePayload.TYPE, (payload, context) -> context.client().execute(() -> CameraShakeHandler.shakeCamera(payload.time(), payload.strength(), payload.frequency())));
+        ClientPlayNetworking.registerGlobalReceiver(CameraShakeResetPayload.TYPE, (payload, context) -> context.client().execute(CameraShakeHandler::resetCamera));
 
         // region Panoramic Screenshots
 

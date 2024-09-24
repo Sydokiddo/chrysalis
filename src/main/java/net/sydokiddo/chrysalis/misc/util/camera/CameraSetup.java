@@ -1,14 +1,15 @@
-package net.sydokiddo.chrysalis.misc.util;
+package net.sydokiddo.chrysalis.misc.util.camera;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 
-@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class CameraSetup {
 
     private final Camera camera;
+    private float yaw;
+    private float pitch;
     private float roll;
 
     public CameraSetup(Camera camera) {
@@ -21,6 +22,22 @@ public class CameraSetup {
 
     public Camera getInfo() {
         return this.camera;
+    }
+
+    public float getYaw() {
+        return this.yaw;
+    }
+
+    public void setYaw(float yaw) {
+        this.yaw = yaw;
+    }
+
+    public float getPitch() {
+        return this.pitch;
+    }
+
+    public void setPitch(float pitch) {
+        this.pitch = pitch;
     }
 
     public float getRoll() {

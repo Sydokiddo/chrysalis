@@ -77,6 +77,10 @@
   "gui.chrysalis.commands.explosion.success_entity": "Created an explosion caused by %1$s with a power of %2$s",
   "gui.chrysalis.commands.play_game_event.success": "Played game event %1$s from %2$s",
   "gui.chrysalis.commands.play_game_event.invalid": "There is no game event with type \"%s\"",
+  "gui.chrysalis.commands.camera_shake.success_single": "Emitted a camera shake for %s",
+  "gui.chrysalis.commands.camera_shake.success_multiple": "Emitted a camera shake for %s players",
+  "gui.chrysalis.commands.camera_shake.reset.success_single": "Reset %s's camera shake",
+  "gui.chrysalis.commands.camera_shake.reset.success_multiple": "Reset camera shake for %s players",
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",

@@ -14,6 +14,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
+import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.commands.*;
 import net.sydokiddo.chrysalis.misc.util.entities.ChrysalisMemoryModules;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
@@ -118,6 +120,9 @@ public class ChrysalisRegistry {
         ChrysalisCreativeModeTabs.registerCreativeTabs();
         ChrysalisMemoryModules.MEMORY_MODULES.register();
 
+        PayloadTypeRegistry.playS2C().register(CameraShakePayload.TYPE, CameraShakePayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC);
+
         // endregion
 
         // region Commands
@@ -133,6 +138,7 @@ public class ChrysalisRegistry {
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> DurabilityCommand.register(commandDispatcher));
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> ExplosionCommand.register(commandDispatcher));
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> GameEventCommand.register(commandDispatcher));
+        CommandRegistrationCallback.EVENT.register((commandDispatcher, commandBuildContext, commandSelection) -> CameraShakeCommand.register(commandDispatcher));
 
         // endregion
 
