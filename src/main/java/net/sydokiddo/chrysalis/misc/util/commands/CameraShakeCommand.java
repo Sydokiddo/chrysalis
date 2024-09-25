@@ -22,7 +22,7 @@ public class CameraShakeCommand {
     ;
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
-        commandDispatcher.register((Commands.literal("camerashake").requires((commandSourceStack) -> commandSourceStack.hasPermission(2))).then(Commands.argument(targetsString, EntityArgument.players())
+        commandDispatcher.register(Commands.literal("camerashake").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).then(Commands.argument(targetsString, EntityArgument.players())
 
         .then(Commands.argument(timeString, IntegerArgumentType.integer(1))
             .then(Commands.argument(strengthString, IntegerArgumentType.integer(1))

@@ -36,7 +36,7 @@ public class DisenchantCommand {
     ;
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext) {
-        commandDispatcher.register((Commands.literal("disenchant").requires((commandSourceStack) -> commandSourceStack.hasPermission(2))).then(Commands.argument(targetsString, EntityArgument.entities())
+        commandDispatcher.register(Commands.literal("disenchant").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).then(Commands.argument(targetsString, EntityArgument.entities())
 
             .then(Commands.argument(enchantmentString, ResourceArgument.resource(commandBuildContext, Registries.ENCHANTMENT))
             .executes((commandContext) -> removeEnchantments(commandContext.getSource(), EntityArgument.getEntities(commandContext, targetsString), ResourceArgument.getEnchantment(commandContext, enchantmentString)))

@@ -21,15 +21,19 @@ public class CooldownCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext) {
 
-        commandDispatcher.register(((Commands.literal("cooldown").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)))
+        commandDispatcher.register(Commands.literal("cooldown").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).then(Commands.argument(targetString, EntityArgument.player())
 
-        .then(Commands.literal("add").then((Commands.argument(targetString, EntityArgument.player())
-        .then(Commands.argument(itemString, ItemArgument.item(commandBuildContext)).then(Commands.argument(lengthString, IntegerArgumentType.integer(1))
-        .executes((commandContext) -> addCooldown(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), ItemArgument.getItem(commandContext, itemString), IntegerArgumentType.getInteger(commandContext, lengthString))))))))
+            .then(Commands.literal("add")
+                .then(Commands.argument(itemString, ItemArgument.item(commandBuildContext))
+                .then(Commands.argument(lengthString, IntegerArgumentType.integer(1))
+                .executes((commandContext) -> addCooldown(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), ItemArgument.getItem(commandContext, itemString), IntegerArgumentType.getInteger(commandContext, lengthString)))))
+            )
 
-        .then(Commands.literal("remove").then((Commands.argument(targetString, EntityArgument.player())
-        .then(Commands.argument(itemString, ItemArgument.item(commandBuildContext))
-        .executes((commandContext) -> removeCooldown(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), ItemArgument.getItem(commandContext, itemString)))))))));
+            .then(Commands.literal("remove")
+                .then(Commands.argument(itemString, ItemArgument.item(commandBuildContext))
+                .executes((commandContext) -> removeCooldown(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), ItemArgument.getItem(commandContext, itemString))))
+            )
+        ));
     }
 
     private static int addCooldown(CommandSourceStack commandSourceStack, Player player, ItemInput itemInput, int cooldownLength) {

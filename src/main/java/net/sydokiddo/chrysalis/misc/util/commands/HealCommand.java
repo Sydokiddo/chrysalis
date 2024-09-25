@@ -19,7 +19,7 @@ public class HealCommand {
     ;
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
-        commandDispatcher.register((Commands.literal("heal").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)))
+        commandDispatcher.register(Commands.literal("heal").requires((commandSourceStack) -> commandSourceStack.hasPermission(2))
         .then(Commands.argument(targetString, EntityArgument.entity()).then(Commands.argument(amountString, FloatArgumentType.floatArg(0.1F))
         .executes((commandContext) -> heal(commandContext.getSource(), EntityArgument.getEntity(commandContext, targetString), FloatArgumentType.getFloat(commandContext, amountString))))));
     }

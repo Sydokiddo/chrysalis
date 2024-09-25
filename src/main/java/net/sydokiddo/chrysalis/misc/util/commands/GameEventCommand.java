@@ -25,7 +25,7 @@ public class GameEventCommand {
     ;
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
-        commandDispatcher.register((Commands.literal("gameevent").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)))
+        commandDispatcher.register(Commands.literal("gameevent").requires((commandSourceStack) -> commandSourceStack.hasPermission(2))
         .then(Commands.argument(causingEntityString, EntityArgument.entity())
         .then(Commands.argument(gameEventString, ResourceKeyArgument.key(Registries.GAME_EVENT))
         .then(Commands.argument(posString, Vec3Argument.vec3())

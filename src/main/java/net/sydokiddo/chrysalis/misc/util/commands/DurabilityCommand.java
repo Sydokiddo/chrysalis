@@ -35,7 +35,7 @@ public class DurabilityCommand {
     ;
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
-        commandDispatcher.register((Commands.literal(durabilityString).requires((commandSourceStack) -> commandSourceStack.hasPermission(2))).then(Commands.argument(targetsString, EntityArgument.entities())
+        commandDispatcher.register(Commands.literal(durabilityString).requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).then(Commands.argument(targetsString, EntityArgument.entities())
 
         .then(Commands.literal("add")
 
