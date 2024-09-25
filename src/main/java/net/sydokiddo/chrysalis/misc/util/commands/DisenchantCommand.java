@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -13,6 +14,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -87,10 +92,19 @@ public class DisenchantCommand {
             throw failInvalidEntity.create(entity.getName().getString());
         }
 
-        Component singleSuccessMessage = enchantmentHolder != null ? Component.translatable("gui.chrysalis.commands.disenchant_single.success_single", Enchantment.getFullname(enchantmentHolder, 1), entities.iterator().next().getDisplayName())
+        MutableComponent enchantmentName = Component.empty();
+
+        if (enchantmentHolder != null) {
+            enchantmentName = enchantmentHolder.value().description().copy();
+            ChatFormatting color = ChatFormatting.GRAY;
+            if (enchantmentHolder.is(EnchantmentTags.CURSE)) color = ChatFormatting.RED;
+            ComponentUtils.mergeStyles(enchantmentName, Style.EMPTY.withColor(color));
+        }
+
+        Component singleSuccessMessage = enchantmentHolder != null ? Component.translatable("gui.chrysalis.commands.disenchant_single.success_single", enchantmentName, entities.iterator().next().getDisplayName())
         : Component.translatable("gui.chrysalis.commands.disenchant_all.success_single", entities.iterator().next().getDisplayName());
 
-        Component multipleSuccessMessage = enchantmentHolder != null ? Component.translatable("gui.chrysalis.commands.disenchant_single.success_multiple", Enchantment.getFullname(enchantmentHolder, 1), entities.size())
+        Component multipleSuccessMessage = enchantmentHolder != null ? Component.translatable("gui.chrysalis.commands.disenchant_single.success_multiple", enchantmentName, entities.size())
         : Component.translatable("gui.chrysalis.commands.disenchant_all.success_multiple", entities.size());
 
         if (returnValue == 0) throw failGeneric.create();
