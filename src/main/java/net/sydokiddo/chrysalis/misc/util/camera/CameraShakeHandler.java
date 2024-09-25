@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.misc.util.camera;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 
 @Environment(EnvType.CLIENT)
@@ -37,14 +38,23 @@ public class CameraShakeHandler {
 
             float delta = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
             float ticksExistedDelta = player.tickCount + delta;
-
             float strength = CameraShakeHandler.strength / 4.0F;
             float frequency = CameraShakeHandler.frequency / 2.0F;
 
+            float yaw = (float) (cameraSetup.getYaw() + strength * Math.cos(ticksExistedDelta * frequency + 1));
+            float pitch = (float) (cameraSetup.getPitch() + strength * Math.cos(ticksExistedDelta * frequency + 2));
+            float roll = (float) (cameraSetup.getRoll() + strength * Math.cos(ticksExistedDelta * frequency));
+
             if (!Minecraft.getInstance().isPaused()) {
-                cameraSetup.setYaw((float) (cameraSetup.getYaw() + strength * Math.cos(ticksExistedDelta * frequency + 1)));
-                cameraSetup.setPitch((float) (cameraSetup.getPitch() + strength * Math.cos(ticksExistedDelta * frequency + 2)));
-                cameraSetup.setRoll((float) (cameraSetup.getRoll() + strength * Math.cos(ticksExistedDelta * frequency)));
+                cameraSetup.setYaw(yaw);
+                cameraSetup.setPitch(pitch);
+                cameraSetup.setRoll(roll);
+            }
+
+            if (CameraShakeHandler.time <= 5) {
+                cameraSetup.setYaw(Mth.lerp(delta, yaw, 0));
+                cameraSetup.setPitch(Mth.lerp(delta, pitch, 0));
+                cameraSetup.setRoll(Mth.lerp(delta, roll, 0));
             }
 
         } else if (CameraShakeHandler.strength != 0) {

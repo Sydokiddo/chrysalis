@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraSetup;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeHandler;
@@ -18,7 +17,7 @@ public class GameRendererMixin {
 
     @ModifyExpressionValue(method = "renderLevel", at = @At(value = "NEW", target = "()Lcom/mojang/blaze3d/vertex/PoseStack;"))
     private PoseStack chrysalis$renderCameraShake(PoseStack poseStack) {
-        CameraSetup cameraSetup = new CameraSetup(Minecraft.getInstance().gameRenderer.getMainCamera());
+        CameraSetup cameraSetup = CameraSetup.getCameraSetup();
         CameraShakeHandler.handleCameraShake(cameraSetup);
         poseStack.mulPose(Axis.XP.rotationDegrees(cameraSetup.getYaw()));
         poseStack.mulPose(Axis.YP.rotationDegrees(cameraSetup.getPitch()));

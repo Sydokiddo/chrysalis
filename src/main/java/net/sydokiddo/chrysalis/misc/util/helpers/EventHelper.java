@@ -19,17 +19,27 @@ public class EventHelper {
         ServerPlayNetworking.send(serverPlayer, new CameraShakePayload(time, strength, frequency));
     }
 
-    public static void sendCameraShakeToNearbyPlayers(Entity entity, float range, int time, int strength, int frequency) {
+    public static void sendCameraShakeToNearbyPlayers(Entity entity, Entity ignoredEntity, float range, int time, int strength, int frequency) {
+
         List<? extends ServerPlayer> shakingRange = entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(range), EntitySelector.NO_SPECTATORS);
-        for (ServerPlayer serverPlayer : shakingRange) sendCameraShake(serverPlayer, time, strength, frequency);
+
+        for (ServerPlayer serverPlayer : shakingRange) {
+            if (serverPlayer == ignoredEntity) return;
+            sendCameraShake(serverPlayer, time, strength, frequency);
+        }
     }
 
     public static void resetCameraShake(ServerPlayer serverPlayer) {
         ServerPlayNetworking.send(serverPlayer, new CameraShakeResetPayload(1));
     }
 
-    public static void resetCameraShakeForNearbyPlayers(Entity entity, float range) {
+    public static void resetCameraShakeForNearbyPlayers(Entity entity, Entity ignoredEntity, float range) {
+
         List<? extends ServerPlayer> resetRange = entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(range), EntitySelector.NO_SPECTATORS);
-        for (ServerPlayer serverPlayer : resetRange) resetCameraShake(serverPlayer);
+
+        for (ServerPlayer serverPlayer : resetRange) {
+            if (serverPlayer == ignoredEntity) return;
+            resetCameraShake(serverPlayer);
+        }
     }
 }
