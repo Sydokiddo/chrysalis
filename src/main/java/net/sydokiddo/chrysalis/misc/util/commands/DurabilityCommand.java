@@ -19,11 +19,11 @@ import java.util.Collection;
 public class DurabilityCommand {
 
     private static final String
+        targetsString = "targets",
         durabilityString = "durability",
         durabilityAmountString = "durability_amount",
         repairCostString = "repair_cost",
-        repairCostAmountString = "repair_cost_amount",
-        targetsString = "targets"
+        repairCostAmountString = "repair_cost_amount"
     ;
 
     private static final SimpleCommandExceptionType failGeneric = new SimpleCommandExceptionType(Component.translatable("gui.chrysalis.commands.durability.fail"));
