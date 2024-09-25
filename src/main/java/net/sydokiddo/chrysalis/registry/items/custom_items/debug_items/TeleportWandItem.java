@@ -42,7 +42,7 @@ public class TeleportWandItem extends DebugUtilityItem {
 
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
-            serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_START);
+            serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
 
             HitResult hitResult = ProjectileUtil.getHitResultOnViewVector(player, entity -> !entity.isSpectator() && entity.isPickable(), Minecraft.getInstance().gameRenderer.getRenderDistance() * 4.0F);

@@ -52,7 +52,7 @@ public class TameMobItem extends DebugUtilityItem {
 
     public static void playTameEvents(Player player, LivingEntity tamedMob) {
 
-        player.gameEvent(GameEvent.ITEM_INTERACT_START);
+        player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
         player.playNotifySound(ChrysalisSoundEvents.TAME_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
 
         if (tamedMob.level() instanceof ServerLevel serverLevel) {

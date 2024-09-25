@@ -41,7 +41,7 @@ public class RideMobItem extends DebugUtilityItem {
             player.setYRot(livingEntity.getYRot());
             player.startRiding(livingEntity);
 
-            player.gameEvent(GameEvent.ITEM_INTERACT_START);
+            player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             player.playNotifySound(ChrysalisSoundEvents.RIDE_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
             player.awardStat(Stats.ITEM_USED.get(this));
 
