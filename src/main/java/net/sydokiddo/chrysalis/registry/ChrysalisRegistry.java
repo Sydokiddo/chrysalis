@@ -84,6 +84,7 @@ public class ChrysalisRegistry {
     @SuppressWarnings("unused")
     public static final MutableComponent
         CHRYSALIS_ICON = Component.translatable("gui.icon.chrysalis.mod_icon"),
+        GEAR_ICON = Component.translatable("gui.icon.chrysalis.gear"),
         WARNING_ICON = Component.translatable("gui.icon.chrysalis.warning")
     ;
 

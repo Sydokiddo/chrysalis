@@ -17,11 +17,20 @@
     },
     {
       "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/gear.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua001"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/warning.png",
       "ascent": 9,
       "height": 9,
       "chars": [
-        "\ua001"
+        "\ua002"
       ]
     }
   ]
