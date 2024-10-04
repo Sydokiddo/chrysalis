@@ -57,7 +57,8 @@
     "misc.EnchantCommandMixin",
     "misc.LevelSummaryMixin",
     "misc.SnowFixMixin",
-    "util.SimpleParticleTypeAccessor"
+    "util.SimpleParticleTypeAccessor",
+    "util.WoodTypeAccessor"
   ],
   "client": [
     "misc.ClientLevelMixin",

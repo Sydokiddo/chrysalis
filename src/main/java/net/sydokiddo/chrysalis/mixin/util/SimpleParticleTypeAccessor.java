@@ -13,7 +13,7 @@ public interface SimpleParticleTypeAccessor {
      **/
 
     @Invoker("<init>")
-    static SimpleParticleType createSimpleParticleType(boolean alwaysSpawn) {
+    static SimpleParticleType chrysalis$invokeSimpleParticleType(boolean alwaysSpawn) {
         throw new UnsupportedOperationException();
     }
 }

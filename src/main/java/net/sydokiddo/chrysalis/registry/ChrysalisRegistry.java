@@ -94,10 +94,6 @@ public class ChrysalisRegistry {
         FIVE_ALT_FONT = Chrysalis.id("five_alt")
     ;
 
-    public static void setTooltipIconsFont(MutableComponent mutableComponent) {
-        mutableComponent.setStyle(mutableComponent.getStyle().withFont(Chrysalis.id("tooltip_icons")));
-    }
-
     // endregion
 
     // Registry
