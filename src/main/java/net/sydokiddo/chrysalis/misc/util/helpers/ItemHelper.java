@@ -7,7 +7,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -127,6 +129,10 @@ public class ItemHelper {
 
     public static Component addTooltipWithIcon(Component icon, Component tooltip) {
         return Component.translatable("gui.chrysalis.item.tooltip_with_icon", icon, tooltip);
+    }
+
+    public static void setTooltipIconsFont(MutableComponent mutableComponent, String modID) {
+        mutableComponent.setStyle(mutableComponent.getStyle().withFont(ResourceLocation.fromNamespaceAndPath(modID, "tooltip_icons")));
     }
 
     // endregion

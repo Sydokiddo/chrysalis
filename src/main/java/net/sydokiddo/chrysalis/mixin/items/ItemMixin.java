@@ -31,7 +31,7 @@ public abstract class ItemMixin {
         if (this.getDescriptionId().contains(Chrysalis.MOD_ID)) {
             if (!list.isEmpty()) list.add(CommonComponents.EMPTY);
             MutableComponent chrysalisIcon = ChrysalisRegistry.CHRYSALIS_ICON;
-            ChrysalisRegistry.setTooltipIconsFont(chrysalisIcon);
+            ItemHelper.setTooltipIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
             Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(ChrysalisRegistry.FIVE_FONT).withColor(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB())));
             list.add(chrysalisTooltip);
         }
