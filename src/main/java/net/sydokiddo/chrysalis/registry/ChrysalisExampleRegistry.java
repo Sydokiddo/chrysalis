@@ -17,6 +17,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.dispenser.PlaceBlockDispenserBehavior;
+import net.sydokiddo.chrysalis.misc.util.dispenser.ShootProjectileDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.misc.util.helpers.RegistryHelper;
 
@@ -25,7 +26,7 @@ public class ChrysalisExampleRegistry {
 
     /**
      * A variety of examples for things that can be registered with Chrysalis.
-     * Note: Do not initialize this class unless you want a bunch of broken items, blocks, and other things in your game!
+     * Note: Do not initialize any methods in this class unless you want a bunch of broken items, blocks, and other things in your game!
      **/
 
     // region Example Potion Recipe Registries
@@ -93,6 +94,7 @@ public class ChrysalisExampleRegistry {
 
     public static void registerExampleDispenserMethods() {
         DispenserBlock.registerBehavior(Blocks.SAND.asItem(), new PlaceBlockDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.BLAZE_POWDER, new ShootProjectileDispenserBehavior(EntityType.SMALL_FIREBALL, SoundEvents.BLAZE_SHOOT));
     }
 
     public static void sendExampleCameraShake(Entity entity) {

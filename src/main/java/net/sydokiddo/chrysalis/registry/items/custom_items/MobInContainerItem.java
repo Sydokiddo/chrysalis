@@ -26,13 +26,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class MobInContainerItem extends Item implements DispensibleContainerItem {
 
-    private final EntityType<?> type;
+    private final EntityType<?> entityType;
     public final SoundEvent emptySound;
     public final Item returnItem;
 
     public MobInContainerItem(EntityType<?> entityType, SoundEvent emptySound, Properties properties, Item returnItem) {
         super(properties);
-        this.type = entityType;
+        this.entityType = entityType;
         this.emptySound = emptySound;
         this.returnItem = returnItem;
     }
@@ -74,7 +74,7 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
     public void checkExtraContent(@Nullable Player player, @NotNull Level level, @NotNull ItemStack itemStack, @NotNull BlockPos blockPos) {
         if (level instanceof ServerLevel serverLevel) {
 
-            Entity entity = this.type.spawn(serverLevel, itemStack, null, blockPos, MobSpawnType.BUCKET, true, false);
+            Entity entity = this.entityType.spawn(serverLevel, itemStack, null, blockPos, MobSpawnType.BUCKET, true, false);
 
             if (entity instanceof ContainerMob containerMob) {
                 containerMob.loadFromItemTag(itemStack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag());
