@@ -101,15 +101,15 @@ public class DisenchantCommand {
             ComponentUtils.mergeStyles(enchantmentName, Style.EMPTY.withColor(color));
         }
 
-        Component singleSuccessMessage = enchantmentHolder != null ? Component.translatable("gui.chrysalis.commands.disenchant_single.success_single", enchantmentName, entities.iterator().next().getDisplayName())
+        Component successSingleMessage = enchantmentHolder != null ? Component.translatable("gui.chrysalis.commands.disenchant_single.success_single", enchantmentName, entities.iterator().next().getDisplayName())
         : Component.translatable("gui.chrysalis.commands.disenchant_all.success_single", entities.iterator().next().getDisplayName());
 
-        Component multipleSuccessMessage = enchantmentHolder != null ? Component.translatable("gui.chrysalis.commands.disenchant_single.success_multiple", enchantmentName, entities.size())
+        Component successMultipleMessage = enchantmentHolder != null ? Component.translatable("gui.chrysalis.commands.disenchant_single.success_multiple", enchantmentName, entities.size())
         : Component.translatable("gui.chrysalis.commands.disenchant_all.success_multiple", entities.size());
 
         if (returnValue == 0) throw failGeneric.create();
-        if (entities.size() == 1) commandSourceStack.sendSuccess(() -> singleSuccessMessage, true);
-        else commandSourceStack.sendSuccess(() -> multipleSuccessMessage, true);
+        if (entities.size() == 1) commandSourceStack.sendSuccess(() -> successSingleMessage, true);
+        else commandSourceStack.sendSuccess(() -> successMultipleMessage, true);
         return returnValue;
     }
 }
