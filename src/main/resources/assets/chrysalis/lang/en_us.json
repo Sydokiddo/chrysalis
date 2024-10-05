@@ -28,6 +28,7 @@
   "item.chrysalis.ride_mob": "Ride Mob",
   "item.chrysalis.ride_mob.desc": "Mounts Targeted Mob",
   "item.chrysalis.debug_stick.desc": "Cycles Between Block States",
+  "item.chrysalis.light.desc": "Light Level: %s",
 
   "gui.chrysalis.heal_message": "Successfully healed %s",
   "gui.chrysalis.fill_hunger_message": "Successfully nourished %s",
