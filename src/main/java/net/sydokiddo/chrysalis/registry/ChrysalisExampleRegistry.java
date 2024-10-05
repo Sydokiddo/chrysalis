@@ -29,6 +29,10 @@ public class ChrysalisExampleRegistry {
      * Note: Do not initialize any methods in this class unless you want a bunch of broken items, blocks, and other things in your game!
      **/
 
+    public static void initWarning() {
+        Chrysalis.LOGGER.warn("WARNING: {} example registry has been initialized.", Chrysalis.LOGGER.getName());
+    }
+
     // region Example Potion Recipe Registries
 
     public static void registerExamplePotions() {
