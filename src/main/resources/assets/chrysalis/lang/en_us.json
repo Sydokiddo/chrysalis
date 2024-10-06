@@ -30,6 +30,8 @@
   "item.chrysalis.debug_stick.desc": "Cycles Between Block States",
   "item.chrysalis.light.desc": "Light Level: %s",
 
+  "block.chrysalis.podium_spawner": "Podium Spawner",
+
   "gui.chrysalis.heal_message": "Successfully healed %s",
   "gui.chrysalis.fill_hunger_message": "Successfully nourished %s",
   "gui.chrysalis.teleport_to_spawnpoint_message": "Successfully teleported to spawnpoint",
@@ -173,6 +175,11 @@
   "subtitles.item.teleport_to_spawnpoint.fail": "Teleportation fails",
   "subtitles.item.tame_mob.use": "Mob tamed",
   "subtitles.item.ride_mob.use": "Mob mounted",
+
+  "subtitles.block.podium_spawner.ambient": "Podium Spawner crackles",
+  "subtitles.block.podium_spawner.spawn_mob": "Podium Spawner spawns a mob",
+  "subtitles.block.podium_spawner.trigger_countdown": "Podium Spawner ticks",
+  "subtitles.block.podium_spawner.end_cooldown": "Podium Spawner reactivates",
 
   "tag.block.chrysalis.mineable.shears": "Mineable With Shears",
   "tag.block.chrysalis.mineable.sword": "Mineable With Swords",

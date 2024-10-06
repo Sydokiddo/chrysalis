@@ -6,12 +6,12 @@
 		{
 			"name": "Button",
 			"from": [5, 0, 6],
-			"to": [11, 2, 10],
+			"to": [11, 1, 10],
 			"faces": {
-				"north": {"uv": [5, 10, 11, 12], "texture": "#texture"},
-				"east": {"uv": [1, 8, 5, 10], "texture": "#texture"},
-				"south": {"uv": [5, 4, 11, 6], "texture": "#texture"},
-				"west": {"uv": [11, 8, 15, 10], "texture": "#texture"},
+				"north": {"uv": [11, 10, 5, 11], "texture": "#texture"},
+				"south": {"uv": [5, 4, 11, 5], "texture": "#texture"},
+				"east": {"uv": [1, 8, 5, 9], "texture": "#texture"},
+				"west": {"uv": [11, 8, 15, 9], "texture": "#texture"},
 				"up": {"uv": [11, 10, 5, 6], "texture": "#texture"},
 				"down": {"uv": [11, 6, 5, 10], "texture": "#texture", "cullface": "down"}
 			}
