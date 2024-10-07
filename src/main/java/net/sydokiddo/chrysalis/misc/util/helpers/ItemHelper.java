@@ -29,9 +29,9 @@ public class ItemHelper {
      **/
 
     public static boolean containerIsEmpty(ItemStack itemStack) {
-        ItemContainerContents component = itemStack.get(DataComponents.CONTAINER);
-        if (component == null) return true;
-        return component.nonEmptyStream().toList().isEmpty();
+        ItemContainerContents itemContainerContents = itemStack.get(DataComponents.CONTAINER);
+        if (itemContainerContents == null) return true;
+        return itemContainerContents.nonEmptyStream().toList().isEmpty();
     }
 
     /**
