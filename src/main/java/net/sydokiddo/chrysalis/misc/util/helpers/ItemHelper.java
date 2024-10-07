@@ -14,6 +14,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -39,8 +40,14 @@ public class ItemHelper {
 
     public static boolean hasItemInInventory(Item item, Player player) {
         for (int slots = 0; slots <= 35; slots++) {
-            if (player.getInventory().getItem(slots).is(item) || player.getOffhandItem().is(item) || player.getItemBySlot(EquipmentSlot.HEAD).is(item) ||
-            player.getItemBySlot(EquipmentSlot.CHEST).is(item) || player.getItemBySlot(EquipmentSlot.LEGS).is(item) || player.getItemBySlot(EquipmentSlot.FEET).is(item)) {
+
+            ItemStack itemStack = player.getInventory().getItem(slots);
+            BundleContents bundleContents = itemStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+            ItemContainerContents itemContainerContents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
+
+            if (itemStack.is(item) || player.getOffhandItem().is(item) || player.getItemBySlot(EquipmentSlot.HEAD).is(item) || player.getItemBySlot(EquipmentSlot.CHEST).is(item) ||
+            player.getItemBySlot(EquipmentSlot.LEGS).is(item) || player.getItemBySlot(EquipmentSlot.FEET).is(item) || !bundleContents.isEmpty() && bundleContents.itemCopyStream().anyMatch(matchingItems -> matchingItems.is(item)) ||
+            itemContainerContents.nonEmptyStream().anyMatch(matchingItems -> matchingItems.is(item))) {
                 return true;
             }
         }
