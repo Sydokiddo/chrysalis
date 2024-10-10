@@ -36,28 +36,26 @@ public class HybridWalkingFlyingMoveControl extends MoveControl {
                 double y = this.wantedY - this.mob.getY();
                 double z = this.wantedZ - this.mob.getZ();
 
-                double g = x * x + y * y + z * z;
+                double wantedPosMultiplier = x * x + y * y + z * z;
 
-                if (g < 2.500000277905201E-7D) {
+                if (wantedPosMultiplier < 2.500000277905201E-7D) {
                     this.mob.setYya(0.0F);
                     this.mob.setZza(0.0F);
                     return;
                 }
 
-                float h = (float) (Mth.atan2(z, x) * 57.2957763671875D) - 90.0F;
-                this.mob.setYRot(this.rotlerp(this.mob.getYRot(), h, 90.0F));
-                float i;
+                this.mob.setYRot(this.rotlerp(this.mob.getYRot(), (float) (Mth.atan2(z, x) * 57.2957763671875D) - 90.0F, 90.0F));
+                float speedModifier;
 
-                if (this.mob.onGround()) i = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                else i = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.FLYING_SPEED));
+                if (this.mob.onGround()) speedModifier = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                else speedModifier = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.FLYING_SPEED));
 
-                this.mob.setSpeed(i);
-                double j = Math.sqrt(x * x + z * z);
+                this.mob.setSpeed(speedModifier);
+                double mathSqrt = Math.sqrt(x * x + z * z);
 
-                if (Math.abs(y) > 9.999999747378752E-6D || Math.abs(j) > 9.999999747378752E-6D) {
-                    float k = (float) (-(Mth.atan2(y, j) * 57.2957763671875D));
-                    this.mob.setXRot(this.rotlerp(this.mob.getXRot(), k, (float) this.maxTurn));
-                    this.mob.setYya(y > 0.0D ? i : -i);
+                if (Math.abs(y) > 9.999999747378752E-6D || Math.abs(mathSqrt) > 9.999999747378752E-6D) {
+                    this.mob.setXRot(this.rotlerp(this.mob.getXRot(), (float) (-(Mth.atan2(y, mathSqrt) * 57.2957763671875D)), (float) this.maxTurn));
+                    this.mob.setYya(y > 0.0D ? speedModifier : -speedModifier);
                 }
 
             } else {

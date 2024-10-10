@@ -36,7 +36,7 @@ public class EntityDataHelper {
     }
 
     public static boolean isEntityInFluid(LivingEntity livingEntity) {
-        return (livingEntity.isUnderWater() || livingEntity.isInPowderSnow || livingEntity.isInLava());
+        return livingEntity.isUnderWater() || livingEntity.isInPowderSnow || livingEntity.isInLava();
     }
 
     public static boolean targetIsImmunePlayer(Entity target, Entity player) {
@@ -54,7 +54,11 @@ public class EntityDataHelper {
     }
 
     public static boolean getCustomNameTagName(String name, Mob mob) {
-        return (mob.hasCustomName() && name.equals(ChatFormatting.stripFormatting(mob.getName().getString())));
+        return mob.hasCustomName() && name.equals(ChatFormatting.stripFormatting(mob.getName().getString()));
+    }
+
+    public static boolean isPlayerWithUUID(LivingEntity livingEntity, String uuid) {
+        return livingEntity instanceof Player player && player.getStringUUID().equals(uuid);
     }
 
     // endregion
