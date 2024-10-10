@@ -29,7 +29,7 @@ public class ChrysalisExampleRegistry {
      * Note: Do not initialize any methods in this class unless you want a bunch of broken items, blocks, and other things in your game!
      **/
 
-    public static void initWarning() {
+    public ChrysalisExampleRegistry() {
         Chrysalis.LOGGER.warn("WARNING: {} example registry has been initialized.", Chrysalis.LOGGER.getName());
     }
 
@@ -40,7 +40,6 @@ public class ChrysalisExampleRegistry {
         RegistryHelper.registerLongPotionRecipe(Potions.REGENERATION, Potions.LONG_REGENERATION);
         RegistryHelper.registerStrongPotionRecipe(Potions.REGENERATION, Potions.STRONG_REGENERATION);
         RegistryHelper.registerInvertedPotionRecipe(Potions.REGENERATION, Potions.POISON);
-        initWarning();
     }
 
     // endregion
@@ -95,18 +94,15 @@ public class ChrysalisExampleRegistry {
 
     public static void registerExampleMusic() {
         RegistryHelper.registerStructureMusic("minecraft:mineshaft", SoundEvents.MUSIC_CREDITS, 20, 600, false);
-        initWarning();
     }
 
     public static void registerExampleDispenserMethods() {
         DispenserBlock.registerBehavior(Blocks.SAND.asItem(), new PlaceBlockDispenserBehavior());
         DispenserBlock.registerBehavior(Items.BLAZE_POWDER, new ShootProjectileDispenserBehavior(EntityType.SMALL_FIREBALL, SoundEvents.BLAZE_SHOOT));
-        initWarning();
     }
 
     public static void sendExampleCameraShake(Entity entity) {
         EventHelper.sendCameraShakeToNearbyPlayers(entity, null, 10.0F, 20, 5, 5);
-        initWarning();
     }
 
     // endregion
@@ -114,14 +110,12 @@ public class ChrysalisExampleRegistry {
     // region Registries
 
     private static Item registerItem(String name, Item item) {
-        initWarning();
         return Registry.register(BuiltInRegistries.ITEM, Chrysalis.id(name), item);
     }
 
     private static void registerBlockItem(String name, Block block) {
         Registry.register(BuiltInRegistries.ITEM, Chrysalis.id(name),
         new BlockItem(block, new Item.Properties()));
-        initWarning();
     }
 
     private static Block registerBlock(String name, Block block) {

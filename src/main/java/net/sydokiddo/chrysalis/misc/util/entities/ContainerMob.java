@@ -74,22 +74,25 @@ public interface ContainerMob {
 
     static <T extends LivingEntity> Optional<InteractionResult> containerMobPickup(Player player, Item containerItem, InteractionHand interactionHand, T livingEntity) {
 
+        Optional<InteractionResult> emptyReturnValue = Optional.empty();
+        if (!(livingEntity instanceof ContainerMob containerMob)) return emptyReturnValue;
+
         ItemStack itemInHand = player.getItemInHand(interactionHand);
-        ItemStack resultItemStack = ((ContainerMob) livingEntity).getResultItemStack();
+        ItemStack resultItemStack = containerMob.getResultItemStack();
 
         if (itemInHand.getItem() == containerItem.asItem() && livingEntity.isAlive()) {
 
-            livingEntity.playSound(((ContainerMob) livingEntity).getPickupSound(), 1.0F, 1.0F);
-            ((ContainerMob) livingEntity).saveToItemTag(resultItemStack);
+            livingEntity.playSound(containerMob.getPickupSound(), 1.0F, 1.0F);
+            containerMob.saveToItemTag(resultItemStack);
             player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemInHand, player, resultItemStack, false));
 
-            if (!livingEntity.level().isClientSide()) CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, resultItemStack);
-            if (livingEntity instanceof Mob mob && mob.isLeashed()) mob.dropLeash(true, true);
+            if (!livingEntity.level().isClientSide() && player instanceof ServerPlayer serverPlayer) CriteriaTriggers.FILLED_BUCKET.trigger(serverPlayer, resultItemStack);
+            if (containerMob instanceof Mob mob && mob.isLeashed()) mob.dropLeash(true, true);
             livingEntity.discard();
             return Optional.of(InteractionResult.sidedSuccess(livingEntity.level().isClientSide()));
 
         } else {
-            return Optional.empty();
+            return emptyReturnValue;
         }
     }
  }
