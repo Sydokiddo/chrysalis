@@ -40,6 +40,8 @@ public interface ContainerMob {
 
         CustomData.update(DataComponents.BUCKET_ENTITY_DATA, itemStack, (compoundTag) -> {
 
+            compoundTag.putBoolean("PersistenceRequired", true);
+
             if (mob.isNoAi()) compoundTag.putBoolean("NoAI", true);
             if (mob.isSilent()) compoundTag.putBoolean("Silent", true);
             if (mob.isNoGravity()) compoundTag.putBoolean("NoGravity", true);
@@ -54,6 +56,8 @@ public interface ContainerMob {
     }
 
     static void loadDefaultDataFromItemTag(Mob mob, CompoundTag compoundTag) {
+
+        if (compoundTag.contains("PersistenceRequired")) mob.setPersistenceRequired();
 
         if (compoundTag.contains("NoAI")) mob.setNoAi(true);
         if (compoundTag.contains("Silent")) mob.setSilent(true);
