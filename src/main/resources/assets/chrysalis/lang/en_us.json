@@ -196,7 +196,6 @@
   "tag.block.chrysalis.lanterns": "Lanterns",
   "tag.block.chrysalis.nether_portal_base_blocks": "Nether Portal Base Blocks",
   "tag.block.chrysalis.nether_wart_can_grow_on": "Nether Warts Can Grow On",
-  "tag.block.chrysalis.obsidian": "Obsidian",
   "tag.block.chrysalis.prismarine_blocks": "Prismarine Blocks",
   "tag.block.chrysalis.purpur": "Purpur",
   "tag.block.chrysalis.sniffer_plant_crops": "Sniffer Plant Crops",
@@ -206,6 +205,9 @@
   "tag.block.chrysalis.unbreakable_blocks": "Unbreakable Blocks",
   "tag.block.chrysalis.waxable_blocks": "Waxable Blocks",
   "tag.block.chrysalis.waxed_blocks": "Waxed Blocks",
+  "tag.block.chrysalis.overworld_ores": "Overworld Ores",
+  "tag.block.chrysalis.nether_ores": "Nether Ores",
+  "tag.block.chrysalis.end_ores": "End Ores",
 
   "tag.damage_type.chrysalis.is_magic": "Is Magic",
   "tag.damage_type.chrysalis.is_ranged": "Is Ranged",
@@ -242,7 +244,6 @@
   "tag.item.chrysalis.increased_despawn_time": "Increased Despawn Time",
   "tag.item.chrysalis.instruments": "Instruments",
   "tag.item.chrysalis.lanterns": "Lanterns",
-  "tag.item.chrysalis.obsidian": "Obsidian",
   "tag.item.chrysalis.piglin_bartering_items": "Piglin Bartering Items",
   "tag.item.chrysalis.piglin_pacifying_armor": "Piglin Pacifying Armor",
   "tag.item.chrysalis.powder_snow_walkable_items": "Powder Snow Walkable Items",
@@ -256,6 +257,9 @@
   "tag.item.chrysalis.teleporting_foods": "Teleporting Foods",
   "tag.item.chrysalis.tnt_igniters": "TNT Igniters",
   "tag.item.chrysalis.torches": "Torches",
+  "tag.item.chrysalis.overworld_ores": "Overworld Ores",
+  "tag.item.chrysalis.nether_ores": "Nether Ores",
+  "tag.item.chrysalis.end_ores": "End Ores",
 
   "tag.worldgen.chrysalis.biome.without_mob_spawns": "Biomes Without Mob Spawns"
 }
