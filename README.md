@@ -14,7 +14,7 @@ _Do note that the wiki is slightly outdated, so information presented on there m
 
 Chrysalis can be downloaded from these sources:
 
-- [Current Version: 0.4.7]
+- [Current Version: 0.5.0]
 
 * [CurseForge](https://www.curseforge.com/minecraft/mc-mods/chrysalis)
 * [Modrinth](https://modrinth.com/mod/chrysalis)
