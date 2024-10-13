@@ -96,9 +96,7 @@ public class ChrysalisRegistry {
 
     // endregion
 
-    // Registry
-
-    // region Structure Music Registry
+    // region Structure Music
 
     public static Map<String, StructureMusicSound> registeredStructures = new HashMap<>();
     public record StructureMusicSound(String name, int minDelay, int maxDelay, boolean replaceCurrentMusic) {}
