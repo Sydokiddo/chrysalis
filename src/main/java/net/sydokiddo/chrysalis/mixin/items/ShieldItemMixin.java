@@ -9,12 +9,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
+import java.util.Objects;
 
 @Mixin(ShieldItem.class)
 public class ShieldItemMixin {
 
     @Inject(method = "appendHoverText", at = @At("TAIL"))
     private void chrysalis$addSpaceOnShieldBannerTooltip(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
-        if (itemStack.isEnchanted() && itemStack.get(DataComponents.BANNER_PATTERNS) != null) list.add(CommonComponents.EMPTY);
+        if (itemStack.isEnchanted() && !Objects.requireNonNull(itemStack.get(DataComponents.BANNER_PATTERNS)).layers().isEmpty()) list.add(CommonComponents.EMPTY);
     }
 }

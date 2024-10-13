@@ -35,13 +35,13 @@ public class RideMobItem extends DebugUtilityItem {
     @Override
     public @NotNull InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
-        if (!livingEntity.level().isClientSide()) {
+        if (!player.level().isClientSide() && !player.isShiftKeyDown()) {
 
             player.setXRot(livingEntity.getXRot());
             player.setYRot(livingEntity.getYRot());
             player.startRiding(livingEntity);
 
-            player.gameEvent(GameEvent.ITEM_INTERACT_START);
+            player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             player.playNotifySound(ChrysalisSoundEvents.RIDE_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
             player.awardStat(Stats.ITEM_USED.get(this));
 

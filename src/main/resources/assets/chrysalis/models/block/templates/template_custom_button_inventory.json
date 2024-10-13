@@ -1,0 +1,21 @@
+{
+	"parent": "minecraft:block/block",
+	"textures": {
+		"particle": "#texture"
+	},
+	"elements": [
+		{
+			"name": "Button",
+			"from": [5, 6, 6],
+			"to": [11, 10, 10],
+			"faces": {
+				"north": {"uv": [5, 6, 11, 10], "texture": "#texture"},
+				"south": {"uv": [5, 6, 11, 10], "texture": "#texture"},
+				"east": {"uv": [1, 6, 5, 10], "texture": "#texture"},
+				"west": {"uv": [11, 6, 15, 10], "texture": "#texture"},
+				"up": {"uv": [11, 10, 5, 6], "texture": "#texture"},
+				"down": {"uv": [11, 6, 5, 10], "texture": "#texture"}
+			}
+		}
+	]
+}

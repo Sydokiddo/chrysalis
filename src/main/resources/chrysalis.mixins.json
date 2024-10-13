@@ -18,6 +18,7 @@
     "blocks.NetherWartBlockMixin",
     "blocks.PowderSnowBlockMixin",
     "blocks.RespawnAnchorBlockMixin",
+    "blocks.StructureVoidBlockMixin",
     "blocks.TNTBlockMixin",
     "blocks.TurtleEggBlockMixin",
     "entities.hostile.EnderDragonMixin",
@@ -53,15 +54,18 @@
     "items.SwordItemMixin",
     "items.TooltipMixin",
     "items.TridentItemMixin",
+    "misc.EnchantCommandMixin",
     "misc.LevelSummaryMixin",
     "misc.SnowFixMixin",
-    "util.ActivityAccessor",
-    "util.MemoryModuleAccessor",
-    "util.SensorTypeAccessor",
-    "util.SimpleParticleTypeAccessor"
+    "util.SimpleParticleTypeAccessor",
+    "util.WoodTypeAccessor"
   ],
   "client": [
+    "misc.ClientLevelMixin",
+    "misc.GameRendererMixin",
+    "misc.GuiMixin",
     "misc.LevelRendererMixin",
+    "misc.MinecraftMixin",
     "misc.ScreenshotMainMixin",
     "misc.ScreenshotRecorderMixin"
   ],

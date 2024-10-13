@@ -8,6 +8,7 @@
   "authors": [
     "Sydokiddo (Lead Developer)",
     "AmberSand (Miscellaneous)",
+    "quietflowerss (Contributor)",
     "Soumeh (Contributor)"
   ],
   "contact": {
@@ -33,7 +34,7 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.16.3",
+    "fabricloader": ">=0.16.5",
     "fabric-api": "*",
     "minecraft": ">=1.21.1",
     "java": ">=21"

@@ -18,6 +18,12 @@ public class ChrysalisTags {
 
     public static final TagKey<Item>
 
+        // region Chrysalis Items
+
+        DEBUG_UTILITY_ITEMS = registerItemTag("debug_utility_items"),
+
+        // endregion
+
         // region Common Items
 
         BANNER_PATTERNS = registerItemTag("banner_patterns"),
@@ -39,13 +45,15 @@ public class ChrysalisTags {
         COPPER_BLOCK_ITEMS = registerItemTag("copper_blocks"),
         COPPER_GRATE_ITEMS = registerItemTag("copper_grates"),
         LANTERN_ITEMS = registerItemTag("lanterns"),
-        OBSIDIAN_ITEMS = registerItemTag("obsidian"),
         PRESSURE_PLATE_ITEMS = registerItemTag("pressure_plates"),
         PRISMARINE_BLOCK_ITEMS = registerItemTag("prismarine_blocks"),
         PURPUR_ITEMS = registerItemTag("purpur"),
         SOUL_SAND_ITEMS = registerItemTag("soul_sand"),
         STONE_PRESSURE_PLATE_ITEMS = registerItemTag("stone_pressure_plates"),
         TORCH_ITEMS = registerItemTag("torches"),
+        OVERWORLD_ORE_ITEMS = registerItemTag("overworld_ores"),
+        NETHER_ORE_ITEMS = registerItemTag("nether_ores"),
+        END_ORE_ITEMS = registerItemTag("end_ores"),
 
         // endregion
 
@@ -93,7 +101,6 @@ public class ChrysalisTags {
         COPPER_BLOCKS = registerBlockTag("copper_blocks"),
         COPPER_GRATES = registerBlockTag("copper_grates"),
         LANTERNS = registerBlockTag("lanterns"),
-        OBSIDIAN = registerBlockTag("obsidian"),
         PRISMARINE_BLOCKS = registerBlockTag("prismarine_blocks"),
         PURPUR = registerBlockTag("purpur"),
         SNIFFER_PLANT_CROPS = registerBlockTag("sniffer_plant_crops"),
@@ -115,6 +122,9 @@ public class ChrysalisTags {
         NETHER_PORTAL_BASE_BLOCKS = registerBlockTag("nether_portal_base_blocks"),
         NETHER_WART_CAN_GROW_ON = registerBlockTag("nether_wart_can_grow_on"),
         TURTLE_EGGS_CAN_HATCH_ON = registerBlockTag("turtle_eggs_can_hatch_on"),
+        OVERWORLD_ORES = registerBlockTag("overworld_ores"),
+        NETHER_ORES = registerBlockTag("nether_ores"),
+        END_ORES = registerBlockTag("end_ores"),
 
         // endregion
 

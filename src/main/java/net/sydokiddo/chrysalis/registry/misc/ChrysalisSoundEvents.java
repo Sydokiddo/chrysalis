@@ -4,8 +4,12 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChrysalisSoundEvents {
 
@@ -22,6 +26,8 @@ public class ChrysalisSoundEvents {
     public static final SoundEvent RIDE_MOB_USE = registerSoundEvent("item.ride_mob.use");
 
     // Registry
+
+    // region Base Registries
 
     private static SoundEvent registerSoundEvent(String name) {
         ResourceLocation resourceLocation = Chrysalis.id(name);
@@ -41,6 +47,27 @@ public class ChrysalisSoundEvents {
     private static Holder.Reference<SoundEvent> registerForHolder(ResourceLocation resourceLocation, ResourceLocation secondaryResourceLocation) {
         return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, resourceLocation, SoundEvent.createVariableRangeEvent(secondaryResourceLocation));
     }
+
+    // endregion
+
+    // region Structure Music Registry
+
+    public static Map<String, Music> structures = new HashMap<>();
+
+    public static Music registerMusic(String name, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
+        ResourceLocation resourceLocation = ResourceLocation.parse(name);
+        SoundEvent music = SoundEvent.createVariableRangeEvent(resourceLocation);
+        return new Music(registerForHolder(resourceLocation, music.getLocation()), minDelay, maxDelay, replaceCurrentMusic);
+    }
+
+    public static void registerStructureMusic() {
+        for (Map.Entry<String, ChrysalisRegistry.StructureMusicSound> structure : ChrysalisRegistry.registeredStructures.entrySet()) {
+            ChrysalisRegistry.StructureMusicSound musicSound = structure.getValue();
+            structures.put(structure.getKey(), registerMusic(musicSound.name(), musicSound.minDelay(), musicSound.maxDelay(), musicSound.replaceCurrentMusic()));
+        }
+    }
+
+    // endregion
 
     public static void registerSounds() {}
 }

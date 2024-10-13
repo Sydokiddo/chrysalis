@@ -3,6 +3,7 @@
     "#minecraft:sword_efficient",
     "minecraft:cobweb",
     "minecraft:bamboo_sapling",
-    "minecraft:bamboo"
+    "minecraft:bamboo",
+    "#c:skulls"
   ]
 }

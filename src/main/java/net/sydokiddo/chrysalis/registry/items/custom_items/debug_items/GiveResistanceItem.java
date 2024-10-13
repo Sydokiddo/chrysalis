@@ -42,7 +42,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
         if (!level.isClientSide()) {
 
             player.playNotifySound(ChrysalisSoundEvents.GIVE_RESISTANCE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-            player.gameEvent(GameEvent.ITEM_INTERACT_START);
+            player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             player.awardStat(Stats.ITEM_USED.get(this));
 
             Holder<MobEffect> resistance = MobEffects.DAMAGE_RESISTANCE;

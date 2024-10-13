@@ -18,12 +18,14 @@ public class FadingEmissiveParticle extends TextureSheetParticle {
     private final SpriteSet spriteSet;
     private final float startingBrightness;
     private final float endingBrightness;
+    private final boolean animateTextures;
 
-    public FadingEmissiveParticle(ClientLevel clientLevel, double x, double y, double z, float startingBrightness, float endingBrightness, SpriteSet spriteSet) {
+    public FadingEmissiveParticle(ClientLevel clientLevel, double x, double y, double z, float startingBrightness, float endingBrightness, SpriteSet spriteSet, boolean animateTextures) {
         super(clientLevel, x, y, z);
         this.spriteSet = spriteSet;
         this.startingBrightness = startingBrightness;
         this.endingBrightness = endingBrightness;
+        this.animateTextures = animateTextures;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class FadingEmissiveParticle extends TextureSheetParticle {
         if (this.age++ >= this.lifetime) {
             this.remove();
         } else {
-            this.setSpriteFromAge(spriteSet);
+            if (this.animateTextures) this.setSpriteFromAge(spriteSet);
         }
     }
 

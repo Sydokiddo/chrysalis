@@ -3,22 +3,25 @@ package net.sydokiddo.chrysalis.misc.util.helpers;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -29,9 +32,9 @@ public class ItemHelper {
      **/
 
     public static boolean containerIsEmpty(ItemStack itemStack) {
-        ItemContainerContents component = itemStack.get(DataComponents.CONTAINER);
-        if (component == null) return true;
-        return component.nonEmptyStream().toList().isEmpty();
+        ItemContainerContents itemContainerContents = itemStack.get(DataComponents.CONTAINER);
+        if (itemContainerContents == null) return true;
+        return itemContainerContents.nonEmptyStream().toList().isEmpty();
     }
 
     /**
@@ -40,22 +43,18 @@ public class ItemHelper {
 
     public static boolean hasItemInInventory(Item item, Player player) {
         for (int slots = 0; slots <= 35; slots++) {
-            if (player.getInventory().getItem(slots).is(item) || player.getOffhandItem().is(item) || player.getItemBySlot(EquipmentSlot.HEAD).is(item) ||
-            player.getItemBySlot(EquipmentSlot.CHEST).is(item) || player.getItemBySlot(EquipmentSlot.LEGS).is(item) || player.getItemBySlot(EquipmentSlot.FEET).is(item)) {
+
+            ItemStack itemStack = player.getInventory().getItem(slots);
+            BundleContents bundleContents = itemStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+            ItemContainerContents itemContainerContents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
+
+            if (itemStack.is(item) || player.getOffhandItem().is(item) || player.getItemBySlot(EquipmentSlot.HEAD).is(item) || player.getItemBySlot(EquipmentSlot.CHEST).is(item) ||
+            player.getItemBySlot(EquipmentSlot.LEGS).is(item) || player.getItemBySlot(EquipmentSlot.FEET).is(item) || !bundleContents.isEmpty() && bundleContents.itemCopyStream().anyMatch(matchingItems -> matchingItems.is(item)) ||
+            itemContainerContents.nonEmptyStream().anyMatch(matchingItems -> matchingItems.is(item))) {
                 return true;
             }
         }
         return false;
-    }
-
-    /**
-     * Checks for a food item's saturation amount.
-     **/
-
-    public static BigDecimal getFoodSaturation(ItemStack itemStack) {
-        FoodProperties component = itemStack.get(DataComponents.FOOD);
-        if (component == null) return new BigDecimal(0);
-        return BigDecimal.valueOf(component.nutrition() * component.saturation() * 2.0F).setScale(1, RoundingMode.DOWN);
     }
 
     /**
@@ -127,9 +126,28 @@ public class ItemHelper {
     public static void addDimensionTooltip(List<Component> tooltip, String dimension) {
         String registryKey = dimension.split(":")[0];
         String registryPath = dimension.split(":")[1];
+        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension", Component.translatable("dimension." + registryKey + "." + registryPath).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
+    }
 
-        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension",
-                Component.translatable("dimension." + registryKey + "." + registryPath).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
+    public static Component getWeatherComponent(Level level, Holder<Biome> biome, BlockPos blockPos) {
+
+        MutableComponent weatherType;
+
+        if (level.isRainingAt(blockPos)) {
+            if (level.isThundering()) weatherType = Component.translatable("gui.chrysalis.weather.thundering");
+            else weatherType = Component.translatable("gui.chrysalis.weather.raining");
+        } else {
+            if (level.isRaining() && biome.value().getPrecipitationAt(blockPos) == Biome.Precipitation.SNOW) weatherType = Component.translatable("gui.chrysalis.weather.snowing");
+            else weatherType = Component.translatable("gui.chrysalis.weather.clear");
+        }
+
+        return weatherType;
+    }
+
+    public static Component getMoonPhaseComponent(Level level) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level != null && !minecraft.level.dimensionType().hasFixedTime()) return Component.translatable("gui.chrysalis.moon_phase." + level.getMoonPhase());
+        else return Component.translatable("gui.chrysalis.none");
     }
 
     public static void addSpaceOnTooltipIfEnchantedOrTrimmed(ItemStack itemStack, List<Component> tooltip) {
@@ -142,6 +160,10 @@ public class ItemHelper {
 
     public static Component addTooltipWithIcon(Component icon, Component tooltip) {
         return Component.translatable("gui.chrysalis.item.tooltip_with_icon", icon, tooltip);
+    }
+
+    public static void setTooltipIconsFont(MutableComponent mutableComponent, String modID) {
+        mutableComponent.setStyle(mutableComponent.getStyle().withFont(ResourceLocation.fromNamespaceAndPath(modID, "tooltip_icons")));
     }
 
     // endregion

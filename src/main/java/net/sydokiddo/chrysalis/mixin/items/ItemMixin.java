@@ -1,10 +1,13 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.level.block.LightBlock;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
@@ -28,10 +31,15 @@ public abstract class ItemMixin {
             list.add(CommonComponents.space().append(Component.translatable("item.chrysalis.debug_stick.desc").withStyle(ChatFormatting.BLUE)));
         }
 
+        if (itemStack.is(Items.LIGHT)) {
+            BlockItemStateProperties blockItemStateProperties = itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
+            list.add(Component.translatable("item.chrysalis.light.desc", blockItemStateProperties.get(LightBlock.LEVEL) != null ? blockItemStateProperties.get(LightBlock.LEVEL) : 15).withStyle(ChatFormatting.GRAY));
+        }
+
         if (this.getDescriptionId().contains(Chrysalis.MOD_ID)) {
             if (!list.isEmpty()) list.add(CommonComponents.EMPTY);
             MutableComponent chrysalisIcon = ChrysalisRegistry.CHRYSALIS_ICON;
-            ChrysalisRegistry.setTooltipIconsFont(chrysalisIcon);
+            ItemHelper.setTooltipIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
             Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(ChrysalisRegistry.FIVE_FONT).withColor(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB())));
             list.add(chrysalisTooltip);
         }

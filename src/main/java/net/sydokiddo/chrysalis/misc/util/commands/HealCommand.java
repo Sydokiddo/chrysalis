@@ -19,8 +19,8 @@ public class HealCommand {
     ;
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
-        commandDispatcher.register((Commands.literal("heal").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)))
-        .then(Commands.argument(targetString, EntityArgument.entity()).then(Commands.argument(amountString, FloatArgumentType.floatArg(0.0F))
+        commandDispatcher.register(Commands.literal("heal").requires((commandSourceStack) -> commandSourceStack.hasPermission(2))
+        .then(Commands.argument(targetString, EntityArgument.entity()).then(Commands.argument(amountString, FloatArgumentType.floatArg(0.1F))
         .executes((commandContext) -> heal(commandContext.getSource(), EntityArgument.getEntity(commandContext, targetString), FloatArgumentType.getFloat(commandContext, amountString))))));
     }
 
@@ -28,10 +28,10 @@ public class HealCommand {
 
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.heal(healAmount);
-            commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.heal_success", healAmount, entity.getDisplayName()), true);
+            commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.heal.success", healAmount, entity.getDisplayName()), true);
             return 1;
         } else {
-            throw new SimpleCommandExceptionType(Component.translatable("gui.chrysalis.commands.heal_fail")).create();
+            throw new SimpleCommandExceptionType(Component.translatable("gui.chrysalis.commands.heal.fail")).create();
         }
     }
 }

@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
@@ -26,6 +27,18 @@ import net.sydokiddo.chrysalis.registry.items.custom_items.MobInSolidBucketItem;
 
 @SuppressWarnings("unused, unchecked, rawtypes")
 public class RegistryHelper {
+
+    // region Music Registry
+
+    /**
+     * Registry for custom structure-specific music.
+     **/
+
+    public static void registerStructureMusic(String structureName, Holder.Reference<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
+        ChrysalisRegistry.registeredStructures.put(structureName, new ChrysalisRegistry.StructureMusicSound(soundEvent.getRegisteredName(), minDelay, maxDelay, replaceCurrentMusic));
+    }
+
+    // endregion
 
     // region Potion Recipe Registry
 
@@ -88,19 +101,19 @@ public class RegistryHelper {
     // region Armor
 
     public static ArmorItem registerHelmet(ArmorMaterial armorMaterial, int durability) {
-        return registerArmor(ArmorItem.Type.HELMET, armorMaterial, durability);
+        return registerArmor(ArmorItem.Type.HELMET, armorMaterial, ArmorItem.Type.HELMET.getDurability(durability));
     }
 
     public static ArmorItem registerChestplate(ArmorMaterial armorMaterial, int durability) {
-        return registerArmor(ArmorItem.Type.CHESTPLATE, armorMaterial, durability);
+        return registerArmor(ArmorItem.Type.CHESTPLATE, armorMaterial, ArmorItem.Type.CHESTPLATE.getDurability(durability));
     }
 
     public static ArmorItem registerLeggings(ArmorMaterial armorMaterial, int durability) {
-        return registerArmor(ArmorItem.Type.LEGGINGS, armorMaterial, durability);
+        return registerArmor(ArmorItem.Type.LEGGINGS, armorMaterial, ArmorItem.Type.LEGGINGS.getDurability(durability));
     }
 
     public static ArmorItem registerBoots(ArmorMaterial armorMaterial, int durability) {
-        return registerArmor(ArmorItem.Type.BOOTS, armorMaterial, durability);
+        return registerArmor(ArmorItem.Type.BOOTS, armorMaterial, ArmorItem.Type.BOOTS.getDurability(durability));
     }
 
     public static ArmorItem registerArmor(ArmorItem.Type armorType, ArmorMaterial armorMaterial, int durability) {
@@ -111,24 +124,24 @@ public class RegistryHelper {
 
     // region Miscellaneous
 
-    public static Item registerMusicDisc(Rarity rarity, ResourceKey<JukeboxSong> jukeboxSong) {
-        return new Item(new Item.Properties().stacksTo(1).rarity(rarity).jukeboxPlayable(jukeboxSong));
+    public static Item registerMusicDisc(ResourceKey<JukeboxSong> jukeboxSong, Rarity rarity) {
+        return new Item(new Item.Properties().stacksTo(1).jukeboxPlayable(jukeboxSong).rarity(rarity));
     }
 
     public static CSpawnEggItem registerSpawnEgg(EntityType entityType, int baseColor, int spotsColor, EntityType mobOffspring) {
        return new CSpawnEggItem(entityType, baseColor, spotsColor, mobOffspring, new Item.Properties());
     }
 
-    public static MobInContainerItem registerMobInContainer(EntityType entityType, SoundEvent soundEvent, Item returnItem) {
-        return new MobInContainerItem(entityType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(returnItem), returnItem);
+    public static MobInContainerItem registerMobInContainer(EntityType entityType, SoundEvent soundEvent, Item returnItem, Rarity rarity) {
+        return new MobInContainerItem(entityType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(returnItem).rarity(rarity), returnItem);
     }
 
-    public static MobInFluidBucketItem registerMobInFluidBucket(EntityType entityType, Fluid fluidType, SoundEvent soundEvent) {
-        return new MobInFluidBucketItem(entityType, fluidType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET));
+    public static MobInFluidBucketItem registerMobInFluidBucket(EntityType entityType, Fluid fluidType, SoundEvent soundEvent, Rarity rarity) {
+        return new MobInFluidBucketItem(entityType, fluidType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).rarity(rarity));
     }
 
-    public static MobInSolidBucketItem registerMobInSolidBucket(EntityType entityType, Block blockType, SoundEvent soundEvent) {
-        return new MobInSolidBucketItem(entityType, blockType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET), Items.BUCKET);
+    public static MobInSolidBucketItem registerMobInSolidBucket(EntityType entityType, Block blockType, SoundEvent soundEvent, Rarity rarity) {
+        return new MobInSolidBucketItem(entityType, blockType, soundEvent, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).rarity(rarity), Items.BUCKET);
     }
 
     // endregion
