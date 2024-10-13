@@ -114,6 +114,15 @@
   "gui.chrysalis.direction.east": "East",
   "gui.chrysalis.direction.west": "West",
 
+  "gui.chrysalis.moon_phase.1": "Full Moon",
+  "gui.chrysalis.moon_phase.2": "Waning Gibbous",
+  "gui.chrysalis.moon_phase.3": "Last Quarter",
+  "gui.chrysalis.moon_phase.4": "Waning Crescent",
+  "gui.chrysalis.moon_phase.5": "New Moon",
+  "gui.chrysalis.moon_phase.6": "Waxing Crescent",
+  "gui.chrysalis.moon_phase.7": "First Quarter",
+  "gui.chrysalis.moon_phase.8": "Waxing Gibbous",
+
   "gui.chrysalis.weather.clear": "Clear",
   "gui.chrysalis.weather.raining": "Raining",
   "gui.chrysalis.weather.thundering": "Thundering",

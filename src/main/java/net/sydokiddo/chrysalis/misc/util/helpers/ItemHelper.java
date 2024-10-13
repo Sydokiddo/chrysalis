@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.misc.util.helpers;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
@@ -19,6 +20,8 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -124,6 +127,27 @@ public class ItemHelper {
         String registryKey = dimension.split(":")[0];
         String registryPath = dimension.split(":")[1];
         tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension", Component.translatable("dimension." + registryKey + "." + registryPath).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
+    }
+
+    public static Component getWeatherComponent(Level level, Holder<Biome> biome, BlockPos blockPos) {
+
+        MutableComponent weatherType;
+
+        if (level.isRainingAt(blockPos)) {
+            if (level.isThundering()) weatherType = Component.translatable("gui.chrysalis.weather.thundering");
+            else weatherType = Component.translatable("gui.chrysalis.weather.raining");
+        } else {
+            if (level.isRaining() && biome.value().getPrecipitationAt(blockPos) == Biome.Precipitation.SNOW) weatherType = Component.translatable("gui.chrysalis.weather.snowing");
+            else weatherType = Component.translatable("gui.chrysalis.weather.clear");
+        }
+
+        return weatherType;
+    }
+
+    public static Component getMoonPhaseComponent(Level level) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level != null && !minecraft.level.dimensionType().hasFixedTime()) return Component.translatable("gui.chrysalis.moon_phase." + level.getMoonPhase());
+        else return Component.translatable("gui.chrysalis.none");
     }
 
     public static void addSpaceOnTooltipIfEnchantedOrTrimmed(ItemStack itemStack, List<Component> tooltip) {
