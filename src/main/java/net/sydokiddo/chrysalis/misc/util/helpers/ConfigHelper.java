@@ -17,10 +17,16 @@ public class ConfigHelper {
 
     // region Components
 
+    public static Component genericCategoryName(String modID) {
+        MutableComponent icon = ChrysalisRegistry.GEAR_ICON;
+        ItemHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
+        return Component.translatable("gui.chrysalis.config_category.generic", icon, Component.translatable("mod." + modID));
+    }
+
     public static Component categoryName(String string) {
         MutableComponent icon = ChrysalisRegistry.GEAR_ICON;
         ItemHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
-        return Component.translatable(string, icon, icon);
+        return Component.translatable(string, icon);
     }
 
     public static Component groupName(String modID, String translationString, MutableComponent icon) {
@@ -29,7 +35,7 @@ public class ConfigHelper {
 
     public static Component groupNameWithCustomFont(String modID, String fontName, String translationString, MutableComponent icon) {
         icon.setStyle(icon.getStyle().withFont(ResourceLocation.fromNamespaceAndPath(modID, fontName)));
-        return Component.translatable(translationString, icon, icon);
+        return Component.translatable(translationString, icon);
     }
 
     public static int roundedConfigNumber(float value) {
