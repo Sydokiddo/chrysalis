@@ -57,3 +57,12 @@ jar {
 		rename { "${it}_${project.base.archivesName.get()}"}
 	}
 }
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+}
+tasks.build.finalizedBy publishToMavenLocal
