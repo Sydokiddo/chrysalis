@@ -1,9 +1,8 @@
 package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoField;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 public class DateHelper {
 
     /**
@@ -11,8 +10,8 @@ public class DateHelper {
      **/
 
     public static final LocalDate localDate = LocalDate.now();
-    public static final int getMonth = localDate.get(ChronoField.MONTH_OF_YEAR);
-    public static final int getDay = localDate.get(ChronoField.DAY_OF_MONTH);
+    public static final int getMonth = localDate.getMonth().getValue();
+    public static final int getDay = localDate.getDayOfMonth();
 
     public static boolean isCustomDate(int month, int day) {
         return getMonth == month && getDay == day;

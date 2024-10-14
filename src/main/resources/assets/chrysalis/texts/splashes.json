@@ -1,0 +1,7 @@
+{
+  "entries": [
+    { "text": { "text": "Powered by Chrysalis!", "color": "#A27FFF" }, "weight": 20 },
+    { "text": "Flutter away!", "weight": 20 },
+    { "text": "Ooo, secret splash text!" }
+  ]
+}

@@ -7,16 +7,19 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.Music;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
+import net.sydokiddo.chrysalis.misc.util.splash_texts.SplashTextLoader;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
@@ -31,9 +34,19 @@ public class ChrysalisClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
+        // region Splash Texts
+
+        ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(SplashTextLoader.INSTANCE);
+
+        // endregion
+
+        // region Packets
+
         ClientPlayNetworking.registerGlobalReceiver(StructureChangedPayload.TYPE, ((payload, context) -> context.client().execute(() -> setStructureMusic(payload.structureName().toString()))));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakePayload.TYPE, (payload, context) -> context.client().execute(() -> CameraShakeHandler.shakeCamera(payload.time(), payload.strength(), payload.frequency())));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakeResetPayload.TYPE, (payload, context) -> context.client().execute(CameraShakeHandler::resetCamera));
+
+        // endregion
 
         // region Panoramic Screenshots
 

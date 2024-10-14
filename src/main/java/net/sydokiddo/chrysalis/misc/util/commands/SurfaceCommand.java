@@ -35,7 +35,7 @@ public class SurfaceCommand {
         Component successText = Component.translatable("gui.chrysalis.commands.surface.success", player.getDisplayName());
         Component failText = Component.translatable("gui.chrysalis.commands.surface.fail").withStyle(ChatFormatting.RED);
 
-        if (highestYValue != y && !highestBlockState.isAir() && !highestBlockState.getCollisionShape(player.level(), highestBlockPos).isEmpty()) {
+        if (highestYValue != y && !highestBlockState.isAir() && (!highestBlockState.getFluidState().isEmpty() || !highestBlockState.getCollisionShape(player.level(), highestBlockPos).isEmpty())) {
             player.teleportTo(playerPos.getX(), highestYValue, playerPos.getZ());
             player.sendSystemMessage(successText);
         } else {
