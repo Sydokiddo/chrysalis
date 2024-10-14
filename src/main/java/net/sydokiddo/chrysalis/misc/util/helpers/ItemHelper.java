@@ -160,7 +160,7 @@ public class ItemHelper {
 
     public static Component getMoonPhaseComponent(Level level) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level != null && !minecraft.level.dimensionType().hasFixedTime()) return Component.translatable("gui.chrysalis.moon_phase." + level.getMoonPhase());
+        if (minecraft.level != null && !minecraft.level.dimensionType().hasFixedTime()) return Component.translatable("gui.chrysalis.moon_phase." + (level.getMoonPhase() + 1));
         else return Component.translatable("gui.chrysalis.none");
     }
 
