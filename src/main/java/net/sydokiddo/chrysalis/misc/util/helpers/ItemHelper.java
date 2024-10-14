@@ -12,6 +12,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +23,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -79,6 +81,18 @@ public class ItemHelper {
 
     public static boolean hasEnchantmentOrTrim(ItemStack itemStack) {
         return (itemStack.isEnchanted() || hasArmorTrim(itemStack));
+    }
+
+    /**
+     * Sets the glow color entity data of an item entity.
+     **/
+
+    public static int getItemGlowColor(ItemEntity itemEntity) {
+        return itemEntity.getEntityData().get(ChrysalisRegistry.ITEM_GLOW_COLOR);
+    }
+
+    public static void setItemGlowColor(ItemEntity itemEntity, int glowColor) {
+        itemEntity.getEntityData().set(ChrysalisRegistry.ITEM_GLOW_COLOR, glowColor);
     }
 
     // region Custom Item Tooltips
