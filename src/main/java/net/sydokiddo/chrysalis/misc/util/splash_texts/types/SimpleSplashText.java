@@ -1,10 +1,13 @@
 package net.sydokiddo.chrysalis.misc.util.splash_texts.types;
 
 import com.mojang.serialization.Codec;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 
+@Environment(EnvType.CLIENT)
 public class SimpleSplashText implements SplashText {
 
     public static final Codec<SimpleSplashText> CODEC = Codec.STRING.xmap(SimpleSplashText::new, null);
