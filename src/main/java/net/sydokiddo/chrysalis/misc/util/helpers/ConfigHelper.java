@@ -15,7 +15,7 @@ public class ConfigHelper {
      * Various methods to assist with creating generic config categories and options when paired with a config library mod.
      **/
 
-    // region Components
+    // region Config Option Components
 
     public static Component genericCategoryName(String modID) {
         MutableComponent icon = ChrysalisRegistry.GEAR_ICON;
@@ -38,6 +38,22 @@ public class ConfigHelper {
         return Component.translatable(translationString, icon, icon);
     }
 
+    private static String optionTranslationString(String modID, String optionName) {
+        return "gui." + modID + ".config." + optionName;
+    }
+
+    public static Component optionName(String modID, String optionName) {
+        return Component.translatable(optionTranslationString(modID, optionName));
+    }
+
+    public static Component optionDescription(String modID, String optionName) {
+        return Component.translatable(optionTranslationString(modID, optionName) + descriptionString);
+    }
+
+    // endregion
+
+    // region Config Option Math
+
     public static int roundedConfigNumber(float value) {
         return new BigDecimal(value).setScale(1, RoundingMode.UP).intValueExact();
     }
@@ -50,7 +66,7 @@ public class ConfigHelper {
         return Component.literal(roundedConfigNumber(value * 100.0F) + "%");
     }
 
-    public static Component ticksComponent(float value) {
+    public static Component ticksComponent(int value) {
         return value > 1 ? Component.translatable("gui.chrysalis.config_controller.ticks_plural", value) : Component.translatable("gui.chrysalis.config_controller.ticks_singular", value);
     }
 
