@@ -12,6 +12,14 @@ import java.util.List;
 public class EventHelper {
 
     /**
+     * Gets any nearby players within a specific range of a selected entity's hitbox.
+     **/
+
+    public static List<? extends ServerPlayer> getNearbyPlayers(Entity entity, float range) {
+        return entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(range), EntitySelector.NO_SPECTATORS);
+    }
+
+    /**
      * Sends a customizable camera shake effect to a selected player.
      **/
 
@@ -20,10 +28,7 @@ public class EventHelper {
     }
 
     public static void sendCameraShakeToNearbyPlayers(Entity entity, Entity ignoredEntity, float range, int time, int strength, int frequency) {
-
-        List<? extends ServerPlayer> shakingRange = entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(range), EntitySelector.NO_SPECTATORS);
-
-        for (ServerPlayer serverPlayer : shakingRange) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
             sendCameraShake(serverPlayer, time, strength, frequency);
         }
@@ -34,10 +39,7 @@ public class EventHelper {
     }
 
     public static void resetCameraShakeForNearbyPlayers(Entity entity, Entity ignoredEntity, float range) {
-
-        List<? extends ServerPlayer> resetRange = entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(range), EntitySelector.NO_SPECTATORS);
-
-        for (ServerPlayer serverPlayer : resetRange) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
             resetCameraShake(serverPlayer);
         }

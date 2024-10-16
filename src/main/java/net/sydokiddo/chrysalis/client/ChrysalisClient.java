@@ -42,7 +42,7 @@ public class ChrysalisClient implements ClientModInitializer {
 
         // region Packets
 
-        ClientPlayNetworking.registerGlobalReceiver(StructureChangedPayload.TYPE, ((payload, context) -> context.client().execute(() -> setStructureMusic(payload.structureName().toString()))));
+        ClientPlayNetworking.registerGlobalReceiver(StructureChangedPayload.TYPE, (payload, context) -> context.client().execute(() -> setStructureMusic(payload.structureName().toString())));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakePayload.TYPE, (payload, context) -> context.client().execute(() -> CameraShakeHandler.shakeCamera(payload.time(), payload.strength(), payload.frequency())));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakeResetPayload.TYPE, (payload, context) -> context.client().execute(CameraShakeHandler::resetCamera));
 
@@ -69,6 +69,8 @@ public class ChrysalisClient implements ClientModInitializer {
         // endregion
     }
 
+    // region Structure Music
+
     @Nullable public static Music structureMusic = null;
 
     @Nullable
@@ -83,4 +85,6 @@ public class ChrysalisClient implements ClientModInitializer {
         }
         structureMusic = ChrysalisSoundEvents.structures.get(structure);
     }
+
+    // endregion
 }
