@@ -177,7 +177,7 @@ public class ItemHelper {
     }
 
     public static void setTooltipIconsFont(MutableComponent mutableComponent, String modID) {
-        mutableComponent.setStyle(mutableComponent.getStyle().withFont(ResourceLocation.fromNamespaceAndPath(modID, "tooltip_icons")));
+        mutableComponent.setStyle(mutableComponent.getStyle().withFont(ResourceLocation.fromNamespaceAndPath(modID, ChrysalisRegistry.TOOLTIP_ICONS_NAME)));
     }
 
     // endregion

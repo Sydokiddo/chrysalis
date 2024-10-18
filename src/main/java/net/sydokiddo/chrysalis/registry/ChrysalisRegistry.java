@@ -109,6 +109,8 @@ public class ChrysalisRegistry {
         FIVE_ALT_FONT = Chrysalis.id("five_alt")
     ;
 
+    public static final String TOOLTIP_ICONS_NAME = "tooltip_icons";
+
     // endregion
 
     // region Structure Music
