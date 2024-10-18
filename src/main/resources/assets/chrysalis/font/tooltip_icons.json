@@ -32,6 +32,33 @@
       "chars": [
         "\ua002"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/question_mark.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua003"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/tooltip.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua004"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/potion.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua005"
+      ]
     }
   ]
 }

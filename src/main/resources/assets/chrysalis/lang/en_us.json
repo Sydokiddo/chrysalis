@@ -5,6 +5,9 @@
   "gui.icon.chrysalis.mod_icon": "\ua000",
   "gui.icon.chrysalis.gear": "\ua001",
   "gui.icon.chrysalis.warning": "\ua002",
+  "gui.icon.chrysalis.question_mark": "\ua003",
+  "gui.icon.chrysalis.tooltip": "\ua004",
+  "gui.icon.chrysalis.potion": "\ua005",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
