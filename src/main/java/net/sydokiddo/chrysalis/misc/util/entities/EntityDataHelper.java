@@ -36,7 +36,7 @@ public class EntityDataHelper {
     }
 
     public static boolean isEntityInFluid(LivingEntity livingEntity) {
-        return livingEntity.isUnderWater() || livingEntity.isInPowderSnow || livingEntity.isInLava();
+        return livingEntity.isInLiquid() || livingEntity.isInPowderSnow;
     }
 
     public static boolean targetIsImmunePlayer(Entity target, Entity player) {

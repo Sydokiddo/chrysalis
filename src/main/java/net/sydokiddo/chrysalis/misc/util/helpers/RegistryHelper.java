@@ -100,24 +100,24 @@ public class RegistryHelper {
 
     // region Armor
 
-    public static ArmorItem registerHelmet(ArmorMaterial armorMaterial, int durability) {
-        return registerArmor(ArmorItem.Type.HELMET, armorMaterial, ArmorItem.Type.HELMET.getDurability(durability));
+    public static ArmorItem registerHelmet(Holder<ArmorMaterial> armorMaterial, int durability) {
+        return registerArmor(armorMaterial, ArmorItem.Type.HELMET, ArmorItem.Type.HELMET.getDurability(durability));
     }
 
-    public static ArmorItem registerChestplate(ArmorMaterial armorMaterial, int durability) {
-        return registerArmor(ArmorItem.Type.CHESTPLATE, armorMaterial, ArmorItem.Type.CHESTPLATE.getDurability(durability));
+    public static ArmorItem registerChestplate(Holder<ArmorMaterial> armorMaterial, int durability) {
+        return registerArmor(armorMaterial, ArmorItem.Type.CHESTPLATE, ArmorItem.Type.CHESTPLATE.getDurability(durability));
     }
 
-    public static ArmorItem registerLeggings(ArmorMaterial armorMaterial, int durability) {
-        return registerArmor(ArmorItem.Type.LEGGINGS, armorMaterial, ArmorItem.Type.LEGGINGS.getDurability(durability));
+    public static ArmorItem registerLeggings(Holder<ArmorMaterial> armorMaterial, int durability) {
+        return registerArmor(armorMaterial, ArmorItem.Type.LEGGINGS, ArmorItem.Type.LEGGINGS.getDurability(durability));
     }
 
-    public static ArmorItem registerBoots(ArmorMaterial armorMaterial, int durability) {
-        return registerArmor(ArmorItem.Type.BOOTS, armorMaterial, ArmorItem.Type.BOOTS.getDurability(durability));
+    public static ArmorItem registerBoots(Holder<ArmorMaterial> armorMaterial, int durability) {
+        return registerArmor(armorMaterial, ArmorItem.Type.BOOTS, ArmorItem.Type.BOOTS.getDurability(durability));
     }
 
-    public static ArmorItem registerArmor(ArmorItem.Type armorType, ArmorMaterial armorMaterial, int durability) {
-        return new ArmorItem(Holder.direct(armorMaterial), armorType, new Item.Properties().durability(armorType.getDurability(durability)));
+    public static ArmorItem registerArmor(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type armorType, int durability) {
+        return new ArmorItem(armorMaterial, armorType, new Item.Properties().durability(armorType.getDurability(durability)));
     }
 
     // endregion
