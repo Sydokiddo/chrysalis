@@ -11,7 +11,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -101,24 +100,24 @@ public class RegistryHelper {
 
     // region Armor
 
-    public static ArmorItem registerHelmet(Holder<ArmorMaterial> armorMaterial, int durability, ItemAttributeModifiers attributeModifiers) {
-        return registerArmor(armorMaterial, ArmorItem.Type.HELMET, durability, attributeModifiers);
+    public static ArmorItem registerHelmet(Holder<ArmorMaterial> armorMaterial, int durability) {
+        return registerArmor(armorMaterial, ArmorItem.Type.HELMET, durability);
     }
 
-    public static ArmorItem registerChestplate(Holder<ArmorMaterial> armorMaterial, int durability, ItemAttributeModifiers attributeModifiers) {
-        return registerArmor(armorMaterial, ArmorItem.Type.CHESTPLATE, durability, attributeModifiers);
+    public static ArmorItem registerChestplate(Holder<ArmorMaterial> armorMaterial, int durability) {
+        return registerArmor(armorMaterial, ArmorItem.Type.CHESTPLATE, durability);
     }
 
-    public static ArmorItem registerLeggings(Holder<ArmorMaterial> armorMaterial, int durability, ItemAttributeModifiers attributeModifiers) {
-        return registerArmor(armorMaterial, ArmorItem.Type.LEGGINGS, durability, attributeModifiers);
+    public static ArmorItem registerLeggings(Holder<ArmorMaterial> armorMaterial, int durability) {
+        return registerArmor(armorMaterial, ArmorItem.Type.LEGGINGS, durability);
     }
 
-    public static ArmorItem registerBoots(Holder<ArmorMaterial> armorMaterial, int durability, ItemAttributeModifiers attributeModifiers) {
-        return registerArmor(armorMaterial, ArmorItem.Type.BOOTS, durability, attributeModifiers);
+    public static ArmorItem registerBoots(Holder<ArmorMaterial> armorMaterial, int durability) {
+        return registerArmor(armorMaterial, ArmorItem.Type.BOOTS, durability);
     }
 
-    public static ArmorItem registerArmor(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type armorType, int durability, ItemAttributeModifiers attributeModifiers) {
-        return new ArmorItem(armorMaterial, armorType, new Item.Properties().durability(armorType.getDurability(durability)).attributes(attributeModifiers));
+    public static ArmorItem registerArmor(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type armorType, int durability) {
+        return new ArmorItem(armorMaterial, armorType, new Item.Properties().durability(armorType.getDurability(durability)));
     }
 
     // endregion
