@@ -59,6 +59,15 @@
       "chars": [
         "\ua005"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/armor.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua006"
+      ]
     }
   ]
 }

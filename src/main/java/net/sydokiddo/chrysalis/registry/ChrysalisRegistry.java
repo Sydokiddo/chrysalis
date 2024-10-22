@@ -100,7 +100,8 @@ public class ChrysalisRegistry {
         WARNING_ICON = Component.translatable("gui.icon.chrysalis.warning"),
         QUESTION_MARK = Component.translatable("gui.icon.chrysalis.question_mark"),
         TOOLTIP_ICON = Component.translatable("gui.icon.chrysalis.tooltip"),
-        POTION_ICON = Component.translatable("gui.icon.chrysalis.potion")
+        POTION_ICON = Component.translatable("gui.icon.chrysalis.potion"),
+        ARMOR_ICON = Component.translatable("gui.icon.chrysalis.armor")
     ;
 
     @SuppressWarnings("unused")
