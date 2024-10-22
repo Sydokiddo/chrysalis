@@ -28,7 +28,8 @@ public class EntityDataHelper {
     }
 
     public static boolean isEntityMoving(LivingEntity livingEntity) {
-        return livingEntity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6;
+        if (livingEntity instanceof Player player) return player.getKnownMovement().horizontalDistanceSqr() > 0.0D;
+        return livingEntity.getDeltaMovement().horizontalDistanceSqr() > 0.0D;
     }
 
     public static boolean isMobWithAIMoving(Mob mob) {

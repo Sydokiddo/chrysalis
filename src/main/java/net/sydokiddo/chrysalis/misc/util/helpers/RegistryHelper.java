@@ -101,19 +101,19 @@ public class RegistryHelper {
     // region Armor
 
     public static ArmorItem registerHelmet(Holder<ArmorMaterial> armorMaterial, int durability) {
-        return registerArmor(armorMaterial, ArmorItem.Type.HELMET, ArmorItem.Type.HELMET.getDurability(durability));
+        return registerArmor(armorMaterial, ArmorItem.Type.HELMET, durability);
     }
 
     public static ArmorItem registerChestplate(Holder<ArmorMaterial> armorMaterial, int durability) {
-        return registerArmor(armorMaterial, ArmorItem.Type.CHESTPLATE, ArmorItem.Type.CHESTPLATE.getDurability(durability));
+        return registerArmor(armorMaterial, ArmorItem.Type.CHESTPLATE, durability);
     }
 
     public static ArmorItem registerLeggings(Holder<ArmorMaterial> armorMaterial, int durability) {
-        return registerArmor(armorMaterial, ArmorItem.Type.LEGGINGS, ArmorItem.Type.LEGGINGS.getDurability(durability));
+        return registerArmor(armorMaterial, ArmorItem.Type.LEGGINGS, durability);
     }
 
     public static ArmorItem registerBoots(Holder<ArmorMaterial> armorMaterial, int durability) {
-        return registerArmor(armorMaterial, ArmorItem.Type.BOOTS, ArmorItem.Type.BOOTS.getDurability(durability));
+        return registerArmor(armorMaterial, ArmorItem.Type.BOOTS, durability);
     }
 
     public static ArmorItem registerArmor(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type armorType, int durability) {
