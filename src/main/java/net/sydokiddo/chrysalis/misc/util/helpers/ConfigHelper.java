@@ -107,6 +107,9 @@ public class ConfigHelper {
         potionsCategoryName = categoryString + "potions",
         potionsCategoryDescription = potionsCategoryName + descriptionString,
 
+        armorCategoryName = categoryString + "armor",
+        armorCategoryDescription = armorCategoryName + descriptionString,
+
         enchantmentsCategoryName = categoryString + "enchantments",
         enchantmentsCategoryDescription = enchantmentsCategoryName + descriptionString,
 

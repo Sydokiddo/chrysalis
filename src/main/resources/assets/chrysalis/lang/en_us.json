@@ -196,6 +196,8 @@
   "gui.chrysalis.config_category.items.description": "Configure the way various items function in this mod.",
   "gui.chrysalis.config_category.potions": "%s Potions %s",
   "gui.chrysalis.config_category.potions.description": "Enable or disable various potions from being able to be brewed.",
+  "gui.chrysalis.config_category.armor": "%s Armor %s",
+  "gui.chrysalis.config_category.armor.description": "Configure the way various armor items function in this mod.",
   "gui.chrysalis.config_category.enchantments": "%s Enchantments %s",
   "gui.chrysalis.config_category.enchantments.description": "Enable or disable various enchantments from being obtainable.",
   "gui.chrysalis.config_category.tooltips": "%s Tooltips %s",
