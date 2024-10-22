@@ -35,6 +35,8 @@
 
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
+  "attribute.chrysalis.generic.reduced_detection_range": "Reduced Detection Range",
+
   "gui.chrysalis.heal_message": "Successfully healed %s",
   "gui.chrysalis.fill_hunger_message": "Successfully nourished %s",
   "gui.chrysalis.teleport_to_spawnpoint_message": "Successfully teleported to spawnpoint",

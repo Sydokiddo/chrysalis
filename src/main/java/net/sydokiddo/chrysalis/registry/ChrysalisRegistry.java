@@ -131,6 +131,7 @@ public class ChrysalisRegistry {
         ChrysalisDebugItems.registerDebugItems();
         ChrysalisCreativeModeTabs.registerCreativeTabs();
         ChrysalisMemoryModules.MEMORY_MODULES.register();
+        ChrysalisAttributes.registerAttributes();
 
         PayloadTypeRegistry.playS2C().register(CameraShakePayload.TYPE, CameraShakePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC);

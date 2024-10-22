@@ -50,7 +50,7 @@ public class ChrysalisExampleRegistry {
         RegistryHelper.registerSword(Tiers.IRON, 3, -2.4F));
 
     public static final Item EXAMPLE_ARMOR = registerItem("example_armor",
-        RegistryHelper.registerChestplate(ArmorMaterials.IRON, 15));
+        RegistryHelper.registerChestplate(ArmorMaterials.IRON, 15, null));
 
     public static final Item EXAMPLE_MUSIC_DISC = registerItem("example_music_disc",
         RegistryHelper.registerMusicDisc(JukeboxSongs.CAT, Rarity.COMMON));

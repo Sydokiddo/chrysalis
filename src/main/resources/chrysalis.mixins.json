@@ -64,6 +64,8 @@
   ],
   "client": [
     "misc.ClientLevelMixin",
+    "misc.EntityRenderLayerMixin",
+    "misc.EntityRenderLayerMixin$ElytraLayerMixin",
     "misc.GameRendererMixin",
     "misc.GuiMixin",
     "misc.LevelRendererMixin",
