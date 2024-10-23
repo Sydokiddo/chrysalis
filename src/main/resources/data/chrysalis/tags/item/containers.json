@@ -9,6 +9,7 @@
     "#c:barrels",
     "#c:barrels/wooden",
     "#c:chests",
-    "#c:chests/wooden"
+    "#c:chests/wooden",
+    "#minecraft:bundles"
   ]
 }
