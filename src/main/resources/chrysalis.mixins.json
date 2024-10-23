@@ -34,6 +34,7 @@
     "entities.misc.PlayerMixin",
     "entities.passive.AllayMixin",
     "entities.passive.AxolotlMixin",
+    "entities.passive.DolphinMixin",
     "entities.passive.EatBlockGoalMixin",
     "entities.passive.FoxEatBerriesGoalMixin",
     "entities.passive.HorseMixin",

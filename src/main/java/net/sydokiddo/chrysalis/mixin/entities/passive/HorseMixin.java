@@ -34,7 +34,7 @@ public class HorseMixin extends AbstractHorse {
 
         ItemStack itemStack = player.getItemInHand(interactionHand);
         Item item = itemStack.getItem();
-        InteractionResult success = InteractionResult.SUCCESS;
+        InteractionResult success = InteractionResult.SUCCESS_SERVER;
 
         if (item instanceof RideMobItem rideMobItem) {
             rideMobItem.interactLivingEntity(itemStack, player, this, interactionHand);
@@ -68,7 +68,7 @@ public class HorseMixin extends AbstractHorse {
 
             ItemStack itemStack = player.getItemInHand(interactionHand);
             Item item = itemStack.getItem();
-            InteractionResult success = InteractionResult.SUCCESS;
+            InteractionResult success = InteractionResult.SUCCESS_SERVER;
 
             if (item instanceof RideMobItem rideMobItem) {
                 rideMobItem.interactLivingEntity(itemStack, player, this, interactionHand);
@@ -103,7 +103,7 @@ public class HorseMixin extends AbstractHorse {
 
             ItemStack itemStack = player.getItemInHand(interactionHand);
             Item item = itemStack.getItem();
-            InteractionResult success = InteractionResult.SUCCESS;
+            InteractionResult success = InteractionResult.SUCCESS_SERVER;
 
             if (item instanceof RideMobItem rideMobItem) {
                 rideMobItem.interactLivingEntity(itemStack, player, this, interactionHand);

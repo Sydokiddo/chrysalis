@@ -62,6 +62,7 @@ public class ChrysalisTags {
         CHARGES_RESPAWN_ANCHORS = registerItemTag("charges_respawn_anchors"),
         PIGLIN_BARTERING_ITEMS = registerItemTag("piglin_bartering_items"),
         REPAIRS_IRON_GOLEMS = registerItemTag("repairs_iron_golems"),
+        DOLPHIN_FOOD = registerItemTag("dolphin_food"),
         TNT_IGNITERS = registerItemTag("tnt_igniters"),
 
         // endregion
@@ -146,6 +147,7 @@ public class ChrysalisTags {
         PIGLIN = registerEntityTag("piglin"),
         SLIME = registerEntityTag("slime"),
         VILLAGER = registerEntityTag("villager"),
+        PIGLIN_AVOIDED = registerEntityTag("piglin_avoided"),
 
         // endregion
 

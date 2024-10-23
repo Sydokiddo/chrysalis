@@ -38,6 +38,8 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
     @Override
     public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
 
+        ItemStack itemStack = player.getItemInHand(interactionHand);
+
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
             serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
@@ -48,12 +50,13 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
                 level.gameEvent(GameEvent.TELEPORT, serverPlayer.position(), GameEvent.Context.of(serverPlayer));
                 serverPlayer.playNotifySound(SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_message"));
+                serverPlayer.getCooldowns().addCooldown(itemStack, 60);
             } else {
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.TELEPORT_TO_SPAWNPOINT_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_failed_message"));
             }
         }
 
-        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
+        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(itemStack);
     }
 }
