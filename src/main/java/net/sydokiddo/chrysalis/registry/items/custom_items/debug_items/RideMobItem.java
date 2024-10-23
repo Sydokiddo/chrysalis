@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -35,18 +36,18 @@ public class RideMobItem extends DebugUtilityItem {
     @Override
     public @NotNull InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
-        if (!player.level().isClientSide() && !player.isShiftKeyDown()) {
+        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && !serverPlayer.isShiftKeyDown()) {
 
-            player.setXRot(livingEntity.getXRot());
-            player.setYRot(livingEntity.getYRot());
-            player.startRiding(livingEntity);
+            serverPlayer.setXRot(livingEntity.getXRot());
+            serverPlayer.setYRot(livingEntity.getYRot());
+            serverPlayer.startRiding(livingEntity);
 
-            player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            player.playNotifySound(ChrysalisSoundEvents.RIDE_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-            player.awardStat(Stats.ITEM_USED.get(this));
+            serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+            serverPlayer.playNotifySound(ChrysalisSoundEvents.RIDE_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
 
-            player.sendSystemMessage(Component.translatable("commands.ride.mount.success", player.getName().getString(), livingEntity.getName().getString()));
-            return InteractionResult.SUCCESS;
+            serverPlayer.sendSystemMessage(Component.translatable("commands.ride.mount.success", serverPlayer.getName().getString(), livingEntity.getName().getString()));
+            return InteractionResult.SUCCESS_SERVER;
         }
 
         return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);

@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import net.minecraft.core.Holder;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -52,7 +53,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (livingEntity.hasEffect(blindness)) {
             cir.setReturnValue(cir.getReturnValue() / (2.0D * (Objects.requireNonNull(livingEntity.getEffect(blindness)).getAmplifier() + 1)));
         } else {
-            if (livingEntity.getType().is(ChrysalisTags.ENDER) && this.getItemBySlot(EquipmentSlot.HEAD).is(ChrysalisTags.PROTECTS_AGAINST_ENDERMEN)) {
+            if (livingEntity.getType().is(ChrysalisTags.ENDER) && this.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.GAZE_DISGUISE_EQUIPMENT)) {
                 cir.setReturnValue(cir.getReturnValue() * 0.5D);
             } else {
                 double reducedDetectionRangeAttribute = this.getAttributeValue(ChrysalisAttributes.GENERIC_REDUCED_DETECTION_RANGE);

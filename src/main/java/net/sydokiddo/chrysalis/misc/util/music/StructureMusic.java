@@ -44,7 +44,7 @@ public class StructureMusic {
 
         boolean structureFound = false;
 
-        for (Holder<Structure> structure : serverLevel.structureManager().registryAccess().registryOrThrow(Registries.STRUCTURE).asHolderIdMap()) {
+        for (Holder<Structure> structure : serverLevel.structureManager().registryAccess().lookupOrThrow(Registries.STRUCTURE).asHolderIdMap()) {
             if (serverLevel.structureManager().getStructureWithPieceAt(BlockPos.containing(player.position()), structure.value()).isValid()) {
                 setCurrentStructure(player, serverLevel, structure.getRegisteredName());
                 structureFound = true;

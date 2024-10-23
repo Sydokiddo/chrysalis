@@ -6,7 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import java.util.Objects;
 
@@ -18,14 +18,14 @@ public class ShowcaseCommand {
 
     private static int displayItemToChat(CommandContext<CommandSourceStack> context) {
 
-        Player player = Objects.requireNonNull(context.getSource().getPlayer());
-        ItemStack itemStack = player.getMainHandItem();
+        ServerPlayer serverPlayer = Objects.requireNonNull(context.getSource().getPlayer());
+        ItemStack itemStack = serverPlayer.getMainHandItem();
 
-        Component successText = Component.translatable("gui.chrysalis.commands.showcase.success", player.getDisplayName(), itemStack.getDisplayName());
+        Component successText = Component.translatable("gui.chrysalis.commands.showcase.success", serverPlayer.getDisplayName(), itemStack.getDisplayName());
         Component failText = Component.translatable("gui.chrysalis.commands.showcase.fail").withStyle(ChatFormatting.RED);
 
         if (!itemStack.isEmpty()) context.getSource().getServer().getPlayerList().broadcastSystemMessage(successText, false);
-        else player.sendSystemMessage(failText);
+        else serverPlayer.sendSystemMessage(failText);
 
         return 1;
     }

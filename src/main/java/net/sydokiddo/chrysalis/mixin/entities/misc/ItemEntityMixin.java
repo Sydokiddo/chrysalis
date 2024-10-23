@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -37,10 +38,7 @@ public abstract class ItemEntityMixin extends Entity {
      * Adds the glow color entity data to item entities.
      **/
 
-    @Unique
-    private final String
-        glowColorTag = "GlowColor"
-    ;
+    @Unique private final String glowColorTag = "GlowColor";
 
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
     private void chrysalis$defineItemEntityTags(SynchedEntityData.Builder builder, CallbackInfo info) {
@@ -86,11 +84,11 @@ public abstract class ItemEntityMixin extends Entity {
      * Makes various items immune to various damage sources dependent on what tag they are in.
      **/
 
-    @Inject(at = @At("HEAD"), method = "hurt", cancellable = true)
-    private void chrysalis$makeItemsImmune(DamageSource damageSource, float damageAmount, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(at = @At("HEAD"), method = "hurtServer", cancellable = true)
+    private void chrysalis$makeItemsImmune(ServerLevel serverLevel, DamageSource damageSource, float damageAmount, CallbackInfoReturnable<Boolean> cir) {
         if (!this.getItem().isEmpty()) {
             if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) cir.setReturnValue(false);
-            if ((this.getItem().is(ChrysalisTags.IMMUNE_TO_EXPLOSIONS) || !this.level().getGameRules().getBoolean(ChrysalisRegistry.RULE_DESTROY_ITEMS_IN_EXPLOSIONS)) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) cir.setReturnValue(false);
+            if ((this.getItem().is(ChrysalisTags.IMMUNE_TO_EXPLOSIONS) || !serverLevel.getGameRules().getBoolean(ChrysalisRegistry.RULE_DESTROY_ITEMS_IN_EXPLOSIONS)) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) cir.setReturnValue(false);
         }
     }
 

@@ -1,10 +1,8 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -41,11 +39,11 @@ public class KillWandItem extends DebugUtilityItem {
     @Override
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity self) {
 
-        if (self instanceof Player player && player.isCreative() || !target.isInvulnerable()) {
+        if (self.level() instanceof ServerLevel serverLevel && (self instanceof Player player && player.isCreative() || !target.isInvulnerable())) {
 
-            target.hurt(target.damageSources().source(ChrysalisDamageSources.KILL_WAND, self), Float.MAX_VALUE);
+            target.hurtServer(serverLevel, target.damageSources().source(ChrysalisDamageSources.KILL_WAND, self), Float.MAX_VALUE);
 
-            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(self.level());
+            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverLevel, EntitySpawnReason.TRIGGERED);
             assert lightningBolt != null;
 
             lightningBolt.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));

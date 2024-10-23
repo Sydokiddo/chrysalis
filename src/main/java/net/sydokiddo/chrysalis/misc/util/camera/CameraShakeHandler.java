@@ -36,7 +36,7 @@ public class CameraShakeHandler {
 
             CameraShakeHandler.time--;
 
-            float delta = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
+            float delta = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
             float ticksExistedDelta = player.tickCount + delta;
             float strength = CameraShakeHandler.strength / 4.0F;
             float frequency = CameraShakeHandler.frequency / 2.0F;

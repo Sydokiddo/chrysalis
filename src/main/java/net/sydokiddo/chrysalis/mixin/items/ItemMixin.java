@@ -44,12 +44,12 @@ public abstract class ItemMixin {
     @Mixin(ItemStack.class)
     public static abstract class ItemStackMixin {
 
-        @Shadow public abstract String getDescriptionId();
+        @Shadow public abstract Item getItem();
 
         @Environment(EnvType.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
         private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
-            if (this.getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced()) {
+            if (this.getItem().getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced()) {
                 if (!cir.getReturnValue().isEmpty()) cir.getReturnValue().add(CommonComponents.EMPTY);
                 MutableComponent chrysalisIcon = ChrysalisRegistry.CHRYSALIS_ICON;
                 ItemHelper.setTooltipIconsFont(chrysalisIcon, Chrysalis.MOD_ID);

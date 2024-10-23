@@ -57,7 +57,7 @@ public class ChrysalisSoundEvents {
     public static Music registerMusic(String name, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
         ResourceLocation resourceLocation = ResourceLocation.parse(name);
         SoundEvent music = SoundEvent.createVariableRangeEvent(resourceLocation);
-        return new Music(registerForHolder(resourceLocation, music.getLocation()), minDelay, maxDelay, replaceCurrentMusic);
+        return new Music(registerForHolder(resourceLocation, music.location()), minDelay, maxDelay, replaceCurrentMusic);
     }
 
     public static void registerStructureMusic() {

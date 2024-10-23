@@ -8,7 +8,7 @@
     "minecraft:piglin_banner_pattern",
     "minecraft:flow_banner_pattern",
     "minecraft:guster_banner_pattern",
-    {"id": "minecraft:field_masoned_banner_pattern", "required": false},
-    {"id": "minecraft:bordure_indented_banner_pattern", "required": false}
+    "minecraft:field_masoned_banner_pattern",
+    "minecraft:bordure_indented_banner_pattern"
   ]
 }

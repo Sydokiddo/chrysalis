@@ -20,7 +20,7 @@ public class GuiMixin {
 
     @Shadow @Final private Minecraft minecraft;
 
-    @ModifyArg(method = "renderCrosshair", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 0))
+    @ModifyArg(method = "renderCrosshair", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Ljava/util/function/Function;Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 0))
     private ResourceLocation chrysalis$renderTeleportWandCrosshair(ResourceLocation resourceLocation) {
         Player player = this.minecraft.player;
         if (player != null && player.isHolding(ChrysalisDebugItems.TELEPORT_WAND)) resourceLocation = Chrysalis.id("hud/teleport_wand_crosshair");

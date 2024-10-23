@@ -3,8 +3,8 @@ package net.sydokiddo.chrysalis.misc.util.dispenser;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -27,7 +27,7 @@ public class DispenseCustomSpawnEggDispenserBehavior implements DispenseItemBeha
         EntityType<?> entityType = ((CSpawnEggItem) itemStack.getItem()).getType(itemStack);
 
         try {
-            entityType.spawn(blockSource.level(), itemStack, null, blockSource.pos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
+            entityType.spawn(blockSource.level(), itemStack, null, blockSource.pos().relative(direction), EntitySpawnReason.DISPENSER, direction != Direction.UP, false);
         } catch (Exception exception) {
             LOGGER.error("Error while dispensing spawn egg from dispenser at {}", blockSource.pos(), exception);
             return ItemStack.EMPTY;

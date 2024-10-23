@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.registry.items.custom_items;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -28,9 +29,7 @@ public class CSpawnEggItem extends SpawnEggItem {
     public @NotNull Optional<Mob> spawnOffspringFromSpawnEgg(Player player, Mob mob, EntityType<? extends Mob> entityType, ServerLevel serverLevel, Vec3 vec3, ItemStack itemStack) {
 
         if (this.mobOffspring == null) return super.spawnOffspringFromSpawnEgg(player, mob, entityType, serverLevel, vec3, itemStack);
-
-        Mob babyMob = this.mobOffspring.create(serverLevel);
-
+        Mob babyMob = this.mobOffspring.create(serverLevel, EntitySpawnReason.SPAWN_ITEM_USE);
         if (babyMob == null || entityType == this.mobOffspring) return Optional.empty();
 
         babyMob.setBaby(true);

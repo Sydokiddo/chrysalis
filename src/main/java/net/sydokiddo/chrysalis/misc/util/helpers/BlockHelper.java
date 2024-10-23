@@ -4,13 +4,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import java.util.function.ToIntFunction;
@@ -26,17 +26,17 @@ public class BlockHelper {
         return blockState -> blockState.getValue(BlockStateProperties.LIT) ? lightAmount : 0;
     }
 
-    public static void popResourceBelow(Level level, BlockPos blockPos, ItemStack itemStack, double itemDropOffset) {
+    public static void popResourceBelow(ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, double itemDropOffset) {
 
         double itemHeight = (double) EntityType.ITEM.getHeight() / 2.0;
-        double x = (double) blockPos.getX() + 0.5 + Mth.nextDouble(level.getRandom(), -0.25, 0.25);
-        double y = (double) blockPos.getY() - itemDropOffset + Mth.nextDouble(level.getRandom(), -0.25, 0.25) - itemHeight;
-        double z = (double) blockPos.getZ() + 0.5 + Mth.nextDouble(level.getRandom(), -0.25, 0.25);
+        double x = (double) blockPos.getX() + 0.5 + Mth.nextDouble(serverLevel.getRandom(), -0.25, 0.25);
+        double y = (double) blockPos.getY() - itemDropOffset + Mth.nextDouble(serverLevel.getRandom(), -0.25, 0.25) - itemHeight;
+        double z = (double) blockPos.getZ() + 0.5 + Mth.nextDouble(serverLevel.getRandom(), -0.25, 0.25);
 
-        if (!level.isClientSide() && !itemStack.isEmpty() && level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
-            ItemEntity itemEntity = new ItemEntity(level, x, y, z, itemStack);
+        if (!serverLevel.isClientSide() && !itemStack.isEmpty() && serverLevel.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
+            ItemEntity itemEntity = new ItemEntity(serverLevel, x, y, z, itemStack);
             itemEntity.setDefaultPickUpDelay();
-            level.addFreshEntity(itemEntity);
+            serverLevel.addFreshEntity(itemEntity);
         }
     }
 

@@ -93,7 +93,7 @@ public interface ContainerMob {
             if (!livingEntity.level().isClientSide() && player instanceof ServerPlayer serverPlayer) CriteriaTriggers.FILLED_BUCKET.trigger(serverPlayer, resultItemStack);
             if (containerMob instanceof Mob mob && mob.isLeashed()) mob.dropLeash(true, true);
             livingEntity.discard();
-            return Optional.of(InteractionResult.sidedSuccess(livingEntity.level().isClientSide()));
+            return Optional.of(InteractionResult.SUCCESS);
 
         } else {
             return emptyReturnValue;

@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis.mixin.entities.misc;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.entity.vehicle.AbstractBoat;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
-@Mixin(Boat.class)
-public abstract class BoatMixin extends Entity {
+@Mixin(AbstractBoat.class)
+public abstract class AbstractBoatMixin extends Entity {
 
-    private BoatMixin(EntityType<?> entityType, Level level) {
+    private AbstractBoatMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 

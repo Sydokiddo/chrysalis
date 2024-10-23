@@ -7,6 +7,7 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -33,7 +34,7 @@ public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavio
         Position position = DispenserBlock.getDispensePosition(blockSource);
         Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
 
-        Entity entity = this.entityType.create(level);
+        Entity entity = this.entityType.create(level, EntitySpawnReason.DISPENSER);
         assert entity != null;
 
         if (entity instanceof ThrowableItemProjectile throwableItemProjectile) throwableItemProjectile.setItem(itemStack);

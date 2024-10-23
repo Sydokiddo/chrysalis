@@ -7,7 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
@@ -38,7 +38,7 @@ public class TeleportWandItem extends DebugUtilityItem {
      **/
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
 
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
@@ -58,10 +58,8 @@ public class TeleportWandItem extends DebugUtilityItem {
             serverPlayer.playNotifySound(SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
             level.gameEvent(GameEvent.TELEPORT, serverPlayer.position(), GameEvent.Context.of(serverPlayer));
             level.broadcastEntityEvent(serverPlayer, (byte) 46); // Teleporting Particles
-
-            serverPlayer.getCooldowns().addCooldown(this, 60);
         }
 
-        return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
+        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
     }
 }

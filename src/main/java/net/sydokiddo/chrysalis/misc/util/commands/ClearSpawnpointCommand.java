@@ -28,9 +28,9 @@ public class ClearSpawnpointCommand {
 
             if (serverPlayer.getRespawnPosition() != null) {
                 serverPlayer.setRespawnPosition(Level.OVERWORLD, null, 0.0F, false, false);
-                player.sendSystemMessage(successText);
+                serverPlayer.sendSystemMessage(successText);
             } else {
-                player.sendSystemMessage(failText);
+                serverPlayer.sendSystemMessage(failText);
             }
         }
 

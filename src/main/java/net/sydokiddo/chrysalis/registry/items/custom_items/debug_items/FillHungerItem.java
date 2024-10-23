@@ -1,10 +1,11 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,24 +34,22 @@ public class FillHungerItem extends DebugUtilityItem {
      **/
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
 
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-
-        if (player.getFoodData().needsFood()) {
+        if (player instanceof ServerPlayer serverPlayer && serverPlayer.getFoodData().needsFood()) {
 
             if (!level.isClientSide()) {
-                player.playNotifySound(ChrysalisSoundEvents.FILL_HUNGER_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-                player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-                player.awardStat(Stats.ITEM_USED.get(this));
-                player.getFoodData().setFoodLevel(20);
-                player.getFoodData().setSaturation(5.0F);
-                player.sendSystemMessage(Component.translatable("gui.chrysalis.fill_hunger_message", player.getName().getString()));
+                serverPlayer.playNotifySound(ChrysalisSoundEvents.FILL_HUNGER_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+                serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+                serverPlayer.getFoodData().setFoodLevel(20);
+                serverPlayer.getFoodData().setSaturation(5.0F);
+                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.fill_hunger_message", serverPlayer.getName().getString()));
             }
 
-            return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+            return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
-        return InteractionResultHolder.pass(itemStack);
+        return super.use(level, player, interactionHand);
     }
 }

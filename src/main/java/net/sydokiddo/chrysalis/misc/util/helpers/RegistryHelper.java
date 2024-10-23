@@ -12,6 +12,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -76,48 +78,48 @@ public class RegistryHelper {
 
     // region Tools
 
-    public static SwordItem registerSword(Tier tier, float attackDamage, float attackSpeed) {
-        return new SwordItem(tier, new Item.Properties().attributes(SwordItem.createAttributes(tier, (int) attackDamage, attackSpeed)));
+    public static SwordItem registerSword(ToolMaterial toolMaterial, float attackDamage, float attackSpeed) {
+        return new SwordItem(toolMaterial, attackDamage, attackSpeed, new Item.Properties());
     }
 
-    public static PickaxeItem registerPickaxe(Tier tier, float attackDamage, float attackSpeed) {
-        return new PickaxeItem(tier, new Item.Properties().attributes(PickaxeItem.createAttributes(tier, attackDamage, attackSpeed)));
+    public static PickaxeItem registerPickaxe(ToolMaterial toolMaterial, float attackDamage, float attackSpeed) {
+        return new PickaxeItem(toolMaterial, attackDamage, attackSpeed, new Item.Properties());
     }
 
-    public static AxeItem registerAxe(Tier tier, float attackDamage, float attackSpeed) {
-        return new AxeItem(tier, new Item.Properties().attributes(AxeItem.createAttributes(tier, attackDamage, attackSpeed)));
+    public static AxeItem registerAxe(ToolMaterial toolMaterial, float attackDamage, float attackSpeed) {
+        return new AxeItem(toolMaterial, attackDamage, attackSpeed, new Item.Properties());
     }
 
-    public static ShovelItem registerShovel(Tier tier, float attackDamage, float attackSpeed) {
-        return new ShovelItem(tier, new Item.Properties().attributes(ShovelItem.createAttributes(tier, attackDamage, attackSpeed)));
+    public static ShovelItem registerShovel(ToolMaterial toolMaterial, float attackDamage, float attackSpeed) {
+        return new ShovelItem(toolMaterial, attackDamage, attackSpeed, new Item.Properties());
     }
 
-    public static HoeItem registerHoe(Tier tier, float attackDamage, float attackSpeed) {
-        return new HoeItem(tier, new Item.Properties().attributes(HoeItem.createAttributes(tier, attackDamage, attackSpeed)));
+    public static HoeItem registerHoe(ToolMaterial toolMaterial, float attackDamage, float attackSpeed) {
+        return new HoeItem(toolMaterial, attackDamage, attackSpeed, new Item.Properties());
     }
 
     // endregion
 
     // region Armor
 
-    public static ArmorItem registerHelmet(Holder<ArmorMaterial> armorMaterial, int durability) {
-        return registerArmor(armorMaterial, ArmorItem.Type.HELMET, durability);
+    public static ArmorItem registerHelmet(ArmorMaterial armorMaterial) {
+        return registerArmor(armorMaterial, ArmorType.HELMET);
     }
 
-    public static ArmorItem registerChestplate(Holder<ArmorMaterial> armorMaterial, int durability) {
-        return registerArmor(armorMaterial, ArmorItem.Type.CHESTPLATE, durability);
+    public static ArmorItem registerChestplate(ArmorMaterial armorMaterial) {
+        return registerArmor(armorMaterial, ArmorType.CHESTPLATE);
     }
 
-    public static ArmorItem registerLeggings(Holder<ArmorMaterial> armorMaterial, int durability) {
-        return registerArmor(armorMaterial, ArmorItem.Type.LEGGINGS, durability);
+    public static ArmorItem registerLeggings(ArmorMaterial armorMaterial) {
+        return registerArmor(armorMaterial, ArmorType.LEGGINGS);
     }
 
-    public static ArmorItem registerBoots(Holder<ArmorMaterial> armorMaterial, int durability) {
-        return registerArmor(armorMaterial, ArmorItem.Type.BOOTS, durability);
+    public static ArmorItem registerBoots(ArmorMaterial armorMaterial) {
+        return registerArmor(armorMaterial, ArmorType.BOOTS);
     }
 
-    public static ArmorItem registerArmor(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type armorType, int durability) {
-        return new ArmorItem(armorMaterial, armorType, new Item.Properties().durability(armorType.getDurability(durability)));
+    public static ArmorItem registerArmor(ArmorMaterial armorMaterial, ArmorType armorType) {
+        return new ArmorItem(armorMaterial, armorType, new Item.Properties());
     }
 
     // endregion

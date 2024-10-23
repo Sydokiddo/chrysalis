@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.mixin.blocks;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
@@ -17,6 +18,6 @@ public class BaseFireBlockMixin {
 
     @Inject(at = @At("HEAD"), method = "inPortalDimension", cancellable = true)
     private static void chrysalis$preventNetherPortalActivating(Level level, CallbackInfoReturnable<Boolean> cir) {
-        if (!level.getGameRules().getBoolean(ChrysalisRegistry.RULE_DO_NETHER_PORTAL_ACTIVATING)) cir.setReturnValue(false);
+        if (level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(ChrysalisRegistry.RULE_DO_NETHER_PORTAL_ACTIVATING)) cir.setReturnValue(false);
     }
 }

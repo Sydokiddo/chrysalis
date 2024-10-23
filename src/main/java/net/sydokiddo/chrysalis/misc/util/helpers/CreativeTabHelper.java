@@ -1,14 +1,14 @@
 package net.sydokiddo.chrysalis.misc.util.helpers;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Fireworks;
-import java.util.ArrayList;
+import net.minecraft.world.item.component.OminousBottleAmplifier;
+import net.minecraft.world.level.ItemLike;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -18,18 +18,10 @@ public class CreativeTabHelper {
      * Assists with adding Instrument items and their variants to any Creative Mode tab.
      **/
 
-    public static void addInstrumentItem(Item comparedItem, Item instrument, TagKey<Instrument> tagKey, CreativeModeTab.TabVisibility tabVisibility, ResourceKey<CreativeModeTab> creativeModeTab) {
-        ItemGroupEvents.modifyEntriesEvent(creativeModeTab).register((entries) -> {
-
-            List<ItemStack> list = new ArrayList<>();
-
-            for (Holder<Instrument> holder : BuiltInRegistries.INSTRUMENT.getTagOrEmpty(tagKey)) {
-                ItemStack itemStack = InstrumentItem.create(instrument, holder);
-                itemStack.setCount(1);
-                list.add(itemStack);
-            }
-            entries.addBefore(comparedItem, list, tabVisibility);
-        });
+    public static void addInstrumentItem(ItemLike comparedItem, Item instrument, TagKey<Instrument> tagKey, HolderLookup<Instrument> holderLookup, ResourceKey<CreativeModeTab> creativeModeTab) {
+        ItemGroupEvents.modifyEntriesEvent(creativeModeTab).register((entries) ->
+        holderLookup.get(tagKey).ifPresent((named) -> named.stream().map((holder) ->
+        InstrumentItem.create(instrument, holder)).forEach((itemStack) -> entries.addBefore(comparedItem, itemStack))));
     }
 
     /**
@@ -54,7 +46,7 @@ public class CreativeTabHelper {
         ItemGroupEvents.modifyEntriesEvent(creativeModeTab).register((entries) -> {
             for (int amplifiers = 0; amplifiers <= maxAmplifierValue; ++amplifiers) {
                 ItemStack itemStack = new ItemStack(Items.OMINOUS_BOTTLE);
-                itemStack.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, amplifiers);
+                itemStack.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, new OminousBottleAmplifier(amplifiers));
                 entries.addBefore(comparedItem, itemStack);
             }
         });

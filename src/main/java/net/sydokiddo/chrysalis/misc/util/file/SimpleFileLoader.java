@@ -6,7 +6,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.profiling.ProfilerFiller;
 import java.util.concurrent.Executor;
 import java.util.stream.Stream;
 import java.util.concurrent.CompletableFuture;
@@ -48,12 +47,12 @@ public interface SimpleFileLoader extends SimpleResourceReloadListener<Void> {
     }
 
     @Override
-    default CompletableFuture<Void> load(ResourceManager resourceManager, ProfilerFiller profilerFiller, Executor executor) {
+    default CompletableFuture<Void> load(ResourceManager resourceManager, Executor executor) {
         return CompletableFuture.runAsync(() -> this.load(resourceManager), executor);
     }
 
     @Override
-    default CompletableFuture<Void> apply(Void data, ResourceManager resourceManager, ProfilerFiller profilerFiller, Executor executor) {
+    default CompletableFuture<Void> apply(Void data, ResourceManager resourceManager, Executor executor) {
         return CompletableFuture.runAsync(() -> {}, executor);
     }
 }

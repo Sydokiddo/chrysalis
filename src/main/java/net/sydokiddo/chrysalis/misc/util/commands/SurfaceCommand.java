@@ -7,7 +7,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import java.util.Objects;
@@ -20,26 +20,26 @@ public class SurfaceCommand {
 
     private static int teleportPlayerToSurface(CommandContext<CommandSourceStack> context) {
 
-        Player player = Objects.requireNonNull(context.getSource().getPlayer());
-        if (player.isPassenger()) player.stopRiding();
+        ServerPlayer serverPlayer = Objects.requireNonNull(context.getSource().getPlayer());
+        if (serverPlayer.isPassenger()) serverPlayer.stopRiding();
 
-        int x = player.getBlockX();
-        int y = player.getBlockY();
-        int z = player.getBlockZ();
-        BlockPos playerPos = player.getOnPos();
+        int x = serverPlayer.getBlockX();
+        int y = serverPlayer.getBlockY();
+        int z = serverPlayer.getBlockZ();
+        BlockPos playerPos = serverPlayer.getOnPos();
 
-        int highestYValue = player.level().getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
+        int highestYValue = serverPlayer.level().getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
         BlockPos highestBlockPos = new BlockPos(x, highestYValue, z);
-        BlockState highestBlockState = player.level().getBlockState(highestBlockPos.below());
+        BlockState highestBlockState = serverPlayer.level().getBlockState(highestBlockPos.below());
 
-        Component successText = Component.translatable("gui.chrysalis.commands.surface.success", player.getDisplayName());
+        Component successText = Component.translatable("gui.chrysalis.commands.surface.success", serverPlayer.getDisplayName());
         Component failText = Component.translatable("gui.chrysalis.commands.surface.fail").withStyle(ChatFormatting.RED);
 
-        if (highestYValue != y && !highestBlockState.isAir() && (!highestBlockState.getFluidState().isEmpty() || !highestBlockState.getCollisionShape(player.level(), highestBlockPos).isEmpty())) {
-            player.teleportTo(playerPos.getX(), highestYValue, playerPos.getZ());
-            player.sendSystemMessage(successText);
+        if (highestYValue != y && !highestBlockState.isAir() && (!highestBlockState.getFluidState().isEmpty() || !highestBlockState.getCollisionShape(serverPlayer.level(), highestBlockPos).isEmpty())) {
+            serverPlayer.teleportTo(playerPos.getX(), highestYValue, playerPos.getZ());
+            serverPlayer.sendSystemMessage(successText);
         } else {
-            player.sendSystemMessage(failText);
+            serverPlayer.sendSystemMessage(failText);
         }
 
         return 1;

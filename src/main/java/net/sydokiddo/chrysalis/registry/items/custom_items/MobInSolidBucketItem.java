@@ -32,7 +32,7 @@ public class MobInSolidBucketItem extends MobInContainerItem {
 
         if (level.isInWorldBounds(blockPos) && level.isEmptyBlock(blockPos)) {
             level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos);
-            if (!level.isClientSide()) level.setBlock(blockPos, this.blockType.defaultBlockState(), 3);
+            if (!level.isClientSide()) level.setBlockAndUpdate(blockPos, this.blockType.defaultBlockState());
         }
     }
 }

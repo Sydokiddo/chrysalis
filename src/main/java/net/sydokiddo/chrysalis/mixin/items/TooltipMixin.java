@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
-@Mixin({DiscFragmentItem.class, BannerItem.class, BannerPatternItem.class, ShieldItem.class, CrossbowItem.class, FireworkRocketItem.class, MobBucketItem.class, WrittenBookItem.class, PotionItem.class})
+@Mixin({DiscFragmentItem.class, BannerItem.class, ShieldItem.class, CrossbowItem.class, FireworkRocketItem.class, MobBucketItem.class, WrittenBookItem.class, PotionItem.class})
 public class TooltipMixin extends Item {
 
     private TooltipMixin(Properties properties) {

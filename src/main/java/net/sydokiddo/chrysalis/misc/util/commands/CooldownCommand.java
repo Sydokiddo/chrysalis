@@ -8,8 +8,13 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.item.ItemArgument;
 import net.minecraft.commands.arguments.item.ItemInput;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.UseCooldown;
 
 public class CooldownCommand {
 
@@ -37,14 +42,20 @@ public class CooldownCommand {
     }
 
     private static int addCooldown(CommandSourceStack commandSourceStack, Player player, ItemInput itemInput, int cooldownLength) {
-        player.getCooldowns().addCooldown(itemInput.getItem(), cooldownLength);
+        player.getCooldowns().addCooldown(itemInput.getItem().getDefaultInstance(), cooldownLength);
         commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.cooldown.add", cooldownLength, itemInput.getItem().getDefaultInstance().getDisplayName(), player.getDisplayName()), true);
         return 1;
     }
 
     private static int removeCooldown(CommandSourceStack commandSourceStack, Player player, ItemInput itemInput) {
-        player.getCooldowns().removeCooldown(itemInput.getItem());
+        player.getCooldowns().removeCooldown(getCooldownGroup(itemInput.getItem().getDefaultInstance()));
         commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.cooldown.remove", itemInput.getItem().getDefaultInstance().getDisplayName(), player.getDisplayName()), true);
         return 1;
+    }
+
+    private static ResourceLocation getCooldownGroup(ItemStack itemStack) {
+        UseCooldown useCooldown = itemStack.get(DataComponents.USE_COOLDOWN);
+        ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
+        return useCooldown == null ? resourceLocation : useCooldown.cooldownGroup().orElse(resourceLocation);
     }
 }

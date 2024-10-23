@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -47,10 +48,10 @@ public class ChrysalisExampleRegistry {
     // region Example Item Registries
 
     public static final Item EXAMPLE_TOOL = registerItem("example_tool",
-        RegistryHelper.registerSword(Tiers.IRON, 3, -2.4F));
+        RegistryHelper.registerSword(ToolMaterial.IRON, 3, -2.4F));
 
     public static final Item EXAMPLE_ARMOR = registerItem("example_armor",
-        RegistryHelper.registerChestplate(ArmorMaterials.IRON, 15));
+        RegistryHelper.registerChestplate(ArmorMaterials.IRON));
 
     public static final Item EXAMPLE_MUSIC_DISC = registerItem("example_music_disc",
         RegistryHelper.registerMusicDisc(JukeboxSongs.CAT, Rarity.COMMON));

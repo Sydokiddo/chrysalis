@@ -2,10 +2,11 @@ package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -37,19 +38,19 @@ public class GiveResistanceItem extends DebugUtilityItem {
      **/
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
 
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
-            player.playNotifySound(ChrysalisSoundEvents.GIVE_RESISTANCE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-            player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            player.awardStat(Stats.ITEM_USED.get(this));
+            serverPlayer.playNotifySound(ChrysalisSoundEvents.GIVE_RESISTANCE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+            serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
 
             Holder<MobEffect> resistance = MobEffects.DAMAGE_RESISTANCE;
-            player.addEffect(new MobEffectInstance(resistance, -1, 255, false, false, true));
-            player.sendSystemMessage(Component.translatable("commands.effect.give.success.single", resistance.value().getDisplayName(), player.getName().getString()));
+            serverPlayer.addEffect(new MobEffectInstance(resistance, -1, 255, false, false, true));
+            serverPlayer.sendSystemMessage(Component.translatable("commands.effect.give.success.single", resistance.value().getDisplayName(), serverPlayer.getName().getString()));
         }
 
-        return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
+        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
     }
 }

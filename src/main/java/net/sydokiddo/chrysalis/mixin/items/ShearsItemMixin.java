@@ -1,5 +1,7 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.block.Block;
@@ -21,7 +23,8 @@ public class ShearsItemMixin {
 
     @Inject(method = "createToolProperties", at = @At(value = "RETURN"), cancellable = true)
     private static void chrysalis$createShearProperties(CallbackInfoReturnable<Tool> cir) {
-        cir.setReturnValue(new Tool(List.of(Tool.Rule.minesAndDrops(ChrysalisTags.MINEABLE_WITH_SHEARS, 15.0F), Tool.Rule.overrideSpeed(ChrysalisTags.MINEABLE_WITH_SHEARS, 15.0F)), 1.0F, 1));
+        HolderGetter<Block> holderGetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
+        cir.setReturnValue(new Tool(List.of(Tool.Rule.minesAndDrops(holderGetter.getOrThrow(ChrysalisTags.MINEABLE_WITH_SHEARS), 15.0F), Tool.Rule.overrideSpeed(holderGetter.getOrThrow(ChrysalisTags.MINEABLE_WITH_SHEARS), 15.0F)), 1.0F, 1));
     }
 
     @Redirect(method = "mineBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))

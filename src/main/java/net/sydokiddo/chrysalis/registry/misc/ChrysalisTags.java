@@ -60,7 +60,6 @@ public class ChrysalisTags {
         // region Interactable Items
 
         CHARGES_RESPAWN_ANCHORS = registerItemTag("charges_respawn_anchors"),
-        DUPLICATES_ALLAYS = registerItemTag("duplicates_allays"),
         PIGLIN_BARTERING_ITEMS = registerItemTag("piglin_bartering_items"),
         REPAIRS_IRON_GOLEMS = registerItemTag("repairs_iron_golems"),
         TNT_IGNITERS = registerItemTag("tnt_igniters"),
@@ -70,9 +69,7 @@ public class ChrysalisTags {
         // region Equipable Items
 
         HORSE_ARMOR = registerItemTag("horse_armor"),
-        PIGLIN_PACIFYING_ARMOR = registerItemTag("piglin_pacifying_armor"),
         POWDER_SNOW_WALKABLE_ITEMS = registerItemTag("powder_snow_walkable_items"),
-        PROTECTS_AGAINST_ENDERMEN = registerItemTag("protects_against_endermen"),
 
         // endregion
 

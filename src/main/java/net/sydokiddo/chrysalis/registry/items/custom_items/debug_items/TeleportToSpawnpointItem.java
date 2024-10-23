@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -36,28 +36,24 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
      **/
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
 
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
-            player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            player.awardStat(Stats.ITEM_USED.get(this));
+            serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
 
-            if (player instanceof ServerPlayer serverPlayer) {
-
-                if (serverPlayer.getRespawnPosition() != null) {
-                    serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
-                    level.gameEvent(GameEvent.TELEPORT, serverPlayer.position(), GameEvent.Context.of(serverPlayer));
-                    player.playNotifySound(SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_message"));
-                    player.getCooldowns().addCooldown(this, 60);
-                } else {
-                    player.playNotifySound(ChrysalisSoundEvents.TELEPORT_TO_SPAWNPOINT_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_failed_message"));
-                }
+            if (serverPlayer.getRespawnPosition() != null) {
+                serverPlayer.teleportTo(Objects.requireNonNull(serverPlayer.getRespawnPosition()).getX(), serverPlayer.getRespawnPosition().getY() + 1, serverPlayer.getRespawnPosition().getZ());
+                level.gameEvent(GameEvent.TELEPORT, serverPlayer.position(), GameEvent.Context.of(serverPlayer));
+                serverPlayer.playNotifySound(SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_message"));
+            } else {
+                serverPlayer.playNotifySound(ChrysalisSoundEvents.TELEPORT_TO_SPAWNPOINT_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_failed_message"));
             }
         }
 
-        return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
+        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
     }
 }

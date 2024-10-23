@@ -151,7 +151,7 @@ public class ItemHelper {
             if (level.isThundering()) weatherType = Component.translatable("gui.chrysalis.weather.thundering");
             else weatherType = Component.translatable("gui.chrysalis.weather.raining");
         } else {
-            if (level.isRaining() && biome.value().getPrecipitationAt(blockPos) == Biome.Precipitation.SNOW) weatherType = Component.translatable("gui.chrysalis.weather.snowing");
+            if (level.isRaining() && biome.value().getPrecipitationAt(blockPos, level.getSeaLevel()) == Biome.Precipitation.SNOW) weatherType = Component.translatable("gui.chrysalis.weather.snowing");
             else weatherType = Component.translatable("gui.chrysalis.weather.clear");
         }
 

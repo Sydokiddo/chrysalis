@@ -2,24 +2,28 @@ package net.sydokiddo.chrysalis.registry.items;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.*;
+import java.util.function.Function;
 
 public class ChrysalisDebugItems {
 
     // region Debug Items
 
-    public static final Item HEAL = registerItem("heal", new HealItem(debugUtilitySettings()));
-    public static final Item FILL_HUNGER = registerItem("fill_hunger", new FillHungerItem(debugUtilitySettings()));
-    public static final Item GIVE_RESISTANCE = registerItem("give_resistance", new GiveResistanceItem(debugUtilitySettings()));
-    public static final Item CLEAR_EFFECTS = registerItem("clear_effects", new ClearEffectsItem(debugUtilitySettings()));
-    public static final Item TELEPORT_TO_SPAWNPOINT = registerItem("teleport_to_spawnpoint", new TeleportToSpawnpointItem(debugUtilitySettings()));
-    public static final Item TELEPORT_WAND = registerItem("teleport_wand", new TeleportWandItem(debugUtilitySettings()));
-    public static final Item KILL_WAND = registerItem("kill_wand", new KillWandItem(debugUtilitySettings().attributes(KillWandItem.createAttributes())));
-    public static final Item TAME_MOB = registerItem("tame_mob", new TameMobItem(debugUtilitySettings()));
-    public static final Item RIDE_MOB = registerItem("ride_mob", new RideMobItem(debugUtilitySettings()));
+    public static final Item HEAL = registerItem("heal", HealItem::new, debugUtilitySettings());
+    public static final Item FILL_HUNGER = registerItem("fill_hunger", FillHungerItem::new, debugUtilitySettings());
+    public static final Item GIVE_RESISTANCE = registerItem("give_resistance", GiveResistanceItem::new, debugUtilitySettings());
+    public static final Item CLEAR_EFFECTS = registerItem("clear_effects", ClearEffectsItem::new, debugUtilitySettings());
+    public static final Item TELEPORT_TO_SPAWNPOINT = registerItem("teleport_to_spawnpoint", TeleportToSpawnpointItem::new, debugUtilitySettings().useCooldown(3.0F));
+    public static final Item TELEPORT_WAND = registerItem("teleport_wand", TeleportWandItem::new, debugUtilitySettings().useCooldown(3.0F));
+    public static final Item KILL_WAND = registerItem("kill_wand", KillWandItem::new, debugUtilitySettings().attributes(KillWandItem.createAttributes()));
+    public static final Item TAME_MOB = registerItem("tame_mob", TameMobItem::new, debugUtilitySettings());
+    public static final Item RIDE_MOB = registerItem("ride_mob", RideMobItem::new, debugUtilitySettings());
 
     // endregion
 
@@ -29,8 +33,11 @@ public class ChrysalisDebugItems {
         return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC);
     }
 
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(BuiltInRegistries.ITEM, Chrysalis.id(name), item);
+    private static Item registerItem(String name, Function<Item.Properties, Item> function, Item.Properties properties) {
+        ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, Chrysalis.id(name));
+        Item item = function.apply(properties.setId(resourceKey));
+        if (item instanceof BlockItem blockItem) blockItem.registerBlocks(Item.BY_BLOCK, item);
+        return Registry.register(BuiltInRegistries.ITEM, resourceKey, item);
     }
 
     public static void registerDebugItems() {}

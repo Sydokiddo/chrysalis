@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -53,7 +54,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Redirect(method = "dropEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;dropAll()V"))
     private void chrysalis$setDeathItemsToNeverDespawn(Inventory inventory) {
-        if (this.level().getGameRules().getBoolean(ChrysalisRegistry.RULE_PLAYER_DEATH_ITEM_DESPAWNING)) {
+        if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(ChrysalisRegistry.RULE_PLAYER_DEATH_ITEM_DESPAWNING)) {
             inventory.dropAll();
         } else {
             inventory.compartments.forEach((getInventory) -> getInventory.forEach(itemStack -> {

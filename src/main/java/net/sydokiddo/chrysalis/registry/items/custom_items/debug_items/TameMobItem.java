@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -44,7 +45,7 @@ public class TameMobItem extends DebugUtilityItem {
             playTameEvents(player, tamableAnimal);
             player.awardStat(Stats.ITEM_USED.get(this));
 
-            return InteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS_SERVER;
         }
 
         return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);
@@ -52,8 +53,10 @@ public class TameMobItem extends DebugUtilityItem {
 
     public static void playTameEvents(Player player, LivingEntity tamedMob) {
 
-        player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-        player.playNotifySound(ChrysalisSoundEvents.TAME_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+        if (!(player instanceof ServerPlayer serverPlayer)) return;
+
+        serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+        serverPlayer.playNotifySound(ChrysalisSoundEvents.TAME_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
 
         if (tamedMob.level() instanceof ServerLevel serverLevel) {
             for (int particleAmount = 0; particleAmount < 7; ++particleAmount) {
@@ -62,6 +65,6 @@ public class TameMobItem extends DebugUtilityItem {
             }
         }
 
-        player.sendSystemMessage(Component.translatable("gui.chrysalis.tame_mob_message", tamedMob.getName().getString()));
+        serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.tame_mob_message", tamedMob.getName().getString()));
     }
 }

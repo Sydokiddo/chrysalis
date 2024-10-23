@@ -2,10 +2,8 @@ package net.sydokiddo.chrysalis.mixin.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ChorusPlantFeature;
@@ -54,8 +52,8 @@ public abstract class ChorusPlantMixin extends PipeBlock {
     }
 
     @Inject(method = "updateShape", at = @At("RETURN"), cancellable = true)
-    private void chrysalis$chorusPlantUpdateShape(BlockState blockState, Direction direction, BlockState adjacentState, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos adjacentPos, CallbackInfoReturnable<BlockState> cir) {
-        if (blockState.canSurvive(levelAccessor, blockPos)) {
+    private void chrysalis$chorusPlantUpdateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos adjacentPos, BlockState adjacentState, RandomSource randomSource, CallbackInfoReturnable<BlockState> cir) {
+        if (blockState.canSurvive(levelReader, blockPos)) {
             boolean canGrowFrom = adjacentState.is(this) || adjacentState.is(Blocks.CHORUS_FLOWER) || direction == Direction.DOWN && adjacentState.is(ChrysalisTags.CHORUS_PLANT_CAN_GROW_ON);
             cir.setReturnValue(blockState.setValue(PROPERTY_BY_DIRECTION.get(direction), canGrowFrom));
         }

@@ -5,14 +5,16 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.equipment.Equippable;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import java.util.Objects;
 
@@ -24,33 +26,40 @@ public class HatCommand {
 
     private static int putItemOnHead(CommandContext<CommandSourceStack> context) {
 
-        Player player = Objects.requireNonNull(context.getSource().getPlayer());
-        ItemStack heldItem = player.getMainHandItem();
-        ItemStack currentHeadItem = player.getItemBySlot(EquipmentSlot.HEAD);
+        ServerPlayer serverPlayer = Objects.requireNonNull(context.getSource().getPlayer());
+        ItemStack heldItem = serverPlayer.getMainHandItem();
+        ItemStack currentHeadItem = serverPlayer.getItemBySlot(EquipmentSlot.HEAD);
 
-        Component successText = Component.translatable("gui.chrysalis.commands.hat.success", heldItem.getDisplayName(), player.getDisplayName());
+        Component successText = Component.translatable("gui.chrysalis.commands.hat.success", heldItem.getDisplayName(), serverPlayer.getDisplayName());
         Component failNoItemText = Component.translatable("gui.chrysalis.commands.hat.fail_no_item").withStyle(ChatFormatting.RED);
-        Component failInvalidItemText = Component.translatable("gui.chrysalis.commands.hat.fail_invalid_item", heldItem.getDisplayName(), player.getDisplayName()).withStyle(ChatFormatting.RED);
+        Component failInvalidItemText = Component.translatable("gui.chrysalis.commands.hat.fail_invalid_item", heldItem.getDisplayName(), serverPlayer.getDisplayName()).withStyle(ChatFormatting.RED);
 
         if (heldItem.isEmpty()) {
-            player.sendSystemMessage(failNoItemText);
+            serverPlayer.sendSystemMessage(failNoItemText);
         } else if (ItemHelper.getEnchantmentLevel(heldItem, Enchantments.BINDING_CURSE) > 0) {
-            player.sendSystemMessage(failInvalidItemText);
+            serverPlayer.sendSystemMessage(failInvalidItemText);
         } else {
 
-            if (!player.level().isClientSide() && !player.isSpectator() && !player.isSilent()) {
+            if (!serverPlayer.level().isClientSide() && !serverPlayer.isSpectator() && !serverPlayer.isSilent()) {
 
                 SoundEvent soundEvent;
 
-                if (heldItem.getItem() instanceof Equipable equipable && equipable.getEquipmentSlot() != EquipmentSlot.HEAD) soundEvent = equipable.getEquipSound().value();
-                else soundEvent = SoundEvents.ARMOR_EQUIP_GENERIC.value();
+                DataComponentType<Equippable> equippableComponent = DataComponents.EQUIPPABLE;
+                Equippable getEquippableComponent = heldItem.getComponents().get(equippableComponent);
 
-                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), soundEvent, player.getSoundSource(), 1.0F, 1.0F);
+                if (heldItem.has(equippableComponent) && getEquippableComponent != null) {
+                    if (getEquippableComponent.slot() == EquipmentSlot.HEAD) soundEvent = SoundEvents.EMPTY;
+                    else soundEvent = getEquippableComponent.equipSound().value();
+                } else {
+                    soundEvent = SoundEvents.ARMOR_EQUIP_GENERIC.value();
+                }
+
+                serverPlayer.level().playSound(null, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), soundEvent, serverPlayer.getSoundSource(), 1.0F, 1.0F);
             }
 
-            if (!currentHeadItem.isEmpty()) player.setItemSlot(EquipmentSlot.MAINHAND, currentHeadItem.copyAndClear());
-            player.setItemSlot(EquipmentSlot.HEAD, heldItem.copyAndClear());
-            player.sendSystemMessage(successText);
+            if (!currentHeadItem.isEmpty()) serverPlayer.setItemSlot(EquipmentSlot.MAINHAND, currentHeadItem.copyAndClear());
+            serverPlayer.setItemSlot(EquipmentSlot.HEAD, heldItem.copyAndClear());
+            serverPlayer.sendSystemMessage(successText);
         }
 
         return 1;
