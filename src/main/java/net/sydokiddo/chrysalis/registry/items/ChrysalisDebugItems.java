@@ -7,6 +7,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.*;
 import java.util.function.Function;
@@ -33,7 +35,14 @@ public class ChrysalisDebugItems {
         return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC);
     }
 
-    private static Item registerItem(String name, Function<Item.Properties, Item> function, Item.Properties properties) {
+    public static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties properties) {
+        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, Chrysalis.id(name));
+        Block block = function.apply(properties.setId(resourceKey));
+        registerItem(name, itemProperties -> new BlockItem(block, itemProperties), new Item.Properties());
+        return Registry.register(BuiltInRegistries.BLOCK, resourceKey, block);
+    }
+
+    public static Item registerItem(String name, Function<Item.Properties, Item> function, Item.Properties properties) {
         ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, Chrysalis.id(name));
         Item item = function.apply(properties.setId(resourceKey));
         if (item instanceof BlockItem blockItem) blockItem.registerBlocks(Item.BY_BLOCK, item);

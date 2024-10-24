@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -16,8 +15,8 @@ public class MobInSolidBucketItem extends MobInContainerItem {
 
     private final Block blockType;
 
-    public MobInSolidBucketItem(EntityType<?> entityType, Block blockType, SoundEvent emptySound, Properties properties, Item returnItem) {
-        super(entityType, emptySound, properties, returnItem);
+    public MobInSolidBucketItem(EntityType<?> entityType, Block blockType, SoundEvent emptySound, Properties properties) {
+        super(entityType, emptySound, properties);
         this.blockType = blockType;
     }
 

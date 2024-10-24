@@ -37,15 +37,7 @@ public class ChrysalisSoundEvents {
 
     @SuppressWarnings("all")
     private static Holder.Reference<SoundEvent> registerForHolder(String name) {
-        return registerForHolder(Chrysalis.id(name));
-    }
-
-    private static Holder.Reference<SoundEvent> registerForHolder(ResourceLocation resourceLocation) {
-        return registerForHolder(resourceLocation, resourceLocation);
-    }
-
-    private static Holder.Reference<SoundEvent> registerForHolder(ResourceLocation resourceLocation, ResourceLocation secondaryResourceLocation) {
-        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, resourceLocation, SoundEvent.createVariableRangeEvent(secondaryResourceLocation));
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, Chrysalis.id(name), SoundEvent.createVariableRangeEvent(Chrysalis.id(name)));
     }
 
     // endregion
@@ -54,16 +46,10 @@ public class ChrysalisSoundEvents {
 
     public static Map<String, Music> structures = new HashMap<>();
 
-    public static Music registerMusic(String name, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
-        ResourceLocation resourceLocation = ResourceLocation.parse(name);
-        SoundEvent music = SoundEvent.createVariableRangeEvent(resourceLocation);
-        return new Music(registerForHolder(resourceLocation, music.location()), minDelay, maxDelay, replaceCurrentMusic);
-    }
-
     public static void registerStructureMusic() {
         for (Map.Entry<String, ChrysalisRegistry.StructureMusicSound> structure : ChrysalisRegistry.registeredStructures.entrySet()) {
             ChrysalisRegistry.StructureMusicSound musicSound = structure.getValue();
-            structures.put(structure.getKey(), registerMusic(musicSound.name(), musicSound.minDelay(), musicSound.maxDelay(), musicSound.replaceCurrentMusic()));
+            structures.put(structure.getKey(), new Music(musicSound.soundEvent(), musicSound.minDelay(), musicSound.maxDelay(), musicSound.replaceCurrentMusic()));
         }
     }
 

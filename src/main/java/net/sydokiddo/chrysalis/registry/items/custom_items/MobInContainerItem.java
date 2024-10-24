@@ -30,11 +30,11 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
     public final SoundEvent emptySound;
     public final Item returnItem;
 
-    public MobInContainerItem(EntityType<?> entityType, SoundEvent emptySound, Properties properties, Item returnItem) {
+    public MobInContainerItem(EntityType<?> entityType, SoundEvent emptySound, Properties properties) {
         super(properties);
         this.entityType = entityType;
         this.emptySound = emptySound;
-        this.returnItem = returnItem;
+        this.returnItem = this.getCraftingRemainder().getItem();
     }
 
     /**

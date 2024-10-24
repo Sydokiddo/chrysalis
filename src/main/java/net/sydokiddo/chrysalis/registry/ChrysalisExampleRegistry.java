@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.registry;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -9,10 +7,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.equipment.ArmorMaterials;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
@@ -21,6 +17,11 @@ import net.sydokiddo.chrysalis.misc.util.dispenser.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.dispenser.ShootProjectileDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.misc.util.helpers.RegistryHelper;
+import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
+import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.MobInSolidBucketItem;
 
 @SuppressWarnings("unused")
 public class ChrysalisExampleRegistry {
@@ -47,45 +48,45 @@ public class ChrysalisExampleRegistry {
 
     // region Example Item Registries
 
-    public static final Item EXAMPLE_TOOL = registerItem("example_tool",
-        RegistryHelper.registerSword(ToolMaterial.IRON, 3, -2.4F));
+    public static final Item EXAMPLE_TOOL = ChrysalisDebugItems.registerItem("example_tool",
+        properties -> new SwordItem(ToolMaterial.IRON, 3, -2.4F, properties), new Item.Properties());
 
-    public static final Item EXAMPLE_ARMOR = registerItem("example_armor",
-        RegistryHelper.registerChestplate(ArmorMaterials.IRON));
+    public static final Item EXAMPLE_ARMOR = ChrysalisDebugItems.registerItem("example_armor",
+        properties -> new ArmorItem(ArmorMaterials.IRON, ArmorType.CHESTPLATE, properties), new Item.Properties());
 
-    public static final Item EXAMPLE_MUSIC_DISC = registerItem("example_music_disc",
-        RegistryHelper.registerMusicDisc(JukeboxSongs.CAT, Rarity.COMMON));
+    public static final Item EXAMPLE_MUSIC_DISC = ChrysalisDebugItems.registerItem("example_music_disc",
+        Item::new, RegistryHelper.musicDiscProperties(JukeboxSongs.CAT, Rarity.COMMON));
 
-    public static final Item EXAMPLE_SPAWN_EGG = registerItem("example_spawn_egg",
-        RegistryHelper.registerSpawnEgg(EntityType.FROG, 16777215, 13421772, EntityType.TADPOLE));
+    public static final Item EXAMPLE_SPAWN_EGG = ChrysalisDebugItems.registerItem("example_spawn_egg",
+        properties -> new CSpawnEggItem(EntityType.FROG, 16777215, 13421772, EntityType.TADPOLE, properties), new Item.Properties());
 
-    public static final Item EXAMPLE_MOB_CUSTOM_CONTAINER = registerItem("example_mob_custom_container",
-        RegistryHelper.registerMobInContainer(EntityType.ALLAY, SoundEvents.BUCKET_EMPTY, Items.GLASS_BOTTLE, Rarity.COMMON));
+    public static final Item EXAMPLE_MOB_CUSTOM_CONTAINER = ChrysalisDebugItems.registerItem("example_mob_custom_container",
+        properties -> new MobInContainerItem(EntityType.ALLAY, SoundEvents.BUCKET_EMPTY, properties), RegistryHelper.mobContainerProperties(Items.GLASS_BOTTLE, Rarity.COMMON));
 
-    public static final Item EXAMPLE_MOB_FLUID_BUCKET = registerItem("example_mob_fluid_bucket",
-        RegistryHelper.registerMobInFluidBucket(EntityType.COD, Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, Rarity.COMMON));
+    public static final Item EXAMPLE_MOB_FLUID_BUCKET = ChrysalisDebugItems.registerItem("example_mob_fluid_bucket",
+        properties -> new MobInFluidBucketItem(EntityType.COD, Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, properties), RegistryHelper.mobContainerProperties(Items.BUCKET, Rarity.COMMON));
 
-    public static final Item EXAMPLE_MOB_SOLID_BUCKET = registerItem("example_mob_solid_bucket",
-        RegistryHelper.registerMobInSolidBucket(EntityType.SNOW_GOLEM, Blocks.POWDER_SNOW, SoundEvents.BUCKET_EMPTY_POWDER_SNOW, Rarity.COMMON));
+    public static final Item EXAMPLE_MOB_SOLID_BUCKET = ChrysalisDebugItems.registerItem("example_mob_solid_bucket",
+        properties -> new MobInSolidBucketItem(EntityType.SNOW_GOLEM, Blocks.POWDER_SNOW, SoundEvents.BUCKET_EMPTY_POWDER_SNOW, properties), RegistryHelper.mobContainerProperties(Items.BUCKET, Rarity.COMMON));
 
     // endregion
 
     // region Example Block Registries
 
-    public static final Block EXAMPLE_BUTTON = registerBlock("example_button",
-        RegistryHelper.registerButton(BlockSetType.STONE, 20));
+    public static final Block EXAMPLE_BUTTON = ChrysalisDebugItems.registerBlock("example_button",
+        properties -> new ButtonBlock(BlockSetType.STONE, 20, properties), Blocks.buttonProperties());
 
-    public static final Block EXAMPLE_STONE_PRESSURE_PLATE = registerBlock("example_stone_pressure_plate",
-        RegistryHelper.registerStonePressurePlate(BlockSetType.STONE, MapColor.STONE));
+    public static final Block EXAMPLE_STONE_PRESSURE_PLATE = ChrysalisDebugItems.registerBlock("example_stone_pressure_plate",
+        properties -> new PressurePlateBlock(BlockSetType.STONE, properties), RegistryHelper.stonePressurePlateProperties(MapColor.STONE));
 
-    public static final Block EXAMPLE_WOODEN_PRESSURE_PLATE = registerBlock("example_wooden_pressure_plate",
-        RegistryHelper.registerWoodenPressurePlate(BlockSetType.OAK, MapColor.WOOD));
+    public static final Block EXAMPLE_WOODEN_PRESSURE_PLATE = ChrysalisDebugItems.registerBlock("example_wooden_pressure_plate",
+        properties -> new PressurePlateBlock(BlockSetType.OAK, properties), RegistryHelper.woodenPressurePlateProperties(Blocks.OAK_PLANKS.defaultMapColor()));
 
-    public static final Block EXAMPLE_LEAVES = registerBlock("example_leaves",
-        RegistryHelper.registerLeaves(SoundType.AZALEA_LEAVES, MapColor.PLANT));
+    public static final Block EXAMPLE_LEAVES = ChrysalisDebugItems.registerBlock("example_leaves",
+        LeavesBlock::new, RegistryHelper.leavesProperties(MapColor.PLANT, SoundType.AZALEA_LEAVES, Blocks::ocelotOrParrot));
 
-    public static final Block EXAMPLE_LOG = registerBlock("example_log",
-        RegistryHelper.registerLog(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD));
+    public static final Block EXAMPLE_LOG = ChrysalisDebugItems.registerBlock("example_log",
+        RotatedPillarBlock::new, Blocks.logProperties(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD));
 
     // endregion
 
@@ -104,24 +105,6 @@ public class ChrysalisExampleRegistry {
 
     public static void sendExampleCameraShake(Entity entity) {
         EventHelper.sendCameraShakeToNearbyPlayers(entity, null, 10.0F, 20, 5, 5);
-    }
-
-    // endregion
-
-    // region Registries
-
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(BuiltInRegistries.ITEM, Chrysalis.id(name), item);
-    }
-
-    private static void registerBlockItem(String name, Block block) {
-        Registry.register(BuiltInRegistries.ITEM, Chrysalis.id(name),
-        new BlockItem(block, new Item.Properties()));
-    }
-
-    private static Block registerBlock(String name, Block block) {
-        registerBlockItem(name, block);
-        return Registry.register(BuiltInRegistries.BLOCK, Chrysalis.id(name), block);
     }
 
     // endregion
