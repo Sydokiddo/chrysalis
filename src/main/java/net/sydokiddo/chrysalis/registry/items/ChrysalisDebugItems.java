@@ -35,10 +35,10 @@ public class ChrysalisDebugItems {
         return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC);
     }
 
-    public static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties properties) {
+    public static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
         ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, Chrysalis.id(name));
         Block block = function.apply(properties.setId(resourceKey));
-        registerItem(name, itemProperties -> new BlockItem(block, itemProperties), new Item.Properties());
+        registerItem(name, blockItemProperties -> new BlockItem(block, blockItemProperties), itemProperties);
         return Registry.register(BuiltInRegistries.BLOCK, resourceKey, block);
     }
 

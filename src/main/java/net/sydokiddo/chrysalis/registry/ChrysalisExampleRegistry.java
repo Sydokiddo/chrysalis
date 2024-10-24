@@ -74,19 +74,19 @@ public class ChrysalisExampleRegistry {
     // region Example Block Registries
 
     public static final Block EXAMPLE_BUTTON = ChrysalisDebugItems.registerBlock("example_button",
-        properties -> new ButtonBlock(BlockSetType.STONE, 20, properties), Blocks.buttonProperties());
+        properties -> new ButtonBlock(BlockSetType.STONE, 20, properties), Blocks.buttonProperties(), new Item.Properties());
 
     public static final Block EXAMPLE_STONE_PRESSURE_PLATE = ChrysalisDebugItems.registerBlock("example_stone_pressure_plate",
-        properties -> new PressurePlateBlock(BlockSetType.STONE, properties), RegistryHelper.stonePressurePlateProperties(MapColor.STONE));
+        properties -> new PressurePlateBlock(BlockSetType.STONE, properties), RegistryHelper.stonePressurePlateProperties(MapColor.STONE), new Item.Properties());
 
     public static final Block EXAMPLE_WOODEN_PRESSURE_PLATE = ChrysalisDebugItems.registerBlock("example_wooden_pressure_plate",
-        properties -> new PressurePlateBlock(BlockSetType.OAK, properties), RegistryHelper.woodenPressurePlateProperties(Blocks.OAK_PLANKS.defaultMapColor()));
+        properties -> new PressurePlateBlock(BlockSetType.OAK, properties), RegistryHelper.woodenPressurePlateProperties(Blocks.OAK_PLANKS.defaultMapColor()), new Item.Properties());
 
     public static final Block EXAMPLE_LEAVES = ChrysalisDebugItems.registerBlock("example_leaves",
-        LeavesBlock::new, RegistryHelper.leavesProperties(MapColor.PLANT, SoundType.AZALEA_LEAVES, Blocks::ocelotOrParrot));
+        LeavesBlock::new, RegistryHelper.leavesProperties(MapColor.PLANT, SoundType.AZALEA_LEAVES, Blocks::ocelotOrParrot), new Item.Properties());
 
     public static final Block EXAMPLE_LOG = ChrysalisDebugItems.registerBlock("example_log",
-        RotatedPillarBlock::new, Blocks.logProperties(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD));
+        RotatedPillarBlock::new, Blocks.logProperties(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD), new Item.Properties());
 
     // endregion
 
@@ -95,7 +95,7 @@ public class ChrysalisExampleRegistry {
     public static final ResourceLocation EXAMPLE_GAMEPLAY_LOOT_TABLE = RegistryHelper.registerCustomLootTable(Chrysalis.id("gameplay/example_gameplay_loot_table"));
 
     public static void registerExampleMusic() {
-        RegistryHelper.registerStructureMusic("minecraft:mineshaft", SoundEvents.MUSIC_CREDITS, 20, 600, false);
+        RegistryHelper.registerStructureMusic("minecraft:village_plains", SoundEvents.MUSIC_CREDITS, 20, 600, false);
     }
 
     public static void registerExampleDispenserMethods() {
