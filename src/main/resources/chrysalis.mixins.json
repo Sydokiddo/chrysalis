@@ -62,11 +62,12 @@
   ],
   "client": [
     "misc.ClientLevelMixin",
-    "misc.EntityRenderLayerMixin",
-    "misc.EntityRenderLayerMixin$ElytraLayerMixin",
+    "misc.EntityRendererMixin",
+    "misc.EntityRendererMixin$HumanoidArmorLayerMixin",
+    "misc.EntityRendererMixin$LivingEntityRendererMixin",
+    "misc.EntityRendererMixin$WingsLayerMixin",
     "misc.GameRendererMixin",
     "misc.GuiMixin",
-    "misc.HumanoidMobRendererMixin",
     "misc.MinecraftMixin",
     "misc.ScreenshotMainMixin",
     "misc.ScreenshotRecorderMixin",
@@ -75,5 +76,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  }
 }
