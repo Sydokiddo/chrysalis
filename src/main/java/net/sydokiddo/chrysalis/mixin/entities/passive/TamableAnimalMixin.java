@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis.mixin.entities.passive;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Wolf;
@@ -19,9 +19,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({Wolf.class, Cat.class, Parrot.class})
-public abstract class TamableAnimalMixin extends Animal {
+public abstract class TamableAnimalMixin extends TamableAnimal {
 
-    private TamableAnimalMixin(EntityType<? extends Animal> entityType, Level level) {
+    private TamableAnimalMixin(EntityType<? extends TamableAnimal> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -36,6 +36,7 @@ public abstract class TamableAnimalMixin extends Animal {
         Item item = itemStack.getItem();
 
         if (this.level().isClientSide() && item instanceof TameMobItem || item instanceof RideMobItem) {
+            if (item instanceof TameMobItem && this.isTame()) return;
             if (item instanceof RideMobItem rideMobItem) rideMobItem.interactLivingEntity(itemStack, player, this, interactionHand);
             cir.setReturnValue(InteractionResult.SUCCESS.heldItemTransformedTo(itemStack));
         }
