@@ -36,9 +36,9 @@ public class HealItem extends DebugUtilityItem {
     @Override
     public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
 
-        if (player instanceof ServerPlayer serverPlayer && serverPlayer.getHealth() < serverPlayer.getMaxHealth()) {
+        if (player.getHealth() < player.getMaxHealth()) {
 
-            if (!level.isClientSide()) {
+            if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.HEAL_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
@@ -46,7 +46,7 @@ public class HealItem extends DebugUtilityItem {
                 serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.heal_message", serverPlayer.getName().getString()));
             }
 
-            return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
+            return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
         return super.use(level, player, interactionHand);

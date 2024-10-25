@@ -36,18 +36,22 @@ public class RideMobItem extends DebugUtilityItem {
     @Override
     public @NotNull InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
-        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && !serverPlayer.isShiftKeyDown()) {
+        if (!player.isShiftKeyDown()) {
 
-            serverPlayer.setXRot(livingEntity.getXRot());
-            serverPlayer.setYRot(livingEntity.getYRot());
-            serverPlayer.startRiding(livingEntity);
+            if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide()) {
 
-            serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            serverPlayer.playNotifySound(ChrysalisSoundEvents.RIDE_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+                serverPlayer.setXRot(livingEntity.getXRot());
+                serverPlayer.setYRot(livingEntity.getYRot());
+                serverPlayer.startRiding(livingEntity);
 
-            serverPlayer.sendSystemMessage(Component.translatable("commands.ride.mount.success", serverPlayer.getName().getString(), livingEntity.getName().getString()));
-            return InteractionResult.SUCCESS_SERVER;
+                serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+                serverPlayer.playNotifySound(ChrysalisSoundEvents.RIDE_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+
+                serverPlayer.sendSystemMessage(Component.translatable("commands.ride.mount.success", serverPlayer.getName().getString(), livingEntity.getName().getString()));
+            }
+
+            return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
         return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);

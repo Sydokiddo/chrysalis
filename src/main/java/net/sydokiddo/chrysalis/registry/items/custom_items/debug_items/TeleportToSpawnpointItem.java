@@ -57,6 +57,6 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
             }
         }
 
-        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(itemStack);
+        return InteractionResult.SUCCESS.heldItemTransformedTo(itemStack);
     }
 }

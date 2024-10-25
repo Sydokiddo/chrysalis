@@ -30,11 +30,11 @@ public class HorseMixin extends AbstractHorse {
     @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/horse/Horse;makeMad()V"), cancellable = true)
     private void chrysalis$automaticallyTameHorse(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
 
-        if (this.level().isClientSide() || this.isTamed()) return;
+        if (this.isTamed()) return;
 
         ItemStack itemStack = player.getItemInHand(interactionHand);
         Item item = itemStack.getItem();
-        InteractionResult success = InteractionResult.SUCCESS_SERVER;
+        InteractionResult success = InteractionResult.SUCCESS.heldItemTransformedTo(itemStack);
 
         if (item instanceof RideMobItem rideMobItem) {
             rideMobItem.interactLivingEntity(itemStack, player, this, interactionHand);
@@ -64,11 +64,11 @@ public class HorseMixin extends AbstractHorse {
         @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/horse/AbstractChestedHorse;makeMad()V"), cancellable = true)
         private void chrysalis$automaticallyTameChestedHorse(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
 
-            if (this.level().isClientSide() || this.isTamed()) return;
+            if (this.isTamed()) return;
 
             ItemStack itemStack = player.getItemInHand(interactionHand);
             Item item = itemStack.getItem();
-            InteractionResult success = InteractionResult.SUCCESS_SERVER;
+            InteractionResult success = InteractionResult.SUCCESS.heldItemTransformedTo(itemStack);
 
             if (item instanceof RideMobItem rideMobItem) {
                 rideMobItem.interactLivingEntity(itemStack, player, this, interactionHand);
@@ -99,11 +99,11 @@ public class HorseMixin extends AbstractHorse {
         @Inject(at = @At("HEAD"), method = "mobInteract", cancellable = true)
         private void chrysalis$automaticallyTameUndeadHorse(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
 
-            if (this.level().isClientSide() || this.isTamed()) return;
+            if (this.isTamed()) return;
 
             ItemStack itemStack = player.getItemInHand(interactionHand);
             Item item = itemStack.getItem();
-            InteractionResult success = InteractionResult.SUCCESS_SERVER;
+            InteractionResult success = InteractionResult.SUCCESS.heldItemTransformedTo(itemStack);
 
             if (item instanceof RideMobItem rideMobItem) {
                 rideMobItem.interactLivingEntity(itemStack, player, this, interactionHand);

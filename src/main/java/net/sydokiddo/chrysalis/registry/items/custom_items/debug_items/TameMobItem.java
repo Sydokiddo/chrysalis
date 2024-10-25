@@ -39,13 +39,15 @@ public class TameMobItem extends DebugUtilityItem {
     @Override
     public @NotNull InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
-        if (!livingEntity.level().isClientSide() && livingEntity instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame()) {
+        if (livingEntity instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame()) {
 
-            tamableAnimal.tame(player);
-            playTameEvents(player, tamableAnimal);
-            player.awardStat(Stats.ITEM_USED.get(this));
+            if (!livingEntity.level().isClientSide()) {
+                tamableAnimal.tame(player);
+                playTameEvents(player, tamableAnimal);
+                player.awardStat(Stats.ITEM_USED.get(this));
+            }
 
-            return InteractionResult.SUCCESS_SERVER;
+            return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
         return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);

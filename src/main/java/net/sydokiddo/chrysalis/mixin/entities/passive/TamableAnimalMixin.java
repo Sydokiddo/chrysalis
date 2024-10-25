@@ -37,7 +37,7 @@ public abstract class TamableAnimalMixin extends Animal {
 
         if (this.level().isClientSide() && item instanceof TameMobItem || item instanceof RideMobItem) {
             if (item instanceof RideMobItem rideMobItem) rideMobItem.interactLivingEntity(itemStack, player, this, interactionHand);
-            cir.setReturnValue(InteractionResult.SUCCESS_SERVER);
+            cir.setReturnValue(InteractionResult.SUCCESS.heldItemTransformedTo(itemStack));
         }
     }
 }

@@ -60,6 +60,6 @@ public class TeleportWandItem extends DebugUtilityItem {
             level.broadcastEntityEvent(serverPlayer, (byte) 46); // Teleporting Particles
         }
 
-        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
+        return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
     }
 }

@@ -36,9 +36,9 @@ public class FillHungerItem extends DebugUtilityItem {
     @Override
     public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
 
-        if (player instanceof ServerPlayer serverPlayer && serverPlayer.getFoodData().needsFood()) {
+        if (player.getFoodData().needsFood()) {
 
-            if (!level.isClientSide()) {
+            if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.FILL_HUNGER_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
@@ -47,7 +47,7 @@ public class FillHungerItem extends DebugUtilityItem {
                 serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.fill_hunger_message", serverPlayer.getName().getString()));
             }
 
-            return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
+            return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
         return super.use(level, player, interactionHand);

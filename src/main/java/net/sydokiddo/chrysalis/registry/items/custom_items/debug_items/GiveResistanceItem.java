@@ -51,6 +51,6 @@ public class GiveResistanceItem extends DebugUtilityItem {
             serverPlayer.sendSystemMessage(Component.translatable("commands.effect.give.success.single", resistance.value().getDisplayName(), serverPlayer.getName().getString()));
         }
 
-        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
+        return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
     }
 }
