@@ -23,6 +23,7 @@ import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
 import net.sydokiddo.chrysalis.misc.util.splash_texts.SplashTextLoader;
 import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisParticles;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
@@ -73,6 +74,7 @@ public class ChrysalisClient implements ClientModInitializer {
 
         // region Miscellaneous
 
+        ChrysalisParticles.registerParticles();
         EntityRendererRegistry.register(ChrysalisEntities.SEAT, SeatRenderer::new);
 
         // endregion
