@@ -26,6 +26,7 @@ import net.sydokiddo.chrysalis.misc.util.commands.*;
 import net.sydokiddo.chrysalis.misc.util.entities.ChrysalisMemoryModules;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureMusic;
+import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
 import java.awt.*;
@@ -127,12 +128,13 @@ public class ChrysalisRegistry {
 
         // region Base Registries
 
-        ChrysalisDamageSources.registerDamageSources();
-        ChrysalisCriteriaTriggers.registerCriteriaTriggers();
-        ChrysalisSoundEvents.registerSounds();
-        ChrysalisSoundEvents.registerStructureMusic();
         ChrysalisDebugItems.registerDebugItems();
         ChrysalisCreativeModeTabs.registerCreativeTabs();
+        ChrysalisSoundEvents.registerSounds();
+        ChrysalisSoundEvents.registerStructureMusic();
+        ChrysalisDamageSources.registerDamageSources();
+        ChrysalisCriteriaTriggers.registerCriteriaTriggers();
+        ChrysalisEntities.registerEntities();
         ChrysalisMemoryModules.MEMORY_MODULES.register();
         ChrysalisAttributes.registerAttributes();
 

@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
@@ -15,11 +16,13 @@ import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.Music;
+import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
 import net.sydokiddo.chrysalis.misc.util.splash_texts.SplashTextLoader;
+import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
@@ -65,6 +68,12 @@ public class ChrysalisClient implements ClientModInitializer {
                 client.getNarrator().sayNow(message);
             }
         });
+
+        // endregion
+
+        // region Miscellaneous
+
+        EntityRendererRegistry.register(ChrysalisEntities.SEAT, SeatRenderer::new);
 
         // endregion
     }

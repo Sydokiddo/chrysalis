@@ -9,6 +9,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
@@ -17,6 +18,7 @@ import net.sydokiddo.chrysalis.misc.util.dispenser.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.dispenser.ShootProjectileDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.misc.util.helpers.RegistryHelper;
+import net.sydokiddo.chrysalis.registry.blocks.custom_blocks.ExampleSeatBlock;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
@@ -87,6 +89,9 @@ public class ChrysalisExampleRegistry {
 
     public static final Block EXAMPLE_LOG = ChrysalisDebugItems.registerBlock("example_log",
         RotatedPillarBlock::new, Blocks.logProperties(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD), new Item.Properties());
+
+    public static final Block EXAMPLE_SITTABLE_BLOCK = ChrysalisDebugItems.registerBlock("example_sittable_block",
+        ExampleSeatBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), new Item.Properties());
 
     // endregion
 

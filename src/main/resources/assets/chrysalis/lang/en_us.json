@@ -36,6 +36,8 @@
 
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
+  "entity.chrysalis.seat": "Seat",
+
   "attribute.chrysalis.generic.reduced_detection_range": "Reduced Detection Range",
 
   "gui.chrysalis.heal_message": "Successfully healed %s",
