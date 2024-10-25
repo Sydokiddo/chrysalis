@@ -20,10 +20,7 @@ import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.misc.util.helpers.RegistryHelper;
 import net.sydokiddo.chrysalis.registry.blocks.custom_blocks.ExampleSeatBlock;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
-import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
-import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
-import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
-import net.sydokiddo.chrysalis.registry.items.custom_items.MobInSolidBucketItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.*;
 
 @SuppressWarnings("unused")
 public class ChrysalisExampleRegistry {
@@ -70,6 +67,13 @@ public class ChrysalisExampleRegistry {
 
     public static final Item EXAMPLE_MOB_SOLID_BUCKET = ChrysalisDebugItems.registerItem("example_mob_solid_bucket",
         properties -> new MobInSolidBucketItem(EntityType.SNOW_GOLEM, Blocks.POWDER_SNOW, SoundEvents.BUCKET_EMPTY_POWDER_SNOW, properties), RegistryHelper.mobContainerProperties(Items.BUCKET, Rarity.COMMON));
+
+    public static final Item EXAMPLE_ARMOR_TRIM_SMITHING_TEMPLATE = ChrysalisDebugItems.registerItem("example_armor_trim_smithing_template",
+        SmithingTemplateItem::createArmorTrimTemplate, new Item.Properties().rarity(Rarity.UNCOMMON));
+
+    public static final Item EXAMPLE_UPGRADE_SMITHING_TEMPLATE = ChrysalisDebugItems.registerItem("example_upgrade_smithing_template",
+        properties -> ModSmithingTemplateItem.createUpgradeTemplate("minecraft", "netherite_upgrade", ModSmithingTemplateItem.EMPTY_SLOT_INGOT, properties),
+        new Item.Properties().rarity(Rarity.UNCOMMON));
 
     // endregion
 

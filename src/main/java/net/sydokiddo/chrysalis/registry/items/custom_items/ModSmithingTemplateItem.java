@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -18,10 +19,27 @@ public class ModSmithingTemplateItem extends SmithingTemplateItem {
      * Class for assisting with the creation of custom Smithing Template items.
      **/
 
+    public static SmithingTemplateItem createUpgradeTemplate(String modID, String smithingTemplateName, ResourceLocation upgradeIcon, Item.Properties properties) {
+        return new SmithingTemplateItem(
+            createDescription(modID, smithingTemplateName + ".applies_to", DESCRIPTION_FORMAT),
+            createDescription(modID, smithingTemplateName + ".ingredients", DESCRIPTION_FORMAT),
+            createDescription(modID, smithingTemplateName + ".base_slot_description", TITLE_FORMAT),
+            createDescription(modID, smithingTemplateName + ".additions_slot_description", TITLE_FORMAT),
+            List.of(EMPTY_SLOT_HELMET, EMPTY_SLOT_SWORD, EMPTY_SLOT_CHESTPLATE, EMPTY_SLOT_PICKAXE,
+            EMPTY_SLOT_LEGGINGS, EMPTY_SLOT_AXE, EMPTY_SLOT_BOOTS, EMPTY_SLOT_HOE, EMPTY_SLOT_SHOVEL),
+            List.of(upgradeIcon),
+            properties
+        );
+    }
+
     public static final ChatFormatting
         TITLE_FORMAT = ChatFormatting.GRAY,
         DESCRIPTION_FORMAT = ChatFormatting.BLUE
     ;
+
+    public static Component createDescription(String modID, String name, ChatFormatting chatFormatting) {
+        return Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(modID, "smithing_template." + name))).withStyle(chatFormatting);
+    }
 
     public static final ResourceLocation
         EMPTY_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet"),
