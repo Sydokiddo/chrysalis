@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.registry.status_effects.types;
+package net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects;
 
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.effect.MobEffect;

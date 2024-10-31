@@ -7,7 +7,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisParticles;
-import net.sydokiddo.chrysalis.registry.status_effects.types.GenericStatusEffect;
+import net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects.GenericStatusEffect;
 import java.awt.*;
 
 public class ChrysalisEffects {
