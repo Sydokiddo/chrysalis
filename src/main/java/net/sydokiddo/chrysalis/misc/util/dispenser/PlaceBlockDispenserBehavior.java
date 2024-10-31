@@ -15,7 +15,6 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.helpers.BlockHelper;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("unused")
 public class PlaceBlockDispenserBehavior implements DispenseItemBehavior {
 
     /**
