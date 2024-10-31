@@ -1,11 +1,14 @@
 package net.sydokiddo.chrysalis.misc.util.helpers;
 
+import com.mojang.blaze3d.shaders.FogShape;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
+import org.joml.Vector4f;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -43,5 +46,13 @@ public class EventHelper {
             if (serverPlayer == ignoredEntity) return;
             resetCameraShake(serverPlayer);
         }
+    }
+
+    /**
+     * Assists with creating a custom fog effect.
+     **/
+
+    public static FogParameters createCustomFog(float start, float end, FogShape fogShape, Vector4f vector4f) {
+        return new FogParameters(start, end, fogShape, vector4f.x(), vector4f.y(), vector4f.z(), vector4f.w());
     }
 }

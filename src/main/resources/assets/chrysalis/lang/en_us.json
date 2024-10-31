@@ -38,6 +38,9 @@
 
   "entity.chrysalis.seat": "Seat",
 
+  "effect.chrysalis.radiance": "Radiance",
+  "effect.chrysalis.radiance.desc": "Shrouds the player's screen in a blinding light.",
+
   "attribute.chrysalis.generic.reduced_detection_range": "Reduced Detection Range",
 
   "gui.chrysalis.heal_message": "Successfully healed %s",

@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.particle.FlameParticle;
+import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
@@ -16,7 +17,8 @@ public class ChrysalisParticles {
     public static final net.sydokiddo.chrysalis.misc.util.CoreRegistry<ParticleType<?>> PARTICLES = CoreRegistry.create(Registries.PARTICLE_TYPE, Chrysalis.MOD_ID);
 
     public static final SimpleParticleType
-        MEMORY_FLAME = register("memory_flame", false)
+        MEMORY_FLAME = register("memory_flame", false),
+        RADIANCE = register("radiance", false)
     ;
 
     @SuppressWarnings("all")
@@ -28,5 +30,6 @@ public class ChrysalisParticles {
     public static void registerParticles() {
         ParticleFactoryRegistry registry = ParticleFactoryRegistry.getInstance();
         registry.register(MEMORY_FLAME, FlameParticle.Provider::new);
+        registry.register(RADIANCE, SpellParticle.Provider::new);
     }
 }

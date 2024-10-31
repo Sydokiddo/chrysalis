@@ -12,6 +12,8 @@
     "minecraft:sea_pickle",
     "minecraft:cake",
     "#minecraft:candle_cakes",
-    "minecraft:tnt"
+    "minecraft:tnt",
+    {"id": "minecraft:resin_clump", "required": false},
+    {"id": "minecraft:resin_block", "required": false}
   ]
 }

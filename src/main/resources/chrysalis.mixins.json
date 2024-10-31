@@ -66,6 +66,7 @@
     "misc.EntityRendererMixin$HumanoidArmorLayerMixin",
     "misc.EntityRendererMixin$LivingEntityRendererMixin",
     "misc.EntityRendererMixin$WingsLayerMixin",
+    "misc.FogRendererMixin",
     "misc.GameRendererMixin",
     "misc.GuiMixin",
     "misc.MinecraftMixin",

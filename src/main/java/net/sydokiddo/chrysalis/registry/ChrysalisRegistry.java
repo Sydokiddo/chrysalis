@@ -29,6 +29,7 @@ import net.sydokiddo.chrysalis.misc.util.music.StructureMusic;
 import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
+import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -137,6 +138,7 @@ public class ChrysalisRegistry {
         ChrysalisEntities.registerEntities();
         ChrysalisMemoryModules.MEMORY_MODULES.register();
         ChrysalisAttributes.registerAttributes();
+        ChrysalisEffects.registerStatusEffects();
 
         PayloadTypeRegistry.playS2C().register(CameraShakePayload.TYPE, CameraShakePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC);
