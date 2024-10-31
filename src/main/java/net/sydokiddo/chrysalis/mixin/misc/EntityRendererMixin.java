@@ -41,7 +41,7 @@ public abstract class EntityRendererMixin {
     @Inject(method = "getBlockLightLevel", at = @At("HEAD"), cancellable = true)
     private void chrysalis$selfRadianceGlowing(Entity entity, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
         Holder<MobEffect> radianceEffect = ChrysalisEffects.RADIANCE;
-        if (entity instanceof Player player && player == Minecraft.getInstance().player && player.hasEffect(radianceEffect)) cir.setReturnValue(Math.min(Objects.requireNonNull(player.getEffect(radianceEffect)).getDuration(), 15));
+        if (entity instanceof Player player && player == Minecraft.getInstance().player && player.hasEffect(radianceEffect) && Minecraft.getInstance().options.getCameraType().isFirstPerson()) cir.setReturnValue(Math.min(Objects.requireNonNull(player.getEffect(radianceEffect)).getDuration(), 15));
     }
 
     @SuppressWarnings("unused")
