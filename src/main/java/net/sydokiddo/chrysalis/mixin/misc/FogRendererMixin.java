@@ -16,6 +16,7 @@ import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,6 +27,8 @@ import java.util.Objects;
 @Mixin(FogRenderer.class)
 public class FogRendererMixin {
 
+    @Shadow private static long biomeChangedTime;
+
     @Inject(method = "setupFog", at = @At(value = "RETURN"), cancellable = true)
     private static void chrysalis$applyCustomFog(Camera camera, FogRenderer.FogMode fogMode, Vector4f vector4f, float viewDistance, boolean thickFog, float tickDelta, CallbackInfoReturnable<FogParameters> cir) {
         if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) cir.setReturnValue(EventHelper.createCustomFog(0.25F, 1.0F, FogShape.SPHERE, vector4f));
@@ -34,8 +37,11 @@ public class FogRendererMixin {
     @Inject(method = "computeFogColor", at = @At(value = "RETURN"), cancellable = true)
     private static void chrysalis$applyCustomFogColor(Camera camera, float tickDelta, ClientLevel clientLevel, int int1, float float1, CallbackInfoReturnable<Vector4f> cir) {
         if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) {
+
             MobEffectInstance radianceEffect = Objects.requireNonNull(livingEntity.getEffect(getRadianceEffect()));
             float intensity = radianceEffect.isInfiniteDuration() ? 1.0F : Mth.clamp(radianceEffect.getDuration() / 20.0F, 0.0F, 1.0F);
+
+            biomeChangedTime = -1L;
             cir.setReturnValue(new Vector4f(intensity, intensity, intensity, intensity));
         }
     }
