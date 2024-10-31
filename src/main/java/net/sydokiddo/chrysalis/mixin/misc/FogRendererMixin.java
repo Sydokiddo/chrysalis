@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
@@ -33,7 +34,8 @@ public class FogRendererMixin {
     @Inject(method = "computeFogColor", at = @At(value = "RETURN"), cancellable = true)
     private static void chrysalis$applyCustomFogColor(Camera camera, float tickDelta, ClientLevel clientLevel, int int1, float float1, CallbackInfoReturnable<Vector4f> cir) {
         if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) {
-            float intensity = Math.min(Mth.clamp(Objects.requireNonNull(livingEntity.getEffect(getRadianceEffect())).getDuration() / 20.0F, 0.0F, 1.0F), 1.0F);
+            MobEffectInstance radianceEffect = Objects.requireNonNull(livingEntity.getEffect(getRadianceEffect()));
+            float intensity = radianceEffect.isInfiniteDuration() ? 1.0F : Mth.clamp(radianceEffect.getDuration() / 20.0F, 0.0F, 1.0F);
             cir.setReturnValue(new Vector4f(intensity, intensity, intensity, intensity));
         }
     }
