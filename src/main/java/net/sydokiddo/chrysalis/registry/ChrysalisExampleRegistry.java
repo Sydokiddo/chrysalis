@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.registry;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
@@ -21,6 +22,7 @@ import net.sydokiddo.chrysalis.misc.util.helpers.RegistryHelper;
 import net.sydokiddo.chrysalis.registry.blocks.custom_blocks.ExampleSeatBlock;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.items.custom_items.*;
+import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
 
 @SuppressWarnings("unused")
 public class ChrysalisExampleRegistry {
@@ -114,6 +116,10 @@ public class ChrysalisExampleRegistry {
 
     public static void sendExampleCameraShake(Entity entity) {
         EventHelper.sendCameraShakeToNearbyPlayers(entity, null, 10.0F, 20, 5, 5);
+    }
+
+    public static void sendExampleStatusEffect(Entity entity) {
+        EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0F, new MobEffectInstance(ChrysalisEffects.RADIANCE, 40));
     }
 
     // endregion

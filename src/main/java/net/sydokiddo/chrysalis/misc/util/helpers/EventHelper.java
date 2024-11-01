@@ -4,6 +4,7 @@ import com.mojang.blaze3d.shaders.FogShape;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
@@ -45,6 +46,17 @@ public class EventHelper {
         for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
             resetCameraShake(serverPlayer);
+        }
+    }
+
+    /**
+     * Sends a specific status effect to nearby players.
+     **/
+
+    public static void sendStatusEffectToNearbyPlayers(Entity entity, Entity ignoredEntity, float range, MobEffectInstance mobEffectInstance) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
+            if (serverPlayer == ignoredEntity) return;
+            serverPlayer.addEffect(mobEffectInstance);
         }
     }
 
