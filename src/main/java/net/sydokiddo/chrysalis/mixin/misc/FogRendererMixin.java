@@ -31,7 +31,7 @@ public class FogRendererMixin {
 
     @Inject(method = "setupFog", at = @At(value = "RETURN"), cancellable = true)
     private static void chrysalis$applyCustomFog(Camera camera, FogRenderer.FogMode fogMode, Vector4f vector4f, float viewDistance, boolean thickFog, float tickDelta, CallbackInfoReturnable<FogParameters> cir) {
-        if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) cir.setReturnValue(EventHelper.createCustomFog(0.25F, Mth.lerp(Objects.requireNonNull(livingEntity.getEffect(getRadianceEffect())).getBlendFactor(livingEntity, tickDelta) * 2.0F, viewDistance, 1.0F), FogShape.SPHERE, vector4f));
+        if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) cir.setReturnValue(EventHelper.createCustomFog(0.25F, 1.0F, FogShape.SPHERE, vector4f));
     }
 
     @Inject(method = "computeFogColor", at = @At(value = "RETURN"), cancellable = true)
