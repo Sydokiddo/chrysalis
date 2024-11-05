@@ -31,7 +31,7 @@ public class FogRendererMixin {
 
     @Inject(method = "setupFog", at = @At(value = "RETURN"), cancellable = true)
     private static void chrysalis$applyCustomFog(Camera camera, FogRenderer.FogMode fogMode, Vector4f vector4f, float viewDistance, boolean thickFog, float tickDelta, CallbackInfoReturnable<FogParameters> cir) {
-        if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) cir.setReturnValue(EventHelper.createCustomFog(0.25F, 1.0F, FogShape.SPHERE, vector4f));
+        if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) cir.setReturnValue(EventHelper.createCustomFog(0.25F, Mth.lerp(Objects.requireNonNull(livingEntity.getEffect(getRadianceEffect())).getBlendFactor(livingEntity, tickDelta) * 2.0F, viewDistance, 1.0F), FogShape.SPHERE, vector4f));
     }
 
     @Inject(method = "computeFogColor", at = @At(value = "RETURN"), cancellable = true)
@@ -39,7 +39,7 @@ public class FogRendererMixin {
         if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) {
 
             MobEffectInstance radianceEffect = Objects.requireNonNull(livingEntity.getEffect(getRadianceEffect()));
-            float intensity = radianceEffect.isInfiniteDuration() ? 1.0F : Mth.clamp(radianceEffect.getDuration() / 20.0F, 0.0F, 1.0F);
+            float intensity = Mth.lerp(radianceEffect.getBlendFactor(livingEntity, tickDelta), 0.0F, radianceEffect.isInfiniteDuration() ? 1.0F : Mth.clamp(radianceEffect.getDuration() / 20.0F, 0.0F, 1.0F));
 
             biomeChangedTime = -1L;
             cir.setReturnValue(new Vector4f(intensity, intensity, intensity, intensity));

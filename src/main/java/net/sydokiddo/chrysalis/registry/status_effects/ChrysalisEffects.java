@@ -12,7 +12,8 @@ import java.awt.*;
 
 public class ChrysalisEffects {
 
-    public static final Holder<MobEffect> RADIANCE = registerStatusEffect("radiance", new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#FFFFB2").getRGB(), ChrysalisParticles.RADIANCE));
+    public static final Holder<MobEffect> RADIANCE = registerStatusEffect("radiance",
+    new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#FFFFB2").getRGB(), ChrysalisParticles.RADIANCE).setBlendDuration(5));
 
     public static Holder<MobEffect> registerStatusEffect(String name, MobEffect statusEffect) {
         return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Chrysalis.id(name), statusEffect);
