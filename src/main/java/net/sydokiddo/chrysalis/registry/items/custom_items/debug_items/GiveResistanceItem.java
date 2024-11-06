@@ -1,6 +1,8 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -15,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
@@ -44,8 +47,9 @@ public class GiveResistanceItem extends DebugUtilityItem {
 
             serverPlayer.playNotifySound(ChrysalisSoundEvents.GIVE_RESISTANCE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
             serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+            this.addParticlesAroundPlayer(serverPlayer, new BlockParticleOption(ParticleTypes.BLOCK, Blocks.IRON_BLOCK.defaultBlockState()));
 
+            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
             Holder<MobEffect> resistance = MobEffects.DAMAGE_RESISTANCE;
             serverPlayer.addEffect(new MobEffectInstance(resistance, -1, 255, false, false, true));
             serverPlayer.sendSystemMessage(Component.translatable("commands.effect.give.success.single", resistance.value().getDisplayName(), serverPlayer.getName().getString()));

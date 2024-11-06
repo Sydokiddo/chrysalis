@@ -48,7 +48,7 @@ public class TeleportWandItem extends DebugUtilityItem {
             HitResult hitResult = ProjectileUtil.getHitResultOnViewVector(player, entity -> !entity.isSpectator() && entity.isPickable(), Minecraft.getInstance().gameRenderer.getRenderDistance() * 4.0F);
             Vec3 teleportToPos = new Vec3(hitResult.getLocation().x(), hitResult.getLocation().y(), hitResult.getLocation().z());
 
-            serverPlayer.teleportTo(teleportToPos.x(), teleportToPos.y(), teleportToPos.z());
+            serverPlayer.teleportTo(teleportToPos.x(), teleportToPos.y() + 1, teleportToPos.z());
             if (serverPlayer.isInWall()) serverPlayer.moveTo(Vec3.atCenterOf(serverPlayer.getOnPos().above()));
 
             if (serverPlayer.isPassenger()) serverPlayer.stopRiding();

@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -39,8 +40,11 @@ public class HealItem extends DebugUtilityItem {
         if (player.getHealth() < player.getMaxHealth()) {
 
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.HEAL_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+                this.addParticlesAroundPlayer(serverPlayer, ParticleTypes.HEART);
+
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.setHealth(serverPlayer.getMaxHealth());
                 serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.heal_message", serverPlayer.getName().getString()));

@@ -1,5 +1,7 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -9,6 +11,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -39,8 +42,11 @@ public class FillHungerItem extends DebugUtilityItem {
         if (player.getFoodData().needsFood()) {
 
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.FILL_HUNGER_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+                this.addParticlesAroundPlayer(serverPlayer, new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.COOKED_BEEF)));
+
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.getFoodData().setFoodLevel(20);
                 serverPlayer.getFoodData().setSaturation(5.0F);

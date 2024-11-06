@@ -63,7 +63,7 @@ public class TameMobItem extends DebugUtilityItem {
         if (tamedMob.level() instanceof ServerLevel serverLevel) {
             for (int particleAmount = 0; particleAmount < 7; ++particleAmount) {
                 double random = tamedMob.level().getRandom().nextGaussian() * 0.02D;
-                serverLevel.sendParticles(ParticleTypes.HEART, tamedMob.getRandomX(1.0D), tamedMob.getRandomY() + 0.5D, tamedMob.getRandomZ(1.0D), 1, 0.0, random, random, random);
+                serverLevel.sendParticles(ParticleTypes.HEART, tamedMob.getRandomX(1.0D), tamedMob.getRandomY() + 0.5D, tamedMob.getRandomZ(1.0D), 1, 0.0D, random, random, random);
             }
         }
 
