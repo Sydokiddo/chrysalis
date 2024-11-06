@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.client.particles.options.ColoredDustPlumeParticleOptions;
 import net.sydokiddo.chrysalis.misc.util.dispenser.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.dispenser.ShootProjectileDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
@@ -121,6 +122,8 @@ public class ChrysalisExampleRegistry {
     public static void sendExampleStatusEffect(Entity entity) {
         EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0F, new MobEffectInstance(ChrysalisEffects.RADIANCE, 40));
     }
+
+    public static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
 
     // endregion
 }
