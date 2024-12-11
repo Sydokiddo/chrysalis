@@ -271,6 +271,7 @@
   "tag.entity_type.chrysalis.cannot_ride_boats": "Cannot Ride Boats",
   "tag.entity_type.chrysalis.ender": "Ender",
   "tag.entity_type.chrysalis.golem": "Golem",
+  "tag.entity_type.chrysalis.has_damage_cap": "Has Damage Cap",
   "tag.entity_type.chrysalis.piglin": "Piglin",
   "tag.entity_type.chrysalis.piglin_avoided": "Piglin Avoided",
   "tag.entity_type.chrysalis.slime": "Slime",

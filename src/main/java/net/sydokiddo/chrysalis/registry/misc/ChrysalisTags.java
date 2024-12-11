@@ -162,6 +162,7 @@ public class ChrysalisTags {
 
         CAN_SPAWN_ON_LEAVES = registerEntityTag("can_spawn_on_leaves"),
         CANNOT_RIDE_BOATS = registerEntityTag("cannot_ride_boats"),
+        HAS_DAMAGE_CAP = registerEntityTag("has_damage_cap"),
         WARDEN_IGNORED = registerEntityTag("warden_ignored"),
         STATISTICS_MENU_IGNORED = registerEntityTag("statistics_menu_ignored")
 
