@@ -140,7 +140,6 @@
   "gui.chrysalis.weather.snowing": "Snowing",
 
   "gui.endless_encore.weather.meteor_shower": "Meteor Shower",
-  "gui.endless_encore.weather.corruption_storm": "Corruption Storm",
   "gui.endless_encore.weather.tide_of_memory": "Tide of Memory",
 
   "dimension.minecraft.overworld": "Overworld",
@@ -275,8 +274,10 @@
   "tag.entity_type.chrysalis.piglin": "Piglin",
   "tag.entity_type.chrysalis.piglin_avoided": "Piglin Avoided",
   "tag.entity_type.chrysalis.slime": "Slime",
+  "tag.entity_type.chrysalis.statistics_menu_ignored": "Statistics Menu Ignored",
   "tag.entity_type.chrysalis.vehicle": "Vehicle",
   "tag.entity_type.chrysalis.villager": "Villager",
+  "tag.entity_type.chrysalis.warden_ignored": "Warden Ignored",
 
   "tag.item.chrysalis.amethyst_blocks": "Amethyst Blocks",
   "tag.item.chrysalis.banner_patterns": "Banner Patterns",

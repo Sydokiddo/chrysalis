@@ -1,7 +1,12 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
+import com.mojang.authlib.GameProfile;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stat;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -70,6 +75,26 @@ public abstract class PlayerMixin extends LivingEntity {
                     droppedItem.readAdditionalSaveData(compoundTag);
                 }
             }));
+        }
+    }
+
+    @Inject(method = "killedEntity", at = @At(value = "HEAD"), cancellable = true)
+    private void chrysalis$hideEntityKilledStat(ServerLevel serverLevel, LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
+        if (livingEntity != null && livingEntity.getType().is(ChrysalisTags.STATISTICS_MENU_IGNORED)) cir.setReturnValue(true);
+    }
+
+    @SuppressWarnings("unused")
+    @Mixin(ServerPlayer.class)
+    public abstract static class ServerPlayerMixin extends Player {
+
+        private ServerPlayerMixin(Level level, BlockPos blockPos, float rotation, GameProfile gameProfile) {
+            super(level, blockPos, rotation, gameProfile);
+        }
+
+        @Redirect(method = "die", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;awardStat(Lnet/minecraft/stats/Stat;)V", ordinal = 0))
+        private void chrysalis$hideEntityKilledByStat(ServerPlayer serverPlayer, Stat<?> stat) {
+            LivingEntity killCredit = this.getKillCredit();
+            if (killCredit != null && !killCredit.getType().is(ChrysalisTags.STATISTICS_MENU_IGNORED)) this.awardStat(Stats.ENTITY_KILLED_BY.get(killCredit.getType()));
         }
     }
 }

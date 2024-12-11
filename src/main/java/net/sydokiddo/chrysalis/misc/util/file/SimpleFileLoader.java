@@ -27,7 +27,7 @@ public interface SimpleFileLoader extends SimpleResourceReloadListener<Void> {
         private final FileReader<JsonElement> JSON;
         private final FileReader<Stream<String>> RAW;
 
-        protected DataFileLoader() {
+        public DataFileLoader() {
             JSON = new FileReader<>(JsonParser::parseReader);
             RAW = new FileReader<>(BufferedReader::lines);
         }
@@ -40,7 +40,7 @@ public interface SimpleFileLoader extends SimpleResourceReloadListener<Void> {
             return this.RAW;
         }
 
-        protected void load(ResourceManager resourceManager) {
+        public void load(ResourceManager resourceManager) {
             this.JSON.load(resourceManager);
             this.RAW.load(resourceManager);
         }

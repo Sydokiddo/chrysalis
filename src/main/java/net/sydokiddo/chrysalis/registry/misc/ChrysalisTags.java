@@ -161,7 +161,9 @@ public class ChrysalisTags {
         // region Technical
 
         CAN_SPAWN_ON_LEAVES = registerEntityTag("can_spawn_on_leaves"),
-        CANNOT_RIDE_BOATS = registerEntityTag("cannot_ride_boats")
+        CANNOT_RIDE_BOATS = registerEntityTag("cannot_ride_boats"),
+        WARDEN_IGNORED = registerEntityTag("warden_ignored"),
+        STATISTICS_MENU_IGNORED = registerEntityTag("statistics_menu_ignored")
 
         // endregion
     ;
