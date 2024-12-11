@@ -19,6 +19,7 @@ public class ChrysalisDebugItems {
 
     public static final Item HEAL = registerItem("heal", HealItem::new, debugUtilitySettings());
     public static final Item FILL_HUNGER = registerItem("fill_hunger", FillHungerItem::new, debugUtilitySettings());
+    public static final Item FILL_OXYGEN = registerItem("fill_oxygen", FillOxygenItem::new, debugUtilitySettings());
     public static final Item GIVE_RESISTANCE = registerItem("give_resistance", GiveResistanceItem::new, debugUtilitySettings());
     public static final Item CLEAR_EFFECTS = registerItem("clear_effects", ClearEffectsItem::new, debugUtilitySettings());
     public static final Item TELEPORT_TO_SPAWNPOINT = registerItem("teleport_to_spawnpoint", TeleportToSpawnpointItem::new, debugUtilitySettings());

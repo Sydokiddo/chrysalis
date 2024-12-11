@@ -3,6 +3,7 @@
     "minecraft:debug_stick",
     "chrysalis:heal",
     "chrysalis:fill_hunger",
+    "chrysalis:fill_oxygen",
     "chrysalis:give_resistance",
     "chrysalis:clear_effects",
     "chrysalis:teleport_to_spawnpoint",

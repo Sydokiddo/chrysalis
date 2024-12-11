@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Chrysalis",
-  "description": "A library mod and shared API to assist with creating Minecraft Fabric mods!",
+  "description": "A library mod and shared API to assist with creating Minecraft mods!",
   "authors": [
     "Sydokiddo (Lead Developer)",
     "Amber Gray (Miscellaneous)",
@@ -16,7 +16,7 @@
     "issues": "https://github.com/Sydokiddo/chrysalis/issues",
     "sources": "https://github.com/Sydokiddo/chrysalis"
   },
-  "license": "MIT",
+  "license": "Custom License",
   "icon": "assets/chrysalis/icon.png",
   "accessWidener": "chrysalis.accesswidener",
   "environment": "*",

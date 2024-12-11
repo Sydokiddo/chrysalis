@@ -19,6 +19,7 @@ public class ChrysalisSoundEvents {
 
     public static final SoundEvent HEAL_USE = registerSoundEvent("item.heal.use");
     public static final SoundEvent FILL_HUNGER_USE = registerSoundEvent("item.fill_hunger.use");
+    public static final SoundEvent FILL_OXYGEN_USE = registerSoundEvent("item.fill_oxygen.use");
     public static final SoundEvent GIVE_RESISTANCE_USE = registerSoundEvent("item.give_resistance.use");
     public static final SoundEvent CLEAR_EFFECTS_USE = registerSoundEvent("item.clear_effects.use");
     public static final SoundEvent TELEPORT_TO_SPAWNPOINT_FAIL = registerSoundEvent("item.teleport_to_spawnpoint.fail");

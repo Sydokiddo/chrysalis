@@ -21,6 +21,13 @@
     ],
     "subtitle": "subtitles.item.fill_hunger.use"
   },
+  "item.fill_oxygen.use": {
+    "sounds": [
+      "minecraft:liquid/splash",
+      "minecraft:liquid/splash2"
+    ],
+    "subtitle": "subtitles.item.fill_oxygen.use"
+  },
   "item.give_resistance.use": {
     "sounds": [
       "minecraft:mob/irongolem/repair"

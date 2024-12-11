@@ -17,6 +17,8 @@
   "item.chrysalis.heal.desc": "Sets to Maximum Health",
   "item.chrysalis.fill_hunger": "Fill Hunger",
   "item.chrysalis.fill_hunger.desc": "Sets to Maximum Hunger Value",
+  "item.chrysalis.fill_oxygen": "Fill Oxygen",
+  "item.chrysalis.fill_oxygen.desc": "Sets to Maximum Oxygen Value",
   "item.chrysalis.give_resistance": "Give Resistance",
   "item.chrysalis.give_resistance.desc": "Gives Infinite Resistance",
   "item.chrysalis.clear_effects": "Clear Effects",
@@ -46,6 +48,7 @@
 
   "gui.chrysalis.heal_message": "Successfully healed %s",
   "gui.chrysalis.fill_hunger_message": "Successfully nourished %s",
+  "gui.chrysalis.fill_oxygen_message": "Successfully replenished oxygen for %s",
   "gui.chrysalis.teleport_to_spawnpoint_message": "Successfully teleported to spawnpoint",
   "gui.chrysalis.teleport_to_spawnpoint_failed_message": "You have no set spawnpoint",
   "gui.chrysalis.tame_mob_message": "%s has successfully been tamed",
@@ -225,6 +228,7 @@
 
   "subtitles.item.heal.use": "Player heals",
   "subtitles.item.fill_hunger.use": "Player nourishes",
+  "subtitles.item.fill_oxygen.use": "Player's oxygen replenished",
   "subtitles.item.give_resistance.use": "Player fortifies",
   "subtitles.item.clear_effects.use": "Player clears effects",
   "subtitles.item.teleport_to_spawnpoint.fail": "Teleportation fails",
