@@ -42,6 +42,7 @@
   "effect.chrysalis.radiance.desc": "Shrouds the player's screen in a blinding light.",
 
   "attribute.chrysalis.generic.reduced_detection_range": "Reduced Detection Range",
+  "attribute.chrysalis.generic.damage_capacity": "Damage Capacity",
 
   "gui.chrysalis.heal_message": "Successfully healed %s",
   "gui.chrysalis.fill_hunger_message": "Successfully nourished %s",
@@ -271,7 +272,6 @@
   "tag.entity_type.chrysalis.cannot_ride_boats": "Cannot Ride Boats",
   "tag.entity_type.chrysalis.ender": "Ender",
   "tag.entity_type.chrysalis.golem": "Golem",
-  "tag.entity_type.chrysalis.has_damage_cap": "Has Damage Cap",
   "tag.entity_type.chrysalis.piglin": "Piglin",
   "tag.entity_type.chrysalis.piglin_avoided": "Piglin Avoided",
   "tag.entity_type.chrysalis.slime": "Slime",

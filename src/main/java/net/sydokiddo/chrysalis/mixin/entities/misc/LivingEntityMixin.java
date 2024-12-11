@@ -14,8 +14,7 @@ import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
@@ -33,7 +32,10 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
     private static void chrysalis$addLivingEntityAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> info) {
-        if (info.getReturnValue() != null) info.getReturnValue().add(ChrysalisAttributes.GENERIC_REDUCED_DETECTION_RANGE);
+        if (info.getReturnValue() != null) {
+            info.getReturnValue().add(ChrysalisAttributes.GENERIC_REDUCED_DETECTION_RANGE);
+            info.getReturnValue().add(ChrysalisAttributes.GENERIC_DAMAGE_CAPACITY);
+        }
     }
 
     // region Reworked Mob Visibility
