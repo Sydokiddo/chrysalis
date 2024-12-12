@@ -15,7 +15,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
-import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class RideMobItem extends DebugUtilityItem {
@@ -34,8 +33,7 @@ public class RideMobItem extends DebugUtilityItem {
      * Automatically mounts any mob when the mob is right-clicked with the item.
      **/
 
-    @Override
-    public @NotNull InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
+    public static InteractionResult doInteraction(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
         if (!player.isShiftKeyDown()) {
 
@@ -47,7 +45,7 @@ public class RideMobItem extends DebugUtilityItem {
 
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.RIDE_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-                serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+                serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
 
                 serverPlayer.sendSystemMessage(Component.translatable("commands.ride.mount.success", serverPlayer.getName().getString(), livingEntity.getName().getString()));
             }
@@ -55,6 +53,6 @@ public class RideMobItem extends DebugUtilityItem {
             return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
-        return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);
+        return InteractionResult.PASS;
     }
 }

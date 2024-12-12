@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
-import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class TameMobItem extends DebugUtilityItem {
@@ -37,29 +37,38 @@ public class TameMobItem extends DebugUtilityItem {
      * Automatically tames any tamable mob when the mob is right-clicked with the item.
      **/
 
-    @Override
-    public @NotNull InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
+    public static InteractionResult doInteraction(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
         if (livingEntity instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame()) {
 
             if (!livingEntity.level().isClientSide()) {
                 tamableAnimal.tame(player);
-                playTameEvents(player, tamableAnimal);
-                player.awardStat(Stats.ITEM_USED.get(this));
+                playTameEvents(player, tamableAnimal, itemStack);
             }
 
             return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
-        return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);
+        if (livingEntity instanceof AbstractHorse abstractHorse && !abstractHorse.isTamed()) {
+
+            if (!livingEntity.level().isClientSide()) {
+                abstractHorse.tameWithName(player);
+                playTameEvents(player, abstractHorse, itemStack);
+            }
+
+            return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
+        }
+
+        return InteractionResult.PASS;
     }
 
-    public static void playTameEvents(Player player, LivingEntity tamedMob) {
+    public static void playTameEvents(Player player, LivingEntity tamedMob, ItemStack itemStack) {
 
         if (!(player instanceof ServerPlayer serverPlayer)) return;
 
         serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
         serverPlayer.playNotifySound(ChrysalisSoundEvents.TAME_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+        serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
 
         if (tamedMob.level() instanceof ServerLevel serverLevel) {
             for (int particleAmount = 0; particleAmount < 7; ++particleAmount) {

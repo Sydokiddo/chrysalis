@@ -22,7 +22,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
-import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class AggroWandItem extends ExtraReachDebugUtilityItem {
@@ -49,8 +48,11 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         list.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + descriptionString).withStyle(ChatFormatting.BLUE)));
     }
 
-    @Override
-    public @NotNull InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
+    /**
+     * When right-clicked on a mob, the mob will be bound to the item, and then the next mob that is right-clicked on will be set as the previous mob's attack target.
+     **/
+
+    public static InteractionResult doInteraction(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
         if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && livingEntity instanceof Mob mob) {
 
@@ -59,7 +61,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                 Mob linkedMob = (Mob) serverPlayer.serverLevel().getEntity(getCustomData(itemStack).copyTag().getUUID(mobUuidString));
 
                 if (linkedMob != null) {
-                    this.addGlowingEffect(mob);
+                    addGlowingEffect(mob);
                     linkedMob.setTarget(livingEntity);
                     serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS, SoundSource.PLAYERS, 1.0F, 1.0F);
                     serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.aggro_wand.set_target", livingEntity.getName().getString(), linkedMob.getName().getString()));
@@ -68,36 +70,31 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                     serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.aggro_wand.linked_mob_missing"));
                 }
 
-                this.unlinkWand(itemStack, player, interactionHand);
+                ItemStack unlinkedWand = itemStack.copy();
+                unlinkedWand.remove(customDataComponent);
+                player.setItemInHand(interactionHand, unlinkedWand);
 
             } else {
-                this.addGlowingEffect(mob);
-                this.linkWand(itemStack, player, interactionHand, livingEntity);
+
+                addGlowingEffect(mob);
+
+                ItemStack linkedWand = itemStack.copy();
+                CustomData.update(customDataComponent, linkedWand, (compoundTag) -> compoundTag.putUUID(mobUuidString, livingEntity.getUUID()));
+                player.setItemInHand(interactionHand, linkedWand);
+
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_LINK, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.aggro_wand.link_mob", livingEntity.getName().getString()));
             }
 
             serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+            serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
             return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
-        return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);
+        return InteractionResult.PASS;
     }
 
-    private void linkWand(ItemStack itemStack, Player player, InteractionHand interactionHand, LivingEntity livingEntity) {
-        ItemStack linkedWand = itemStack.copy();
-        CustomData.update(customDataComponent, linkedWand, (compoundTag) -> compoundTag.putUUID(mobUuidString, livingEntity.getUUID()));
-        player.setItemInHand(interactionHand, linkedWand);
-    }
-
-    private void unlinkWand(ItemStack itemStack, Player player, InteractionHand interactionHand) {
-        ItemStack unlinkedWand = itemStack.copy();
-        unlinkedWand.remove(customDataComponent);
-        player.setItemInHand(interactionHand, unlinkedWand);
-    }
-
-    private void addGlowingEffect(Mob mob) {
+    private static void addGlowingEffect(Mob mob) {
         mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 10, 0, false, false, false));
     }
 }

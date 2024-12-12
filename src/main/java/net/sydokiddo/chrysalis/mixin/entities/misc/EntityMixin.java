@@ -2,12 +2,18 @@ package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.AggroWandItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.RideMobItem;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.TameMobItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,6 +28,7 @@ public abstract class EntityMixin {
 
     @Unique Entity entity = (Entity) (Object) this;
     @Shadow public abstract boolean isAttackable();
+    @Shadow public abstract boolean isAlive();
 
     @Inject(method = "getPickRadius", at = @At("RETURN"), cancellable = true)
     private void chrysalis$increasedPickRadius(CallbackInfoReturnable<Float> cir) {
@@ -38,5 +45,14 @@ public abstract class EntityMixin {
     private void chrysalis$preventEntityRendering(double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
         Holder<MobEffect> invisibility = MobEffects.INVISIBILITY;
         if (this.entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(invisibility) && Objects.requireNonNull(livingEntity.getEffect(invisibility)).getAmplifier() > 0) cir.setReturnValue(false);
+    }
+
+    @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
+    private void chrysalis$debugItemInteractions(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
+        if (!this.isAlive() || !(this.entity instanceof LivingEntity livingEntity)) return;
+        ItemStack itemStack = player.getItemInHand(interactionHand);
+        if (itemStack.getItem() instanceof AggroWandItem) cir.setReturnValue(AggroWandItem.doInteraction(itemStack, player, livingEntity, interactionHand));
+        if (itemStack.getItem() instanceof TameMobItem) cir.setReturnValue(TameMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
+        if (itemStack.getItem() instanceof RideMobItem) cir.setReturnValue(RideMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
     }
 }
