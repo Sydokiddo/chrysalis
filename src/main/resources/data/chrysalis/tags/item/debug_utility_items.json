@@ -9,6 +9,7 @@
     "chrysalis:teleport_to_spawnpoint",
     "chrysalis:teleport_wand",
     "chrysalis:kill_wand",
+    "chrysalis:aggro_wand",
     "chrysalis:tame_mob",
     "chrysalis:ride_mob"
   ]

@@ -14,6 +14,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
@@ -52,12 +53,12 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
                 level.broadcastEntityEvent(serverPlayer, (byte) 46); // Teleporting Particles
 
                 serverPlayer.playNotifySound(SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
-                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_message"));
+                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint.message.success"));
                 serverPlayer.getCooldowns().addCooldown(itemStack, 60);
 
             } else {
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.TELEPORT_TO_SPAWNPOINT_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
-                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint_failed_message"));
+                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint.message.fail"));
             }
         }
 

@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
@@ -67,6 +68,6 @@ public class TameMobItem extends DebugUtilityItem {
             }
         }
 
-        serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.tame_mob_message", tamedMob.getName().getString()));
+        serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.tame_mob.message", tamedMob.getName().getString()));
     }
 }

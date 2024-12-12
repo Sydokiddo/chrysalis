@@ -3,20 +3,17 @@ package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.phys.Vec3;
-import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
 import java.util.List;
 
-public class KillWandItem extends DebugUtilityItem {
+public class KillWandItem extends ExtraReachDebugUtilityItem {
 
     public KillWandItem(Properties properties) {
         super(properties);
@@ -26,10 +23,6 @@ public class KillWandItem extends DebugUtilityItem {
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         ItemHelper.addAttackTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
-    }
-
-    public static ItemAttributeModifiers createAttributes() {
-        return ItemAttributeModifiers.builder().add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(Chrysalis.id("base_entity_interaction_range"), 64.0D, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
     }
 
     /**
@@ -53,6 +46,6 @@ public class KillWandItem extends DebugUtilityItem {
             return true;
         }
 
-        return false;
+        return super.hurtEnemy(itemStack, target, self);
     }
 }

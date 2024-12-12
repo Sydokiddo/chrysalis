@@ -60,5 +60,28 @@
       "minecraft:mob/horse/leather"
     ],
     "subtitle": "subtitles.item.ride_mob.use"
+  },
+  "item.aggro_wand.link": {
+    "sounds": [
+      "minecraft:block/chain/break1",
+      "minecraft:block/chain/break2",
+      "minecraft:block/chain/break3",
+      "minecraft:block/chain/break4"
+    ],
+    "subtitle": "subtitles.item.aggro_wand.link"
+  },
+  "item.aggro_wand.select_target.fail": {
+    "sounds": [
+      "minecraft:mob/villager/no1",
+      "minecraft:mob/villager/no2",
+      "minecraft:mob/villager/no3"
+    ],
+    "subtitle": "subtitles.item.aggro_wand.select_target.fail"
+  },
+  "item.aggro_wand.select_target.success": {
+    "sounds": [
+      "minecraft:item/goat_horn/call2"
+    ],
+    "subtitle": "subtitles.item.aggro_wand.select_target.success"
   }
 }

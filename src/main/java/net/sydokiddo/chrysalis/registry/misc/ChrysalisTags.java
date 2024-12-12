@@ -21,6 +21,7 @@ public class ChrysalisTags {
         // region Chrysalis Items
 
         DEBUG_UTILITY_ITEMS = registerItemTag("debug_utility_items"),
+        INCREASED_PICK_RADIUS = registerItemTag("increased_pick_radius"),
 
         // endregion
 

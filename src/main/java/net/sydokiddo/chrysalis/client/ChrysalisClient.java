@@ -12,10 +12,12 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.Music;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
@@ -23,6 +25,8 @@ import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
 import net.sydokiddo.chrysalis.misc.util.splash_texts.SplashTextLoader;
 import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
+import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.AggroWandItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisParticles;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.Nullable;
@@ -76,6 +80,7 @@ public class ChrysalisClient implements ClientModInitializer {
 
         ChrysalisParticles.registerParticles();
         EntityRendererRegistry.register(ChrysalisEntities.SEAT, SeatRenderer::new);
+        ItemProperties.register(ChrysalisDebugItems.AGGRO_WAND, Chrysalis.id("linked"), (itemStack, client, livingEntity, value) -> AggroWandItem.isLinked(itemStack) ? 1.0F : 0.0F);
 
         // endregion
     }

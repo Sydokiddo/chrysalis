@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
+package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;

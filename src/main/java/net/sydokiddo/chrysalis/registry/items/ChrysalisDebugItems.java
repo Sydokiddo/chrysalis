@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.*;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import java.util.function.Function;
 
 public class ChrysalisDebugItems {
@@ -24,7 +25,8 @@ public class ChrysalisDebugItems {
     public static final Item CLEAR_EFFECTS = registerItem("clear_effects", ClearEffectsItem::new, debugUtilitySettings());
     public static final Item TELEPORT_TO_SPAWNPOINT = registerItem("teleport_to_spawnpoint", TeleportToSpawnpointItem::new, debugUtilitySettings());
     public static final Item TELEPORT_WAND = registerItem("teleport_wand", TeleportWandItem::new, debugUtilitySettings().useCooldown(3.0F));
-    public static final Item KILL_WAND = registerItem("kill_wand", KillWandItem::new, debugUtilitySettings().attributes(KillWandItem.createAttributes()));
+    public static final Item KILL_WAND = registerItem("kill_wand", KillWandItem::new, debugUtilitySettings().attributes(ExtraReachDebugUtilityItem.createAttributes()));
+    public static final Item AGGRO_WAND = registerItem("aggro_wand", AggroWandItem::new, debugUtilitySettings().attributes(ExtraReachDebugUtilityItem.createAttributes()));
     public static final Item TAME_MOB = registerItem("tame_mob", TameMobItem::new, debugUtilitySettings());
     public static final Item RIDE_MOB = registerItem("ride_mob", RideMobItem::new, debugUtilitySettings());
 

@@ -16,6 +16,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
@@ -50,7 +51,7 @@ public class FillHungerItem extends DebugUtilityItem {
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.getFoodData().setFoodLevel(20);
                 serverPlayer.getFoodData().setSaturation(5.0F);
-                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.fill_hunger_message", serverPlayer.getName().getString()));
+                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.fill_hunger.message", serverPlayer.getName().getString()));
             }
 
             return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));

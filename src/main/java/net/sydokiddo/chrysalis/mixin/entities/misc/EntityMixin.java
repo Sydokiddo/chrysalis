@@ -6,7 +6,9 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -22,9 +24,14 @@ public abstract class EntityMixin {
     @Shadow public abstract boolean isAttackable();
 
     @Inject(method = "getPickRadius", at = @At("RETURN"), cancellable = true)
-    private void chrysalis$killWandPickRadius(CallbackInfoReturnable<Float> cir) {
+    private void chrysalis$increasedPickRadius(CallbackInfoReturnable<Float> cir) {
+
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.player != null && minecraft.player.getMainHandItem().is(ChrysalisDebugItems.KILL_WAND) && this.isAttackable()) cir.setReturnValue(minecraft.player.distanceTo(this.entity) > 8 ? 0.5F : 0.0F);
+        if (minecraft.player == null) return;
+        ItemStack itemStack = minecraft.player.getMainHandItem();
+
+        if (itemStack.is(ChrysalisDebugItems.KILL_WAND) && !this.isAttackable()) return;
+        if (itemStack.is(ChrysalisTags.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.entity) > 8 ? 0.5F : 0.0F);
     }
 
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)

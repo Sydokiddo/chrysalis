@@ -25,6 +25,9 @@ public class ChrysalisSoundEvents {
     public static final SoundEvent TELEPORT_TO_SPAWNPOINT_FAIL = registerSoundEvent("item.teleport_to_spawnpoint.fail");
     public static final SoundEvent TAME_MOB_USE = registerSoundEvent("item.tame_mob.use");
     public static final SoundEvent RIDE_MOB_USE = registerSoundEvent("item.ride_mob.use");
+    public static final SoundEvent AGGRO_WAND_LINK = registerSoundEvent("item.aggro_wand.link");
+    public static final SoundEvent AGGRO_WAND_SELECT_TARGET_FAIL = registerSoundEvent("item.aggro_wand.select_target.fail");
+    public static final SoundEvent AGGRO_WAND_SELECT_TARGET_SUCCESS = registerSoundEvent("item.aggro_wand.select_target.success");
 
     // Registry
 
