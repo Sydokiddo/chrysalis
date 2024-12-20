@@ -20,6 +20,7 @@
   "gui.icon.chrysalis.gray_heart": "\ua015",
   "gui.icon.chrysalis.black_heart": "\ua016",
   "gui.icon.chrysalis.brown_heart": "\ua017",
+  "gui.icon.chrysalis.snout": "\ua018",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
@@ -242,6 +243,13 @@
   "gamerule.playerDeathItemDespawning.description": "Items dropped by dead players will despawn after a short period of time.",
   "gamerule.doNetherPortalActivating": "Allow Nether Portal activating",
   "gamerule.doEndPortalActivating": "Allow End Portal activating",
+  "gamerule.bedsExplode": "Beds explode",
+  "gamerule.bedsExplode.description": "Beds will explode when used in any dimension outside of the Overworld.",
+  "gamerule.respawnAnchorsExplode": "Respawn Anchors explode",
+  "gamerule.respawnAnchorsExplode.description": "Respawn Anchors will explode when used in any dimension outside of the Nether.",
+
+  "gui.chrysalis.block.bed.invalid_dimension": "You cannot sleep in this dimension",
+  "gui.chrysalis.block.generic_respawn_block.invalid_dimension": "You cannot set your spawn point using this block in this dimension",
 
   "subtitles.item.heal.use": "Player heals",
   "subtitles.item.fill_hunger.use": "Player nourishes",

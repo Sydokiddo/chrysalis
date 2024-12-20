@@ -49,6 +49,6 @@ public class GuiMixin {
 
     @Unique
     private String getCrosshairTexture(String itemName) {
-        return "hud/" + itemName + "_crosshair.png";
+        return "hud/" + itemName + "_crosshair";
     }
 }

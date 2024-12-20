@@ -80,6 +80,18 @@ public class ChrysalisRegistry {
         GameRules.Category.UPDATES,
         GameRuleFactory.createBooleanRule(true)
     );
+    public static GameRules.Key<GameRules.BooleanValue> RULE_BEDS_EXPLODE =
+        GameRuleRegistry.register(
+        "bedsExplode",
+        GameRules.Category.DROPS,
+        GameRuleFactory.createBooleanRule(true)
+    );
+    public static GameRules.Key<GameRules.BooleanValue> RULE_RESPAWN_ANCHORS_EXPLODE =
+        GameRuleRegistry.register(
+        "respawnAnchorsExplode",
+        GameRules.Category.DROPS,
+        GameRuleFactory.createBooleanRule(true)
+    );
 
     // endregion
 
@@ -116,7 +128,8 @@ public class ChrysalisRegistry {
         WHITE_HEART_ICON = Component.translatable("gui.icon.chrysalis.white_heart"),
         GRAY_HEART_ICON = Component.translatable("gui.icon.chrysalis.gray_heart"),
         BLACK_HEART_ICON = Component.translatable("gui.icon.chrysalis.black_heart"),
-        BROWN_HEART_ICON = Component.translatable("gui.icon.chrysalis.brown_heart")
+        BROWN_HEART_ICON = Component.translatable("gui.icon.chrysalis.brown_heart"),
+        SNOUT_ICON = Component.translatable("gui.icon.chrysalis.snout")
     ;
 
     @SuppressWarnings("unused")
