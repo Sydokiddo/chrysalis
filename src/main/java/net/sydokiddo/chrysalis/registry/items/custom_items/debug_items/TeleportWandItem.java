@@ -38,17 +38,21 @@ public class TeleportWandItem extends DebugUtilityItem {
      * Teleports the player to the position they are looking at when right-clicked with the Teleport Wand.
      **/
 
+    public static HitResult getHitResult(Player player) {
+        return ProjectileUtil.getHitResultOnViewVector(player, entity -> !entity.isSpectator(), Minecraft.getInstance().gameRenderer.getRenderDistance() * 4.0F);
+    }
+
     @Override
     public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
+
+        if (getHitResult(player).getType() != HitResult.Type.BLOCK) return super.use(level, player, interactionHand);
 
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
             serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
 
-            HitResult hitResult = ProjectileUtil.getHitResultOnViewVector(player, entity -> !entity.isSpectator() && entity.isPickable(), Minecraft.getInstance().gameRenderer.getRenderDistance() * 4.0F);
-            Vec3 teleportToPos = new Vec3(hitResult.getLocation().x(), hitResult.getLocation().y(), hitResult.getLocation().z());
-
+            Vec3 teleportToPos = new Vec3(getHitResult(player).getLocation().x(), getHitResult(player).getLocation().y(), getHitResult(player).getLocation().z());
             serverPlayer.teleportTo(teleportToPos.x(), teleportToPos.y() + 1, teleportToPos.z());
             if (serverPlayer.isInWall()) serverPlayer.moveTo(Vec3.atCenterOf(serverPlayer.getOnPos().above()));
 

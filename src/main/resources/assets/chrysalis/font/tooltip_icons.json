@@ -68,6 +68,105 @@
       "chars": [
         "\ua006"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/red_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua007"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/orange_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua008"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/yellow_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua009"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/green_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua010"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/blue_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua011"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/purple_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua012"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/pink_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua013"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/white_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua014"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/gray_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua015"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/black_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua016"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/brown_heart.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua017"
+      ]
     }
   ]
 }

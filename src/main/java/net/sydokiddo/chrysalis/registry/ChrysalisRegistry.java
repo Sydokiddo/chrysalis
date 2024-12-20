@@ -102,10 +102,21 @@ public class ChrysalisRegistry {
         CHRYSALIS_ICON = Component.translatable("gui.icon.chrysalis.mod_icon"),
         GEAR_ICON = Component.translatable("gui.icon.chrysalis.gear"),
         WARNING_ICON = Component.translatable("gui.icon.chrysalis.warning"),
-        QUESTION_MARK = Component.translatable("gui.icon.chrysalis.question_mark"),
+        QUESTION_MARK_ICON = Component.translatable("gui.icon.chrysalis.question_mark"),
         TOOLTIP_ICON = Component.translatable("gui.icon.chrysalis.tooltip"),
         POTION_ICON = Component.translatable("gui.icon.chrysalis.potion"),
-        ARMOR_ICON = Component.translatable("gui.icon.chrysalis.armor")
+        ARMOR_ICON = Component.translatable("gui.icon.chrysalis.armor"),
+        RED_HEART_ICON = Component.translatable("gui.icon.chrysalis.red_heart"),
+        ORANGE_HEART_ICON = Component.translatable("gui.icon.chrysalis.orange_heart"),
+        YELLOW_HEART_ICON = Component.translatable("gui.icon.chrysalis.yellow_heart"),
+        GREEN_HEART_ICON = Component.translatable("gui.icon.chrysalis.green_heart"),
+        BLUE_HEART_ICON = Component.translatable("gui.icon.chrysalis.blue_heart"),
+        PURPLE_HEART_ICON = Component.translatable("gui.icon.chrysalis.purple_heart"),
+        PINK_HEART_ICON = Component.translatable("gui.icon.chrysalis.pink_heart"),
+        WHITE_HEART_ICON = Component.translatable("gui.icon.chrysalis.white_heart"),
+        GRAY_HEART_ICON = Component.translatable("gui.icon.chrysalis.gray_heart"),
+        BLACK_HEART_ICON = Component.translatable("gui.icon.chrysalis.black_heart"),
+        BROWN_HEART_ICON = Component.translatable("gui.icon.chrysalis.brown_heart")
     ;
 
     @SuppressWarnings("unused")
