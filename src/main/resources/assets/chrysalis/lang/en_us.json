@@ -42,6 +42,7 @@
   "item.chrysalis.kill_wand": "Kill Wand",
   "item.chrysalis.kill_wand.desc": "Instantly Kills Targeted Mob",
   "item.chrysalis.aggro_wand": "Aggro Wand",
+  "item.chrysalis.aggro_wand.linked_mob_tooltip": "Linked Mob: %s",
   "item.chrysalis.aggro_wand.desc_unlinked": "Selects Mob to Aggro",
   "item.chrysalis.aggro_wand.desc_linked": "Selects Mob to Target",
   "item.chrysalis.tame_mob": "Tame Mob",
@@ -138,6 +139,7 @@
   "gui.chrysalis.item.tooltip_with_icon": "%1$s %2$s",
 
   "gui.chrysalis.none": "None",
+  "gui.chrysalis.unknown": "Unknown",
   "gui.chrysalis.dimension": "Dimension: %s",
   "gui.chrysalis.coordinates": "X: %1$s Y: %2$s Z: %3$s",
 

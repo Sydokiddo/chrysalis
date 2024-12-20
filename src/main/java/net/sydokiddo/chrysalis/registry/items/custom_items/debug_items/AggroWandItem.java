@@ -30,21 +30,35 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         super(properties);
     }
 
-    private static final String mobUuidString = "mob_uuid";
+    private static final String
+        mobNameString = "mob_name",
+        mobUuidString = "mob_uuid"
+    ;
+
     private static final DataComponentType<CustomData> customDataComponent = DataComponents.CUSTOM_DATA;
 
     private static CustomData getCustomData(ItemStack itemStack) {
         return itemStack.getOrDefault(customDataComponent, CustomData.EMPTY);
     }
 
-    public static boolean isLinked(ItemStack itemStack) {
+    private static boolean hasMobName(ItemStack itemStack) {
+        return getCustomData(itemStack).contains(mobNameString);
+    }
+
+    public static boolean hasMobUUID(ItemStack itemStack) {
         return getCustomData(itemStack).contains(mobUuidString);
     }
 
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+
+        if (hasMobUUID(itemStack)) {
+            String mobName = hasMobName(itemStack) ? getCustomData(itemStack).copyTag().getString(mobNameString) : ItemHelper.UNKNOWN_COMPONENT.getString();
+            list.add(Component.translatable(this.getDescriptionId() + ".linked_mob_tooltip", mobName).withStyle(ChatFormatting.GRAY));
+        }
+
         ItemHelper.addUseTooltip(list);
-        String descriptionString = isLinked(itemStack) ? ".desc_linked" : ".desc_unlinked";
+        String descriptionString = hasMobUUID(itemStack) ? ".desc_linked" : ".desc_unlinked";
         list.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + descriptionString).withStyle(ChatFormatting.BLUE)));
     }
 
@@ -56,7 +70,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
         if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && livingEntity instanceof Mob mob) {
 
-            if (isLinked(itemStack)) {
+            if (hasMobUUID(itemStack)) {
 
                 Mob linkedMob = (Mob) serverPlayer.serverLevel().getEntity(getCustomData(itemStack).copyTag().getUUID(mobUuidString));
 
@@ -77,9 +91,13 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
             } else {
 
                 addGlowingEffect(mob);
-
                 ItemStack linkedWand = itemStack.copy();
-                CustomData.update(customDataComponent, linkedWand, (compoundTag) -> compoundTag.putUUID(mobUuidString, livingEntity.getUUID()));
+
+                CustomData.update(customDataComponent, linkedWand, (compoundTag) -> {
+                    compoundTag.putString(mobNameString, livingEntity.getName().getString());
+                    compoundTag.putUUID(mobUuidString, livingEntity.getUUID());
+                });
+
                 player.setItemInHand(interactionHand, linkedWand);
 
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_LINK, SoundSource.PLAYERS, 1.0F, 1.0F);

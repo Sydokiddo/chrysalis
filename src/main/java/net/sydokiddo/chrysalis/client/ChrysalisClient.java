@@ -80,7 +80,7 @@ public class ChrysalisClient implements ClientModInitializer {
 
         ChrysalisParticles.registerParticles();
         EntityRendererRegistry.register(ChrysalisEntities.SEAT, SeatRenderer::new);
-        ItemProperties.register(ChrysalisDebugItems.AGGRO_WAND, Chrysalis.id("linked"), (itemStack, client, livingEntity, value) -> AggroWandItem.isLinked(itemStack) ? 1.0F : 0.0F);
+        ItemProperties.register(ChrysalisDebugItems.AGGRO_WAND, Chrysalis.id("linked"), (itemStack, client, livingEntity, value) -> AggroWandItem.hasMobUUID(itemStack) ? 1.0F : 0.0F);
 
         // endregion
     }

@@ -29,6 +29,8 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class ItemHelper {
 
+    // region Inventories
+
     /**
      * Checks to see if a block entity as an item is empty when in the player's inventory.
      **/
@@ -59,6 +61,10 @@ public class ItemHelper {
         return false;
     }
 
+    // endregion
+
+    // region Enchantments and Armor Trims
+
     /**
      * Checks for enchantments or armor trims.
      **/
@@ -83,6 +89,10 @@ public class ItemHelper {
         return (itemStack.isEnchanted() || hasArmorTrim(itemStack));
     }
 
+    // endregion
+
+    // region Item Entities
+
     /**
      * Sets the glow color entity data of an item entity.
      **/
@@ -95,11 +105,18 @@ public class ItemHelper {
         itemEntity.getEntityData().set(ChrysalisRegistry.ITEM_GLOW_COLOR, glowColor);
     }
 
+    // endregion
+
     // region Custom Item Tooltips
 
     /**
      * Custom tooltips for items.
      **/
+
+    public static final Component
+        NONE_COMPONENT = Component.translatable("gui.chrysalis.none"),
+        UNKNOWN_COMPONENT = Component.translatable("gui.chrysalis.unknown")
+    ;
 
     public static void addHoldingTooltip(List<Component> tooltip) {
         tooltip.add(CommonComponents.EMPTY);
@@ -169,7 +186,11 @@ public class ItemHelper {
     }
 
     public static void addNullTooltip(List<Component> tooltip) {
-        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.none").withStyle(ChatFormatting.BLUE)));
+        tooltip.add(CommonComponents.space().append(NONE_COMPONENT.copy().withStyle(ChatFormatting.BLUE)));
+    }
+
+    public static void addUnknownTooltip(List<Component> tooltip) {
+        tooltip.add(CommonComponents.space().append(UNKNOWN_COMPONENT.copy().withStyle(ChatFormatting.BLUE)));
     }
 
     public static Component addTooltipWithIcon(Component icon, Component tooltip) {
