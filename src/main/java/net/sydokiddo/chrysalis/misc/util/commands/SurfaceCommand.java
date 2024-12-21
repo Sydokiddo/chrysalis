@@ -8,7 +8,6 @@ import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import java.util.Objects;
 
@@ -27,15 +26,12 @@ public class SurfaceCommand {
         int y = serverPlayer.getBlockY();
         int z = serverPlayer.getBlockZ();
         BlockPos playerPos = serverPlayer.getOnPos();
-
         int highestYValue = serverPlayer.level().getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
-        BlockPos highestBlockPos = new BlockPos(x, highestYValue, z);
-        BlockState highestBlockState = serverPlayer.level().getBlockState(highestBlockPos.below());
 
         Component successText = Component.translatable("gui.chrysalis.commands.surface.success", serverPlayer.getDisplayName());
         Component failText = Component.translatable("gui.chrysalis.commands.surface.fail").withStyle(ChatFormatting.RED);
 
-        if (highestYValue != y && !highestBlockState.isAir() && (!highestBlockState.getFluidState().isEmpty() || !highestBlockState.getCollisionShape(serverPlayer.level(), highestBlockPos).isEmpty())) {
+        if (highestYValue > y && !serverPlayer.level().getBlockState(new BlockPos(x, highestYValue, z).below()).isAir()) {
             serverPlayer.teleportTo(playerPos.getX(), highestYValue, playerPos.getZ());
             serverPlayer.sendSystemMessage(successText);
         } else {
