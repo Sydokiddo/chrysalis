@@ -38,10 +38,11 @@ public abstract class EntityMixin {
 
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player == null) return;
-        ItemStack itemStack = minecraft.player.getMainHandItem();
+        ItemStack mainHandItem = minecraft.player.getMainHandItem();
+        ItemStack offHandItem = minecraft.player.getOffhandItem();
 
-        if (itemStack.is(ChrysalisDebugItems.KILL_WAND) && !this.isAttackable()) return;
-        if (itemStack.is(ChrysalisTags.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.entity) > 8 ? 0.5F : 0.0F);
+        if (mainHandItem.is(ChrysalisDebugItems.KILL_WAND) && !this.isAttackable()) return;
+        if (mainHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS) || offHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.entity) > 8 ? 0.5F : 0.0F);
     }
 
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
