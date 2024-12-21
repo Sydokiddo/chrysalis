@@ -31,21 +31,21 @@ public class ExplosionCommand {
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(Commands.literal("explosion").requires((commandSourceStack) -> commandSourceStack.hasPermission(2))
 
-        .then(Commands.argument(causingEntityString, EntityArgument.entity())
-            .then(Commands.argument(posString, Vec3Argument.vec3())
-            .then(Commands.argument(powerString, FloatArgumentType.floatArg(minExplosionPower, maxExplosionPower))
-            .then(Commands.argument(createsFireString, BoolArgumentType.bool())
-            .executes((commandContext) -> createExplosion(commandContext.getSource(), EntityArgument.getEntity(commandContext, causingEntityString),
-            Vec3Argument.getVec3(commandContext, posString), FloatArgumentType.getFloat(commandContext, powerString), BoolArgumentType.getBool(commandContext, createsFireString))))))
-        )
+            .then(Commands.argument(causingEntityString, EntityArgument.entity())
+                .then(Commands.argument(posString, Vec3Argument.vec3())
+                .then(Commands.argument(powerString, FloatArgumentType.floatArg(minExplosionPower, maxExplosionPower))
+                .then(Commands.argument(createsFireString, BoolArgumentType.bool())
+                .executes((commandContext) -> createExplosion(commandContext.getSource(), EntityArgument.getEntity(commandContext, causingEntityString),
+                Vec3Argument.getVec3(commandContext, posString), FloatArgumentType.getFloat(commandContext, powerString), BoolArgumentType.getBool(commandContext, createsFireString))))))
+            )
 
-        .then(Commands.literal(noneString)
-            .then(Commands.argument(posString, Vec3Argument.vec3())
-            .then(Commands.argument(powerString, FloatArgumentType.floatArg(minExplosionPower, maxExplosionPower))
-            .then(Commands.argument(createsFireString, BoolArgumentType.bool())
-            .executes((commandContext) -> createExplosion(commandContext.getSource(), null,
-            Vec3Argument.getVec3(commandContext, posString), FloatArgumentType.getFloat(commandContext, powerString), BoolArgumentType.getBool(commandContext, createsFireString))))))
-        )
+            .then(Commands.literal(noneString)
+                .then(Commands.argument(posString, Vec3Argument.vec3())
+                .then(Commands.argument(powerString, FloatArgumentType.floatArg(minExplosionPower, maxExplosionPower))
+                .then(Commands.argument(createsFireString, BoolArgumentType.bool())
+                .executes((commandContext) -> createExplosion(commandContext.getSource(), null,
+                Vec3Argument.getVec3(commandContext, posString), FloatArgumentType.getFloat(commandContext, powerString), BoolArgumentType.getBool(commandContext, createsFireString))))))
+            )
         );
     }
 
@@ -55,7 +55,7 @@ public class ExplosionCommand {
         Level.ExplosionInteraction explosionInteraction = Level.ExplosionInteraction.BLOCK;
 
         if (causingEntity != null) {
-            successText = Component.translatable("gui.chrysalis.commands.explosion.success_entity", causingEntity.getDisplayName(), power);
+            successText = Component.translatable("gui.chrysalis.commands.explosion.success.entity", causingEntity.getDisplayName(), power);
             explosionInteraction = Level.ExplosionInteraction.MOB;
         }
 

@@ -69,23 +69,23 @@ public class VelocityCommand {
             switch (type) {
                 case 1 -> {
                     entity.setDeltaMovement(entity.getDeltaMovement().add(x, y, z));
-                    successSingleMessage = Component.translatable("gui.chrysalis.commands.velocity.add.success_single", x, y, z, entities.iterator().next().getDisplayName());
-                    successMultipleMessage = Component.translatable("gui.chrysalis.commands.velocity.add.success_multiple", x, y, z, entities.size());
+                    successSingleMessage = Component.translatable("gui.chrysalis.commands.velocity.add.success.single", x, y, z, entities.iterator().next().getDisplayName());
+                    successMultipleMessage = Component.translatable("gui.chrysalis.commands.velocity.add.success.multiple", x, y, z, entities.size());
                 }
                 case 2 -> {
                     entity.setDeltaMovement(entity.getDeltaMovement().subtract(x, y, z));
-                    successSingleMessage = Component.translatable("gui.chrysalis.commands.velocity.subtract.success_single", x, y, z, entities.iterator().next().getDisplayName());
-                    successMultipleMessage = Component.translatable("gui.chrysalis.commands.velocity.subtract.success_multiple", x, y, z, entities.size());
+                    successSingleMessage = Component.translatable("gui.chrysalis.commands.velocity.subtract.success.single", x, y, z, entities.iterator().next().getDisplayName());
+                    successMultipleMessage = Component.translatable("gui.chrysalis.commands.velocity.subtract.success.multiple", x, y, z, entities.size());
                 }
                 case 3 -> {
                     entity.setDeltaMovement(entity.getDeltaMovement().multiply(x, y, z));
-                    successSingleMessage = Component.translatable("gui.chrysalis.commands.velocity.multiply.success_single", x, y, z, entities.iterator().next().getDisplayName());
-                    successMultipleMessage = Component.translatable("gui.chrysalis.commands.velocity.multiply.success_multiple", x, y, z, entities.size());
+                    successSingleMessage = Component.translatable("gui.chrysalis.commands.velocity.multiply.success.single", x, y, z, entities.iterator().next().getDisplayName());
+                    successMultipleMessage = Component.translatable("gui.chrysalis.commands.velocity.multiply.success.multiple", x, y, z, entities.size());
                 }
                 default -> {
                     entity.setDeltaMovement(x, y, z);
-                    successSingleMessage = Component.translatable("gui.chrysalis.commands.velocity.set.success_single", x, y, z, entities.iterator().next().getDisplayName());
-                    successMultipleMessage = Component.translatable("gui.chrysalis.commands.velocity.set.success_multiple", x, y, z, entities.size());
+                    successSingleMessage = Component.translatable("gui.chrysalis.commands.velocity.set.success.single", x, y, z, entities.iterator().next().getDisplayName());
+                    successMultipleMessage = Component.translatable("gui.chrysalis.commands.velocity.set.success.multiple", x, y, z, entities.size());
                 }
             }
 

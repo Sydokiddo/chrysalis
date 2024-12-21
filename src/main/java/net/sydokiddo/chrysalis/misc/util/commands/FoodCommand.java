@@ -21,23 +21,23 @@ public class FoodCommand {
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(Commands.literal("food").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).then(Commands.argument(targetString, EntityArgument.player())
 
-        .then(Commands.literal("add")
-            .then(Commands.argument(nutritionAmountString, IntegerArgumentType.integer(1))
-            .then(Commands.argument(saturationAmountString, FloatArgumentType.floatArg(1))
-            .executes((commandContext) -> addHungerPoints(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), IntegerArgumentType.getInteger(commandContext, nutritionAmountString), FloatArgumentType.getFloat(commandContext, saturationAmountString)))))
-        )
+            .then(Commands.literal("add")
+                .then(Commands.argument(nutritionAmountString, IntegerArgumentType.integer(1))
+                .then(Commands.argument(saturationAmountString, FloatArgumentType.floatArg(1))
+                .executes((commandContext) -> addHungerPoints(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), IntegerArgumentType.getInteger(commandContext, nutritionAmountString), FloatArgumentType.getFloat(commandContext, saturationAmountString)))))
+            )
 
-        .then(Commands.literal("remove")
-            .then(Commands.argument(nutritionAmountString, IntegerArgumentType.integer(1))
-            .then(Commands.argument(saturationAmountString, FloatArgumentType.floatArg(1))
-            .executes((commandContext) -> removeHungerPoints(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), IntegerArgumentType.getInteger(commandContext, nutritionAmountString), FloatArgumentType.getFloat(commandContext, saturationAmountString)))))
-        )
+            .then(Commands.literal("remove")
+                .then(Commands.argument(nutritionAmountString, IntegerArgumentType.integer(1))
+                .then(Commands.argument(saturationAmountString, FloatArgumentType.floatArg(1))
+                .executes((commandContext) -> removeHungerPoints(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), IntegerArgumentType.getInteger(commandContext, nutritionAmountString), FloatArgumentType.getFloat(commandContext, saturationAmountString)))))
+            )
 
-        .then(Commands.literal("set")
-            .then(Commands.argument(nutritionAmountString, IntegerArgumentType.integer())
-            .then(Commands.argument(saturationAmountString, FloatArgumentType.floatArg())
-            .executes((commandContext) -> setHungerPoints(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), IntegerArgumentType.getInteger(commandContext, nutritionAmountString), FloatArgumentType.getFloat(commandContext, saturationAmountString)))))
-        )
+            .then(Commands.literal("set")
+                .then(Commands.argument(nutritionAmountString, IntegerArgumentType.integer())
+                .then(Commands.argument(saturationAmountString, FloatArgumentType.floatArg())
+                .executes((commandContext) -> setHungerPoints(commandContext.getSource(), EntityArgument.getPlayer(commandContext, targetString), IntegerArgumentType.getInteger(commandContext, nutritionAmountString), FloatArgumentType.getFloat(commandContext, saturationAmountString)))))
+            )
         ));
     }
 

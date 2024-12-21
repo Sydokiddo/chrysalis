@@ -24,24 +24,24 @@ public class CameraShakeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(Commands.literal("camerashake").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).then(Commands.argument(targetsString, EntityArgument.players())
 
-        .then(Commands.argument(timeString, IntegerArgumentType.integer(1))
-            .then(Commands.argument(strengthString, IntegerArgumentType.integer(1))
-            .then(Commands.argument(frequencyString, IntegerArgumentType.integer(1))
-            .executes((commandContext) -> shakeCamera(commandContext.getSource(), EntityArgument.getPlayers(commandContext, targetsString),
-            IntegerArgumentType.getInteger(commandContext, timeString), IntegerArgumentType.getInteger(commandContext, strengthString), IntegerArgumentType.getInteger(commandContext, frequencyString)))))
-        )
+            .then(Commands.argument(timeString, IntegerArgumentType.integer(1))
+                .then(Commands.argument(strengthString, IntegerArgumentType.integer(1))
+                .then(Commands.argument(frequencyString, IntegerArgumentType.integer(1))
+                .executes((commandContext) -> shakeCamera(commandContext.getSource(), EntityArgument.getPlayers(commandContext, targetsString),
+                IntegerArgumentType.getInteger(commandContext, timeString), IntegerArgumentType.getInteger(commandContext, strengthString), IntegerArgumentType.getInteger(commandContext, frequencyString)))))
+            )
 
-        .then(Commands.literal(resetString)
-            .executes((commandContext) -> resetCameraShake(commandContext.getSource(), EntityArgument.getPlayers(commandContext, targetsString)))
-        )
+            .then(Commands.literal(resetString)
+                .executes((commandContext) -> resetCameraShake(commandContext.getSource(), EntityArgument.getPlayers(commandContext, targetsString)))
+            )
         ));
     }
 
     private static int shakeCamera(CommandSourceStack commandSourceStack, Collection<? extends Player> players, int time, int strength, int frequency) {
 
         int returnValue = 0;
-        Component successSingleMessage = Component.translatable("gui.chrysalis.commands.camera_shake.success_single", players.iterator().next().getDisplayName());
-        Component successMultipleMessage = Component.translatable("gui.chrysalis.commands.camera_shake.success_multiple", players.size());
+        Component successSingleMessage = Component.translatable("gui.chrysalis.commands.camera_shake.success.single", players.iterator().next().getDisplayName());
+        Component successMultipleMessage = Component.translatable("gui.chrysalis.commands.camera_shake.success.multiple", players.size());
 
         for (Player player : players) {
             if (player instanceof ServerPlayer serverPlayer) EventHelper.sendCameraShake(serverPlayer, time, strength, frequency);
@@ -56,8 +56,8 @@ public class CameraShakeCommand {
     private static int resetCameraShake(CommandSourceStack commandSourceStack, Collection<? extends Player> players) {
 
         int returnValue = 0;
-        Component successSingleMessage = Component.translatable("gui.chrysalis.commands.camera_shake.reset.success_single", players.iterator().next().getDisplayName());
-        Component successMultipleMessage = Component.translatable("gui.chrysalis.commands.camera_shake.reset.success_multiple", players.size());
+        Component successSingleMessage = Component.translatable("gui.chrysalis.commands.camera_shake.reset.success.single", players.iterator().next().getDisplayName());
+        Component successMultipleMessage = Component.translatable("gui.chrysalis.commands.camera_shake.reset.success.multiple", players.size());
 
         for (Player player : players) {
             if (player instanceof ServerPlayer serverPlayer) EventHelper.resetCameraShake(serverPlayer);

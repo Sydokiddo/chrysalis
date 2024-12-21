@@ -31,8 +31,8 @@ public class HatCommand {
         ItemStack currentHeadItem = serverPlayer.getItemBySlot(EquipmentSlot.HEAD);
 
         Component successText = Component.translatable("gui.chrysalis.commands.hat.success", heldItem.getDisplayName(), serverPlayer.getDisplayName());
-        Component failNoItemText = Component.translatable("gui.chrysalis.commands.hat.fail_no_item").withStyle(ChatFormatting.RED);
-        Component failInvalidItemText = Component.translatable("gui.chrysalis.commands.hat.fail_invalid_item", heldItem.getDisplayName(), serverPlayer.getDisplayName()).withStyle(ChatFormatting.RED);
+        Component failNoItemText = Component.translatable("gui.chrysalis.commands.hat.fail.no_item").withStyle(ChatFormatting.RED);
+        Component failInvalidItemText = Component.translatable("gui.chrysalis.commands.hat.fail.invalid_item", heldItem.getDisplayName(), serverPlayer.getDisplayName()).withStyle(ChatFormatting.RED);
 
         if (heldItem.isEmpty()) {
             serverPlayer.sendSystemMessage(failNoItemText);
