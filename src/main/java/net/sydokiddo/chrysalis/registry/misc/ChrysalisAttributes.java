@@ -10,8 +10,8 @@ import net.sydokiddo.chrysalis.Chrysalis;
 public class ChrysalisAttributes {
 
     public static final Holder<Attribute>
-        GENERIC_REDUCED_DETECTION_RANGE = registerAttribute("generic.reduced_detection_range", 0.0D, 0.0D, 1.0D),
-        GENERIC_DAMAGE_CAPACITY = registerAttribute("generic.damage_capacity", Double.MAX_VALUE, 1.0D, Double.MAX_VALUE)
+        REDUCED_DETECTION_RANGE = registerAttribute("reduced_detection_range", 0.0D, 0.0D, 1.0D),
+        DAMAGE_CAPACITY = registerAttribute("damage_capacity", Double.MAX_VALUE, 1.0D, Double.MAX_VALUE)
     ;
 
     public static Holder<Attribute> registerAttribute(String name, double baseValue, double minValue, double maxValue) {

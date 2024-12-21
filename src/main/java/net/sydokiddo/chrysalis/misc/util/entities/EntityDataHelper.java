@@ -116,7 +116,7 @@ public class EntityDataHelper {
 
     public static float getDamageCap(LivingEntity livingEntity, DamageSource damageSource, float originalDamage) {
 
-        float damageCap = (float) livingEntity.getAttributeValue(ChrysalisAttributes.GENERIC_DAMAGE_CAPACITY);
+        float damageCap = (float) livingEntity.getAttributeValue(ChrysalisAttributes.DAMAGE_CAPACITY);
 
         if (originalDamage > damageCap && originalDamage < Float.MAX_VALUE && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             if (Chrysalis.IS_DEBUG && !livingEntity.level().isClientSide()) Chrysalis.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);

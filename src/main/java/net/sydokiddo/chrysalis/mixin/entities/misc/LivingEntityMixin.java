@@ -33,8 +33,8 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
     private static void chrysalis$addLivingEntityAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> info) {
         if (info.getReturnValue() != null) {
-            info.getReturnValue().add(ChrysalisAttributes.GENERIC_REDUCED_DETECTION_RANGE);
-            info.getReturnValue().add(ChrysalisAttributes.GENERIC_DAMAGE_CAPACITY);
+            info.getReturnValue().add(ChrysalisAttributes.REDUCED_DETECTION_RANGE);
+            info.getReturnValue().add(ChrysalisAttributes.DAMAGE_CAPACITY);
         }
     }
 
@@ -58,7 +58,7 @@ public abstract class LivingEntityMixin extends Entity {
             if (livingEntity.getType().is(ChrysalisTags.ENDER) && this.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.GAZE_DISGUISE_EQUIPMENT)) {
                 cir.setReturnValue(cir.getReturnValue() * 0.5D);
             } else {
-                double reducedDetectionRangeAttribute = this.getAttributeValue(ChrysalisAttributes.GENERIC_REDUCED_DETECTION_RANGE);
+                double reducedDetectionRangeAttribute = this.getAttributeValue(ChrysalisAttributes.REDUCED_DETECTION_RANGE);
                 if (reducedDetectionRangeAttribute > 0.0D) cir.setReturnValue(cir.getReturnValue() * (1.0D - reducedDetectionRangeAttribute));
             }
         }
