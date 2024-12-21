@@ -1,7 +1,7 @@
 {
   "entries": [
     { "text": { "text": "Powered by Chrysalis!", "color": "#A27FFF" }, "weight": 20 },
-    { "text": { "text": "\ua000", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1000 },
+    { "text": { "text": "\ua000", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 5 },
     { "text": "Flutter away!", "weight": 5 },
     { "text": { "text": "Uses custom fonts!", "font": "chrysalis:five" }, "weight": 1 },
     { "text": { "text": "Uses bold text!", "bold": true }, "weight": 1 },
