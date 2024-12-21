@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
@@ -8,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.Vec3;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
@@ -47,5 +49,15 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
         }
 
         return super.hurtEnemy(itemStack, target, self);
+    }
+
+    @Override
+    public boolean shouldDisplayCrosshair(Player player) {
+        return super.shouldDisplayCrosshair(player) && player.getMainHandItem().getItem() == this;
+    }
+
+    @Override
+    public ResourceLocation getCrosshairTextureLocation() {
+        return Chrysalis.id("hud/kill_wand_crosshair");
     }
 }

@@ -5,6 +5,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -19,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
@@ -114,5 +116,10 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
     private static void addGlowingEffect(Mob mob) {
         mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 10, 0, false, false, false));
+    }
+
+    @Override
+    public ResourceLocation getCrosshairTextureLocation() {
+        return Chrysalis.id("hud/aggro_wand_crosshair");
     }
 }
