@@ -44,7 +44,7 @@ public class HealItem extends DebugUtilityItem {
 
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.HEAL_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-                this.addParticlesAroundPlayer(serverPlayer, ParticleTypes.HEART);
+                addParticlesAroundEntity(serverPlayer, ParticleTypes.HEART, 10, 1.0D);
 
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.setHealth(serverPlayer.getMaxHealth());

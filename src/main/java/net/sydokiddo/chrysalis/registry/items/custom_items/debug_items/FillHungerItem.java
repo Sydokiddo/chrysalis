@@ -46,7 +46,7 @@ public class FillHungerItem extends DebugUtilityItem {
 
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.FILL_HUNGER_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-                this.addParticlesAroundPlayer(serverPlayer, new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.COOKED_BEEF)));
+                addParticlesAroundEntity(serverPlayer, new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.COOKED_BEEF)), 10, 1.0D);
 
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.getFoodData().setFoodLevel(20);

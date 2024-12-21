@@ -6,6 +6,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,13 +41,13 @@ public class DebugUtilityItem extends EnchantedGlintItem {
         return !player.isCreative();
     }
 
-    public void addParticlesAroundPlayer(Player player, ParticleOptions particleType) {
+    public static void addParticlesAroundEntity(Entity entity, ParticleOptions particleType, int amount, double range) {
 
-        if (!(player.level() instanceof ServerLevel serverLevel)) return;
+        if (!(entity.level() instanceof ServerLevel serverLevel)) return;
 
-        for (int particleAmount = 0; particleAmount < 10; ++particleAmount) {
+        for (int particleAmount = 0; particleAmount < amount; ++particleAmount) {
             double random = serverLevel.getRandom().nextGaussian() * 0.02D;
-            serverLevel.sendParticles(particleType, player.getRandomX(1.0D), player.getRandomY() + 0.5D, player.getRandomZ(1.0D), 1, 0.0D, random, random, random);
+            serverLevel.sendParticles(particleType, entity.getRandomX(range), entity.getRandomY() + 0.5D, entity.getRandomZ(range), 1, 0.0D, random, random, random);
         }
     }
 }

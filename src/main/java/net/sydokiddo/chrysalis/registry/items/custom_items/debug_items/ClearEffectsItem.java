@@ -44,7 +44,7 @@ public class ClearEffectsItem extends DebugUtilityItem {
 
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.CLEAR_EFFECTS_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-                this.addParticlesAroundPlayer(serverPlayer, ParticleTypes.EFFECT);
+                addParticlesAroundEntity(serverPlayer, ParticleTypes.EFFECT, 10, 1.0D);
 
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.removeAllEffects();

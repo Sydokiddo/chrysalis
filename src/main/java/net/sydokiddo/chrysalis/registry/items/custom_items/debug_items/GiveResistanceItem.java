@@ -48,7 +48,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
 
             serverPlayer.playNotifySound(ChrysalisSoundEvents.GIVE_RESISTANCE_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
             serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            this.addParticlesAroundPlayer(serverPlayer, new BlockParticleOption(ParticleTypes.BLOCK, Blocks.IRON_BLOCK.defaultBlockState()));
+            addParticlesAroundEntity(serverPlayer, new BlockParticleOption(ParticleTypes.BLOCK, Blocks.IRON_BLOCK.defaultBlockState()), 10, 1.0D);
 
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
             Holder<MobEffect> resistance = MobEffects.DAMAGE_RESISTANCE;

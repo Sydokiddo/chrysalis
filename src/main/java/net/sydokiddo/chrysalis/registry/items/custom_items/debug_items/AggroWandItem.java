@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -83,10 +84,14 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                 Mob linkedMob = (Mob) serverPlayer.serverLevel().getEntity(getCustomData(itemStack).copyTag().getUUID(mobUuidString));
 
                 if (linkedMob != null) {
-                    addGlowingEffect(mob);
+
+                    addVisualEffects(mob);
+                    addParticlesAroundEntity(linkedMob, ParticleTypes.ANGRY_VILLAGER, 5, 1.5D);
                     linkedMob.setTarget(livingEntity);
+
                     serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS, SoundSource.PLAYERS, 1.0F, 1.0F);
                     serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.aggro_wand.set_target", livingEntity.getName().getString(), linkedMob.getName().getString()));
+
                 } else {
                     serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
                     serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.aggro_wand.linked_mob_missing"));
@@ -98,7 +103,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
             } else {
 
-                addGlowingEffect(mob);
+                addVisualEffects(mob);
                 ItemStack linkedWand = itemStack.copy();
 
                 CustomData.update(customDataComponent, linkedWand, (compoundTag) -> {
@@ -120,7 +125,8 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         return InteractionResult.PASS;
     }
 
-    private static void addGlowingEffect(Mob mob) {
+    private static void addVisualEffects(Mob mob) {
+        addParticlesAroundEntity(mob, ParticleTypes.HAPPY_VILLAGER, 10, 1.5D);
         mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 10, 0, false, false, false));
     }
 
