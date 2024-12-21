@@ -1,5 +1,7 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -71,11 +73,13 @@ public class TeleportWandItem extends DebugUtilityItem implements CustomCrosshai
         return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean shouldDisplayCrosshair(Player player) {
         return this.getHitResult(player).getType() == HitResult.Type.BLOCK;
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public ResourceLocation getCrosshairTextureLocation() {
         return Chrysalis.id("hud/teleport_wand_crosshair");

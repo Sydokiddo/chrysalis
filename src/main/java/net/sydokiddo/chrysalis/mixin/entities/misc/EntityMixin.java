@@ -1,5 +1,7 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
@@ -30,6 +32,7 @@ public abstract class EntityMixin {
     @Shadow public abstract boolean isAttackable();
     @Shadow public abstract boolean isAlive();
 
+    @Environment(EnvType.CLIENT)
     @Inject(method = "getPickRadius", at = @At("RETURN"), cancellable = true)
     private void chrysalis$increasedPickRadius(CallbackInfoReturnable<Float> cir) {
 

@@ -1,5 +1,7 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
@@ -32,6 +34,8 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         super(properties);
     }
 
+    // region Item Components
+
     private static final String
         mobNameString = "mob_name",
         mobUuidString = "mob_uuid"
@@ -50,6 +54,8 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
     public static boolean hasMobUUID(ItemStack itemStack) {
         return getCustomData(itemStack).contains(mobUuidString);
     }
+
+    // endregion
 
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
@@ -118,6 +124,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 10, 0, false, false, false));
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public ResourceLocation getCrosshairTextureLocation() {
         return Chrysalis.id("hud/aggro_wand_crosshair");

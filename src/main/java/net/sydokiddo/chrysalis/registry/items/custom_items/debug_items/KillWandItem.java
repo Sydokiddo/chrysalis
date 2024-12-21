@@ -1,5 +1,7 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -51,11 +53,13 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
         return super.hurtEnemy(itemStack, target, self);
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean shouldDisplayCrosshair(Player player) {
         return super.shouldDisplayCrosshair(player) && player.getMainHandItem().getItem() == this;
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public ResourceLocation getCrosshairTextureLocation() {
         return Chrysalis.id("hud/kill_wand_crosshair");
