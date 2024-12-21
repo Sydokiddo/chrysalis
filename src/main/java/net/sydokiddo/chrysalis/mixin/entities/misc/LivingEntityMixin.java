@@ -43,7 +43,7 @@ public abstract class LivingEntityMixin extends Entity {
     /**
      * Mobs are now affected by the Blindness status effect, which decreases their visibility percentage depending on the amplifier of the effect.
      * <p>
-     * Additionally, Ender mobs now have reduced visibility of entities wearing anything in their helmet slot that is in the protects_against_endermen tag.
+     * Additionally, Ender mobs now have reduced visibility of entities wearing anything in their helmet slot that is in the gaze_disguise_equipment tag.
      **/
 
     @Inject(method = "getVisibilityPercent", at = @At(value = "RETURN"), cancellable = true)
