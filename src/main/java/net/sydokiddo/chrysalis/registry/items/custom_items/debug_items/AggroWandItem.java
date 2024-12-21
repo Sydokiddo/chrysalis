@@ -14,8 +14,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -85,7 +83,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
                 if (linkedMob != null) {
 
-                    addVisualEffects(mob);
+                    addSparkleParticles(mob);
                     addParticlesAroundEntity(linkedMob, ParticleTypes.ANGRY_VILLAGER, 5, 1.5D);
                     linkedMob.setTarget(livingEntity);
 
@@ -103,7 +101,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
             } else {
 
-                addVisualEffects(mob);
+                addSparkleParticles(mob);
                 ItemStack linkedWand = itemStack.copy();
 
                 CustomData.update(customDataComponent, linkedWand, (compoundTag) -> {
@@ -125,9 +123,8 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         return InteractionResult.PASS;
     }
 
-    private static void addVisualEffects(Mob mob) {
+    private static void addSparkleParticles(Mob mob) {
         addParticlesAroundEntity(mob, ParticleTypes.HAPPY_VILLAGER, 10, 1.5D);
-        mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 10, 0, false, false, false));
     }
 
     @Environment(EnvType.CLIENT)
