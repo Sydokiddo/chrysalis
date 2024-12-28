@@ -36,6 +36,7 @@ public class WeatherFixMixin {
         if (WorldGenHelper.isNetherOrEnd(clientLevel)) info.cancel();
     }
 
+    @SuppressWarnings("unused")
     @Mixin(ServerLevel.class)
     public static abstract class SnowFixMixin {
 

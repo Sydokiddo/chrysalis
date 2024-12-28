@@ -14,7 +14,9 @@ import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,12 +43,12 @@ public abstract class EntityRendererMixin {
     @Inject(method = "getBlockLightLevel", at = @At("RETURN"), cancellable = true)
     private void chrysalis$playerHandRadianceGlowing(Entity entity, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
 
+        Minecraft minecraft = Minecraft.getInstance();
         Holder<MobEffect> radianceEffect = ChrysalisEffects.RADIANCE;
 
-        if (entity instanceof Player player && player == Minecraft.getInstance().player && player.hasEffect(radianceEffect) && Minecraft.getInstance().options.getCameraType().isFirstPerson()) {
-            int returnValue = Math.min(Objects.requireNonNull(player.getEffect(radianceEffect)).getDuration(), 15);
-            if (cir.getReturnValue() != null && returnValue <= cir.getReturnValue()) return;
-            cir.setReturnValue(returnValue);
+        if (entity instanceof Player player && player == minecraft.player && player.hasEffect(radianceEffect) && minecraft.options.getCameraType().isFirstPerson()) {
+            MobEffectInstance radianceEffectInstance = Objects.requireNonNull(player.getEffect(radianceEffect));
+            cir.setReturnValue(Mth.lerpInt(radianceEffectInstance.getBlendFactor(player, minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(false)), cir.getReturnValue(), 15));
         }
     }
 
