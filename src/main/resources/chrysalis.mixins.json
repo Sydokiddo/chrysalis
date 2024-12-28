@@ -71,6 +71,7 @@
     "misc.MinecraftMixin",
     "misc.ScreenshotMainMixin",
     "misc.ScreenshotRecorderMixin",
+    "misc.SplashRendererMixin",
     "misc.TitleScreenMixin",
     "misc.WeatherFixMixin",
     "misc.WeatherFixMixin$SnowFixMixin"

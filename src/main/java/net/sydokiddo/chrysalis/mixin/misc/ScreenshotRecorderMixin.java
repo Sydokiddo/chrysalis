@@ -40,7 +40,7 @@ public class ScreenshotRecorderMixin {
         Minecraft minecraft = Minecraft.getInstance();
 
         try {
-            minecraft.getSoundManager().play(SimpleSoundInstance.forUI(ChrysalisSoundEvents.UI_SCREENSHOT_SUCCESS, 1.0F));
+            minecraft.getSoundManager().play(SimpleSoundInstance.forUI(ChrysalisSoundEvents.SCREENSHOT_SUCCESS, 1.0F));
 
             Path path = minecraft.gameDirectory.toPath().resolve(Screenshot.SCREENSHOT_DIR);
             Optional<Path> lastFilePath = Files.list(path).filter(directory -> !Files.isDirectory(directory)).max(Comparator.comparingLong(directory -> directory.toFile().lastModified()));

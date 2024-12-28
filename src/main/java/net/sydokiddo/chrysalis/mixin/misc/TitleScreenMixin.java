@@ -6,7 +6,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.sounds.SoundEvents;
+import net.sydokiddo.chrysalis.misc.util.splash_texts.SplashTextLoader;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,8 +34,9 @@ public class TitleScreenMixin {
         float maxRangeY = 25.0F;
         if (x > splashTextX + maxRangeX || x < splashTextX - maxRangeX || y > splashTextY + maxRangeY || y < splashTextY - maxRangeY) return;
 
-        minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+        minecraft.getSoundManager().play(SimpleSoundInstance.forUI(ChrysalisSoundEvents.SPLASH_TEXT_SHUFFLE, 1.0F));
         this.splash = null;
         this.splash = minecraft.getSplashManager().getSplash();
+        SplashTextLoader.lifeTime = 0;
     }
 }

@@ -2,7 +2,15 @@
   "ui.screenshot.success": {
     "sounds": [
       {
-        "name": "chrysalis:ui/screenshot",
+        "name": "chrysalis:ui/screenshot_success",
+        "stream": true
+      }
+    ]
+  },
+  "ui.splash_text.shuffle": {
+    "sounds": [
+      {
+        "name": "chrysalis:ui/splash_text_shuffle",
         "stream": true
       }
     ]
