@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Chrysalis",
-  "description": "Flying past the boundaries of what you can do with a library mod!",
+  "description": "Flying past the boundaries of what you can do with a Minecraft library mod!",
   "authors": [
     "Sydokiddo (Lead Developer)",
     "Amber Gray (Miscellaneous)",
@@ -16,7 +16,7 @@
     "issues": "https://github.com/Sydokiddo/chrysalis/issues",
     "sources": "https://github.com/Sydokiddo/chrysalis"
   },
-  "license": "Custom License",
+  "license": "Chrysalis License",
   "icon": "assets/chrysalis/icon.png",
   "accessWidener": "chrysalis.accesswidener",
   "environment": "*",

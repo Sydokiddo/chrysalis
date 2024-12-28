@@ -1,21 +1,42 @@
-MIT License
-
+This license describes the terms of usage across any of our projects. These terms may be subject to change at any time.
 Copyright (c) 2024 Sydokiddo
+Last Updated: 12/27/2024
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+|=================|
+| PERMITTED USAGE |
+|=================|
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+You are fully entitled to:
+- Use and enjoy this content freely, or integrate Chrysalis into your own projects.
+- Host this content on multiplayer servers.
+- View and use excerpts of this project's code, as long as credit is provided.
+- Modify this project's code for personal use.
+- Include this project in mod packs.
+- Create similar projects, as long as the idea is transformative and unique from our implementation of it.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+|==================|
+| PROHIBITED USAGE |
+|==================|
+
+Unless you are given explicit permission, you are not allowed to:
+- Republish, re-upload, or otherwise reuse this project's model, texture, and audio assets.
+- Republish, re-upload, or otherwise redistribute this project.
+    * Should you make re-textures or other asset changes, those are permitted to upload; however, said re-uploads must not contain any original assets from the project.
+- Directly profit off of this project in any way.
+- Use this project as a part of a promotion for any paid material.
+If you are in doubt of anything, or simply just want permission for other usage, please ask.
+
+|========|
+| CREDIT |
+|========|
+
+If the following apply:
+- You are redistributing this project's assets in any way (with explicit permission),
+- You are distributing a resource pack that modifies this project (i.e. asset changes),
+- You are using this project in a mod pack,
+then proper credit is required.
+
+Proper credit includes:
+- A link to this project's GitHub, Modrinth, or CurseForge page,
+- A mention of the relevant project(s),
+- Optionally, what specifically has been modified.
