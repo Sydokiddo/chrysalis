@@ -2,10 +2,13 @@ package net.sydokiddo.chrysalis.mixin.misc;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.Optionull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.User;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.SplashManager;
+import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
@@ -26,6 +29,7 @@ public class MinecraftMixin {
 
     @Shadow @Final private User user;
     @Shadow @Nullable public LocalPlayer player;
+    @Shadow @Nullable public Screen screen;
 
     @Inject(method = "getSplashManager", at = @At("RETURN"), cancellable = true)
     private void chrysalis$getSplashManager(CallbackInfoReturnable<SplashManager> cir) {
@@ -33,14 +37,14 @@ public class MinecraftMixin {
     }
 
     @Inject(method = "getSituationalMusic", at = @At("RETURN"), cancellable = true)
-    private void chrysalis$getStructureMusic(CallbackInfoReturnable<Music> cir) {
+    private void chrysalis$getStructureMusic(CallbackInfoReturnable<MusicInfo> cir) {
 
-        Music music = cir.getReturnValue();
+        Music music = Optionull.map(this.screen, Screen::getBackgroundMusic);
         if (music == Musics.MENU) ChrysalisClient.setStructureMusic(null);
 
         if (music != Musics.MENU && music != Musics.CREATIVE && music != Musics.END_BOSS && music != Musics.CREDITS) {
             @Nullable Music structureMusic = ChrysalisClient.getStructureMusic();
-            if (structureMusic != null) cir.setReturnValue(structureMusic);
+            if (structureMusic != null) cir.setReturnValue(new MusicInfo(structureMusic));
         }
     }
 

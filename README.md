@@ -4,7 +4,7 @@
 
 Flying past the boundaries of what you can do with a Minecraft library mod!
 
-Chrysalis is a library mod for [Fabric](https://fabricmc.net) 1.21.2 with built-in features to assist with mod development and to make modding a bit more accessible for developers!
+Chrysalis is a library mod for [Fabric](https://fabricmc.net) 1.21.4 with built-in features to assist with mod development and to make modding a bit more accessible for developers!
 
 ## **Information**
 

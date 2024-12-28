@@ -2,9 +2,6 @@
   "values": [
     "#minecraft:wool",
     "#minecraft:wool_carpets",
-    "minecraft:moss_carpet",
-    {"id": "minecraft:pale_moss_carpet", "required": false},
-    {"id": "minecraft:pale_hanging_moss", "required": false},
     "minecraft:short_grass",
     "minecraft:tall_grass",
     "minecraft:fern",
@@ -25,6 +22,7 @@
     "#minecraft:leaves",
     "minecraft:vine",
     "#minecraft:cave_vines",
+    "minecraft:pale_hanging_moss",
     "minecraft:weeping_vines",
     "minecraft:weeping_vines_plant",
     "minecraft:twisting_vines",

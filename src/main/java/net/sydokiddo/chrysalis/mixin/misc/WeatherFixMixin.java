@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.WeatherEffectRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ParticleStatus;
@@ -26,8 +26,8 @@ public class WeatherFixMixin {
      * Fixes a vanilla bug where occasionally when going through portals when the world is loading, rain can sometimes display in dimensions where rain doesn't exist.
      **/
 
-    @Inject(method = "render(Lnet/minecraft/world/level/Level;Lnet/minecraft/client/renderer/LightTexture;IFLnet/minecraft/world/phys/Vec3;)V", at = @At(value = "HEAD"), cancellable = true)
-    private void chrysalis$preventWeatherRenderingInNetherAndEnd(Level level, LightTexture lightTexture, int int1, float float1, Vec3 vec3, CallbackInfo info) {
+    @Inject(method = "render(Lnet/minecraft/world/level/Level;Lnet/minecraft/client/renderer/MultiBufferSource;IFLnet/minecraft/world/phys/Vec3;)V", at = @At(value = "HEAD"), cancellable = true)
+    private void chrysalis$preventWeatherRenderingInNetherAndEnd(Level level, MultiBufferSource multiBufferSource, int int1, float float1, Vec3 vec3, CallbackInfo info) {
         if (WorldGenHelper.isNetherOrEnd(level)) info.cancel();
     }
 

@@ -16,8 +16,8 @@ public class CSpawnEggItem extends SpawnEggItem {
 
     private final EntityType<? extends Mob> mobOffspring;
 
-    public CSpawnEggItem(EntityType<? extends Mob> entityType, int baseColor, int spotsColor, EntityType<? extends Mob> mobOffspring, Properties properties) {
-        super(entityType, baseColor, spotsColor, properties);
+    public CSpawnEggItem(EntityType<? extends Mob> entityType, EntityType<? extends Mob> mobOffspring, Properties properties) {
+        super(entityType, properties);
         this.mobOffspring = mobOffspring;
     }
 

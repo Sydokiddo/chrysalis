@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.registry.items.custom_items;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -15,7 +16,7 @@ public class MobInSolidBucketItem extends MobInContainerItem {
 
     private final Block blockType;
 
-    public MobInSolidBucketItem(EntityType<?> entityType, Block blockType, SoundEvent emptySound, Properties properties) {
+    public MobInSolidBucketItem(EntityType<? extends Mob> entityType, Block blockType, SoundEvent emptySound, Properties properties) {
         super(entityType, emptySound, properties);
         this.blockType = blockType;
     }

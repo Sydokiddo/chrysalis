@@ -60,7 +60,7 @@ public class ChrysalisExampleRegistry {
         Item::new, RegistryHelper.musicDiscProperties(JukeboxSongs.CAT, Rarity.COMMON));
 
     public static final Item EXAMPLE_SPAWN_EGG = ChrysalisDebugItems.registerItem("example_spawn_egg",
-        properties -> new CSpawnEggItem(EntityType.FROG, 16777215, 13421772, EntityType.TADPOLE, properties), new Item.Properties());
+        properties -> new CSpawnEggItem(EntityType.FROG, EntityType.TADPOLE, properties), new Item.Properties());
 
     public static final Item EXAMPLE_MOB_CUSTOM_CONTAINER = ChrysalisDebugItems.registerItem("example_mob_custom_container",
         properties -> new MobInContainerItem(EntityType.ALLAY, SoundEvents.BUCKET_EMPTY, properties), RegistryHelper.mobContainerProperties(Items.GLASS_BOTTLE, Rarity.COMMON));

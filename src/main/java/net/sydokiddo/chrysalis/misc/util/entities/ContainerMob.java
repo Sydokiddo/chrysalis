@@ -91,7 +91,7 @@ public interface ContainerMob {
             player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemInHand, player, resultItemStack, false));
 
             if (!livingEntity.level().isClientSide() && player instanceof ServerPlayer serverPlayer) CriteriaTriggers.FILLED_BUCKET.trigger(serverPlayer, resultItemStack);
-            if (containerMob instanceof Mob mob && mob.isLeashed()) mob.dropLeash(true, true);
+            if (containerMob instanceof Mob mob && mob.isLeashed()) mob.dropLeash();
             livingEntity.discard();
             return Optional.of(InteractionResult.SUCCESS);
 
