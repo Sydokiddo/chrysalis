@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
+import net.minecraft.client.main.Main;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.sydokiddo.chrysalis.Chrysalis;
@@ -26,7 +27,7 @@ import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
 @Mixin(Screenshot.class)
-public class ScreenshotRecorderMixin {
+public class ScreenshotMixin {
 
     /**
      * Copies screenshots to the user's clipboard upon taking a screenshot.
@@ -57,6 +58,21 @@ public class ScreenshotRecorderMixin {
         } catch (Exception exception) {
             Chrysalis.LOGGER.warn("Failed to copy screenshot to clipboard", exception);
             exception.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("unused")
+    @Environment(EnvType.CLIENT)
+    @Mixin(Main.class)
+    public static class MainMixin {
+
+        /**
+         * Additional mixin code for the screenshot to clipboard feature.
+         **/
+
+        @Inject(method = "main", at = @At("HEAD"), remap = false)
+        private static void chrysalis$setScreenshotProperty(CallbackInfo info) {
+            System.setProperty("java.awt.headless", "false");
         }
     }
 }
