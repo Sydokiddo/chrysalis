@@ -46,19 +46,18 @@ public class CameraShakeHandler {
             float roll = (float) (cameraSetup.getRoll() + strength * Math.cos(ticksExistedDelta * frequency));
 
             if (!Minecraft.getInstance().isPaused()) {
-
-                cameraSetup.setYaw(yaw);
-                cameraSetup.setPitch(pitch);
-                cameraSetup.setRoll(roll);
-
-                if (CameraShakeHandler.time <= 5) {
+                if (CameraShakeHandler.time > 5) {
+                    cameraSetup.setYaw(yaw);
+                    cameraSetup.setPitch(pitch);
+                    cameraSetup.setRoll(roll);
+                } else {
                     cameraSetup.setYaw(Mth.lerp(delta, yaw, 0));
                     cameraSetup.setPitch(Mth.lerp(delta, pitch, 0));
                     cameraSetup.setRoll(Mth.lerp(delta, roll, 0));
                 }
             }
 
-        } else if (CameraShakeHandler.strength != 0) {
+        } else {
             CameraShakeHandler.resetCamera();
         }
     }
