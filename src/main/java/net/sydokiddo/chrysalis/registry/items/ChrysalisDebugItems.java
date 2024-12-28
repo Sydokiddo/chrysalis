@@ -33,7 +33,7 @@ public class ChrysalisDebugItems {
 
     // endregion
 
-    // Registry
+    // region Registry
 
     private static Item.Properties debugUtilitySettings() {
         return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC);
@@ -54,4 +54,6 @@ public class ChrysalisDebugItems {
     }
 
     public static void registerDebugItems() {}
+
+    // endregion
 }

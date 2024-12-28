@@ -26,6 +26,8 @@ public class ChrysalisParticles {
 
     public static final net.sydokiddo.chrysalis.misc.util.CoreRegistry<ParticleType<?>> PARTICLES = CoreRegistry.create(Registries.PARTICLE_TYPE, Chrysalis.MOD_ID);
 
+    // region Particles
+
     public static final SimpleParticleType
         MEMORY_FLAME = registerSimpleParticle("memory_flame", false),
         RADIANCE = registerSimpleParticle("radiance", false)
@@ -34,6 +36,10 @@ public class ChrysalisParticles {
     public static final ParticleType<ColoredDustPlumeParticleOptions> COLORED_DUST_PLUME = registerAdvancedParticle(
         "colored_dust_plume", false, particleType -> ColoredDustPlumeParticleOptions.CODEC, particleType -> ColoredDustPlumeParticleOptions.STREAM_CODEC
     );
+
+    // endregion
+
+    // region Registry
 
     @SuppressWarnings("all")
     private static SimpleParticleType registerSimpleParticle(String name, boolean alwaysSpawn) {
@@ -63,4 +69,6 @@ public class ChrysalisParticles {
         registry.register(RADIANCE, SpellParticle.Provider::new);
         registry.register(COLORED_DUST_PLUME, ColoredDustPlumeParticle.ColoredDustPlumeParticleProvider::new);
     }
+
+    // endregion
 }

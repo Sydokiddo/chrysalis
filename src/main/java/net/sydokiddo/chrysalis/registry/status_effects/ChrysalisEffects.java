@@ -12,12 +12,20 @@ import java.awt.*;
 
 public class ChrysalisEffects {
 
+    // region Status Effects
+
     public static final Holder<MobEffect> RADIANCE = registerStatusEffect("radiance",
     new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#FFFFB2").getRGB(), ChrysalisParticles.RADIANCE).setBlendDuration(5));
+
+    // endregion
+
+    // region Registry
 
     public static Holder<MobEffect> registerStatusEffect(String name, MobEffect statusEffect) {
         return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Chrysalis.id(name), statusEffect);
     }
 
     public static void registerStatusEffects() {}
+
+    // endregion
 }

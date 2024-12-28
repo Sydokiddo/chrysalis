@@ -136,7 +136,7 @@ public class ChrysalisTags {
     ;
 
     /**
-     * Entity Tags
+     * Entity Type Tags
      **/
 
     public static final TagKey<EntityType<?>>

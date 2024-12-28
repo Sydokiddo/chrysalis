@@ -10,6 +10,10 @@ import net.sydokiddo.chrysalis.registry.entities.custom_entities.Seat;
 
 public interface SittableBlock {
 
+    /**
+     * Any block that integrates this interface can be sat on by utilizing the seat entity.
+     **/
+
     static boolean isSittable() {
         return true;
     }

@@ -7,7 +7,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 
 public class ChrysalisDamageSources {
 
-    // Damage Sources
+    // region Damage Sources
 
     @SuppressWarnings("unused")
     public static final ResourceKey<DamageType>
@@ -18,11 +18,15 @@ public class ChrysalisDamageSources {
         KILL_WAND = register("kill_wand")
     ;
 
-    // Registry
+    // endregion
+
+    // region Registry
 
     private static ResourceKey<DamageType> register(String name) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, Chrysalis.id(name));
     }
 
     public static void registerDamageSources() {}
+
+    // endregion
 }

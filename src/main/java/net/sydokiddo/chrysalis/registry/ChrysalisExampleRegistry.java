@@ -75,7 +75,7 @@ public class ChrysalisExampleRegistry {
         SmithingTemplateItem::createArmorTrimTemplate, new Item.Properties().rarity(Rarity.UNCOMMON));
 
     public static final Item EXAMPLE_UPGRADE_SMITHING_TEMPLATE = ChrysalisDebugItems.registerItem("example_upgrade_smithing_template",
-        properties -> ModSmithingTemplateItem.createUpgradeTemplate("minecraft", "netherite_upgrade", ModSmithingTemplateItem.EMPTY_SLOT_INGOT, properties),
+        properties -> CSmithingTemplateItem.createUpgradeTemplate("minecraft", "netherite_upgrade", CSmithingTemplateItem.EMPTY_SLOT_INGOT, properties),
         new Item.Properties().rarity(Rarity.UNCOMMON));
 
     // endregion

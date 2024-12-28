@@ -9,9 +9,9 @@ import net.minecraft.world.item.SmithingTemplateItem;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class ModSmithingTemplateItem extends SmithingTemplateItem {
+public class CSmithingTemplateItem extends SmithingTemplateItem {
 
-    public ModSmithingTemplateItem(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> baseSlotEmptyIcons, List<ResourceLocation> additionalSlotEmptyIcons, Item.Properties properties) {
+    public CSmithingTemplateItem(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> baseSlotEmptyIcons, List<ResourceLocation> additionalSlotEmptyIcons, Item.Properties properties) {
         super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, baseSlotEmptyIcons, additionalSlotEmptyIcons, properties);
     }
 

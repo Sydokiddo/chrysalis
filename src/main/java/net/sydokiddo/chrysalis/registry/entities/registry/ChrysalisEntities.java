@@ -12,7 +12,13 @@ import net.sydokiddo.chrysalis.registry.entities.custom_entities.Seat;
 
 public class ChrysalisEntities {
 
+    // region Entities
+
     public static final EntityType<Seat> SEAT = registerEntityType("seat", EntityType.Builder.of(Seat::new, MobCategory.MISC).sized(0.0F, 0.0F).noLootTable().clientTrackingRange(10));
+
+    // endregion
+
+    // region Registry
 
     @SuppressWarnings("all")
     private static <T extends Entity> EntityType<T> registerEntityType(String name, EntityType.Builder<T> builder) {
@@ -21,4 +27,6 @@ public class ChrysalisEntities {
     }
 
     public static void registerEntities() {}
+
+    // endregion
 }

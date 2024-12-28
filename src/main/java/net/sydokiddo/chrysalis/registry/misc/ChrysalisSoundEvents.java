@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ChrysalisSoundEvents {
 
-    // Sound Events
+    // region Sound Events
 
     public static final Holder.Reference<SoundEvent> SCREENSHOT_SUCCESS = registerForHolder("ui.screenshot.success");
     public static final Holder.Reference<SoundEvent> SPLASH_TEXT_SHUFFLE = registerForHolder("ui.splash_text.shuffle");
@@ -30,9 +30,9 @@ public class ChrysalisSoundEvents {
     public static final SoundEvent AGGRO_WAND_SELECT_TARGET_FAIL = registerSoundEvent("item.aggro_wand.select_target.fail");
     public static final SoundEvent AGGRO_WAND_SELECT_TARGET_SUCCESS = registerSoundEvent("item.aggro_wand.select_target.success");
 
-    // Registry
+    // endregion
 
-    // region Base Registries
+    // region Registry
 
     private static SoundEvent registerSoundEvent(String name) {
         ResourceLocation resourceLocation = Chrysalis.id(name);
@@ -45,10 +45,6 @@ public class ChrysalisSoundEvents {
         return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, Chrysalis.id(name), SoundEvent.createVariableRangeEvent(Chrysalis.id(name)));
     }
 
-    // endregion
-
-    // region Structure Music Registry
-
     public static Map<String, Music> structures = new HashMap<>();
 
     public static void registerStructureMusic() {
@@ -58,7 +54,7 @@ public class ChrysalisSoundEvents {
         }
     }
 
-    // endregion
-
     public static void registerSounds() {}
+
+    // endregion
 }

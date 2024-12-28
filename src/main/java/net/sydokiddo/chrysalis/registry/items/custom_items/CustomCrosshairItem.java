@@ -7,6 +7,10 @@ import net.minecraft.world.entity.player.Player;
 
 public interface CustomCrosshairItem {
 
+    /**
+     * Any item that integrates this interface can be given a custom crosshair that can be displayed under certain conditions.
+     **/
+
     @Environment(EnvType.CLIENT)
     default boolean shouldDisplayCrosshair(Player player) {
         return true;
