@@ -91,5 +91,11 @@
       "minecraft:item/goat_horn/call2"
     ],
     "subtitle": "subtitles.item.aggro_wand.select_target.success"
+  },
+  "entity.item.drop": {
+    "sounds": [
+      "minecraft:random/pop"
+    ],
+    "subtitle": "subtitles.entity.item.drop"
   }
 }

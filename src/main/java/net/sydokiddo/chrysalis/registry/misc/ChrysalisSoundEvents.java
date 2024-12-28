@@ -30,6 +30,8 @@ public class ChrysalisSoundEvents {
     public static final SoundEvent AGGRO_WAND_SELECT_TARGET_FAIL = registerSoundEvent("item.aggro_wand.select_target.fail");
     public static final SoundEvent AGGRO_WAND_SELECT_TARGET_SUCCESS = registerSoundEvent("item.aggro_wand.select_target.success");
 
+    public static final SoundEvent ITEM_DROP = registerSoundEvent("entity.item.drop");
+
     // endregion
 
     // region Registry

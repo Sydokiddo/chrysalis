@@ -15,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -124,6 +125,10 @@ public class EntityDataHelper {
         }
 
         return originalDamage;
+    }
+
+    public static void playItemDroppingSound(Player player) {
+        player.playNotifySound(ChrysalisSoundEvents.ITEM_DROP, player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
     }
 
     // endregion

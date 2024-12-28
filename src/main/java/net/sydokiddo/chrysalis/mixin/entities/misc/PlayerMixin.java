@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -34,6 +35,8 @@ public abstract class PlayerMixin extends LivingEntity {
     private PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }
+
+    @Unique Player player = (Player) (Object) this;
 
     @Unique
     private BlockHitResult getPlayerPOVHitResult() {
@@ -57,6 +60,11 @@ public abstract class PlayerMixin extends LivingEntity {
     private void chrysalis$allowBlockUseWhileSneaking(CallbackInfoReturnable<Boolean> cir) {
         BlockHitResult blockHitResult = this.getPlayerPOVHitResult();
         if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(ChrysalisTags.ALLOWS_USE_WHILE_SNEAKING)) cir.setReturnValue(false);
+    }
+
+    @Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At(value = "TAIL"))
+    private void chrysalis$playInventoryItemDroppingSound(ItemStack itemStack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
+        if (!itemStack.isEmpty() && retainOwnership) EntityDataHelper.playItemDroppingSound(this.player);
     }
 
     @Redirect(method = "dropEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;dropAll()V"))
