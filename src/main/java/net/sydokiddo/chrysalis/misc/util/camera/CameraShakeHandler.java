@@ -3,7 +3,6 @@ package net.sydokiddo.chrysalis.misc.util.camera;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 
 @Environment(EnvType.CLIENT)
@@ -46,15 +45,9 @@ public class CameraShakeHandler {
             float roll = (float) (cameraSetup.getRoll() + strength * Math.cos(ticksExistedDelta * frequency));
 
             if (!Minecraft.getInstance().isPaused()) {
-                if (CameraShakeHandler.time > 5) {
-                    cameraSetup.setYaw(yaw);
-                    cameraSetup.setPitch(pitch);
-                    cameraSetup.setRoll(roll);
-                } else {
-                    cameraSetup.setYaw(Mth.lerp(delta, yaw, 0));
-                    cameraSetup.setPitch(Mth.lerp(delta, pitch, 0));
-                    cameraSetup.setRoll(Mth.lerp(delta, roll, 0));
-                }
+                cameraSetup.setYaw(yaw);
+                cameraSetup.setPitch(pitch);
+                cameraSetup.setRoll(roll);
             }
 
         } else {
