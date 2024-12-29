@@ -16,7 +16,12 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.monster.warden.AngerLevel;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
@@ -85,7 +90,18 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
                     addSparkleParticles(mob);
                     addParticlesAroundEntity(linkedMob, ParticleTypes.ANGRY_VILLAGER, 5, 1.5D);
+
                     linkedMob.setTarget(livingEntity);
+
+                    Brain<?> brain = linkedMob.getBrain();
+                    brain.setMemory(MemoryModuleType.ATTACK_TARGET, livingEntity);
+                    brain.setMemory(MemoryModuleType.ANGRY_AT, livingEntity.getUUID());
+                    brain.setActiveActivityIfPossible(Activity.FIGHT);
+
+                    if (linkedMob instanceof Warden warden && !warden.isDiggingOrEmerging() && warden.canTargetEntity(livingEntity)) {
+                        warden.increaseAngerAt(livingEntity, AngerLevel.ANGRY.getMinimumAnger() + 20, false);
+                        warden.setAttackTarget(livingEntity);
+                    }
 
                     serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS, SoundSource.PLAYERS, 1.0F, 1.0F);
                     serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.aggro_wand.set_target", livingEntity.getName().getString(), linkedMob.getName().getString()));
