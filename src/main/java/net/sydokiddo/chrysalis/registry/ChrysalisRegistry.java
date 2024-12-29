@@ -106,7 +106,8 @@ public class ChrysalisRegistry {
     // region Colors and Fonts
 
     public static final Color
-        CHRYSALIS_COLOR = Color.decode("#A27FFF")
+        CHRYSALIS_COLOR = Color.decode("#A27FFF"),
+        WAXED_COLOR = Color.decode("#FABF29")
     ;
 
     @SuppressWarnings("unused")
@@ -129,7 +130,8 @@ public class ChrysalisRegistry {
         GRAY_HEART_ICON = Component.translatable("gui.icon.chrysalis.gray_heart"),
         BLACK_HEART_ICON = Component.translatable("gui.icon.chrysalis.black_heart"),
         BROWN_HEART_ICON = Component.translatable("gui.icon.chrysalis.brown_heart"),
-        SNOUT_ICON = Component.translatable("gui.icon.chrysalis.snout")
+        SNOUT_ICON = Component.translatable("gui.icon.chrysalis.snout"),
+        WAXED_ICON = Component.translatable("gui.icon.chrysalis.waxed")
     ;
 
     @SuppressWarnings("unused")

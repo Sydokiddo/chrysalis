@@ -52,6 +52,7 @@ public class ChrysalisTags {
         SOUL_SAND_ITEMS = registerItemTag("soul_sand"),
         STONE_PRESSURE_PLATE_ITEMS = registerItemTag("stone_pressure_plates"),
         TORCH_ITEMS = registerItemTag("torches"),
+        WAXED_BLOCK_ITEMS = registerItemTag("waxed_blocks"),
         OVERWORLD_ORE_ITEMS = registerItemTag("overworld_ores"),
         NETHER_ORE_ITEMS = registerItemTag("nether_ores"),
         END_ORE_ITEMS = registerItemTag("end_ores"),

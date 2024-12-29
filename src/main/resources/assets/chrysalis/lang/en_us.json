@@ -21,6 +21,7 @@
   "gui.icon.chrysalis.black_heart": "\ua016",
   "gui.icon.chrysalis.brown_heart": "\ua017",
   "gui.icon.chrysalis.snout": "\ua018",
+  "gui.icon.chrysalis.waxed": "\ua019",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
@@ -140,6 +141,7 @@
   "gui.chrysalis.item.when_used": "When Used with %s:",
   "gui.chrysalis.item.when_eaten": "When Eaten:",
   "gui.chrysalis.item.when_drank": "When Drank:",
+  "gui.chrysalis.item.waxed": "Waxed",
   "gui.chrysalis.item.tooltip_with_icon": "%1$s %2$s",
 
   "gui.chrysalis.none": "None",
@@ -354,6 +356,7 @@
   "tag.item.chrysalis.teleporting_foods": "Teleporting Foods",
   "tag.item.chrysalis.tnt_igniters": "TNT Igniters",
   "tag.item.chrysalis.torches": "Torches",
+  "tag.item.chrysalis.waxed_blocks": "Waxed Blocks",
   "tag.item.chrysalis.overworld_ores": "Overworld Ores",
   "tag.item.chrysalis.nether_ores": "Nether Ores",
   "tag.item.chrysalis.end_ores": "End Ores",

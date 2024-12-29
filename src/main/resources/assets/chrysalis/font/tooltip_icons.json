@@ -176,6 +176,15 @@
       "chars": [
         "\ua018"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/waxed.png",
+      "ascent": 9,
+      "height": 9,
+      "chars": [
+        "\ua019"
+      ]
     }
   ]
 }

@@ -68,6 +68,7 @@
     "misc.FogRendererMixin",
     "misc.GameRendererMixin",
     "misc.GuiMixin",
+    "misc.GuiMixin$GuiGraphicsMixin",
     "misc.MinecraftMixin",
     "misc.ScreenshotMixin",
     "misc.ScreenshotMixin$MainMixin",

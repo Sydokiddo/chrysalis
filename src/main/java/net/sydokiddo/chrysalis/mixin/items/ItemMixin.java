@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.LightBlock;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,6 +29,13 @@ public abstract class ItemMixin {
 
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
+
+        if (itemStack.is(ChrysalisTags.WAXED_BLOCK_ITEMS)) {
+            MutableComponent waxedIcon = ChrysalisRegistry.WAXED_ICON;
+            ItemHelper.setTooltipIconsFont(waxedIcon, Chrysalis.MOD_ID);
+            Component waxedTooltip = ItemHelper.addTooltipWithIcon(waxedIcon, Component.translatable("gui.chrysalis.item.waxed").withColor(ChrysalisRegistry.WAXED_COLOR.getRGB()));
+            list.add(waxedTooltip);
+        }
 
         if (itemStack.is(Items.DEBUG_STICK)) {
             ItemHelper.addUseTooltip(list);
