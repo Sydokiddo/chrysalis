@@ -18,6 +18,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.monster.warden.AngerLevel;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
@@ -97,6 +98,11 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                     brain.setMemory(MemoryModuleType.ATTACK_TARGET, livingEntity);
                     brain.setMemory(MemoryModuleType.ANGRY_AT, livingEntity.getUUID());
                     brain.setActiveActivityIfPossible(Activity.FIGHT);
+
+                    if (linkedMob instanceof Goat) {
+                        brain.setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, 0);
+                        brain.setMemory(MemoryModuleType.RAM_TARGET, livingEntity.getBoundingBox().getCenter());
+                    }
 
                     if (linkedMob instanceof Warden warden && !warden.isDiggingOrEmerging() && warden.canTargetEntity(livingEntity)) {
                         warden.increaseAngerAt(livingEntity, AngerLevel.ANGRY.getMinimumAnger() + 20, false);
