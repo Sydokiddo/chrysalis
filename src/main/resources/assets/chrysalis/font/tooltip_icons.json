@@ -9,8 +9,8 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/chrysalis.png",
-      "ascent": 9,
-      "height": 11,
+      "ascent": 10,
+      "height": 12,
       "chars": [
         "\ua000"
       ]
@@ -18,8 +18,8 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/gear.png",
-      "ascent": 9,
-      "height": 11,
+      "ascent": 10,
+      "height": 13,
       "chars": [
         "\ua001"
       ]
@@ -27,7 +27,7 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/warning.png",
-      "ascent": 9,
+      "ascent": 8,
       "height": 9,
       "chars": [
         "\ua002"
@@ -37,7 +37,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/question_mark.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua003"
       ]
@@ -45,8 +45,8 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/tooltip.png",
-      "ascent": 9,
-      "height": 9,
+      "ascent": 10,
+      "height": 13,
       "chars": [
         "\ua004"
       ]
@@ -54,8 +54,8 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/potion.png",
-      "ascent": 9,
-      "height": 9,
+      "ascent": 11,
+      "height": 14,
       "chars": [
         "\ua005"
       ]
@@ -64,7 +64,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/armor.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua006"
       ]
@@ -73,7 +73,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/red_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua007"
       ]
@@ -82,7 +82,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/orange_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua008"
       ]
@@ -91,7 +91,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/yellow_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua009"
       ]
@@ -100,7 +100,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/green_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua010"
       ]
@@ -109,7 +109,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/blue_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua011"
       ]
@@ -118,7 +118,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/purple_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua012"
       ]
@@ -127,7 +127,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/pink_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua013"
       ]
@@ -136,7 +136,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/white_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua014"
       ]
@@ -145,7 +145,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/gray_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua015"
       ]
@@ -154,7 +154,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/black_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua016"
       ]
@@ -163,7 +163,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/brown_heart.png",
       "ascent": 9,
-      "height": 9,
+      "height": 11,
       "chars": [
         "\ua017"
       ]
@@ -171,8 +171,8 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/snout.png",
-      "ascent": 9,
-      "height": 9,
+      "ascent": 8,
+      "height": 10,
       "chars": [
         "\ua018"
       ]
@@ -180,8 +180,8 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/waxed.png",
-      "ascent": 9,
-      "height": 9,
+      "ascent": 10,
+      "height": 13,
       "chars": [
         "\ua019"
       ]
