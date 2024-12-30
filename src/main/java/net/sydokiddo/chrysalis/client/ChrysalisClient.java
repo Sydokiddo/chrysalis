@@ -20,6 +20,7 @@ import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
+import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
 import net.sydokiddo.chrysalis.misc.util.splash_texts.SplashTextLoader;
 import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
@@ -46,6 +47,7 @@ public class ChrysalisClient implements ClientModInitializer {
 
         // region Packets
 
+        ClientPlayNetworking.registerGlobalReceiver(QueuedMusicPayload.TYPE, (payload, context) -> context.client().execute(() -> setQueuedMusic(new Music(payload.soundEvent(), payload.minDelay(), payload.maxDelay(), payload.replaceCurrentMusic()))));
         ClientPlayNetworking.registerGlobalReceiver(StructureChangedPayload.TYPE, (payload, context) -> context.client().execute(() -> setStructureMusic(payload.structureName().toString())));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakePayload.TYPE, (payload, context) -> context.client().execute(() -> CameraShakeHandler.shakeCamera(payload.time(), payload.strength(), payload.frequency())));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakeResetPayload.TYPE, (payload, context) -> context.client().execute(CameraShakeHandler::resetCamera));
@@ -80,21 +82,30 @@ public class ChrysalisClient implements ClientModInitializer {
         // endregion
     }
 
-    // region Structure Music
+    // region Custom Music
 
-    @Nullable public static Music structureMusic = null;
+    @Nullable private static Music queuedMusic = null;
 
     @Nullable
-    public static Music getStructureMusic() {
-        return structureMusic;
+    public static Music getQueuedMusic() {
+        return queuedMusic;
+    }
+
+    public static void setQueuedMusic(@Nullable Music music) {
+        queuedMusic = music;
     }
 
     public static void setStructureMusic(String structure) {
         if (structure == null || Objects.equals(structure, "chrysalis:none")) {
-            structureMusic = null;
+            queuedMusic = null;
             return;
         }
-        structureMusic = ChrysalisSoundEvents.structures.get(structure);
+        queuedMusic = ChrysalisSoundEvents.structures.get(structure);
+    }
+
+    public static void clearMusic() {
+        setQueuedMusic(null);
+        setStructureMusic(null);
     }
 
     // endregion

@@ -3,12 +3,15 @@ package net.sydokiddo.chrysalis.misc.util.helpers;
 import com.mojang.blaze3d.shaders.FogShape;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.renderer.FogParameters;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
+import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
 import org.joml.Vector4f;
 import java.util.List;
 
@@ -58,6 +61,25 @@ public class EventHelper {
             if (serverPlayer == ignoredEntity) return;
             serverPlayer.addEffect(mobEffectInstance);
         }
+    }
+
+    /**
+     * Sends a queued music track to a selected player.
+     **/
+
+    public static void sendMusic(ServerPlayer serverPlayer, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
+        ServerPlayNetworking.send(serverPlayer, new QueuedMusicPayload(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
+    }
+
+    public static void sendMusicToNearbyPlayers(Entity entity, Entity ignoredEntity, float range, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
+            if (serverPlayer == ignoredEntity) return;
+            sendMusic(serverPlayer, soundEvent, minDelay, maxDelay, replaceCurrentMusic);
+        }
+    }
+
+    public static void sendEncounterMusic(Entity entity, float range, Holder<SoundEvent> soundEvent) {
+        sendMusicToNearbyPlayers(entity, null, range, soundEvent, 0, 0, true);
     }
 
     /**

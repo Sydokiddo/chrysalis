@@ -106,7 +106,11 @@ public class ChrysalisExampleRegistry {
 
     public static final ResourceLocation EXAMPLE_GAMEPLAY_LOOT_TABLE = RegistryHelper.registerCustomLootTable(Chrysalis.id("gameplay/example_gameplay_loot_table"));
 
-    public static void registerExampleMusic() {
+    public static void sendExampleEncounterMusic(Entity entity) {
+        EventHelper.sendEncounterMusic(entity, 10.0F, SoundEvents.MUSIC_DRAGON);
+    }
+
+    public static void registerExampleStructureMusic() {
         RegistryHelper.registerStructureMusic("minecraft:village_plains", SoundEvents.MUSIC_CREDITS, 20, 600, false);
     }
 

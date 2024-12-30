@@ -37,14 +37,14 @@ public class MinecraftMixin {
     }
 
     @Inject(method = "getSituationalMusic", at = @At("RETURN"), cancellable = true)
-    private void chrysalis$getStructureMusic(CallbackInfoReturnable<MusicInfo> cir) {
+    private void chrysalis$getQueuedMusic(CallbackInfoReturnable<MusicInfo> cir) {
 
         Music music = Optionull.map(this.screen, Screen::getBackgroundMusic);
-        if (music == Musics.MENU) ChrysalisClient.setStructureMusic(null);
+        if (music == Musics.MENU) ChrysalisClient.clearMusic();
 
         if (music != Musics.MENU && music != Musics.CREATIVE && music != Musics.END_BOSS && music != Musics.CREDITS) {
-            @Nullable Music structureMusic = ChrysalisClient.getStructureMusic();
-            if (structureMusic != null) cir.setReturnValue(new MusicInfo(structureMusic));
+            @Nullable Music queuedMusic = ChrysalisClient.getQueuedMusic();
+            if (queuedMusic != null) cir.setReturnValue(new MusicInfo(queuedMusic));
         }
     }
 
