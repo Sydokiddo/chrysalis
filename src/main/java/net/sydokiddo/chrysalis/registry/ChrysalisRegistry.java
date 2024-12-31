@@ -20,10 +20,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.client.ChrysalisClient;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.commands.*;
 import net.sydokiddo.chrysalis.misc.util.entities.ChrysalisMemoryModules;
+import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
+import net.sydokiddo.chrysalis.misc.util.music.ClearMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureMusic;
@@ -195,12 +198,18 @@ public class ChrysalisRegistry {
 
         PayloadTypeRegistry.playS2C().register(QueuedMusicPayload.TYPE, QueuedMusicPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(StructureChangedPayload.TYPE, StructureChangedPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(ClearMusicPayload.TYPE, ClearMusicPayload.CODEC);
 
         ServerWorldEvents.UNLOAD.register((server, level) -> {
-            if (level.isClientSide() && !StructureMusic.playerStructures.isEmpty()) StructureMusic.playerStructures.clear();
+            if (!level.isClientSide()) return;
+            ChrysalisClient.clearAllMusic();
+            if (!StructureMusic.playerStructures.isEmpty()) StructureMusic.playerStructures.clear();
         });
 
-        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> StructureMusic.playerStructures.remove(handler.getPlayer()));
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+            EventHelper.clearAllMusic(handler.getPlayer());
+            StructureMusic.playerStructures.remove(handler.getPlayer());
+        });
 
         ServerTickEvents.START_WORLD_TICK.register((serverLevel) -> {
 

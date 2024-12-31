@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
+import net.sydokiddo.chrysalis.misc.util.music.ClearMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
 import org.joml.Vector4f;
 import java.util.List;
@@ -80,6 +81,28 @@ public class EventHelper {
 
     public static void sendEncounterMusic(Entity entity, float range, Holder<SoundEvent> soundEvent) {
         sendMusicToNearbyPlayers(entity, null, range, soundEvent, 0, 0, true);
+    }
+
+    public static void clearAllMusic(ServerPlayer serverPlayer) {
+        ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(true, null));
+    }
+
+    public static void clearAllMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, float range) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
+            if (serverPlayer == ignoredEntity) return;
+            clearAllMusic(serverPlayer);
+        }
+    }
+
+    public static void clearSpecificMusic(ServerPlayer serverPlayer, Holder<SoundEvent> soundEvent) {
+        ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(false, soundEvent));
+    }
+
+    public static void clearSpecificMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, float range, Holder<SoundEvent> soundEvent) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
+            if (serverPlayer == ignoredEntity) return;
+            clearSpecificMusic(serverPlayer, soundEvent);
+        }
     }
 
     /**
