@@ -6,11 +6,13 @@ import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
+import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.misc.util.music.ClearMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
 import org.joml.Vector4f;
@@ -80,11 +82,14 @@ public class EventHelper {
     }
 
     public static void sendEncounterMusic(Entity entity, float range, Holder<SoundEvent> soundEvent) {
-        sendMusicToNearbyPlayers(entity, null, range, soundEvent, 0, 0, true);
+        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
+            EntityDataHelper.setEncounteredMobUUID(serverPlayer, entity.getUUID());
+            sendMusic(serverPlayer, soundEvent, 0, 0, true);
+        }
     }
 
     public static void clearAllMusic(ServerPlayer serverPlayer) {
-        ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(true, null));
+        ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(true, SoundEvents.MUSIC_GAME));
     }
 
     public static void clearAllMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, float range) {

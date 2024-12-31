@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import java.util.Optional;
@@ -129,6 +130,14 @@ public class EntityDataHelper {
 
     public static void playItemDroppingSound(Player player) {
         player.playNotifySound(ChrysalisSoundEvents.ITEM_DROP, player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
+    }
+
+    public static Optional<UUID> getEncounteredMobUUID(Player player) {
+        return player.getEntityData().get(ChrysalisRegistry.ENCOUNTERED_MOB_UUID);
+    }
+
+    public static void setEncounteredMobUUID(Player player, UUID uuid) {
+        player.getEntityData().set(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.ofNullable(uuid));
     }
 
     // endregion

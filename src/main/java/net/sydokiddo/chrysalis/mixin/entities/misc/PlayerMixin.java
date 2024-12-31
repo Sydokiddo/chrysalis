@@ -3,14 +3,14 @@ package net.sydokiddo.chrysalis.mixin.entities.misc;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,7 +28,11 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
@@ -37,6 +42,40 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     @Unique Player player = (Player) (Object) this;
+    @Unique private final String encounteredMobUuidTag = "encountered_mob_uuid";
+
+    @Inject(method = "defineSynchedData", at = @At("RETURN"))
+    private void chrysalis$definePlayerTags(SynchedEntityData.Builder builder, CallbackInfo info) {
+        builder.define(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.of(this.getUUID()));
+    }
+
+    @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))
+    private void chrysalis$addPlayerTags(CompoundTag compoundTag, CallbackInfo info) {
+        Optional<UUID> uUID = EntityDataHelper.getEncounteredMobUUID(this.player);
+        uUID.ifPresent(value -> compoundTag.putUUID(this.encounteredMobUuidTag, value));
+    }
+
+    @Inject(method = "readAdditionalSaveData", at = @At("RETURN"))
+    private void chrysalis$readPlayerTags(CompoundTag compoundTag, CallbackInfo info) {
+        if (compoundTag.get(this.encounteredMobUuidTag) != null) EntityDataHelper.setEncounteredMobUUID(this.player, compoundTag.getUUID(this.encounteredMobUuidTag));
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void chrysalis$checkNearbyEncounteredMobs(CallbackInfo info) {
+
+        if (this.level().isClientSide()) return;
+        Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(this.player);
+
+        if (encounteredMobUuid.isPresent()) {
+
+            List<? extends Mob> nearbyEncounteredMobs = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(64.0D), entity -> entity.isAlive() && entity.getUUID() == encounteredMobUuid.get());
+
+            if (nearbyEncounteredMobs.isEmpty()) {
+                EntityDataHelper.setEncounteredMobUUID(this.player, null);
+                if (this.player instanceof ServerPlayer serverPlayer) EventHelper.clearAllMusic(serverPlayer);
+            }
+        }
+    }
 
     @Unique
     private BlockHitResult getPlayerPOVHitResult() {

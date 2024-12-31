@@ -18,6 +18,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
@@ -37,6 +38,8 @@ import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 public class ChrysalisRegistry {
 
@@ -103,6 +106,10 @@ public class ChrysalisRegistry {
 
     public static final EntityDataAccessor<Integer>
         ITEM_GLOW_COLOR = SynchedEntityData.defineId(ItemEntity.class, EntityDataSerializers.INT)
+    ;
+
+    public static final EntityDataAccessor<Optional<UUID>>
+        ENCOUNTERED_MOB_UUID = SynchedEntityData.defineId(Player.class, EntityDataSerializers.OPTIONAL_UUID)
     ;
 
     // endregion
