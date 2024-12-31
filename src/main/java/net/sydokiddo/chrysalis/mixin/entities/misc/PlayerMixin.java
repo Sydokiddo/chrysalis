@@ -46,7 +46,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
     private void chrysalis$definePlayerTags(SynchedEntityData.Builder builder, CallbackInfo info) {
-        builder.define(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.of(this.getUUID()));
+        builder.define(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.empty());
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))

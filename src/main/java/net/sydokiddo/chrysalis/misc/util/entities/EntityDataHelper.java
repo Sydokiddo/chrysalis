@@ -133,7 +133,7 @@ public class EntityDataHelper {
     }
 
     public static Optional<UUID> getEncounteredMobUUID(Player player) {
-        return player.getEntityData().get(ChrysalisRegistry.ENCOUNTERED_MOB_UUID);
+        return Optional.of(player.getEntityData().get(ChrysalisRegistry.ENCOUNTERED_MOB_UUID).orElse(player.getUUID()));
     }
 
     public static void setEncounteredMobUUID(Player player, UUID uuid) {
