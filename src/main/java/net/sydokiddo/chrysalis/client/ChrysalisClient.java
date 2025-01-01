@@ -16,10 +16,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
@@ -56,7 +58,7 @@ public class ChrysalisClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(StructureChangedPayload.TYPE, (payload, context) -> context.client().execute(() -> setStructureMusic(payload.structureName().toString())));
 
         ClientPlayNetworking.registerGlobalReceiver(ClearMusicPayload.TYPE, (payload, context) -> context.client().execute(() -> {
-            if (payload.clearAll()) clearAllMusic();
+            if (payload.clearAll()) clearAllMusic(true);
             else clearSpecificMusic(payload.soundEvent());
         }));
 
@@ -111,18 +113,22 @@ public class ChrysalisClient implements ClientModInitializer {
             queuedMusic = null;
             return;
         }
+        if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Setting current structure to {} for the music tracker", structure);
         queuedMusic = ChrysalisSoundEvents.structures.get(structure);
     }
 
-    public static void clearAllMusic() {
-        if (getQueuedMusic() != null) Minecraft.getInstance().getSoundManager().stop(getQueuedMusic().getEvent().value().location(), SoundSource.MUSIC);
+    public static void clearAllMusic(boolean stopMusicTracker) {
+        if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Clearing all music from the music tracker");
+        if (stopMusicTracker) Minecraft.getInstance().getMusicManager().stopPlaying();
         setQueuedMusic(null);
         setStructureMusic(null);
     }
 
     public static void clearSpecificMusic(Holder<SoundEvent> soundEvent) {
         if (getQueuedMusic() != null && getQueuedMusic().getEvent() == soundEvent) {
-            Minecraft.getInstance().getSoundManager().stop(soundEvent.value().location(), SoundSource.MUSIC);
+            ResourceLocation soundEventLocation = soundEvent.value().location();
+            if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Clearing music event {} from the music tracker", soundEventLocation);
+            Minecraft.getInstance().getSoundManager().stop(soundEventLocation, SoundSource.MUSIC);
             setQueuedMusic(null);
         }
     }

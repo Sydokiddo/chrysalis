@@ -209,7 +209,7 @@ public class ChrysalisRegistry {
 
         ServerWorldEvents.UNLOAD.register((server, level) -> {
             if (!level.isClientSide()) return;
-            ChrysalisClient.clearAllMusic();
+            ChrysalisClient.clearAllMusic(true);
             if (!StructureMusic.playerStructures.isEmpty()) StructureMusic.playerStructures.clear();
         });
 

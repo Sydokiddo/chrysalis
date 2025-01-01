@@ -68,11 +68,15 @@ public abstract class PlayerMixin extends LivingEntity {
 
         if (encounteredMobUuid.isPresent()) {
 
-            List<? extends Mob> nearbyEncounteredMobs = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(64.0D), entity -> entity.isAlive() && entity.getUUID() == encounteredMobUuid.get());
+            List<? extends Mob> nearbyEncounteredMobs = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(64.0D), entity -> {
+                boolean defaultReturnValue = entity.isAlive() && entity.getUUID() == encounteredMobUuid.get();
+                if (entity.getType().is(ChrysalisTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC)) return defaultReturnValue;
+                else return defaultReturnValue && entity.getTarget() != null;
+            });
 
             if (nearbyEncounteredMobs.isEmpty()) {
-                EntityDataHelper.setEncounteredMobUUID(this.player, null);
                 if (this.player instanceof ServerPlayer serverPlayer) EventHelper.clearAllMusic(serverPlayer);
+                EntityDataHelper.setEncounteredMobUUID(this.player, null);
             }
         }
     }

@@ -309,6 +309,7 @@
   "tag.damage_type.chrysalis.is_magic": "Is Magic",
   "tag.damage_type.chrysalis.is_ranged": "Is Ranged",
 
+  "tag.entity_type.chrysalis.always_plays_encounter_music": "Always Plays Encounter Music",
   "tag.entity_type.chrysalis.attackable_static_entities": "Attackable Static Entities",
   "tag.entity_type.chrysalis.can_spawn_on_leaves": "Can Spawn On Leaves",
   "tag.entity_type.chrysalis.cannot_ride_boats": "Cannot Ride Boats",
