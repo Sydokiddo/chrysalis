@@ -59,7 +59,7 @@ public class ChrysalisClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(StructureChangedPayload.TYPE, (payload, context) -> context.client().execute(() -> setStructureMusic(payload.structureName().toString(), true)));
 
         ClientPlayNetworking.registerGlobalReceiver(ClearMusicPayload.TYPE, (payload, context) -> context.client().execute(() -> {
-            if (payload.clearAll()) clearAllMusic(true);
+            if (payload.clearAll()) clearMusicQueue(true);
             else clearSpecificMusic(payload.soundEvent());
         }));
 
@@ -124,8 +124,13 @@ public class ChrysalisClient implements ClientModInitializer {
         setQueuedMusic(ChrysalisSoundEvents.structures.get(structure), sendDebugMessage);
     }
 
-    public static void clearAllMusic(boolean stopMusicTracker) {
-        if (stopMusicTracker) Minecraft.getInstance().getMusicManager().stopPlaying();
+    public static void clearMusicQueue(boolean stopMusic) {
+
+        if (stopMusic) {
+            Music currentMusic = Minecraft.getInstance().getSituationalMusic().music();
+            if (currentMusic != null) Minecraft.getInstance().getSoundManager().stop(currentMusic.getEvent().value().location(), SoundSource.MUSIC);
+        }
+
         setQueuedMusic(null, true);
         setStructureMusic(null, false);
     }

@@ -10,11 +10,13 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.Mob;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.misc.util.music.ClearMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import org.joml.Vector4f;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class EventHelper {
      * Gets any nearby players within a specific range of a selected entity's hitbox.
      **/
 
-    public static List<? extends ServerPlayer> getNearbyPlayers(Entity entity, float range) {
+    public static List<? extends ServerPlayer> getNearbyPlayers(Entity entity, double range) {
         return entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(range), EntitySelector.NO_SPECTATORS);
     }
 
@@ -37,7 +39,7 @@ public class EventHelper {
         ServerPlayNetworking.send(serverPlayer, new CameraShakePayload(time, strength, frequency));
     }
 
-    public static void sendCameraShakeToNearbyPlayers(Entity entity, Entity ignoredEntity, float range, int time, int strength, int frequency) {
+    public static void sendCameraShakeToNearbyPlayers(Entity entity, Entity ignoredEntity, double range, int time, int strength, int frequency) {
         for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
             sendCameraShake(serverPlayer, time, strength, frequency);
@@ -48,7 +50,7 @@ public class EventHelper {
         ServerPlayNetworking.send(serverPlayer, new CameraShakeResetPayload(1));
     }
 
-    public static void resetCameraShakeForNearbyPlayers(Entity entity, Entity ignoredEntity, float range) {
+    public static void resetCameraShakeForNearbyPlayers(Entity entity, Entity ignoredEntity, double range) {
         for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
             resetCameraShake(serverPlayer);
@@ -59,7 +61,7 @@ public class EventHelper {
      * Sends a specific status effect to nearby players.
      **/
 
-    public static void sendStatusEffectToNearbyPlayers(Entity entity, Entity ignoredEntity, float range, MobEffectInstance mobEffectInstance) {
+    public static void sendStatusEffectToNearbyPlayers(Entity entity, Entity ignoredEntity, double range, MobEffectInstance mobEffectInstance) {
         for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
             serverPlayer.addEffect(mobEffectInstance);
@@ -74,25 +76,46 @@ public class EventHelper {
         ServerPlayNetworking.send(serverPlayer, new QueuedMusicPayload(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
     }
 
-    public static void sendMusicToNearbyPlayers(Entity entity, Entity ignoredEntity, float range, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
+    public static void sendMusicToNearbyPlayers(Entity entity, Entity ignoredEntity, double range, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
         for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
             sendMusic(serverPlayer, soundEvent, minDelay, maxDelay, replaceCurrentMusic);
         }
     }
 
-    public static void sendEncounterMusic(Entity entity, float range, Holder<SoundEvent> soundEvent) {
-        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
-            EntityDataHelper.setEncounteredMobUUID(serverPlayer, entity.getUUID());
+    public static void sendEncounterMusic(Mob mob, Holder<SoundEvent> soundEvent, boolean playOnFirstTick) {
+
+        if (!playOnFirstTick && !checkEncounterMusicRefreshing(mob)) return;
+
+        for (ServerPlayer serverPlayer : getNearbyPlayers(mob, mob.getAttributeValue(ChrysalisAttributes.ENCOUNTER_MUSIC_RANGE))) {
+            EntityDataHelper.setEncounteredMobUUID(serverPlayer, mob.getUUID());
             sendMusic(serverPlayer, soundEvent, 0, 0, true);
         }
+    }
+
+    private static int ticksWithinRange = 0;
+
+    private static boolean checkEncounterMusicRefreshing(Mob mob) {
+
+        List<? extends ServerPlayer> nearbyPlayers = getNearbyPlayers(mob, mob.getAttributeValue(ChrysalisAttributes.ENCOUNTER_MUSIC_RANGE));
+
+        if (nearbyPlayers.isEmpty()) {
+            ticksWithinRange = 0;
+            return false;
+        } else {
+            ++ticksWithinRange;
+            if (ticksWithinRange < 100) ++ticksWithinRange;
+            else return mob.tickCount % 20 == 0;
+        }
+
+        return false;
     }
 
     public static void clearAllMusic(ServerPlayer serverPlayer) {
         ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(true, SoundEvents.MUSIC_GAME));
     }
 
-    public static void clearAllMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, float range) {
+    public static void clearAllMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, double range) {
         for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
             clearAllMusic(serverPlayer);
@@ -103,7 +126,7 @@ public class EventHelper {
         ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(false, soundEvent));
     }
 
-    public static void clearSpecificMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, float range, Holder<SoundEvent> soundEvent) {
+    public static void clearSpecificMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, double range, Holder<SoundEvent> soundEvent) {
         for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
             clearSpecificMusic(serverPlayer, soundEvent);

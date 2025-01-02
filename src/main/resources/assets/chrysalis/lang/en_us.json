@@ -62,6 +62,7 @@
 
   "attribute.chrysalis.reduced_detection_range": "Reduced Detection Range",
   "attribute.chrysalis.damage_capacity": "Damage Capacity",
+  "attribute.chrysalis.encounter_music_range": "Encounter Music Range",
 
   "gui.chrysalis.heal.message": "Successfully healed %s",
   "gui.chrysalis.fill_hunger.message": "Successfully nourished %s",

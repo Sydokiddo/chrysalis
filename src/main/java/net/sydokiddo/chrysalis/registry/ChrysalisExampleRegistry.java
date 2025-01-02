@@ -5,6 +5,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.equipment.ArmorMaterials;
@@ -106,8 +107,8 @@ public class ChrysalisExampleRegistry {
 
     public static final ResourceLocation EXAMPLE_GAMEPLAY_LOOT_TABLE = RegistryHelper.registerCustomLootTable(Chrysalis.id("gameplay/example_gameplay_loot_table"));
 
-    public static void sendExampleEncounterMusic(Entity entity) {
-        EventHelper.sendEncounterMusic(entity, 10.0F, SoundEvents.MUSIC_DRAGON);
+    public static void sendExampleEncounterMusic(Mob mob) {
+        EventHelper.sendEncounterMusic(mob, SoundEvents.MUSIC_DRAGON, true);
     }
 
     public static void registerExampleStructureMusic() {
@@ -120,11 +121,11 @@ public class ChrysalisExampleRegistry {
     }
 
     public static void sendExampleCameraShake(Entity entity) {
-        EventHelper.sendCameraShakeToNearbyPlayers(entity, null, 10.0F, 20, 5, 5);
+        EventHelper.sendCameraShakeToNearbyPlayers(entity, null, 10.0D, 20, 5, 5);
     }
 
     public static void sendExampleStatusEffect(Entity entity) {
-        EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0F, new MobEffectInstance(ChrysalisEffects.RADIANCE, 40));
+        EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0D, new MobEffectInstance(ChrysalisEffects.RADIANCE, 40));
     }
 
     public static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);

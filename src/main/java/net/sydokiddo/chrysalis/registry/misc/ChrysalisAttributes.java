@@ -13,7 +13,8 @@ public class ChrysalisAttributes {
 
     public static final Holder<Attribute>
         REDUCED_DETECTION_RANGE = registerAttribute("reduced_detection_range", 0.0D, 0.0D, 1.0D),
-        DAMAGE_CAPACITY = registerAttribute("damage_capacity", Double.MAX_VALUE, 1.0D, Double.MAX_VALUE)
+        DAMAGE_CAPACITY = registerAttribute("damage_capacity", Double.MAX_VALUE, 1.0D, Double.MAX_VALUE),
+        ENCOUNTER_MUSIC_RANGE = registerAttribute("encounter_music_range", 64.0D, 0.0D, 128.0D)
     ;
 
     // endregion
