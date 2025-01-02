@@ -19,10 +19,10 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.sydokiddo.chrysalis.misc.util.entities.EncounterMusicEntity;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -78,7 +78,7 @@ public abstract class PlayerMixin extends LivingEntity {
         if (encounteredMobUuid.isPresent()) {
 
             List<? extends Mob> nearbyEncounteredMobs = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(128.0D), entity -> {
-                boolean defaultReturnValue = entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(this.player) <= entity.getAttributeValue(ChrysalisAttributes.ENCOUNTER_MUSIC_RANGE);
+                boolean defaultReturnValue = entity instanceof EncounterMusicEntity encounterMusicEntity && entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(this.player) <= encounterMusicEntity.chrysalis$getEncounterMusicRange();
                 if (entity.getType().is(ChrysalisTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC)) return defaultReturnValue;
                 else return defaultReturnValue && entity.getTarget() != null;
             });

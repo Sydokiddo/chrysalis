@@ -13,10 +13,10 @@ import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.Mob;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
+import net.sydokiddo.chrysalis.misc.util.entities.EncounterMusicEntity;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.misc.util.music.ClearMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import org.joml.Vector4f;
 import java.util.List;
 
@@ -85,9 +85,9 @@ public class EventHelper {
 
     public static void sendEncounterMusic(Mob mob, Holder<SoundEvent> soundEvent, boolean playOnFirstTick) {
 
-        if (!playOnFirstTick && !checkEncounterMusicRefreshing(mob)) return;
+        if (!(mob instanceof EncounterMusicEntity encounterMusicEntity) || !playOnFirstTick && !checkEncounterMusicRefreshing(mob)) return;
 
-        for (ServerPlayer serverPlayer : getNearbyPlayers(mob, mob.getAttributeValue(ChrysalisAttributes.ENCOUNTER_MUSIC_RANGE))) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(mob, encounterMusicEntity.chrysalis$getEncounterMusicRange())) {
             if (EntityDataHelper.getEncounteredMobUUID(serverPlayer).isPresent()) return;
             EntityDataHelper.setEncounteredMobUUID(serverPlayer, mob.getUUID());
             sendMusic(serverPlayer, soundEvent, 0, 0, true);
@@ -98,7 +98,8 @@ public class EventHelper {
 
     private static boolean checkEncounterMusicRefreshing(Mob mob) {
 
-        List<? extends ServerPlayer> nearbyPlayers = getNearbyPlayers(mob, mob.getAttributeValue(ChrysalisAttributes.ENCOUNTER_MUSIC_RANGE));
+        if (!(mob instanceof EncounterMusicEntity encounterMusicEntity)) return false;
+        List<? extends ServerPlayer> nearbyPlayers = getNearbyPlayers(mob, encounterMusicEntity.chrysalis$getEncounterMusicRange());
 
         if (nearbyPlayers.isEmpty()) {
             ticksWithinRange = 0;
