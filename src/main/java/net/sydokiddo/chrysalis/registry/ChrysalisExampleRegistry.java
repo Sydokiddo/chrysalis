@@ -5,7 +5,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.equipment.ArmorMaterials;
@@ -106,10 +105,6 @@ public class ChrysalisExampleRegistry {
     // region Miscellaneous Example Registries
 
     public static final ResourceLocation EXAMPLE_GAMEPLAY_LOOT_TABLE = RegistryHelper.registerCustomLootTable(Chrysalis.id("gameplay/example_gameplay_loot_table"));
-
-    public static void sendExampleEncounterMusic(Mob mob) {
-        EventHelper.sendEncounterMusic(mob, SoundEvents.MUSIC_DRAGON, true);
-    }
 
     public static void registerExampleStructureMusic() {
         RegistryHelper.registerStructureMusic("minecraft:village_plains", SoundEvents.MUSIC_CREDITS, 20, 600, false);
