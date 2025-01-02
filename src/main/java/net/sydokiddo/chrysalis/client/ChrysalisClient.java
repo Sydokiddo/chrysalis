@@ -113,6 +113,7 @@ public class ChrysalisClient implements ClientModInitializer {
         if (getQueuedMusic() == music || music != null && minecraft.getMusicManager().isPlayingMusic(music) || player != null && EntityDataHelper.getEncounteredMobUUID(player).isPresent()) return;
         if (Chrysalis.IS_DEBUG && sendDebugMessage) Chrysalis.LOGGER.info("Setting the queued music for the music tracker to {}", music != null ? music.getEvent().getRegisteredName() : null);
 
+        if (music == null) minecraft.getMusicManager().nextSongDelay += 100;
         queuedMusic = music;
     }
 
