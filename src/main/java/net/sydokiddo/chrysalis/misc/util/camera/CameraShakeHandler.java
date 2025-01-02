@@ -23,6 +23,7 @@ public class CameraShakeHandler {
     }
 
     public static void resetCamera() {
+        if (time == 0 && strength == 0 && frequency == 0) return;
         if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Camera shake has been reset");
         time = 0;
         strength = 0;

@@ -60,11 +60,23 @@ public abstract class PlayerMixin extends LivingEntity {
         if (compoundTag.get(this.encounteredMobUuidTag) != null) EntityDataHelper.setEncounteredMobUUID(this.player, compoundTag.getUUID(this.encounteredMobUuidTag));
     }
 
+    @Unique private boolean shouldClearMusic = false;
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void chrysalis$checkNearbyEncounteredMobs(CallbackInfo info) {
 
         if (this.level().isClientSide()) return;
         Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(this.player);
+
+        if (this.shouldClearMusic) {
+
+            if (this.player instanceof ServerPlayer serverPlayer) {
+                EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+                EventHelper.clearAllMusic(serverPlayer);
+            }
+
+            this.shouldClearMusic = false;
+        }
 
         if (encounteredMobUuid.isPresent()) {
 
@@ -74,10 +86,7 @@ public abstract class PlayerMixin extends LivingEntity {
                 else return defaultReturnValue && entity.getTarget() != null;
             });
 
-            if (nearbyEncounteredMobs.isEmpty()) {
-                if (this.player instanceof ServerPlayer serverPlayer) EventHelper.clearAllMusic(serverPlayer);
-                EntityDataHelper.setEncounteredMobUUID(this.player, null);
-            }
+            if (nearbyEncounteredMobs.isEmpty()) this.shouldClearMusic = true;
         }
     }
 

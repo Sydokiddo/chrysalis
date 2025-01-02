@@ -40,7 +40,7 @@ public class MinecraftMixin {
     private void chrysalis$getQueuedMusic(CallbackInfoReturnable<MusicInfo> cir) {
 
         Music music = Optionull.map(this.screen, Screen::getBackgroundMusic);
-        if (music == Musics.MENU || Minecraft.getInstance().level == null) ChrysalisClient.clearAllMusic(false);
+        if (ChrysalisClient.getQueuedMusic() != null && (music == Musics.MENU || Minecraft.getInstance().level == null)) ChrysalisClient.clearAllMusic(false);
 
         if (music != Musics.MENU && music != Musics.CREATIVE && music != Musics.END_BOSS && music != Musics.CREDITS) {
             @Nullable Music queuedMusic = ChrysalisClient.getQueuedMusic();

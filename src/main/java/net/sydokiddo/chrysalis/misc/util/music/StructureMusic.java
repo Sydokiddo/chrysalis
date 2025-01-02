@@ -33,7 +33,7 @@ public class StructureMusic {
         playerStructures.put(player, newStructure);
 
         if (level.isClientSide()) {
-            ChrysalisClient.setStructureMusic(structureLocation);
+            ChrysalisClient.setStructureMusic(structureLocation, true);
             return;
         }
 
