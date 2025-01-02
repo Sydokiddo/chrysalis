@@ -106,24 +106,32 @@ public class ChrysalisClient implements ClientModInitializer {
         return queuedMusic;
     }
 
-    public static void setQueuedMusic(@Nullable Music music, boolean sendDebugMessage) {
+    public static void setQueuedMusic(@Nullable Music music, boolean isFirst) {
 
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
 
         if (getQueuedMusic() == music || music != null && minecraft.getMusicManager().isPlayingMusic(music) || player != null && EntityDataHelper.getEncounteredMobUUID(player).isPresent()) return;
-        if (Chrysalis.IS_DEBUG && sendDebugMessage) Chrysalis.LOGGER.info("Setting the queued music for the music tracker to {}", music != null ? music.getEvent().getRegisteredName() : null);
-
         queuedMusic = music;
-        if (music == null) minecraft.getMusicManager().nextSongDelay = new Random().nextInt(6000, 24000);
+
+        if (isFirst) {
+
+            if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Set the queued music for the music tracker to {}", music != null ? music.getEvent().getRegisteredName() : null);
+
+            if (music == null) {
+                int delay = new Random().nextInt(6000, 24000);
+                minecraft.getMusicManager().nextSongDelay = delay;
+                if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Music Delay: {}", delay);
+            }
+        }
     }
 
-    public static void setStructureMusic(String structure, boolean sendDebugMessage) {
+    public static void setStructureMusic(String structure, boolean isFirst) {
         if (structure == null || Objects.equals(structure, "chrysalis:none")) {
-            setQueuedMusic(null, sendDebugMessage);
+            setQueuedMusic(null, isFirst);
             return;
         }
-        setQueuedMusic(ChrysalisSoundEvents.structures.get(structure), sendDebugMessage);
+        setQueuedMusic(ChrysalisSoundEvents.structures.get(structure), isFirst);
     }
 
     public static void clearMusicQueue(boolean stopMusic) {
