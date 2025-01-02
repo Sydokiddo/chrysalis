@@ -38,6 +38,7 @@ import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import java.io.File;
 import java.util.Objects;
+import java.util.Random;
 
 @Environment(EnvType.CLIENT)
 public class ChrysalisClient implements ClientModInitializer {
@@ -114,6 +115,7 @@ public class ChrysalisClient implements ClientModInitializer {
         if (Chrysalis.IS_DEBUG && sendDebugMessage) Chrysalis.LOGGER.info("Setting the queued music for the music tracker to {}", music != null ? music.getEvent().getRegisteredName() : null);
 
         queuedMusic = music;
+        if (music == null) minecraft.getMusicManager().nextSongDelay = new Random().nextInt(6000, 24000);
     }
 
     public static void setStructureMusic(String structure, boolean sendDebugMessage) {
