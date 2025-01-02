@@ -19,7 +19,6 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.sydokiddo.chrysalis.misc.util.entities.EncounterMusicEntity;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
@@ -69,28 +68,16 @@ public abstract class PlayerMixin extends LivingEntity {
 
         if (this.level().isClientSide()) return;
         Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(this.player);
-        double maxRange = 128.0D;
 
-        if (this.shouldClearMusic) {
-
-            if (this.player instanceof ServerPlayer serverPlayer) {
-
-                if (encounteredMobUuid.isPresent()) {
-                    List<? extends Mob> linkedEncounteredMob = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(maxRange), entity -> entity.getUUID() == encounteredMobUuid.get());
-                    if (!linkedEncounteredMob.isEmpty() && linkedEncounteredMob.getFirst() instanceof EncounterMusicEntity encounterMusicEntity) EventHelper.clearSpecificMusic(serverPlayer, encounterMusicEntity.chrysalis$getEncounterMusic());
-                } else {
-                    EventHelper.clearAllMusic(serverPlayer);
-                }
-
-                EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
-            }
-
+        if (this.shouldClearMusic && this.player instanceof ServerPlayer serverPlayer) {
+            EventHelper.clearAllMusic(serverPlayer);
+            EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
             this.shouldClearMusic = false;
         }
 
         if (encounteredMobUuid.isPresent()) {
 
-            List<? extends Mob> nearbyEncounteredMobs = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(maxRange), entity -> {
+            List<? extends Mob> nearbyEncounteredMobs = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(128.0D), entity -> {
                 boolean defaultReturnValue = entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(this.player) <= entity.getAttributeValue(ChrysalisAttributes.ENCOUNTER_MUSIC_RANGE);
                 if (entity.getType().is(ChrysalisTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC)) return defaultReturnValue;
                 else return defaultReturnValue && entity.getTarget() != null;

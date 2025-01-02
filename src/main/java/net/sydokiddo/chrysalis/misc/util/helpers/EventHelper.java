@@ -88,6 +88,7 @@ public class EventHelper {
         if (!playOnFirstTick && !checkEncounterMusicRefreshing(mob)) return;
 
         for (ServerPlayer serverPlayer : getNearbyPlayers(mob, mob.getAttributeValue(ChrysalisAttributes.ENCOUNTER_MUSIC_RANGE))) {
+            if (EntityDataHelper.getEncounteredMobUUID(serverPlayer).isPresent()) return;
             EntityDataHelper.setEncounteredMobUUID(serverPlayer, mob.getUUID());
             sendMusic(serverPlayer, soundEvent, 0, 0, true);
         }
