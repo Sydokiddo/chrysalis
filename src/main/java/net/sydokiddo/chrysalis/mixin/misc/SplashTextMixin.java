@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.splash_texts.SplashTextLoader;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.Nullable;
@@ -51,6 +52,7 @@ public class SplashTextMixin {
             float maxRangeY = 25.0F;
             if (x > splashTextX + maxRangeX || x < splashTextX - maxRangeX || y > splashTextY + maxRangeY || y < splashTextY - maxRangeY) return;
 
+            if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Splash text has been refreshed");
             minecraft.getSoundManager().play(SimpleSoundInstance.forUI(ChrysalisSoundEvents.SPLASH_TEXT_SHUFFLE, 1.0F));
             this.splash = null;
             this.splash = minecraft.getSplashManager().getSplash();
