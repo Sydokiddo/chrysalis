@@ -13,7 +13,7 @@ import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.Mob;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
-import net.sydokiddo.chrysalis.misc.util.entities.EncounterMusicEntity;
+import net.sydokiddo.chrysalis.misc.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.misc.util.music.ClearMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
@@ -85,9 +85,9 @@ public class EventHelper {
 
     public static void sendEncounterMusic(Mob mob, Holder<SoundEvent> soundEvent, boolean playOnFirstTick) {
 
-        if (!(mob instanceof EncounterMusicEntity encounterMusicEntity) || !playOnFirstTick && !checkEncounterMusicRefreshing(mob)) return;
+        if (!(mob instanceof EncounterMusicMob encounterMusicMob) || !playOnFirstTick && !checkEncounterMusicRefreshing(mob)) return;
 
-        for (ServerPlayer serverPlayer : getNearbyPlayers(mob, encounterMusicEntity.chrysalis$getEncounterMusicRange())) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(mob, encounterMusicMob.chrysalis$getFinalEncounterMusicRange())) {
             if (EntityDataHelper.getEncounteredMobUUID(serverPlayer).isPresent()) return;
             EntityDataHelper.setEncounteredMobUUID(serverPlayer, mob.getUUID());
             sendMusic(serverPlayer, soundEvent, 0, 0, true);
@@ -98,8 +98,8 @@ public class EventHelper {
 
     private static boolean checkEncounterMusicRefreshing(Mob mob) {
 
-        if (!(mob instanceof EncounterMusicEntity encounterMusicEntity)) return false;
-        List<? extends ServerPlayer> nearbyPlayers = getNearbyPlayers(mob, encounterMusicEntity.chrysalis$getEncounterMusicRange());
+        if (!(mob instanceof EncounterMusicMob encounterMusicMob)) return false;
+        List<? extends ServerPlayer> nearbyPlayers = getNearbyPlayers(mob, encounterMusicMob.chrysalis$getFinalEncounterMusicRange());
 
         if (nearbyPlayers.isEmpty()) {
             ticksWithinRange = 0;

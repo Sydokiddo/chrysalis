@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.sydokiddo.chrysalis.misc.util.entities.EncounterMusicEntity;
+import net.sydokiddo.chrysalis.misc.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +31,7 @@ public abstract class MobMixin extends LivingEntity {
     @Unique Mob mob = (Mob) (Object) this;
 
     /**
-     * If a mob is an instance of the EncounterMusicEntity interface, it will play encounter music upon aggravation.
+     * If a mob is an instance of the EncounterMusicMob interface, it will play encounter music upon aggravation.
      **/
 
     @Inject(method = "setTarget", at = @At("HEAD"))
@@ -46,8 +46,8 @@ public abstract class MobMixin extends LivingEntity {
 
     @Unique
     private void tryToSendEncounterMusic(boolean playOnFirstTick) {
-        if (!this.level().isClientSide() && this.mob instanceof EncounterMusicEntity encounterMusicEntity &&
-        (playOnFirstTick ? encounterMusicEntity.chrysalis$shouldStartEncounterMusic() : encounterMusicEntity.chrysalis$shouldRefreshEncounterMusic())) encounterMusicEntity.chrysalis$sendEncounterMusic(this.mob, playOnFirstTick);
+        if (!this.level().isClientSide() && this.mob instanceof EncounterMusicMob encounterMusicMob &&
+        (playOnFirstTick ? encounterMusicMob.chrysalis$shouldStartEncounterMusic() : encounterMusicMob.chrysalis$shouldRefreshEncounterMusic())) encounterMusicMob.chrysalis$sendEncounterMusic(this.mob, playOnFirstTick);
     }
 
     /**

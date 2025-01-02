@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Mob;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 
-public interface EncounterMusicEntity {
+public interface EncounterMusicMob {
 
     default Holder<SoundEvent> chrysalis$getEncounterMusic() {
         return SoundEvents.MUSIC_DRAGON;
@@ -14,6 +14,10 @@ public interface EncounterMusicEntity {
 
     default double chrysalis$getEncounterMusicRange() {
         return 64.0D;
+    }
+
+    default double chrysalis$getFinalEncounterMusicRange() {
+        return Math.min(this.chrysalis$getEncounterMusicRange(), 128.0D);
     }
 
     default boolean chrysalis$shouldStartEncounterMusic() {
