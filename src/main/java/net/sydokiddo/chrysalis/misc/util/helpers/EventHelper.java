@@ -90,7 +90,7 @@ public class EventHelper {
         for (ServerPlayer serverPlayer : getNearbyPlayers(mob, encounterMusicMob.chrysalis$getFinalEncounterMusicRange())) {
             if (EntityDataHelper.getEncounteredMobUUID(serverPlayer).isPresent()) return;
             EntityDataHelper.setEncounteredMobUUID(serverPlayer, mob.getUUID());
-            sendMusic(serverPlayer, soundEvent, 0, 0, true);
+            sendMusic(serverPlayer, soundEvent, 10, 10, true);
         }
     }
 

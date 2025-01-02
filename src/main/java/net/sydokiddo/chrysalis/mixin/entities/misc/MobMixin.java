@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.misc.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,6 +42,7 @@ public abstract class MobMixin extends LivingEntity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void chrysalis$refreshEncounterMusic(CallbackInfo info) {
+        if (!this.level().isClientSide() && this.getType().is(ChrysalisTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC) && this.tickCount % 20 == 0) this.tryToSendEncounterMusic(true);
         this.tryToSendEncounterMusic(false);
     }
 
