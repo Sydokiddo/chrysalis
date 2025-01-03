@@ -55,12 +55,9 @@ public class MinecraftMixin {
     }
 
     @SuppressWarnings("unused")
+    @Environment(EnvType.CLIENT)
     @Mixin(MusicManager.class)
-    public static abstract class MusicManagerMixin {
-
-        @Shadow @Final private Minecraft minecraft;
-        @Shadow protected abstract boolean fadePlaying(float volume);
-        @Shadow public abstract boolean isPlayingMusic(Music music);
+    public static class MusicManagerMixin {
 
         @Shadow private float currentGain;
 

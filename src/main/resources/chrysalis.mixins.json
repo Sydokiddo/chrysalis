@@ -22,8 +22,6 @@
     "blocks.StructureVoidBlockMixin",
     "blocks.TNTBlockMixin",
     "blocks.TurtleEggBlockMixin",
-    "entities.hostile.CreakingMixin",
-    "entities.hostile.CreeperMixin",
     "entities.hostile.EnderDragonMixin",
     "entities.hostile.EndermanMixin",
     "entities.hostile.PiglinMixin",

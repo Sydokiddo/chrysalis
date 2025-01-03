@@ -132,6 +132,7 @@ public class ChrysalisClient implements ClientModInitializer {
         if (shouldFade) {
             fadeOutMusic = true;
         } else {
+            Minecraft.getInstance().getMusicManager().stopPlaying();
             setQueuedMusic(null, true);
             setStructureMusic(null, false);
         }
