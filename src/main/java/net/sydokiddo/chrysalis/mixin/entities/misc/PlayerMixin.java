@@ -70,7 +70,7 @@ public abstract class PlayerMixin extends LivingEntity {
         Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(this.player);
 
         if (this.shouldClearMusic && this.player instanceof ServerPlayer serverPlayer) {
-            EventHelper.clearAllMusic(serverPlayer);
+            EventHelper.clearMusicOnServer(serverPlayer, true);
             EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
             this.shouldClearMusic = false;
         }

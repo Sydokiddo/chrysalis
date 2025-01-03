@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
@@ -113,25 +112,14 @@ public class EventHelper {
         return false;
     }
 
-    public static void clearAllMusic(ServerPlayer serverPlayer) {
-        ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(true, SoundEvents.MUSIC_GAME));
+    public static void clearMusicOnServer(ServerPlayer serverPlayer, boolean shouldFade) {
+        ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(shouldFade));
     }
 
-    public static void clearAllMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, double range) {
+    public static void clearMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, double range, boolean shouldFade) {
         for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
             if (serverPlayer == ignoredEntity) return;
-            clearAllMusic(serverPlayer);
-        }
-    }
-
-    public static void clearSpecificMusic(ServerPlayer serverPlayer, Holder<SoundEvent> soundEvent) {
-        ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(false, soundEvent));
-    }
-
-    public static void clearSpecificMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, double range, Holder<SoundEvent> soundEvent) {
-        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
-            if (serverPlayer == ignoredEntity) return;
-            clearSpecificMusic(serverPlayer, soundEvent);
+            clearMusicOnServer(serverPlayer, shouldFade);
         }
     }
 

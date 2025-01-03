@@ -13,13 +13,10 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.Music;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
@@ -58,12 +55,7 @@ public class ChrysalisClient implements ClientModInitializer {
 
         ClientPlayNetworking.registerGlobalReceiver(QueuedMusicPayload.TYPE, (payload, context) -> context.client().execute(() -> setQueuedMusic(new Music(payload.soundEvent(), payload.minDelay(), payload.maxDelay(), payload.replaceCurrentMusic()), true)));
         ClientPlayNetworking.registerGlobalReceiver(StructureChangedPayload.TYPE, (payload, context) -> context.client().execute(() -> setStructureMusic(payload.structureName().toString(), true)));
-
-        ClientPlayNetworking.registerGlobalReceiver(ClearMusicPayload.TYPE, (payload, context) -> context.client().execute(() -> {
-            if (payload.clearAll()) clearMusicQueue(true);
-            else clearSpecificMusic(payload.soundEvent());
-        }));
-
+        ClientPlayNetworking.registerGlobalReceiver(ClearMusicPayload.TYPE, (payload, context) -> context.client().execute(() -> clearMusicOnClient(payload.shouldFade())));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakePayload.TYPE, (payload, context) -> context.client().execute(() -> CameraShakeHandler.shakeCamera(payload.time(), payload.strength(), payload.frequency())));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakeResetPayload.TYPE, (payload, context) -> context.client().execute(CameraShakeHandler::resetCamera));
 
@@ -100,6 +92,7 @@ public class ChrysalisClient implements ClientModInitializer {
     // region Custom Music
 
     @Nullable private static Music queuedMusic = null;
+    public static boolean fadeOutMusic = false;
 
     @Nullable
     public static Music getQueuedMusic() {
@@ -135,21 +128,12 @@ public class ChrysalisClient implements ClientModInitializer {
         setQueuedMusic(ChrysalisSoundEvents.structures.get(structure), isFirst);
     }
 
-    public static void clearMusicQueue(boolean stopMusic) {
-
-        if (stopMusic) {
-            Music currentMusic = Minecraft.getInstance().getSituationalMusic().music();
-            if (currentMusic != null) Minecraft.getInstance().getSoundManager().stop(currentMusic.getEvent().value().location(), SoundSource.MUSIC);
-        }
-
-        setQueuedMusic(null, true);
-        setStructureMusic(null, false);
-    }
-
-    public static void clearSpecificMusic(Holder<SoundEvent> soundEvent) {
-        if (getQueuedMusic() != null && getQueuedMusic().getEvent() == soundEvent) {
-            Minecraft.getInstance().getSoundManager().stop(soundEvent.value().location(), SoundSource.MUSIC);
+    public static void clearMusicOnClient(boolean shouldFade) {
+        if (shouldFade) {
+            fadeOutMusic = true;
+        } else {
             setQueuedMusic(null, true);
+            setStructureMusic(null, false);
         }
     }
 
