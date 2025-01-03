@@ -17,6 +17,7 @@ import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.Music;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
@@ -132,7 +133,7 @@ public class ChrysalisClient implements ClientModInitializer {
         if (shouldFade) {
             fadeOutMusic = true;
         } else {
-            Minecraft.getInstance().getMusicManager().stopPlaying();
+            if (getQueuedMusic() != null) Minecraft.getInstance().getSoundManager().stop(getQueuedMusic().getEvent().value().location(), SoundSource.MUSIC);
             setQueuedMusic(null, true);
             setStructureMusic(null, false);
         }
