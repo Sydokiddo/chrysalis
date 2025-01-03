@@ -94,6 +94,6 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"), method = "fireImmune", cancellable = true)
     private void chrysalis$makeItemsFireImmune(CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(this.getItem().is(ChrysalisTags.IMMUNE_TO_FIRE));
+        if (this.getItem().is(ChrysalisTags.IMMUNE_TO_FIRE)) cir.setReturnValue(true);
     }
 }
