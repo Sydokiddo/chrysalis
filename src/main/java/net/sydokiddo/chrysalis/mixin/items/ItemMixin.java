@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.mixin.items;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentHolder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -50,14 +51,14 @@ public abstract class ItemMixin {
 
     @SuppressWarnings("unused")
     @Mixin(ItemStack.class)
-    public static abstract class ItemStackMixin {
+    public static abstract class ItemStackMixin implements DataComponentHolder {
 
         @Shadow public abstract Item getItem();
 
         @Environment(EnvType.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
         private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
-            if (this.getItem().getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced()) {
+            if (this.getItem().getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)) {
                 if (!cir.getReturnValue().isEmpty()) cir.getReturnValue().add(CommonComponents.EMPTY);
                 MutableComponent chrysalisIcon = ChrysalisRegistry.CHRYSALIS_ICON;
                 ItemHelper.setTooltipIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
