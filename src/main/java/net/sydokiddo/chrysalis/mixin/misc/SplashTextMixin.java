@@ -40,10 +40,10 @@ public class SplashTextMixin {
         @Shadow private @Nullable SplashRenderer splash;
 
         @Inject(method = "mouseClicked", at = @At("TAIL"))
-        private void chrysalis$splashTextRefreshing(double x, double y, int z, CallbackInfoReturnable<Boolean> cir) {
+        private void chrysalis$splashTextRefreshing(double x, double y, int keyPressed, CallbackInfoReturnable<Boolean> cir) {
 
             Minecraft minecraft = Minecraft.getInstance();
-            if (minecraft.screen == null) return;
+            if (minecraft.screen == null || keyPressed != 0) return;
 
             float splashTextX = minecraft.screen.width / 2.0F + 123.0F;
             float splashTextY = 69.0F;
