@@ -37,7 +37,7 @@ public class StructureMusic {
             return;
         }
 
-        ServerPlayNetworking.send((ServerPlayer) player, new StructureChangedPayload(newStructure));
+        if (player instanceof ServerPlayer serverPlayer) ServerPlayNetworking.send(serverPlayer, new StructureChangedPayload(newStructure));
     }
 
     public static void checkAllStructures(ServerLevel serverLevel, Player player) {

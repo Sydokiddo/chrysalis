@@ -13,16 +13,20 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 
 @SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
-public abstract class CEyesFeatureRenderer<S extends LivingEntityRenderState, M extends EntityModel<S>> extends RenderLayer<S, M> {
+public abstract class EntityOverlayRenderer<S extends LivingEntityRenderState, M extends EntityModel<S>> extends RenderLayer<S, M> {
 
-    public CEyesFeatureRenderer(RenderLayerParent<S, M> renderLayerParent) {
+    private final boolean hideWhenInvisible;
+
+    public EntityOverlayRenderer(RenderLayerParent<S, M> renderLayerParent, boolean hideWhenInvisible) {
         super(renderLayerParent);
+        this.hideWhenInvisible = hideWhenInvisible;
     }
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int color, S entityRenderState, float float1, float float2) {
+        if (this.hideWhenInvisible && entityRenderState.isInvisible) return;
         RenderType renderType = this.renderType();
-        if (renderType != null) this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), 0xF00000, OverlayTexture.NO_OVERLAY);
+        if (renderType != null) this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), color, OverlayTexture.NO_OVERLAY);
     }
 
     public abstract RenderType renderType();

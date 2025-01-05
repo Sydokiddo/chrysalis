@@ -86,7 +86,7 @@ public class ItemHelper {
     }
 
     public static boolean hasEnchantmentOrTrim(ItemStack itemStack) {
-        return (itemStack.isEnchanted() || hasArmorTrim(itemStack));
+        return itemStack.isEnchanted() || hasArmorTrim(itemStack);
     }
 
     // endregion

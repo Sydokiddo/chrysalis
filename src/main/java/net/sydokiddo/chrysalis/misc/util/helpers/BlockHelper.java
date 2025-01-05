@@ -28,10 +28,9 @@ public class BlockHelper {
 
     public static void popResourceBelow(ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, double itemDropOffset) {
 
-        double itemHeight = (double) EntityType.ITEM.getHeight() / 2.0;
-        double x = (double) blockPos.getX() + 0.5 + Mth.nextDouble(serverLevel.getRandom(), -0.25, 0.25);
-        double y = (double) blockPos.getY() - itemDropOffset + Mth.nextDouble(serverLevel.getRandom(), -0.25, 0.25) - itemHeight;
-        double z = (double) blockPos.getZ() + 0.5 + Mth.nextDouble(serverLevel.getRandom(), -0.25, 0.25);
+        double x = (double) blockPos.getX() + 0.5D + Mth.nextDouble(serverLevel.getRandom(), -0.25D, 0.25D);
+        double y = (double) blockPos.getY() - itemDropOffset + Mth.nextDouble(serverLevel.getRandom(), -0.25D, 0.25D) - (EntityType.ITEM.getHeight() / 2.0D);
+        double z = (double) blockPos.getZ() + 0.5D + Mth.nextDouble(serverLevel.getRandom(), -0.25D, 0.25D);
 
         if (!serverLevel.isClientSide() && !itemStack.isEmpty() && serverLevel.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             ItemEntity itemEntity = new ItemEntity(serverLevel, x, y, z, itemStack);

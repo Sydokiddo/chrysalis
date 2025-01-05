@@ -28,8 +28,8 @@ public interface SimpleFileLoader extends SimpleResourceReloadListener<Void> {
         private final FileReader<Stream<String>> RAW;
 
         public DataFileLoader() {
-            JSON = new FileReader<>(JsonParser::parseReader);
-            RAW = new FileReader<>(BufferedReader::lines);
+            this.JSON = new FileReader<>(JsonParser::parseReader);
+            this.RAW = new FileReader<>(BufferedReader::lines);
         }
 
         public FileReader<JsonElement> json() {

@@ -48,7 +48,7 @@ public class FileReader<Value> {
 
     private Value fromResource(Resource resource) {
         try {
-            return bufferReader.apply(resource.openAsReader());
+            return this.bufferReader.apply(resource.openAsReader());
         }
         catch (IOException ignored) {}
         return null;
