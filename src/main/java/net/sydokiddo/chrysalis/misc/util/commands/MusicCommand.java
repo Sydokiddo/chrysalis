@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
+import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import java.util.Collection;
 
@@ -61,8 +62,12 @@ public class MusicCommand {
         Component successMultipleMessage = Component.translatable("gui.chrysalis.commands.music.queue.success.multiple", soundEvent.getRegisteredName(), players.size());
 
         for (Player player : players) {
-            if (player instanceof ServerPlayer serverPlayer)
+
+            if (player instanceof ServerPlayer serverPlayer) {
                 EventHelper.sendMusic(serverPlayer, soundEvent, minDelay, maxDelay, replaceCurrentMusic);
+                EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+            }
+
             if (players.size() > 1) returnValue = 1;
         }
 
@@ -78,7 +83,12 @@ public class MusicCommand {
         Component successMultipleMessage = Component.translatable("gui.chrysalis.commands.music." + (shouldFade ? "stop.fade_out" : "stop") + ".success.multiple", players.size());
 
         for (Player player : players) {
-            if (player instanceof ServerPlayer serverPlayer) EventHelper.clearMusicOnServer(serverPlayer, shouldFade);
+
+            if (player instanceof ServerPlayer serverPlayer) {
+                EventHelper.clearMusicOnServer(serverPlayer, shouldFade);
+                EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+            }
+
             if (players.size() > 1) returnValue = 1;
         }
 
