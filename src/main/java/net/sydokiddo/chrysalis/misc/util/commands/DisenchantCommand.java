@@ -52,11 +52,11 @@ public class DisenchantCommand {
 
         int returnValue = 0;
 
-        SimpleCommandExceptionType failGeneric = new SimpleCommandExceptionType(Component.translatable("gui.chrysalis.commands.disenchant.fail"));
-        DynamicCommandExceptionType failNoItem = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant.fail.no_item", object));
+        SimpleCommandExceptionType failGeneric = new SimpleCommandExceptionType(Component.translatable("gui.chrysalis.commands.disenchant.fail.generic"));
+        DynamicCommandExceptionType failNoItem = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.generic.fail.no_item", object));
         DynamicCommandExceptionType failNoEnchantments = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant.fail.no_enchantments", object));
         DynamicCommandExceptionType failNoSpecificEnchantment = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant.fail.no_specific_enchantment", object));
-        DynamicCommandExceptionType failInvalidEntity = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.disenchant.fail.invalid_entity", object));
+        DynamicCommandExceptionType failInvalidEntity = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.generic.fail.invalid_entity", object));
 
         for (Entity entity : entities) {
 

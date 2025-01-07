@@ -52,7 +52,7 @@ public class MusicCommand {
     }
 
     private static Holder.Reference<SoundEvent> getSoundEvent(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
-        return ResourceKeyArgument.resolveKey(commandContext, soundEventString, Registries.SOUND_EVENT, new DynamicCommandExceptionType(object -> Component.translatableEscape("gui.chrysalis.commands.music.queue.invalid", object)));
+        return ResourceKeyArgument.resolveKey(commandContext, soundEventString, Registries.SOUND_EVENT, new DynamicCommandExceptionType(object -> Component.translatableEscape("gui.chrysalis.commands.music.queue.fail.invalid", object)));
     }
 
     private static int queueMusic(CommandSourceStack commandSourceStack, Collection<? extends Player> players, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {

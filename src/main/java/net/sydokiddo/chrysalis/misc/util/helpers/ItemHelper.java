@@ -21,10 +21,13 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import java.util.List;
+import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class ItemHelper {
@@ -83,6 +86,10 @@ public class ItemHelper {
 
     public static boolean hasArmorTrim(ItemStack itemStack) {
         return itemStack.has(DataComponents.TRIM);
+    }
+
+    public static boolean hasSpecificArmorTrim(ItemStack itemStack, Holder<TrimPattern> pattern, Holder<TrimMaterial> material) {
+        return hasArmorTrim(itemStack) && Objects.requireNonNull(itemStack.get(DataComponents.TRIM)).hasPatternAndMaterial(pattern, material);
     }
 
     public static boolean hasEnchantmentOrTrim(ItemStack itemStack) {

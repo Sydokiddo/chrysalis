@@ -73,36 +73,47 @@
   "gui.chrysalis.aggro_wand.set_target": "Set %1$s as %2$s's attack target",
   "gui.chrysalis.aggro_wand.linked_mob_missing": "Linked mob could not be found",
 
+  "gui.chrysalis.commands.generic.fail.invalid_entity": "%s is not a valid entity for this command",
+  "gui.chrysalis.commands.generic.fail.no_item": "%s is not holding any item",
+
   "gui.chrysalis.commands.heal.success": "Applied %1$s health to %2$s",
   "gui.chrysalis.commands.heal.fail": "Target could not be healed",
+
   "gui.chrysalis.commands.food.add": "Added %1$s nutrition and %2$s saturation to %3$s",
   "gui.chrysalis.commands.food.remove": "Removed %1$s nutrition and %2$s saturation from %3$s",
   "gui.chrysalis.commands.food.set": "Set a nutrition value of %1$s and a saturation value of %2$s for %3$s",
+
   "gui.chrysalis.commands.oxygen.add": "Added %1$s oxygen to %2$s",
   "gui.chrysalis.commands.oxygen.remove": "Removed %1$s oxygen from %2$s",
   "gui.chrysalis.commands.oxygen.set": "Set %1$s's oxygen value to %2$s",
   "gui.chrysalis.commands.oxygen.fail": "Target's oxygen could not be adjusted",
+
   "gui.chrysalis.commands.cooldown.add": "Added a cooldown length of %1$s to %2$s for %3$s",
   "gui.chrysalis.commands.cooldown.remove": "Removed cooldown of %1$s for %2$s",
+
   "gui.chrysalis.commands.hat.success": "Placed %1$s on %2$s's head",
   "gui.chrysalis.commands.hat.fail.no_item": "You are not holding a valid item to place on your head",
   "gui.chrysalis.commands.hat.fail.invalid_item": "Could not place %1$s on %2$s's head",
+
   "gui.chrysalis.commands.showcase.success": "%1$s is showcasing %2$s",
   "gui.chrysalis.commands.showcase.fail": "You are not holding a valid item to showcase",
+
   "gui.chrysalis.commands.surface.success": "Teleported %s to the highest block position",
   "gui.chrysalis.commands.surface.fail": "You are already at the highest block position",
+
   "gui.chrysalis.commands.clear_spawnpoint.success": "Cleared %s's spawn point",
   "gui.chrysalis.commands.clear_spawnpoint.fail": "%1$s does not have a specified spawn point",
+
+  "gui.chrysalis.commands.enchant.fail.low_level": "The value of that enchantment is lower than or equal to the value that is already on the item",
+
   "gui.chrysalis.commands.disenchant_single.success.single": "Removed enchantment %1$s from %2$s's item",
   "gui.chrysalis.commands.disenchant_single.success.multiple": "Removed enchantment %1$s from %2$s entities",
   "gui.chrysalis.commands.disenchant_all.success.single": "Removed all enchantments from %s's item",
   "gui.chrysalis.commands.disenchant_all.success.multiple": "Removed all enchantments from %s entities",
-  "gui.chrysalis.commands.disenchant.fail": "Nothing changed. Targets either have no item in their hands or the item could not be disenchanted.",
-  "gui.chrysalis.commands.disenchant.fail.no_item": "%s is not holding any item",
+  "gui.chrysalis.commands.disenchant.fail.generic": "Nothing changed. Targets either have no item in their hands or the item could not be disenchanted.",
   "gui.chrysalis.commands.disenchant.fail.no_enchantments": "%s's held item does not have any enchantments to remove",
   "gui.chrysalis.commands.disenchant.fail.no_specific_enchantment": "%s's held item does not have that enchantment to remove",
-  "gui.chrysalis.commands.disenchant.fail.invalid_entity": "%s is not a valid entity for this command",
-  "gui.chrysalis.commands.enchant.fail.low_level": "The value of that enchantment is lower than or equal to the value that is already on the item",
+
   "gui.chrysalis.commands.add_durability.success.single": "Repaired %1$s's item by %2$s points",
   "gui.chrysalis.commands.add_durability.success.multiple": "Repaired items for %1$s entities by %2$s points",
   "gui.chrysalis.commands.remove_durability.success.single": "Damaged %1$s's item by %2$s points",
@@ -115,25 +126,39 @@
   "gui.chrysalis.commands.remove_repair_cost.success.multiple": "Removed a repair cost of %1$s from items for %2$s entities",
   "gui.chrysalis.commands.set_repair_cost.success.single": "Set the repair cost of %1$s's item to %2$s",
   "gui.chrysalis.commands.set_repair_cost.success.multiple": "Set the repair cost of items for %1$s entities to %2$s",
-  "gui.chrysalis.commands.durability.fail": "Nothing changed. Targets either have no item in their hands or the item could not have its durability or repair cost adjusted.",
+  "gui.chrysalis.commands.durability.fail.generic": "Nothing changed. Targets either have no item in their hands or the item could not have its durability or repair cost adjusted.",
   "gui.chrysalis.commands.durability.fail.no_durability": "%s's held item does not have any durability or repair cost to be adjusted",
-  "gui.chrysalis.commands.durability.fail.no_item": "%s is not holding any item",
-  "gui.chrysalis.commands.durability.fail.invalid_entity": "%s is not a valid entity for this command",
+
+  "gui.chrysalis.commands.set_trim.success.single": "Applied %1$s to %2$s's item",
+  "gui.chrysalis.commands.set_trim.success.multiple": "Applied %1$s to %2$s entities",
+  "gui.chrysalis.commands.set_trim.fail.generic": "Nothing changed. Targets either have no item in their hands or the item could not be trimmed.",
+  "gui.chrysalis.commands.set_trim.fail.invalid": "%s's held item cannot have an armor trim applied to it",
+  "gui.chrysalis.commands.set_trim.fail.same_type": "This armor trim is already applied to the held item",
+
+  "gui.chrysalis.commands.remove_trim.success.single": "Removed armor trim from %s's item",
+  "gui.chrysalis.commands.remove_trim.success.multiple": "Removed armor trim from %s entities",
+  "gui.chrysalis.commands.remove_trim.fail.generic": "Nothing changed. Targets either have no item in their hands or the item could not be have any armor trims removed.",
+  "gui.chrysalis.commands.remove_trim.fail.no_trim": "%s's held item does not have any applied armor trims",
+
   "gui.chrysalis.commands.explosion.success": "Created an explosion with a power of %1$s",
   "gui.chrysalis.commands.explosion.success.entity": "Created an explosion caused by %1$s with a power of %2$s",
+
   "gui.chrysalis.commands.music.queue.success.single": "Added music %1$s to %2$s's music queue",
   "gui.chrysalis.commands.music.queue.success.multiple": "Added music %1$s to the music queue for %2$s players",
-  "gui.chrysalis.commands.music.queue.invalid": "There is no sound event with type \"%s\"",
+  "gui.chrysalis.commands.music.queue.fail.invalid": "There is no sound event with type \"%s\"",
   "gui.chrysalis.commands.music.stop.success.single": "Stopping music for %s",
   "gui.chrysalis.commands.music.stop.success.multiple": "Stopping music for %s players",
   "gui.chrysalis.commands.music.stop.fade_out.success.single": "Fading out music for %s",
   "gui.chrysalis.commands.music.stop.fade_out.success.multiple": "Fading out music for %s players",
+
   "gui.chrysalis.commands.play_game_event.success": "Played game event %1$s from %2$s",
-  "gui.chrysalis.commands.play_game_event.invalid": "There is no game event with type \"%s\"",
+  "gui.chrysalis.commands.play_game_event.fail.invalid": "There is no game event with type \"%s\"",
+
   "gui.chrysalis.commands.camera_shake.success.single": "Emitted a camera shake for %s",
   "gui.chrysalis.commands.camera_shake.success.multiple": "Emitted a camera shake for %s players",
   "gui.chrysalis.commands.camera_shake.reset.success.single": "Reset %s's camera shake",
   "gui.chrysalis.commands.camera_shake.reset.success.multiple": "Reset camera shake for %s players",
+
   "gui.chrysalis.commands.velocity.add.success.single": "Added a velocity of {%1$s, %2$s, %3$s} to %4$s",
   "gui.chrysalis.commands.velocity.add.success.multiple": "Added a velocity of {%1$s, %2$s, %3$s} for %4$s entities",
   "gui.chrysalis.commands.velocity.subtract.success.single": "Subtracted a velocity of {%1$s, %2$s, %3$s} from %4$s",

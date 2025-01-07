@@ -33,7 +33,7 @@ public class GameEventCommand {
     }
 
     private static Holder.Reference<GameEvent> getGameEvent(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
-        return ResourceKeyArgument.resolveKey(commandContext, gameEventString, Registries.GAME_EVENT, new DynamicCommandExceptionType(object -> Component.translatableEscape("gui.chrysalis.commands.play_game_event.invalid", object)));
+        return ResourceKeyArgument.resolveKey(commandContext, gameEventString, Registries.GAME_EVENT, new DynamicCommandExceptionType(object -> Component.translatableEscape("gui.chrysalis.commands.play_game_event.fail.invalid", object)));
     }
 
     private static int playGameEvent(CommandSourceStack commandSourceStack, Entity causingEntity, Holder<GameEvent> gameEvent, Vec3 position) {

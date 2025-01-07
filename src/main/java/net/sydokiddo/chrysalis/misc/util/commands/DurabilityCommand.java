@@ -26,12 +26,12 @@ public class DurabilityCommand {
         repairCostAmountString = "repair_cost_amount"
     ;
 
-    private static final SimpleCommandExceptionType failGeneric = new SimpleCommandExceptionType(Component.translatable("gui.chrysalis.commands.durability.fail"));
+    private static final SimpleCommandExceptionType failGeneric = new SimpleCommandExceptionType(Component.translatable("gui.chrysalis.commands.durability.fail.generic"));
 
     private static final DynamicCommandExceptionType
         failNoDurability = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.durability.fail.no_durability", object)),
-        failNoItem = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.durability.fail.no_item", object)),
-        failInvalidEntity = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.durability.fail.invalid_entity", object))
+        failNoItem = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.generic.fail.no_item", object)),
+        failInvalidEntity = new DynamicCommandExceptionType(object -> Component.translatable("gui.chrysalis.commands.generic.fail.invalid_entity", object))
     ;
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
