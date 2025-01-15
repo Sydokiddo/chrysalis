@@ -72,19 +72,19 @@ public class EntityDataHelper {
 
     // region Dimension Checks
 
-    public static boolean isMobInOverworld(Entity entity) {
-        return entity.level().dimension() == Level.OVERWORLD;
+    public static boolean isInOverworld(Entity entity) {
+        return isInDimension(entity, Level.OVERWORLD);
     }
 
-    public static boolean isMobInNether(Entity entity) {
-        return entity.level().dimension() == Level.NETHER;
+    public static boolean isInNether(Entity entity) {
+        return isInDimension(entity, Level.NETHER);
     }
 
-    public static boolean isMobInEnd(Entity entity) {
-        return entity.level().dimension() == Level.END;
+    public static boolean isInEnd(Entity entity) {
+        return isInDimension(entity, Level.END);
     }
 
-    public static boolean isMobInDimension(Entity entity, ResourceKey<Level> dimension) {
+    public static boolean isInDimension(Entity entity, ResourceKey<Level> dimension) {
         return entity.level().dimension() == dimension;
     }
 

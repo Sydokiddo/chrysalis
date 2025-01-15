@@ -98,6 +98,10 @@
   "gui.chrysalis.commands.showcase.success": "%1$s is showcasing %2$s",
   "gui.chrysalis.commands.showcase.fail": "You are not holding a valid item to showcase",
 
+  "gui.chrysalis.commands.coordinates.copy.success": "Copied %s's current coordinates to clipboard",
+  "gui.chrysalis.commands.coordinates.convert.success": "Coordinates (%1$s): %2$s",
+  "gui.chrysalis.commands.coordinates.convert.fail": "Could not convert %s's current coordinates",
+
   "gui.chrysalis.commands.surface.success": "Teleported %s to the highest block position",
   "gui.chrysalis.commands.surface.fail": "You are already at the highest block position",
 

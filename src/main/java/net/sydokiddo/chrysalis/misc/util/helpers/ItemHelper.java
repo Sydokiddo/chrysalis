@@ -162,9 +162,13 @@ public class ItemHelper {
     }
 
     public static void addDimensionTooltip(List<Component> tooltip, String dimension) {
+        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension", getDimensionComponent(dimension).copy().withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
+    }
+
+    public static Component getDimensionComponent(String dimension) {
         String registryKey = dimension.split(":")[0];
         String registryPath = dimension.split(":")[1];
-        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension", Component.translatable("dimension." + registryKey + "." + registryPath).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
+        return Component.translatable("dimension." + registryKey + "." + registryPath);
     }
 
     public static Component getWeatherComponent(Level level, Holder<Biome> biome, BlockPos blockPos) {
