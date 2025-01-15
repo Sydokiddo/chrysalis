@@ -27,10 +27,7 @@ import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.commands.*;
 import net.sydokiddo.chrysalis.misc.util.entities.ChrysalisMemoryModules;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
-import net.sydokiddo.chrysalis.misc.util.music.ClearMusicPayload;
-import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
-import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
-import net.sydokiddo.chrysalis.misc.util.music.StructureMusic;
+import net.sydokiddo.chrysalis.misc.util.music.*;
 import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
@@ -155,7 +152,7 @@ public class ChrysalisRegistry {
 
     // endregion
 
-    // region Structure Music
+    // region Custom Music
 
     public static Map<String, StructureMusicSound> registeredStructures = new HashMap<>();
     public record StructureMusicSound(Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {}
@@ -208,6 +205,7 @@ public class ChrysalisRegistry {
         PayloadTypeRegistry.playS2C().register(QueuedMusicPayload.TYPE, QueuedMusicPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(StructureChangedPayload.TYPE, StructureChangedPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(ClearMusicPayload.TYPE, ClearMusicPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(ResetMusicFadePayload.TYPE, ResetMusicFadePayload.CODEC);
 
         ServerWorldEvents.UNLOAD.register((server, level) -> {
             if (!level.isClientSide()) return;

@@ -63,6 +63,7 @@ public class MinecraftMixin {
 
         @Inject(method = "tick", at = @At("HEAD"))
         private void chrysalis$fadeOutMusic(CallbackInfo info) {
+
             if (ChrysalisClient.fadeOutMusic) {
 
                 this.currentGain = this.currentGain - 0.01F;
@@ -72,6 +73,12 @@ public class MinecraftMixin {
                     ChrysalisClient.setStructureMusic(null, false);
                     ChrysalisClient.fadeOutMusic = false;
                 }
+            }
+
+            if (ChrysalisClient.resetMusicFade) {
+                ChrysalisClient.fadeOutMusic = false;
+                this.currentGain = 1.0F;
+                ChrysalisClient.resetMusicFade = false;
             }
         }
     }

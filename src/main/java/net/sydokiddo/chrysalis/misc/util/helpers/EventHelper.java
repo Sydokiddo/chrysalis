@@ -16,6 +16,7 @@ import net.sydokiddo.chrysalis.misc.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.misc.util.music.ClearMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
+import net.sydokiddo.chrysalis.misc.util.music.ResetMusicFadePayload;
 import org.joml.Vector4f;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class EventHelper {
     public static List<? extends ServerPlayer> getNearbyPlayers(Entity entity, double range) {
         return entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(range), EntitySelector.NO_SPECTATORS);
     }
+
+    // region Camera Shaking
 
     /**
      * Sends a customizable camera shake effect to a selected player.
@@ -56,6 +59,10 @@ public class EventHelper {
         }
     }
 
+    // endregion
+
+    // region Status Effects
+
     /**
      * Sends a specific status effect to nearby players.
      **/
@@ -67,12 +74,17 @@ public class EventHelper {
         }
     }
 
+    // endregion
+
+    // region Custom Music
+
     /**
      * Sends a queued music track to a selected player.
      **/
 
     public static void sendMusic(ServerPlayer serverPlayer, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
         ServerPlayNetworking.send(serverPlayer, new QueuedMusicPayload(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
+        if (replaceCurrentMusic) resetMusicFade(serverPlayer);
     }
 
     public static void sendMusicToNearbyPlayers(Entity entity, Entity ignoredEntity, double range, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
@@ -123,6 +135,21 @@ public class EventHelper {
         }
     }
 
+    public static void resetMusicFade(ServerPlayer serverPlayer) {
+        ServerPlayNetworking.send(serverPlayer, new ResetMusicFadePayload(0));
+    }
+
+    public static void resetMusicFadeForNearbyPlayers(Entity entity, Entity ignoredEntity, double range) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(entity, range)) {
+            if (serverPlayer == ignoredEntity) return;
+            resetMusicFade(serverPlayer);
+        }
+    }
+
+    // endregion
+
+    // region Custom Fog
+
     /**
      * Assists with creating a custom fog effect.
      **/
@@ -130,4 +157,6 @@ public class EventHelper {
     public static FogParameters createCustomFog(float start, float end, FogShape fogShape, Vector4f vector4f) {
         return new FogParameters(start, end, fogShape, vector4f.x(), vector4f.y(), vector4f.z(), vector4f.w());
     }
+
+    // endregion
 }

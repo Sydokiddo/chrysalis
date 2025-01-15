@@ -64,8 +64,8 @@ public class MusicCommand {
         for (Player player : players) {
 
             if (player instanceof ServerPlayer serverPlayer) {
-                EventHelper.sendMusic(serverPlayer, soundEvent, minDelay, maxDelay, replaceCurrentMusic);
                 EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+                EventHelper.sendMusic(serverPlayer, soundEvent, minDelay, maxDelay, replaceCurrentMusic);
             }
 
             if (players.size() > 1) returnValue = 1;
@@ -85,8 +85,8 @@ public class MusicCommand {
         for (Player player : players) {
 
             if (player instanceof ServerPlayer serverPlayer) {
-                EventHelper.clearMusicOnServer(serverPlayer, shouldFade);
                 EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+                EventHelper.clearMusicOnServer(serverPlayer, shouldFade);
             }
 
             if (players.size() > 1) returnValue = 1;

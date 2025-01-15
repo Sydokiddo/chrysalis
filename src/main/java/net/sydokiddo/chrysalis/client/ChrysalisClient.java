@@ -27,6 +27,7 @@ import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.misc.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.misc.util.music.QueuedMusicPayload;
 import net.sydokiddo.chrysalis.misc.util.music.ClearMusicPayload;
+import net.sydokiddo.chrysalis.misc.util.music.ResetMusicFadePayload;
 import net.sydokiddo.chrysalis.misc.util.music.StructureChangedPayload;
 import net.sydokiddo.chrysalis.misc.util.splash_texts.SplashTextLoader;
 import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
@@ -57,6 +58,7 @@ public class ChrysalisClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(QueuedMusicPayload.TYPE, (payload, context) -> context.client().execute(() -> setQueuedMusic(new Music(payload.soundEvent(), payload.minDelay(), payload.maxDelay(), payload.replaceCurrentMusic()), true)));
         ClientPlayNetworking.registerGlobalReceiver(StructureChangedPayload.TYPE, (payload, context) -> context.client().execute(() -> setStructureMusic(payload.structureName().toString(), true)));
         ClientPlayNetworking.registerGlobalReceiver(ClearMusicPayload.TYPE, (payload, context) -> context.client().execute(() -> clearMusicOnClient(payload.shouldFade())));
+        ClientPlayNetworking.registerGlobalReceiver(ResetMusicFadePayload.TYPE, (payload, context) -> context.client().execute(() -> resetMusicFade = true));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakePayload.TYPE, (payload, context) -> context.client().execute(() -> CameraShakeHandler.shakeCamera(payload.time(), payload.strength(), payload.frequency())));
         ClientPlayNetworking.registerGlobalReceiver(CameraShakeResetPayload.TYPE, (payload, context) -> context.client().execute(CameraShakeHandler::resetCamera));
 
@@ -94,6 +96,7 @@ public class ChrysalisClient implements ClientModInitializer {
 
     @Nullable private static Music queuedMusic = null;
     public static boolean fadeOutMusic = false;
+    public static boolean resetMusicFade = false;
 
     @Nullable
     public static Music getQueuedMusic() {

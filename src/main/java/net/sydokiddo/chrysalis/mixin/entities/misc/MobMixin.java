@@ -23,21 +23,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Mob.class)
 public abstract class MobMixin extends LivingEntity {
 
-    @Shadow @Nullable public abstract LivingEntity getTarget();
-
     private MobMixin(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }
 
     @Unique Mob mob = (Mob) (Object) this;
+    @Shadow @Nullable public abstract LivingEntity getTarget();
 
     /**
      * If a mob is an instance of the EncounterMusicMob interface, it will play encounter music upon aggravation.
      **/
 
-    @Inject(method = "setTarget", at = @At("HEAD"))
+    @Inject(method = "setTarget", at = @At("TAIL"))
     private void chrysalis$startEncounterMusic(LivingEntity livingEntity, CallbackInfo info) {
-        this.tryToSendEncounterMusic(true);
+        if (this.getTarget() != null) this.tryToSendEncounterMusic(true);
     }
 
     @Inject(method = "tick", at = @At("HEAD"))

@@ -70,8 +70,8 @@ public abstract class PlayerMixin extends LivingEntity {
         Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(this.player);
 
         if (this.shouldClearMusic && this.player instanceof ServerPlayer serverPlayer) {
-            EventHelper.clearMusicOnServer(serverPlayer, true);
             EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+            EventHelper.clearMusicOnServer(serverPlayer, true);
             this.shouldClearMusic = false;
         }
 
@@ -101,7 +101,7 @@ public abstract class PlayerMixin extends LivingEntity {
         float sinTimesCos = ySin * xCos;
         float cosTimesCos = yCos * xCos;
 
-        Vec3 vec3 = eyePosition.add((double) sinTimesCos * 5.0, (double) xSin * 5.0, (double) cosTimesCos * 5.0);
+        Vec3 vec3 = eyePosition.add((double) sinTimesCos * 5.0D, (double) xSin * 5.0D, (double) cosTimesCos * 5.0D);
         return this.level().clip(new ClipContext(eyePosition, vec3, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, this));
     }
 

@@ -3,7 +3,8 @@
   "item.modifiers.body": "When Equipped:",
   "item.modifiers.armor": "When Worn:",
   "item.modifiers.hand": "When Held:",
-
+  "item.canBreak": "Can Break:",
+  "item.canPlace": "Can Be Placed On:",
   "item.minecraft.smithing_template.applies_to": "Applies To:",
 
   "block.minecraft.waxed_copper_block": "Block of Copper",
