@@ -177,6 +177,7 @@
   "gui.chrysalis.item.when_used": "When Used with %s:",
   "gui.chrysalis.item.when_eaten": "When Eaten:",
   "gui.chrysalis.item.when_drank": "When Drank:",
+  "gui.chrysalis.item.enchantments": "Enchantments:",
   "gui.chrysalis.item.waxed": "Waxed",
   "gui.chrysalis.item.armor_trim": "%1$s (%2$s)",
   "gui.chrysalis.item.tooltip_with_icon": "%1$s %2$s",
