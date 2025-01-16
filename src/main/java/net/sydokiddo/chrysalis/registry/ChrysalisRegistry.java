@@ -115,6 +115,7 @@ public class ChrysalisRegistry {
 
     public static final Color
         CHRYSALIS_COLOR = Color.decode("#A27FFF"),
+        ENCHANTMENT_COLOR = Color.decode("#964CFF"),
         WAXED_COLOR = Color.decode("#FABF29")
     ;
 

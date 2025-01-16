@@ -17,6 +17,7 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.equipment.trim.ArmorTrim;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -109,7 +110,7 @@ public class TooltipMixin extends Item {
 
         @Redirect(method = "getFullname", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;withColor(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/Style;", ordinal = 1))
         private static Style chrysalis$changeEnchantmentTooltipColor(Style style, ChatFormatting chatFormatting) {
-            return Style.EMPTY.withColor(ChatFormatting.BLUE);
+            return Style.EMPTY.withColor(ChrysalisRegistry.ENCHANTMENT_COLOR.getRGB());
         }
     }
 }
