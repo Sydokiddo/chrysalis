@@ -126,6 +126,7 @@ public class EventHelper {
 
     public static void clearMusicOnServer(ServerPlayer serverPlayer, boolean shouldFade) {
         ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(shouldFade));
+        if (!shouldFade) resetMusicFade(serverPlayer);
     }
 
     public static void clearMusicForNearbyPlayers(Entity entity, Entity ignoredEntity, double range, boolean shouldFade) {

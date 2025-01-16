@@ -139,6 +139,7 @@ public class ChrysalisClient implements ClientModInitializer {
             if (getQueuedMusic() != null) Minecraft.getInstance().getSoundManager().stop(getQueuedMusic().getEvent().value().location(), SoundSource.MUSIC);
             setQueuedMusic(null, true);
             setStructureMusic(null, false);
+            resetMusicFade = true;
         }
     }
 
