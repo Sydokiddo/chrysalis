@@ -43,6 +43,7 @@ public class GuiMixin {
         return resourceLocation;
     }
 
+    @Environment(EnvType.CLIENT)
     @SuppressWarnings("unused")
     @Mixin(GuiGraphics.class)
     public static abstract class GuiGraphicsMixin {

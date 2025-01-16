@@ -23,7 +23,6 @@
     "blocks.TNTBlockMixin",
     "blocks.TurtleEggBlockMixin",
     "entities.hostile.EnderDragonMixin",
-    "entities.hostile.EndermanMixin",
     "entities.hostile.PiglinMixin",
     "entities.hostile.PiglinMixin$PiglinAiMixin",
     "entities.hostile.WardenMixin",
@@ -58,18 +57,20 @@
     "items.TooltipMixin",
     "items.TridentItemMixin",
     "misc.EnchantCommandMixin",
-    "misc.LevelSummaryMixin",
+    "misc.LevelMixin",
+    "misc.LevelMixin$SnowFixMixin",
     "util.SimpleParticleTypeAccessor",
     "util.WoodTypeAccessor"
   ],
   "client": [
     "misc.ClientLevelMixin",
+    "misc.ClientLevelMixin$WeatherFixMixin",
     "misc.EntityRendererMixin",
     "misc.EntityRendererMixin$HumanoidArmorLayerMixin",
     "misc.EntityRendererMixin$LivingEntityRendererMixin",
     "misc.EntityRendererMixin$WingsLayerMixin",
-    "misc.FogRendererMixin",
     "misc.GameRendererMixin",
+    "misc.GameRendererMixin$FogRendererMixin",
     "misc.GuiMixin",
     "misc.GuiMixin$GuiGraphicsMixin",
     "misc.MinecraftMixin",
@@ -77,9 +78,7 @@
     "misc.ScreenshotMixin",
     "misc.ScreenshotMixin$MainMixin",
     "misc.SplashTextMixin",
-    "misc.SplashTextMixin$TitleScreenMixin",
-    "misc.WeatherFixMixin",
-    "misc.WeatherFixMixin$SnowFixMixin"
+    "misc.SplashTextMixin$TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
