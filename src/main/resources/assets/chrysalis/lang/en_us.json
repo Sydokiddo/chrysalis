@@ -22,6 +22,9 @@
   "gui.icon.chrysalis.brown_heart": "\ua017",
   "gui.icon.chrysalis.snout": "\ua018",
   "gui.icon.chrysalis.waxed": "\ua019",
+  "gui.icon.chrysalis.flame": "\ua020",
+  "gui.icon.chrysalis.soul_flame": "\ua021",
+  "gui.icon.chrysalis.memory_flame": "\ua022",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
@@ -178,6 +181,7 @@
   "gui.chrysalis.item.when_eaten": "When Eaten:",
   "gui.chrysalis.item.when_drank": "When Drank:",
   "gui.chrysalis.item.enchantments": "Enchantments:",
+  "gui.chrysalis.item.fireproof": "Fireproof",
   "gui.chrysalis.item.waxed": "Waxed",
   "gui.chrysalis.item.armor_trim": "%1$s (%2$s)",
   "gui.chrysalis.item.tooltip_with_icon": "%1$s %2$s",

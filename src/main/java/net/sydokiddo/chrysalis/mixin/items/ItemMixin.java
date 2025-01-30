@@ -8,9 +8,11 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.DamageResistant;
 import net.minecraft.world.level.block.LightBlock;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
@@ -31,10 +33,19 @@ public abstract class ItemMixin {
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
+        DamageResistant damageResistant = itemStack.get(DataComponents.DAMAGE_RESISTANT);
+
+        if (damageResistant != null && damageResistant.types() == DamageTypeTags.IS_FIRE) {
+            MutableComponent flameIcon = ChrysalisRegistry.FLAME_ICON;
+            ItemHelper.setTooltipIconsFont(flameIcon, Chrysalis.MOD_ID);
+            Component fireproofTooltip = ItemHelper.addTooltipWithIcon(flameIcon, Component.translatable("gui.chrysalis.item.fireproof").withStyle(style -> style.withItalic(true).withColor(ChrysalisRegistry.FIREPROOF_COLOR.getRGB())));
+            list.add(fireproofTooltip);
+        }
+
         if (itemStack.is(ChrysalisTags.WAXED_BLOCK_ITEMS)) {
             MutableComponent waxedIcon = ChrysalisRegistry.WAXED_ICON;
             ItemHelper.setTooltipIconsFont(waxedIcon, Chrysalis.MOD_ID);
-            Component waxedTooltip = ItemHelper.addTooltipWithIcon(waxedIcon, Component.translatable("gui.chrysalis.item.waxed").withColor(ChrysalisRegistry.WAXED_COLOR.getRGB()));
+            Component waxedTooltip = ItemHelper.addTooltipWithIcon(waxedIcon, Component.translatable("gui.chrysalis.item.waxed").withStyle(style -> style.withItalic(true).withColor(ChrysalisRegistry.WAXED_COLOR.getRGB())));
             list.add(waxedTooltip);
         }
 

@@ -116,6 +116,7 @@ public class ChrysalisRegistry {
     public static final Color
         CHRYSALIS_COLOR = Color.decode("#A27FFF"),
         ENCHANTMENT_COLOR = Color.decode("#964CFF"),
+        FIREPROOF_COLOR = Color.decode("#FF6A00"),
         WAXED_COLOR = Color.decode("#FABF29")
     ;
 
@@ -140,7 +141,10 @@ public class ChrysalisRegistry {
         BLACK_HEART_ICON = Component.translatable("gui.icon.chrysalis.black_heart"),
         BROWN_HEART_ICON = Component.translatable("gui.icon.chrysalis.brown_heart"),
         SNOUT_ICON = Component.translatable("gui.icon.chrysalis.snout"),
-        WAXED_ICON = Component.translatable("gui.icon.chrysalis.waxed")
+        WAXED_ICON = Component.translatable("gui.icon.chrysalis.waxed"),
+        FLAME_ICON = Component.translatable("gui.icon.chrysalis.flame"),
+        SOUL_FLAME_ICON = Component.translatable("gui.icon.chrysalis.soul_flame"),
+        MEMORY_FLAME_ICON = Component.translatable("gui.icon.chrysalis.memory_flame")
     ;
 
     @SuppressWarnings("unused")

@@ -185,6 +185,33 @@
       "chars": [
         "\ua019"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua020"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/soul_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua021"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/memory_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua022"
+      ]
     }
   ]
 }
