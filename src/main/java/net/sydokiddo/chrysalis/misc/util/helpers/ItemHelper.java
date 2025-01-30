@@ -92,10 +92,6 @@ public class ItemHelper {
         return hasArmorTrim(itemStack) && Objects.requireNonNull(itemStack.get(DataComponents.TRIM)).hasPatternAndMaterial(pattern, material);
     }
 
-    public static boolean hasEnchantmentOrTrim(ItemStack itemStack) {
-        return itemStack.isEnchanted() || hasArmorTrim(itemStack);
-    }
-
     // endregion
 
     // region Item Entities
@@ -190,10 +186,6 @@ public class ItemHelper {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level != null && !minecraft.level.dimensionType().hasFixedTime()) return Component.translatable("gui.chrysalis.moon_phase." + (level.getMoonPhase() + 1));
         else return Component.translatable("gui.chrysalis.none");
-    }
-
-    public static void addSpaceOnTooltipIfEnchantedOrTrimmed(ItemStack itemStack, List<Component> tooltip) {
-        if (hasEnchantmentOrTrim(itemStack)) tooltip.add(CommonComponents.EMPTY);
     }
 
     public static void addNullTooltip(List<Component> tooltip) {

@@ -44,7 +44,6 @@
     "entities.passive.SnowGolemMixin",
     "entities.passive.VillagerHarvestFarmlandMixin",
     "items.BundleItemMixin",
-    "items.CrossbowItemMixin",
     "items.EndCrystalItemMixin",
     "items.EyeOfEnderItemMixin",
     "items.ItemMixin",
