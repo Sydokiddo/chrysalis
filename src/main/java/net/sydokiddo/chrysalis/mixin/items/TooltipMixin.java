@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-@Mixin({DiscFragmentItem.class, BannerItem.class, ShieldItem.class, CrossbowItem.class, FireworkRocketItem.class, MobBucketItem.class, WrittenBookItem.class, PotionItem.class})
+@Mixin({DiscFragmentItem.class, BannerItem.class, CrossbowItem.class, FireworkRocketItem.class, MobBucketItem.class, WrittenBookItem.class, PotionItem.class})
 public class TooltipMixin extends Item {
 
     private TooltipMixin(Properties properties) {
