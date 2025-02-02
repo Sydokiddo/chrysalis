@@ -18,7 +18,7 @@ public class GlowingSporeParticle extends TextureSheetParticle {
         super(clientLevel, x, y, z);
         this.setSize(0.001F, 0.001F);
         this.setColor(0.5F, 0.5F, 0.5F);
-        this.lifetime = (int) (8.0 / (Math.random() * 0.8 + 0.2)) + 4;
+        this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
         this.hasPhysics = true;
         this.xd = velocityX;
         this.yd = velocityY;

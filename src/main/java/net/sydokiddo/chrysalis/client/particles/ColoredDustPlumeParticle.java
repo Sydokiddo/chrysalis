@@ -11,7 +11,7 @@ import org.joml.Vector3f;
 
 @SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
-public class ColoredDustPlumeParticle<T extends ColoredDustPlumeParticleOptions> extends DustPlumeParticle {
+public class ColoredDustPlumeParticle extends DustPlumeParticle {
 
     // region Initialization
 
@@ -20,12 +20,12 @@ public class ColoredDustPlumeParticle<T extends ColoredDustPlumeParticleOptions>
     public ColoredDustPlumeParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, ColoredDustPlumeParticleOptions particleOptions, SpriteSet spriteSet) {
         super(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions.getScale(), spriteSet);
 
-        Vector3f color = particleOptions.getColor();
+        Vector3f color = particleOptions.getFinalColor();
 
         if (particleOptions.shouldRandomizeColor()) {
-            this.rCol = this.randomizeColor(color.x());
-            this.gCol = this.randomizeColor(color.y());
-            this.bCol = this.randomizeColor(color.z());
+            this.rCol = particleOptions.randomizeColor(color.x(), this.random);
+            this.gCol = particleOptions.randomizeColor(color.y(), this.random);
+            this.bCol = particleOptions.randomizeColor(color.z(), this.random);
         } else {
             this.rCol = color.x();
             this.gCol = color.y();
@@ -33,10 +33,6 @@ public class ColoredDustPlumeParticle<T extends ColoredDustPlumeParticleOptions>
         }
 
         this.isEmissive = particleOptions.isEmissive();
-    }
-
-    private float randomizeColor(float color) {
-        return (this.random.nextFloat() * 0.2F + 0.8F) * color * (this.random.nextFloat() * 0.4F + 0.6F);
     }
 
     // endregion
@@ -85,7 +81,7 @@ public class ColoredDustPlumeParticle<T extends ColoredDustPlumeParticleOptions>
 
         @Override
         public Particle createParticle(@NotNull ColoredDustPlumeParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new ColoredDustPlumeParticle<>(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions, this.spriteSet);
+            return new ColoredDustPlumeParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions, this.spriteSet);
         }
     }
 

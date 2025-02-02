@@ -16,10 +16,10 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
         super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet, animateTextures);
         this.setSize(0.02F, 0.02F);
         this.quadSize *= this.random.nextFloat() * 0.6F + 0.5F;
-        this.lifetime = (int) (20.0 / (Math.random() * 0.8 + 0.2));
-        this.xd *= 0.02;
-        this.yd *= 0.02;
-        this.zd *= 0.02;
+        this.lifetime = (int) (20.0D / (Math.random() * 0.8D + 0.2D));
+        this.xd *= 0.02D;
+        this.yd *= 0.02D;
+        this.zd *= 0.02D;
         float random = this.random.nextFloat() * 0.1F + 0.2F;
         this.rCol = random;
         this.gCol = random;
@@ -37,9 +37,9 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
             this.remove();
         } else {
             this.move(this.xd, this.yd, this.zd);
-            this.xd *= 0.99;
-            this.yd *= 0.99;
-            this.zd *= 0.99;
+            this.xd *= 0.99D;
+            this.yd *= 0.99D;
+            this.zd *= 0.99D;
         }
     }
 

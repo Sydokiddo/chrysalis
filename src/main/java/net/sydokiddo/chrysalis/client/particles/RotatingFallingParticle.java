@@ -39,7 +39,7 @@ public class RotatingFallingParticle extends RisingParticle {
         }
 
         if (this.onGround) {
-            this.setParticleSpeed(0D, 0D, 0D);
+            this.setParticleSpeed(0.0D, 0.0D, 0.0D);
             this.setPos(this.xo, this.yo + 0.1D, this.zo);
         }
     }

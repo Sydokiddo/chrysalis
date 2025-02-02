@@ -16,32 +16,28 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class ColoredDustPlumeParticleOptions extends ScalableParticleOptionsBase implements ColoredParticleCommonMethods {
+public class SparkleParticleOptions extends ScalableParticleOptionsBase implements ColoredParticleCommonMethods {
 
-    public static final MapCodec<ColoredDustPlumeParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+    public static final MapCodec<SparkleParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("color", Color.LIGHT_GRAY.getRGB()).forGetter(ColoredParticleCommonMethods::getColor),
         Codec.BOOL.optionalFieldOf("randomize_color", false).forGetter(ColoredParticleCommonMethods::shouldRandomizeColor),
-        Codec.BOOL.optionalFieldOf("emissive", false).forGetter(ColoredParticleCommonMethods::isEmissive),
         SCALE.optionalFieldOf("scale", 1.0F).forGetter(ScalableParticleOptionsBase::getScale))
-    .apply(instance, ColoredDustPlumeParticleOptions::new));
+    .apply(instance, SparkleParticleOptions::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, ColoredDustPlumeParticleOptions> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, SparkleParticleOptions> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.INT, ColoredParticleCommonMethods::getColor,
         ByteBufCodecs.BOOL, ColoredParticleCommonMethods::shouldRandomizeColor,
-        ByteBufCodecs.BOOL, ColoredParticleCommonMethods::isEmissive,
         ByteBufCodecs.FLOAT, ScalableParticleOptionsBase::getScale,
-        ColoredDustPlumeParticleOptions::new
+        SparkleParticleOptions::new
     );
 
     private final int color;
     private final boolean randomizeColor;
-    private final boolean emissive;
 
-    public ColoredDustPlumeParticleOptions(int color, boolean randomizeColor, boolean emissive, float scale) {
+    public SparkleParticleOptions(int color, boolean randomizeColor, float scale) {
         super(scale);
         this.color = color;
         this.randomizeColor = randomizeColor;
-        this.emissive = emissive;
     }
 
     @Override
@@ -55,12 +51,7 @@ public class ColoredDustPlumeParticleOptions extends ScalableParticleOptionsBase
     }
 
     @Override
-    public boolean isEmissive() {
-        return this.emissive;
-    }
-
-    @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.COLORED_DUST_PLUME;
+        return ChrysalisParticles.SPARKLE;
     }
 }

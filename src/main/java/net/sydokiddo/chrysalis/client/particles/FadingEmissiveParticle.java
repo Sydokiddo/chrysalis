@@ -9,7 +9,6 @@ import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class FadingEmissiveParticle extends TextureSheetParticle {
 
@@ -35,7 +34,7 @@ public class FadingEmissiveParticle extends TextureSheetParticle {
         if (this.age++ >= this.lifetime) {
             this.remove();
         } else {
-            if (this.animateTextures) this.setSpriteFromAge(spriteSet);
+            if (this.animateTextures) this.setSpriteFromAge(this.spriteSet);
         }
     }
 

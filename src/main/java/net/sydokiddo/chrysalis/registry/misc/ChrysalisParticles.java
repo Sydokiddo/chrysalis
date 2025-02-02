@@ -16,7 +16,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.ColoredDustPlumeParticle;
+import net.sydokiddo.chrysalis.client.particles.SparkleParticle;
 import net.sydokiddo.chrysalis.client.particles.options.ColoredDustPlumeParticleOptions;
+import net.sydokiddo.chrysalis.client.particles.options.SparkleParticleOptions;
 import net.sydokiddo.chrysalis.misc.util.CoreRegistry;
 import net.sydokiddo.chrysalis.mixin.util.SimpleParticleTypeAccessor;
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +37,10 @@ public class ChrysalisParticles {
 
     public static final ParticleType<ColoredDustPlumeParticleOptions> COLORED_DUST_PLUME = registerAdvancedParticle(
         "colored_dust_plume", false, particleType -> ColoredDustPlumeParticleOptions.CODEC, particleType -> ColoredDustPlumeParticleOptions.STREAM_CODEC
+    );
+
+    public static final ParticleType<SparkleParticleOptions> SPARKLE = registerAdvancedParticle(
+        "sparkle", false, particleType -> SparkleParticleOptions.CODEC, particleType -> SparkleParticleOptions.STREAM_CODEC
     );
 
     // endregion
@@ -68,6 +74,7 @@ public class ChrysalisParticles {
         registry.register(MEMORY_FLAME, FlameParticle.Provider::new);
         registry.register(RADIANCE, SpellParticle.Provider::new);
         registry.register(COLORED_DUST_PLUME, ColoredDustPlumeParticle.ColoredDustPlumeParticleProvider::new);
+        registry.register(SPARKLE, SparkleParticle.SparkleParticleProvider::new);
     }
 
     // endregion

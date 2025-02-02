@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.misc.util.entities;
+package net.sydokiddo.chrysalis.misc.util.entities.move_controls;
 
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
@@ -7,17 +7,17 @@ import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 
 @SuppressWarnings("unused")
-public class HybridWalkingFlyingMoveControl extends MoveControl {
+public class HybridFlyingMoveControl extends MoveControl {
 
     /**
-     * This move control allows for mobs that integrate it to use both flying and walking pathfinding types
+     * This move control allows for mobs that integrate it to use both flying and walking pathfinding types.
      **/
 
     public final Mob mob;
     public final int maxTurn;
     public final boolean hoversInPlace;
 
-    public HybridWalkingFlyingMoveControl(Mob mob, int maxTurn, boolean noGravity) {
+    public HybridFlyingMoveControl(Mob mob, int maxTurn, boolean noGravity) {
         super(mob);
         this.mob = mob;
         this.maxTurn = maxTurn;
