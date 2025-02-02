@@ -40,7 +40,7 @@ public abstract class ItemMixin {
             MutableComponent fireproofIcon = ChrysalisRegistry.FLAME_ICON;
             int fireproofColor = ChrysalisRegistry.FIRE_COLOR.getRGB();
 
-            if (ItemHelper.nameContains(itemStack, "soul") || ItemHelper.nameContains(itemStack, "Soul") || ItemHelper.nameContains(itemStack, "souls") || ItemHelper.nameContains(itemStack, "Souls")) {
+            if (ItemHelper.nameContains(itemStack, "soul") || ItemHelper.nameContains(itemStack, "Soul")) {
                 fireproofIcon = ChrysalisRegistry.SOUL_FLAME_ICON;
                 fireproofColor = ChrysalisRegistry.SOUL_FIRE_COLOR.getRGB();
             } else if (ItemHelper.nameContains(itemStack, "memory") || ItemHelper.nameContains(itemStack, "Memory") || ItemHelper.nameContains(itemStack, "memories") || ItemHelper.nameContains(itemStack, "Memories")) {
