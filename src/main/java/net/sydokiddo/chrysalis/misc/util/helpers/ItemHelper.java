@@ -66,10 +66,10 @@ public class ItemHelper {
 
     // endregion
 
-    // region Enchantments and Armor Trims
+    // region Item Components
 
     /**
-     * Checks for enchantments or armor trims.
+     * Checks for various properties relating to enchantments.
      **/
 
     public static int getEnchantmentLevel(ItemStack itemStack, ResourceKey<Enchantment> enchantment) {
@@ -84,12 +84,25 @@ public class ItemHelper {
         return noEnchantments;
     }
 
+    /**
+     * Checks for various properties relating to armor trims.
+     **/
+
     public static boolean hasArmorTrim(ItemStack itemStack) {
         return itemStack.has(DataComponents.TRIM);
     }
 
     public static boolean hasSpecificArmorTrim(ItemStack itemStack, Holder<TrimPattern> pattern, Holder<TrimMaterial> material) {
         return hasArmorTrim(itemStack) && Objects.requireNonNull(itemStack.get(DataComponents.TRIM)).hasPatternAndMaterial(pattern, material);
+    }
+
+    /**
+     * Checks if the item contains a specific word in its name.
+     **/
+
+    public static boolean nameContains(ItemStack itemStack, String name) {
+        Component customName = itemStack.getCustomName();
+        return customName != null && customName.getString().contains(name);
     }
 
     // endregion

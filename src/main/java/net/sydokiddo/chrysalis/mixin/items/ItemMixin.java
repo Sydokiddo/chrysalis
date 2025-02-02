@@ -36,9 +36,21 @@ public abstract class ItemMixin {
         DamageResistant damageResistant = itemStack.get(DataComponents.DAMAGE_RESISTANT);
 
         if (damageResistant != null && damageResistant.types() == DamageTypeTags.IS_FIRE) {
-            MutableComponent flameIcon = ChrysalisRegistry.FLAME_ICON;
-            ItemHelper.setTooltipIconsFont(flameIcon, Chrysalis.MOD_ID);
-            Component fireproofTooltip = ItemHelper.addTooltipWithIcon(flameIcon, Component.translatable("gui.chrysalis.item.fireproof").withStyle(style -> style.withItalic(true).withColor(ChrysalisRegistry.FIREPROOF_COLOR.getRGB())));
+
+            MutableComponent fireproofIcon = ChrysalisRegistry.FLAME_ICON;
+            int fireproofColor = ChrysalisRegistry.FIRE_COLOR.getRGB();
+
+            if (ItemHelper.nameContains(itemStack, "soul") || ItemHelper.nameContains(itemStack, "Soul") || ItemHelper.nameContains(itemStack, "souls") || ItemHelper.nameContains(itemStack, "Souls")) {
+                fireproofIcon = ChrysalisRegistry.SOUL_FLAME_ICON;
+                fireproofColor = ChrysalisRegistry.SOUL_FIRE_COLOR.getRGB();
+            } else if (ItemHelper.nameContains(itemStack, "memory") || ItemHelper.nameContains(itemStack, "Memory") || ItemHelper.nameContains(itemStack, "memories") || ItemHelper.nameContains(itemStack, "Memories")) {
+                fireproofIcon = ChrysalisRegistry.MEMORY_FLAME_ICON;
+                fireproofColor = ChrysalisRegistry.MEMORY_FIRE_COLOR.getRGB();
+            }
+
+            int finalFireproofColor = fireproofColor;
+            ItemHelper.setTooltipIconsFont(fireproofIcon, Chrysalis.MOD_ID);
+            Component fireproofTooltip = ItemHelper.addTooltipWithIcon(fireproofIcon, Component.translatable("gui.chrysalis.item.fireproof").withStyle(style -> style.withItalic(true).withColor(finalFireproofColor)));
             list.add(fireproofTooltip);
         }
 

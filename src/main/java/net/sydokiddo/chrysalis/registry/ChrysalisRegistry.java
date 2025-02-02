@@ -116,7 +116,9 @@ public class ChrysalisRegistry {
     public static final Color
         CHRYSALIS_COLOR = Color.decode("#A27FFF"),
         ENCHANTMENT_COLOR = Color.decode("#964CFF"),
-        FIREPROOF_COLOR = Color.decode("#FF6A00"),
+        FIRE_COLOR = Color.decode("#FF6A00"),
+        SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
+        MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
         WAXED_COLOR = Color.decode("#FABF29")
     ;
 
