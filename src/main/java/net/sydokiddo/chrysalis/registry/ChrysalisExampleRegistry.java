@@ -16,6 +16,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.ColoredDustPlumeParticleOptions;
+import net.sydokiddo.chrysalis.client.particles.options.DustExplosionParticleOptions;
 import net.sydokiddo.chrysalis.client.particles.options.SparkleParticleOptions;
 import net.sydokiddo.chrysalis.misc.util.dispenser.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.dispenser.ShootProjectileDispenserBehavior;
@@ -125,6 +126,7 @@ public class ChrysalisExampleRegistry {
     }
 
     public static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
+    public static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ChrysalisRegistry.FIRE_COLOR.getRGB(), ChrysalisRegistry.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
     public static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, 1.0F);
 
     // endregion

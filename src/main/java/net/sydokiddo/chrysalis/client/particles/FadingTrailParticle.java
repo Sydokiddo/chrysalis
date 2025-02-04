@@ -20,7 +20,7 @@ public class FadingTrailParticle extends TextureSheetParticle {
         super(clientLevel, x, y, z);
         this.quadSize *= 0.75F;
         this.lifetime = 35;
-        this.gravity = 3.0E-6F;
+        this.gravity = 0.0F;
         this.xd = velocityX;
         this.yd = velocityY + (double) (this.random.nextFloat() / 500.0F);
         this.zd = velocityZ;
