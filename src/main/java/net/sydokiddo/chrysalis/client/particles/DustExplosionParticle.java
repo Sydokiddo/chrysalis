@@ -26,6 +26,7 @@ public class DustExplosionParticle extends ExplodeParticle {
         this.startingColor = particleOptions.getFinalStartingColor();
         this.endingColor = particleOptions.getFinalEndingColor();
         this.emissive = particleOptions.isEmissive();
+        this.scale(particleOptions.getScale());
     }
 
     @Override
