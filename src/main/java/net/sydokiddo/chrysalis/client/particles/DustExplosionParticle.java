@@ -64,7 +64,7 @@ public class DustExplosionParticle extends ExplodeParticle {
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float tickRate) {
 
-        Vector3f vector3f = new Vector3f(this.startingColor).lerp(this.endingColor, ((float) this.age + tickRate) / ((float) this.lifetime + 1.0F));
+        Vector3f vector3f = new Vector3f(this.startingColor).lerp(this.endingColor, ((float) this.age + tickRate) / ((float) this.lifetime + 1.0F) / 1.5F);
         this.rCol = vector3f.x();
         this.gCol = vector3f.y();
         this.bCol = vector3f.z();
