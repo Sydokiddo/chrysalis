@@ -31,6 +31,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract double getAttributeValue(Holder<Attribute> holder);
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> holder);
     @Shadow public abstract @Nullable MobEffectInstance getEffect(Holder<MobEffect> holder);
+    @Shadow protected abstract void dropEquipment(ServerLevel serverLevel);
 
     private LivingEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -46,7 +47,10 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventLootDropping(ServerLevel serverLevel, DamageSource damageSource, CallbackInfo info) {
-        if (!(this.livingEntity instanceof Player) && damageSource.is(ChrysalisDamageSources.KILL_WAND)) info.cancel();
+        if (!(this.livingEntity instanceof Player) && damageSource.is(ChrysalisDamageSources.KILL_WAND)) {
+            info.cancel();
+            this.dropEquipment(serverLevel);
+        }
     }
 
     // region Reworked Mob Visibility
