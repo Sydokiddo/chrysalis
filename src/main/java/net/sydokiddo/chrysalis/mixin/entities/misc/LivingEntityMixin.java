@@ -1,26 +1,32 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 
+    @Unique LivingEntity livingEntity = (LivingEntity) (Object) this;
     @Shadow public abstract ItemStack getItemBySlot(EquipmentSlot equipmentSlot);
     @Shadow public abstract double getAttributeValue(Holder<Attribute> holder);
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> holder);
@@ -38,6 +44,11 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
+    @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
+    private void chrysalis$preventLootDropping(ServerLevel serverLevel, DamageSource damageSource, CallbackInfo info) {
+        if (!(this.livingEntity instanceof Player) && damageSource.is(ChrysalisDamageSources.KILL_WAND)) info.cancel();
+    }
+
     // region Reworked Mob Visibility
 
     /**
@@ -49,13 +60,13 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "getVisibilityPercent", at = @At(value = "RETURN"), cancellable = true)
     private void chrysalis$changeMobVisibilityPercentage(Entity entity, CallbackInfoReturnable<Double> cir) {
 
-        if (this.level().isClientSide() || !(entity instanceof LivingEntity livingEntity)) return;
+        if (this.level().isClientSide() || !(entity instanceof LivingEntity self)) return;
         Holder<MobEffect> blindness = MobEffects.BLINDNESS;
 
-        if (livingEntity.hasEffect(blindness)) {
-            cir.setReturnValue(cir.getReturnValue() / (2.0D * (Objects.requireNonNull(livingEntity.getEffect(blindness)).getAmplifier() + 1)));
+        if (self.hasEffect(blindness)) {
+            cir.setReturnValue(cir.getReturnValue() / (2.0D * (Objects.requireNonNull(self.getEffect(blindness)).getAmplifier() + 1)));
         } else {
-            if (livingEntity.getType().is(ChrysalisTags.ENDER) && this.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.GAZE_DISGUISE_EQUIPMENT)) {
+            if (self.getType().is(ChrysalisTags.ENDER) && this.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.GAZE_DISGUISE_EQUIPMENT)) {
                 cir.setReturnValue(cir.getReturnValue() * 0.5D);
             } else {
                 double reducedDetectionRangeAttribute = this.getAttributeValue(ChrysalisAttributes.REDUCED_DETECTION_RANGE);
