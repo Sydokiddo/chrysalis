@@ -13,7 +13,9 @@
     "minecraft:cake",
     "#minecraft:candle_cakes",
     "minecraft:tnt",
-    {"id": "minecraft:resin_clump", "required": false},
-    {"id": "minecraft:resin_block", "required": false}
+    "minecraft:resin_clump",
+    "minecraft:resin_block",
+    {"id": "minecraft:leaf_litter", "required": false},
+    {"id": "minecraft:wildflowers", "required": false}
   ]
 }

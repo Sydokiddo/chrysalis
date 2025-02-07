@@ -4,12 +4,16 @@
     "#minecraft:wool_carpets",
     "minecraft:short_grass",
     "minecraft:tall_grass",
+    {"id": "minecraft:short_dry_grass", "required": false},
+    {"id": "minecraft:tall_dry_grass", "required": false},
     "minecraft:fern",
     "minecraft:large_fern",
     "#minecraft:flowers",
     "#minecraft:saplings",
     "minecraft:bamboo_sapling",
     "#minecraft:crops",
+    {"id": "minecraft:bush", "required": false},
+    {"id": "minecraft:firefly_bush", "required": false},
     "minecraft:dead_bush",
     "minecraft:sweet_berry_bush",
     "minecraft:lily_pad",
@@ -20,6 +24,7 @@
     "minecraft:hanging_roots",
     "minecraft:glow_lichen",
     "#minecraft:leaves",
+    {"id": "minecraft:leaf_litter", "required": false},
     "minecraft:vine",
     "#minecraft:cave_vines",
     "minecraft:pale_hanging_moss",
@@ -42,7 +47,7 @@
     "minecraft:cobweb",
     "minecraft:tripwire",
     "minecraft:redstone_wire",
-    {"id": "#vast_vistas:frosted_short_grass", "required": false},
-    {"id": "#vast_vistas:frosted_tall_grass", "required": false}
+    {"id": "vast_vistas:short_frosted_grass", "required": false},
+    {"id": "vast_vistas:tall_frosted_grass", "required": false}
   ]
 }

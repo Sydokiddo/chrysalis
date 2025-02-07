@@ -35,7 +35,7 @@ public class PlaceBlockDispenserBehavior implements DispenseItemBehavior {
             BlockHelper.playDispenserSound(blockSource);
             BlockHelper.playDispenserAnimation(blockSource, direction);
 
-            serverLevel.setBlock(blockPos, blockState, 3);
+            serverLevel.setBlockAndUpdate(blockPos, blockState);
             serverLevel.playSound(null, blockPos, blockState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, blockState.getSoundType().getVolume(), blockState.getSoundType().getPitch());
             serverLevel.gameEvent(null, GameEvent.BLOCK_PLACE, blockPos);
 
