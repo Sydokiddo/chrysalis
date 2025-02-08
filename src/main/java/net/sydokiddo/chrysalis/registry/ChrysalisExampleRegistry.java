@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.registry;
 
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,9 +16,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.client.particles.options.ColoredDustPlumeParticleOptions;
-import net.sydokiddo.chrysalis.client.particles.options.DustExplosionParticleOptions;
-import net.sydokiddo.chrysalis.client.particles.options.SparkleParticleOptions;
+import net.sydokiddo.chrysalis.client.particles.options.*;
 import net.sydokiddo.chrysalis.misc.util.dispenser.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.dispenser.ShootProjectileDispenserBehavior;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
@@ -127,7 +126,9 @@ public class ChrysalisExampleRegistry {
 
     public static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
     public static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ChrysalisRegistry.FIRE_COLOR.getRGB(), ChrysalisRegistry.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
-    public static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, 1.0F);
+    public static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false);
+    public static final SmallPulsationParticleOptions EXAMPLE_SMALL_PULSATION_PARTICLES = new SmallPulsationParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue());
+    public static final LargePulsationParticleOptions EXAMPLE_LARGE_PULSATION_PARTICLES = new LargePulsationParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue());
 
     // endregion
 }

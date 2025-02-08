@@ -17,10 +17,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.ColoredDustPlumeParticle;
 import net.sydokiddo.chrysalis.client.particles.DustExplosionParticle;
+import net.sydokiddo.chrysalis.client.particles.PulsationParticle;
 import net.sydokiddo.chrysalis.client.particles.SparkleParticle;
-import net.sydokiddo.chrysalis.client.particles.options.ColoredDustPlumeParticleOptions;
-import net.sydokiddo.chrysalis.client.particles.options.DustExplosionParticleOptions;
-import net.sydokiddo.chrysalis.client.particles.options.SparkleParticleOptions;
+import net.sydokiddo.chrysalis.client.particles.options.*;
 import net.sydokiddo.chrysalis.misc.util.CoreRegistry;
 import net.sydokiddo.chrysalis.mixin.util.SimpleParticleTypeAccessor;
 import org.jetbrains.annotations.NotNull;
@@ -47,6 +46,14 @@ public class ChrysalisParticles {
 
     public static final ParticleType<SparkleParticleOptions> SPARKLE = registerAdvancedParticle(
         "sparkle", false, particleType -> SparkleParticleOptions.CODEC, particleType -> SparkleParticleOptions.STREAM_CODEC
+    );
+
+    public static final ParticleType<SmallPulsationParticleOptions> SMALL_PULSATION = registerAdvancedParticle(
+        "small_pulsation", true, particleType -> SmallPulsationParticleOptions.CODEC, particleType -> SmallPulsationParticleOptions.STREAM_CODEC
+    );
+
+    public static final ParticleType<LargePulsationParticleOptions> LARGE_PULSATION = registerAdvancedParticle(
+        "large_pulsation", true, particleType -> LargePulsationParticleOptions.CODEC, particleType -> LargePulsationParticleOptions.STREAM_CODEC
     );
 
     // endregion
@@ -82,6 +89,8 @@ public class ChrysalisParticles {
         registry.register(COLORED_DUST_PLUME, ColoredDustPlumeParticle.ColoredDustPlumeParticleProvider::new);
         registry.register(DUST_EXPLOSION, DustExplosionParticle.DustExplosionParticleProvider::new);
         registry.register(SPARKLE, SparkleParticle.SparkleParticleProvider::new);
+        registry.register(SMALL_PULSATION, PulsationParticle.SmallPulsationParticleProvider::new);
+        registry.register(LARGE_PULSATION, PulsationParticle.LargePulsationParticleProvider::new);
     }
 
     // endregion

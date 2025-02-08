@@ -10,7 +10,6 @@ import net.sydokiddo.chrysalis.client.particles.options.SparkleParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
-@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class SparkleParticle extends FadingEmissiveParticle {
 
@@ -19,7 +18,6 @@ public class SparkleParticle extends FadingEmissiveParticle {
     public SparkleParticle(ClientLevel clientLevel, double x, double y, double z, SparkleParticleOptions particleOptions, SpriteSet spriteSet) {
         super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet, true);
 
-        this.scale(particleOptions.getScale());
         this.lifetime = 10;
         this.hasPhysics = false;
         this.setSpriteFromAge(spriteSet);

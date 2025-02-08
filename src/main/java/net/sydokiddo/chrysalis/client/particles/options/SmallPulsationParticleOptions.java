@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -16,25 +17,29 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class SparkleParticleOptions implements ParticleOptions, ColoredParticleCommonMethods {
+public class SmallPulsationParticleOptions implements ParticleOptions, ColoredParticleCommonMethods {
 
-    public static final MapCodec<SparkleParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+    public static final MapCodec<SmallPulsationParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("color", Color.LIGHT_GRAY.getRGB()).forGetter(ColoredParticleCommonMethods::getColor),
-        Codec.BOOL.optionalFieldOf("randomize_color", false).forGetter(ColoredParticleCommonMethods::shouldRandomizeColor))
-    .apply(instance, SparkleParticleOptions::new));
+        Codec.BOOL.optionalFieldOf("randomize_color", false).forGetter(ColoredParticleCommonMethods::shouldRandomizeColor),
+        Codec.INT.optionalFieldOf("direction", 0).forGetter(SmallPulsationParticleOptions::getDirection))
+    .apply(instance, SmallPulsationParticleOptions::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, SparkleParticleOptions> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, SmallPulsationParticleOptions> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.INT, ColoredParticleCommonMethods::getColor,
         ByteBufCodecs.BOOL, ColoredParticleCommonMethods::shouldRandomizeColor,
-        SparkleParticleOptions::new
+        ByteBufCodecs.INT, SmallPulsationParticleOptions::getDirection,
+        SmallPulsationParticleOptions::new
     );
 
     private final int color;
     private final boolean randomizeColor;
+    private final int direction;
 
-    public SparkleParticleOptions(int color, boolean randomizeColor) {
+    public SmallPulsationParticleOptions(int color, boolean randomizeColor, int direction) {
         this.color = color;
         this.randomizeColor = randomizeColor;
+        this.direction = direction;
     }
 
     @Override
@@ -47,8 +52,16 @@ public class SparkleParticleOptions implements ParticleOptions, ColoredParticleC
         return this.randomizeColor;
     }
 
+    public int getDirection() {
+        return this.direction;
+    }
+
+    public Direction getFinalDirection() {
+        return Direction.from3DDataValue(this.getDirection());
+    }
+
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.SPARKLE;
+        return ChrysalisParticles.SMALL_PULSATION;
     }
 }

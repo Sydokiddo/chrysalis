@@ -5,7 +5,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -16,39 +15,27 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class SparkleParticleOptions implements ParticleOptions, ColoredParticleCommonMethods {
+public class LargePulsationParticleOptions extends SmallPulsationParticleOptions {
 
-    public static final MapCodec<SparkleParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+    public static final MapCodec<LargePulsationParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("color", Color.LIGHT_GRAY.getRGB()).forGetter(ColoredParticleCommonMethods::getColor),
-        Codec.BOOL.optionalFieldOf("randomize_color", false).forGetter(ColoredParticleCommonMethods::shouldRandomizeColor))
-    .apply(instance, SparkleParticleOptions::new));
+        Codec.BOOL.optionalFieldOf("randomize_color", false).forGetter(ColoredParticleCommonMethods::shouldRandomizeColor),
+        Codec.INT.optionalFieldOf("direction", 0).forGetter(SmallPulsationParticleOptions::getDirection))
+    .apply(instance, LargePulsationParticleOptions::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, SparkleParticleOptions> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, LargePulsationParticleOptions> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.INT, ColoredParticleCommonMethods::getColor,
         ByteBufCodecs.BOOL, ColoredParticleCommonMethods::shouldRandomizeColor,
-        SparkleParticleOptions::new
+        ByteBufCodecs.INT, SmallPulsationParticleOptions::getDirection,
+        LargePulsationParticleOptions::new
     );
 
-    private final int color;
-    private final boolean randomizeColor;
-
-    public SparkleParticleOptions(int color, boolean randomizeColor) {
-        this.color = color;
-        this.randomizeColor = randomizeColor;
-    }
-
-    @Override
-    public int getColor() {
-        return this.color;
-    }
-
-    @Override
-    public boolean shouldRandomizeColor() {
-        return this.randomizeColor;
+    public LargePulsationParticleOptions(int color, boolean randomizeColor, int direction) {
+        super(color, randomizeColor, direction);
     }
 
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.SPARKLE;
+        return ChrysalisParticles.LARGE_PULSATION;
     }
 }
