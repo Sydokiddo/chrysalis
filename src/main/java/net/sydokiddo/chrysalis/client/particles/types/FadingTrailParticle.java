@@ -27,8 +27,21 @@ public class FadingTrailParticle extends TextureSheetParticle implements Particl
 
     @Override
     public void tick() {
+
         super.tick();
+
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
+
         if (this.age > this.lifetime / 2) this.setAlpha(1.0F - Mth.clamp((float) this.age / (float) this.lifetime, 0.0F, 1.0F));
+
+        if (this.age++ < this.lifetime && this.alpha > 0.0F) {
+            this.xd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
+            this.zd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
+            this.yd -= this.gravity;
+            this.move(this.xd, this.yd, this.zd);
+        }
     }
 
     // endregion
