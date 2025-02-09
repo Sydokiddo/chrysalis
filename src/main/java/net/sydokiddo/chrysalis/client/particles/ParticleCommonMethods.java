@@ -41,4 +41,8 @@ public interface ParticleCommonMethods {
         if ((int1 += (int) (divider * 15.0F * 16.0F)) > 240) int1 = 240;
         return int1 | int2 << 16;
     }
+
+    default float shrinkParticle(float quadSize, float divider) {
+        return quadSize * (1.0F - divider * divider * 0.5F);
+    }
 }

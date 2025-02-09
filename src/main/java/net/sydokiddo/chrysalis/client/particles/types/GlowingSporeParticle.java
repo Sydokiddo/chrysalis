@@ -6,18 +6,16 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
-import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
-public class GlowingSporeParticle extends TextureSheetParticle implements ParticleCommonMethods {
+public class GlowingSporeParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
 
     // region Initialization and Ticking
 
     public GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-        super(clientLevel, x, y, z);
+        super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet, false);
         this.setSize(0.001F, 0.001F);
-        this.setColor(0.5F, 0.5F, 0.5F);
         this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
         this.hasPhysics = true;
         this.xd = velocityX;
@@ -26,35 +24,13 @@ public class GlowingSporeParticle extends TextureSheetParticle implements Partic
         this.pickSprite(spriteSet);
     }
 
-    @Override
-    public void tick() {
-
-        super.tick();
-
-        if (this.age > (this.lifetime / 2)) {
-            if (this.alpha > 0.1F) this.alpha -= 0.015F;
-            else this.remove();
-        }
-    }
-
     // endregion
 
     // region Rendering
 
     @Override
     public float getQuadSize(float tickRate) {
-        float divider = ((float) this.age + tickRate) / (float) this.lifetime;
-        return this.quadSize * (1.0F - divider * divider * 0.5F);
-    }
-
-    @Override
-    public int getLightColor(float tickRate) {
-        return this.fadeLightColor(1.0F, 0.0F, this.age, this.lifetime, super.getLightColor(tickRate));
-    }
-
-    @Override
-    public @NotNull ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return this.shrinkParticle(this.quadSize, ((float) this.age + tickRate) / (float) this.lifetime);
     }
 
     // endregion

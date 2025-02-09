@@ -1,25 +1,24 @@
 package net.sydokiddo.chrysalis.client.particles.types;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
-public class FadingTrailParticle extends TextureSheetParticle {
+public class FadingTrailParticle extends TextureSheetParticle implements ParticleCommonMethods {
 
     // region Initialization and Ticking
 
     public FadingTrailParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         super(clientLevel, x, y, z);
         this.quadSize *= 0.75F;
-        this.lifetime = 35;
+        this.lifetime = 40;
         this.gravity = 0.0F;
         this.xd = velocityX;
         this.yd = velocityY + (double) (this.random.nextFloat() / 500.0F);
@@ -28,23 +27,8 @@ public class FadingTrailParticle extends TextureSheetParticle {
 
     @Override
     public void tick() {
-
-        this.xo = this.x;
-        this.yo = this.y;
-        this.zo = this.z;
-
-        if (this.age++ < this.lifetime && this.alpha > 0.0F) {
-
-            this.xd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
-            this.zd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
-            this.yd -= this.gravity;
-
-            this.move(this.xd, this.yd, this.zd);
-            if (this.age >= this.lifetime - 60 && this.alpha > 0.01F) this.alpha -= 0.015F;
-
-        } else {
-            this.remove();
-        }
+        super.tick();
+        if (this.age > this.lifetime / 2) this.setAlpha(1.0F - Mth.clamp((float) this.age / (float) this.lifetime, 0.0F, 1.0F));
     }
 
     // endregion
@@ -53,14 +37,7 @@ public class FadingTrailParticle extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float tickRate) {
-        float divider = ((float) this.age + tickRate) / (float) this.lifetime;
-        return this.quadSize * (1.0F - divider * divider * 0.5F);
-    }
-
-    @Override
-    public void render(VertexConsumer vertexConsumer, Camera camera, float tickRate) {
-        this.alpha = 1.0F - Mth.clamp(((float) this.age + tickRate) / (float) this.lifetime, 0.0F, 1.0F);
-        super.render(vertexConsumer, camera, tickRate);
+        return this.shrinkParticle(this.quadSize, ((float) this.age + tickRate) / (float) this.lifetime);
     }
 
     @Override
