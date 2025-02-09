@@ -15,7 +15,7 @@ public class ColoredDustPlumeParticle extends DustPlumeParticle implements Parti
 
     // region Initialization
 
-    private final boolean isEmissive;
+    private final boolean emissive;
 
     public ColoredDustPlumeParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, ColoredDustPlumeParticleOptions particleOptions, SpriteSet spriteSet) {
         super(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions.getScale(), spriteSet);
@@ -32,7 +32,7 @@ public class ColoredDustPlumeParticle extends DustPlumeParticle implements Parti
             this.bCol = color.z();
         }
 
-        this.isEmissive = particleOptions.isEmissive();
+        this.emissive = particleOptions.isEmissive();
     }
 
     // endregion
@@ -41,7 +41,7 @@ public class ColoredDustPlumeParticle extends DustPlumeParticle implements Parti
 
     @Override
     public int getLightColor(float tickRate) {
-        if (this.isEmissive) return this.fadeLightColor(1.0F, 0.0F, this.age, this.lifetime, super.getLightColor(tickRate));
+        if (this.emissive) return this.fadeLightColor(1.0F, 0.0F, this.age, this.lifetime, super.getLightColor(tickRate));
         return super.getLightColor(tickRate);
     }
 

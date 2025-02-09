@@ -19,14 +19,14 @@ public class DustExplosionParticle extends ExplodeParticle implements ParticleCo
 
     private final Vector3f startingColor;
     private final Vector3f endingColor;
-    private final boolean isEmissive;
+    private final boolean emissive;
 
     public DustExplosionParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, DustExplosionParticleOptions particleOptions, SpriteSet spriteSet) {
         super(clientLevel, x, y, z, velocityX, velocityY, velocityZ, spriteSet);
         this.gravity = 0.5F;
         this.startingColor = particleOptions.getFinalStartingColor();
         this.endingColor = particleOptions.getFinalEndingColor();
-        this.isEmissive = particleOptions.isEmissive();
+        this.emissive = particleOptions.isEmissive();
         this.scale(particleOptions.getScale());
     }
 
@@ -42,7 +42,7 @@ public class DustExplosionParticle extends ExplodeParticle implements ParticleCo
 
     @Override
     public int getLightColor(float tickRate) {
-        if (this.isEmissive) return this.fadeLightColor(1.0F, 0.0F, this.age, this.lifetime, super.getLightColor(tickRate));
+        if (this.emissive) return this.fadeLightColor(1.0F, 0.0F, this.age, this.lifetime, super.getLightColor(tickRate));
         return super.getLightColor(tickRate);
     }
 
