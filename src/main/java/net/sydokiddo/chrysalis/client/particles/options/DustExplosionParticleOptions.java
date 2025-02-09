@@ -12,25 +12,26 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.ExtraCodecs;
+import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisParticles;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class DustExplosionParticleOptions extends ScalableParticleOptionsBase implements ColoredParticleCommonMethods {
+public class DustExplosionParticleOptions extends ScalableParticleOptionsBase implements ParticleCommonMethods {
 
     public static final MapCodec<DustExplosionParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("starting_color", Color.LIGHT_GRAY.getRGB()).forGetter(DustExplosionParticleOptions::getStartingColor),
         ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("ending_color", Color.LIGHT_GRAY.getRGB()).forGetter(DustExplosionParticleOptions::getEndingColor),
-        Codec.BOOL.optionalFieldOf("emissive", false).forGetter(ColoredParticleCommonMethods::isEmissive),
+        Codec.BOOL.optionalFieldOf("emissive", false).forGetter(ParticleCommonMethods::isEmissive),
         SCALE.optionalFieldOf("scale", 1.0F).forGetter(ScalableParticleOptionsBase::getScale))
     .apply(instance, DustExplosionParticleOptions::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DustExplosionParticleOptions> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.INT, DustExplosionParticleOptions::getStartingColor,
         ByteBufCodecs.INT, DustExplosionParticleOptions::getEndingColor,
-        ByteBufCodecs.BOOL, ColoredParticleCommonMethods::isEmissive,
+        ByteBufCodecs.BOOL, ParticleCommonMethods::isEmissive,
         ByteBufCodecs.FLOAT, ScalableParticleOptionsBase::getScale,
         DustExplosionParticleOptions::new
     );

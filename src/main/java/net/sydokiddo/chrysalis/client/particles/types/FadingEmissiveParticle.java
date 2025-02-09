@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.client.particles;
+package net.sydokiddo.chrysalis.client.particles.types;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -7,10 +7,11 @@ import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.util.Mth;
+import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import org.jetbrains.annotations.NotNull;
 
 @Environment(EnvType.CLIENT)
-public class FadingEmissiveParticle extends TextureSheetParticle {
+public class FadingEmissiveParticle extends TextureSheetParticle implements ParticleCommonMethods {
 
     // region Initialization and Ticking
 
@@ -40,19 +41,7 @@ public class FadingEmissiveParticle extends TextureSheetParticle {
 
     @Override
     public int getLightColor(float tickRate) {
-
-        float divider = ((float) this.age) / (float) this.lifetime;
-        divider = Mth.clamp(divider, this.startingBrightness, this.endingBrightness);
-
-        int lightColor = super.getLightColor(tickRate);
-        int int1 = lightColor & 0xFF;
-        int int2 = lightColor >> 16 & 0xFF;
-
-        if ((int1 += (int) (divider * 15.0F * 16.0F)) > 240) {
-            int1 = 240;
-        }
-
-        return int1 | int2 << 16;
+        return this.fadeLightColor(this.startingBrightness, this.endingBrightness, this.age, this.lifetime, super.getLightColor(tickRate));
     }
 
     @Override

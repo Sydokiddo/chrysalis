@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.client.particles;
+package net.sydokiddo.chrysalis.client.particles.types;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -1,17 +1,17 @@
-package net.sydokiddo.chrysalis.client.particles;
+package net.sydokiddo.chrysalis.client.particles.types;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.util.Mth;
+import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import net.sydokiddo.chrysalis.client.particles.options.ColoredDustPlumeParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 @SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
-public class ColoredDustPlumeParticle extends DustPlumeParticle {
+public class ColoredDustPlumeParticle extends DustPlumeParticle implements ParticleCommonMethods {
 
     // region Initialization
 
@@ -41,23 +41,7 @@ public class ColoredDustPlumeParticle extends DustPlumeParticle {
 
     @Override
     public int getLightColor(float tickRate) {
-
-        if (this.isEmissive) {
-
-            float divider = ((float) this.age) / (float) this.lifetime;
-            divider = Mth.clamp(divider, 1.0F, 0.0F);
-
-            int lightColor = super.getLightColor(tickRate);
-            int int1 = lightColor & 0xFF;
-            int int2 = lightColor >> 16 & 0xFF;
-
-            if ((int1 += (int) (divider * 15.0F * 16.0F)) > 240) {
-                int1 = 240;
-            }
-
-            return int1 | int2 << 16;
-        }
-
+        if (this.isEmissive) return this.fadeLightColor(1.0F, 0.0F, this.age, this.lifetime, super.getLightColor(tickRate));
         return super.getLightColor(tickRate);
     }
 

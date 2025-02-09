@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.client.particles;
+package net.sydokiddo.chrysalis.client.particles.types;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
@@ -7,25 +7,26 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.util.Mth;
+import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import net.sydokiddo.chrysalis.client.particles.options.DustExplosionParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
-public class DustExplosionParticle extends ExplodeParticle {
+public class DustExplosionParticle extends ExplodeParticle implements ParticleCommonMethods {
 
     // region Initialization and Ticking
 
     private final Vector3f startingColor;
     private final Vector3f endingColor;
-    private final boolean emissive;
+    private final boolean isEmissive;
 
     public DustExplosionParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, DustExplosionParticleOptions particleOptions, SpriteSet spriteSet) {
         super(clientLevel, x, y, z, velocityX, velocityY, velocityZ, spriteSet);
         this.gravity = 0.5F;
         this.startingColor = particleOptions.getFinalStartingColor();
         this.endingColor = particleOptions.getFinalEndingColor();
-        this.emissive = particleOptions.isEmissive();
+        this.isEmissive = particleOptions.isEmissive();
         this.scale(particleOptions.getScale());
     }
 
@@ -41,22 +42,7 @@ public class DustExplosionParticle extends ExplodeParticle {
 
     @Override
     public int getLightColor(float tickRate) {
-
-        if (this.emissive) {
-            float divider = ((float) this.age) / (float) this.lifetime;
-            divider = Mth.clamp(divider, 1.0F, 0.0F);
-
-            int lightColor = super.getLightColor(tickRate);
-            int int1 = lightColor & 0xFF;
-            int int2 = lightColor >> 16 & 0xFF;
-
-            if ((int1 += (int) (divider * 15.0F * 16.0F)) > 240) {
-                int1 = 240;
-            }
-
-            return int1 | int2 << 16;
-        }
-
+        if (this.isEmissive) return this.fadeLightColor(1.0F, 0.0F, this.age, this.lifetime, super.getLightColor(tickRate));
         return super.getLightColor(tickRate);
     }
 

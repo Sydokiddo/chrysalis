@@ -1,13 +1,14 @@
-package net.sydokiddo.chrysalis.client.particles.options;
+package net.sydokiddo.chrysalis.client.particles;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.ARGB;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
-public interface ColoredParticleCommonMethods {
+public interface ParticleCommonMethods {
 
     default int getColor() {
         return 0;
@@ -27,5 +28,17 @@ public interface ColoredParticleCommonMethods {
 
     default boolean isEmissive() {
         return false;
+    }
+
+    default int fadeLightColor(float startingBrightness, float endingBrightness, int age, int lifeTime, int lightColor) {
+
+        float divider = ((float) age) / (float) lifeTime;
+        divider = Mth.clamp(divider, startingBrightness, endingBrightness);
+
+        int int1 = lightColor & 0xFF;
+        int int2 = lightColor >> 16 & 0xFF;
+
+        if ((int1 += (int) (divider * 15.0F * 16.0F)) > 240) int1 = 240;
+        return int1 | int2 << 16;
     }
 }

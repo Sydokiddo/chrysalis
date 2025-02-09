@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.client.particles;
+package net.sydokiddo.chrysalis.client.particles.types;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
