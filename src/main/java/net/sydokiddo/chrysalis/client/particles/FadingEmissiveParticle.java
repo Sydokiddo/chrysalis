@@ -29,13 +29,9 @@ public class FadingEmissiveParticle extends TextureSheetParticle {
 
     @Override
     public void tick() {
-        if (this.age > this.lifetime / 2) this.setAlpha(1.0F - ((float) this.age - (float) (this.lifetime / 2)) / (float) this.lifetime);
-
-        if (this.age++ >= this.lifetime) {
-            this.remove();
-        } else {
-            if (this.animateTextures) this.setSpriteFromAge(this.spriteSet);
-        }
+        super.tick();
+        if (this.animateTextures) this.setSpriteFromAge(this.spriteSet);
+        if (this.age > this.lifetime / 2) this.setAlpha(1.0F - Mth.clamp((float) this.age / (float) this.lifetime, 0.0F, 1.0F));
     }
 
     // endregion

@@ -32,8 +32,7 @@ public class DustExplosionParticle extends ExplodeParticle {
     @Override
     public void tick() {
         super.tick();
-        if (this.age > this.lifetime / 2) this.setAlpha(1.0F - ((float) this.age - (float) (this.lifetime / 2)) / (float) this.lifetime);
-        if (this.age++ >= this.lifetime) this.remove();
+        if (this.age > this.lifetime / 2) this.setAlpha(1.0F - Mth.clamp((float) this.age / (float) this.lifetime, 0.0F, 1.0F));
     }
 
     // endregion

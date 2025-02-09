@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
@@ -25,10 +26,7 @@ public class RotatingFallingParticle extends RisingParticle {
     public void tick() {
 
         super.tick();
-
-        if (this.age > this.lifetime / 2) {
-            this.setAlpha(1.0F - ((float) this.age - (float) (this.lifetime / 2)) / (float) this.lifetime);
-        }
+        if (this.age > this.lifetime / 2) this.setAlpha(1.0F - Mth.clamp((float) this.age / (float) this.lifetime, 0.0F, 1.0F));
 
         if (this.age == 1) {
             this.xd = this.xd + (Math.random() * 2.0D - 1.0D) * 0.2D;
