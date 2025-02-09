@@ -38,8 +38,8 @@ public class FadingTrailParticle extends TextureSheetParticle implements Particl
 
         if (this.age < this.lifetime && this.alpha > 0.0F) {
             this.xd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
-            this.zd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
             this.yd -= this.gravity;
+            this.zd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
             this.move(this.xd, this.yd, this.zd);
         }
     }
