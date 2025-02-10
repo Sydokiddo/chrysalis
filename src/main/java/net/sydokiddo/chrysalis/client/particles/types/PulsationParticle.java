@@ -52,7 +52,7 @@ public class PulsationParticle extends FadingEmissiveParticle {
 
     @Override
     public float getQuadSize(float tickRate) {
-        return this.quadSize * Mth.clamp(((float) this.age + tickRate) / (float) this.lifetime * 0.75F, 0.0F, 1.0F);
+        return this.growParticle(this.quadSize, this.age, tickRate, this.lifetime);
     }
 
     @Override

@@ -45,4 +45,8 @@ public interface ParticleCommonMethods {
     default float shrinkParticle(float quadSize, float divider) {
         return quadSize * (1.0F - divider * divider * 0.5F);
     }
+
+    default float growParticle(float quadSize, int age, float tickRate, int lifeTime) {
+        return quadSize * Mth.clamp(((float) age + tickRate) / (float) lifeTime * 0.75F, 0.0F, 1.0F);
+    }
 }
