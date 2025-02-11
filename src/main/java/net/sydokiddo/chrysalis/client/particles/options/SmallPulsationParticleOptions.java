@@ -23,24 +23,28 @@ public class SmallPulsationParticleOptions implements ParticleOptions, ParticleC
     public static final MapCodec<SmallPulsationParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.colorString, Color.LIGHT_GRAY.getRGB()).forGetter(ParticleCommonMethods::getColor),
         Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor),
-        Codec.INT.optionalFieldOf(ParticleCommonMethods.directionString, 0).forGetter(SmallPulsationParticleOptions::getDirection))
+        Codec.INT.optionalFieldOf(ParticleCommonMethods.directionString, 0).forGetter(SmallPulsationParticleOptions::getDirection),
+        LIFE_TIME.optionalFieldOf(ParticleCommonMethods.lifeTimeString, 10).forGetter(SmallPulsationParticleOptions::getLifeTime))
     .apply(instance, SmallPulsationParticleOptions::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SmallPulsationParticleOptions> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.INT, ParticleCommonMethods::getColor,
         ByteBufCodecs.BOOL, ParticleCommonMethods::shouldRandomizeColor,
         ByteBufCodecs.INT, SmallPulsationParticleOptions::getDirection,
+        ByteBufCodecs.INT, SmallPulsationParticleOptions::getLifeTime,
         SmallPulsationParticleOptions::new
     );
 
     private final int color;
     private final boolean randomizeColor;
     private final int direction;
+    private final int lifeTime;
 
-    public SmallPulsationParticleOptions(int color, boolean randomizeColor, int direction) {
+    public SmallPulsationParticleOptions(int color, boolean randomizeColor, int direction, int lifeTime) {
         this.color = color;
         this.randomizeColor = randomizeColor;
         this.direction = direction;
+        this.lifeTime = this.getClampedLifeTime(lifeTime);
     }
 
     @Override
@@ -59,6 +63,10 @@ public class SmallPulsationParticleOptions implements ParticleOptions, ParticleC
 
     public Direction getFinalDirection() {
         return Direction.from3DDataValue(this.getDirection());
+    }
+
+    public int getLifeTime() {
+        return this.lifeTime;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package net.sydokiddo.chrysalis.client.particles;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.ARGB;
@@ -18,6 +20,7 @@ public interface ParticleCommonMethods {
         emissiveString = "emissive",
         hasGravityString = "has_gravity",
         directionString = "direction",
+        lifeTimeString = "life_time",
         scaleString = "scale"
     ;
 
@@ -59,5 +62,13 @@ public interface ParticleCommonMethods {
 
     default float growParticle(float quadSize, int age, float tickRate, int lifeTime) {
         return quadSize * Mth.clamp(((float) age + tickRate) / (float) lifeTime * 0.75F, 0.0F, 1.0F);
+    }
+
+    Codec<Integer> LIFE_TIME = Codec.INT.validate(
+        life_time -> life_time >= 10 && life_time <= 100 ? DataResult.success(life_time) : DataResult.error(() -> "Value must be within range [10 ; 100]: " + life_time)
+    );
+
+    default int getClampedLifeTime(int lifeTime) {
+        return Mth.clamp(lifeTime, 10, 100);
     }
 }

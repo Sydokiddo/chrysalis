@@ -128,8 +128,8 @@ public class ChrysalisExampleRegistry {
     public static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ChrysalisRegistry.FIRE_COLOR.getRGB(), ChrysalisRegistry.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
     public static final RotatingDustParticleOptions EXAMPLE_ROTATING_DUST_PARTICLES = new RotatingDustParticleOptions(ChrysalisRegistry.MEMORY_FIRE_COLOR.getRGB(), true, true, false, 1.0F);
     public static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false);
-    public static final SmallPulsationParticleOptions EXAMPLE_SMALL_PULSATION_PARTICLES = new SmallPulsationParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue());
-    public static final LargePulsationParticleOptions EXAMPLE_LARGE_PULSATION_PARTICLES = new LargePulsationParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue());
+    public static final SmallPulsationParticleOptions EXAMPLE_SMALL_PULSATION_PARTICLES = new SmallPulsationParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 10);
+    public static final LargePulsationParticleOptions EXAMPLE_LARGE_PULSATION_PARTICLES = new LargePulsationParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 20);
 
     // endregion
 }

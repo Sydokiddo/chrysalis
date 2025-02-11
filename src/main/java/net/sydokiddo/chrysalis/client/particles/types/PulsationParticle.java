@@ -28,7 +28,7 @@ public class PulsationParticle extends FadingEmissiveParticle {
     public PulsationParticle(ClientLevel clientLevel, double x, double y, double z, SmallPulsationParticleOptions particleOptions, SpriteSet spriteSet) {
         super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet, true);
 
-        this.lifetime = 20;
+        this.lifetime = particleOptions.getLifeTime();
         this.hasPhysics = false;
         this.setSpriteFromAge(spriteSet);
         this.direction = particleOptions.getFinalDirection();
@@ -74,7 +74,8 @@ public class PulsationParticle extends FadingEmissiveParticle {
             Vector3f face = faces[rotation];
             face.rotate(quaternion);
             face.mul(this.getQuadSize(tickRate));
-            face.add(x, y, z);
+            float addedSpace = this.direction.getAxisDirection() == Direction.AxisDirection.POSITIVE ? 0.01F : -0.01F;
+            face.add(x + addedSpace, y + addedSpace, z + addedSpace);
         }
 
         int lightColor = this.getLightColor(tickRate);
