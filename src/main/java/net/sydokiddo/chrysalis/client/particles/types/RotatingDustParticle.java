@@ -7,22 +7,23 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
-import net.sydokiddo.chrysalis.client.particles.options.RisingDustParticleOptions;
+import net.sydokiddo.chrysalis.client.particles.options.RotatingDustParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
-public class RisingDustParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
+public class RotatingDustParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
 
     // region Initialization and Ticking
 
-    public RisingDustParticle(ClientLevel clientLevel, double x, double y, double z, RisingDustParticleOptions particleOptions, SpriteSet spriteSet) {
-        super(clientLevel, x, y, z, particleOptions.getStartingBrightness(), particleOptions.getEndingBrightness(), spriteSet, false);
+    public RotatingDustParticle(ClientLevel clientLevel, double x, double y, double z, RotatingDustParticleOptions particleOptions, SpriteSet spriteSet) {
+        super(clientLevel, x, y, z, particleOptions.isEmissive() ? 1.0F : 0.0F, 0.0F, spriteSet, false);
 
         this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
-        this.hasPhysics = false;
         this.roll = this.oRoll = this.random.nextFloat() * (float) (2.0F * Math.PI);
-        this.yd = this.yd * 0.01F + 0.025F;
+        float speed = 0.025F;
+        this.yd = this.yd * 0.01F + (particleOptions.hasGravity() ? -speed : speed);
+        this.hasPhysics = particleOptions.hasGravity();
 
         this.scale(particleOptions.getScale() * 4.0F);
         this.pickSprite(spriteSet);
@@ -66,17 +67,17 @@ public class RisingDustParticle extends FadingEmissiveParticle implements Partic
     // region Providers
 
     @Environment(EnvType.CLIENT)
-    public static class RisingDustParticleProvider implements ParticleProvider<RisingDustParticleOptions> {
+    public static class RotatingDustParticleProvider implements ParticleProvider<RotatingDustParticleOptions> {
 
         private final SpriteSet spriteSet;
 
-        public RisingDustParticleProvider(SpriteSet spriteSet) {
+        public RotatingDustParticleProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 
         @Override
-        public Particle createParticle(@NotNull RisingDustParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new RisingDustParticle(clientLevel, x, y, z, particleOptions, this.spriteSet);
+        public Particle createParticle(@NotNull RotatingDustParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+            return new RotatingDustParticle(clientLevel, x, y, z, particleOptions, this.spriteSet);
         }
     }
 

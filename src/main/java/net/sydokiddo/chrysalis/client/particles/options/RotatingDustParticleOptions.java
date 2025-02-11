@@ -17,32 +17,36 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class ColoredDustPlumeParticleOptions extends ScalableParticleOptionsBase implements ParticleCommonMethods {
+public class RotatingDustParticleOptions extends ScalableParticleOptionsBase implements ParticleCommonMethods {
 
-    public static final MapCodec<ColoredDustPlumeParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+    public static final MapCodec<RotatingDustParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.colorString, Color.LIGHT_GRAY.getRGB()).forGetter(ParticleCommonMethods::getColor),
         Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor),
         Codec.BOOL.optionalFieldOf(ParticleCommonMethods.emissiveString, false).forGetter(ParticleCommonMethods::isEmissive),
+        Codec.BOOL.optionalFieldOf(ParticleCommonMethods.hasGravityString, false).forGetter(RotatingDustParticleOptions::hasGravity),
         SCALE.optionalFieldOf(ParticleCommonMethods.scaleString, 1.0F).forGetter(ScalableParticleOptionsBase::getScale))
-    .apply(instance, ColoredDustPlumeParticleOptions::new));
+    .apply(instance, RotatingDustParticleOptions::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, ColoredDustPlumeParticleOptions> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, RotatingDustParticleOptions> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.INT, ParticleCommonMethods::getColor,
         ByteBufCodecs.BOOL, ParticleCommonMethods::shouldRandomizeColor,
         ByteBufCodecs.BOOL, ParticleCommonMethods::isEmissive,
+        ByteBufCodecs.BOOL, RotatingDustParticleOptions::hasGravity,
         ByteBufCodecs.FLOAT, ScalableParticleOptionsBase::getScale,
-        ColoredDustPlumeParticleOptions::new
+        RotatingDustParticleOptions::new
     );
 
     private final int color;
     private final boolean randomizeColor;
     private final boolean emissive;
+    private final boolean hasGravity;
 
-    public ColoredDustPlumeParticleOptions(int color, boolean randomizeColor, boolean emissive, float scale) {
+    public RotatingDustParticleOptions(int color, boolean randomizeColor, boolean emissive, boolean hasGravity, float scale) {
         super(scale);
         this.color = color;
         this.randomizeColor = randomizeColor;
         this.emissive = emissive;
+        this.hasGravity = hasGravity;
     }
 
     @Override
@@ -60,8 +64,12 @@ public class ColoredDustPlumeParticleOptions extends ScalableParticleOptionsBase
         return this.emissive;
     }
 
+    public boolean hasGravity() {
+        return this.hasGravity;
+    }
+
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.COLORED_DUST_PLUME;
+        return ChrysalisParticles.ROTATING_DUST;
     }
 }

@@ -22,10 +22,10 @@ import java.awt.*;
 public class DustExplosionParticleOptions extends ScalableParticleOptionsBase implements ParticleCommonMethods {
 
     public static final MapCodec<DustExplosionParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
-        instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("starting_color", Color.LIGHT_GRAY.getRGB()).forGetter(DustExplosionParticleOptions::getStartingColor),
-        ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("ending_color", Color.LIGHT_GRAY.getRGB()).forGetter(DustExplosionParticleOptions::getEndingColor),
-        Codec.BOOL.optionalFieldOf("emissive", false).forGetter(ParticleCommonMethods::isEmissive),
-        SCALE.optionalFieldOf("scale", 1.0F).forGetter(ScalableParticleOptionsBase::getScale))
+        instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.startingColorString, Color.LIGHT_GRAY.getRGB()).forGetter(DustExplosionParticleOptions::getStartingColor),
+        ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.endingColorString, Color.LIGHT_GRAY.getRGB()).forGetter(DustExplosionParticleOptions::getEndingColor),
+        Codec.BOOL.optionalFieldOf(ParticleCommonMethods.emissiveString, false).forGetter(ParticleCommonMethods::isEmissive),
+        SCALE.optionalFieldOf(ParticleCommonMethods.scaleString, 1.0F).forGetter(ScalableParticleOptionsBase::getScale))
     .apply(instance, DustExplosionParticleOptions::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DustExplosionParticleOptions> STREAM_CODEC = StreamCodec.composite(

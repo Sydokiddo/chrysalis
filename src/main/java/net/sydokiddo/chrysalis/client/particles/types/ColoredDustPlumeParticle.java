@@ -9,7 +9,6 @@ import net.sydokiddo.chrysalis.client.particles.options.ColoredDustPlumeParticle
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
-@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class ColoredDustPlumeParticle extends DustPlumeParticle implements ParticleCommonMethods {
 

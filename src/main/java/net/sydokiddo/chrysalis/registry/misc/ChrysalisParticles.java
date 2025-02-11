@@ -41,8 +41,8 @@ public class ChrysalisParticles {
         "dust_explosion", false, particleType -> DustExplosionParticleOptions.CODEC, particleType -> DustExplosionParticleOptions.STREAM_CODEC
     );
 
-    public static final ParticleType<RisingDustParticleOptions> RISING_DUST = registerAdvancedParticle(
-        "rising_dust", false, particleType -> RisingDustParticleOptions.CODEC, particleType -> RisingDustParticleOptions.STREAM_CODEC
+    public static final ParticleType<RotatingDustParticleOptions> ROTATING_DUST = registerAdvancedParticle(
+        "rotating_dust", false, particleType -> RotatingDustParticleOptions.CODEC, particleType -> RotatingDustParticleOptions.STREAM_CODEC
     );
 
     public static final ParticleType<SparkleParticleOptions> SPARKLE = registerAdvancedParticle(
@@ -89,7 +89,7 @@ public class ChrysalisParticles {
         registry.register(RADIANCE, SpellParticle.Provider::new);
         registry.register(COLORED_DUST_PLUME, ColoredDustPlumeParticle.ColoredDustPlumeParticleProvider::new);
         registry.register(DUST_EXPLOSION, DustExplosionParticle.DustExplosionParticleProvider::new);
-        registry.register(RISING_DUST, RisingDustParticle.RisingDustParticleProvider::new);
+        registry.register(ROTATING_DUST, RotatingDustParticle.RotatingDustParticleProvider::new);
         registry.register(SPARKLE, SparkleParticle.SparkleParticleProvider::new);
         registry.register(SMALL_PULSATION, PulsationParticle.SmallPulsationParticleProvider::new);
         registry.register(LARGE_PULSATION, PulsationParticle.LargePulsationParticleProvider::new);

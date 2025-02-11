@@ -21,9 +21,9 @@ import java.awt.*;
 public class SmallPulsationParticleOptions implements ParticleOptions, ParticleCommonMethods {
 
     public static final MapCodec<SmallPulsationParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
-        instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("color", Color.LIGHT_GRAY.getRGB()).forGetter(ParticleCommonMethods::getColor),
-        Codec.BOOL.optionalFieldOf("randomize_color", false).forGetter(ParticleCommonMethods::shouldRandomizeColor),
-        Codec.INT.optionalFieldOf("direction", 0).forGetter(SmallPulsationParticleOptions::getDirection))
+        instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.colorString, Color.LIGHT_GRAY.getRGB()).forGetter(ParticleCommonMethods::getColor),
+        Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor),
+        Codec.INT.optionalFieldOf(ParticleCommonMethods.directionString, 0).forGetter(SmallPulsationParticleOptions::getDirection))
     .apply(instance, SmallPulsationParticleOptions::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SmallPulsationParticleOptions> STREAM_CODEC = StreamCodec.composite(

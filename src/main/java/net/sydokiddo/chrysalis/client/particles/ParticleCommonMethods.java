@@ -10,6 +10,17 @@ import org.joml.Vector3f;
 @Environment(EnvType.CLIENT)
 public interface ParticleCommonMethods {
 
+    String
+        colorString = "color",
+        startingColorString = "starting_color",
+        endingColorString = "ending_color",
+        randomizeColorString = "randomize_color",
+        emissiveString = "emissive",
+        hasGravityString = "has_gravity",
+        directionString = "direction",
+        scaleString = "scale"
+    ;
+
     default int getColor() {
         return 0;
     }
