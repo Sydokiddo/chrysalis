@@ -7,6 +7,7 @@ import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.renderer.FogRenderer;
@@ -25,6 +26,7 @@ import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
 import org.joml.Vector4f;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -32,6 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import java.util.Iterator;
 import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
@@ -39,14 +42,23 @@ import java.util.Objects;
 public abstract class GameRendererMixin {
 
     @Shadow protected abstract void setPostEffect(ResourceLocation resourceLocation);
+    @Shadow @Final private Minecraft minecraft;
 
     @Inject(method = "checkEntityPostEffect", at = @At("RETURN"))
     private void chrysalis$addEntitySpectatorShaders(Entity entity, CallbackInfo info) {
-        if (entity == null) return;
-        EntityType<?> entityType = entity.getType();
-        if (entityType.is(ChrysalisTags.HAS_ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
-        if (entityType.is(ChrysalisTags.HAS_CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
-        if (entityType.is(ChrysalisTags.HAS_ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
+
+        if (!this.minecraft.options.getCameraType().isFirstPerson() || !(entity instanceof LivingEntity livingEntity)) return;
+        EntityType<?> entityType = livingEntity.getType();
+
+        if (entityType.is(ChrysalisTags.HAS_ARTHROPOD_SIGHT) || this.hasMobSightEffect(livingEntity, ChrysalisEffects.ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
+        if (entityType.is(ChrysalisTags.HAS_CREEPER_SIGHT) || this.hasMobSightEffect(livingEntity, ChrysalisEffects.CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
+        if (entityType.is(ChrysalisTags.HAS_ENDER_SIGHT) || this.hasMobSightEffect(livingEntity, ChrysalisEffects.ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
+    }
+
+    @Unique
+    private boolean hasMobSightEffect(LivingEntity livingEntity, Holder<MobEffect> mobEffect) {
+        Iterator<MobEffectInstance> mobEffectIterator = livingEntity.getActiveEffects().iterator();
+        return mobEffectIterator.hasNext() && mobEffectIterator.next().getEffect() == mobEffect;
     }
 
     @ModifyExpressionValue(method = "renderLevel", at = @At(value = "NEW", target = "()Lcom/mojang/blaze3d/vertex/PoseStack;"))

@@ -16,11 +16,13 @@ import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects.MobSightEffect;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import java.util.Collection;
 import java.util.Objects;
 
 @Mixin(LivingEntity.class)
@@ -28,10 +30,11 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Unique LivingEntity livingEntity = (LivingEntity) (Object) this;
     @Shadow public abstract ItemStack getItemBySlot(EquipmentSlot equipmentSlot);
+    @Shadow protected abstract void dropEquipment(ServerLevel serverLevel);
     @Shadow public abstract double getAttributeValue(Holder<Attribute> holder);
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> holder);
     @Shadow public abstract @Nullable MobEffectInstance getEffect(Holder<MobEffect> holder);
-    @Shadow protected abstract void dropEquipment(ServerLevel serverLevel);
+    @Shadow public abstract Collection<MobEffectInstance> getActiveEffects();
 
     private LivingEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -91,4 +94,9 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     // endregion
+
+    @Inject(method = "tickEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;updateGlowingStatus()V"))
+    private void chrysalis$updateMobSightStatuses(CallbackInfo info) {
+        if (this.getActiveEffects().stream().noneMatch(mobEffectInstance -> mobEffectInstance.getEffect() instanceof MobSightEffect)) MobSightEffect.tryRefreshingPostEffect(this.livingEntity);
+    }
 }

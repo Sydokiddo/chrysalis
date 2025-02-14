@@ -30,7 +30,10 @@ public class ChrysalisParticles {
 
     public static final SimpleParticleType
         MEMORY_FLAME = registerSimpleParticle("memory_flame", false),
-        RADIANCE = registerSimpleParticle("radiance", false)
+        RADIANCE = registerSimpleParticle("radiance", false),
+        ARTHROPOD_SIGHT = registerSimpleParticle("arthropod_sight", false),
+        CREEPER_SIGHT = registerSimpleParticle("creeper_sight", false),
+        ENDER_SIGHT = registerSimpleParticle("ender_sight", false)
     ;
 
     public static final ParticleType<ColoredDustPlumeParticleOptions> COLORED_DUST_PLUME = registerAdvancedParticle(
@@ -87,6 +90,9 @@ public class ChrysalisParticles {
         ParticleFactoryRegistry registry = ParticleFactoryRegistry.getInstance();
         registry.register(MEMORY_FLAME, FlameParticle.Provider::new);
         registry.register(RADIANCE, SpellParticle.Provider::new);
+        registry.register(ARTHROPOD_SIGHT, SpellParticle.Provider::new);
+        registry.register(CREEPER_SIGHT, SpellParticle.Provider::new);
+        registry.register(ENDER_SIGHT, SpellParticle.Provider::new);
         registry.register(COLORED_DUST_PLUME, ColoredDustPlumeParticle.ColoredDustPlumeParticleProvider::new);
         registry.register(DUST_EXPLOSION, DustExplosionParticle.DustExplosionParticleProvider::new);
         registry.register(ROTATING_DUST, RotatingDustParticle.RotatingDustParticleProvider::new);
