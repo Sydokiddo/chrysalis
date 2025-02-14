@@ -12,13 +12,17 @@ import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraSetup;
 import net.sydokiddo.chrysalis.misc.util.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,12 +30,24 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 @Mixin(GameRenderer.class)
-public class GameRendererMixin {
+public abstract class GameRendererMixin {
+
+    @Shadow protected abstract void setPostEffect(ResourceLocation resourceLocation);
+
+    @Inject(method = "checkEntityPostEffect", at = @At("RETURN"))
+    private void chrysalis$addEntitySpectatorShaders(Entity entity, CallbackInfo info) {
+        if (entity == null) return;
+        EntityType<?> entityType = entity.getType();
+        if (entityType.is(ChrysalisTags.HAS_ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
+        if (entityType.is(ChrysalisTags.HAS_CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
+        if (entityType.is(ChrysalisTags.HAS_ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
+    }
 
     @ModifyExpressionValue(method = "renderLevel", at = @At(value = "NEW", target = "()Lcom/mojang/blaze3d/vertex/PoseStack;"))
     private PoseStack chrysalis$renderCameraShake(PoseStack poseStack) {

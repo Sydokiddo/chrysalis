@@ -166,7 +166,10 @@ public class ChrysalisTags {
         CANNOT_RIDE_BOATS = registerEntityTag("cannot_ride_boats"),
         WARDEN_IGNORED = registerEntityTag("warden_ignored"),
         STATISTICS_MENU_IGNORED = registerEntityTag("statistics_menu_ignored"),
-        ALWAYS_PLAYS_ENCOUNTER_MUSIC = registerEntityTag("always_plays_encounter_music")
+        ALWAYS_PLAYS_ENCOUNTER_MUSIC = registerEntityTag("always_plays_encounter_music"),
+        HAS_ARTHROPOD_SIGHT = registerEntityTag("has_arthropod_sight"),
+        HAS_CREEPER_SIGHT = registerEntityTag("has_creeper_sight"),
+        HAS_ENDER_SIGHT = registerEntityTag("has_ender_sight")
 
         // endregion
     ;

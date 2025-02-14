@@ -46,8 +46,6 @@
     "#minecraft:coral_plants",
     "minecraft:cobweb",
     "minecraft:tripwire",
-    "minecraft:redstone_wire",
-    {"id": "vast_vistas:short_frosted_grass", "required": false},
-    {"id": "vast_vistas:tall_frosted_grass", "required": false}
+    "minecraft:redstone_wire"
   ]
 }

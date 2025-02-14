@@ -3,7 +3,6 @@
     "minecraft:potion",
     "minecraft:honey_bottle",
     "minecraft:dragon_breath",
-    "minecraft:ominous_bottle",
-    {"id": "vast_vistas:butterfly_bottle", "required": false}
+    "minecraft:ominous_bottle"
   ]
 }
