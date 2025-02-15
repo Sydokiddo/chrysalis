@@ -5,12 +5,15 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisParticles;
 import net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects.GenericStatusEffect;
 import net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects.MobSightEffect;
 import java.awt.*;
 
+@SuppressWarnings("unused")
 public class ChrysalisEffects {
 
     // region Status Effects
@@ -26,6 +29,13 @@ public class ChrysalisEffects {
 
     public static final Holder<MobEffect> ENDER_SIGHT = registerStatusEffect("ender_sight",
     new MobSightEffect(MobEffectCategory.NEUTRAL, Color.decode("#E079FA").getRGB(), ChrysalisParticles.ENDER_SIGHT));
+
+    public static final Holder<MobEffect> HEALTH_REDUCTION = registerStatusEffect("health_reduction",
+    new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#994C4C").getRGB())
+    .addAttributeModifier(Attributes.MAX_HEALTH, Chrysalis.id("effect.health_reduction"), -4.0D, AttributeModifier.Operation.ADD_VALUE));
+
+    public static final Holder<MobEffect> BUILDING_FATIGUE = registerStatusEffect("building_fatigue",
+    new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#79553A").getRGB()));
 
     // endregion
 

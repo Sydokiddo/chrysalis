@@ -34,7 +34,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import java.util.Iterator;
 import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
@@ -54,15 +53,9 @@ public abstract class GameRendererMixin {
         if (!this.minecraft.options.getCameraType().isFirstPerson() || !(entity instanceof LivingEntity livingEntity)) return;
         EntityType<?> entityType = livingEntity.getType();
 
-        if (entityType.is(ChrysalisTags.HAS_ARTHROPOD_SIGHT) || this.hasMobSightEffect(livingEntity, ChrysalisEffects.ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
-        if (entityType.is(ChrysalisTags.HAS_CREEPER_SIGHT) || this.hasMobSightEffect(livingEntity, ChrysalisEffects.CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
-        if (entityType.is(ChrysalisTags.HAS_ENDER_SIGHT) || this.hasMobSightEffect(livingEntity, ChrysalisEffects.ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
-    }
-
-    @Unique
-    private boolean hasMobSightEffect(LivingEntity livingEntity, Holder<MobEffect> mobEffect) {
-        Iterator<MobEffectInstance> mobEffectIterator = livingEntity.getActiveEffects().iterator();
-        return mobEffectIterator.hasNext() && mobEffectIterator.next().getEffect() == mobEffect;
+        if (entityType.is(ChrysalisTags.HAS_ARTHROPOD_SIGHT) || livingEntity.hasEffect(ChrysalisEffects.ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
+        if (entityType.is(ChrysalisTags.HAS_CREEPER_SIGHT) || livingEntity.hasEffect(ChrysalisEffects.CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
+        if (entityType.is(ChrysalisTags.HAS_ENDER_SIGHT) || livingEntity.hasEffect(ChrysalisEffects.ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
     }
 
     /**

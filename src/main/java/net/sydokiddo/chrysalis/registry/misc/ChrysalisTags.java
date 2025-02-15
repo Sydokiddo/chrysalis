@@ -58,6 +58,7 @@ public class ChrysalisTags {
         MINEABLE_WITH_SHEARS = registerBlockTag("mineable/shears"),
         MINEABLE_WITH_SWORDS = registerBlockTag("mineable/sword"),
         ALLOWS_BEACON_BEAM_PASSTHROUGH = registerBlockTag("allows_beacon_beam_passthrough"),
+        ALLOWS_PLACEMENT_WITH_BUILDING_FATIGUE = registerBlockTag("allows_placement_with_building_fatigue"),
         ALLOWS_USE_WHILE_SNEAKING = registerBlockTag("allows_use_while_sneaking"),
         BASE_STONE_END = registerBlockTag("base_stone_end"),
         CHORUS_PLANTS_CAN_GROW_ON = registerBlockTag("chorus_plants_can_grow_on"),
