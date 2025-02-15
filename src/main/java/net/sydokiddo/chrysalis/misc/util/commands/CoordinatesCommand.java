@@ -15,6 +15,10 @@ import java.util.Objects;
 
 public class CoordinatesCommand {
 
+    /**
+     * A command to either copy the player's coordinates or convert them between dimensions.
+     **/
+
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(Commands.literal("coordinates")
             .then(Commands.literal("copy").executes(CoordinatesCommand::copyCoordinates))

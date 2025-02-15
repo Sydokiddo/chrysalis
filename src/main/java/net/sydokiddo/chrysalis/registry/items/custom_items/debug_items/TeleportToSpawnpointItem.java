@@ -26,6 +26,10 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
         super(properties);
     }
 
+    /**
+     * Adds a custom tooltip to the teleport to spawnpoint item.
+     **/
+
     @Override
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);

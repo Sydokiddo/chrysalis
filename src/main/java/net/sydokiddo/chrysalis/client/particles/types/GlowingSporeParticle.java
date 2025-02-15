@@ -11,6 +11,10 @@ import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 @Environment(EnvType.CLIENT)
 public class GlowingSporeParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
 
+    /**
+     * A floating spore particle effect that shrinks over time.
+     **/
+
     // region Initialization and Ticking
 
     public GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {

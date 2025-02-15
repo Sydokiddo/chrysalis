@@ -8,6 +8,10 @@ import org.jetbrains.annotations.NotNull;
 
 public record StructureChangedPayload(ResourceLocation structureName) implements CustomPacketPayload {
 
+    /**
+     * The packet to update the player's current structure on the client.
+     **/
+
     public static final Type<StructureChangedPayload> TYPE = CustomPacketPayload.createType("structure_changed");
     public static final StreamCodec<FriendlyByteBuf, StructureChangedPayload> CODEC = StreamCodec.composite(ResourceLocation.STREAM_CODEC, StructureChangedPayload::structureName, StructureChangedPayload::new);
 

@@ -8,6 +8,10 @@ import org.jetbrains.annotations.NotNull;
 
 public record ClearMusicPayload(boolean shouldFade) implements CustomPacketPayload {
 
+    /**
+     * The packet to clear music on the client.
+     **/
+
     public static final Type<ClearMusicPayload> TYPE = CustomPacketPayload.createType("clear_music");
     public static final StreamCodec<RegistryFriendlyByteBuf, ClearMusicPayload> CODEC = StreamCodec.composite(ByteBufCodecs.BOOL, ClearMusicPayload::shouldFade, ClearMusicPayload::new);
 

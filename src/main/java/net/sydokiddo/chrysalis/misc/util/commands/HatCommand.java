@@ -20,6 +20,10 @@ import java.util.Objects;
 
 public class HatCommand {
 
+    /**
+     * A command to put the player's held item on their head slot.
+     **/
+
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(Commands.literal("hat").executes(HatCommand::putItemOnHead));
     }

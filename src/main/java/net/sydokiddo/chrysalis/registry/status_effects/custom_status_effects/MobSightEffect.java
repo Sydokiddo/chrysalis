@@ -8,6 +8,10 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class MobSightEffect extends GenericStatusEffect {
 
+    /**
+     * A status effect class that allows for spectator mode shaders to be applied with it.
+     **/
+
     @SuppressWarnings("unused")
     public MobSightEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);

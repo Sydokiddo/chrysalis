@@ -10,6 +10,10 @@ import net.minecraft.network.chat.Component;
 @Environment(EnvType.CLIENT)
 public class CSplashTextRenderer extends SplashRenderer {
 
+    /**
+     * Renders the custom splash text.
+     **/
+
     private final Component splashText;
 
     public CSplashTextRenderer(Component splashText) {

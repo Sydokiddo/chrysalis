@@ -14,6 +14,10 @@ import org.joml.Vector3f;
 @Environment(EnvType.CLIENT)
 public class RotatingDustParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
 
+    /**
+     * A floating dust particle effect that rotates over time, with options to configure the color and scale.
+     **/
+
     // region Initialization and Ticking
 
     public RotatingDustParticle(ClientLevel clientLevel, double x, double y, double z, RotatingDustParticleOptions particleOptions, SpriteSet spriteSet) {

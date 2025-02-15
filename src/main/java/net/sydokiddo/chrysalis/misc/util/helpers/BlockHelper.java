@@ -18,6 +18,10 @@ import java.util.function.ToIntFunction;
 @SuppressWarnings("unused")
 public class BlockHelper {
 
+    /**
+     * Methods to get various pieces of information from blocks.
+     **/
+
     public static boolean isBlockStateFree(BlockState blockState) {
         return blockState.is(BlockTags.REPLACEABLE);
     }

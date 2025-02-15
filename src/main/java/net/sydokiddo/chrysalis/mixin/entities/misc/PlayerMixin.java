@@ -45,6 +45,10 @@ public abstract class PlayerMixin extends LivingEntity {
     @Unique Player player = (Player) (Object) this;
     @Unique private final String encounteredMobUuidTag = "encountered_mob_uuid";
 
+    /**
+     * Adds new data to players.
+     **/
+
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
     private void chrysalis$definePlayerTags(SynchedEntityData.Builder builder, CallbackInfo info) {
         builder.define(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.empty());
@@ -60,6 +64,10 @@ public abstract class PlayerMixin extends LivingEntity {
     private void chrysalis$readPlayerTags(CompoundTag compoundTag, CallbackInfo info) {
         if (compoundTag.get(this.encounteredMobUuidTag) != null) EntityDataHelper.setEncounteredMobUUID(this.player, compoundTag.getUUID(this.encounteredMobUuidTag));
     }
+
+    /**
+     * Clears an encounter mob's music if the player goes outside their range.
+     **/
 
     @Unique private boolean shouldClearMusic = false;
 
@@ -87,6 +95,10 @@ public abstract class PlayerMixin extends LivingEntity {
         }
     }
 
+    /**
+     * Allows for blocks in the allows_use_while_sneaking to be interacted with the maximum priority even while sneaking.
+     **/
+
     @Unique
     private BlockHitResult getPlayerPOVHitResult() {
 
@@ -111,10 +123,18 @@ public abstract class PlayerMixin extends LivingEntity {
         if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(ChrysalisTags.ALLOWS_USE_WHILE_SNEAKING)) cir.setReturnValue(false);
     }
 
+    /**
+     * Plays a sound when the player drops an item.
+     **/
+
     @Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At(value = "TAIL"))
     private void chrysalis$playInventoryItemDroppingSound(ItemStack itemStack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
         if (!itemStack.isEmpty() && retainOwnership) EntityDataHelper.playItemDroppingSound(this.player);
     }
+
+    /**
+     * If the playerDeathItemDespawning game rule is set to false, items dropped from players on death will never despawn.
+     **/
 
     @Redirect(method = "dropEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;dropAll()V"))
     private void chrysalis$setDeathItemsToNeverDespawn(Inventory inventory) {
@@ -137,6 +157,10 @@ public abstract class PlayerMixin extends LivingEntity {
         }
     }
 
+    /**
+     * Any living entity in the statistics_menu_ignored tag will not show up in the statistics menu if the player kills it.
+     **/
+
     @Inject(method = "killedEntity", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$hideEntityKilledStat(ServerLevel serverLevel, LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
         if (livingEntity != null && livingEntity.getType().is(ChrysalisTags.STATISTICS_MENU_IGNORED)) cir.setReturnValue(true);
@@ -150,10 +174,18 @@ public abstract class PlayerMixin extends LivingEntity {
             super(level, blockPos, rotation, gameProfile);
         }
 
+        /**
+         * Redirects the hurtServer method to respect the new damage capacity attribute.
+         **/
+
         @Redirect(method = "hurtServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
         private boolean chrysalis$hurtPlayerWithDamageCap(Player player, ServerLevel serverLevel, DamageSource damageSource, float damageAmount) {
             return super.hurtServer(serverLevel, damageSource, EntityDataHelper.getDamageCap(this, damageSource, damageAmount));
         }
+
+        /**
+         * Any living entity in the statistics_menu_ignored tag will not show up in the statistics menu if the player is killed by it.
+         **/
 
         @Redirect(method = "die", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;awardStat(Lnet/minecraft/stats/Stat;)V", ordinal = 0))
         private void chrysalis$hideEntityKilledByStat(ServerPlayer serverPlayer, Stat<?> stat) {

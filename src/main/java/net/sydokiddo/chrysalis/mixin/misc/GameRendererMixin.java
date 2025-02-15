@@ -44,6 +44,10 @@ public abstract class GameRendererMixin {
     @Shadow protected abstract void setPostEffect(ResourceLocation resourceLocation);
     @Shadow @Final private Minecraft minecraft;
 
+    /**
+     * Adds spectator mode shaders to entities within specific tags or entities that are under specific effects.
+     **/
+
     @Inject(method = "checkEntityPostEffect", at = @At("RETURN"))
     private void chrysalis$addEntitySpectatorShaders(Entity entity, CallbackInfo info) {
 
@@ -61,6 +65,10 @@ public abstract class GameRendererMixin {
         return mobEffectIterator.hasNext() && mobEffectIterator.next().getEffect() == mobEffect;
     }
 
+    /**
+     * Rotates the client's camera depending on the triggered camera shake values.
+     **/
+
     @ModifyExpressionValue(method = "renderLevel", at = @At(value = "NEW", target = "()Lcom/mojang/blaze3d/vertex/PoseStack;"))
     private PoseStack chrysalis$renderCameraShake(PoseStack poseStack) {
         CameraSetup cameraSetup = CameraSetup.getCameraSetup();
@@ -75,6 +83,10 @@ public abstract class GameRendererMixin {
     @Environment(EnvType.CLIENT)
     @Mixin(FogRenderer.class)
     public static class FogRendererMixin {
+
+        /**
+         * Applies a custom fog effect to the player's screen while under the radiance effect.
+         **/
 
         @Shadow private static long biomeChangedTime;
 

@@ -18,6 +18,10 @@ import net.minecraft.world.phys.Vec3;
 
 public class GameEventCommand {
 
+    /**
+     * A command to trigger a game event at a given position.
+     **/
+
     private static final String
         causingEntityString = "causing_entity",
         gameEventString = "game_event",

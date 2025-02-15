@@ -12,6 +12,10 @@ import net.minecraft.world.food.FoodData;
 
 public class FoodCommand {
 
+    /**
+     * A command to configure a player's nutrition and saturation values.
+     **/
+
     private static final String
         targetString = "target",
         nutritionAmountString = "nutrition_amount",

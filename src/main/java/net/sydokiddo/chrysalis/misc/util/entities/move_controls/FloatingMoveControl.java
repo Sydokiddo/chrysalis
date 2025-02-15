@@ -10,7 +10,7 @@ import net.minecraft.world.phys.Vec3;
 public class FloatingMoveControl extends MoveControl {
 
     /**
-     * This move control allows for mobs that integrate it to float around similarly to Ghasts.
+     * This move control allows for mobs that integrate it to float around similarly to ghasts.
      **/
 
     public final Mob mob;

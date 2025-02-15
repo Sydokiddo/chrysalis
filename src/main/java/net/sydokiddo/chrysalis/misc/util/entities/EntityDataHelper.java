@@ -24,7 +24,7 @@ import java.util.UUID;
 public class EntityDataHelper {
 
     /**
-     * Accesses various data from entities.
+     * Accesses various pieces of data from entities.
      **/
 
     // region General Entity Data

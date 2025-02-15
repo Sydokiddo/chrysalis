@@ -14,11 +14,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class DispenseCustomSpawnEggDispenserBehavior implements DispenseItemBehavior {
 
-    public static final DispenseCustomSpawnEggDispenserBehavior INSTANCE = new DispenseCustomSpawnEggDispenserBehavior();
-
     /**
      * Dispenses any custom spawn egg item.
      **/
+
+    public static final DispenseCustomSpawnEggDispenserBehavior INSTANCE = new DispenseCustomSpawnEggDispenserBehavior();
 
     @Override
     public @NotNull ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {

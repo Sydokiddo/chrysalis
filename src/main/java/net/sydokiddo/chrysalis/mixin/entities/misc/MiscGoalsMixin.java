@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public class MiscGoalsMixin {
 
     /**
-     * Rabbits eating Carrot crops and Evokers casting their Wololo spell is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     * Rabbits eating carrot crops and evokers casting their wololo spell is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
      **/
 
     @ModifyArg(method = "canUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))

@@ -25,6 +25,10 @@ public class HealItem extends DebugUtilityItem {
         super(properties);
     }
 
+    /**
+     * Adds a custom tooltip to the heal item.
+     **/
+
     @Override
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);

@@ -13,6 +13,10 @@ import org.joml.Vector3f;
 @Environment(EnvType.CLIENT)
 public class SparkleParticle extends FadingEmissiveParticle {
 
+    /**
+     * A sparkle particle effect with the ability to configure the color.
+     **/
+
     // region Initialization
 
     public SparkleParticle(ClientLevel clientLevel, double x, double y, double z, SparkleParticleOptions particleOptions, SpriteSet spriteSet) {

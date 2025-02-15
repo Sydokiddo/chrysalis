@@ -8,5 +8,9 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class ChrysalisLivingEntityRenderState extends LivingEntityRenderState {
 
+    /**
+     * Allows for the livingEntity field to be accessed from living entity renderer classes.
+     **/
+
     public static LivingEntity livingEntity;
 }

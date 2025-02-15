@@ -19,6 +19,10 @@ import java.awt.*;
 @Environment(EnvType.CLIENT)
 public class SparkleParticleOptions implements ParticleOptions, ParticleCommonMethods {
 
+    /**
+     * The options class for sparkle particles.
+     **/
+
     public static final MapCodec<SparkleParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.colorString, Color.LIGHT_GRAY.getRGB()).forGetter(ParticleCommonMethods::getColor),
         Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor))

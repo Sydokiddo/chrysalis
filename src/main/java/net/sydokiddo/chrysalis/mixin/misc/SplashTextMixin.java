@@ -26,6 +26,10 @@ public class SplashTextMixin {
 
     @Shadow @Final private String splash;
 
+    /**
+     * Replaces the vanilla splash text renderer with Chrysalis's custom one.
+     **/
+
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     private void chrysalis$replaceSplashTextRenderer(GuiGraphics guiGraphics, int x, Font font, int y, CallbackInfo info) {
         info.cancel();
@@ -38,6 +42,10 @@ public class SplashTextMixin {
     public static class TitleScreenMixin {
 
         @Shadow private @Nullable SplashRenderer splash;
+
+        /**
+         * Allows for splash text to be refreshed when clicked on.
+         **/
 
         @Inject(method = "mouseClicked", at = @At("TAIL"))
         private void chrysalis$splashTextRefreshing(double x, double y, int keyPressed, CallbackInfoReturnable<Boolean> cir) {

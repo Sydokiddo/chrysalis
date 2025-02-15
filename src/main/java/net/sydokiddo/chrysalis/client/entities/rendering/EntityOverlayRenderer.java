@@ -15,6 +15,10 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 @Environment(EnvType.CLIENT)
 public abstract class EntityOverlayRenderer<S extends LivingEntityRenderState, M extends EntityModel<S>> extends RenderLayer<S, M> {
 
+    /**
+     * A template renderer class for entity texture overlays.
+     **/
+
     private final boolean hideWhenInvisible;
 
     public EntityOverlayRenderer(RenderLayerParent<S, M> renderLayerParent, boolean hideWhenInvisible) {

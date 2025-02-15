@@ -13,6 +13,10 @@ import org.jetbrains.annotations.NotNull;
 @Environment(EnvType.CLIENT)
 public class FadingTrailParticle extends TextureSheetParticle implements ParticleCommonMethods {
 
+    /**
+     * A fading dust trail particle effect.
+     **/
+
     // region Initialization and Ticking
 
     public FadingTrailParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {

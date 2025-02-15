@@ -18,6 +18,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class Seat extends Entity {
 
+    /**
+     * The seat entity that sittable blocks utilize.
+     **/
+
     public Seat(EntityType<? extends Seat> entityType, Level level) {
         super(entityType, level);
         this.noPhysics = true;

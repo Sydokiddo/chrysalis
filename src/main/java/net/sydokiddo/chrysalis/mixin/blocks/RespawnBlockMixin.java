@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class RespawnBlockMixin {
 
     /**
-     * Interacting with a Bed while the bedsExplode gamerule is set to false will display an error message instead of exploding.
+     * Interacting with a bed while the bedsExplode gamerule is set to false will display an error message instead of exploding.
      **/
 
     @Inject(at = @At("HEAD"), method = "useWithoutItem", cancellable = true)
@@ -43,7 +43,7 @@ public abstract class RespawnBlockMixin {
         @Shadow @Final public static IntegerProperty CHARGE;
 
         /**
-         * Items that can charge Respawn Anchors is now driven by the charges_respawn_anchors tag.
+         * Items that can charge respawn anchors is now driven by the charges_respawn_anchors tag.
          **/
 
         @Inject(method = "isRespawnFuel", at = @At("HEAD"), cancellable = true)
@@ -52,7 +52,7 @@ public abstract class RespawnBlockMixin {
         }
 
         /**
-         * Interacting with a Respawn Anchor while the respawnAnchorsExplode gamerule is set to false will display an error message instead of exploding.
+         * Interacting with a respawn anchor while the respawnAnchorsExplode gamerule is set to false will display an error message instead of exploding.
          **/
 
         @Inject(at = @At("HEAD"), method = "useWithoutItem", cancellable = true)

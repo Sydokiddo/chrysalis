@@ -31,7 +31,7 @@ public class ClientLevelMixin {
     @Shadow @Final private Minecraft minecraft;
 
     /**
-     * Renders a marker for Structure Voids in Creative Mode similarly to Barriers or Lights.
+     * Renders a marker for structure voids in creative mode similarly to barriers or lights.
      **/
 
     @Inject(method = "getMarkerParticleTarget", at = @At("HEAD"), cancellable = true)
@@ -55,7 +55,7 @@ public class ClientLevelMixin {
     public static class WeatherFixMixin {
 
         /**
-         * Fixes a vanilla bug where occasionally when going through portals when the world is loading, rain can sometimes display in dimensions where rain doesn't exist.
+         * Fixes a vanilla bug where occasionally when going through portals while the world is loading, rain can sometimes display in dimensions where rain doesn't exist.
          **/
 
         @Inject(method = "render(Lnet/minecraft/world/level/Level;Lnet/minecraft/client/renderer/MultiBufferSource;IFLnet/minecraft/world/phys/Vec3;)V", at = @At(value = "HEAD"), cancellable = true)

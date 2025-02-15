@@ -19,6 +19,10 @@ import java.util.Objects;
 
 public class StructureMusic {
 
+    /**
+     * Sets the player's current structure to send it to the music tracker.
+     **/
+
     public static Map<Player, ResourceLocation> playerStructures = new HashMap<>();
     public static int ticks = 0;
 

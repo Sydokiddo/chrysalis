@@ -20,7 +20,7 @@ public abstract class AbstractBoatMixin extends Entity {
     }
 
     /**
-     * Any mobs in the cannot_ride_boats tag will never be able to mount boats when near them.
+     * Any mobs in the cannot_ride_boats tag will never be able to mount boats when colliding with them.
      **/
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;startRiding(Lnet/minecraft/world/entity/Entity;)Z"), cancellable = true)

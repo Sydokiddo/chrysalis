@@ -10,6 +10,10 @@ import org.jetbrains.annotations.NotNull;
 
 public record QueuedMusicPayload(Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) implements CustomPacketPayload {
 
+    /**
+     * The packet to send a queued music track to the client.
+     **/
+
     public static final Type<QueuedMusicPayload> TYPE = CustomPacketPayload.createType("queued_music");
     public static final StreamCodec<RegistryFriendlyByteBuf, QueuedMusicPayload> CODEC = StreamCodec.composite(SoundEvent.STREAM_CODEC, QueuedMusicPayload::soundEvent, ByteBufCodecs.VAR_INT, QueuedMusicPayload::minDelay, ByteBufCodecs.VAR_INT, QueuedMusicPayload::maxDelay, ByteBufCodecs.BOOL, QueuedMusicPayload::replaceCurrentMusic, QueuedMusicPayload::new);
 

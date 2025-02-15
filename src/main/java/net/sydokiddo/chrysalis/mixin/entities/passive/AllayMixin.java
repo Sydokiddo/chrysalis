@@ -34,7 +34,7 @@ public class AllayMixin extends PathfinderMob {
     }
 
     /**
-     * Triggers the 'summoned_entity' advancement criteria when a player duplicates an Allay.
+     * Triggers the 'summoned_entity' advancement criteria when a player duplicates an allay.
      **/
 
     @Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/allay/Allay;duplicateAllay()V"))

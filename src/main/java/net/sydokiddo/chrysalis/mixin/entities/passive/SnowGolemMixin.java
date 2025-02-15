@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public class SnowGolemMixin {
 
     /**
-     * Snow Golems being able to spread snow while walking is now determined by the passiveGriefing gamerule rather than mobGriefing.
+     * Snow golems being able to spread snow while walking is now determined by the passiveGriefing gamerule rather than mobGriefing.
      **/
 
     @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))

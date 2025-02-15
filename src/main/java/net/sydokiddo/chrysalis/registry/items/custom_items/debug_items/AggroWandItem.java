@@ -62,6 +62,10 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
     // endregion
 
+    /**
+     * Adds a custom tooltip to the aggro wand item.
+     **/
+
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
 

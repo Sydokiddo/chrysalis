@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PowderSnowBlockMixin {
 
     /**
-     * Mobs that are on fire and destroy Powder Snow when going into it is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     * Mobs that are on fire and destroy powder snow when going into it is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
      **/
 
     @ModifyArg(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
@@ -26,7 +26,7 @@ public class PowderSnowBlockMixin {
     }
 
     /**
-     * Any items in the powder_snow_walkable_items tag that can be equipped in the feet slot will allow the user to walk on Powder Snow.
+     * Any items in the powder_snow_walkable_items tag that can be equipped in the feet slot will allow for the user to walk on powder snow.
      **/
 
     @Inject(method = "canEntityWalkOnPowderSnow", at = @At("HEAD"), cancellable = true)

@@ -23,6 +23,10 @@ import java.util.stream.Stream;
 @Environment(EnvType.CLIENT)
 public class SplashTextLoader implements SimpleFileLoader {
 
+    /**
+     * Loads custom splash texts from a json file.
+     **/
+
     private SplashTextLoader() {}
 
     public static final SplashTextLoader INSTANCE = new SplashTextLoader();

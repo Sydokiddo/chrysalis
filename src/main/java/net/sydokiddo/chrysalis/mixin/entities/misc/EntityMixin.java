@@ -32,6 +32,10 @@ public abstract class EntityMixin {
     @Shadow public abstract boolean isAttackable();
     @Shadow public abstract boolean isAlive();
 
+    /**
+     * Allows for items in the increased_pick_radius tag to be able to select entities within a wider range when far away from them.
+     **/
+
     @Environment(EnvType.CLIENT)
     @Inject(method = "getPickRadius", at = @At("RETURN"), cancellable = true)
     private void chrysalis$increasedPickRadius(CallbackInfoReturnable<Float> cir) {
@@ -45,11 +49,19 @@ public abstract class EntityMixin {
         if (mainHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS) || offHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.entity) > 8 ? 0.5F : 0.0F);
     }
 
+    /**
+     * Prevents entities from rendering entirely while under the invisibility 2 effect or higher.
+     **/
+
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventEntityRendering(double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
         Holder<MobEffect> invisibility = MobEffects.INVISIBILITY;
         if (this.entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(invisibility) && Objects.requireNonNull(livingEntity.getEffect(invisibility)).getAmplifier() > 0) cir.setReturnValue(false);
     }
+
+    /**
+     * Allows for various debug utility items to be used on entities with a higher priority than other interactions.
+     **/
 
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
     private void chrysalis$debugItemInteractions(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {

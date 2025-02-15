@@ -15,7 +15,7 @@ public class PotionColorMixin {
     @Shadow @Final private int color;
 
     /**
-     * Changes the default potion colors of Blindness, Haste, Mining Fatigue, and Wither.
+     * Changes the default potion colors of blindness, haste, mining fatigue, and wither.
      **/
 
     @Inject(at = @At("RETURN"), method = "getColor", cancellable = true)

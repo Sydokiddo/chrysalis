@@ -21,6 +21,10 @@ import org.joml.Vector3f;
 @Environment(EnvType.CLIENT)
 public class PulsationParticle extends FadingEmissiveParticle {
 
+    /**
+     * A directional pulsation ring particle effect with the ability to configure the color.
+     **/
+
     // region Initialization and Ticking
 
     private final Direction direction;

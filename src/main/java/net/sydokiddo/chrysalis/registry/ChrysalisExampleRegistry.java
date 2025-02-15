@@ -31,6 +31,7 @@ public class ChrysalisExampleRegistry {
 
     /**
      * A variety of examples for things that can be registered with Chrysalis.
+     * <p>
      * Note: Do not initialize any methods in this class unless you want a bunch of broken items, blocks, and other things in your game!
      **/
 

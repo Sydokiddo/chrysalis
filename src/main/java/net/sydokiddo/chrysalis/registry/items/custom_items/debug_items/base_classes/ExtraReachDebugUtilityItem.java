@@ -18,6 +18,10 @@ public class ExtraReachDebugUtilityItem extends DebugUtilityItem implements Cust
         super(properties);
     }
 
+    /**
+     * Adds an entity_interaction_range attribute modifier to the item.
+     **/
+
     public static ItemAttributeModifiers createAttributes(EquipmentSlotGroup equipmentSlotGroup) {
         return ItemAttributeModifiers.builder().add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(Chrysalis.id("base_entity_interaction_range"), 64.0D, AttributeModifier.Operation.ADD_VALUE), equipmentSlotGroup).build();
     }

@@ -8,6 +8,10 @@ import net.minecraft.client.Minecraft;
 @Environment(EnvType.CLIENT)
 public class CameraSetup {
 
+    /**
+     * Gets various pieces of information about the client's camera.
+     **/
+
     private final Camera camera;
     private float yaw;
     private float pitch;
@@ -16,10 +20,6 @@ public class CameraSetup {
     public CameraSetup(Camera camera) {
         this.camera = camera;
     }
-
-    /**
-     * Gets various information about the client's camera.
-     **/
 
     public static CameraSetup getCameraSetup() {
         return new CameraSetup(Minecraft.getInstance().gameRenderer.getMainCamera());

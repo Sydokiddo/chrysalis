@@ -15,6 +15,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BundleItem.class)
 public class BundleItemMixin {
 
+    /**
+     * Prevents the player's hand from swinging while right-clicking with a bundle while it's empty.
+     **/
+
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventBundleRightClickWhileEmpty(Level level, Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
         BundleContents bundleContents = player.getItemInHand(interactionHand).get(DataComponents.BUNDLE_CONTENTS);

@@ -25,6 +25,10 @@ public class ClearEffectsItem extends DebugUtilityItem {
         super(properties);
     }
 
+    /**
+     * Adds a custom tooltip to the clear effects item.
+     **/
+
     @Override
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);

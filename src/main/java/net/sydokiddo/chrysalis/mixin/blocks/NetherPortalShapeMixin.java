@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class NetherPortalShapeMixin {
 
     /**
-     * Blocks used to create Nether Portal frames are now driven by the nether_portal_base_blocks tag.
+     * Blocks used to create nether portal frames are now driven by the nether_portal_base_blocks tag.
      **/
 
     @Inject(at = @At("HEAD"), method = "method_30487", cancellable = true)

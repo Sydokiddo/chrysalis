@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public class EatBlockGoalMixin {
 
     /**
-     * Sheep being able to eat Grass Blocks is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     * Sheep being able to eat grass blocks is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
      **/
 
     @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))

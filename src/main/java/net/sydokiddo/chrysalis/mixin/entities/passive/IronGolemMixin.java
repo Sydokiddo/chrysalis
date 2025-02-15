@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class IronGolemMixin {
 
     /**
-     * Items that can repair damaged Iron Golems is now driven by the repairs_iron_golems tag.
+     * Items that can repair damaged iron golems is now driven by the repairs_iron_golems tag.
      **/
 
     @Redirect(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))

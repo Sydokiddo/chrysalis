@@ -12,6 +12,10 @@ import org.joml.Vector3f;
 @Environment(EnvType.CLIENT)
 public interface ParticleCommonMethods {
 
+    /**
+     * Common methods utilized by multiple custom particle effects.
+     **/
+
     String
         colorString = "color",
         startingColorString = "starting_color",

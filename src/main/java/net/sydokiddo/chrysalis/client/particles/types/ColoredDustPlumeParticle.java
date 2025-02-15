@@ -12,6 +12,10 @@ import org.joml.Vector3f;
 @Environment(EnvType.CLIENT)
 public class ColoredDustPlumeParticle extends DustPlumeParticle implements ParticleCommonMethods {
 
+    /**
+     * A colored variant of the vanilla dust plume particles, with an option to make it emissive.
+     **/
+
     // region Initialization
 
     private final boolean emissive;

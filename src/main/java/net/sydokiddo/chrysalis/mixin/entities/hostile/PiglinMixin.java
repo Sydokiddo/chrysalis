@@ -30,7 +30,7 @@ public class PiglinMixin {
     public static class PiglinAiMixin {
 
         /**
-         * Items that can be bartered to Piglins is now determined by the piglin_bartering_items tag.
+         * Items that can be bartered to piglins is now determined by the piglin_bartering_items tag.
          **/
 
         @Inject(at = @At("HEAD"), method = "isBarterCurrency", cancellable = true)

@@ -24,6 +24,10 @@ public class FillOxygenItem extends DebugUtilityItem {
         super(properties);
     }
 
+    /**
+     * Adds a custom tooltip to the fill oxygen item.
+     **/
+
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);

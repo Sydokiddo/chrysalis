@@ -15,6 +15,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LevelSummary.class)
 public class LevelMixin {
 
+    /**
+     * Prevents the experimental warning when starting the world if the user is in a development environment.
+     **/
+
     @Inject(method = "isExperimental", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$disableExperimentalWarning(CallbackInfoReturnable<Boolean> cir) {
         if (Chrysalis.IS_DEBUG) cir.setReturnValue(false);
@@ -27,7 +31,7 @@ public class LevelMixin {
         @Shadow public abstract ServerLevel getLevel();
 
         /**
-         * Prevents a bug where snow can fall in the Nether and End if the Y-level can go high enough.
+         * Prevents a bug where snow can fall in the nether and end if the y-level can go high enough.
          **/
 
         @Inject(method = "tickPrecipitation", at = @At(value = "HEAD"), cancellable = true)

@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class PlaceBlockDispenserBehavior implements DispenseItemBehavior {
 
     /**
-     * Allows for Dispensers to place any block in front of them.
+     * Allows for dispensers to place any block in front of them.
      **/
 
     @Override

@@ -19,6 +19,10 @@ public class ShieldItemMixin extends Item {
         super(properties);
     }
 
+    /**
+     * Cleans up the shield banner pattern tooltip layout.
+     **/
+
     @Inject(method = "appendHoverText", at = @At("HEAD"), cancellable = true)
     private void chrysalis$changeShieldTooltip(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 

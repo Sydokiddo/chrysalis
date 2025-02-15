@@ -31,6 +31,10 @@ public class GiveResistanceItem extends DebugUtilityItem {
         super(properties);
     }
 
+    /**
+     * Adds a custom tooltip to the give resistance item.
+     **/
+
     @Override
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);

@@ -22,6 +22,10 @@ import java.util.Collection;
 
 public class MusicCommand {
 
+    /**
+     * A command to modify the game's music tracker.
+     **/
+
     private static final String
         targetsString = "targets",
         soundEventString = "sound_event",

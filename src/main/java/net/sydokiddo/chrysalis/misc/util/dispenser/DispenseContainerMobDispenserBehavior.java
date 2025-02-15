@@ -15,11 +15,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavior {
 
-    public static final DispenseContainerMobDispenserBehavior INSTANCE = new DispenseContainerMobDispenserBehavior();
-
     /**
      * Dispenses any mob container item.
      **/
+
+    public static final DispenseContainerMobDispenserBehavior INSTANCE = new DispenseContainerMobDispenserBehavior();
 
     @Override
     public @NotNull ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {

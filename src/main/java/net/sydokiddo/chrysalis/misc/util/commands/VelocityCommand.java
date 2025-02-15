@@ -13,6 +13,10 @@ import java.util.Collection;
 
 public class VelocityCommand {
 
+    /**
+     * A command to configure an entity's velocity.
+     **/
+
     private static final String
         targetsString = "targets",
         xString = "x",

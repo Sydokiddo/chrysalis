@@ -38,6 +38,10 @@ public class TooltipMixin extends Item {
         super(properties);
     }
 
+    /**
+     * Allows for the original appendHoverText method to be executed after the overwritten one on various item classes.
+     **/
+
     @Inject(method = "appendHoverText", at = @At("HEAD"))
     private void chrysalis$allowOriginalTooltips(ItemStack itemStack, TooltipContext context, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
         super.appendHoverText(itemStack, context, list, tooltipFlag);
@@ -50,6 +54,10 @@ public class TooltipMixin extends Item {
         @Shadow public abstract boolean showInTooltip();
         @Shadow public abstract Holder<TrimPattern> pattern();
         @Shadow public abstract Holder<TrimMaterial> material();
+
+        /**
+         * Cleans up the armor trim tooltip layout.
+         **/
 
         @Inject(method = "addToTooltip", at = @At("HEAD"), cancellable = true)
         private void chrysalis$changeArmorTrimTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, CallbackInfo info) {
@@ -66,6 +74,10 @@ public class TooltipMixin extends Item {
 
         @Shadow @Final boolean showInTooltip;
         @Shadow @Final Object2IntOpenHashMap<Holder<Enchantment>> enchantments;
+
+        /**
+         * Cleans up the enchantment tooltip layout.
+         **/
 
         @Inject(method = "addToTooltip", at = @At("HEAD"), cancellable = true)
         private void chrysalis$changeEnchantmentTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, CallbackInfo info) {
@@ -107,6 +119,10 @@ public class TooltipMixin extends Item {
     @SuppressWarnings("unused")
     @Mixin(Enchantment.class)
     public static class EnchantmentMixin {
+
+        /**
+         * Changes the color of non-curse enchantment tooltips to a purple color.
+         **/
 
         @Redirect(method = "getFullname", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;withColor(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/Style;", ordinal = 1))
         private static Style chrysalis$changeEnchantmentTooltipColor(Style style, ChatFormatting chatFormatting) {

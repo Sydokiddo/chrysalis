@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class TurtleEggBlockMixin {
 
     /**
-     * Blocks that Turtle Eggs are able to hatch on is now driven by the turtle_eggs_can_hatch_on tag rather than the sand tag.
+     * Blocks that turtle eggs are able to hatch on is now driven by the turtle_eggs_can_hatch_on tag rather than the sand tag.
      **/
 
     @Inject(method = "isSand", at = @At("HEAD"), cancellable = true)

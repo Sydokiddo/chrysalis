@@ -8,5 +8,9 @@ import net.minecraft.world.entity.Entity;
 @Environment(EnvType.CLIENT)
 public class ChrysalisEntityRenderState extends EntityRenderState {
 
+    /**
+     * Allows for the entity field to be accessed from entity renderer classes.
+     **/
+
     public static Entity entity;
 }

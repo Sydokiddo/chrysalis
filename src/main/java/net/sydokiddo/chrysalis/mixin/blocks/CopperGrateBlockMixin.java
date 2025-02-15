@@ -18,6 +18,10 @@ public class CopperGrateBlockMixin extends Block {
         super(properties);
     }
 
+    /**
+     * Occludes blocked faces of any copper grate block when adjacent to each other.
+     **/
+
     @Inject(at = @At("HEAD"), method = "skipRendering", cancellable = true)
     private void chrysalis$occludeCopperGrateFaces(BlockState blockState, BlockState adjacentBlock, Direction direction, CallbackInfoReturnable<Boolean> cir) {
 

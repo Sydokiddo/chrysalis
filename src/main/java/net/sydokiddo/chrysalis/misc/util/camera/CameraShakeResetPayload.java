@@ -8,6 +8,10 @@ import org.jetbrains.annotations.NotNull;
 
 public record CameraShakeResetPayload(int protocolVersion) implements CustomPacketPayload {
 
+    /**
+     * The packet to reset the camera shake on the client.
+     **/
+
     public static final Type<CameraShakeResetPayload> TYPE = CustomPacketPayload.createType("camera_shake_reset");
     public static final StreamCodec<RegistryFriendlyByteBuf, CameraShakeResetPayload> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, CameraShakeResetPayload::protocolVersion, CameraShakeResetPayload::new);
 

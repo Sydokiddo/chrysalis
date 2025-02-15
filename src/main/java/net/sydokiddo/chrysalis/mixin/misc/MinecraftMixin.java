@@ -32,10 +32,18 @@ public class MinecraftMixin {
     @Shadow @Nullable public LocalPlayer player;
     @Shadow @Nullable public Screen screen;
 
+    /**
+     * Replaces the vanilla splash text manager with Chrysalis's custom one.
+     **/
+
     @Inject(method = "getSplashManager", at = @At("RETURN"), cancellable = true)
     private void chrysalis$getSplashManager(CallbackInfoReturnable<SplashManager> cir) {
         cir.setReturnValue(new CSplashManager(this.user));
     }
+
+    /**
+     * Gets situational music from Chrysalis's custom queued music system.
+     **/
 
     @Inject(method = "getSituationalMusic", at = @At("RETURN"), cancellable = true)
     private void chrysalis$getQueuedMusic(CallbackInfoReturnable<MusicInfo> cir) {
@@ -49,6 +57,10 @@ public class MinecraftMixin {
         }
     }
 
+    /**
+     * Plays a sound when the player drops an item.
+     **/
+
     @Inject(method = "handleKeybinds", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;swing(Lnet/minecraft/world/InteractionHand;)V"))
     private void chrysalis$playKeyPressItemDroppingSound(CallbackInfo info) {
         if (this.player != null) EntityDataHelper.playItemDroppingSound(this.player);
@@ -60,6 +72,10 @@ public class MinecraftMixin {
     public static class MusicManagerMixin {
 
         @Shadow private float currentGain;
+
+        /**
+         * Fades out the current played music if instructed to do so.
+         **/
 
         @Inject(method = "tick", at = @At("HEAD"))
         private void chrysalis$fadeOutMusic(CallbackInfo info) {

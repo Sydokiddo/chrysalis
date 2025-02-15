@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BaseFireBlockMixin {
 
     /**
-     * Prevents Nether Portals from activating if the doNetherPortalActivating gamerule is set to false.
+     * Prevents nether portals from activating if the doNetherPortalActivating gamerule is set to false.
      **/
 
     @Inject(at = @At("HEAD"), method = "inPortalDimension", cancellable = true)

@@ -20,7 +20,7 @@ public class StructureVoidBlockMixin extends Block {
     }
 
     /**
-     * Changes the Structure Void's visual hitbox to that of a normal-sized block.
+     * Changes the structure void's visual hitbox to that of a normal-sized block.
      **/
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)

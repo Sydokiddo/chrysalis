@@ -22,7 +22,7 @@ public class CSpawnEggItem extends SpawnEggItem {
     }
 
     /**
-     * Gets the custom offspring for the adult mob and spawns it when the adult mob is right-clicked with the spawn egg.
+     * Gets the custom offspring for the adult mob and spawns it when the adult mob is right-clicked on with the spawn egg.
      **/
 
     @Override

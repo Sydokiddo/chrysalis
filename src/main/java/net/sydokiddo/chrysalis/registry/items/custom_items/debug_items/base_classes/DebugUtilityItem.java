@@ -23,7 +23,7 @@ public class DebugUtilityItem extends EnchantedGlintItem {
     }
 
     /**
-     * Adds a description tooltip to any of the Debug Utility items.
+     * Adds a description tooltip to any of the debug utility items.
      **/
 
     @Override
@@ -33,7 +33,7 @@ public class DebugUtilityItem extends EnchantedGlintItem {
     }
 
     /**
-     * Debug Utility items cannot be used to break blocks while in Creative Mode.
+     * Debug utility items cannot be used to break blocks while in creative mode.
      **/
 
     @Override

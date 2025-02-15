@@ -6,6 +6,10 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class GenericStatusEffect extends MobEffect {
 
+    /**
+     * A generic status effect class that allows for users to either use the default particles or a custom particle for it.
+     **/
+
     public GenericStatusEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);
     }

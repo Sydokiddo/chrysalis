@@ -23,6 +23,10 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
         super(properties);
     }
 
+    /**
+     * Adds a custom tooltip to the kill wand item.
+     **/
+
     @Override
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         ItemHelper.addAttackTooltip(list);

@@ -17,6 +17,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BlockBehaviour.BlockStateBase.class)
 public class BlockStateBaseMixin {
 
+    /**
+     * Fixes fluid hitboxes for any entity that is able to walk on fluids.
+     **/
+
     @Unique private static final VoxelShape[] voxelShapes;
 
     static {

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class BeaconBlockEntityMixin {
 
     /**
-     * Blocks that Beacon beams can pass through is now driven by the allows_beacons_beam_passthrough tag.
+     * Blocks that beacon beams can pass through is now driven by the allows_beacons_beam_passthrough tag.
      **/
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))

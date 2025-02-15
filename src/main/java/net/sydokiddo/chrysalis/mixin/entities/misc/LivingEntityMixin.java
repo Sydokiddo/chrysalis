@@ -40,6 +40,10 @@ public abstract class LivingEntityMixin extends Entity {
         super(entityType, level);
     }
 
+    /**
+     * Adds Chrysalis's new attributes to living entities.
+     **/
+
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
     private static void chrysalis$addLivingEntityAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> info) {
         if (info.getReturnValue() != null) {
@@ -47,6 +51,10 @@ public abstract class LivingEntityMixin extends Entity {
             info.getReturnValue().add(ChrysalisAttributes.DAMAGE_CAPACITY);
         }
     }
+
+    /**
+     * Prevents non-player living entities from dropping loot when killed with a kill wand.
+     **/
 
     @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventLootDropping(ServerLevel serverLevel, DamageSource damageSource, CallbackInfo info) {
@@ -94,6 +102,10 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     // endregion
+
+    /**
+     * Refreshes any mob sight rendering effects when the effect wears out.
+     **/
 
     @Inject(method = "tickEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;updateGlowingStatus()V"))
     private void chrysalis$updateMobSightStatuses(CallbackInfo info) {

@@ -30,6 +30,10 @@ import java.util.List;
 @Mixin(Item.class)
 public abstract class ItemMixin {
 
+    /**
+     * Adds tooltips to various items.
+     **/
+
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
@@ -77,6 +81,10 @@ public abstract class ItemMixin {
     public static abstract class ItemStackMixin implements DataComponentHolder {
 
         @Shadow public abstract Item getItem();
+
+        /**
+         * Adds a Chrysalis tooltip to any new item registered by the mod.
+         **/
 
         @Environment(EnvType.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))

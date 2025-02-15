@@ -5,13 +5,13 @@ import net.minecraft.world.item.ItemStack;
 
 public abstract class EnchantedGlintItem extends Item {
 
+    /**
+     * Any item that extends this class will automatically display the enchanted glint on it.
+     **/
+
     public EnchantedGlintItem(Properties properties) {
         super(properties);
     }
-
-    /**
-     * Any items that extend this class will automatically display the enchanted glint on them.
-     **/
 
     @Override
     public boolean isFoil(ItemStack itemStack) {

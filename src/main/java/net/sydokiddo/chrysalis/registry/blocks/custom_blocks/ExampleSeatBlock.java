@@ -14,6 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class ExampleSeatBlock extends Block implements SittableBlock {
 
+    /**
+     * An example class to show how to integrate the ability to sit on a block.
+     **/
+
     public ExampleSeatBlock(Properties properties) {
         super(properties);
     }

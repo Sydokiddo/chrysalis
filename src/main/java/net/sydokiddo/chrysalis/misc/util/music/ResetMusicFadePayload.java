@@ -8,6 +8,10 @@ import org.jetbrains.annotations.NotNull;
 
 public record ResetMusicFadePayload(int protocolVersion) implements CustomPacketPayload {
 
+    /**
+     * The packet to reset the music tracker's volume fading on the client.
+     **/
+
     public static final Type<ResetMusicFadePayload> TYPE = CustomPacketPayload.createType("reset_music_fade");
     public static final StreamCodec<RegistryFriendlyByteBuf, ResetMusicFadePayload> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, ResetMusicFadePayload::protocolVersion, ResetMusicFadePayload::new);
 

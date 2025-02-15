@@ -26,6 +26,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class MobInContainerItem extends Item implements DispensibleContainerItem {
 
+    /**
+     * The base class for any mob container item that doesn't place a fluid alongside it.
+     **/
+
     private final EntityType<?> entityType;
     public final SoundEvent emptySound;
     public final Item returnItem;

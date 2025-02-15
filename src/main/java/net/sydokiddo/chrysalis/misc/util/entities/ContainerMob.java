@@ -23,10 +23,8 @@ public interface ContainerMob {
 
     boolean fromItem();
     void setFromItem(boolean fromItem);
-
     void saveToItemTag(ItemStack itemStack);
     void loadFromItemTag(CompoundTag compoundTag);
-
     ItemStack getResultItemStack();
     SoundEvent getPickupSound();
 
@@ -54,6 +52,10 @@ public interface ContainerMob {
             if (mob instanceof Animal animal) compoundTag.putInt("InLove", animal.getInLoveTime());
         });
     }
+
+    /**
+     * Loads the data of the mob from the item stack.
+     **/
 
     static void loadDefaultDataFromItemTag(Mob mob, CompoundTag compoundTag) {
 

@@ -18,6 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(DispenserBlock.class)
 public class DispenserBlockMixin {
 
+    /**
+     * Adds new dispenser methods.
+     **/
+
     @Inject(method = "getDispenseMethod", at = @At("HEAD"), cancellable = true)
     private void chrysalis$addNewDispenserMethods(Level level, ItemStack itemStack, CallbackInfoReturnable<DispenseItemBehavior> cir) {
 

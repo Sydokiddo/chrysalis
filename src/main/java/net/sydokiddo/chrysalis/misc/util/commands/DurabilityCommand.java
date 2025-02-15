@@ -18,6 +18,10 @@ import java.util.Collection;
 
 public class DurabilityCommand {
 
+    /**
+     * A command to configure the durability or repair cost of a held item.
+     **/
+
     private static final String
         targetsString = "targets",
         durabilityString = "durability",

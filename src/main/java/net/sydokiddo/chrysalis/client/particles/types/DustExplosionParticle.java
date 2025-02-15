@@ -15,6 +15,10 @@ import org.joml.Vector3f;
 @Environment(EnvType.CLIENT)
 public class DustExplosionParticle extends ExplodeParticle implements ParticleCommonMethods {
 
+    /**
+     * A fading dust cloud explosion particle effect, with options to set the starting color, the color to fade into, and whether the particle is emissive.
+     **/
+
     // region Initialization and Ticking
 
     private final Vector3f startingColor;

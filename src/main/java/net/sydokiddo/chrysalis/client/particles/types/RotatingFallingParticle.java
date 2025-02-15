@@ -12,6 +12,10 @@ import org.jetbrains.annotations.NotNull;
 @Environment(EnvType.CLIENT)
 public class RotatingFallingParticle extends RisingParticle {
 
+    /**
+     * A particle effect that rotates and falls, with custom physics for colliding with a block.
+     **/
+
     // region Initialization and Ticking
 
     public RotatingFallingParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {

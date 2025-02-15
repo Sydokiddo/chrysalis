@@ -13,6 +13,10 @@ import org.jetbrains.annotations.NotNull;
 @Environment(EnvType.CLIENT)
 public class FadingEmissiveParticle extends TextureSheetParticle implements ParticleCommonMethods {
 
+    /**
+     * A base class for custom particles that fade out.
+     **/
+
     // region Initialization and Ticking
 
     private final SpriteSet spriteSet;

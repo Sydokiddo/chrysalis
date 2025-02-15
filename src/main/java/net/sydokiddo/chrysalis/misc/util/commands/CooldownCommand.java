@@ -18,6 +18,10 @@ import net.minecraft.world.item.component.UseCooldown;
 
 public class CooldownCommand {
 
+    /**
+     * A command to trigger or remove a cooldown on an item.
+     **/
+
     private static final String
         targetString = "target",
         itemString = "item",

@@ -35,10 +35,18 @@ import java.util.Objects;
 @Mixin(EntityRenderer.class)
 public abstract class EntityRendererMixin {
 
+    /**
+     * Allows for the entity field to be accessed from the entity renderer class.
+     **/
+
     @Inject(method = "extractRenderState", at = @At("HEAD"))
     private void chrysalis$addEntityRenderStates(Entity entity, EntityRenderState entityRenderState, float tickCount, CallbackInfo info) {
         ChrysalisEntityRenderState.entity = entity;
     }
+
+    /**
+     * Changes the illumination value of the player's first-person hand depending on the radiance effect.
+     **/
 
     @Inject(method = "getBlockLightLevel", at = @At("RETURN"), cancellable = true)
     private void chrysalis$playerHandRadianceGlowing(Entity entity, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
@@ -57,6 +65,10 @@ public abstract class EntityRendererMixin {
     @Mixin(LivingEntityRenderer.class)
     public static abstract class LivingEntityRendererMixin {
 
+        /**
+         * Allows for the livingEntity field to be accessed from the living entity renderer class.
+         **/
+
         @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("HEAD"))
         private void chrysalis$addLivingEntityRenderStates(LivingEntity livingEntity, LivingEntityRenderState livingEntityRenderState, float tickCount, CallbackInfo info) {
             ChrysalisLivingEntityRenderState.livingEntity = livingEntity;
@@ -67,6 +79,10 @@ public abstract class EntityRendererMixin {
     @Environment(EnvType.CLIENT)
     @Mixin(HumanoidArmorLayer.class)
     public static class HumanoidArmorLayerMixin {
+
+        /**
+         * Hides rendered armor while the entity is under the invisibility 2 effect or higher.
+         **/
 
         @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/HumanoidRenderState;FF)V", at = @At("HEAD"), cancellable = true)
         private void chrysalis$hideRenderedArmor(PoseStack poseStack, MultiBufferSource multiBufferSource, int color, HumanoidRenderState humanoidRenderState, float float1, float float2, CallbackInfo info) {
@@ -79,6 +95,10 @@ public abstract class EntityRendererMixin {
     @Environment(EnvType.CLIENT)
     @Mixin(WingsLayer.class)
     public static class WingsLayerMixin {
+
+        /**
+         * Hides rendered elytra while the entity is under the invisibility 2 effect or higher.
+         **/
 
         @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/HumanoidRenderState;FF)V", at = @At("HEAD"), cancellable = true)
         private void chrysalis$hideRenderedElytra(PoseStack poseStack, MultiBufferSource multiBufferSource, int color, HumanoidRenderState humanoidRenderState, float float1, float float2, CallbackInfo info) {

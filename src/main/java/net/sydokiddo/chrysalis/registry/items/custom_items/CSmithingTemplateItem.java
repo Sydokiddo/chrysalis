@@ -8,7 +8,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SmithingTemplateItem;
 import java.util.List;
 
-@SuppressWarnings("unused")
 public class CSmithingTemplateItem extends SmithingTemplateItem {
 
     public CSmithingTemplateItem(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> baseSlotEmptyIcons, List<ResourceLocation> additionalSlotEmptyIcons, Item.Properties properties) {
@@ -16,7 +15,7 @@ public class CSmithingTemplateItem extends SmithingTemplateItem {
     }
 
     /**
-     * Class for assisting with the creation of custom Smithing Template items.
+     * Class for assisting with the creation of custom smithing template items.
      **/
 
     public static SmithingTemplateItem createUpgradeTemplate(String modID, String smithingTemplateName, ResourceLocation upgradeIcon, Item.Properties properties) {
@@ -41,6 +40,7 @@ public class CSmithingTemplateItem extends SmithingTemplateItem {
         return Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(modID, "smithing_template." + name))).withStyle(chatFormatting);
     }
 
+    @SuppressWarnings("unused")
     public static final ResourceLocation
         EMPTY_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet"),
         EMPTY_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate"),

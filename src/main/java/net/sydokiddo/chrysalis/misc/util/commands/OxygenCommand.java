@@ -13,6 +13,10 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class OxygenCommand {
 
+    /**
+     * A command to configure an entity's oxygen values.
+     **/
+
     private static final String
         targetString = "target",
         oxygenAmountString = "oxygen_amount"

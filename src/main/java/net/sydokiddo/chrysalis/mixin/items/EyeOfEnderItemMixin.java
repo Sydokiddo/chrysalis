@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class EyeOfEnderItemMixin {
 
     /**
-     * Prevents End Portals from activating if the doEndPortalActivating gamerule is set to false.
+     * Prevents end portals from activating if the doEndPortalActivating gamerule is set to false.
      **/
 
     @Inject(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/EndPortalFrameBlock;getOrCreatePortalShape()Lnet/minecraft/world/level/block/state/pattern/BlockPattern;"), cancellable = true)

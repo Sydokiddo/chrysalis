@@ -15,6 +15,10 @@ import net.minecraft.world.phys.Vec3;
 
 public class ExplosionCommand {
 
+    /**
+     * A command to trigger a custom explosion.
+     **/
+
     private static final String
         causingEntityString = "causing_entity",
         noneString = "none",

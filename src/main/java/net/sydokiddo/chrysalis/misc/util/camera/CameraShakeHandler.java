@@ -9,6 +9,10 @@ import net.sydokiddo.chrysalis.Chrysalis;
 @Environment(EnvType.CLIENT)
 public class CameraShakeHandler {
 
+    /**
+     * Handles the camera shaking feature.
+     **/
+
     private static int time = 0;
     private static float strength = 0;
     private static float frequency = 0;

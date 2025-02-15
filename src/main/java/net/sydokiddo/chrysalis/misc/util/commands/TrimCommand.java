@@ -23,6 +23,10 @@ import java.util.Collection;
 
 public class TrimCommand {
 
+    /**
+     * A command to add or remove armor trims from armor items.
+     **/
+
     private static final String
         targetsString = "targets",
         patternString = "pattern",

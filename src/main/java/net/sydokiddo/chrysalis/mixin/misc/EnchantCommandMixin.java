@@ -22,7 +22,7 @@ import java.util.Objects;
 public class EnchantCommandMixin {
 
     /**
-     * Allows for the /enchant command to be able to enchant any item, even if said enchantment cannot normally be applied in Survival Mode.
+     * Allows for the /enchant command to be able to enchant any item, even if said enchantment cannot normally be applied in survival mode.
      **/
 
     @ModifyExpressionValue(method = "enchant", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/Enchantment;canEnchant(Lnet/minecraft/world/item/ItemStack;)Z"))

@@ -15,6 +15,10 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public class CSplashManager extends SplashManager {
 
+    /**
+     * The splash manager for Chrysalis's custom splash text system.
+     **/
+
     public CSplashManager(User user) {
         super(user);
     }

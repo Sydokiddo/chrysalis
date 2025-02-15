@@ -30,6 +30,10 @@ import java.util.Objects;
 
 public class DisenchantCommand {
 
+    /**
+     * A command to remove enchantments from a held item.
+     **/
+
     private static final String
         targetsString = "targets",
         enchantmentString = "enchantment"

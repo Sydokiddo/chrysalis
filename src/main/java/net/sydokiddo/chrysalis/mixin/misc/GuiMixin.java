@@ -29,6 +29,10 @@ public class GuiMixin {
 
     @Shadow @Final private Minecraft minecraft;
 
+    /**
+     * Renders a custom crosshair if the player is holding an item that is an instance of the CustomCrosshairItem interface.
+     **/
+
     @ModifyArg(method = "renderCrosshair", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Ljava/util/function/Function;Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 0))
     private ResourceLocation chrysalis$renderCustomCrosshair(ResourceLocation resourceLocation) {
 
@@ -50,6 +54,10 @@ public class GuiMixin {
 
         @Shadow public abstract PoseStack pose();
         @Shadow public abstract void blitSprite(Function<ResourceLocation, RenderType> function, ResourceLocation resourceLocation, int x, int y, int sizeX, int sizeY);
+
+        /**
+         * Renders a custom waxed icon in the corner of item sprites that are in the waxed_blocks tag.
+         **/
 
         @Inject(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V"))
         private void chrysalis$renderWaxedIcon(Font font, ItemStack itemStack, int offsetX, int offsetY, String string, CallbackInfo info) {

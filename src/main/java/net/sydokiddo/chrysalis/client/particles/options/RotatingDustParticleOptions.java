@@ -19,6 +19,10 @@ import java.awt.*;
 @Environment(EnvType.CLIENT)
 public class RotatingDustParticleOptions extends ScalableParticleOptionsBase implements ParticleCommonMethods {
 
+    /**
+     * The options class for rotating dust particles.
+     **/
+
     public static final MapCodec<RotatingDustParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.colorString, Color.LIGHT_GRAY.getRGB()).forGetter(ParticleCommonMethods::getColor),
         Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor),

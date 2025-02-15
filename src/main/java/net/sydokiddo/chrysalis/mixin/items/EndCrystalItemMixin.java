@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class EndCrystalItemMixin {
 
     /**
-     * End Crystals are now placeable on any blocks in the end_crystal_base_blocks tag.
+     * End crystals are now placeable on any blocks in the end_crystal_base_blocks tag.
      **/
 
     @Redirect(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))

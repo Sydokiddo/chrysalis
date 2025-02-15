@@ -15,7 +15,7 @@ import java.util.List;
 public class CreativeTabHelper {
 
     /**
-     * Assists with adding Instrument items and their variants to any Creative Mode tab.
+     * Assists with adding instrument items and their variants to any creative mode tab.
      **/
 
     public static void addInstrumentItem(ItemLike comparedItem, Item instrument, TagKey<Instrument> tagKey, HolderLookup<Instrument> holderLookup, ResourceKey<CreativeModeTab> creativeModeTab) {
@@ -25,7 +25,7 @@ public class CreativeTabHelper {
     }
 
     /**
-     * Assists with adding each Firework Rocket duration to any Creative Mode tab.
+     * Assists with adding each firework rocket duration to any creative mode tab.
      **/
 
     public static void addFireworkRockets(Item comparedItem, ResourceKey<CreativeModeTab> creativeModeTab) {
@@ -39,7 +39,7 @@ public class CreativeTabHelper {
     }
 
     /**
-     * Assists with adding each Ominous Bottle variant to any Creative Mode tab.
+     * Assists with adding each ominous bottle variant to any creative mode tab.
      **/
 
     private static void addOminousBottles(int maxAmplifierValue, Item comparedItem, ResourceKey<CreativeModeTab> creativeModeTab) {

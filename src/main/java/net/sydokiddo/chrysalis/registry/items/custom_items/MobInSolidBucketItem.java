@@ -14,6 +14,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class MobInSolidBucketItem extends MobInContainerItem {
 
+    /**
+     * The base class for any mob container item that places a block alongside it.
+     **/
+
     private final Block blockType;
 
     public MobInSolidBucketItem(EntityType<? extends Mob> entityType, Block blockType, SoundEvent emptySound, Properties properties) {

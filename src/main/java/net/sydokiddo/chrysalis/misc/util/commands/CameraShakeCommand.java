@@ -13,6 +13,10 @@ import java.util.Collection;
 
 public class CameraShakeCommand {
 
+    /**
+     * A command to trigger a custom camera shake effect.
+     **/
+
     private static final String
         targetsString = "targets",
         resetString = "reset",

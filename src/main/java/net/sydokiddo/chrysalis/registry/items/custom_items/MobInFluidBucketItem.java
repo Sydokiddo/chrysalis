@@ -8,6 +8,10 @@ import net.minecraft.world.level.material.Fluid;
 
 public class MobInFluidBucketItem extends MobBucketItem {
 
+    /**
+     * The base class for any mob container item that places a fluid alongside it.
+     **/
+
     public MobInFluidBucketItem(EntityType<? extends Mob> entityType, Fluid fluidType, SoundEvent emptySound, Properties properties) {
         super(entityType, fluidType, emptySound, properties);
     }

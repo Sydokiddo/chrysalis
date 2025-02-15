@@ -13,6 +13,10 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class HealCommand {
 
+    /**
+     * A command to heal a selected entity.
+     **/
+
     private static final String
         targetString = "target",
         amountString = "amount"

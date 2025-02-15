@@ -8,6 +8,10 @@ import net.sydokiddo.chrysalis.misc.util.helpers.EventHelper;
 
 public interface EncounterMusicMob {
 
+    /**
+     * An interface that can be integrated into any mob class to allow for it to emit custom encounter music.
+     **/
+
     default Holder<SoundEvent> chrysalis$getEncounterMusic() {
         return SoundEvents.MUSIC_DRAGON;
     }

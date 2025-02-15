@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class TNTBlockMixin {
 
     /**
-     * Items that can ignite TNT is now driven by the tnt_igniters tag.
+     * Items that can ignite TNT are now driven by the tnt_igniters tag.
      **/
 
     @Redirect(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))

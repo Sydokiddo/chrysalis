@@ -18,6 +18,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavior {
 
+    /**
+     * Allows for dispensers to shoot any custom projectile.
+     **/
+
     private final EntityType<?> entityType;
     public final SoundEvent shootSound;
 

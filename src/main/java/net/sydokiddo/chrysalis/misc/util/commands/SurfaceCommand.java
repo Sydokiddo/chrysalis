@@ -13,6 +13,10 @@ import java.util.Objects;
 
 public class SurfaceCommand {
 
+    /**
+     * A command to teleport the player to the highest possible solid block position.
+     **/
+
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(Commands.literal("surface").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).executes(SurfaceCommand::teleportPlayerToSurface));
     }

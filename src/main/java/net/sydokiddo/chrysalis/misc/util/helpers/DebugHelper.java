@@ -11,6 +11,10 @@ import net.sydokiddo.chrysalis.Chrysalis;
 @SuppressWarnings("unused")
 public class DebugHelper {
 
+    /**
+     * Various template debug messages that can be sent in the logger.
+     **/
+
     public static void sendEntityDespawnDebugMessage(LivingEntity livingEntity) {
         if (Chrysalis.IS_DEBUG && !livingEntity.level().isClientSide() && !livingEntity.isRemoved()) Chrysalis.LOGGER.info("{} has been removed from the world", livingEntity.getName().getString());
     }

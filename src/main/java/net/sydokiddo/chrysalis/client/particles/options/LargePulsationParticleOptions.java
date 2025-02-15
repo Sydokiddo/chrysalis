@@ -18,6 +18,10 @@ import java.awt.*;
 @Environment(EnvType.CLIENT)
 public class LargePulsationParticleOptions extends SmallPulsationParticleOptions {
 
+    /**
+     * The options class for large pulsation particles.
+     **/
+
     public static final MapCodec<LargePulsationParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.colorString, Color.LIGHT_GRAY.getRGB()).forGetter(ParticleCommonMethods::getColor),
         Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor),

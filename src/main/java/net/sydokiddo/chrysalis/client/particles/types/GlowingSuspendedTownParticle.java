@@ -10,6 +10,10 @@ import net.minecraft.core.particles.SimpleParticleType;
 @Environment(EnvType.CLIENT)
 public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
 
+    /**
+     * An emissive version of the vanilla suspended town particles (the green particles you see from bone-mealing and other things).
+     **/
+
     // region Initialization and Ticking
 
     public GlowingSuspendedTownParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteSet spriteSet, boolean animateTextures) {

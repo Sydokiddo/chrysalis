@@ -13,6 +13,10 @@ import java.util.Objects;
 
 public class ClearSpawnpointCommand {
 
+    /**
+     * A command to clear a player's spawn point.
+     **/
+
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(Commands.literal("clearspawnpoint").requires((commandSourceStack) -> commandSourceStack.hasPermission(2)).executes(ClearSpawnpointCommand::clearSpawnpoint));
     }

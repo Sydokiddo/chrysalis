@@ -21,6 +21,10 @@ import java.awt.*;
 @Environment(EnvType.CLIENT)
 public class DustExplosionParticleOptions extends ScalableParticleOptionsBase implements ParticleCommonMethods {
 
+    /**
+     * The options class for dust explosion particles.
+     **/
+
     public static final MapCodec<DustExplosionParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.startingColorString, Color.LIGHT_GRAY.getRGB()).forGetter(DustExplosionParticleOptions::getStartingColor),
         ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.endingColorString, Color.LIGHT_GRAY.getRGB()).forGetter(DustExplosionParticleOptions::getEndingColor),
