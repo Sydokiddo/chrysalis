@@ -13,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class DolphinMixin {
 
     /**
-     * Items that can be fed to Dolphins is now controlled by the dolphin_food tag rather than the fishes tag.
+     * Items that can be fed to dolphins is now controlled by the dolphin_food tag rather than the fishes tag.
      **/
 
     @Redirect(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/tags/TagKey;)Z"))
     private boolean chrysalis$dolphinFoodTag(ItemStack itemStack, TagKey<Item> tagKey) {
-        return itemStack.is(ChrysalisTags.DOLPHIN_FOOD);
+        return itemStack.is(ChrysalisTags.DOLPHIN_FOODS);
     }
 }

@@ -62,7 +62,7 @@ public abstract class ItemEntityMixin extends Entity {
     }
 
     /**
-     * Any items in the increased_despawn_time tag will set themselves to have an extended lifetime on the first tick.
+     * Any items in the increased_despawn_time tag will set themselves to have an extended lifetime on their first tick.
      **/
 
     @Inject(at = @At("HEAD"), method = "tick")
@@ -81,19 +81,14 @@ public abstract class ItemEntityMixin extends Entity {
     }
 
     /**
-     * Makes various items immune to various damage sources dependent on what tag they are in.
+     * Makes items immune to specific damage sources.
      **/
 
     @Inject(at = @At("HEAD"), method = "hurtServer", cancellable = true)
     private void chrysalis$makeItemsImmune(ServerLevel serverLevel, DamageSource damageSource, float damageAmount, CallbackInfoReturnable<Boolean> cir) {
         if (!this.getItem().isEmpty()) {
             if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) cir.setReturnValue(false);
-            if ((this.getItem().is(ChrysalisTags.IMMUNE_TO_EXPLOSIONS) || !serverLevel.getGameRules().getBoolean(ChrysalisRegistry.RULE_DESTROY_ITEMS_IN_EXPLOSIONS)) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) cir.setReturnValue(false);
+            if (!serverLevel.getGameRules().getBoolean(ChrysalisRegistry.RULE_DESTROY_ITEMS_IN_EXPLOSIONS) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) cir.setReturnValue(false);
         }
-    }
-
-    @Inject(at = @At("HEAD"), method = "fireImmune", cancellable = true)
-    private void chrysalis$makeItemsFireImmune(CallbackInfoReturnable<Boolean> cir) {
-        if (this.getItem().is(ChrysalisTags.IMMUNE_TO_FIRE)) cir.setReturnValue(true);
     }
 }

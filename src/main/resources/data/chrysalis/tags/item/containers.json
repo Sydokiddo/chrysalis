@@ -1,15 +1,9 @@
 {
   "values": [
-    "minecraft:barrel",
-    "minecraft:chest",
-    "minecraft:trapped_chest",
-    "minecraft:ender_chest",
+    "#c:chests",
+    "#c:barrels",
     "minecraft:decorated_pot",
     "#c:shulker_boxes",
-    "#c:barrels",
-    "#c:barrels/wooden",
-    "#c:chests",
-    "#c:chests/wooden",
     "#minecraft:bundles"
   ]
 }

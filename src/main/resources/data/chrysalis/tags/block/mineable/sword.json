@@ -2,8 +2,6 @@
   "values": [
     "#minecraft:sword_efficient",
     "minecraft:cobweb",
-    "minecraft:bamboo_sapling",
-    "minecraft:bamboo",
-    "#c:skulls"
+    {"id": "#minecraft:sword_instantly_mines", "required": false}
   ]
 }

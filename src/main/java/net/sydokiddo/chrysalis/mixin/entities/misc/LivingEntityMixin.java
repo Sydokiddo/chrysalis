@@ -59,9 +59,9 @@ public abstract class LivingEntityMixin extends Entity {
     // region Reworked Mob Visibility
 
     /**
-     * Mobs are now affected by the Blindness status effect, which decreases their visibility percentage depending on the amplifier of the effect.
+     * Mobs are now affected by the blindness status effect, which decreases their visibility percentage depending on the amplifier of the effect.
      * <p>
-     * Additionally, Ender mobs now have reduced visibility of entities wearing anything in their helmet slot that is in the gaze_disguise_equipment tag.
+     * Additionally, ender mobs now have reduced visibility of entities wearing anything in their helmet slot that is in the gaze_disguise_equipment tag.
      **/
 
     @Inject(method = "getVisibilityPercent", at = @At(value = "RETURN"), cancellable = true)
@@ -73,7 +73,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (self.hasEffect(blindness)) {
             cir.setReturnValue(cir.getReturnValue() / (2.0D * (Objects.requireNonNull(self.getEffect(blindness)).getAmplifier() + 1)));
         } else {
-            if (self.getType().is(ChrysalisTags.ENDER) && this.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.GAZE_DISGUISE_EQUIPMENT)) {
+            if (self.getType().is(ChrysalisTags.ENDERS) && this.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.GAZE_DISGUISE_EQUIPMENT)) {
                 cir.setReturnValue(cir.getReturnValue() * 0.5D);
             } else {
                 double reducedDetectionRangeAttribute = this.getAttributeValue(ChrysalisAttributes.REDUCED_DETECTION_RANGE);
@@ -83,7 +83,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     /**
-     * Entities with Invisibility 2 or higher will not cause mobs to detect their armor.
+     * Entities with invisibility 2 or higher will not cause mobs to detect their armor.
      **/
 
     @Inject(method = "getArmorCoverPercentage", at = @At(value = "HEAD"), cancellable = true)

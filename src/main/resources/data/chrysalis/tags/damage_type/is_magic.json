@@ -2,9 +2,9 @@
   "values": [
     "minecraft:magic",
     "minecraft:indirect_magic",
+    "minecraft:thorns",
     "minecraft:wither",
     "minecraft:dragon_breath",
-    "minecraft:thorns",
     "minecraft:sonic_boom"
   ]
 }

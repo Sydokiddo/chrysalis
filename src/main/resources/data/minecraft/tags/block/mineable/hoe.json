@@ -1,21 +1,21 @@
 {
   "replace": false,
   "values": [
+    "minecraft:frogspawn",
+    "minecraft:sea_pickle",
+    "minecraft:honeycomb_block",
+    "minecraft:slime_block",
+    "minecraft:honey_block",
+    "minecraft:resin_block",
+    "minecraft:resin_clump",
     "minecraft:ochre_froglight",
     "minecraft:verdant_froglight",
     "minecraft:pearlescent_froglight",
-    "minecraft:frogspawn",
-    "minecraft:slime_block",
-    "minecraft:honey_block",
-    "minecraft:honeycomb_block",
     "#minecraft:candles",
-    "minecraft:sea_pickle",
+    "minecraft:tnt",
     "minecraft:cake",
     "#minecraft:candle_cakes",
-    "minecraft:tnt",
-    "minecraft:resin_clump",
-    "minecraft:resin_block",
-    {"id": "minecraft:leaf_litter", "required": false},
-    {"id": "minecraft:wildflowers", "required": false}
+    {"id": "minecraft:wildflowers", "required": false},
+    {"id": "minecraft:leaf_litter", "required": false}
   ]
 }

@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class NetherWartBlockMixin {
 
     /**
-     * Nether Warts are now placeable on any blocks in the nether_wart_can_grow_on tag.
+     * Nether warts are now placeable on any blocks in the nether_warts_can_grow_on tag.
      **/
 
     @Inject(method = "mayPlaceOn", at = @At("HEAD"), cancellable = true)
     private void chrysalis$netherWartCanGrowOnTag(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(blockState.is(ChrysalisTags.NETHER_WART_CAN_GROW_ON));
+        cir.setReturnValue(blockState.is(ChrysalisTags.NETHER_WARTS_CAN_GROW_ON));
     }
 }

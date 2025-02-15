@@ -9,191 +9,121 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.sydokiddo.chrysalis.Chrysalis;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 public class ChrysalisTags {
 
-    /**
-     * Item Tags
-     **/
+    // region Item Tags
 
     public static final TagKey<Item>
-
-        // region Chrysalis Items
-
-        DEBUG_UTILITY_ITEMS = registerItemTag("debug_utility_items"),
-        INCREASED_PICK_RADIUS = registerItemTag("increased_pick_radius"),
-
-        // endregion
-
-        // region Common Items
-
         BANNER_PATTERNS = registerItemTag("banner_patterns"),
-        DISC_FRAGMENTS = registerItemTag("disc_fragments"),
-        FILLED_BOTTLES = registerItemTag("filled_bottles"),
-        FILLED_BOWLS = registerItemTag("filled_bowls"),
-        FISH_BUCKETS = registerItemTag("fish_buckets"),
-        INSTRUMENTS = registerItemTag("instruments"),
-        TELEPORTING_FOODS = registerItemTag("teleporting_foods"),
-
-        // endregion
-
-        // region Block Items
-
-        AMETHYST_BLOCK_ITEMS = registerItemTag("amethyst_blocks"),
-        BRUSHABLE_BLOCK_ITEMS = registerItemTag("brushable_blocks"),
-        CAMPFIRE_ITEMS = registerItemTag("campfires"),
+        CAMPFIRES = registerItemTag("campfires"),
+        CHARGES_RESPAWN_ANCHORS = registerItemTag("charges_respawn_anchors"),
         CONTAINER_ITEMS = registerItemTag("containers"),
         COPPER_BLOCK_ITEMS = registerItemTag("copper_blocks"),
         COPPER_GRATE_ITEMS = registerItemTag("copper_grates"),
-        LANTERN_ITEMS = registerItemTag("lanterns"),
-        PRESSURE_PLATE_ITEMS = registerItemTag("pressure_plates"),
-        PRISMARINE_BLOCK_ITEMS = registerItemTag("prismarine_blocks"),
-        PURPUR_ITEMS = registerItemTag("purpur"),
-        SOUL_SAND_ITEMS = registerItemTag("soul_sand"),
-        STONE_PRESSURE_PLATE_ITEMS = registerItemTag("stone_pressure_plates"),
-        TORCH_ITEMS = registerItemTag("torches"),
-        WAXED_BLOCK_ITEMS = registerItemTag("waxed_blocks"),
-        OVERWORLD_ORE_ITEMS = registerItemTag("overworld_ores"),
-        NETHER_ORE_ITEMS = registerItemTag("nether_ores"),
+        DEBUG_UTILITIES = registerItemTag("debug_utilities"),
+        DISC_FRAGMENTS = registerItemTag("disc_fragments"),
+        DOLPHIN_FOODS = registerItemTag("dolphin_foods"),
         END_ORE_ITEMS = registerItemTag("end_ores"),
-
-        // endregion
-
-        // region Interactable Items
-
-        CHARGES_RESPAWN_ANCHORS = registerItemTag("charges_respawn_anchors"),
-        PIGLIN_BARTERING_ITEMS = registerItemTag("piglin_bartering_items"),
-        REPAIRS_IRON_GOLEMS = registerItemTag("repairs_iron_golems"),
-        DOLPHIN_FOOD = registerItemTag("dolphin_food"),
-        TNT_IGNITERS = registerItemTag("tnt_igniters"),
-
-        // endregion
-
-        // region Equipable Items
-
+        FILLED_BOTTLES = registerItemTag("filled_bottles"),
+        FILLED_BOWLS = registerItemTag("filled_bowls"),
+        FISH_BUCKETS = registerItemTag("fish_buckets"),
         HORSE_ARMOR = registerItemTag("horse_armor"),
-        POWDER_SNOW_WALKABLE_ITEMS = registerItemTag("powder_snow_walkable_items"),
-
-        // endregion
-
-        // region Item Entities
-
         IMMUNE_TO_DAMAGE = registerItemTag("immune_to_damage"),
         IMMUNE_TO_DESPAWNING = registerItemTag("immune_to_despawning"),
-        IMMUNE_TO_EXPLOSIONS = registerItemTag("immune_to_explosions"),
-        IMMUNE_TO_FIRE = registerItemTag("immune_to_fire"),
-        INCREASED_DESPAWN_TIME = registerItemTag("increased_despawn_time")
-
-        // endregion
+        INCREASED_DESPAWN_TIME = registerItemTag("increased_despawn_time"),
+        INCREASED_PICK_RADIUS = registerItemTag("increased_pick_radius"),
+        LANTERN_ITEMS = registerItemTag("lanterns"),
+        NETHER_ORE_ITEMS = registerItemTag("nether_ores"),
+        OPEN_FLOWER_ITEMS = registerItemTag("open_flowers"),
+        OVERWORLD_ORE_ITEMS = registerItemTag("overworld_ores"),
+        PIGLIN_BARTERING_ITEMS = registerItemTag("piglin_bartering_items"),
+        POWDER_SNOW_WALKABLE_ITEMS = registerItemTag("powder_snow_walkable_items"),
+        PRESSURE_PLATE_ITEMS = registerItemTag("pressure_plates"),
+        PRISMARINE_BLOCK_ITEMS = registerItemTag("prismarine_blocks"),
+        PURPUR_BLOCK_ITEMS = registerItemTag("purpur_blocks"),
+        REPAIRS_IRON_GOLEMS = registerItemTag("repairs_iron_golems"),
+        SOUL_SAND_ITEMS = registerItemTag("soul_sands"),
+        STONE_PRESSURE_PLATE_ITEMS = registerItemTag("stone_pressure_plates"),
+        TNT_IGNITERS = registerItemTag("tnt_igniters"),
+        TORCH_ITEMS = registerItemTag("torches"),
+        WAXED_BLOCK_ITEMS = registerItemTag("waxed_blocks")
     ;
 
-    /**
-     * Block Tags
-     **/
+    // endregion
+
+    // region Block Tags
 
     public static final TagKey<Block>
-
-        // region Common Blocks
-
-        AMETHYST_BLOCKS = registerBlockTag("amethyst_blocks"),
-        BRUSHABLE_BLOCKS = registerBlockTag("brushable_blocks"),
-        CONTAINERS = registerBlockTag("containers"),
-        COPPER_BLOCKS = registerBlockTag("copper_blocks"),
-        COPPER_GRATES = registerBlockTag("copper_grates"),
-        LANTERNS = registerBlockTag("lanterns"),
-        PRISMARINE_BLOCKS = registerBlockTag("prismarine_blocks"),
-        PURPUR = registerBlockTag("purpur"),
-        SNIFFER_PLANT_CROPS = registerBlockTag("sniffer_plant_crops"),
-        SOUL_SAND = registerBlockTag("soul_sand"),
-        TORCHES = registerBlockTag("torches"),
-        UNBREAKABLE_BLOCKS = registerBlockTag("unbreakable_blocks"),
-        WAXABLE_BLOCKS = registerBlockTag("waxable_blocks"),
-        WAXED_BLOCKS = registerBlockTag("waxed_blocks"),
-
-        // endregion
-
-        // region Technical
-
+        MINEABLE_WITH_SHEARS = registerBlockTag("mineable/shears"),
+        MINEABLE_WITH_SWORDS = registerBlockTag("mineable/sword"),
         ALLOWS_BEACON_BEAM_PASSTHROUGH = registerBlockTag("allows_beacon_beam_passthrough"),
         ALLOWS_USE_WHILE_SNEAKING = registerBlockTag("allows_use_while_sneaking"),
         BASE_STONE_END = registerBlockTag("base_stone_end"),
-        CHORUS_PLANT_CAN_GROW_ON = registerBlockTag("chorus_plant_can_grow_on"),
+        CHORUS_PLANTS_CAN_GROW_ON = registerBlockTag("chorus_plants_can_grow_on"),
+        CONTAINERS = registerBlockTag("containers"),
+        COPPER_BLOCKS = registerBlockTag("copper_blocks"),
+        COPPER_GRATES = registerBlockTag("copper_grates"),
         END_CRYSTAL_BASE_BLOCKS = registerBlockTag("end_crystal_base_blocks"),
-        NETHER_PORTAL_BASE_BLOCKS = registerBlockTag("nether_portal_base_blocks"),
-        NETHER_WART_CAN_GROW_ON = registerBlockTag("nether_wart_can_grow_on"),
-        TURTLE_EGGS_CAN_HATCH_ON = registerBlockTag("turtle_eggs_can_hatch_on"),
-        OVERWORLD_ORES = registerBlockTag("overworld_ores"),
-        NETHER_ORES = registerBlockTag("nether_ores"),
         END_ORES = registerBlockTag("end_ores"),
-
-        // endregion
-
-        // region Mineable Block Tags
-
-        MINEABLE_WITH_SWORD = registerBlockTag("mineable/sword"),
-        MINEABLE_WITH_SHEARS = registerBlockTag("mineable/shears")
-
-        // endregion
+        LANTERNS = registerBlockTag("lanterns"),
+        NETHER_ORES = registerBlockTag("nether_ores"),
+        NETHER_PORTAL_BASE_BLOCKS = registerBlockTag("nether_portal_base_blocks"),
+        NETHER_WARTS_CAN_GROW_ON = registerBlockTag("nether_warts_can_grow_on"),
+        OPEN_FLOWERS = registerBlockTag("open_flowers"),
+        OVERWORLD_ORES = registerBlockTag("overworld_ores"),
+        PRISMARINE_BLOCKS = registerBlockTag("prismarine_blocks"),
+        PURPUR_BLOCKS = registerBlockTag("purpur_blocks"),
+        SNIFFER_PLANT_CROPS = registerBlockTag("sniffer_plant_crops"),
+        SOUL_SANDS = registerBlockTag("soul_sands"),
+        TORCHES = registerBlockTag("torches"),
+        TURTLE_EGGS_CAN_HATCH_ON = registerBlockTag("turtle_eggs_can_hatch_on"),
+        UNBREAKABLE_BLOCKS = registerBlockTag("unbreakable_blocks"),
+        WAXABLE_BLOCKS = registerBlockTag("waxable_blocks"),
+        WAXED_BLOCKS = registerBlockTag("waxed_blocks")
     ;
 
-    /**
-     * Entity Type Tags
-     **/
+    // endregion
+
+    // region Entity Type Tags
 
     public static final TagKey<EntityType<?>>
-
-        // region Living Entities
-
-        ENDER = registerEntityTag("ender"),
-        GOLEM = registerEntityTag("golem"),
-        PIGLIN = registerEntityTag("piglin"),
-        SLIME = registerEntityTag("slime"),
-        VILLAGER = registerEntityTag("villager"),
-        PIGLIN_AVOIDED = registerEntityTag("piglin_avoided"),
-
-        // endregion
-
-        // region Non-Living Entities
-
-        ATTACKABLE_STATIC_ENTITIES = registerEntityTag("attackable_static_entities"),
-        VEHICLE = registerEntityTag("vehicle"),
-
-        // endregion
-
-        // region Technical
-
+        ALWAYS_PLAYS_ENCOUNTER_MUSIC = registerEntityTag("always_plays_encounter_music"),
         CAN_SPAWN_ON_LEAVES = registerEntityTag("can_spawn_on_leaves"),
         CANNOT_RIDE_BOATS = registerEntityTag("cannot_ride_boats"),
-        WARDEN_IGNORED = registerEntityTag("warden_ignored"),
-        STATISTICS_MENU_IGNORED = registerEntityTag("statistics_menu_ignored"),
-        ALWAYS_PLAYS_ENCOUNTER_MUSIC = registerEntityTag("always_plays_encounter_music"),
+        ENDERS = registerEntityTag("enders"),
+        GOLEMS = registerEntityTag("golems"),
         HAS_ARTHROPOD_SIGHT = registerEntityTag("has_arthropod_sight"),
         HAS_CREEPER_SIGHT = registerEntityTag("has_creeper_sight"),
-        HAS_ENDER_SIGHT = registerEntityTag("has_ender_sight")
-
-        // endregion
+        HAS_ENDER_SIGHT = registerEntityTag("has_ender_sight"),
+        NON_LIVING_ATTACKABLES = registerEntityTag("non_living_attackables"),
+        PIGLIN_AVOIDED = registerEntityTag("piglin_avoided"),
+        PIGLINS = registerEntityTag("piglins"),
+        SLIMES = registerEntityTag("slimes"),
+        STATISTICS_MENU_IGNORED = registerEntityTag("statistics_menu_ignored"),
+        VEHICLES = registerEntityTag("vehicles"),
+        VILLAGERS = registerEntityTag("villagers"),
+        WARDEN_IGNORED = registerEntityTag("warden_ignored")
     ;
 
-    /**
-     * Damage Type Tags
-     **/
+    // endregion
+
+    // region Damage Type Tags
 
     public static final TagKey<DamageType>
         IS_MAGIC = registerDamageTypeTag("is_magic"),
         IS_RANGED = registerDamageTypeTag("is_ranged")
     ;
 
-    /**
-     * Biome Tags
-     **/
+    // endregion
+
+    // region Biome Tags
 
     public static final TagKey<Biome>
         WITHOUT_MOB_SPAWNS = registerBiomeTag("without_mob_spawns")
     ;
 
-    /**
-     * Registries
-     **/
+    // endregion
 
     // region Registry
 
@@ -213,6 +143,7 @@ public class ChrysalisTags {
         return TagKey.create(Registries.DAMAGE_TYPE, Chrysalis.id(name));
     }
 
+    @SuppressWarnings("all")
     private static TagKey<Biome> registerBiomeTag(String name) {
         return TagKey.create(Registries.BIOME, Chrysalis.id(name));
     }

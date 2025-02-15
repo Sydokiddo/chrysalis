@@ -4,6 +4,6 @@
     "minecraft:glow_item_frame",
     "minecraft:end_crystal",
     "#minecraft:redirectable_projectile",
-    "#chrysalis:vehicle"
+    "#chrysalis:vehicles"
   ]
 }

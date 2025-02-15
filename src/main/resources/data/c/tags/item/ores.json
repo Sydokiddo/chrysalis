@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#chrysalis:overworld_ores",
+    "#chrysalis:nether_ores",
+    "#chrysalis:end_ores"
+  ]
+}

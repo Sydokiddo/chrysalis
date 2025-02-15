@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#chrysalis:brushable_blocks",
-    "#minecraft:sand",
-    "#chrysalis:soul_sand",
     "minecraft:powder_snow"
   ]
 }
