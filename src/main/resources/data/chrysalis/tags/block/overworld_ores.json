@@ -16,7 +16,7 @@
     "minecraft:deepslate_lapis_ore",
     "minecraft:diamond_ore",
     "minecraft:deepslate_diamond_ore",
-    {"id": "#c/ores_in_ground:stone", "required": false},
-    {"id": "#c/ores_in_ground:deepslate", "required": false}
+    {"id": "#c:ores_in_ground/stone", "required": false},
+    {"id": "#c:ores_in_ground/deepslate", "required": false}
   ]
 }

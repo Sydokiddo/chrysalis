@@ -2,6 +2,7 @@
   "values": [
     "minecraft:nether_gold_ore",
     "minecraft:nether_quartz_ore",
-    "minecraft:ancient_debris"
+    "minecraft:ancient_debris",
+    {"id": "#c:ores_in_ground/netherrack", "required": false}
   ]
 }
