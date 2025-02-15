@@ -44,6 +44,7 @@
     "entities.passive.IronGolemMixin",
     "entities.passive.SnowGolemMixin",
     "entities.passive.VillagerHarvestFarmlandMixin",
+    "items.ArmorStandItemMixin",
     "items.BlockItemMixin",
     "items.BundleItemMixin",
     "items.EndCrystalItemMixin",
