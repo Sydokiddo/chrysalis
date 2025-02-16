@@ -25,7 +25,7 @@ public class LargePulsationParticleOptions extends SmallPulsationParticleOptions
     public static final MapCodec<LargePulsationParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.colorString, Color.LIGHT_GRAY.getRGB()).forGetter(ParticleCommonMethods::getColor),
         Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor),
-        Codec.INT.optionalFieldOf(ParticleCommonMethods.directionString, 0).forGetter(SmallPulsationParticleOptions::getDirection),
+        Codec.INT.optionalFieldOf(ParticleCommonMethods.directionString, 1).forGetter(SmallPulsationParticleOptions::getDirection),
         LIFE_TIME.optionalFieldOf(ParticleCommonMethods.lifeTimeString, 10).forGetter(SmallPulsationParticleOptions::getLifeTime))
     .apply(instance, LargePulsationParticleOptions::new));
 
