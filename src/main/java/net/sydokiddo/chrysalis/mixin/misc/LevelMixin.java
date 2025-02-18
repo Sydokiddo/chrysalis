@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.storage.LevelSummary;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.misc.util.helpers.WorldGenHelper;
+import net.sydokiddo.chrysalis.util.helpers.WorldGenHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

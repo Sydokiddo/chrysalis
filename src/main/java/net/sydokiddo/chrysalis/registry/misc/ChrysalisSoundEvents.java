@@ -17,6 +17,7 @@ public class ChrysalisSoundEvents {
 
     public static final Holder.Reference<SoundEvent> SCREENSHOT_SUCCESS = registerForHolder("ui.screenshot.success");
     public static final Holder.Reference<SoundEvent> SPLASH_TEXT_SHUFFLE = registerForHolder("ui.splash_text.shuffle");
+    public static final Holder.Reference<SoundEvent> ENDERMAN_ENCOUNTER_MUSIC = registerForHolder("music.encounter.enderman");
 
     public static final SoundEvent HEAL_USE = registerSoundEvent("item.heal.use");
     public static final SoundEvent FILL_HUNGER_USE = registerSoundEvent("item.fill_hunger.use");

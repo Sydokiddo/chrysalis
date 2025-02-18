@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.Vec3;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
 import java.util.List;

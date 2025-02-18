@@ -16,7 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import java.util.List;

@@ -15,7 +15,7 @@ import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DamageResistant;
 import net.minecraft.world.level.block.LightBlock;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.misc.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.jetbrains.annotations.Nullable;

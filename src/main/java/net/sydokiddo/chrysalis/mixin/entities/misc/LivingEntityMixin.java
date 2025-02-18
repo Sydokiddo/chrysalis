@@ -58,7 +58,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventLootDropping(ServerLevel serverLevel, DamageSource damageSource, CallbackInfo info) {
-        if (!(this.livingEntity instanceof Player) && damageSource.is(ChrysalisDamageSources.KILL_WAND)) {
+        if (damageSource.is(ChrysalisDamageSources.KILL_WAND) && !(this.livingEntity instanceof Player)) {
             info.cancel();
             this.dropEquipment(serverLevel);
         }

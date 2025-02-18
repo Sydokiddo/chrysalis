@@ -9,7 +9,7 @@ import net.minecraft.client.main.Main;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.misc.util.ClipboardImage;
+import net.sydokiddo.chrysalis.util.technical.ClipboardImage;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

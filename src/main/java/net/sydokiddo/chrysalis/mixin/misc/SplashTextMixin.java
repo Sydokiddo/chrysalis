@@ -9,7 +9,7 @@ import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.misc.util.splash_texts.SplashTextLoader;
+import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;

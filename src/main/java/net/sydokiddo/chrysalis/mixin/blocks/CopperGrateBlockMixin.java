@@ -24,9 +24,7 @@ public class CopperGrateBlockMixin extends Block {
 
     @Inject(at = @At("HEAD"), method = "skipRendering", cancellable = true)
     private void chrysalis$occludeCopperGrateFaces(BlockState blockState, BlockState adjacentBlock, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-
         TagKey<Block> copperGrates = ChrysalisTags.COPPER_GRATES;
-
         if (blockState.is(copperGrates)) cir.setReturnValue(adjacentBlock.is(copperGrates) || super.skipRendering(blockState, adjacentBlock, direction));
     }
 }
