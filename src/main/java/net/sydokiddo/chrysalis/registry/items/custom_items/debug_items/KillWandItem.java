@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -15,6 +16,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
+import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class KillWandItem extends ExtraReachDebugUtilityItem {
@@ -55,6 +57,11 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
         }
 
         return super.hurtEnemy(itemStack, target, self);
+    }
+
+    @Nullable @Override
+    public DamageSource getDamageSource(LivingEntity livingEntity) {
+        return livingEntity.damageSources().source(ChrysalisDamageSources.KILL_WAND);
     }
 
     @Environment(EnvType.CLIENT)

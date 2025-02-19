@@ -23,11 +23,11 @@ public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavio
      **/
 
     private final EntityType<?> entityType;
-    public final SoundEvent shootSound;
+    private final SoundEvent shootingSound;
 
     public ShootProjectileDispenserBehavior(EntityType<?> entityType, SoundEvent shootSound) {
         this.entityType = entityType;
-        this.shootSound = shootSound;
+        this.shootingSound = shootSound;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavio
         assert entity != null;
 
         if (entity instanceof ThrowableItemProjectile throwableItemProjectile) throwableItemProjectile.setItem(itemStack);
-        if (entity instanceof Projectile projectile) projectile.shoot(direction.getStepX(), (float) direction.getStepY() + 0.1F, direction.getStepZ(), 1.1F, 6.0F);
+        if (entity instanceof Projectile projectile) projectile.shoot(direction.getStepX(), direction.getStepY() + 0.1D, direction.getStepZ(), 1.1F, 6.0F);
         entity.setPos(position.x(), position.y(), position.z());
 
         level.addFreshEntity(entity);
@@ -51,7 +51,7 @@ public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavio
 
     @Override
     protected void playSound(BlockSource blockSource) {
-        if (this.shootSound != null) blockSource.level().playSound(null, blockSource.pos(), this.shootSound, SoundSource.BLOCKS, 1.0F, 1.0F);
+        if (this.shootingSound != null) blockSource.level().playSound(null, blockSource.pos(), this.shootingSound, SoundSource.BLOCKS, 1.0F, 1.0F);
         else blockSource.level().levelEvent(1002, blockSource.pos(), 0);
     }
 }

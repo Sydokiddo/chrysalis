@@ -113,7 +113,8 @@ public class ChrysalisTags {
 
     public static final TagKey<DamageType>
         IS_MAGIC = registerDamageTypeTag("is_magic"),
-        IS_RANGED = registerDamageTypeTag("is_ranged")
+        IS_RANGED = registerDamageTypeTag("is_ranged"),
+        DOES_NOT_EXPLODE_END_CRYSTALS = registerDamageTypeTag("does_not_explode_end_crystals")
     ;
 
     // endregion

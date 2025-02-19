@@ -15,9 +15,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.Vec3;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceBlockDispenserBehavior;
+import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceEntityDispenserBehavior;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.ShootProjectileDispenserBehavior;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
@@ -114,6 +117,7 @@ public class ChrysalisExampleRegistry {
 
     public static void registerExampleDispenserMethods() {
         DispenserBlock.registerBehavior(Blocks.SAND.asItem(), new PlaceBlockDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.END_CRYSTAL, new PlaceEntityDispenserBehavior(EntityType.END_CRYSTAL, new Vec3(1.0D, 2.0D, 1.0D), new Vec3(0.5D, 0.0D, 0.5D), ChrysalisTags.END_CRYSTAL_BASE_BLOCKS, SoundEvents.AMETHYST_BLOCK_PLACE));
         DispenserBlock.registerBehavior(Items.BLAZE_POWDER, new ShootProjectileDispenserBehavior(EntityType.SMALL_FIREBALL, SoundEvents.BLAZE_SHOOT));
     }
 

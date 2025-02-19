@@ -29,6 +29,7 @@
     "entities.hostile.WardenMixin",
     "entities.hostile.WitherMixin",
     "entities.misc.AbstractBoatMixin",
+    "entities.misc.EndCrystalMixin",
     "entities.misc.EntityMixin",
     "entities.misc.ItemEntityMixin",
     "entities.misc.LivingEntityMixin",
