@@ -3,16 +3,19 @@ package net.sydokiddo.chrysalis.registry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -22,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
+import net.sydokiddo.chrysalis.util.sounds.BlockSoundTransformer;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.technical.commands.*;
@@ -159,16 +163,19 @@ public class ChrysalisRegistry {
 
     // endregion
 
-    // region Custom Music
+    // region Sounds
 
     public static Map<String, StructureMusicSound> registeredStructures = new HashMap<>();
     public record StructureMusicSound(Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {}
+    public static final ResourceKey<Registry<BlockSoundTransformer>> BLOCK_SOUND_TRANSFORMER = Chrysalis.key("block/sound_group");
 
     // endregion
 
     public static void registerAll() {
 
         // region Base Registries
+
+        ServerWorldEvents.LOAD.register((server, world) -> Chrysalis.registryAccess = server.registryAccess());
 
         ChrysalisDebugItems.registerDebugItems();
         ChrysalisCreativeModeTabs.registerCreativeTabs();
@@ -183,6 +190,8 @@ public class ChrysalisRegistry {
 
         PayloadTypeRegistry.playS2C().register(CameraShakePayload.TYPE, CameraShakePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC);
+
+        DynamicRegistries.register(BLOCK_SOUND_TRANSFORMER, BlockSoundTransformer.CODEC);
 
         // endregion
 

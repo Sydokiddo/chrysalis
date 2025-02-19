@@ -43,7 +43,6 @@ public class ChrysalisSoundEvents {
         return Registry.register(BuiltInRegistries.SOUND_EVENT, resourceLocation, soundEvent);
     }
 
-    @SuppressWarnings("all")
     private static Holder.Reference<SoundEvent> registerForHolder(String name) {
         return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, Chrysalis.id(name), SoundEvent.createVariableRangeEvent(Chrysalis.id(name)));
     }

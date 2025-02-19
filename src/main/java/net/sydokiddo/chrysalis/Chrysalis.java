@@ -3,6 +3,9 @@ package net.sydokiddo.chrysalis;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import org.slf4j.Logger;
@@ -12,6 +15,7 @@ import java.util.Optional;
 public class Chrysalis implements ModInitializer {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger("Chrysalis");
+	public static RegistryAccess registryAccess;
 
 	public static final String
 		MOD_ID = "chrysalis",
@@ -26,6 +30,10 @@ public class Chrysalis implements ModInitializer {
 
 	public static ResourceLocation id(String name) {
 		return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
+	}
+
+	public static <T> ResourceKey<Registry<T>> key(String name) {
+		return ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace(name));
 	}
 
 	private static Optional<ModContainer> getModContainer() {
