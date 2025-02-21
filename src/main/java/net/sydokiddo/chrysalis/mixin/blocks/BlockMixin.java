@@ -15,8 +15,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.util.blocks.BlockPropertyTransformer;
 import net.sydokiddo.chrysalis.util.sounds.BlockSoundTransformer;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -33,20 +35,48 @@ public class BlockMixin {
     @Inject(at = @At("HEAD"), method = "getSoundType", cancellable = true)
     private void chrysalis$blockSoundTransformer(BlockState blockState, CallbackInfoReturnable<SoundType> cir) {
         if (Chrysalis.registryAccess == null) return;
-        Optional<BlockSoundTransformer> registry = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_SOUND_TRANSFORMER).stream().filter(blockSounds -> blockSounds.blocks().contains(blockState.getBlockHolder())).findFirst();
+        Optional<BlockSoundTransformer> registry = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_SOUND_TRANSFORMER).stream().filter(getBlockState -> getBlockState.blocks().contains(blockState.getBlockHolder())).findFirst();
         if (registry.isPresent() && registry.get().blocks().contains(blockState.getBlockHolder())) cir.setReturnValue(registry.get().toSoundType());
     }
 
     @SuppressWarnings("unused")
     @Mixin(BlockBehaviour.BlockStateBase.class)
-    public static class BlockStateBaseMixin {
+    public static abstract class BlockStateBaseMixin {
+
+        @Shadow protected abstract BlockState asState();
+
+        /**
+         * Pulls information from the data-driven block properties system and applies it as the block's properties.
+         **/
+
+        @Inject(at = @At("HEAD"), method = "getDestroySpeed", cancellable = true)
+        private void chrysalis$blockDestroyTimeTransformer(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Float> cir) {
+            if (Chrysalis.registryAccess == null) return;
+            if (this.getBlockPropertyTransformer(this.asState()).isPresent() && this.getBlockPropertyTransformer(this.asState()).get().blocks().contains(this.asState().getBlockHolder())) cir.setReturnValue(this.getBlockPropertyTransformer(this.asState()).get().destroyTime());
+        }
+
+        @Inject(at = @At("HEAD"), method = "requiresCorrectToolForDrops", cancellable = true)
+        private void chrysalis$blockRequiresToolTransformer(CallbackInfoReturnable<Boolean> cir) {
+            if (Chrysalis.registryAccess == null) return;
+            if (this.getBlockPropertyTransformer(this.asState()).isPresent() && this.getBlockPropertyTransformer(this.asState()).get().blocks().contains(this.asState().getBlockHolder())) cir.setReturnValue(this.getBlockPropertyTransformer(this.asState()).get().requiresTool());
+        }
+
+        @Inject(at = @At("HEAD"), method = "getLightEmission", cancellable = true)
+        private void chrysalis$blockLightLevelTransformer(CallbackInfoReturnable<Integer> cir) {
+            if (Chrysalis.registryAccess == null) return;
+            if (this.getBlockPropertyTransformer(this.asState()).isPresent() && this.getBlockPropertyTransformer(this.asState()).get().blocks().contains(this.asState().getBlockHolder())) cir.setReturnValue(this.getBlockPropertyTransformer(this.asState()).get().lightLevel());
+        }
+
+        @Unique
+        private Optional<BlockPropertyTransformer> getBlockPropertyTransformer(BlockState blockState) {
+            return Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_PROPERTY_TRANSFORMER).stream().filter(getBlockState -> getBlockState.blocks().contains(blockState.getBlockHolder())).findFirst();
+        }
 
         /**
          * Fixes fluid hitboxes for any entity that is able to walk on fluids.
          **/
 
-        @Unique
-        private static final VoxelShape[] voxelShapes;
+        @Unique private static final VoxelShape[] voxelShapes;
 
         static {
             voxelShapes = new VoxelShape[16];
@@ -57,15 +87,10 @@ public class BlockMixin {
 
         @Inject(method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", at = @At("RETURN"), cancellable = true)
         private void chrysalis$fixFluidHitboxes(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-
             FluidState fluidState = blockGetter.getFluidState(blockPos);
             int amount = fluidState.getAmount();
-
             if (amount == 0) return;
-
-            if (collisionContext.isAbove(voxelShapes[amount - 1], blockPos, true) && collisionContext.canStandOnFluid(blockGetter.getFluidState(blockPos.above()), fluidState)) {
-                cir.setReturnValue(Shapes.or(cir.getReturnValue(), voxelShapes[amount]));
-            }
+            if (collisionContext.isAbove(voxelShapes[amount - 1], blockPos, true) && collisionContext.canStandOnFluid(blockGetter.getFluidState(blockPos.above()), fluidState)) cir.setReturnValue(Shapes.or(cir.getReturnValue(), voxelShapes[amount]));
         }
     }
 

@@ -25,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
+import net.sydokiddo.chrysalis.util.blocks.BlockPropertyTransformer;
 import net.sydokiddo.chrysalis.util.sounds.BlockSoundTransformer;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
@@ -163,10 +164,16 @@ public class ChrysalisRegistry {
 
     // endregion
 
-    // region Sounds
+    // region Custom Music
 
     public static Map<String, StructureMusicSound> registeredStructures = new HashMap<>();
     public record StructureMusicSound(Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {}
+
+    // endregion
+
+    // region Data Driven Features
+
+    public static final ResourceKey<Registry<BlockPropertyTransformer>> BLOCK_PROPERTY_TRANSFORMER = Chrysalis.key("block/properties");
     public static final ResourceKey<Registry<BlockSoundTransformer>> BLOCK_SOUND_TRANSFORMER = Chrysalis.key("block/sound_group");
 
     // endregion
@@ -191,6 +198,7 @@ public class ChrysalisRegistry {
         PayloadTypeRegistry.playS2C().register(CameraShakePayload.TYPE, CameraShakePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC);
 
+        DynamicRegistries.register(BLOCK_PROPERTY_TRANSFORMER, BlockPropertyTransformer.CODEC);
         DynamicRegistries.register(BLOCK_SOUND_TRANSFORMER, BlockSoundTransformer.CODEC);
 
         // endregion

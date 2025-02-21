@@ -1,0 +1,6 @@
+{
+  "blocks": "#minecraft:wool",
+  "destroy_time": 0.8,
+  "requires_tool": false,
+  "light_level": 0
+}

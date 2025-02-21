@@ -1,0 +1,6 @@
+{
+  "blocks": "minecraft:stone",
+  "destroy_time": 1.5,
+  "requires_tool": true,
+  "light_level": 0
+}
