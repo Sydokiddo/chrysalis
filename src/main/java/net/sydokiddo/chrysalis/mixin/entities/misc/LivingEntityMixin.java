@@ -2,7 +2,6 @@ package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,10 +12,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects.MobSightEffect;
+import net.sydokiddo.chrysalis.util.entities.EntityDetectionRangeTransformer;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
@@ -24,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -69,7 +71,7 @@ public abstract class LivingEntityMixin extends Entity {
     /**
      * Mobs are now affected by the blindness status effect, which decreases their visibility percentage depending on the amplifier of the effect.
      * <p>
-     * Additionally, ender mobs now have reduced visibility of entities wearing anything in their helmet slot that is in the gaze_disguise_equipment tag.
+     * Additionally, mobs can have reduced visibility of any entity wearing a specific item in a specified slot, registered through a datapack.
      **/
 
     @Inject(method = "getVisibilityPercent", at = @At(value = "RETURN"), cancellable = true)
@@ -81,8 +83,12 @@ public abstract class LivingEntityMixin extends Entity {
         if (self.hasEffect(blindness)) {
             cir.setReturnValue(cir.getReturnValue() / (2.0D * (Objects.requireNonNull(self.getEffect(blindness)).getAmplifier() + 1)));
         } else {
-            if (self.getType().is(ChrysalisTags.ENDERS) && this.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.GAZE_DISGUISE_EQUIPMENT)) {
-                cir.setReturnValue(cir.getReturnValue() * 0.5D);
+
+            if (Chrysalis.registryAccess == null) return;
+            Optional<EntityDetectionRangeTransformer> registry = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.ENTITY_DETECTION_RANGE_TRANSFORMER).stream().findFirst();
+
+            if (registry.isPresent() && self.getType().is(registry.get().entities()) && this.getItemBySlot(EquipmentSlot.byName(registry.get().equipmentSlot())).is(registry.get().items())) {
+                cir.setReturnValue(cir.getReturnValue() * registry.get().detectionPercentage());
             } else {
                 double reducedDetectionRangeAttribute = this.getAttributeValue(ChrysalisAttributes.REDUCED_DETECTION_RANGE);
                 if (reducedDetectionRangeAttribute > 0.0D) cir.setReturnValue(cir.getReturnValue() * (1.0D - reducedDetectionRangeAttribute));

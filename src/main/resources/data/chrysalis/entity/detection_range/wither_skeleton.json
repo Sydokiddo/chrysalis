@@ -1,0 +1,6 @@
+{
+  "items": "minecraft:wither_skeleton_skull",
+  "equipment_slot": "head",
+  "entities": "minecraft:wither_skeleton",
+  "detection_percentage": 0.5
+}

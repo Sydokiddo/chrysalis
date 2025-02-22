@@ -26,6 +26,7 @@ import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
 import net.sydokiddo.chrysalis.util.blocks.BlockPropertyTransformer;
+import net.sydokiddo.chrysalis.util.entities.EntityDetectionRangeTransformer;
 import net.sydokiddo.chrysalis.util.sounds.BlockSoundTransformer;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
@@ -175,6 +176,7 @@ public class ChrysalisRegistry {
 
     public static final ResourceKey<Registry<BlockPropertyTransformer>> BLOCK_PROPERTY_TRANSFORMER = Chrysalis.key("block/properties");
     public static final ResourceKey<Registry<BlockSoundTransformer>> BLOCK_SOUND_TRANSFORMER = Chrysalis.key("block/sound_group");
+    public static final ResourceKey<Registry<EntityDetectionRangeTransformer>> ENTITY_DETECTION_RANGE_TRANSFORMER = Chrysalis.key("entity/detection_range");
 
     // endregion
 
@@ -200,6 +202,7 @@ public class ChrysalisRegistry {
 
         DynamicRegistries.register(BLOCK_PROPERTY_TRANSFORMER, BlockPropertyTransformer.CODEC);
         DynamicRegistries.register(BLOCK_SOUND_TRANSFORMER, BlockSoundTransformer.CODEC);
+        DynamicRegistries.register(ENTITY_DETECTION_RANGE_TRANSFORMER, EntityDetectionRangeTransformer.CODEC);
 
         // endregion
 
