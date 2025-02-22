@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -44,6 +45,13 @@ public class BlockMixin {
     public static abstract class BlockStateBaseMixin {
 
         @Shadow protected abstract BlockState asState();
+
+        @Inject(at = @At("HEAD"), method = "instrument", cancellable = true)
+        private void chrysalis$blockNoteBlockInstrumentTransformer(CallbackInfoReturnable<NoteBlockInstrument> cir) {
+            if (Chrysalis.registryAccess == null) return;
+            Optional<BlockSoundTransformer> registry = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_SOUND_TRANSFORMER).stream().filter(getBlockState -> getBlockState.blocks().contains(this.asState().getBlockHolder())).findFirst();
+            if (registry.isPresent() && registry.get().blocks().contains(this.asState().getBlockHolder())) cir.setReturnValue(BlockSoundTransformer.getNoteBlockInstrument(registry.get().noteBlockInstrument()));
+        }
 
         /**
          * Pulls information from the data-driven block properties system and applies it as the block's properties.

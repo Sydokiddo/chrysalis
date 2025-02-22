@@ -6,5 +6,6 @@
   "hit_sound": "minecraft:block.stone.hit",
   "fall_sound": "minecraft:block.stone.fall",
   "volume": 1.0,
-  "pitch": 1.0
+  "pitch": 1.0,
+  "note_block_instrument": "basedrum"
 }
