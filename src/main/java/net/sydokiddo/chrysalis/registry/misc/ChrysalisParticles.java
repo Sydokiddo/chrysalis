@@ -17,14 +17,14 @@ import net.minecraft.network.codec.StreamCodec;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.types.*;
 import net.sydokiddo.chrysalis.client.particles.options.*;
-import net.sydokiddo.chrysalis.util.CoreRegistry;
+import net.sydokiddo.chrysalis.util.ChrysalisCoreRegistry;
 import net.sydokiddo.chrysalis.mixin.util.SimpleParticleTypeAccessor;
 import org.jetbrains.annotations.NotNull;
 import java.util.function.Function;
 
 public class ChrysalisParticles {
 
-    public static final net.sydokiddo.chrysalis.util.CoreRegistry<ParticleType<?>> PARTICLES = CoreRegistry.create(Registries.PARTICLE_TYPE, Chrysalis.MOD_ID);
+    public static final ChrysalisCoreRegistry<ParticleType<?>> PARTICLES = ChrysalisCoreRegistry.create(Registries.PARTICLE_TYPE, Chrysalis.MOD_ID);
 
     // region Particles
 

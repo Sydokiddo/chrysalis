@@ -65,6 +65,7 @@
     "misc.EnchantCommandMixin",
     "misc.LevelMixin",
     "misc.LevelMixin$SnowFixMixin",
+    "misc.WeavingMobEffectMixin",
     "util.SimpleParticleTypeAccessor",
     "util.WoodTypeAccessor"
   ],

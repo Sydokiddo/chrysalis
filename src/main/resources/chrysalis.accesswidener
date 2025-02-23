@@ -1,6 +1,7 @@
-accessWidener   v1  named
+accessWidener v1 named
 
 accessible field net/minecraft/world/entity/player/Inventory compartments Ljava/util/List;
 accessible field net/minecraft/client/sounds/MusicManager nextSongDelay I
 accessible method net/minecraft/commands/arguments/ResourceKeyArgument resolveKey (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;Lnet/minecraft/resources/ResourceKey;Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;)Lnet/minecraft/core/Holder$Reference;
 accessible method net/minecraft/world/entity/monster/warden/Warden isDiggingOrEmerging ()Z
+accessible class net/minecraft/world/effect/WeavingMobEffect

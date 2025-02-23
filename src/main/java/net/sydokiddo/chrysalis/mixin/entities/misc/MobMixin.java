@@ -27,7 +27,7 @@ public abstract class MobMixin extends LivingEntity {
         super(entityType, level);
     }
 
-    @Unique Mob mob = (Mob) (Object) this;
+    @Unique private Mob mob = (Mob) (Object) this;
     @Shadow @Nullable public abstract LivingEntity getTarget();
 
     /**

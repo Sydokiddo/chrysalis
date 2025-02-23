@@ -42,7 +42,7 @@ public abstract class PlayerMixin extends LivingEntity {
         super(entityType, level);
     }
 
-    @Unique Player player = (Player) (Object) this;
+    @Unique private Player player = (Player) (Object) this;
     @Unique private final String encounteredMobUuidTag = "encountered_mob_uuid";
 
     /**

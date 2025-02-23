@@ -5,7 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-public class CoreRegistry<T> {
+public class ChrysalisCoreRegistry<T> {
 
     /**
      * Custom core registry created by ItsBlackGear (<a href="https://github.com/ItsBlackGear">...</a>)
@@ -18,15 +18,15 @@ public class CoreRegistry<T> {
     private boolean isPresent;
 
     @SuppressWarnings("unchecked, rawtypes")
-    public CoreRegistry(ResourceKey<Registry<T>> key, String modId) {
+    public ChrysalisCoreRegistry(ResourceKey<Registry<T>> key, String modId) {
         this.key = key;
         this.modId = modId;
         this.isPresent = false;
         this.registry = BuiltInRegistries.REGISTRY.getValue((ResourceKey) key);
     }
 
-    public static <T> CoreRegistry<T> create(ResourceKey<Registry<T>> key, String modId) {
-        return new CoreRegistry<>(key, modId);
+    public static <T> ChrysalisCoreRegistry<T> create(ResourceKey<Registry<T>> key, String modId) {
+        return new ChrysalisCoreRegistry<>(key, modId);
     }
 
     public <E extends T> E register(String key, E entry) {

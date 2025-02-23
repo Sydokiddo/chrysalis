@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.util.CoreRegistry;
+import net.sydokiddo.chrysalis.util.ChrysalisCoreRegistry;
 import java.util.Optional;
 
 @SuppressWarnings("all")
@@ -17,7 +17,7 @@ public class ChrysalisMemoryModules {
      * Template memory modules that can be used for mobs.
      **/
 
-    public static final net.sydokiddo.chrysalis.util.CoreRegistry<MemoryModuleType<?>> MEMORY_MODULES = CoreRegistry.create(Registries.MEMORY_MODULE_TYPE, Chrysalis.MOD_ID);
+    public static final ChrysalisCoreRegistry<MemoryModuleType<?>> MEMORY_MODULES = ChrysalisCoreRegistry.create(Registries.MEMORY_MODULE_TYPE, Chrysalis.MOD_ID);
 
     public static final MemoryModuleType<LivingEntity> NEAREST_VISIBLE_AVOIDABLE_ENTITY = registerMemoryModuleWithoutCodec("nearest_visible_avoidable_entity");
 
