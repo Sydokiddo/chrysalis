@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 import java.util.Objects;
 
 public class CoordinatesCommand {
@@ -51,11 +52,11 @@ public class CoordinatesCommand {
             x = x * 8;
             z = z * 8;
         } else {
-            serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.commands.coordinates.convert.fail", serverPlayer.getDisplayName()).withStyle(ChatFormatting.RED));
+            CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.commands.coordinates.convert.fail", serverPlayer.getDisplayName()).withStyle(ChatFormatting.RED));
             return 0;
         }
 
-        serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.commands.coordinates.convert.success", ItemHelper.getDimensionComponent(dimensionString).getString(), Component.translatable("gui.chrysalis.coordinates", x, y, z).getString()));
+        CommandCommonMethods.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.commands.coordinates.convert.success", ItemHelper.getDimensionComponent(dimensionString).getString(), Component.translatable("gui.chrysalis.coordinates", x, y, z).getString()));
         return 1;
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 import java.util.Objects;
 
 public class ClearSpawnpointCommand {
@@ -32,9 +33,9 @@ public class ClearSpawnpointCommand {
 
             if (serverPlayer.getRespawnPosition() != null) {
                 serverPlayer.setRespawnPosition(Level.OVERWORLD, null, 0.0F, false, false);
-                serverPlayer.sendSystemMessage(successText);
+                CommandCommonMethods.sendFeedbackMessage(true, serverPlayer, successText);
             } else {
-                serverPlayer.sendSystemMessage(failText);
+                CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, failText);
             }
         }
 

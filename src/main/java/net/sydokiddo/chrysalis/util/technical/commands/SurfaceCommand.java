@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 import java.util.Objects;
 
 public class SurfaceCommand {
@@ -37,9 +38,9 @@ public class SurfaceCommand {
 
         if (highestYValue > y && !serverPlayer.level().getBlockState(new BlockPos(x, highestYValue, z).below()).isAir()) {
             serverPlayer.teleportTo(playerPos.getX(), highestYValue, playerPos.getZ());
-            serverPlayer.sendSystemMessage(successText);
+            CommandCommonMethods.sendFeedbackMessage(true, serverPlayer, successText);
         } else {
-            serverPlayer.sendSystemMessage(failText);
+            CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, failText);
         }
 
         return 1;

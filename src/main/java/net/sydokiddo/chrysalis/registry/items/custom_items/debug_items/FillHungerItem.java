@@ -55,7 +55,7 @@ public class FillHungerItem extends DebugUtilityItem {
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.getFoodData().setFoodLevel(20);
                 serverPlayer.getFoodData().setSaturation(5.0F);
-                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.fill_hunger.message", serverPlayer.getName().getString()));
+                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.fill_hunger.message", serverPlayer.getName().getString()));
             }
 
             return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));

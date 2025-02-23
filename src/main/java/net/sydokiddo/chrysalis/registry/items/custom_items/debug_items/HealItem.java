@@ -52,7 +52,7 @@ public class HealItem extends DebugUtilityItem {
 
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.setHealth(serverPlayer.getMaxHealth());
-                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.heal.message", serverPlayer.getName().getString()));
+                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.heal.message", serverPlayer.getName().getString()));
             }
 
             return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));

@@ -52,7 +52,7 @@ public class ClearEffectsItem extends DebugUtilityItem {
 
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.removeAllEffects();
-                serverPlayer.sendSystemMessage(Component.translatable("commands.effect.clear.everything.success.single", serverPlayer.getName().getString()));
+                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("commands.effect.clear.everything.success.single", serverPlayer.getName().getString()));
             }
 
             return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));

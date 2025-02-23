@@ -6,6 +6,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.items.custom_items.EnchantedGlintItem;
 import java.util.List;
 
@@ -49,5 +51,10 @@ public class DebugUtilityItem extends EnchantedGlintItem {
             double random = serverLevel.getRandom().nextGaussian() * 0.02D;
             serverLevel.sendParticles(particleType, entity.getRandomX(range), entity.getRandomY() + 0.5D, entity.getRandomZ(range), 1, 0.0D, random, random, random);
         }
+    }
+
+    public static void sendFeedbackMessage(boolean requiresGameRule, ServerPlayer serverPlayer, Component message) {
+        if (requiresGameRule && !serverPlayer.serverLevel().getGameRules().getBoolean(ChrysalisRegistry.RULE_SEND_DEBUG_UTILITY_FEEDBACK)) return;
+        serverPlayer.sendSystemMessage(message);
     }
 }

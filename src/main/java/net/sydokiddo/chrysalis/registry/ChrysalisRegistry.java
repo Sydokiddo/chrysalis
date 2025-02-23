@@ -103,6 +103,12 @@ public class ChrysalisRegistry {
         GameRules.Category.DROPS,
         GameRuleFactory.createBooleanRule(true)
     );
+    public static GameRules.Key<GameRules.BooleanValue> RULE_SEND_DEBUG_UTILITY_FEEDBACK =
+        GameRuleRegistry.register(
+        "sendDebugUtilityFeedback",
+        GameRules.Category.CHAT,
+        GameRuleFactory.createBooleanRule(true)
+    );
 
     // endregion
 

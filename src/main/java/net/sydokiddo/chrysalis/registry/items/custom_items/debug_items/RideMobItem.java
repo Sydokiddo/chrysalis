@@ -50,8 +50,7 @@ public class RideMobItem extends DebugUtilityItem {
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.RIDE_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
-
-                serverPlayer.sendSystemMessage(Component.translatable("commands.ride.mount.success", serverPlayer.getName().getString(), livingEntity.getName().getString()));
+                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("commands.ride.mount.success", serverPlayer.getName().getString(), livingEntity.getName().getString()));
             }
 
             return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));

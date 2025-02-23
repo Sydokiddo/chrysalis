@@ -312,6 +312,8 @@
   "gamerule.bedsExplode.description": "Beds will explode when used in any dimension outside of the Overworld.",
   "gamerule.respawnAnchorsExplode": "Respawn Anchors explode",
   "gamerule.respawnAnchorsExplode.description": "Respawn Anchors will explode when used in any dimension outside of the Nether.",
+  "gamerule.sendDebugUtilityFeedback": "Send debug utility feedback",
+  "gamerule.sendDebugUtilityFeedback.description": "Debug utility items will display a message in the chat when used.",
 
   "gui.chrysalis.block.bed.invalid_dimension": "You cannot sleep in this dimension",
   "gui.chrysalis.block.generic_respawn_block.invalid_dimension": "You cannot set your spawn point using this block in this dimension",

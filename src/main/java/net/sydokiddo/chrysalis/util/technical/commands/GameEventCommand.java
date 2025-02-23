@@ -15,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 
 public class GameEventCommand {
 
@@ -42,7 +43,7 @@ public class GameEventCommand {
 
     private static int playGameEvent(CommandSourceStack commandSourceStack, Entity causingEntity, Holder<GameEvent> gameEvent, Vec3 position) {
         commandSourceStack.getLevel().gameEvent(causingEntity, gameEvent, position);
-        if (commandSourceStack.getPlayer() != null) commandSourceStack.getPlayer().sendSystemMessage(Component.translatable("gui.chrysalis.commands.game_event.success", gameEvent.getRegisteredName(), causingEntity.getDisplayName()));
+        if (commandSourceStack.getPlayer() != null) CommandCommonMethods.sendFeedbackMessage(true, commandSourceStack.getPlayer(), Component.translatable("gui.chrysalis.commands.game_event.success", gameEvent.getRegisteredName(), causingEntity.getDisplayName()));
         return 1;
     }
 }

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 
 public class ExplosionCommand {
 
@@ -64,7 +65,7 @@ public class ExplosionCommand {
         }
 
         commandSourceStack.getLevel().explode(causingEntity, Explosion.getDefaultDamageSource(commandSourceStack.getLevel(), causingEntity), null, position.x(), position.y(), position.z(), power, createsFire, explosionInteraction);
-        if (commandSourceStack.getPlayer() != null) commandSourceStack.getPlayer().sendSystemMessage(successText);
+        if (commandSourceStack.getPlayer() != null) CommandCommonMethods.sendFeedbackMessage(true, commandSourceStack.getPlayer(), successText);
         return 1;
     }
 }

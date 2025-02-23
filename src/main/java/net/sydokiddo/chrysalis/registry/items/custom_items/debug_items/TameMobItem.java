@@ -81,6 +81,6 @@ public class TameMobItem extends DebugUtilityItem {
             }
         }
 
-        serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.tame_mob.message", tamedMob.getName().getString()));
+        DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.tame_mob.message", tamedMob.getName().getString()));
     }
 }

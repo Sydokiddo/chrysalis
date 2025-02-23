@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -57,12 +58,12 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
                 level.broadcastEntityEvent(serverPlayer, (byte) 46); // Teleporting Particles
 
                 serverPlayer.playNotifySound(SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
-                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint.message.success"));
+                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.teleport_to_spawnpoint.message.success"));
                 serverPlayer.getCooldowns().addCooldown(itemStack, 60);
 
             } else {
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.TELEPORT_TO_SPAWNPOINT_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
-                serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.teleport_to_spawnpoint.message.fail"));
+                DebugUtilityItem.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.teleport_to_spawnpoint.message.fail").withStyle(ChatFormatting.RED));
             }
         }
 

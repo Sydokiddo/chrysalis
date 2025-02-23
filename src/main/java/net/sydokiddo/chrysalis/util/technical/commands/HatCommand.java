@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.equipment.Equippable;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 import java.util.Objects;
 
 public class HatCommand {
@@ -39,9 +40,9 @@ public class HatCommand {
         Component failInvalidItemText = Component.translatable("gui.chrysalis.commands.hat.fail.invalid_item", heldItem.getDisplayName(), serverPlayer.getDisplayName()).withStyle(ChatFormatting.RED);
 
         if (heldItem.isEmpty()) {
-            serverPlayer.sendSystemMessage(failNoItemText);
+            CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, failNoItemText);
         } else if (ItemHelper.getEnchantmentLevel(heldItem, Enchantments.BINDING_CURSE) > 0) {
-            serverPlayer.sendSystemMessage(failInvalidItemText);
+            CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, failInvalidItemText);
         } else {
 
             if (!serverPlayer.level().isClientSide() && !serverPlayer.isSpectator() && !serverPlayer.isSilent()) {
@@ -63,7 +64,7 @@ public class HatCommand {
 
             if (!currentHeadItem.isEmpty()) serverPlayer.setItemSlot(EquipmentSlot.MAINHAND, currentHeadItem.copyAndClear());
             serverPlayer.setItemSlot(EquipmentSlot.HEAD, heldItem.copyAndClear());
-            serverPlayer.sendSystemMessage(successText);
+            CommandCommonMethods.sendFeedbackMessage(true, serverPlayer, successText);
         }
 
         return 1;

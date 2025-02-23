@@ -57,7 +57,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
             Holder<MobEffect> resistance = MobEffects.DAMAGE_RESISTANCE;
             serverPlayer.addEffect(new MobEffectInstance(resistance, -1, 255, false, false, true));
-            serverPlayer.sendSystemMessage(Component.translatable("commands.effect.give.success.single", resistance.value().getDisplayName(), serverPlayer.getName().getString()));
+            DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("commands.effect.give.success.single", resistance.value().getDisplayName(), serverPlayer.getName().getString()));
         }
 
         return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
