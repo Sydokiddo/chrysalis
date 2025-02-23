@@ -16,8 +16,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
-import net.sydokiddo.chrysalis.util.blocks.BlockPropertyTransformer;
-import net.sydokiddo.chrysalis.util.sounds.BlockSoundTransformer;
+import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyTransformer;
+import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundTransformer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -45,6 +45,10 @@ public class BlockMixin {
     public static abstract class BlockStateBaseMixin {
 
         @Shadow protected abstract BlockState asState();
+
+        /**
+         * Pulls the specified note block instrument from the json file and applies it as the block's note block instrument.
+         **/
 
         @Inject(at = @At("HEAD"), method = "instrument", cancellable = true)
         private void chrysalis$blockNoteBlockInstrumentTransformer(CallbackInfoReturnable<NoteBlockInstrument> cir) {

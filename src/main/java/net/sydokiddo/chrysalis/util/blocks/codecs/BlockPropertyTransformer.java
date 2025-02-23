@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.util.blocks;
+package net.sydokiddo.chrysalis.util.blocks.codecs;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

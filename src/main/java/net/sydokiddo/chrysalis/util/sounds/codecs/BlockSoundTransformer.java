@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.util.sounds;
+package net.sydokiddo.chrysalis.util.sounds.codecs;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

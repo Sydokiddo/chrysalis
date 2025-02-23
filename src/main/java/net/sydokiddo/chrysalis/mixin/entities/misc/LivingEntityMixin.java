@@ -17,7 +17,7 @@ import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
 import net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects.MobSightEffect;
-import net.sydokiddo.chrysalis.util.entities.EntityDetectionRangeTransformer;
+import net.sydokiddo.chrysalis.util.entities.codecs.EntityDetectionRangeTransformer;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
