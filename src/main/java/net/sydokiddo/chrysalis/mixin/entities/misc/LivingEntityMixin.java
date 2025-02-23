@@ -71,7 +71,7 @@ public abstract class LivingEntityMixin extends Entity {
     /**
      * Mobs are now affected by the blindness status effect, which decreases their visibility percentage depending on the amplifier of the effect.
      * <p>
-     * Additionally, mobs can have reduced visibility of any entity wearing a specific item in a specified slot, registered through a datapack.
+     * Additionally, mobs can have reduced visibility of any entity wearing a specific item in a specified slot, registered through a data pack.
      **/
 
     @Inject(method = "getVisibilityPercent", at = @At(value = "RETURN"), cancellable = true)

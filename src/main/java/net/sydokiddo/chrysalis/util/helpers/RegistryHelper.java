@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.util.helpers;
 import com.google.common.collect.Sets;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -16,10 +17,35 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 
 @SuppressWarnings("unused")
 public class RegistryHelper {
+
+    // region Data Pack Registry
+
+    /**
+     * Registry methods for various custom data types for data packs.
+     **/
+
+    public static <T> ResourceKey<? extends Registry<T>> registerBlockDataType(String string) {
+        return Chrysalis.key("block/" + string);
+    }
+
+    public static <T> ResourceKey<? extends Registry<T>> registerItemDataType(String string) {
+        return Chrysalis.key("item/" + string);
+    }
+
+    public static <T> ResourceKey<? extends Registry<T>> registerEntityDataType(String string) {
+        return Chrysalis.key("entity/" + string);
+    }
+
+    public static <T> ResourceKey<? extends Registry<T>> registerMobVariantDataType(String string) {
+        return registerEntityDataType("mob_variant/" + string);
+    }
+
+    // endregion
 
     // region Music Registry
 

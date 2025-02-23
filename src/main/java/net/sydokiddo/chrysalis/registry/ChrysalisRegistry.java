@@ -27,6 +27,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.entities.codecs.EntityDetectionRangeData;
+import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
@@ -174,9 +175,9 @@ public class ChrysalisRegistry {
 
     // region Data Driven Features
 
-    public static final ResourceKey<Registry<BlockPropertyData>> BLOCK_PROPERTY_DATA = Chrysalis.key("block/properties");
-    public static final ResourceKey<Registry<BlockSoundData>> BLOCK_SOUND_DATA = Chrysalis.key("block/sound_group");
-    public static final ResourceKey<Registry<EntityDetectionRangeData>> ENTITY_DETECTION_RANGE_DATA = Chrysalis.key("entity/detection_range");
+    public static final ResourceKey<? extends Registry<BlockPropertyData>> BLOCK_PROPERTY_DATA = RegistryHelper.registerBlockDataType("properties");
+    public static final ResourceKey<? extends Registry<BlockSoundData>> BLOCK_SOUND_DATA = RegistryHelper.registerBlockDataType("sound_group");
+    public static final ResourceKey<? extends Registry<EntityDetectionRangeData>> ENTITY_DETECTION_RANGE_DATA = RegistryHelper.registerEntityDataType("detection_range");
 
     // endregion
 
