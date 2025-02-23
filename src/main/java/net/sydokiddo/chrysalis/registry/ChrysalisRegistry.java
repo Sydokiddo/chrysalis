@@ -25,9 +25,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
-import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyTransformer;
-import net.sydokiddo.chrysalis.util.entities.codecs.EntityDetectionRangeTransformer;
-import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundTransformer;
+import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
+import net.sydokiddo.chrysalis.util.entities.codecs.EntityDetectionRangeData;
+import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.technical.commands.*;
@@ -174,9 +174,9 @@ public class ChrysalisRegistry {
 
     // region Data Driven Features
 
-    public static final ResourceKey<Registry<BlockPropertyTransformer>> BLOCK_PROPERTY_TRANSFORMER = Chrysalis.key("block/properties");
-    public static final ResourceKey<Registry<BlockSoundTransformer>> BLOCK_SOUND_TRANSFORMER = Chrysalis.key("block/sound_group");
-    public static final ResourceKey<Registry<EntityDetectionRangeTransformer>> ENTITY_DETECTION_RANGE_TRANSFORMER = Chrysalis.key("entity/detection_range");
+    public static final ResourceKey<Registry<BlockPropertyData>> BLOCK_PROPERTY_DATA = Chrysalis.key("block/properties");
+    public static final ResourceKey<Registry<BlockSoundData>> BLOCK_SOUND_DATA = Chrysalis.key("block/sound_group");
+    public static final ResourceKey<Registry<EntityDetectionRangeData>> ENTITY_DETECTION_RANGE_DATA = Chrysalis.key("entity/detection_range");
 
     // endregion
 
@@ -200,9 +200,9 @@ public class ChrysalisRegistry {
         PayloadTypeRegistry.playS2C().register(CameraShakePayload.TYPE, CameraShakePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC);
 
-        DynamicRegistries.register(BLOCK_PROPERTY_TRANSFORMER, BlockPropertyTransformer.CODEC);
-        DynamicRegistries.register(BLOCK_SOUND_TRANSFORMER, BlockSoundTransformer.CODEC);
-        DynamicRegistries.register(ENTITY_DETECTION_RANGE_TRANSFORMER, EntityDetectionRangeTransformer.CODEC);
+        DynamicRegistries.register(BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
+        DynamicRegistries.register(BLOCK_SOUND_DATA, BlockSoundData.CODEC);
+        DynamicRegistries.register(ENTITY_DETECTION_RANGE_DATA, EntityDetectionRangeData.CODEC);
 
         // endregion
 

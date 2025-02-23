@@ -1,6 +1,9 @@
 package net.sydokiddo.chrysalis.util.technical;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 
 public class CodecUtils {
 
@@ -12,5 +15,9 @@ public class CodecUtils {
                 return null;
             }, null
         );
+    }
+
+    public static Holder<SoundEvent> getSoundEventHolder(ResourceLocation resourceLocation) {
+        return Holder.direct(SoundEvent.createVariableRangeEvent(resourceLocation));
     }
 }

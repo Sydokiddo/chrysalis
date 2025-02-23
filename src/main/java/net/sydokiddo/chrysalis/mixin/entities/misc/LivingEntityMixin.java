@@ -17,7 +17,7 @@ import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
 import net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects.MobSightEffect;
-import net.sydokiddo.chrysalis.util.entities.codecs.EntityDetectionRangeTransformer;
+import net.sydokiddo.chrysalis.util.entities.codecs.EntityDetectionRangeData;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
@@ -85,7 +85,7 @@ public abstract class LivingEntityMixin extends Entity {
         } else {
 
             if (Chrysalis.registryAccess == null) return;
-            Optional<EntityDetectionRangeTransformer> registry = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.ENTITY_DETECTION_RANGE_TRANSFORMER).stream().findFirst();
+            Optional<EntityDetectionRangeData> registry = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.ENTITY_DETECTION_RANGE_DATA).stream().findFirst();
 
             if (registry.isPresent() && self.getType().is(registry.get().entities()) && this.getItemBySlot(EquipmentSlot.byName(registry.get().equipmentSlot())).is(registry.get().items())) {
                 cir.setReturnValue(cir.getReturnValue() * registry.get().detectionPercentage());
