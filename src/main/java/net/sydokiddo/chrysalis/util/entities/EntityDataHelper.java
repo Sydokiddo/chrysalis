@@ -93,15 +93,15 @@ public class EntityDataHelper {
     // region Look Direction Checks
 
     public static boolean isLookingUp(Entity entity) {
-        return entity.getXRot() < -45;
+        return entity.getXRot() < -45.0F;
     }
 
     public static boolean isLookingForward(Entity entity) {
-        return entity.getXRot() > -45 && entity.getXRot() < 45;
+        return entity.getXRot() > -45.0F && entity.getXRot() < 45.0F;
     }
 
     public static boolean isLookingDown(Entity entity) {
-        return entity.getXRot() > 45;
+        return entity.getXRot() > 45.0F;
     }
 
     // endregion
