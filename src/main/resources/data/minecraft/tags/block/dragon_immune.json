@@ -4,6 +4,8 @@
     "#chrysalis:unbreakable_blocks",
     "#chrysalis:base_stone_end",
     "#c:obsidians",
-    "minecraft:dragon_egg"
+    "minecraft:dragon_egg",
+    "minecraft:trial_spawner",
+    "minecraft:vault"
   ]
 }

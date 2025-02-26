@@ -7,7 +7,7 @@ import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
-public record BlockPropertyData(HolderSet<Block> blocks, float destroyTime, boolean requiresTool, int lightLevel, boolean emissiveRendering, boolean replaceable, boolean ignitedByLava, boolean spawnsTerrainParticles) {
+public record BlockPropertyData(HolderSet<Block> blocks, float destroyTime, boolean requiresTool, int lightLevel, boolean emissiveRendering, boolean replaceable, boolean ignitedByLava, boolean spawnsTerrainParticles, boolean forTesting) {
 
     /**
      * Converts information from a json file into a specified block(s)'s properties.
@@ -21,6 +21,7 @@ public record BlockPropertyData(HolderSet<Block> blocks, float destroyTime, bool
         Codec.BOOL.optionalFieldOf("emissive_rendering", false).forGetter(BlockPropertyData::emissiveRendering),
         Codec.BOOL.optionalFieldOf("replaceable", false).forGetter(BlockPropertyData::replaceable),
         Codec.BOOL.optionalFieldOf("ignited_by_lava", false).forGetter(BlockPropertyData::ignitedByLava),
-        Codec.BOOL.optionalFieldOf("spawns_terrain_particles", true).forGetter(BlockPropertyData::spawnsTerrainParticles)
+        Codec.BOOL.optionalFieldOf("spawns_terrain_particles", true).forGetter(BlockPropertyData::spawnsTerrainParticles),
+        Codec.BOOL.optionalFieldOf("for_testing", false).forGetter(BlockPropertyData::forTesting)
     ).apply(instance, BlockPropertyData::new));
 }

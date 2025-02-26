@@ -4,12 +4,16 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,11 +23,13 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.util.sounds.codecs.DamageSoundData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -164,6 +170,22 @@ public abstract class PlayerMixin extends LivingEntity {
     @Inject(method = "killedEntity", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$hideEntityKilledStat(ServerLevel serverLevel, LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
         if (livingEntity != null && livingEntity.getType().is(ChrysalisTags.STATISTICS_MENU_IGNORED)) cir.setReturnValue(true);
+    }
+
+    /**
+     * Pulls information from the data-driven damage sound system and applies it as the damage type's sound event for players.
+     **/
+
+    @Inject(method = "getHurtSound", at = @At(value = "HEAD"), cancellable = true)
+    private void chrysalis$damageSoundData(DamageSource damageSource, CallbackInfoReturnable<SoundEvent> cir) {
+
+        Optional<DamageSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.DAMAGE_SOUND_DATA).stream().findFirst();
+
+        if (optional.isPresent()) {
+            if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
+            Optional<ResourceKey<DamageType>> damageTypeKey = optional.get().damageType().unwrapKey();
+            if (optional.get().effect() != null && optional.get().effect() != MobEffects.HEAL && this.hasEffect(optional.get().effect()) || damageTypeKey.isPresent() && damageSource.is(damageTypeKey.get())) cir.setReturnValue(optional.get().soundEvent().value());
+        }
     }
 
     @SuppressWarnings("unused")

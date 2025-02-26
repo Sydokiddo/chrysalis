@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import java.util.Objects;
 import java.util.Optional;
 
 @Mixin(BlockBehaviour.class)
@@ -34,10 +35,15 @@ public class BlockMixin {
      **/
 
     @Inject(at = @At("HEAD"), method = "getSoundType", cancellable = true)
-    private void chrysalis$blockSoundTransformer(BlockState blockState, CallbackInfoReturnable<SoundType> cir) {
+    private void chrysalis$blockSoundData(BlockState blockState, CallbackInfoReturnable<SoundType> cir) {
+
         if (Chrysalis.registryAccess == null) return;
-        Optional<BlockSoundData> registry = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
-        registry.ifPresent(blockSoundData -> cir.setReturnValue(blockSoundData.toSoundType()));
+        Optional<BlockSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
+
+        if (optional.isPresent()) {
+            if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
+            cir.setReturnValue(optional.get().toSoundType());
+        }
     }
 
     @SuppressWarnings("unused")
@@ -51,10 +57,15 @@ public class BlockMixin {
          **/
 
         @Inject(at = @At("HEAD"), method = "instrument", cancellable = true)
-        private void chrysalis$blockNoteBlockInstrumentTransformer(CallbackInfoReturnable<NoteBlockInstrument> cir) {
+        private void chrysalis$blockNoteBlockInstrumentData(CallbackInfoReturnable<NoteBlockInstrument> cir) {
+
             if (Chrysalis.registryAccess == null) return;
-            Optional<BlockSoundData> registry = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(this.asState().getBlockHolder())).findFirst();
-            registry.ifPresent(blockSoundData -> cir.setReturnValue(BlockSoundData.getNoteBlockInstrument(blockSoundData.noteBlockInstrument())));
+            Optional<BlockSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(this.asState().getBlockHolder())).findFirst();
+
+            if (optional.isPresent()) {
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || Objects.equals(optional.get().noteBlockInstrument(), "null")) return;
+                cir.setReturnValue(BlockSoundData.getNoteBlockInstrument(optional.get().noteBlockInstrument()));
+            }
         }
 
         /**
@@ -62,57 +73,92 @@ public class BlockMixin {
          **/
 
         @Inject(at = @At("HEAD"), method = "getDestroySpeed", cancellable = true)
-        private void chrysalis$blockDestroyTimeTransformer(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Float> cir) {
+        private void chrysalis$blockDestroyTimeData(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Float> cir) {
+
             if (Chrysalis.registryAccess == null) return;
-            Optional<BlockPropertyData> optional = this.getBlockPropertyTransformer(this.asState());
-            optional.ifPresent(blockPropertyData -> cir.setReturnValue(blockPropertyData.destroyTime()));
+            Optional<BlockPropertyData> optional = this.getBlockPropertyData(this.asState());
+
+            if (optional.isPresent()) {
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
+                cir.setReturnValue(optional.get().destroyTime());
+            }
         }
 
         @Inject(at = @At("HEAD"), method = "requiresCorrectToolForDrops", cancellable = true)
-        private void chrysalis$blockRequiresToolTransformer(CallbackInfoReturnable<Boolean> cir) {
+        private void chrysalis$blockRequiresToolData(CallbackInfoReturnable<Boolean> cir) {
+
             if (Chrysalis.registryAccess == null) return;
-            Optional<BlockPropertyData> optional = this.getBlockPropertyTransformer(this.asState());
-            optional.ifPresent(blockPropertyData -> cir.setReturnValue(blockPropertyData.requiresTool()));
+            Optional<BlockPropertyData> optional = this.getBlockPropertyData(this.asState());
+
+            if (optional.isPresent()) {
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
+                cir.setReturnValue(optional.get().requiresTool());
+            }
         }
 
         @Inject(at = @At("HEAD"), method = "getLightEmission", cancellable = true)
-        private void chrysalis$blockLightLevelTransformer(CallbackInfoReturnable<Integer> cir) {
+        private void chrysalis$blockLightLevelData(CallbackInfoReturnable<Integer> cir) {
+
             if (Chrysalis.registryAccess == null) return;
-            Optional<BlockPropertyData> optional = this.getBlockPropertyTransformer(this.asState());
-            optional.ifPresent(blockPropertyData -> cir.setReturnValue(blockPropertyData.lightLevel()));
+            Optional<BlockPropertyData> optional = this.getBlockPropertyData(this.asState());
+
+            if (optional.isPresent()) {
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
+                cir.setReturnValue(optional.get().lightLevel());
+            }
         }
 
         @Inject(at = @At("HEAD"), method = "emissiveRendering", cancellable = true)
-        private void chrysalis$blockEmissiveRenderingTransformer(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
+        private void chrysalis$blockEmissiveRenderingDate(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
+
             if (Chrysalis.registryAccess == null) return;
             BlockState blockState = blockGetter.getBlockState(blockPos);
-            Optional<BlockPropertyData> optional = this.getBlockPropertyTransformer(blockState);
-            optional.ifPresent(blockPropertyData -> cir.setReturnValue(blockPropertyData.emissiveRendering()));
+            Optional<BlockPropertyData> optional = this.getBlockPropertyData(blockState);
+
+            if (optional.isPresent()) {
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
+                cir.setReturnValue(optional.get().emissiveRendering());
+            }
         }
 
         @Inject(at = @At("HEAD"), method = "canBeReplaced()Z", cancellable = true)
-        private void chrysalis$blockReplaceableTransformer(CallbackInfoReturnable<Boolean> cir) {
+        private void chrysalis$blockReplaceableData(CallbackInfoReturnable<Boolean> cir) {
+
             if (Chrysalis.registryAccess == null) return;
-            Optional<BlockPropertyData> optional = this.getBlockPropertyTransformer(this.asState());
-            optional.ifPresent(blockPropertyData -> cir.setReturnValue(blockPropertyData.replaceable()));
+            Optional<BlockPropertyData> optional = this.getBlockPropertyData(this.asState());
+
+            if (optional.isPresent()) {
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
+                cir.setReturnValue(optional.get().replaceable());
+            }
         }
 
         @Inject(at = @At("HEAD"), method = "ignitedByLava", cancellable = true)
-        private void chrysalis$blockIgnitedByLavaTransformer(CallbackInfoReturnable<Boolean> cir) {
+        private void chrysalis$blockIgnitedByLavaData(CallbackInfoReturnable<Boolean> cir) {
+
             if (Chrysalis.registryAccess == null) return;
-            Optional<BlockPropertyData> optional = this.getBlockPropertyTransformer(this.asState());
-            optional.ifPresent(blockPropertyData -> cir.setReturnValue(blockPropertyData.ignitedByLava()));
+            Optional<BlockPropertyData> optional = this.getBlockPropertyData(this.asState());
+
+            if (optional.isPresent()) {
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
+                cir.setReturnValue(optional.get().ignitedByLava());
+            }
         }
 
         @Inject(at = @At("HEAD"), method = "shouldSpawnTerrainParticles", cancellable = true)
-        private void chrysalis$blockSpawnsTerrainParticlesTransformer(CallbackInfoReturnable<Boolean> cir) {
+        private void chrysalis$blockSpawnsTerrainParticlesData(CallbackInfoReturnable<Boolean> cir) {
+
             if (Chrysalis.registryAccess == null) return;
-            Optional<BlockPropertyData> optional = this.getBlockPropertyTransformer(this.asState());
-            optional.ifPresent(blockPropertyData -> cir.setReturnValue(blockPropertyData.spawnsTerrainParticles()));
+            Optional<BlockPropertyData> optional = this.getBlockPropertyData(this.asState());
+
+            if (optional.isPresent()) {
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
+                cir.setReturnValue(optional.get().spawnsTerrainParticles());
+            }
         }
 
         @Unique
-        private Optional<BlockPropertyData> getBlockPropertyTransformer(BlockState blockState) {
+        private Optional<BlockPropertyData> getBlockPropertyData(BlockState blockState) {
             return Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_PROPERTY_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
         }
 

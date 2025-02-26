@@ -1,0 +1,6 @@
+{
+  "damage_type": "minecraft:generic",
+  "effect": "minecraft:speed",
+  "sound_event": "minecraft:entity.player.hurt",
+  "for_testing": true
+}

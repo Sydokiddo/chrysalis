@@ -7,5 +7,6 @@
   "fall_sound": "minecraft:block.wool.fall",
   "volume": 1.0,
   "pitch": 1.0,
-  "note_block_instrument": "guitar"
+  "note_block_instrument": "guitar",
+  "for_testing": true
 }

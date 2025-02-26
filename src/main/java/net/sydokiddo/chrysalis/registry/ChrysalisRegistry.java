@@ -26,6 +26,7 @@ import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
+import net.sydokiddo.chrysalis.util.sounds.codecs.DamageSoundData;
 import net.sydokiddo.chrysalis.util.entities.codecs.EntityDetectionRangeData;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
@@ -184,6 +185,7 @@ public class ChrysalisRegistry {
     public static final ResourceKey<? extends Registry<BlockPropertyData>> BLOCK_PROPERTY_DATA = RegistryHelper.registerBlockDataType("properties");
     public static final ResourceKey<? extends Registry<BlockSoundData>> BLOCK_SOUND_DATA = RegistryHelper.registerBlockDataType("sound_group");
     public static final ResourceKey<? extends Registry<EntityDetectionRangeData>> ENTITY_DETECTION_RANGE_DATA = RegistryHelper.registerEntityDataType("detection_range");
+    public static final ResourceKey<? extends Registry<DamageSoundData>> DAMAGE_SOUND_DATA = RegistryHelper.registerEntityDataType("damage_sound");
 
     // endregion
 
@@ -210,6 +212,7 @@ public class ChrysalisRegistry {
         DynamicRegistries.register(BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
         DynamicRegistries.register(BLOCK_SOUND_DATA, BlockSoundData.CODEC);
         DynamicRegistries.register(ENTITY_DETECTION_RANGE_DATA, EntityDetectionRangeData.CODEC);
+        DynamicRegistries.register(DAMAGE_SOUND_DATA, DamageSoundData.CODEC);
 
         // endregion
 

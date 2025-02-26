@@ -85,13 +85,13 @@ public abstract class LivingEntityMixin extends Entity {
         } else {
 
             if (Chrysalis.registryAccess == null) return;
-            Optional<EntityDetectionRangeData> registry = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.ENTITY_DETECTION_RANGE_DATA).stream().findFirst();
+            Optional<EntityDetectionRangeData> optional = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.ENTITY_DETECTION_RANGE_DATA).stream().findFirst();
 
-            if (registry.isPresent() && self.getType().is(registry.get().entities()) && this.getItemBySlot(EquipmentSlot.byName(registry.get().equipmentSlot())).is(registry.get().items())) {
-                cir.setReturnValue(cir.getReturnValue() * registry.get().detectionPercentage());
-            } else {
+            if (optional.isEmpty() || optional.get().forTesting() && !Chrysalis.IS_DEBUG) {
                 double reducedDetectionRangeAttribute = this.getAttributeValue(ChrysalisAttributes.REDUCED_DETECTION_RANGE);
                 if (reducedDetectionRangeAttribute > 0.0D) cir.setReturnValue(cir.getReturnValue() * (1.0D - reducedDetectionRangeAttribute));
+            } else if (self.getType().is(optional.get().entities()) && this.getItemBySlot(EquipmentSlot.byName(optional.get().equipmentSlot())).is(optional.get().items())) {
+                cir.setReturnValue(cir.getReturnValue() * optional.get().detectionPercentage());
             }
         }
     }

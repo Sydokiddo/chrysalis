@@ -2,5 +2,6 @@
   "items": "#minecraft:gaze_disguise_equipment",
   "equipment_slot": "head",
   "entities": "#chrysalis:enders",
-  "detection_percentage": 0.5
+  "detection_percentage": 0.5,
+  "for_testing": false
 }

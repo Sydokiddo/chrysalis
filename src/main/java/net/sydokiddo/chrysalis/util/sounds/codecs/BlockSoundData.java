@@ -13,8 +13,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.sydokiddo.chrysalis.util.technical.CodecUtils;
+import java.util.Objects;
 
-public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSound, Holder<SoundEvent> stepSound, Holder<SoundEvent> placeSound, Holder<SoundEvent> hitSound, Holder<SoundEvent> fallSound, float volume, float pitch, String noteBlockInstrument) {
+public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSound, Holder<SoundEvent> stepSound, Holder<SoundEvent> placeSound, Holder<SoundEvent> hitSound, Holder<SoundEvent> fallSound, float volume, float pitch, String noteBlockInstrument, boolean forTesting) {
 
     /**
      * Converts information from a json file into a specified block(s)'s sound group.
@@ -29,7 +30,8 @@ public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSo
         SoundEvent.CODEC.optionalFieldOf("fall_sound", CodecUtils.getSoundEventHolder(SoundEvents.STONE_FALL.location())).forGetter(BlockSoundData::fallSound),
         Codec.FLOAT.optionalFieldOf("volume", 1.0F).forGetter(BlockSoundData::volume),
         Codec.FLOAT.optionalFieldOf("pitch", 1.0F).forGetter(BlockSoundData::pitch),
-        Codec.STRING.optionalFieldOf("note_block_instrument", "harp").forGetter(BlockSoundData::noteBlockInstrument)
+        Codec.STRING.optionalFieldOf("note_block_instrument", "null").forGetter(BlockSoundData::noteBlockInstrument),
+        Codec.BOOL.optionalFieldOf("for_testing", false).forGetter(BlockSoundData::forTesting)
     ).apply(instance, BlockSoundData::new));
 
     public SoundType toSoundType() {
@@ -37,6 +39,7 @@ public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSo
     }
 
     public static NoteBlockInstrument getNoteBlockInstrument(String string) {
+        if (Objects.equals(string, "null")) return null;
         NoteBlockInstrument noteBlockInstrument = StringRepresentable.fromEnum(NoteBlockInstrument::values).byName(string);
         if (noteBlockInstrument != null) return noteBlockInstrument;
         else throw new IllegalArgumentException("Invalid note block instrument '" + string + "'");
