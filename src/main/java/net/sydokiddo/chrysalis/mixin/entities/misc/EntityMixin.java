@@ -86,7 +86,7 @@ public abstract class EntityMixin {
 
         @Inject(method = "canSummon", at = @At("HEAD"), cancellable = true)
         private void chrysalis$hideEntityFromSummonCommand(CallbackInfoReturnable<Boolean> cir) {
-            if (this.is(ChrysalisTags.HIDDEN_FROM_SUMMON_COMMAND)) cir.setReturnValue(true);
+            if (this.is(ChrysalisTags.HIDDEN_FROM_SUMMON_COMMAND)) cir.setReturnValue(false);
         }
     }
 }
