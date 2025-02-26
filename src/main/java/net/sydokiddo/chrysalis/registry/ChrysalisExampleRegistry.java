@@ -22,6 +22,7 @@ import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceEntityDispenserBehavior;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.ShootProjectileDispenserBehavior;
+import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 import net.sydokiddo.chrysalis.registry.blocks.custom_blocks.ExampleSeatBlock;
@@ -129,12 +130,12 @@ public class ChrysalisExampleRegistry {
         EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0D, new MobEffectInstance(ChrysalisEffects.RADIANCE, 40));
     }
 
-    public static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
-    public static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ChrysalisRegistry.FIRE_COLOR.getRGB(), ChrysalisRegistry.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
-    public static final RotatingDustParticleOptions EXAMPLE_ROTATING_DUST_PARTICLES = new RotatingDustParticleOptions(ChrysalisRegistry.MEMORY_FIRE_COLOR.getRGB(), true, true, false, 1.0F);
-    public static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false);
-    public static final SmallPulsationParticleOptions EXAMPLE_SMALL_PULSATION_PARTICLES = new SmallPulsationParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 10);
-    public static final LargePulsationParticleOptions EXAMPLE_LARGE_PULSATION_PARTICLES = new LargePulsationParticleOptions(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 20);
+    public static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
+    public static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
+    public static final RotatingDustParticleOptions EXAMPLE_ROTATING_DUST_PARTICLES = new RotatingDustParticleOptions(ComponentHelper.MEMORY_FIRE_COLOR.getRGB(), true, true, false, 1.0F);
+    public static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false);
+    public static final SmallPulsationParticleOptions EXAMPLE_SMALL_PULSATION_PARTICLES = new SmallPulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 10);
+    public static final LargePulsationParticleOptions EXAMPLE_LARGE_PULSATION_PARTICLES = new LargePulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 20);
 
     // endregion
 }

@@ -3,14 +3,11 @@ package net.sydokiddo.chrysalis.util.helpers;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -23,8 +20,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import java.util.List;
 import java.util.Objects;
@@ -49,6 +44,7 @@ public class ItemHelper {
      **/
 
     public static boolean hasItemInInventory(Item item, Player player) {
+
         for (int slots = 0; slots <= 35; slots++) {
 
             ItemStack itemStack = player.getInventory().getItem(slots);
@@ -57,10 +53,9 @@ public class ItemHelper {
 
             if (itemStack.is(item) || player.getOffhandItem().is(item) || player.getItemBySlot(EquipmentSlot.HEAD).is(item) || player.getItemBySlot(EquipmentSlot.CHEST).is(item) ||
             player.getItemBySlot(EquipmentSlot.LEGS).is(item) || player.getItemBySlot(EquipmentSlot.FEET).is(item) || !bundleContents.isEmpty() && bundleContents.itemCopyStream().anyMatch(matchingItems -> matchingItems.is(item)) ||
-            itemContainerContents.nonEmptyStream().anyMatch(matchingItems -> matchingItems.is(item))) {
-                return true;
-            }
+            itemContainerContents.nonEmptyStream().anyMatch(matchingItems -> matchingItems.is(item))) return true;
         }
+
         return false;
     }
 
@@ -73,6 +68,7 @@ public class ItemHelper {
      **/
 
     public static int getEnchantmentLevel(ItemStack itemStack, ResourceKey<Enchantment> enchantment) {
+
         int noEnchantments = 0;
         ItemEnchantments itemEnchantments = itemStack.get(DataComponents.ENCHANTMENTS);
         if (itemEnchantments == null || itemEnchantments.isEmpty()) return noEnchantments;
@@ -81,6 +77,7 @@ public class ItemHelper {
             if (entry.getKey().is(enchantment)) return EnchantmentHelper.getItemEnchantmentLevel(entry.getKey(), itemStack);
             return noEnchantments;
         }
+
         return noEnchantments;
     }
 
@@ -123,16 +120,11 @@ public class ItemHelper {
 
     // endregion
 
-    // region Custom Item Tooltips
+    // region Tooltips
 
     /**
      * Custom tooltips for items.
      **/
-
-    public static final Component
-        NONE_COMPONENT = Component.translatable("gui.chrysalis.none"),
-        UNKNOWN_COMPONENT = Component.translatable("gui.chrysalis.unknown")
-    ;
 
     public static void addHoldingTooltip(List<Component> tooltip) {
         tooltip.add(CommonComponents.EMPTY);
@@ -164,57 +156,25 @@ public class ItemHelper {
     }
 
     public static void addDirectionTooltip(List<Component> tooltip, Minecraft minecraft) {
-        if (minecraft.player != null) {
-            Component direction = Component.translatable("gui.chrysalis.direction." + minecraft.player.getDirection().getName()).withStyle(ChatFormatting.BLUE);
-            tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.facing_direction", direction).withStyle(ChatFormatting.BLUE)));
-        }
+        if (minecraft.player == null) return;
+        Component direction = Component.translatable("gui.chrysalis.direction." + minecraft.player.getDirection().getName()).withStyle(ChatFormatting.BLUE);
+        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.facing_direction", direction).withStyle(ChatFormatting.BLUE)));
     }
 
     public static void addDimensionTooltip(List<Component> tooltip, String dimension) {
-        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension", getDimensionComponent(dimension).copy().withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
-    }
-
-    public static Component getDimensionComponent(String dimension) {
-        String registryKey = dimension.split(":")[0];
-        String registryPath = dimension.split(":")[1];
-        return Component.translatable("dimension." + registryKey + "." + registryPath);
-    }
-
-    public static Component getWeatherComponent(Level level, Holder<Biome> biome, BlockPos blockPos) {
-
-        MutableComponent weatherType;
-
-        if (level.isRainingAt(blockPos)) {
-            if (level.isThundering()) weatherType = Component.translatable("gui.chrysalis.weather.thundering");
-            else weatherType = Component.translatable("gui.chrysalis.weather.raining");
-        } else {
-            if (level.isRaining() && biome.value().getPrecipitationAt(blockPos, level.getSeaLevel()) == Biome.Precipitation.SNOW) weatherType = Component.translatable("gui.chrysalis.weather.snowing");
-            else weatherType = Component.translatable("gui.chrysalis.weather.clear");
-        }
-
-        return weatherType;
-    }
-
-    public static Component getMoonPhaseComponent(Level level) {
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level != null && !minecraft.level.dimensionType().hasFixedTime()) return Component.translatable("gui.chrysalis.moon_phase." + (level.getMoonPhase() + 1));
-        else return Component.translatable("gui.chrysalis.none");
+        tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.dimension", ComponentHelper.getDimensionComponent(dimension).copy().withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.BLUE)));
     }
 
     public static void addNullTooltip(List<Component> tooltip) {
-        tooltip.add(CommonComponents.space().append(NONE_COMPONENT.copy().withStyle(ChatFormatting.BLUE)));
+        tooltip.add(CommonComponents.space().append(ComponentHelper.NONE.copy().withStyle(ChatFormatting.BLUE)));
     }
 
     public static void addUnknownTooltip(List<Component> tooltip) {
-        tooltip.add(CommonComponents.space().append(UNKNOWN_COMPONENT.copy().withStyle(ChatFormatting.BLUE)));
+        tooltip.add(CommonComponents.space().append(ComponentHelper.UNKNOWN.copy().withStyle(ChatFormatting.BLUE)));
     }
 
     public static Component addTooltipWithIcon(Component icon, Component tooltip) {
         return Component.translatable("gui.chrysalis.item.tooltip_with_icon", icon, tooltip);
-    }
-
-    public static void setTooltipIconsFont(MutableComponent mutableComponent, String modID) {
-        mutableComponent.setStyle(mutableComponent.getStyle().withFont(ResourceLocation.fromNamespaceAndPath(modID, ChrysalisRegistry.TOOLTIP_ICONS_NAME)));
     }
 
     // endregion

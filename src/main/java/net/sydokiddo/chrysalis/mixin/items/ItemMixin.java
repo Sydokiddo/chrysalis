@@ -15,8 +15,8 @@ import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DamageResistant;
 import net.minecraft.world.level.block.LightBlock;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,27 +41,27 @@ public abstract class ItemMixin {
 
         if (damageResistant != null && damageResistant.types() == DamageTypeTags.IS_FIRE) {
 
-            MutableComponent fireproofIcon = ChrysalisRegistry.FLAME_ICON;
-            int fireproofColor = ChrysalisRegistry.FIRE_COLOR.getRGB();
+            MutableComponent fireproofIcon = ComponentHelper.FLAME_ICON;
+            int fireproofColor = ComponentHelper.FIRE_COLOR.getRGB();
 
             if (ItemHelper.nameContains(itemStack, "soul") || ItemHelper.nameContains(itemStack, "Soul")) {
-                fireproofIcon = ChrysalisRegistry.SOUL_FLAME_ICON;
-                fireproofColor = ChrysalisRegistry.SOUL_FIRE_COLOR.getRGB();
+                fireproofIcon = ComponentHelper.SOUL_FLAME_ICON;
+                fireproofColor = ComponentHelper.SOUL_FIRE_COLOR.getRGB();
             } else if (ItemHelper.nameContains(itemStack, "memory") || ItemHelper.nameContains(itemStack, "Memory") || ItemHelper.nameContains(itemStack, "memories") || ItemHelper.nameContains(itemStack, "Memories")) {
-                fireproofIcon = ChrysalisRegistry.MEMORY_FLAME_ICON;
-                fireproofColor = ChrysalisRegistry.MEMORY_FIRE_COLOR.getRGB();
+                fireproofIcon = ComponentHelper.MEMORY_FLAME_ICON;
+                fireproofColor = ComponentHelper.MEMORY_FIRE_COLOR.getRGB();
             }
 
             int finalFireproofColor = fireproofColor;
-            ItemHelper.setTooltipIconsFont(fireproofIcon, Chrysalis.MOD_ID);
+            ComponentHelper.setTooltipIconsFont(fireproofIcon, Chrysalis.MOD_ID);
             Component fireproofTooltip = ItemHelper.addTooltipWithIcon(fireproofIcon, Component.translatable("gui.chrysalis.item.fireproof").withStyle(style -> style.withItalic(true).withColor(finalFireproofColor)));
             list.add(fireproofTooltip);
         }
 
         if (itemStack.is(ChrysalisTags.WAXED_BLOCK_ITEMS)) {
-            MutableComponent waxedIcon = ChrysalisRegistry.WAXED_ICON;
-            ItemHelper.setTooltipIconsFont(waxedIcon, Chrysalis.MOD_ID);
-            Component waxedTooltip = ItemHelper.addTooltipWithIcon(waxedIcon, Component.translatable("gui.chrysalis.item.waxed").withStyle(style -> style.withItalic(true).withColor(ChrysalisRegistry.WAXED_COLOR.getRGB())));
+            MutableComponent waxedIcon = ComponentHelper.WAXED_ICON;
+            ComponentHelper.setTooltipIconsFont(waxedIcon, Chrysalis.MOD_ID);
+            Component waxedTooltip = ItemHelper.addTooltipWithIcon(waxedIcon, Component.translatable("gui.chrysalis.item.waxed").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.WAXED_COLOR.getRGB())));
             list.add(waxedTooltip);
         }
 
@@ -91,9 +91,9 @@ public abstract class ItemMixin {
         private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
             if (this.getItem().getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)) {
                 if (!cir.getReturnValue().isEmpty()) cir.getReturnValue().add(CommonComponents.EMPTY);
-                MutableComponent chrysalisIcon = ChrysalisRegistry.CHRYSALIS_ICON;
-                ItemHelper.setTooltipIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
-                Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(ChrysalisRegistry.FIVE_FONT).withColor(ChrysalisRegistry.CHRYSALIS_COLOR.getRGB())));
+                MutableComponent chrysalisIcon = ComponentHelper.CHRYSALIS_ICON;
+                ComponentHelper.setTooltipIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
+                Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(ComponentHelper.FIVE_FONT).withColor(ComponentHelper.CHRYSALIS_COLOR.getRGB())));
                 cir.getReturnValue().add(chrysalisTooltip);
             }
         }

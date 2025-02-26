@@ -10,7 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
-import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
+import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 import java.util.Objects;
 
@@ -56,7 +56,7 @@ public class CoordinatesCommand {
             return 0;
         }
 
-        CommandCommonMethods.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.commands.coordinates.convert.success", ItemHelper.getDimensionComponent(dimensionString).getString(), Component.translatable("gui.chrysalis.coordinates", x, y, z).getString()));
+        CommandCommonMethods.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.commands.coordinates.convert.success", ComponentHelper.getDimensionComponent(dimensionString).getString(), Component.translatable("gui.chrysalis.coordinates", x, y, z).getString()));
         return 1;
     }
 }

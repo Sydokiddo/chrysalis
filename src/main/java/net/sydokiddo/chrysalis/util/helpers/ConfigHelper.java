@@ -4,7 +4,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -18,14 +17,14 @@ public class ConfigHelper {
     // region Config Option Components
 
     public static Component genericCategoryName(String modID) {
-        MutableComponent icon = ChrysalisRegistry.GEAR_ICON;
-        ItemHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
+        MutableComponent icon = ComponentHelper.GEAR_ICON;
+        ComponentHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
         return Component.translatable("gui.chrysalis.config_category.generic", icon, Component.translatable("mod." + modID));
     }
 
     public static Component categoryName(String string) {
-        MutableComponent icon = ChrysalisRegistry.GEAR_ICON;
-        ItemHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
+        MutableComponent icon = ComponentHelper.GEAR_ICON;
+        ComponentHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
         return Component.translatable(string, icon, icon);
     }
 

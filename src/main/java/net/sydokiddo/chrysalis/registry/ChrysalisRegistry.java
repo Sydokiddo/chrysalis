@@ -10,13 +10,10 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,7 +37,6 @@ import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
 import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -122,54 +118,6 @@ public class ChrysalisRegistry {
     public static final EntityDataAccessor<Optional<UUID>>
         ENCOUNTERED_MOB_UUID = SynchedEntityData.defineId(Player.class, EntityDataSerializers.OPTIONAL_UUID)
     ;
-
-    // endregion
-
-    // region Colors and Fonts
-
-    public static final Color
-        CHRYSALIS_COLOR = Color.decode("#A27FFF"),
-        ENCHANTMENT_COLOR = Color.decode("#964CFF"),
-        FIRE_COLOR = Color.decode("#FF6A00"),
-        SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
-        MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
-        WAXED_COLOR = Color.decode("#FABF29")
-    ;
-
-    @SuppressWarnings("unused")
-    public static final MutableComponent
-        CHRYSALIS_ICON = Component.translatable("gui.icon.chrysalis.mod_icon"),
-        GEAR_ICON = Component.translatable("gui.icon.chrysalis.gear"),
-        WARNING_ICON = Component.translatable("gui.icon.chrysalis.warning"),
-        QUESTION_MARK_ICON = Component.translatable("gui.icon.chrysalis.question_mark"),
-        TOOLTIP_ICON = Component.translatable("gui.icon.chrysalis.tooltip"),
-        POTION_ICON = Component.translatable("gui.icon.chrysalis.potion"),
-        ARMOR_ICON = Component.translatable("gui.icon.chrysalis.armor"),
-        RED_HEART_ICON = Component.translatable("gui.icon.chrysalis.red_heart"),
-        ORANGE_HEART_ICON = Component.translatable("gui.icon.chrysalis.orange_heart"),
-        YELLOW_HEART_ICON = Component.translatable("gui.icon.chrysalis.yellow_heart"),
-        GREEN_HEART_ICON = Component.translatable("gui.icon.chrysalis.green_heart"),
-        BLUE_HEART_ICON = Component.translatable("gui.icon.chrysalis.blue_heart"),
-        PURPLE_HEART_ICON = Component.translatable("gui.icon.chrysalis.purple_heart"),
-        PINK_HEART_ICON = Component.translatable("gui.icon.chrysalis.pink_heart"),
-        WHITE_HEART_ICON = Component.translatable("gui.icon.chrysalis.white_heart"),
-        GRAY_HEART_ICON = Component.translatable("gui.icon.chrysalis.gray_heart"),
-        BLACK_HEART_ICON = Component.translatable("gui.icon.chrysalis.black_heart"),
-        BROWN_HEART_ICON = Component.translatable("gui.icon.chrysalis.brown_heart"),
-        SNOUT_ICON = Component.translatable("gui.icon.chrysalis.snout"),
-        WAXED_ICON = Component.translatable("gui.icon.chrysalis.waxed"),
-        FLAME_ICON = Component.translatable("gui.icon.chrysalis.flame"),
-        SOUL_FLAME_ICON = Component.translatable("gui.icon.chrysalis.soul_flame"),
-        MEMORY_FLAME_ICON = Component.translatable("gui.icon.chrysalis.memory_flame")
-    ;
-
-    @SuppressWarnings("unused")
-    public static final ResourceLocation
-        FIVE_FONT = Chrysalis.id("five"),
-        FIVE_ALT_FONT = Chrysalis.id("five_alt")
-    ;
-
-    public static final String TOOLTIP_ICONS_NAME = "tooltip_icons";
 
     // endregion
 
