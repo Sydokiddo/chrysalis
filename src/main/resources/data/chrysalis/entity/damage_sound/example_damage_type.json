@@ -1,5 +1,0 @@
-{
-  "damage_type": "minecraft:sweet_berry_bush",
-  "sound_event": "minecraft:entity.player.hurt_sweet_berry_bush",
-  "for_testing": true
-}

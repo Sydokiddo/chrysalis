@@ -1,5 +1,0 @@
-{
-  "effect": "minecraft:nausea",
-  "sound_event": "minecraft:entity.player.hurt",
-  "for_testing": true
-}
