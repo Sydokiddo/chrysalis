@@ -159,12 +159,12 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     /**
-     * Any living entity in the statistics_menu_ignored tag will not show up in the statistics menu if the player kills it.
+     * Any living entity in the hidden_from_statistics_menu tag will not show up in the statistics menu if the player kills it.
      **/
 
     @Inject(method = "killedEntity", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$hideEntityKilledStat(ServerLevel serverLevel, LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
-        if (livingEntity != null && livingEntity.getType().is(ChrysalisTags.STATISTICS_MENU_IGNORED)) cir.setReturnValue(true);
+        if (livingEntity != null && livingEntity.getType().is(ChrysalisTags.HIDDEN_FROM_STATISTICS_MENU)) cir.setReturnValue(true);
     }
 
     @SuppressWarnings("unused")
@@ -185,13 +185,13 @@ public abstract class PlayerMixin extends LivingEntity {
         }
 
         /**
-         * Any living entity in the statistics_menu_ignored tag will not show up in the statistics menu if the player is killed by it.
+         * Any living entity in the hidden_from_statistics_menu tag will not show up in the statistics menu if the player is killed by it.
          **/
 
         @Redirect(method = "die", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;awardStat(Lnet/minecraft/stats/Stat;)V", ordinal = 0))
         private void chrysalis$hideEntityKilledByStat(ServerPlayer serverPlayer, Stat<?> stat) {
             LivingEntity killCredit = this.getKillCredit();
-            if (killCredit != null && !killCredit.getType().is(ChrysalisTags.STATISTICS_MENU_IGNORED)) this.awardStat(Stats.ENTITY_KILLED_BY.get(killCredit.getType()));
+            if (killCredit != null && !killCredit.getType().is(ChrysalisTags.HIDDEN_FROM_STATISTICS_MENU)) this.awardStat(Stats.ENTITY_KILLED_BY.get(killCredit.getType()));
         }
     }
 }

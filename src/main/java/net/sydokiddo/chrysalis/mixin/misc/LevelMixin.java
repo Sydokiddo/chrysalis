@@ -44,6 +44,7 @@ public class LevelMixin {
         }
     }
 
+    @SuppressWarnings("unused")
     @Mixin(ServerExplosion.class)
     public static abstract class ServerExplosionMixin {
 

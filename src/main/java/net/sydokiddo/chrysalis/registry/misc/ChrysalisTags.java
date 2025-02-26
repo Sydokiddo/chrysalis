@@ -97,11 +97,12 @@ public class ChrysalisTags {
         HAS_ARTHROPOD_SIGHT = registerEntityTag("has_arthropod_sight"),
         HAS_CREEPER_SIGHT = registerEntityTag("has_creeper_sight"),
         HAS_ENDER_SIGHT = registerEntityTag("has_ender_sight"),
+        HIDDEN_FROM_STATISTICS_MENU = registerEntityTag("hidden_from_statistics_menu"),
+        HIDDEN_FROM_SUMMON_COMMAND = registerEntityTag("hidden_from_summon_command"),
         NON_LIVING_ATTACKABLES = registerEntityTag("non_living_attackables"),
         PIGLIN_AVOIDED = registerEntityTag("piglin_avoided"),
         PIGLINS = registerEntityTag("piglins"),
         SLIMES = registerEntityTag("slimes"),
-        STATISTICS_MENU_IGNORED = registerEntityTag("statistics_menu_ignored"),
         VEHICLES = registerEntityTag("vehicles"),
         VILLAGERS = registerEntityTag("villagers"),
         WARDEN_IGNORED = registerEntityTag("warden_ignored")

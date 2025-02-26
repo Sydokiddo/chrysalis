@@ -4,11 +4,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +30,7 @@ import java.util.Objects;
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
-    @Unique Entity entity = (Entity) (Object) this;
+    @Unique private Entity entity = (Entity) (Object) this;
     @Shadow public abstract boolean isAttackable();
     @Shadow public abstract boolean isAlive();
 
@@ -70,5 +72,21 @@ public abstract class EntityMixin {
         if (itemStack.getItem() instanceof AggroWandItem) cir.setReturnValue(AggroWandItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof TameMobItem) cir.setReturnValue(TameMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof RideMobItem) cir.setReturnValue(RideMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
+    }
+
+    @SuppressWarnings("unused")
+    @Mixin(EntityType.class)
+    public static abstract class EntityTypeMixin {
+
+        @Shadow public abstract boolean is(TagKey<EntityType<?>> tagKey);
+
+        /**
+         * Any entity in the hidden_from_summon_command tag will not be able to be summoned with the /summon command.
+         **/
+
+        @Inject(method = "canSummon", at = @At("HEAD"), cancellable = true)
+        private void chrysalis$hideEntityFromSummonCommand(CallbackInfoReturnable<Boolean> cir) {
+            if (this.is(ChrysalisTags.HIDDEN_FROM_SUMMON_COMMAND)) cir.setReturnValue(true);
+        }
     }
 }

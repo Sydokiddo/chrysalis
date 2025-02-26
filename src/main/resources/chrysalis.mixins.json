@@ -32,6 +32,7 @@
     "entities.misc.AbstractBoatMixin",
     "entities.misc.EndCrystalMixin",
     "entities.misc.EntityMixin",
+    "entities.misc.EntityMixin$EntityTypeMixin",
     "entities.misc.ItemEntityMixin",
     "entities.misc.LivingEntityMixin",
     "entities.misc.MiscGoalsMixin",
