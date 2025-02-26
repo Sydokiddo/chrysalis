@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
@@ -88,7 +89,7 @@ public abstract class ItemEntityMixin extends Entity {
     private void chrysalis$makeItemsImmune(ServerLevel serverLevel, DamageSource damageSource, float damageAmount, CallbackInfoReturnable<Boolean> cir) {
         if (!this.getItem().isEmpty()) {
             if (this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) cir.setReturnValue(false);
-            if (!serverLevel.getGameRules().getBoolean(ChrysalisRegistry.RULE_DESTROY_ITEMS_IN_EXPLOSIONS) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) cir.setReturnValue(false);
+            if (!serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_DESTROY_ITEMS_IN_EXPLOSIONS) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) cir.setReturnValue(false);
         }
     }
 }

@@ -2,13 +2,17 @@ package net.sydokiddo.chrysalis.mixin.misc;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.ServerExplosion;
 import net.minecraft.world.level.storage.LevelSummary;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.helpers.WorldGenHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -37,6 +41,19 @@ public class LevelMixin {
         @Inject(method = "tickPrecipitation", at = @At(value = "HEAD"), cancellable = true)
         private void chrysalis$preventSnowInNetherAndEnd(BlockPos blockPos, CallbackInfo info) {
             if (WorldGenHelper.isNetherOrEnd(this.getLevel())) info.cancel();
+        }
+    }
+
+    @Mixin(ServerExplosion.class)
+    public static abstract class ServerExplosionMixin {
+
+        /**
+         * Block-interactive explosions (such as wind charges) are now driven by the mobWorldInteractions game rule rather than the mobGriefing game rule.
+         **/
+
+        @ModifyArg(method = "canTriggerBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
+        private GameRules.Key<GameRules.BooleanValue> chrysalis$explosionBlockTriggerWorldInteractionsGameRule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+            return ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS;
         }
     }
 }

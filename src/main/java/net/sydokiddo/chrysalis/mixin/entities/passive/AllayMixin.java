@@ -10,7 +10,7 @@ import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,12 +25,12 @@ public class AllayMixin extends PathfinderMob {
     }
 
     /**
-     * Allays being able to pick up items is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     * Allays being able to pick up items is now determined by the mobWorldInteractions game rule rather than the mobGriefing game rule.
      **/
 
     @ModifyArg(method = "wantsToPickUp", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-    private GameRules.Key<GameRules.BooleanValue> chrysalis$allayPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
-        return ChrysalisRegistry.RULE_PASSIVE_GRIEFING;
+    private GameRules.Key<GameRules.BooleanValue> chrysalis$allayWorldInteractionsGameRule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+        return ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS;
     }
 
     /**

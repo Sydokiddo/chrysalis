@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.RespawnAnchorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,12 +25,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class RespawnBlockMixin {
 
     /**
-     * Interacting with a bed while the bedsExplode gamerule is set to false will display an error message instead of exploding.
+     * Interacting with a bed while the bedsExplode game rule is set to false will display an error message instead of exploding.
      **/
 
     @Inject(at = @At("HEAD"), method = "useWithoutItem", cancellable = true)
     private void chrysalis$interactWithBed(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!level.isClientSide() && level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(ChrysalisRegistry.RULE_BEDS_EXPLODE) && !level.dimensionType().bedWorks()) {
+        if (!level.isClientSide() && level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_BEDS_EXPLODE) && !level.dimensionType().bedWorks()) {
             player.displayClientMessage(Component.translatable("gui.chrysalis.block.bed.invalid_dimension"), true);
             cir.setReturnValue(InteractionResult.SUCCESS_SERVER);
         }
@@ -52,12 +52,12 @@ public abstract class RespawnBlockMixin {
         }
 
         /**
-         * Interacting with a respawn anchor while the respawnAnchorsExplode gamerule is set to false will display an error message instead of exploding.
+         * Interacting with a respawn anchor while the respawnAnchorsExplode game rule is set to false will display an error message instead of exploding.
          **/
 
         @Inject(at = @At("HEAD"), method = "useWithoutItem", cancellable = true)
         private void chrysalis$interactWithRespawnAnchor(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
-            if (!level.isClientSide() && level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(ChrysalisRegistry.RULE_RESPAWN_ANCHORS_EXPLODE) && blockState.getValue(CHARGE) > 0 && !level.dimensionType().respawnAnchorWorks()) {
+            if (!level.isClientSide() && level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_RESPAWN_ANCHORS_EXPLODE) && blockState.getValue(CHARGE) > 0 && !level.dimensionType().respawnAnchorWorks()) {
                 player.displayClientMessage(Component.translatable("gui.chrysalis.block.generic_respawn_block.invalid_dimension"), true);
                 cir.setReturnValue(InteractionResult.SUCCESS_SERVER);
             }

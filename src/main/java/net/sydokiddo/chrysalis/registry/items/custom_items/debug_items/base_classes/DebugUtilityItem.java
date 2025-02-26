@@ -14,8 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.items.custom_items.EnchantedGlintItem;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import java.util.List;
 
 public class DebugUtilityItem extends EnchantedGlintItem {
@@ -54,7 +54,7 @@ public class DebugUtilityItem extends EnchantedGlintItem {
     }
 
     public static void sendFeedbackMessage(boolean requiresGameRule, ServerPlayer serverPlayer, Component message) {
-        if (requiresGameRule && !serverPlayer.serverLevel().getGameRules().getBoolean(ChrysalisRegistry.RULE_SEND_DEBUG_UTILITY_FEEDBACK)) return;
+        if (requiresGameRule && !serverPlayer.serverLevel().getGameRules().getBoolean(ChrysalisGameRules.RULE_SEND_DEBUG_UTILITY_FEEDBACK)) return;
         serverPlayer.sendSystemMessage(message);
     }
 }

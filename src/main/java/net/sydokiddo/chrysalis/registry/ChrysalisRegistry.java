@@ -4,8 +4,6 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.core.Holder;
@@ -19,7 +17,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.GameRules;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
@@ -43,71 +40,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class ChrysalisRegistry {
-
-    // region Game Rules
-
-    public static GameRules.Key<GameRules.BooleanValue> RULE_PASSIVE_GRIEFING =
-        GameRuleRegistry.register(
-        "passiveGriefing",
-        GameRules.Category.MOBS,
-        GameRuleFactory.createBooleanRule(true)
-    );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_DRAGON_GRIEFING =
-        GameRuleRegistry.register(
-        "dragonGriefing",
-        GameRules.Category.MOBS,
-        GameRuleFactory.createBooleanRule(true)
-    );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_WITHER_GRIEFING =
-        GameRuleRegistry.register(
-        "witherGriefing",
-        GameRules.Category.MOBS,
-        GameRuleFactory.createBooleanRule(true)
-    );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_DESTROY_ITEMS_IN_EXPLOSIONS =
-        GameRuleRegistry.register(
-        "destroyItemsInExplosions",
-        GameRules.Category.DROPS,
-        GameRuleFactory.createBooleanRule(true)
-    );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_PLAYER_DEATH_ITEM_DESPAWNING =
-        GameRuleRegistry.register(
-        "playerDeathItemDespawning",
-        GameRules.Category.PLAYER,
-        GameRuleFactory.createBooleanRule(true)
-    );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_DO_NETHER_PORTAL_ACTIVATING =
-        GameRuleRegistry.register(
-        "doNetherPortalActivating",
-        GameRules.Category.UPDATES,
-        GameRuleFactory.createBooleanRule(true)
-    );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_DO_END_PORTAL_ACTIVATING =
-        GameRuleRegistry.register(
-        "doEndPortalActivating",
-        GameRules.Category.UPDATES,
-        GameRuleFactory.createBooleanRule(true)
-    );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_BEDS_EXPLODE =
-        GameRuleRegistry.register(
-        "bedsExplode",
-        GameRules.Category.DROPS,
-        GameRuleFactory.createBooleanRule(true)
-    );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_RESPAWN_ANCHORS_EXPLODE =
-        GameRuleRegistry.register(
-        "respawnAnchorsExplode",
-        GameRules.Category.DROPS,
-        GameRuleFactory.createBooleanRule(true)
-    );
-    public static GameRules.Key<GameRules.BooleanValue> RULE_SEND_DEBUG_UTILITY_FEEDBACK =
-        GameRuleRegistry.register(
-        "sendDebugUtilityFeedback",
-        GameRules.Category.CHAT,
-        GameRuleFactory.createBooleanRule(true)
-    );
-
-    // endregion
 
     // region Entity Data
 

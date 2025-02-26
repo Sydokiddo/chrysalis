@@ -29,6 +29,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
+import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
@@ -71,7 +72,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
 
         if (hasMobUUID(itemStack)) {
-            String mobName = hasMobName(itemStack) ? getCustomData(itemStack).copyTag().getString(mobNameString) : ItemHelper.UNKNOWN_COMPONENT.getString();
+            String mobName = hasMobName(itemStack) ? getCustomData(itemStack).copyTag().getString(mobNameString) : ComponentHelper.UNKNOWN.getString();
             list.add(Component.translatable(this.getDescriptionId() + ".linked_mob_tooltip", mobName).withStyle(ChatFormatting.GRAY));
         }
 

@@ -7,9 +7,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -52,12 +52,12 @@ public abstract class MobMixin extends LivingEntity {
     }
 
     /**
-     * Mobs being able to pick up items is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     * Mobs being able to pick up items is now determined by the mobWorldInteractions game rule rather than the mobGriefing game rule.
      **/
 
     @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-    private GameRules.Key<GameRules.BooleanValue> chrysalis$mobsPickingUpItemsPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
-        return ChrysalisRegistry.RULE_PASSIVE_GRIEFING;
+    private GameRules.Key<GameRules.BooleanValue> chrysalis$mobsPickingUpItemsWorldInteractionsGameRule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+        return ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS;
     }
 
     /**

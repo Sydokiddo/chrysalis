@@ -5,7 +5,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.PowderSnowBlock;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,12 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PowderSnowBlockMixin {
 
     /**
-     * Mobs that are on fire and destroy powder snow when going into it is now determined by the passiveGriefing gamerule rather than the mobGriefing gamerule.
+     * Mobs that are on fire and destroy powder snow when going into it is now determined by the mobWorldInteractions game rule rather than the mobGriefing game rule.
      **/
 
     @ModifyArg(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-    private GameRules.Key<GameRules.BooleanValue> chrysalis$powderSnowPassiveGriefingGamerule(GameRules.Key<GameRules.BooleanValue> oldValue) {
-        return ChrysalisRegistry.RULE_PASSIVE_GRIEFING;
+    private GameRules.Key<GameRules.BooleanValue> chrysalis$powderSnowWorldInteractionsGameRule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+        return ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS;
     }
 
     /**

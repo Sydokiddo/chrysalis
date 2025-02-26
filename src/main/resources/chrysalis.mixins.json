@@ -64,6 +64,7 @@
     "items.TridentItemMixin",
     "misc.EnchantCommandMixin",
     "misc.LevelMixin",
+    "misc.LevelMixin$ServerExplosionMixin",
     "misc.LevelMixin$SnowFixMixin",
     "misc.WeavingMobEffectMixin",
     "util.SimpleParticleTypeAccessor",
