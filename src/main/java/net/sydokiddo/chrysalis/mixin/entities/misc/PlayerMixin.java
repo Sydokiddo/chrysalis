@@ -180,6 +180,7 @@ public abstract class PlayerMixin extends LivingEntity {
     @Inject(method = "getHurtSound", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$damageSoundData(DamageSource damageSource, CallbackInfoReturnable<SoundEvent> cir) {
 
+        if (Chrysalis.registryAccess == null) return;
         Optional<DamageSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.DAMAGE_SOUND_DATA).stream().findFirst();
 
         if (optional.isPresent()) {
