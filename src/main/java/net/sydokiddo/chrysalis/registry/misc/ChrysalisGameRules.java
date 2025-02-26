@@ -6,6 +6,8 @@ import net.minecraft.world.level.GameRules;
 
 public class ChrysalisGameRules {
 
+    // region Game Rules
+
     public static GameRules.Key<GameRules.BooleanValue>
         RULE_MOB_WORLD_INTERACTIONS = registerBooleanGameRule("mobWorldInteractions", GameRules.Category.MOBS, true),
         RULE_DRAGON_GRIEFING = registerBooleanGameRule("dragonGriefing", GameRules.Category.MOBS, true),
@@ -19,6 +21,10 @@ public class ChrysalisGameRules {
         RULE_SEND_DEBUG_UTILITY_FEEDBACK = registerBooleanGameRule("sendDebugUtilityFeedback", GameRules.Category.CHAT, true)
     ;
 
+    // endregion
+
+    // region Registry
+
     @SuppressWarnings("all")
     private static GameRules.Key<GameRules.BooleanValue> registerBooleanGameRule(String name, GameRules.Category category, boolean defaultValue) {
         return GameRuleRegistry.register(name, category, GameRuleFactory.createBooleanRule(defaultValue));
@@ -28,4 +34,8 @@ public class ChrysalisGameRules {
     private static GameRules.Key<GameRules.IntegerValue> registerIntegerGameRule(String name, GameRules.Category category, int defaultValue) {
         return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue));
     }
+
+    public static void registerGameRules() {}
+
+    // endregion
 }

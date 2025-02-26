@@ -79,12 +79,13 @@ public class ChrysalisRegistry {
         ChrysalisCreativeModeTabs.registerCreativeTabs();
         ChrysalisSoundEvents.registerSounds();
         ChrysalisSoundEvents.registerStructureMusic();
-        ChrysalisDamageSources.registerDamageSources();
-        ChrysalisCriteriaTriggers.registerCriteriaTriggers();
         ChrysalisEntities.registerEntities();
         ChrysalisMemoryModules.MEMORY_MODULES.register();
+        ChrysalisDamageSources.registerDamageSources();
         ChrysalisAttributes.registerAttributes();
         ChrysalisEffects.registerStatusEffects();
+        ChrysalisGameRules.registerGameRules();
+        ChrysalisCriteriaTriggers.registerCriteriaTriggers();
 
         PayloadTypeRegistry.playS2C().register(CameraShakePayload.TYPE, CameraShakePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC);
