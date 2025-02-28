@@ -56,6 +56,8 @@ public class ChrysalisExampleRegistry {
 
     // region Example Item Registries
 
+    public static final Item EXAMPLE_ICON = ChrysalisDebugItems.registerItem("example_icon", IconItem::new, ChrysalisDebugItems.debugUtilitySettings());
+
     public static final Item EXAMPLE_TOOL = ChrysalisDebugItems.registerItem("example_tool",
         properties -> new SwordItem(ToolMaterial.IRON, 3, -2.4F, properties), new Item.Properties());
 

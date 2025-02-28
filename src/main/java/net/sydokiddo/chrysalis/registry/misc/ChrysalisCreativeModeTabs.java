@@ -28,20 +28,20 @@ public class ChrysalisCreativeModeTabs {
             .build()
         );
 
-        ItemGroupEvents.modifyEntriesEvent(CHRYSALIS_CREATIVE_TAB).register(content -> {
-            content.accept(ChrysalisDebugItems.HEAL);
-            addDebugItems(content);
-        });
+        ItemGroupEvents.modifyEntriesEvent(CHRYSALIS_CREATIVE_TAB).register(content -> addDebugItems(content, null));
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries -> {
             if (!entries.shouldShowOpRestrictedItems()) return;
-            entries.addAfter(Items.DEBUG_STICK, ChrysalisDebugItems.HEAL);
-            addDebugItems(entries);
+            addDebugItems(entries, Items.DEBUG_STICK);
             entries.addAfter(Items.PAINTING, Items.ENDER_DRAGON_SPAWN_EGG, Items.WITHER_SPAWN_EGG);
         });
     }
 
-    private static void addDebugItems(FabricItemGroupEntries itemGroupEntries) {
+    private static void addDebugItems(FabricItemGroupEntries itemGroupEntries, Item addAfter) {
+
+        if (addAfter != null) itemGroupEntries.addAfter(addAfter, ChrysalisDebugItems.HEAL);
+        else itemGroupEntries.accept(ChrysalisDebugItems.HEAL);
+
         itemGroupEntries.addAfter(ChrysalisDebugItems.HEAL, ChrysalisDebugItems.FILL_HUNGER, ChrysalisDebugItems.FILL_OXYGEN, ChrysalisDebugItems.GIVE_RESISTANCE,
         ChrysalisDebugItems.CLEAR_EFFECTS, ChrysalisDebugItems.TELEPORT_TO_SPAWNPOINT, ChrysalisDebugItems.TELEPORT_WAND, ChrysalisDebugItems.KILL_WAND, ChrysalisDebugItems.AGGRO_WAND,
         ChrysalisDebugItems.TAME_MOB, ChrysalisDebugItems.RIDE_MOB);
