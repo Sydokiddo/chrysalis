@@ -17,6 +17,7 @@ public class ChrysalisTags {
     public static final TagKey<Item>
         BANNER_PATTERNS = registerItemTag("banner_patterns"),
         CAMPFIRES = registerItemTag("campfires"),
+        CANNOT_GIVE_WITH_COMMANDS = registerItemTag("cannot_give_with_commands"),
         CHARGES_RESPAWN_ANCHORS = registerItemTag("charges_respawn_anchors"),
         CONTAINER_ITEMS = registerItemTag("containers"),
         COPPER_BLOCK_ITEMS = registerItemTag("copper_blocks"),

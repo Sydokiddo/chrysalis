@@ -11,6 +11,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.registry.items.custom_items.IconItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.*;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import java.util.function.Function;
@@ -19,6 +20,7 @@ public class ChrysalisDebugItems {
 
     // region Debug Items
 
+    public static final Item ICON = registerItem("icon", IconItem::new, debugUtilitySettings());
     public static final Item HEAL = registerItem("heal", HealItem::new, debugUtilitySettings());
     public static final Item FILL_HUNGER = registerItem("fill_hunger", FillHungerItem::new, debugUtilitySettings());
     public static final Item FILL_OXYGEN = registerItem("fill_oxygen", FillOxygenItem::new, debugUtilitySettings());
@@ -35,7 +37,7 @@ public class ChrysalisDebugItems {
 
     // region Registry
 
-    private static Item.Properties debugUtilitySettings() {
+    public static Item.Properties debugUtilitySettings() {
         return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC);
     }
 

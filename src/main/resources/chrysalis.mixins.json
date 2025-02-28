@@ -64,6 +64,7 @@
     "items.TooltipMixin$ItemEnchantmentsMixin",
     "items.TridentItemMixin",
     "misc.EnchantCommandMixin",
+    "misc.GiveCommandMixin",
     "misc.LevelMixin",
     "misc.LevelMixin$ServerExplosionMixin",
     "misc.LevelMixin$SnowFixMixin",

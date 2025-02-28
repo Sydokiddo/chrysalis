@@ -29,6 +29,8 @@
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
 
+  "item.chrysalis.icon": "Chrysalis Icon",
+
   "item.chrysalis.heal": "Heal",
   "item.chrysalis.heal.desc": "Sets to Maximum Health",
   "item.chrysalis.fill_hunger": "Fill Hunger",
@@ -129,6 +131,8 @@
 
   "gui.chrysalis.commands.game_event.success": "Played game event %1$s from %2$s",
   "gui.chrysalis.commands.game_event.fail.invalid": "There is no game event with type \"%s\"",
+
+  "gui.chrysalis.commands.give.fail.invalid_item": "Could not give item to target",
 
   "gui.chrysalis.commands.hat.success": "Placed %1$s on %2$s's head",
   "gui.chrysalis.commands.hat.fail.no_item": "You are not holding a valid item to place on your head",
@@ -339,6 +343,7 @@
 
   "tag.item.chrysalis.banner_patterns": "Banner Patterns",
   "tag.item.chrysalis.campfires": "Campfires",
+  "tag.item.chrysalis.cannot_give_with_commands": "Cannot Give With Commands",
   "tag.item.chrysalis.charges_respawn_anchors": "Charges Respawn Anchors",
   "tag.item.chrysalis.containers": "Containers",
   "tag.item.chrysalis.copper_blocks": "Copper Blocks",
