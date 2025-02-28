@@ -17,6 +17,10 @@ import java.util.Collection;
 @Mixin(GiveCommand.class)
 public class GiveCommandMixin {
 
+    /**
+     * Items in the cannot_give_with_commands tag will result in a command failure when trying to give them with the /give command.
+     **/
+
     @Inject(method = "giveItem", at = @At("HEAD"), cancellable = true)
     private static void chrysalis$preventGivingItem(CommandSourceStack commandSourceStack, ItemInput itemInput, Collection<ServerPlayer> collection, int amount, CallbackInfoReturnable<Integer> cir) throws CommandSyntaxException {
 

@@ -7,6 +7,10 @@ import net.minecraft.world.level.Level;
 
 public class IconItem extends Item {
 
+    /**
+     * The base class for icon items used for creative mode tabs, which are removed from the player's inventory if they somehow manage to get one.
+     **/
+
     public IconItem(Properties properties) {
         super(properties);
     }
