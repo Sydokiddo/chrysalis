@@ -19,6 +19,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
+import net.sydokiddo.chrysalis.registry.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
@@ -72,6 +73,7 @@ public class ChrysalisRegistry {
         ServerWorldEvents.LOAD.register((server, world) -> Chrysalis.registryAccess = server.registryAccess());
 
         ChrysalisDebugItems.registerDebugItems();
+        ChrysalisDataComponents.registerDataComponents();
         ChrysalisCreativeModeTabs.registerCreativeTabs();
         ChrysalisSoundEvents.registerSounds();
         ChrysalisSoundEvents.registerStructureMusic();

@@ -4,7 +4,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -28,6 +27,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.registry.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
@@ -48,18 +48,18 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         mobUuidString = "mob_uuid"
     ;
 
-    private static final DataComponentType<CustomData> customDataComponent = DataComponents.CUSTOM_DATA;
+    private static final DataComponentType<CustomData> linkedMobDataComponent = ChrysalisDataComponents.LINKED_MOB_DATA;
 
-    private static CustomData getCustomData(ItemStack itemStack) {
-        return itemStack.getOrDefault(customDataComponent, CustomData.EMPTY);
+    private static CustomData getLinkedMobData(ItemStack itemStack) {
+        return itemStack.getOrDefault(linkedMobDataComponent, CustomData.EMPTY);
     }
 
     private static boolean hasMobName(ItemStack itemStack) {
-        return getCustomData(itemStack).contains(mobNameString);
+        return getLinkedMobData(itemStack).contains(mobNameString);
     }
 
     public static boolean hasMobUUID(ItemStack itemStack) {
-        return getCustomData(itemStack).contains(mobUuidString);
+        return getLinkedMobData(itemStack).contains(mobUuidString);
     }
 
     // endregion
@@ -72,7 +72,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
 
         if (hasMobUUID(itemStack)) {
-            String mobName = hasMobName(itemStack) ? getCustomData(itemStack).copyTag().getString(mobNameString) : ComponentHelper.UNKNOWN.getString();
+            String mobName = hasMobName(itemStack) ? getLinkedMobData(itemStack).copyTag().getString(mobNameString) : ComponentHelper.UNKNOWN.getString();
             list.add(Component.translatable(this.getDescriptionId() + ".linked_mob_tooltip", mobName).withStyle(ChatFormatting.GRAY));
         }
 
@@ -91,7 +91,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
             if (hasMobUUID(itemStack)) {
 
-                Mob linkedMob = (Mob) serverPlayer.serverLevel().getEntity(getCustomData(itemStack).copyTag().getUUID(mobUuidString));
+                Mob linkedMob = (Mob) serverPlayer.serverLevel().getEntity(getLinkedMobData(itemStack).copyTag().getUUID(mobUuidString));
 
                 if (linkedMob != null) {
 
@@ -124,7 +124,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                 }
 
                 ItemStack unlinkedWand = itemStack.copy();
-                unlinkedWand.remove(customDataComponent);
+                unlinkedWand.remove(linkedMobDataComponent);
                 player.setItemInHand(interactionHand, unlinkedWand);
 
             } else {
@@ -132,7 +132,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                 addSparkleParticles(mob);
                 ItemStack linkedWand = itemStack.copy();
 
-                CustomData.update(customDataComponent, linkedWand, (compoundTag) -> {
+                CustomData.update(linkedMobDataComponent, linkedWand, (compoundTag) -> {
                     compoundTag.putString(mobNameString, livingEntity.getName().getString());
                     compoundTag.putUUID(mobUuidString, livingEntity.getUUID());
                 });
