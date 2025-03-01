@@ -69,6 +69,11 @@
     "misc.LevelMixin$ServerExplosionMixin",
     "misc.LevelMixin$SnowFixMixin",
     "misc.WeavingMobEffectMixin",
+    "testing.BlockBehaviorMixin",
+    "testing.BlockBehaviorMixin$BlockMixin",
+    "testing.EndPortalBlockMixin",
+    "testing.TestEndermanMixin",
+    "testing.TestEntityMixin",
     "util.SimpleParticleTypeAccessor",
     "util.WoodTypeAccessor"
   ],
@@ -88,7 +93,9 @@
     "misc.ScreenshotMixin",
     "misc.ScreenshotMixin$MainMixin",
     "misc.SplashTextMixin",
-    "misc.SplashTextMixin$TitleScreenMixin"
+    "misc.SplashTextMixin$TitleScreenMixin",
+    "testing.EndRodParticleMixin",
+    "testing.LevelEventHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
