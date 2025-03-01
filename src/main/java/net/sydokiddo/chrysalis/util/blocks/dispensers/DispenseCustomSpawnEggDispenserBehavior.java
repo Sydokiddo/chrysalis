@@ -21,7 +21,7 @@ public class DispenseCustomSpawnEggDispenserBehavior implements DispenseItemBeha
     public static final DispenseCustomSpawnEggDispenserBehavior INSTANCE = new DispenseCustomSpawnEggDispenserBehavior();
 
     @Override
-    public @NotNull ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {
+    public @NotNull ItemStack dispense(@NotNull BlockSource blockSource, ItemStack itemStack) {
 
         if (!(itemStack.getItem() instanceof CSpawnEggItem cSpawnEggItem)) return itemStack;
         Direction direction = blockSource.state().getValue(DispenserBlock.FACING);

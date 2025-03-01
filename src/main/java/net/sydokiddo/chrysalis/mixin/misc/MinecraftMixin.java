@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.mixin.misc;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.Optionull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.User;
@@ -24,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Environment(EnvType.CLIENT)
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
 
@@ -33,7 +30,7 @@ public class MinecraftMixin {
     @Shadow @Nullable public Screen screen;
 
     /**
-     * Replaces the vanilla splash text manager with Chrysalis's custom one.
+     * Replaces the vanilla splash text manager with ChrysalisMod's custom one.
      **/
 
     @Inject(method = "getSplashManager", at = @At("RETURN"), cancellable = true)
@@ -42,7 +39,7 @@ public class MinecraftMixin {
     }
 
     /**
-     * Gets situational music from Chrysalis's custom queued music system.
+     * Gets situational music from ChrysalisMod's custom queued music system.
      **/
 
     @Inject(method = "getSituationalMusic", at = @At("RETURN"), cancellable = true)
@@ -66,8 +63,6 @@ public class MinecraftMixin {
         if (this.player != null) EntityDataHelper.playItemDroppingSound(this.player);
     }
 
-    @SuppressWarnings("unused")
-    @Environment(EnvType.CLIENT)
     @Mixin(MusicManager.class)
     public static class MusicManagerMixin {
 

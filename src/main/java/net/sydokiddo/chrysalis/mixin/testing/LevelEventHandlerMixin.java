@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.mixin.testing;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.LevelEventHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.awt.*;
 
-@Environment(EnvType.CLIENT)
 @Mixin(LevelEventHandler.class)
 public class LevelEventHandlerMixin {
 

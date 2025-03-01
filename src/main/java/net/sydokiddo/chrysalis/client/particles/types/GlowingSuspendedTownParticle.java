@@ -1,13 +1,11 @@
 package net.sydokiddo.chrysalis.client.particles.types;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-@Environment(EnvType.CLIENT)
 public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
 
     /**
@@ -57,7 +55,6 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
 
     // region Providers
 
-    @Environment(EnvType.CLIENT)
     public static class GlowingSuspendedTownParticleProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
@@ -67,7 +64,7 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
             GlowingSuspendedTownParticle particle = new GlowingSuspendedTownParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, this.spriteSet, false);
             particle.pickSprite(this.spriteSet);
             particle.setColor(1.0F, 1.0F, 1.0F);

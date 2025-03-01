@@ -26,7 +26,7 @@ public class CSpawnEggItem extends SpawnEggItem {
      **/
 
     @Override
-    public @NotNull Optional<Mob> spawnOffspringFromSpawnEgg(Player player, Mob mob, EntityType<? extends Mob> entityType, ServerLevel serverLevel, Vec3 vec3, ItemStack itemStack) {
+    public @NotNull Optional<Mob> spawnOffspringFromSpawnEgg(@NotNull Player player, @NotNull Mob mob, @NotNull EntityType<? extends Mob> entityType, @NotNull ServerLevel serverLevel, @NotNull Vec3 vec3, @NotNull ItemStack itemStack) {
 
         if (this.mobOffspring == null) return super.spawnOffspringFromSpawnEgg(player, mob, entityType, serverLevel, vec3, itemStack);
         Mob babyMob = this.mobOffspring.create(serverLevel, EntitySpawnReason.SPAWN_ITEM_USE);

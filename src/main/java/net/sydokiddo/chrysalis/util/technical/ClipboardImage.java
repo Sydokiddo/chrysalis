@@ -1,14 +1,11 @@
 package net.sydokiddo.chrysalis.util.technical;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 
-@Environment(EnvType.CLIENT)
 public record ClipboardImage(Image image) implements Transferable {
 
     /**

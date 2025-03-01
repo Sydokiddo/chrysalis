@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
@@ -30,7 +28,7 @@ import java.util.Objects;
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
-    @Unique private Entity entity = (Entity) (Object) this;
+    @Unique private Entity chrysalis$entity = (Entity) (Object) this;
     @Shadow public abstract boolean isAttackable();
     @Shadow public abstract boolean isAlive();
 
@@ -38,7 +36,6 @@ public abstract class EntityMixin {
      * Allows for items in the increased_pick_radius tag to be able to select entities within a wider range when far away from them.
      **/
 
-    @Environment(EnvType.CLIENT)
     @Inject(method = "getPickRadius", at = @At("RETURN"), cancellable = true)
     private void chrysalis$increasedPickRadius(CallbackInfoReturnable<Float> cir) {
 
@@ -48,7 +45,7 @@ public abstract class EntityMixin {
         ItemStack offHandItem = minecraft.player.getOffhandItem();
 
         if (mainHandItem.is(ChrysalisDebugItems.KILL_WAND) && !this.isAttackable()) return;
-        if (mainHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS) || offHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.entity) > 8 ? 0.5F : 0.0F);
+        if (mainHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS) || offHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.chrysalis$entity) > 8 ? 0.5F : 0.0F);
     }
 
     /**
@@ -58,7 +55,7 @@ public abstract class EntityMixin {
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventEntityRendering(double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
         Holder<MobEffect> invisibility = MobEffects.INVISIBILITY;
-        if (this.entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(invisibility) && Objects.requireNonNull(livingEntity.getEffect(invisibility)).getAmplifier() > 0) cir.setReturnValue(false);
+        if (this.chrysalis$entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(invisibility) && Objects.requireNonNull(livingEntity.getEffect(invisibility)).getAmplifier() > 0) cir.setReturnValue(false);
     }
 
     /**
@@ -67,14 +64,13 @@ public abstract class EntityMixin {
 
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
     private void chrysalis$debugItemInteractions(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!this.isAlive() || !(this.entity instanceof LivingEntity livingEntity)) return;
+        if (!this.isAlive() || !(this.chrysalis$entity instanceof LivingEntity livingEntity)) return;
         ItemStack itemStack = player.getItemInHand(interactionHand);
         if (itemStack.getItem() instanceof AggroWandItem) cir.setReturnValue(AggroWandItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof TameMobItem) cir.setReturnValue(TameMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof RideMobItem) cir.setReturnValue(RideMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
     }
 
-    @SuppressWarnings("unused")
     @Mixin(EntityType.class)
     public static abstract class EntityTypeMixin {
 

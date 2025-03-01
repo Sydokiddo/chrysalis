@@ -22,7 +22,7 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
     public static final DispenseContainerMobDispenserBehavior INSTANCE = new DispenseContainerMobDispenserBehavior();
 
     @Override
-    public @NotNull ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {
+    public @NotNull ItemStack dispense(BlockSource blockSource, @NotNull ItemStack itemStack) {
 
         BlockPos blockPos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
         ServerLevel level = blockSource.level();
@@ -41,7 +41,7 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
 
             } else if (itemStack.getItem() instanceof MobInFluidBucketItem mobInFluidBucketItem) {
 
-                mobInFluidBucketItem.emptyContents(null, level, blockPos, null);
+                mobInFluidBucketItem.emptyContents(null, level, blockPos, null, itemStack);
                 mobInFluidBucketItem.checkExtraContent(null, level, itemStack, blockPos);
 
                 return new ItemStack(Items.BUCKET);

@@ -8,7 +8,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import java.awt.*;
 
 @SuppressWarnings("unused")
@@ -97,8 +97,8 @@ public class ComponentHelper {
     // region Fonts
 
     public static final ResourceLocation
-        FIVE_FONT = Chrysalis.id("five"),
-        FIVE_ALT_FONT = Chrysalis.id("five_alt")
+        FIVE_FONT = ChrysalisMod.id("five"),
+        FIVE_ALT_FONT = ChrysalisMod.id("five_alt")
     ;
 
     public static final String TOOLTIP_ICONS_NAME = "tooltip_icons";

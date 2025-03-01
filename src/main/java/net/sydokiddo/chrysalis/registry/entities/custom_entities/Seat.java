@@ -28,13 +28,13 @@ public class Seat extends Entity {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {}
+    protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {}
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compoundTag) {}
+    protected void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {}
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag compoundTag) {}
+    protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {}
 
     @Override
     public void tick() {
@@ -50,12 +50,12 @@ public class Seat extends Entity {
     }
 
     @Override
-    protected boolean canRide(Entity entity) {
+    protected boolean canRide(@NotNull Entity entity) {
         return true;
     }
 
     @Override
-    public @NotNull Vec3 getDismountLocationForPassenger(LivingEntity livingEntity) {
+    public @NotNull Vec3 getDismountLocationForPassenger(@NotNull LivingEntity livingEntity) {
 
         Vec3 safeVec;
         Direction original = this.getDirection();
@@ -70,19 +70,19 @@ public class Seat extends Entity {
     }
 
     @Override
-    protected void addPassenger(Entity entity) {
+    protected void addPassenger(@NotNull Entity entity) {
         if (entity instanceof TamableAnimal tamableAnimal) tamableAnimal.setInSittingPose(true);
         super.addPassenger(entity);
     }
 
     @Override
-    protected void removePassenger(Entity entity) {
+    protected void removePassenger(@NotNull Entity entity) {
         if (entity instanceof TamableAnimal tamableAnimal) tamableAnimal.setInSittingPose(false);
         super.removePassenger(entity);
     }
 
     @Override
-    public boolean hurtServer(ServerLevel serverLevel, DamageSource damageSource, float damageAmount) {
+    public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
         return false;
     }
 }

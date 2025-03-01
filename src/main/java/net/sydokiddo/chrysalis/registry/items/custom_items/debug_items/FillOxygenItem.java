@@ -29,7 +29,7 @@ public class FillOxygenItem extends DebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }
@@ -39,7 +39,7 @@ public class FillOxygenItem extends DebugUtilityItem {
      **/
 
     @Override
-    public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResult use(@NotNull Level level, Player player, @NotNull InteractionHand interactionHand) {
 
         if (player.getAirSupply() < player.getMaxAirSupply()) {
 

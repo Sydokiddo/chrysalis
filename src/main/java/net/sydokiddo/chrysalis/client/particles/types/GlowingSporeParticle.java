@@ -1,14 +1,12 @@
 package net.sydokiddo.chrysalis.client.particles.types;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-@Environment(EnvType.CLIENT)
 public class GlowingSporeParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
 
     /**
@@ -41,7 +39,6 @@ public class GlowingSporeParticle extends FadingEmissiveParticle implements Part
 
     // region Providers
 
-    @Environment(EnvType.CLIENT)
     public static class GlowingSporeParticleProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
@@ -51,7 +48,7 @@ public class GlowingSporeParticle extends FadingEmissiveParticle implements Part
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
             return new GlowingSporeParticle(clientLevel, this.spriteSet, x, y, z, velocityX, velocityY, velocityZ);
         }
     }

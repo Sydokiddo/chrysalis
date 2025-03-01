@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.client.particles.types;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
@@ -10,7 +8,6 @@ import net.minecraft.util.Mth;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
 public class FadingEmissiveParticle extends TextureSheetParticle implements ParticleCommonMethods {
 
     /**

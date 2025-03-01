@@ -1,6 +1,5 @@
 package net.sydokiddo.chrysalis.util.sounds.music;
 
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -10,7 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
 import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ public class StructureMusic {
     private static void setCurrentStructure(Player player, Level level, String structureLocation) {
 
         @Nullable ResourceLocation oldStructure = playerStructures.get(player);
-        ResourceLocation newStructure = Chrysalis.id("none");
+        ResourceLocation newStructure = ChrysalisMod.id("none");
 
         if (!Objects.equals(structureLocation, null)) newStructure = ResourceLocation.parse(structureLocation);
         if (Objects.equals(oldStructure, newStructure)) return;

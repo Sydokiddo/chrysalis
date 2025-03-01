@@ -1,8 +1,6 @@
 package net.sydokiddo.chrysalis.client.particles.types;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -12,7 +10,6 @@ import net.sydokiddo.chrysalis.client.particles.options.DustExplosionParticleOpt
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
 public class DustExplosionParticle extends ExplodeParticle implements ParticleCommonMethods {
 
     /**
@@ -51,7 +48,7 @@ public class DustExplosionParticle extends ExplodeParticle implements ParticleCo
     }
 
     @Override
-    public void render(VertexConsumer vertexConsumer, Camera camera, float tickRate) {
+    public void render(@NotNull VertexConsumer vertexConsumer, @NotNull Camera camera, float tickRate) {
 
         Vector3f vector3f = new Vector3f(this.startingColor).lerp(this.endingColor, ((float) this.age + tickRate) / ((float) this.lifetime + 1.0F) / 1.5F);
         this.rCol = vector3f.x();
@@ -70,7 +67,6 @@ public class DustExplosionParticle extends ExplodeParticle implements ParticleCo
 
     // region Providers
 
-    @Environment(EnvType.CLIENT)
     public static class DustExplosionParticleProvider implements ParticleProvider<DustExplosionParticleOptions> {
 
         private final SpriteSet spriteSet;

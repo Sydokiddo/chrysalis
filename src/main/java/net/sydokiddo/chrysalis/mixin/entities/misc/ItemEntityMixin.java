@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
 
-    @Unique ItemEntity itemEntity = (ItemEntity) (Object) this;
+    @Unique ItemEntity chrysalis$itemEntity = (ItemEntity) (Object) this;
     @Shadow public abstract ItemStack getItem();
     @Shadow public abstract void setExtendedLifetime();
     @Shadow private int pickupDelay;
@@ -39,7 +39,7 @@ public abstract class ItemEntityMixin extends Entity {
      * Adds the glow color entity data to item entities.
      **/
 
-    @Unique private final String glowColorTag = "GlowColor";
+    @Unique private final String chrysalis$glowColorTag = "glow_color";
 
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
     private void chrysalis$defineItemEntityTags(SynchedEntityData.Builder builder, CallbackInfo info) {
@@ -48,17 +48,17 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))
     private void chrysalis$addItemEntityTags(CompoundTag compoundTag, CallbackInfo info) {
-        compoundTag.putInt(this.glowColorTag, ItemHelper.getItemGlowColor(this.itemEntity));
+        compoundTag.putInt(this.chrysalis$glowColorTag, ItemHelper.getItemGlowColor(this.chrysalis$itemEntity));
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("RETURN"))
     private void chrysalis$readItemEntityTags(CompoundTag compoundTag, CallbackInfo info) {
-        if (compoundTag.get(this.glowColorTag) != null) ItemHelper.setItemGlowColor(this.itemEntity, compoundTag.getInt(this.glowColorTag));
+        if (compoundTag.get(this.chrysalis$glowColorTag) != null) ItemHelper.setItemGlowColor(this.chrysalis$itemEntity, compoundTag.getInt(this.chrysalis$glowColorTag));
     }
 
     @Override
     public int getTeamColor() {
-        if (this.getTeam() == null) return ItemHelper.getItemGlowColor(this.itemEntity);
+        if (this.getTeam() == null) return ItemHelper.getItemGlowColor(this.chrysalis$itemEntity);
         return super.getTeamColor();
     }
 

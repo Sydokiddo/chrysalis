@@ -1,8 +1,6 @@
 package net.sydokiddo.chrysalis.client.entities.rendering;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -12,7 +10,6 @@ import net.sydokiddo.chrysalis.client.entities.rendering.render_states.Chrysalis
 import net.sydokiddo.chrysalis.registry.entities.custom_entities.Seat;
 import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
 public class SeatRenderer extends EntityRenderer<Seat, ChrysalisEntityRenderState> {
 
     public SeatRenderer(EntityRendererProvider.Context context) {
@@ -25,10 +22,10 @@ public class SeatRenderer extends EntityRenderer<Seat, ChrysalisEntityRenderStat
     }
 
     @Override
-    public boolean shouldRender(Seat seat, Frustum frustum, double x, double y, double z) {
+    public boolean shouldRender(@NotNull Seat seat, @NotNull Frustum frustum, double x, double y, double z) {
         return false;
     }
 
     @Override
-    protected void renderNameTag(ChrysalisEntityRenderState entityRenderState, Component component, PoseStack poseStack, MultiBufferSource multiBufferSource, int lightLevel) {}
+    protected void renderNameTag(@NotNull ChrysalisEntityRenderState entityRenderState, @NotNull Component component, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int lightLevel) {}
 }

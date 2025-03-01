@@ -5,7 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.ServerExplosion;
 import net.minecraft.world.level.storage.LevelSummary;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.helpers.WorldGenHelper;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,10 +25,9 @@ public class LevelMixin {
 
     @Inject(method = "isExperimental", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$disableExperimentalWarning(CallbackInfoReturnable<Boolean> cir) {
-        if (Chrysalis.IS_DEBUG) cir.setReturnValue(false);
+        if (ChrysalisMod.IS_DEBUG) cir.setReturnValue(false);
     }
 
-    @SuppressWarnings("unused")
     @Mixin(ServerLevel.class)
     public static abstract class SnowFixMixin {
 
@@ -44,7 +43,6 @@ public class LevelMixin {
         }
     }
 
-    @SuppressWarnings("unused")
     @Mixin(ServerExplosion.class)
     public static abstract class ServerExplosionMixin {
 

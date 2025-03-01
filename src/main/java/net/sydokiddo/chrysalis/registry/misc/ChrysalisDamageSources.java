@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis.registry.misc;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 
 public class ChrysalisDamageSources {
 
@@ -23,7 +23,7 @@ public class ChrysalisDamageSources {
     // region Registry
 
     private static ResourceKey<DamageType> register(String name) {
-        return ResourceKey.create(Registries.DAMAGE_TYPE, Chrysalis.id(name));
+        return ResourceKey.create(Registries.DAMAGE_TYPE, ChrysalisMod.id(name));
     }
 
     public static void registerDamageSources() {}

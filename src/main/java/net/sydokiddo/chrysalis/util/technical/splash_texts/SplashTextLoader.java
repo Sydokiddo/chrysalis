@@ -2,8 +2,6 @@ package net.sydokiddo.chrysalis.util.technical.splash_texts;
 
 import com.google.gson.JsonElement;
 import com.mojang.math.Axis;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.Util;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.Mth;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.util.technical.file.SimpleFileLoader;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.types.SimpleSplashText;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.types.SplashText;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-@Environment(EnvType.CLIENT)
 public class SplashTextLoader implements SimpleFileLoader {
 
     /**
@@ -35,7 +32,7 @@ public class SplashTextLoader implements SimpleFileLoader {
 
     @Override
     public ResourceLocation getFabricId() {
-        return Chrysalis.id("splashes");
+        return ChrysalisMod.id("splashes");
     }
 
     public List<SplashText> getSplashTexts() {
@@ -55,10 +52,10 @@ public class SplashTextLoader implements SimpleFileLoader {
     private void addSplashes(ResourceLocation resourceLocation, JsonElement jsonElement) {
 
         if (!jsonElement.isJsonObject()) {
-            Chrysalis.LOGGER.error("Unable to load splash text file: {}, file must be an object containing splash text data", resourceLocation);
+            ChrysalisMod.LOGGER.error("Unable to load splash text file: {}, file must be an object containing splash text data", resourceLocation);
             return;
         } else {
-            Chrysalis.LOGGER.info("Detected splash text file: {}", resourceLocation);
+            ChrysalisMod.LOGGER.info("Detected splash text file: {}", resourceLocation);
         }
 
         SplashTextGroup.fromJson(jsonElement.getAsJsonObject()).getTexts().filter(SplashText::validate).forEach(this::addSplashes);

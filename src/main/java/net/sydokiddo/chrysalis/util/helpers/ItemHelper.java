@@ -74,7 +74,7 @@ public class ItemHelper {
         if (itemEnchantments == null || itemEnchantments.isEmpty()) return noEnchantments;
 
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
-            if (entry.getKey().is(enchantment)) return EnchantmentHelper.getItemEnchantmentLevel(entry.getKey(), itemStack);
+            if (entry.getKey().is(enchantment)) return EnchantmentHelper.getTagEnchantmentLevel(entry.getKey(), itemStack);
             return noEnchantments;
         }
 

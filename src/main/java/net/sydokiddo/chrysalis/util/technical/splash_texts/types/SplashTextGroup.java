@@ -3,14 +3,11 @@ package net.sydokiddo.chrysalis.util.technical.splash_texts.types;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Style;
 import java.util.List;
 import com.mojang.serialization.Codec;
 import java.util.stream.Stream;
 
-@Environment(EnvType.CLIENT)
 public record SplashTextGroup(Style defaultStyle, List<SplashText> splashTexts) {
 
     public static final Codec<SplashTextGroup> CODEC = RecordCodecBuilder.create(instance -> instance.group(

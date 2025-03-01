@@ -1,7 +1,6 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
 import com.mojang.blaze3d.shaders.FogShape;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,6 +9,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.Mob;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
@@ -38,7 +38,7 @@ public class EventHelper {
      **/
 
     public static void sendCameraShake(ServerPlayer serverPlayer, int time, int strength, int frequency) {
-        ServerPlayNetworking.send(serverPlayer, new CameraShakePayload(time, strength, frequency));
+        PacketDistributor.sendToPlayer(serverPlayer, new CameraShakePayload(time, strength, frequency));
     }
 
     public static void sendCameraShakeToNearbyPlayers(Entity entity, Entity ignoredEntity, double range, int time, int strength, int frequency) {
@@ -49,7 +49,7 @@ public class EventHelper {
     }
 
     public static void resetCameraShake(ServerPlayer serverPlayer) {
-        ServerPlayNetworking.send(serverPlayer, new CameraShakeResetPayload(1));
+        PacketDistributor.sendToPlayer(serverPlayer, new CameraShakeResetPayload(1));
     }
 
     public static void resetCameraShakeForNearbyPlayers(Entity entity, Entity ignoredEntity, double range) {
@@ -83,7 +83,7 @@ public class EventHelper {
      **/
 
     public static void sendMusic(ServerPlayer serverPlayer, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
-        ServerPlayNetworking.send(serverPlayer, new QueuedMusicPayload(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
+        PacketDistributor.sendToPlayer(serverPlayer, new QueuedMusicPayload(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
         if (replaceCurrentMusic) resetMusicFade(serverPlayer);
     }
 
@@ -125,7 +125,7 @@ public class EventHelper {
     }
 
     public static void clearMusicOnServer(ServerPlayer serverPlayer, boolean shouldFade) {
-        ServerPlayNetworking.send(serverPlayer, new ClearMusicPayload(shouldFade));
+        PacketDistributor.sendToPlayer(serverPlayer, new ClearMusicPayload(shouldFade));
         if (!shouldFade) resetMusicFade(serverPlayer);
     }
 
@@ -137,7 +137,7 @@ public class EventHelper {
     }
 
     public static void resetMusicFade(ServerPlayer serverPlayer) {
-        ServerPlayNetworking.send(serverPlayer, new ResetMusicFadePayload(0));
+        PacketDistributor.sendToPlayer(serverPlayer, new ResetMusicFadePayload(0));
     }
 
     public static void resetMusicFadeForNearbyPlayers(Entity entity, Entity ignoredEntity, double range) {

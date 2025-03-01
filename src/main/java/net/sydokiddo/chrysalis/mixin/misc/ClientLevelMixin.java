@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.mixin.misc;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -24,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Environment(EnvType.CLIENT)
 @Mixin(ClientLevel.class)
 public class ClientLevelMixin {
 
@@ -49,8 +46,6 @@ public class ClientLevelMixin {
         }
     }
 
-    @SuppressWarnings("unused")
-    @Environment(EnvType.CLIENT)
     @Mixin(WeatherEffectRenderer.class)
     public static class WeatherFixMixin {
 

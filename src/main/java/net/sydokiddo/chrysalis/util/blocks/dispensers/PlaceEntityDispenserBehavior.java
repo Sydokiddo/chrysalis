@@ -43,7 +43,7 @@ public class PlaceEntityDispenserBehavior implements DispenseItemBehavior {
     }
 
     @Override
-    public @NotNull ItemStack dispense(BlockSource blockSource, ItemStack itemStack) {
+    public @NotNull ItemStack dispense(BlockSource blockSource, @NotNull ItemStack itemStack) {
 
         Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
         BlockPos blockPos = blockSource.pos().relative(direction);

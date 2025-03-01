@@ -4,7 +4,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.component.CustomData;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import java.util.function.UnaryOperator;
 
 public class ChrysalisDataComponents {
@@ -19,7 +19,7 @@ public class ChrysalisDataComponents {
 
     @SuppressWarnings("all")
     private static <T> DataComponentType<T> registerDataComponent(String name, UnaryOperator<DataComponentType.Builder<T>> unaryOperator) {
-        return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, Chrysalis.id(name), unaryOperator.apply(DataComponentType.builder()).build());
+        return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, ChrysalisMod.id(name), unaryOperator.apply(DataComponentType.builder()).build());
     }
 
     public static void registerDataComponents() {}

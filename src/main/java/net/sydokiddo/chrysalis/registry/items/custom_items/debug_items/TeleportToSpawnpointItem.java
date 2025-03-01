@@ -32,7 +32,7 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, Item.@NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }
@@ -42,7 +42,7 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
      **/
 
     @Override
-    public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResult use(Level level, Player player, @NotNull InteractionHand interactionHand) {
 
         ItemStack itemStack = player.getItemInHand(interactionHand);
 

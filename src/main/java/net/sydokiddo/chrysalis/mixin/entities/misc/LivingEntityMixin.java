@@ -25,7 +25,7 @@ import java.util.Objects;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 
-    @Unique LivingEntity livingEntity = (LivingEntity) (Object) this;
+    @Unique LivingEntity chrysalis$livingEntity = (LivingEntity) (Object) this;
     @Shadow protected abstract void dropEquipment(ServerLevel serverLevel);
     @Shadow public abstract double getAttributeValue(Holder<Attribute> holder);
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> holder);
@@ -37,7 +37,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     /**
-     * Adds Chrysalis's new attributes to living entities.
+     * Adds ChrysalisMod's new attributes to living entities.
      **/
 
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
@@ -54,13 +54,11 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventLootDropping(ServerLevel serverLevel, DamageSource damageSource, CallbackInfo info) {
-        if (damageSource.is(ChrysalisDamageSources.KILL_WAND) && !(this.livingEntity instanceof Player)) {
+        if (damageSource.is(ChrysalisDamageSources.KILL_WAND) && !(this.chrysalis$livingEntity instanceof Player)) {
             info.cancel();
             this.dropEquipment(serverLevel);
         }
     }
-
-    // region Reworked Mob Visibility
 
     /**
      * Mobs are now affected by the blindness status effect, which decreases their visibility percentage depending on the amplifier of the effect.
@@ -93,14 +91,12 @@ public abstract class LivingEntityMixin extends Entity {
         if (this.hasEffect(invisibility) && Objects.requireNonNull(this.getEffect(invisibility)).getAmplifier() > 0) cir.setReturnValue(0.0F);
     }
 
-    // endregion
-
     /**
      * Refreshes any mob sight rendering effects when the effect wears out.
      **/
 
     @Inject(method = "tickEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;updateGlowingStatus()V"))
     private void chrysalis$updateMobSightStatuses(CallbackInfo info) {
-        if (this.getActiveEffects().stream().noneMatch(mobEffectInstance -> mobEffectInstance.getEffect() instanceof MobSightEffect)) MobSightEffect.tryRefreshingPostEffect(this.livingEntity);
+        if (this.getActiveEffects().stream().noneMatch(mobEffectInstance -> mobEffectInstance.getEffect() instanceof MobSightEffect)) MobSightEffect.tryRefreshingPostEffect(this.chrysalis$livingEntity);
     }
 }

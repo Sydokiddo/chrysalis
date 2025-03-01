@@ -17,21 +17,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Entity.class)
 public abstract class TestEntityMixin implements EntityAccess {
 
-    @Unique Entity entity = (Entity) (Object) this;
+    @Unique Entity chrysalis$entity = (Entity) (Object) this;
     @Shadow public abstract Level level();
 
     @Inject(at = @At("TAIL"), method = "walkingStepSound")
     private void chrysalis$emitPulsationParticleFromWalking(BlockPos blockPos, BlockState blockState, CallbackInfo info) {
-        this.emitPulsationParticle(false);
+        this.chrysalis$emitPulsationParticle(false);
     }
 
     @Inject(at = @At("TAIL"), method = "playMuffledStepSound")
-    private void chrysalis$emitPulsationParticleFromMuffledWalking(BlockState blockState, CallbackInfo info) {
-        this.emitPulsationParticle(true);
+    private void chrysalis$emitPulsationParticleFromMuffledWalking(BlockState blockState, BlockPos blockPos, CallbackInfo info) {
+        this.chrysalis$emitPulsationParticle(true);
     }
 
     @Unique
-    private void emitPulsationParticle(boolean muffled) {
-        ChrysalisTesting.emitPulsationParticle(this.level(), this.entity, Direction.UP, 0, muffled);
+    private void chrysalis$emitPulsationParticle(boolean muffled) {
+        ChrysalisTesting.emitPulsationParticle(this.level(), this.chrysalis$entity, Direction.UP, 0, muffled);
     }
 }

@@ -25,7 +25,7 @@ public class EnchantCommandMixin {
      * Allows for the /enchant command to be able to enchant any item, even if said enchantment cannot normally be applied in survival mode.
      **/
 
-    @ModifyExpressionValue(method = "enchant", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/Enchantment;canEnchant(Lnet/minecraft/world/item/ItemStack;)Z"))
+    @ModifyExpressionValue(method = "enchant", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;supportsEnchantment(Lnet/minecraft/core/Holder;)Z"))
     private static boolean chrysalis$allowAllEnchantments(boolean original) {
         return true;
     }
@@ -47,7 +47,7 @@ public class EnchantCommandMixin {
     @Inject(method = "enchant", at = @At(value = "HEAD"), cancellable = true)
     private static void chrysalis$preventEnchantingIfValueIsTooLow(CommandSourceStack commandSourceStack, Collection<? extends Entity> collection, Holder<Enchantment> holder, int enchantmentLevel, CallbackInfoReturnable<Integer> cir) {
         for (Entity entity : collection) {
-            if (entity instanceof LivingEntity livingEntity && enchantmentLevel <= EnchantmentHelper.getItemEnchantmentLevel(holder, livingEntity.getMainHandItem())) {
+            if (entity instanceof LivingEntity livingEntity && enchantmentLevel <= EnchantmentHelper.getTagEnchantmentLevel(holder, livingEntity.getMainHandItem())) {
                 Objects.requireNonNull(commandSourceStack.getPlayer()).sendSystemMessage(Component.translatable("gui.chrysalis.commands.enchant.fail.low_level").withStyle(ChatFormatting.RED));
                 cir.setReturnValue(0);
             }

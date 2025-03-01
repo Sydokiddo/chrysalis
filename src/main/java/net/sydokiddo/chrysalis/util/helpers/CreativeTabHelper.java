@@ -1,6 +1,5 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;

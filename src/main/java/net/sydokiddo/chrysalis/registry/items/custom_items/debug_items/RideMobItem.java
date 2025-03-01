@@ -15,6 +15,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
+import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class RideMobItem extends DebugUtilityItem {
@@ -28,7 +29,7 @@ public class RideMobItem extends DebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, Item.@NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }

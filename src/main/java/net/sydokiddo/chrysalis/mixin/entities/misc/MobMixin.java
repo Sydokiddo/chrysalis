@@ -11,6 +11,7 @@ import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,7 +28,7 @@ public abstract class MobMixin extends LivingEntity {
         super(entityType, level);
     }
 
-    @Unique private Mob mob = (Mob) (Object) this;
+    @Unique private Mob chrysalis$mob = (Mob) (Object) this;
     @Shadow @Nullable public abstract LivingEntity getTarget();
 
     /**
@@ -36,19 +37,19 @@ public abstract class MobMixin extends LivingEntity {
 
     @Inject(method = "setTarget", at = @At("TAIL"))
     private void chrysalis$startEncounterMusic(LivingEntity livingEntity, CallbackInfo info) {
-        if (this.getTarget() != null) this.tryToSendEncounterMusic(true);
+        if (this.getTarget() != null) this.chrysalis$tryToSendEncounterMusic(true);
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void chrysalis$refreshEncounterMusic(CallbackInfo info) {
-        if (!this.level().isClientSide() && this.getType().is(ChrysalisTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC) && this.tickCount % 20 == 0) this.tryToSendEncounterMusic(true);
-        this.tryToSendEncounterMusic(false);
+        if (!this.level().isClientSide() && this.getType().is(ChrysalisTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC) && this.tickCount % 20 == 0) this.chrysalis$tryToSendEncounterMusic(true);
+        this.chrysalis$tryToSendEncounterMusic(false);
     }
 
     @Unique
-    private void tryToSendEncounterMusic(boolean playOnFirstTick) {
-        if (!this.level().isClientSide() && this.mob instanceof EncounterMusicMob encounterMusicMob &&
-        (playOnFirstTick ? encounterMusicMob.chrysalis$shouldStartEncounterMusic() : encounterMusicMob.chrysalis$shouldRefreshEncounterMusic())) encounterMusicMob.chrysalis$sendEncounterMusic(this.mob, playOnFirstTick);
+    private void chrysalis$tryToSendEncounterMusic(boolean playOnFirstTick) {
+        if (!this.level().isClientSide() && this.chrysalis$mob instanceof EncounterMusicMob encounterMusicMob &&
+        (playOnFirstTick ? encounterMusicMob.chrysalis$shouldStartEncounterMusic() : encounterMusicMob.chrysalis$shouldRefreshEncounterMusic())) encounterMusicMob.chrysalis$sendEncounterMusic(this.chrysalis$mob, playOnFirstTick);
     }
 
     /**
@@ -65,7 +66,7 @@ public abstract class MobMixin extends LivingEntity {
      **/
 
     @Override
-    public boolean hurtServer(ServerLevel serverLevel, DamageSource damageSource, float damageAmount) {
+    public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
         return super.hurtServer(serverLevel, damageSource, EntityDataHelper.getDamageCap(this, damageSource, damageAmount));
     }
 }

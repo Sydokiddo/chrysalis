@@ -2,8 +2,6 @@ package net.sydokiddo.chrysalis.client.particles.types;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -18,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
 public class PulsationParticle extends FadingEmissiveParticle {
 
     /**
@@ -60,7 +57,7 @@ public class PulsationParticle extends FadingEmissiveParticle {
     }
 
     @Override
-    public void render(VertexConsumer vertexConsumer, Camera camera, float tickRate) {
+    public void render(@NotNull VertexConsumer vertexConsumer, Camera camera, float tickRate) {
 
         Vec3 cameraPosition = camera.getPosition();
         float x = (float) (Mth.lerp(tickRate, this.xo, this.x) - cameraPosition.x());
@@ -93,7 +90,6 @@ public class PulsationParticle extends FadingEmissiveParticle {
 
     // region Providers
 
-    @Environment(EnvType.CLIENT)
     public static class SmallPulsationParticleProvider implements ParticleProvider<SmallPulsationParticleOptions> {
 
         private final SpriteSet spriteSet;
@@ -110,7 +106,6 @@ public class PulsationParticle extends FadingEmissiveParticle {
         }
     }
 
-    @Environment(EnvType.CLIENT)
     public static class LargePulsationParticleProvider implements ParticleProvider<LargePulsationParticleOptions> {
 
         private final SpriteSet spriteSet;

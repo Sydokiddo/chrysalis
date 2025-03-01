@@ -72,7 +72,7 @@ public class DisenchantCommand {
 
                     if (itemStack.isEnchanted()) {
 
-                        if (enchantmentHolder != null && EnchantmentHelper.getItemEnchantmentLevel(enchantmentHolder, itemStack) == 0) throw failNoSpecificEnchantment.create(livingEntity.getName().getString());
+                        if (enchantmentHolder != null && EnchantmentHelper.getTagEnchantmentLevel(enchantmentHolder, itemStack) == 0) throw failNoSpecificEnchantment.create(livingEntity.getName().getString());
                         ItemEnchantments itemEnchantments = EnchantmentHelper.updateEnchantments(itemStack, mutable -> mutable.removeIf(enchantmentHolder != null ? holder -> holder == enchantmentHolder : Objects::nonNull));
 
                         if (enchantmentHolder == null) {

@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.client.particles.types;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
@@ -9,7 +7,6 @@ import net.sydokiddo.chrysalis.client.particles.options.ColoredDustPlumeParticle
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
 public class ColoredDustPlumeParticle extends DustPlumeParticle implements ParticleCommonMethods {
 
     /**
@@ -57,7 +54,6 @@ public class ColoredDustPlumeParticle extends DustPlumeParticle implements Parti
 
     // region Providers
 
-    @Environment(EnvType.CLIENT)
     public static class ColoredDustPlumeParticleProvider implements ParticleProvider<ColoredDustPlumeParticleOptions> {
 
         private final SpriteSet spriteSet;

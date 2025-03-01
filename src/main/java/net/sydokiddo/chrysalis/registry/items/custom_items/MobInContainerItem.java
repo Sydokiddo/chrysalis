@@ -38,7 +38,7 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
         super(properties);
         this.entityType = entityType;
         this.emptySound = emptySound;
-        this.returnItem = this.getCraftingRemainder().getItem();
+        this.returnItem = this.getCraftingRemainder(this.asItem().getDefaultInstance()).getItem();
     }
 
     /**

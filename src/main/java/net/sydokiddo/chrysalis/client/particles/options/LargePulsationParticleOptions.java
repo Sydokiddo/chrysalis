@@ -3,8 +3,6 @@ package net.sydokiddo.chrysalis.client.particles.options;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -15,7 +13,6 @@ import net.sydokiddo.chrysalis.registry.misc.ChrysalisParticles;
 import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
-@Environment(EnvType.CLIENT)
 public class LargePulsationParticleOptions extends SmallPulsationParticleOptions {
 
     /**

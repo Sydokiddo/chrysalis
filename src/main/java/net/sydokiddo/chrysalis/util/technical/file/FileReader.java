@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.util.technical.file;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -13,7 +11,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.io.BufferedReader;
 
-@Environment(EnvType.CLIENT)
 public class FileReader<Value> {
 
     private final Function<BufferedReader, Value> bufferReader;

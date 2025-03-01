@@ -34,6 +34,7 @@ public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSo
         Codec.BOOL.optionalFieldOf("for_testing", false).forGetter(BlockSoundData::forTesting)
     ).apply(instance, BlockSoundData::new));
 
+    @SuppressWarnings("deprecation")
     public SoundType toSoundType() {
         return new SoundType(this.volume(), this.pitch(), this.breakSound().value(), this.stepSound().value(), this.placeSound().value(), this.hitSound().value(), this.fallSound().value());
     }

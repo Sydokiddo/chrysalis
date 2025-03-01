@@ -1,11 +1,5 @@
 package net.sydokiddo.chrysalis.registry;
 
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
-import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -14,10 +8,16 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.client.ChrysalisClient;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
@@ -33,10 +33,7 @@ import net.sydokiddo.chrysalis.registry.entities.registry.ChrysalisEntities;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 import net.sydokiddo.chrysalis.registry.misc.*;
 import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class ChrysalisRegistry {
 
@@ -61,16 +58,20 @@ public class ChrysalisRegistry {
 
     // region Data Driven Features
 
-    public static final ResourceKey<? extends Registry<BlockPropertyData>> BLOCK_PROPERTY_DATA = RegistryHelper.registerBlockDataType("properties");
-    public static final ResourceKey<? extends Registry<BlockSoundData>> BLOCK_SOUND_DATA = RegistryHelper.registerBlockDataType("sound_group");
+    public static final ResourceKey<Registry<BlockPropertyData>> BLOCK_PROPERTY_DATA = RegistryHelper.registerBlockDataType("properties");
+    public static final ResourceKey<Registry<BlockSoundData>> BLOCK_SOUND_DATA = RegistryHelper.registerBlockDataType("sound_group");
 
     // endregion
 
-    public static void registerAll() {
+    public static void registerAll(IEventBus modBus) {
+
+        modBus.addListener(ChrysalisRegistry::onServerAboutToStart);
+        modBus.addListener(ChrysalisRegistry::onServerStarted);
+        modBus.addListener(ChrysalisRegistry::onServerStopping);
+        modBus.addListener(ChrysalisRegistry::onPlayerDisconnect);
+        modBus.addListener(ChrysalisRegistry::datapackRegistry);
 
         // region Base Registries
-
-        ServerWorldEvents.LOAD.register((server, world) -> Chrysalis.registryAccess = server.registryAccess());
 
         ChrysalisDebugItems.registerDebugItems();
         ChrysalisDataComponents.registerDataComponents();
@@ -84,12 +85,6 @@ public class ChrysalisRegistry {
         ChrysalisEffects.registerStatusEffects();
         ChrysalisGameRules.registerGameRules();
         ChrysalisCriteriaTriggers.registerCriteriaTriggers();
-
-        PayloadTypeRegistry.playS2C().register(CameraShakePayload.TYPE, CameraShakePayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC);
-
-        DynamicRegistries.register(BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
-        DynamicRegistries.register(BLOCK_SOUND_DATA, BlockSoundData.CODEC);
 
         // endregion
 
@@ -115,37 +110,59 @@ public class ChrysalisRegistry {
 
         // endregion
 
-        // region Custom Music
+        // region Payloads
+
+        PayloadTypeRegistry.playS2C().register(CameraShakePayload.TYPE, CameraShakePayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC);
 
         PayloadTypeRegistry.playS2C().register(QueuedMusicPayload.TYPE, QueuedMusicPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(StructureChangedPayload.TYPE, StructureChangedPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(ClearMusicPayload.TYPE, ClearMusicPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(ResetMusicFadePayload.TYPE, ResetMusicFadePayload.CODEC);
 
-        ServerWorldEvents.UNLOAD.register((server, level) -> {
-            if (!level.isClientSide()) return;
-            ChrysalisClient.clearMusicOnClient(false);
-            if (!StructureMusic.playerStructures.isEmpty()) StructureMusic.playerStructures.clear();
-        });
-
-        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
-            EventHelper.clearMusicOnServer(handler.getPlayer(), false);
-            StructureMusic.playerStructures.remove(handler.getPlayer());
-        });
-
-        ServerTickEvents.START_WORLD_TICK.register((serverLevel) -> {
-
-            if (StructureMusic.ticks > 0) {
-                StructureMusic.ticks -= 1;
-                return;
-            }
-
-            java.util.List<ServerPlayer> list = serverLevel.getPlayers(LivingEntity::isAlive);
-            for (ServerPlayer serverPlayer : list) StructureMusic.checkAllStructures(serverLevel, serverPlayer);
-
-            StructureMusic.ticks = 250;
-        });
-
         // endregion
+    }
+
+    @SubscribeEvent
+    public static void onServerAboutToStart(ServerAboutToStartEvent event) {
+        ChrysalisMod.registryAccess = event.getServer().registryAccess();
+    }
+
+    @SubscribeEvent
+    public static void onServerStarted(ServerStartedEvent event) {
+
+        if (StructureMusic.ticks > 0) {
+            StructureMusic.ticks -= 1;
+            return;
+        }
+
+        List<ServerPlayer> list = event.getServer().getPlayerList().getPlayers();
+
+        for (ServerPlayer serverPlayer : list) {
+            if (!serverPlayer.isAlive()) return;
+            StructureMusic.checkAllStructures(serverPlayer.serverLevel(), serverPlayer);
+        }
+
+        StructureMusic.ticks = 250;
+    }
+
+    @SubscribeEvent
+    public static void onServerStopping(ServerStoppingEvent event) {
+        ChrysalisClient.clearMusicOnClient(false);
+        if (!StructureMusic.playerStructures.isEmpty()) StructureMusic.playerStructures.clear();
+    }
+
+    @SubscribeEvent
+    public static void onPlayerDisconnect(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            EventHelper.clearMusicOnServer(serverPlayer, false);
+            StructureMusic.playerStructures.remove(serverPlayer);
+        }
+    }
+
+    @SubscribeEvent
+    public static void datapackRegistry(DataPackRegistryEvent.NewRegistry event) {
+        event.dataPackRegistry(BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
+        event.dataPackRegistry(BLOCK_SOUND_DATA, BlockSoundData.CODEC);
     }
 }

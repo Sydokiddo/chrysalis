@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.client.particles.types;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -11,7 +9,6 @@ import net.sydokiddo.chrysalis.client.particles.options.RotatingDustParticleOpti
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
 public class RotatingDustParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
 
     /**
@@ -70,7 +67,6 @@ public class RotatingDustParticle extends FadingEmissiveParticle implements Part
 
     // region Providers
 
-    @Environment(EnvType.CLIENT)
     public static class RotatingDustParticleProvider implements ParticleProvider<RotatingDustParticleOptions> {
 
         private final SpriteSet spriteSet;

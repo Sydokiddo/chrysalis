@@ -5,7 +5,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 
 public class ChrysalisAttributes {
 
@@ -21,7 +21,7 @@ public class ChrysalisAttributes {
     // region Registry
 
     public static Holder<Attribute> registerAttribute(String name, double baseValue, double minValue, double maxValue) {
-        return Registry.registerForHolder(BuiltInRegistries.ATTRIBUTE, Chrysalis.id(name), new RangedAttribute("attribute.chrysalis." + name, baseValue, minValue, maxValue).setSyncable(true));
+        return Registry.registerForHolder(BuiltInRegistries.ATTRIBUTE, ChrysalisMod.id(name), new RangedAttribute("attribute.chrysalis." + name, baseValue, minValue, maxValue).setSyncable(true));
     }
 
     public static void registerAttributes() {}

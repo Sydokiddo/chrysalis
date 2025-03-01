@@ -1,8 +1,6 @@
 package net.sydokiddo.chrysalis.mixin.misc;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
@@ -11,7 +9,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CustomCrosshairItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Final;
@@ -23,7 +21,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.function.Function;
 
-@Environment(EnvType.CLIENT)
 @Mixin(Gui.class)
 public class GuiMixin {
 
@@ -47,8 +44,6 @@ public class GuiMixin {
         return resourceLocation;
     }
 
-    @Environment(EnvType.CLIENT)
-    @SuppressWarnings("unused")
     @Mixin(GuiGraphics.class)
     public static abstract class GuiGraphicsMixin {
 
@@ -63,7 +58,7 @@ public class GuiMixin {
         private void chrysalis$renderWaxedIcon(Font font, ItemStack itemStack, int offsetX, int offsetY, String string, CallbackInfo info) {
             if (itemStack.is(ChrysalisTags.WAXED_BLOCK_ITEMS)) {
                 this.pose().pushPose();
-                this.blitSprite(RenderType::guiTexturedOverlay, Chrysalis.id("hud/waxed_icon"), offsetX - 1, offsetY - 1, 8, 8);
+                this.blitSprite(RenderType::guiTexturedOverlay, ChrysalisMod.id("hud/waxed_icon"), offsetX - 1, offsetY - 1, 8, 8);
                 this.pose().popPose();
             }
         }

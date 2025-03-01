@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.registry.misc;
 
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.level.GameRules;
 
 public class ChrysalisGameRules {
@@ -27,12 +25,12 @@ public class ChrysalisGameRules {
 
     @SuppressWarnings("all")
     private static GameRules.Key<GameRules.BooleanValue> registerBooleanGameRule(String name, GameRules.Category category, boolean defaultValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createBooleanRule(defaultValue));
+        return GameRules.register(name, category, GameRules.BooleanValue.create(defaultValue));
     }
 
     @SuppressWarnings("unused")
     private static GameRules.Key<GameRules.IntegerValue> registerIntegerGameRule(String name, GameRules.Category category, int defaultValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue));
+        return GameRules.register(name, category, GameRules.IntegerValue.create(defaultValue));
     }
 
     public static void registerGameRules() {}

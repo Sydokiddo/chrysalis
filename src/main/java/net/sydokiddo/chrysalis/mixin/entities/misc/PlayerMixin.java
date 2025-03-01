@@ -43,8 +43,8 @@ public abstract class PlayerMixin extends LivingEntity {
         super(entityType, level);
     }
 
-    @Unique private Player player = (Player) (Object) this;
-    @Unique private final String encounteredMobUuidTag = "encountered_mob_uuid";
+    @Unique private Player chrysalis$player = (Player) (Object) this;
+    @Unique private final String chrysalis$encounteredMobUuidTag = "encountered_mob_uuid";
 
     /**
      * Adds new data to players.
@@ -57,42 +57,42 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))
     private void chrysalis$addPlayerTags(CompoundTag compoundTag, CallbackInfo info) {
-        Optional<UUID> uUID = EntityDataHelper.getEncounteredMobUUID(this.player);
-        uUID.ifPresent(value -> compoundTag.putUUID(this.encounteredMobUuidTag, value));
+        Optional<UUID> uUID = EntityDataHelper.getEncounteredMobUUID(this.chrysalis$player);
+        uUID.ifPresent(value -> compoundTag.putUUID(this.chrysalis$encounteredMobUuidTag, value));
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("RETURN"))
     private void chrysalis$readPlayerTags(CompoundTag compoundTag, CallbackInfo info) {
-        if (compoundTag.get(this.encounteredMobUuidTag) != null) EntityDataHelper.setEncounteredMobUUID(this.player, compoundTag.getUUID(this.encounteredMobUuidTag));
+        if (compoundTag.get(this.chrysalis$encounteredMobUuidTag) != null) EntityDataHelper.setEncounteredMobUUID(this.chrysalis$player, compoundTag.getUUID(this.chrysalis$encounteredMobUuidTag));
     }
 
     /**
      * Clears an encounter mob's music if the player goes outside their range.
      **/
 
-    @Unique private boolean shouldClearMusic = false;
+    @Unique private boolean chrysalis$shouldClearMusic = false;
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void chrysalis$checkNearbyEncounteredMobs(CallbackInfo info) {
 
         if (this.level().isClientSide()) return;
-        Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(this.player);
+        Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(this.chrysalis$player);
 
-        if (this.shouldClearMusic && this.player instanceof ServerPlayer serverPlayer) {
+        if (this.chrysalis$shouldClearMusic && this.chrysalis$player instanceof ServerPlayer serverPlayer) {
             EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
             EventHelper.clearMusicOnServer(serverPlayer, true);
-            this.shouldClearMusic = false;
+            this.chrysalis$shouldClearMusic = false;
         }
 
         if (encounteredMobUuid.isPresent()) {
 
             List<? extends Mob> nearbyEncounteredMobs = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(128.0D), entity -> {
-                boolean defaultReturnValue = entity instanceof EncounterMusicMob encounterMusicMob && entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(this.player) <= encounterMusicMob.chrysalis$getFinalEncounterMusicRange();
+                boolean defaultReturnValue = entity instanceof EncounterMusicMob encounterMusicMob && entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(this.chrysalis$player) <= encounterMusicMob.chrysalis$getFinalEncounterMusicRange();
                 if (entity.getType().is(ChrysalisTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC)) return defaultReturnValue;
                 else return defaultReturnValue && entity.getTarget() != null;
             });
 
-            if (nearbyEncounteredMobs.isEmpty()) this.shouldClearMusic = true;
+            if (nearbyEncounteredMobs.isEmpty()) this.chrysalis$shouldClearMusic = true;
         }
     }
 
@@ -101,7 +101,7 @@ public abstract class PlayerMixin extends LivingEntity {
      **/
 
     @Unique
-    private BlockHitResult getPlayerPOVHitResult() {
+    private BlockHitResult chrysalis$getPlayerPOVHitResult() {
 
         Vec3 eyePosition = this.getEyePosition();
 
@@ -120,7 +120,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "isSecondaryUseActive", at = @At(value = "RETURN"), cancellable = true)
     private void chrysalis$allowBlockUseWhileSneaking(CallbackInfoReturnable<Boolean> cir) {
-        BlockHitResult blockHitResult = this.getPlayerPOVHitResult();
+        BlockHitResult blockHitResult = this.chrysalis$getPlayerPOVHitResult();
         if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(ChrysalisTags.ALLOWS_USE_WHILE_SNEAKING)) cir.setReturnValue(false);
     }
 
@@ -130,7 +130,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At(value = "TAIL"))
     private void chrysalis$playInventoryItemDroppingSound(ItemStack itemStack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
-        if (!itemStack.isEmpty() && retainOwnership) EntityDataHelper.playItemDroppingSound(this.player);
+        if (!itemStack.isEmpty() && retainOwnership) EntityDataHelper.playItemDroppingSound(this.chrysalis$player);
     }
 
     /**
@@ -167,7 +167,6 @@ public abstract class PlayerMixin extends LivingEntity {
         if (livingEntity != null && livingEntity.getType().is(ChrysalisTags.HIDDEN_FROM_STATISTICS_MENU)) cir.setReturnValue(true);
     }
 
-    @SuppressWarnings("unused")
     @Mixin(ServerPlayer.class)
     public abstract static class ServerPlayerMixin extends Player {
 

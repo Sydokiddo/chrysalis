@@ -36,7 +36,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, Item.@NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }
@@ -46,7 +46,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
      **/
 
     @Override
-    public @NotNull InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResult use(Level level, @NotNull Player player, @NotNull InteractionHand interactionHand) {
 
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 

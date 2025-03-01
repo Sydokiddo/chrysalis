@@ -31,7 +31,7 @@ public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavio
     }
 
     @Override
-    public @NotNull ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
+    public @NotNull ItemStack execute(BlockSource blockSource, @NotNull ItemStack itemStack) {
 
         Level level = blockSource.level();
         Position position = DispenserBlock.getDispensePosition(blockSource);
@@ -50,7 +50,7 @@ public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavio
     }
 
     @Override
-    protected void playSound(BlockSource blockSource) {
+    protected void playSound(@NotNull BlockSource blockSource) {
         if (this.shootingSound != null) blockSource.level().playSound(null, blockSource.pos(), this.shootingSound, SoundSource.BLOCKS, 1.0F, 1.0F);
         else blockSource.level().levelEvent(1002, blockSource.pos(), 0);
     }

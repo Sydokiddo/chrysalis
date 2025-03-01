@@ -13,7 +13,7 @@ import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
@@ -121,7 +121,7 @@ public class EntityDataHelper {
         float damageCap = (float) livingEntity.getAttributeValue(ChrysalisAttributes.DAMAGE_CAPACITY);
 
         if (originalDamage > damageCap && originalDamage < Float.MAX_VALUE && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            if (Chrysalis.IS_DEBUG && !livingEntity.level().isClientSide()) Chrysalis.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);
+            if (ChrysalisMod.IS_DEBUG && !livingEntity.level().isClientSide()) ChrysalisMod.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);
             return damageCap;
         }
 

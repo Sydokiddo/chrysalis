@@ -47,7 +47,6 @@ public class TooltipMixin extends Item {
         super.appendHoverText(itemStack, context, list, tooltipFlag);
     }
 
-    @SuppressWarnings("unused")
     @Mixin(ArmorTrim.class)
     public static abstract class ArmorTrimMixin {
 
@@ -68,7 +67,6 @@ public class TooltipMixin extends Item {
         }
     }
 
-    @SuppressWarnings("unused")
     @Mixin(ItemEnchantments.class)
     public static abstract class ItemEnchantmentsMixin {
 
@@ -91,7 +89,7 @@ public class TooltipMixin extends Item {
                     consumer.accept(Component.translatable("gui.chrysalis.item.enchantments").withStyle(ChatFormatting.GRAY));
                 }
 
-                HolderSet<Enchantment> holderSet = getTagOrEmpty(tooltipContext.registries());
+                HolderSet<Enchantment> holderSet = chrysalis$getTagOrEmpty(tooltipContext.registries());
 
                 for (Holder<Enchantment> holder : holderSet) {
                     int enchantmentAmount = this.enchantments.getInt(holder);
@@ -105,7 +103,7 @@ public class TooltipMixin extends Item {
         }
 
         @Unique
-        private static HolderSet<Enchantment> getTagOrEmpty(@Nullable HolderLookup.Provider provider) {
+        private static HolderSet<Enchantment> chrysalis$getTagOrEmpty(@Nullable HolderLookup.Provider provider) {
 
             if (provider != null) {
                 Optional<HolderSet.Named<Enchantment>> optional = provider.lookupOrThrow(Registries.ENCHANTMENT).get(EnchantmentTags.TOOLTIP_ORDER);
@@ -116,7 +114,6 @@ public class TooltipMixin extends Item {
         }
     }
 
-    @SuppressWarnings("unused")
     @Mixin(Enchantment.class)
     public static class EnchantmentMixin {
 

@@ -10,7 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.items.custom_items.IconItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.*;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
@@ -42,14 +42,14 @@ public class ChrysalisDebugItems {
     }
 
     public static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
-        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, Chrysalis.id(name));
+        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, ChrysalisMod.id(name));
         Block block = function.apply(properties.setId(resourceKey));
         registerItem(name, blockItemProperties -> new BlockItem(block, blockItemProperties), itemProperties);
         return Registry.register(BuiltInRegistries.BLOCK, resourceKey, block);
     }
 
     public static Item registerItem(String name, Function<Item.Properties, Item> function, Item.Properties properties) {
-        ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, Chrysalis.id(name));
+        ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, ChrysalisMod.id(name));
         Item item = function.apply(properties.setId(resourceKey));
         if (item instanceof BlockItem blockItem) blockItem.registerBlocks(Item.BY_BLOCK, item);
         return Registry.register(BuiltInRegistries.ITEM, resourceKey, item);

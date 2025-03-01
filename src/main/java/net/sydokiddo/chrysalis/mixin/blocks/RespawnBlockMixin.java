@@ -36,7 +36,6 @@ public abstract class RespawnBlockMixin {
         }
     }
 
-    @SuppressWarnings("unused")
     @Mixin(RespawnAnchorBlock.class)
     public static abstract class RespawnAnchorBlockMixin {
 

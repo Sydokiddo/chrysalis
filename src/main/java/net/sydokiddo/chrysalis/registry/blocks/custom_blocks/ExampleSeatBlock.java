@@ -23,7 +23,7 @@ public class ExampleSeatBlock extends Block implements SittableBlock {
     }
 
     @Override
-    protected @NotNull InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected @NotNull InteractionResult useItemOn(@NotNull ItemStack itemStack, @NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull InteractionHand interactionHand, @NotNull BlockHitResult blockHitResult) {
 
         if (SittableBlock.isSittable() && !SittableBlock.isSeatOccupied(level, blockPos)) {
             SittableBlock.startSitting(level, blockPos, player, 0.5D);

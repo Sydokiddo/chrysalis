@@ -9,13 +9,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.sydokiddo.chrysalis.registry.items.custom_items.EnchantedGlintItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
+import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class DebugUtilityItem extends EnchantedGlintItem {
@@ -29,7 +29,7 @@ public class DebugUtilityItem extends EnchantedGlintItem {
      **/
 
     @Override
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + ".desc").withStyle(ChatFormatting.BLUE)));
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }
@@ -39,7 +39,7 @@ public class DebugUtilityItem extends EnchantedGlintItem {
      **/
 
     @Override
-    public boolean canAttackBlock(BlockState blockState, Level level, BlockPos blockPos, Player player) {
+    public boolean canAttackBlock(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, Player player) {
         return !player.isCreative();
     }
 

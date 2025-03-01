@@ -1,8 +1,6 @@
 package net.sydokiddo.chrysalis.util.technical.splash_texts.types;
 
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.chat.Component;
@@ -13,7 +11,6 @@ import java.awt.*;
 import java.util.function.UnaryOperator;
 import com.mojang.serialization.Codec;
 
-@Environment(EnvType.CLIENT)
 public class AdvancedSplashText implements SplashText {
 
     private static final String defaultFont = "minecraft:default";

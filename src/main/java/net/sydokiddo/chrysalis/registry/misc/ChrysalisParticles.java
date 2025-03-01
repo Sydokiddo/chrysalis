@@ -1,9 +1,6 @@
 package net.sydokiddo.chrysalis.registry.misc;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.core.Registry;
@@ -14,7 +11,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.client.particles.types.*;
 import net.sydokiddo.chrysalis.client.particles.options.*;
 import net.sydokiddo.chrysalis.util.ChrysalisCoreRegistry;
@@ -24,7 +22,7 @@ import java.util.function.Function;
 
 public class ChrysalisParticles {
 
-    public static final ChrysalisCoreRegistry<ParticleType<?>> PARTICLES = ChrysalisCoreRegistry.create(Registries.PARTICLE_TYPE, Chrysalis.MOD_ID);
+    public static final ChrysalisCoreRegistry<ParticleType<?>> PARTICLES = ChrysalisCoreRegistry.create(Registries.PARTICLE_TYPE, ChrysalisMod.MOD_ID);
 
     // region Particles
 
@@ -69,9 +67,8 @@ public class ChrysalisParticles {
         return PARTICLES.register(name, SimpleParticleTypeAccessor.chrysalis$invokeSimpleParticleType(alwaysSpawn));
     }
 
-    @SuppressWarnings("all")
     private static <T extends ParticleOptions> ParticleType<T> registerAdvancedParticle(String name, boolean alwaysSpawn, Function<ParticleType<T>, MapCodec<T>> firstFunction, Function<ParticleType<T>, StreamCodec<? super RegistryFriendlyByteBuf, T>> secondFunction) {
-        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, Chrysalis.id(name), new ParticleType<T>(alwaysSpawn) {
+        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, ChrysalisMod.id(name), new ParticleType<T>(alwaysSpawn) {
 
             @Override
             public @NotNull MapCodec<T> codec() {
@@ -85,20 +82,18 @@ public class ChrysalisParticles {
         });
     }
 
-    @Environment(EnvType.CLIENT)
-    public static void registerParticles() {
-        ParticleFactoryRegistry registry = ParticleFactoryRegistry.getInstance();
-        registry.register(MEMORY_FLAME, FlameParticle.Provider::new);
-        registry.register(RADIANCE, SpellParticle.Provider::new);
-        registry.register(ARTHROPOD_SIGHT, SpellParticle.Provider::new);
-        registry.register(CREEPER_SIGHT, SpellParticle.Provider::new);
-        registry.register(ENDER_SIGHT, SpellParticle.Provider::new);
-        registry.register(COLORED_DUST_PLUME, ColoredDustPlumeParticle.ColoredDustPlumeParticleProvider::new);
-        registry.register(DUST_EXPLOSION, DustExplosionParticle.DustExplosionParticleProvider::new);
-        registry.register(ROTATING_DUST, RotatingDustParticle.RotatingDustParticleProvider::new);
-        registry.register(SPARKLE, SparkleParticle.SparkleParticleProvider::new);
-        registry.register(SMALL_PULSATION, PulsationParticle.SmallPulsationParticleProvider::new);
-        registry.register(LARGE_PULSATION, PulsationParticle.LargePulsationParticleProvider::new);
+    public static void registerParticles(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(MEMORY_FLAME, FlameParticle.Provider::new);
+        event.registerSpriteSet(RADIANCE, SpellParticle.Provider::new);
+        event.registerSpriteSet(ARTHROPOD_SIGHT, SpellParticle.Provider::new);
+        event.registerSpriteSet(CREEPER_SIGHT, SpellParticle.Provider::new);
+        event.registerSpriteSet(ENDER_SIGHT, SpellParticle.Provider::new);
+        event.registerSpriteSet(COLORED_DUST_PLUME, ColoredDustPlumeParticle.ColoredDustPlumeParticleProvider::new);
+        event.registerSpriteSet(DUST_EXPLOSION, DustExplosionParticle.DustExplosionParticleProvider::new);
+        event.registerSpriteSet(ROTATING_DUST, RotatingDustParticle.RotatingDustParticleProvider::new);
+        event.registerSpriteSet(SPARKLE, SparkleParticle.SparkleParticleProvider::new);
+        event.registerSpriteSet(SMALL_PULSATION, PulsationParticle.SmallPulsationParticleProvider::new);
+        event.registerSpriteSet(LARGE_PULSATION, PulsationParticle.LargePulsationParticleProvider::new);
     }
 
     // endregion

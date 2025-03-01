@@ -1,11 +1,8 @@
 package net.sydokiddo.chrysalis.util.technical.camera;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 
-@Environment(EnvType.CLIENT)
 public class CameraSetup {
 
     /**

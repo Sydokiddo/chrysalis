@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.client.particles.options.*;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceBlockDispenserBehavior;
@@ -34,13 +34,13 @@ import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
 public class ChrysalisExampleRegistry {
 
     /**
-     * A variety of examples for things that can be registered with Chrysalis.
+     * A variety of examples for things that can be registered with ChrysalisMod.
      * <p>
      * Note: Do not initialize any methods in this class unless you want a bunch of broken items, blocks, and other things in your game!
      **/
 
     public ChrysalisExampleRegistry() {
-        Chrysalis.LOGGER.warn("WARNING: {} example registry has been initialized.", Chrysalis.LOGGER.getName());
+        ChrysalisMod.LOGGER.warn("WARNING: {} example registry has been initialized.", ChrysalisMod.LOGGER.getName());
     }
 
     // region Example Potion Recipe Registries
@@ -112,7 +112,7 @@ public class ChrysalisExampleRegistry {
 
     // region Miscellaneous Example Registries
 
-    public static final ResourceLocation EXAMPLE_GAMEPLAY_LOOT_TABLE = RegistryHelper.registerCustomLootTable(Chrysalis.id("gameplay/example_gameplay_loot_table"));
+    public static final ResourceLocation EXAMPLE_GAMEPLAY_LOOT_TABLE = RegistryHelper.registerCustomLootTable(ChrysalisMod.id("gameplay/example_gameplay_loot_table"));
 
     public static void registerExampleStructureMusic() {
         RegistryHelper.registerStructureMusic("minecraft:village_plains", SoundEvents.MUSIC_CREDITS, 20, 600, false);

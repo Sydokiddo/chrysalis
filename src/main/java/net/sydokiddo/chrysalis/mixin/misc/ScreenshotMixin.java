@@ -1,14 +1,12 @@
 package net.sydokiddo.chrysalis.mixin.misc;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.main.Main;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.neoforged.fml.loading.FMLLoader;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.util.technical.ClipboardImage;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,7 +23,6 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-@Environment(EnvType.CLIENT)
 @Mixin(Screenshot.class)
 public class ScreenshotMixin {
 
@@ -36,8 +33,8 @@ public class ScreenshotMixin {
     @SuppressWarnings("all")
     @Inject(method = "method_1661", at = @At("TAIL"))
     private static void chrysalis$copyScreenshotToClipboard(NativeImage image, File file, Consumer<Component> messageReceiver, CallbackInfo info) {
-
-        if (FabricLoader.getInstance().isModLoaded("essential") || FabricLoader.getInstance().isModLoaded("optifine") || FabricLoader.getInstance().isModLoaded("optifabric") || Minecraft.ON_OSX) return;
+        
+        if (FMLLoader.getLoadingModList().getModFileById("essential") != null || FMLLoader.getLoadingModList().getModFileById("optifine") != null || FMLLoader.getLoadingModList().getModFileById("optifabric") != null || Minecraft.ON_OSX) return;
         Minecraft minecraft = Minecraft.getInstance();
 
         try {
@@ -56,13 +53,11 @@ public class ScreenshotMixin {
             minecraft.getNarrator().sayNow(message);
 
         } catch (Exception exception) {
-            Chrysalis.LOGGER.warn("Failed to copy screenshot to clipboard", exception);
+            ChrysalisMod.LOGGER.warn("Failed to copy screenshot to clipboard", exception);
             exception.printStackTrace();
         }
     }
 
-    @SuppressWarnings("unused")
-    @Environment(EnvType.CLIENT)
     @Mixin(Main.class)
     public static class MainMixin {
 

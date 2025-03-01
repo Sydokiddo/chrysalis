@@ -31,7 +31,7 @@ public abstract class ChorusPlantMixin extends PipeBlock {
      * Chorus plants are now placeable on any blocks in the chorus_plants_can_grow_on tag.
      **/
 
-    @Unique private static TagKey<Block> chorusPlantsCanGrowOnTag = ChrysalisTags.CHORUS_PLANTS_CAN_GROW_ON;
+    @Unique private static TagKey<Block> chrysalis$chorusPlantsCanGrowOnTag = ChrysalisTags.CHORUS_PLANTS_CAN_GROW_ON;
 
     @Inject(method = "getStateWithConnections", at = @At("HEAD"), cancellable = true)
     private static void chrysalis$chorusPlantGetStateWithConnections(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, CallbackInfoReturnable<BlockState> cir) {
@@ -47,7 +47,7 @@ public abstract class ChorusPlantMixin extends PipeBlock {
         Block block = blockState.getBlock();
         Block chorusFlower = Blocks.CHORUS_FLOWER;
 
-        cir.setReturnValue(blockState.trySetValue(DOWN, belowState.is(block) || belowState.is(chorusFlower) || belowState.is(chorusPlantsCanGrowOnTag))
+        cir.setReturnValue(blockState.trySetValue(DOWN, belowState.is(block) || belowState.is(chorusFlower) || belowState.is(chrysalis$chorusPlantsCanGrowOnTag))
         .trySetValue(UP, aboveState.is(block) || aboveState.is(chorusFlower))
         .trySetValue(NORTH, northState.is(block) || northState.is(chorusFlower))
         .trySetValue(EAST, eastState.is(block) || eastState.is(chorusFlower))
@@ -58,7 +58,7 @@ public abstract class ChorusPlantMixin extends PipeBlock {
     @Inject(method = "updateShape", at = @At("RETURN"), cancellable = true)
     private void chrysalis$chorusPlantUpdateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos adjacentPos, BlockState adjacentState, RandomSource randomSource, CallbackInfoReturnable<BlockState> cir) {
         if (blockState.canSurvive(levelReader, blockPos)) {
-            boolean canGrowFrom = adjacentState.is(this) || adjacentState.is(Blocks.CHORUS_FLOWER) || direction == Direction.DOWN && adjacentState.is(chorusPlantsCanGrowOnTag);
+            boolean canGrowFrom = adjacentState.is(this) || adjacentState.is(Blocks.CHORUS_FLOWER) || direction == Direction.DOWN && adjacentState.is(chrysalis$chorusPlantsCanGrowOnTag);
             cir.setReturnValue(blockState.setValue(PROPERTY_BY_DIRECTION.get(direction), canGrowFrom));
         }
     }
@@ -81,15 +81,14 @@ public abstract class ChorusPlantMixin extends PipeBlock {
             if (!levelReader.getBlockState(blockPos.above()).isAir() && !belowBlockState.isAir()) return false;
 
             BlockState belowRelative = levelReader.getBlockState(relativeBlockPos.below());
-            if (!belowRelative.is(this) && !belowRelative.is(chorusPlantsCanGrowOnTag)) continue;
+            if (!belowRelative.is(this) && !belowRelative.is(chrysalis$chorusPlantsCanGrowOnTag)) continue;
 
             return true;
         }
 
-        return belowBlockState.is(this) || belowBlockState.is(chorusPlantsCanGrowOnTag);
+        return belowBlockState.is(this) || belowBlockState.is(chrysalis$chorusPlantsCanGrowOnTag);
     }
 
-    @SuppressWarnings("unused")
     @Mixin(ChorusFlowerBlock.class)
     public static class ChorusFlowerBlockMixin {
 
@@ -97,11 +96,11 @@ public abstract class ChorusPlantMixin extends PipeBlock {
          * Chorus flowers are now placeable on and can tick on any blocks in the chorus_plants_can_grow_on tag.
          **/
 
-        @Unique private static TagKey<Block> chorusPlantsCanGrowOnTag = ChrysalisTags.CHORUS_PLANTS_CAN_GROW_ON;
+        @Unique private static TagKey<Block> chrysalis$chorusPlantsCanGrowOnTag = ChrysalisTags.CHORUS_PLANTS_CAN_GROW_ON;
 
         @Inject(method = "canSurvive", at = @At("HEAD"), cancellable = true)
         private void chrysalis$chorusFlowerCanBePlacedOn(BlockState blockState, LevelReader levelReader, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
-            if (levelReader.getBlockState(blockPos.below()).is(chorusPlantsCanGrowOnTag)) {
+            if (levelReader.getBlockState(blockPos.below()).is(chrysalis$chorusPlantsCanGrowOnTag)) {
                 cir.setReturnValue(true);
                 cir.cancel();
             }
@@ -109,16 +108,15 @@ public abstract class ChorusPlantMixin extends PipeBlock {
 
         @Redirect(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z", ordinal = 0))
         private boolean chrysalis$chorusFlowerRandomTick1(BlockState blockState, Block block) {
-            return blockState.is(chorusPlantsCanGrowOnTag);
+            return blockState.is(chrysalis$chorusPlantsCanGrowOnTag);
         }
 
         @Redirect(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z", ordinal = 3))
         private boolean chrysalis$chorusFlowerRandomTick2(BlockState blockState, Block block) {
-            return blockState.is(chorusPlantsCanGrowOnTag);
+            return blockState.is(chrysalis$chorusPlantsCanGrowOnTag);
         }
     }
 
-    @SuppressWarnings("unused")
     @Mixin(ChorusPlantFeature.class)
     public static class ChorusPlantFeatureMixin {
 

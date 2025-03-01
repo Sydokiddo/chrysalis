@@ -1,15 +1,12 @@
 package net.sydokiddo.chrysalis.registry.misc;
 
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.*;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
 
 public class ChrysalisCreativeModeTabs {
@@ -18,7 +15,7 @@ public class ChrysalisCreativeModeTabs {
      * Registers the debug utility items in the creative mode inventory.
      **/
 
-    private static final ResourceKey<CreativeModeTab> CHRYSALIS_CREATIVE_TAB = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Chrysalis.id(Chrysalis.MOD_ID));
+    private static final ResourceKey<CreativeModeTab> CHRYSALIS_CREATIVE_TAB = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ChrysalisMod.id(ChrysalisMod.MOD_ID));
 
     public static void registerCreativeTabs() {
 

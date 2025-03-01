@@ -7,7 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 
 @SuppressWarnings("unused")
 public class ChrysalisTags {
@@ -132,24 +132,24 @@ public class ChrysalisTags {
     // region Registry
 
     private static TagKey<Item> registerItemTag(String name) {
-        return TagKey.create(Registries.ITEM, Chrysalis.id(name));
+        return TagKey.create(Registries.ITEM, ChrysalisMod.id(name));
     }
 
     private static TagKey<Block> registerBlockTag(String name) {
-        return TagKey.create(Registries.BLOCK, Chrysalis.id(name));
+        return TagKey.create(Registries.BLOCK, ChrysalisMod.id(name));
     }
 
     private static TagKey<EntityType<?>> registerEntityTag(String name) {
-        return TagKey.create(Registries.ENTITY_TYPE, Chrysalis.id(name));
+        return TagKey.create(Registries.ENTITY_TYPE, ChrysalisMod.id(name));
     }
 
     private static TagKey<DamageType> registerDamageTypeTag(String name) {
-        return TagKey.create(Registries.DAMAGE_TYPE, Chrysalis.id(name));
+        return TagKey.create(Registries.DAMAGE_TYPE, ChrysalisMod.id(name));
     }
 
     @SuppressWarnings("all")
     private static TagKey<Biome> registerBiomeTag(String name) {
-        return TagKey.create(Registries.BIOME, Chrysalis.id(name));
+        return TagKey.create(Registries.BIOME, ChrysalisMod.id(name));
     }
 
     // endregion

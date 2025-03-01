@@ -1,13 +1,11 @@
 package net.sydokiddo.chrysalis.util.technical.splash_texts;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
 public class CSplashTextRenderer extends SplashRenderer {
 
     /**
@@ -22,7 +20,7 @@ public class CSplashTextRenderer extends SplashRenderer {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int x, Font font, int y) {
+    public void render(@NotNull GuiGraphics guiGraphics, int x, @NotNull Font font, int y) {
         SplashTextLoader.renderSplashText(guiGraphics, x, font, y, false, null, this.splashText);
     }
 }

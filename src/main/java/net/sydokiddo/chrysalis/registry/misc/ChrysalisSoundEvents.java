@@ -6,7 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvent;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,13 +38,13 @@ public class ChrysalisSoundEvents {
     // region Registry
 
     private static SoundEvent registerSoundEvent(String name) {
-        ResourceLocation resourceLocation = Chrysalis.id(name);
+        ResourceLocation resourceLocation = ChrysalisMod.id(name);
         SoundEvent soundEvent = SoundEvent.createVariableRangeEvent(resourceLocation);
         return Registry.register(BuiltInRegistries.SOUND_EVENT, resourceLocation, soundEvent);
     }
 
     private static Holder.Reference<SoundEvent> registerForHolder(String name) {
-        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, Chrysalis.id(name), SoundEvent.createVariableRangeEvent(Chrysalis.id(name)));
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, ChrysalisMod.id(name), SoundEvent.createVariableRangeEvent(ChrysalisMod.id(name)));
     }
 
     public static Map<String, Music> structures = new HashMap<>();

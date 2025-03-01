@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.client.particles.types;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -10,7 +8,6 @@ import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-@Environment(EnvType.CLIENT)
 public class FadingTrailParticle extends TextureSheetParticle implements ParticleCommonMethods {
 
     /**
@@ -66,7 +63,6 @@ public class FadingTrailParticle extends TextureSheetParticle implements Particl
 
     // region Providers
 
-    @Environment(EnvType.CLIENT)
     public static class FadingTrailParticleProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
@@ -76,7 +72,7 @@ public class FadingTrailParticle extends TextureSheetParticle implements Particl
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
             FadingTrailParticle particle = new FadingTrailParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ);
             particle.setAlpha(1.0F);
             particle.pickSprite(this.spriteSet);

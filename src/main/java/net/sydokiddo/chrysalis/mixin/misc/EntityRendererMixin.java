@@ -1,8 +1,6 @@
 package net.sydokiddo.chrysalis.mixin.misc;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -31,7 +29,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
-@Environment(EnvType.CLIENT)
 @Mixin(EntityRenderer.class)
 public abstract class EntityRendererMixin {
 
@@ -60,8 +57,6 @@ public abstract class EntityRendererMixin {
         }
     }
 
-    @SuppressWarnings("unused")
-    @Environment(EnvType.CLIENT)
     @Mixin(LivingEntityRenderer.class)
     public static abstract class LivingEntityRendererMixin {
 
@@ -75,8 +70,6 @@ public abstract class EntityRendererMixin {
         }
     }
 
-    @SuppressWarnings("unused")
-    @Environment(EnvType.CLIENT)
     @Mixin(HumanoidArmorLayer.class)
     public static class HumanoidArmorLayerMixin {
 
@@ -91,8 +84,6 @@ public abstract class EntityRendererMixin {
         }
     }
 
-    @SuppressWarnings("unused")
-    @Environment(EnvType.CLIENT)
     @Mixin(WingsLayer.class)
     public static class WingsLayerMixin {
 

@@ -23,16 +23,16 @@ public class ShearsItemMixin {
      * Any blocks in the mineable/shears tag will be mined faster with shears.
      **/
 
-    @Unique private static TagKey<Block> mineableWithShearsTag = ChrysalisTags.MINEABLE_WITH_SHEARS;
+    @Unique private static TagKey<Block> chrysalis$mineableWithShearsTag = ChrysalisTags.MINEABLE_WITH_SHEARS;
 
     @Inject(method = "createToolProperties", at = @At(value = "RETURN"), cancellable = true)
     private static void chrysalis$createShearProperties(CallbackInfoReturnable<Tool> cir) {
         HolderGetter<Block> holderGetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-        cir.setReturnValue(new Tool(List.of(Tool.Rule.minesAndDrops(holderGetter.getOrThrow(mineableWithShearsTag), 15.0F), Tool.Rule.overrideSpeed(holderGetter.getOrThrow(ChrysalisTags.MINEABLE_WITH_SHEARS), 15.0F)), 1.0F, 1));
+        cir.setReturnValue(new Tool(List.of(Tool.Rule.minesAndDrops(holderGetter.getOrThrow(chrysalis$mineableWithShearsTag), 15.0F), Tool.Rule.overrideSpeed(holderGetter.getOrThrow(ChrysalisTags.MINEABLE_WITH_SHEARS), 15.0F)), 1.0F, 1));
     }
 
     @Redirect(method = "mineBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private boolean chrysalis$mineBlockWithShears(BlockState blockState, Block block) {
-        return blockState.is(mineableWithShearsTag);
+        return blockState.is(chrysalis$mineableWithShearsTag);
     }
 }

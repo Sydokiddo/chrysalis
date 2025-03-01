@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.entities.custom_entities.Seat;
 
 public class ChrysalisEntities {
@@ -22,7 +22,7 @@ public class ChrysalisEntities {
 
     @SuppressWarnings("all")
     private static <T extends Entity> EntityType<T> registerEntityType(String name, EntityType.Builder<T> builder) {
-        ResourceKey<EntityType<?>> resourceKey = ResourceKey.create(Registries.ENTITY_TYPE, Chrysalis.id(name));
+        ResourceKey<EntityType<?>> resourceKey = ResourceKey.create(Registries.ENTITY_TYPE, ChrysalisMod.id(name));
         return Registry.register(BuiltInRegistries.ENTITY_TYPE, resourceKey, builder.build(resourceKey));
     }
 

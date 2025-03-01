@@ -1,6 +1,5 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;

@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.ParticleTypes;
@@ -26,13 +24,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
+import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class AggroWandItem extends ExtraReachDebugUtilityItem {
@@ -69,7 +68,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
 
         if (hasMobUUID(itemStack)) {
             String mobName = hasMobName(itemStack) ? getLinkedMobData(itemStack).copyTag().getString(mobNameString) : ComponentHelper.UNKNOWN.getString();
@@ -155,9 +154,8 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         addParticlesAroundEntity(mob, ParticleTypes.HAPPY_VILLAGER, 10, 1.5D);
     }
 
-    @Environment(EnvType.CLIENT)
     @Override
     public ResourceLocation getCrosshairTextureLocation() {
-        return Chrysalis.id("hud/aggro_wand_crosshair");
+        return ChrysalisMod.id("hud/aggro_wand_crosshair");
     }
 }

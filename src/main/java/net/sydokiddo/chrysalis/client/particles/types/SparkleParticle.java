@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.client.particles.types;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -10,7 +8,6 @@ import net.sydokiddo.chrysalis.client.particles.options.SparkleParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
 public class SparkleParticle extends FadingEmissiveParticle {
 
     /**
@@ -43,7 +40,6 @@ public class SparkleParticle extends FadingEmissiveParticle {
 
     // region Providers
 
-    @Environment(EnvType.CLIENT)
     public static class SparkleParticleProvider implements ParticleProvider<SparkleParticleOptions> {
 
         private final SpriteSet spriteSet;

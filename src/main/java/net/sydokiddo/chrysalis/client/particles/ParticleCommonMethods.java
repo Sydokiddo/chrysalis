@@ -2,14 +2,11 @@ package net.sydokiddo.chrysalis.client.particles;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
 public interface ParticleCommonMethods {
 
     /**

@@ -5,6 +5,7 @@ import net.minecraft.network.protocol.game.ClientboundSetCameraPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
 
 public class MobSightEffect extends GenericStatusEffect {
 
@@ -22,7 +23,7 @@ public class MobSightEffect extends GenericStatusEffect {
     }
 
     @Override
-    public void onEffectStarted(LivingEntity livingEntity, int amplifier) {
+    public void onEffectStarted(@NotNull LivingEntity livingEntity, int amplifier) {
         tryRefreshingPostEffect(livingEntity);
     }
 

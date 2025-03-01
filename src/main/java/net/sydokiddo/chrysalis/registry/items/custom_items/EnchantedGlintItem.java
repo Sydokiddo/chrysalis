@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.registry.items.custom_items;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class EnchantedGlintItem extends Item {
 
@@ -14,7 +15,7 @@ public abstract class EnchantedGlintItem extends Item {
     }
 
     @Override
-    public boolean isFoil(ItemStack itemStack) {
+    public boolean isFoil(@NotNull ItemStack itemStack) {
         return true;
     }
 }

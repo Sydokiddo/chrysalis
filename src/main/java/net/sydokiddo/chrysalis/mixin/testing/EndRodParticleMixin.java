@@ -1,7 +1,5 @@
 package net.sydokiddo.chrysalis.mixin.testing;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.client.particle.SimpleAnimatedParticle;
@@ -11,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import java.awt.*;
 
-@Environment(EnvType.CLIENT)
 @Mixin(EndRodParticle.class)
 public class EndRodParticleMixin extends SimpleAnimatedParticle {
 

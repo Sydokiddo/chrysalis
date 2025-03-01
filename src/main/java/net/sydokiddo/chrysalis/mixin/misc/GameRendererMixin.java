@@ -4,8 +4,6 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -36,11 +34,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
-@Environment(EnvType.CLIENT)
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
 
-    @Shadow protected abstract void setPostEffect(ResourceLocation resourceLocation);
+    @Shadow public abstract void setPostEffect(ResourceLocation resourceLocation);
     @Shadow @Final private Minecraft minecraft;
 
     /**
@@ -72,8 +69,6 @@ public abstract class GameRendererMixin {
         return poseStack;
     }
 
-    @SuppressWarnings("unused")
-    @Environment(EnvType.CLIENT)
     @Mixin(FogRenderer.class)
     public static class FogRendererMixin {
 
@@ -85,14 +80,14 @@ public abstract class GameRendererMixin {
 
         @Inject(method = "setupFog", at = @At(value = "RETURN"), cancellable = true)
         private static void chrysalis$applyCustomFog(Camera camera, FogRenderer.FogMode fogMode, Vector4f vector4f, float viewDistance, boolean thickFog, float tickDelta, CallbackInfoReturnable<FogParameters> cir) {
-            if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) cir.setReturnValue(EventHelper.createCustomFog(0.25F, 1.0F, FogShape.SPHERE, vector4f));
+            if (camera.getEntity() instanceof LivingEntity livingEntity && chrysalis$hasRadianceEffect(livingEntity)) cir.setReturnValue(EventHelper.createCustomFog(0.25F, 1.0F, FogShape.SPHERE, vector4f));
         }
 
         @Inject(method = "computeFogColor", at = @At(value = "RETURN"), cancellable = true)
         private static void chrysalis$applyCustomFogColor(Camera camera, float tickDelta, ClientLevel clientLevel, int int1, float float1, CallbackInfoReturnable<Vector4f> cir) {
-            if (camera.getEntity() instanceof LivingEntity livingEntity && hasRadianceEffect(livingEntity)) {
+            if (camera.getEntity() instanceof LivingEntity livingEntity && chrysalis$hasRadianceEffect(livingEntity)) {
 
-                MobEffectInstance radianceEffect = Objects.requireNonNull(livingEntity.getEffect(getRadianceEffect()));
+                MobEffectInstance radianceEffect = Objects.requireNonNull(livingEntity.getEffect(chrysalis$getRadianceEffect()));
                 float intensity = Mth.lerp(radianceEffect.getBlendFactor(livingEntity, tickDelta), 0.0F, radianceEffect.isInfiniteDuration() ? 1.0F : Mth.clamp(radianceEffect.getDuration() / 20.0F, 0.0F, 1.0F));
 
                 biomeChangedTime = -1L;
@@ -101,13 +96,13 @@ public abstract class GameRendererMixin {
         }
 
         @Unique
-        private static Holder<MobEffect> getRadianceEffect() {
+        private static Holder<MobEffect> chrysalis$getRadianceEffect() {
             return ChrysalisEffects.RADIANCE;
         }
 
         @Unique
-        private static boolean hasRadianceEffect(LivingEntity livingEntity) {
-            return livingEntity.hasEffect(getRadianceEffect());
+        private static boolean chrysalis$hasRadianceEffect(LivingEntity livingEntity) {
+            return livingEntity.hasEffect(chrysalis$getRadianceEffect());
         }
     }
 }
