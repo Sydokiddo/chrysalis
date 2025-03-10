@@ -3,10 +3,13 @@ package net.sydokiddo.chrysalis.client.particles.types;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
+@OnlyIn(Dist.CLIENT)
 public class GlowingSporeParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
 
     /**
@@ -39,11 +42,12 @@ public class GlowingSporeParticle extends FadingEmissiveParticle implements Part
 
     // region Providers
 
-    public static class GlowingSporeParticleProvider implements ParticleProvider<SimpleParticleType> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
 
-        public GlowingSporeParticleProvider(SpriteSet spriteSet) {
+        public Provider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

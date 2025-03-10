@@ -4,6 +4,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 public record CameraShakeResetPayload(int protocolVersion) implements CustomPacketPayload {
@@ -16,7 +17,12 @@ public record CameraShakeResetPayload(int protocolVersion) implements CustomPack
     public static final StreamCodec<RegistryFriendlyByteBuf, CameraShakeResetPayload> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, CameraShakeResetPayload::protocolVersion, CameraShakeResetPayload::new);
 
     @Override
-    public @NotNull Type<? extends CustomPacketPayload> type() {
+    public CustomPacketPayload.@NotNull Type<? extends CustomPacketPayload> type() {
         return TYPE;
+    }
+
+    @SuppressWarnings("unused")
+    public static void handleDataOnClient(final CameraShakeResetPayload payload, final IPayloadContext context) {
+        CameraShakeHandler.resetCamera();
     }
 }

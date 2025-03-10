@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.util.entities;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
@@ -118,7 +119,7 @@ public class EntityDataHelper {
 
     public static float getDamageCap(LivingEntity livingEntity, DamageSource damageSource, float originalDamage) {
 
-        float damageCap = (float) livingEntity.getAttributeValue(ChrysalisAttributes.DAMAGE_CAPACITY);
+        float damageCap = (float) livingEntity.getAttributeValue(Holder.direct(ChrysalisAttributes.DAMAGE_CAPACITY.get()));
 
         if (originalDamage > damageCap && originalDamage < Float.MAX_VALUE && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             if (ChrysalisMod.IS_DEBUG && !livingEntity.level().isClientSide()) ChrysalisMod.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);
@@ -129,15 +130,14 @@ public class EntityDataHelper {
     }
 
     public static void playItemDroppingSound(Player player) {
-        player.playNotifySound(ChrysalisSoundEvents.ITEM_DROP, player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
+        player.playNotifySound(ChrysalisSoundEvents.ITEM_DROP.value(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
     }
 
     public static Optional<UUID> getEncounteredMobUUID(Player player) {
-        return player.getEntityData().get(ChrysalisRegistry.ENCOUNTERED_MOB_UUID);
+        return Optional.empty();
     }
 
     public static void setEncounteredMobUUID(Player player, UUID uuid) {
-        player.getEntityData().set(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.ofNullable(uuid));
     }
 
     // endregion

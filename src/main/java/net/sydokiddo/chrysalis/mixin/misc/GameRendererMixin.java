@@ -18,6 +18,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraSetup;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
@@ -34,6 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
 
@@ -50,9 +53,9 @@ public abstract class GameRendererMixin {
         if (!this.minecraft.options.getCameraType().isFirstPerson() || !(entity instanceof LivingEntity livingEntity)) return;
         EntityType<?> entityType = livingEntity.getType();
 
-        if (entityType.is(ChrysalisTags.HAS_ARTHROPOD_SIGHT) || livingEntity.hasEffect(ChrysalisEffects.ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
-        if (entityType.is(ChrysalisTags.HAS_CREEPER_SIGHT) || livingEntity.hasEffect(ChrysalisEffects.CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
-        if (entityType.is(ChrysalisTags.HAS_ENDER_SIGHT) || livingEntity.hasEffect(ChrysalisEffects.ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
+        if (entityType.is(ChrysalisTags.HAS_ARTHROPOD_SIGHT) || livingEntity.hasEffect(Holder.direct(ChrysalisEffects.ARTHROPOD_SIGHT.get()))) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
+        if (entityType.is(ChrysalisTags.HAS_CREEPER_SIGHT) || livingEntity.hasEffect(Holder.direct(ChrysalisEffects.CREEPER_SIGHT.get()))) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
+        if (entityType.is(ChrysalisTags.HAS_ENDER_SIGHT) || livingEntity.hasEffect(Holder.direct(ChrysalisEffects.ENDER_SIGHT.get()))) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
     }
 
     /**
@@ -69,6 +72,7 @@ public abstract class GameRendererMixin {
         return poseStack;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Mixin(FogRenderer.class)
     public static class FogRendererMixin {
 
@@ -97,7 +101,7 @@ public abstract class GameRendererMixin {
 
         @Unique
         private static Holder<MobEffect> chrysalis$getRadianceEffect() {
-            return ChrysalisEffects.RADIANCE;
+            return Holder.direct(ChrysalisEffects.RADIANCE.get());
         }
 
         @Unique

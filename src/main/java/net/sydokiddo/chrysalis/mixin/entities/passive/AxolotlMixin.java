@@ -17,6 +17,6 @@ public class AxolotlMixin {
 
     @Redirect(method = "usePlayerItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
     private boolean chrysalis$giveBackBucketWhenFeedingAxolotl(ItemStack itemStack, Item item) {
-        return itemStack.is(Tags.Items.BUCKETS);
+        return itemStack.is(Tags.Items.BUCKETS) && !itemStack.is(Tags.Items.BUCKETS_EMPTY);
     }
 }

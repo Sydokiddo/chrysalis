@@ -20,6 +20,6 @@ public class TridentItemMixin {
 
     @Inject(method = "releaseUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;startAutoSpinAttack(IFLnet/minecraft/world/item/ItemStack;)V"))
     private void chrysalis$useRiptideTridentCriteriaTrigger(ItemStack itemStack, Level level, LivingEntity livingEntity, int usedTicks, CallbackInfoReturnable<Boolean> cir) {
-        if (livingEntity instanceof ServerPlayer serverPlayer) ChrysalisCriteriaTriggers.USE_RIPTIDE_TRIDENT.trigger(serverPlayer);
+        if (livingEntity instanceof ServerPlayer serverPlayer) ChrysalisCriteriaTriggers.USE_RIPTIDE_TRIDENT.get().trigger(serverPlayer);
     }
 }

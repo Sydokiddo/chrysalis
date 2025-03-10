@@ -4,9 +4,12 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
+@OnlyIn(Dist.CLIENT)
 public class RotatingFallingParticle extends RisingParticle {
 
     /**
@@ -56,11 +59,12 @@ public class RotatingFallingParticle extends RisingParticle {
 
     // region Providers
 
-    public static class RotatingFallingParticleProvider implements ParticleProvider<SimpleParticleType> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
 
-        public RotatingFallingParticleProvider(SpriteSet spriteSet) {
+        public Provider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

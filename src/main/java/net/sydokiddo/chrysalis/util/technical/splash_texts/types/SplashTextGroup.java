@@ -6,8 +6,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.chat.Style;
 import java.util.List;
 import com.mojang.serialization.Codec;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import java.util.stream.Stream;
 
+@OnlyIn(Dist.CLIENT)
 public record SplashTextGroup(Style defaultStyle, List<SplashText> splashTexts) {
 
     public static final Codec<SplashTextGroup> CODEC = RecordCodecBuilder.create(instance -> instance.group(

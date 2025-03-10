@@ -8,7 +8,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -30,7 +29,7 @@ public class ClearEffectsItem extends DebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, Item.@NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }
@@ -46,7 +45,7 @@ public class ClearEffectsItem extends DebugUtilityItem {
 
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
-                serverPlayer.playNotifySound(ChrysalisSoundEvents.CLEAR_EFFECTS_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.playNotifySound(ChrysalisSoundEvents.CLEAR_EFFECTS_USE.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
                 addParticlesAroundEntity(serverPlayer, ParticleTypes.EFFECT, 10, 1.0D);
 

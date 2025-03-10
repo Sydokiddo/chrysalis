@@ -1,31 +1,34 @@
 package net.sydokiddo.chrysalis.util.entities;
 
-import com.mojang.serialization.Codec;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.ChrysalisMod;
-import net.sydokiddo.chrysalis.util.ChrysalisCoreRegistry;
 import java.util.Optional;
+import java.util.function.Supplier;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 public class ChrysalisMemoryModules {
 
     /**
      * Template memory modules that can be used for mobs.
      **/
 
-    public static final ChrysalisCoreRegistry<MemoryModuleType<?>> MEMORY_MODULES = ChrysalisCoreRegistry.create(Registries.MEMORY_MODULE_TYPE, ChrysalisMod.MOD_ID);
+    public static final DeferredRegister<MemoryModuleType<?>> MEMORY_MODULES = DeferredRegister.create(Registries.MEMORY_MODULE_TYPE, ChrysalisMod.MOD_ID);
 
-    public static final MemoryModuleType<LivingEntity> NEAREST_VISIBLE_AVOIDABLE_ENTITY = registerMemoryModuleWithoutCodec("nearest_visible_avoidable_entity");
+    // region Memory Modules
 
-    private static <U> MemoryModuleType<U> registerMemoryModuleWithCodec(String name, Codec<U> codec) {
-        return Registry.register(BuiltInRegistries.MEMORY_MODULE_TYPE, ChrysalisMod.id(name), new MemoryModuleType<U>(Optional.of(codec)));
+    public static final Supplier<MemoryModuleType<LivingEntity>> NEAREST_VISIBLE_AVOIDABLE_ENTITY = MEMORY_MODULES.register("nearest_visible_avoidable_entity", builder -> new MemoryModuleType<>(Optional.empty()));
+
+    // endregion
+
+    // region Registry
+
+    public static void register(IEventBus eventBus) {
+        MEMORY_MODULES.register(eventBus);
     }
 
-    private static <U> MemoryModuleType<U> registerMemoryModuleWithoutCodec(String name) {
-        return Registry.register(BuiltInRegistries.MEMORY_MODULE_TYPE, ChrysalisMod.id(name), new MemoryModuleType<U>(Optional.empty()));
-    }
+    // endregion
 }

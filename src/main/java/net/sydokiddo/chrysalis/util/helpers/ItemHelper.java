@@ -111,11 +111,10 @@ public class ItemHelper {
      **/
 
     public static int getItemGlowColor(ItemEntity itemEntity) {
-        return itemEntity.getEntityData().get(ChrysalisRegistry.ITEM_GLOW_COLOR);
+        return 0;
     }
 
     public static void setItemGlowColor(ItemEntity itemEntity, int glowColor) {
-        itemEntity.getEntityData().set(ChrysalisRegistry.ITEM_GLOW_COLOR, glowColor);
     }
 
     // endregion

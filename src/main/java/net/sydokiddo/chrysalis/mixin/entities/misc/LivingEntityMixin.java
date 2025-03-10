@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageSources;
+import net.sydokiddo.chrysalis.registry.misc.ChrysalisDamageTypes;
 import net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects.MobSightEffect;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
@@ -43,8 +43,8 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
     private static void chrysalis$addLivingEntityAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> info) {
         if (info.getReturnValue() != null) {
-            info.getReturnValue().add(ChrysalisAttributes.REDUCED_DETECTION_RANGE);
-            info.getReturnValue().add(ChrysalisAttributes.DAMAGE_CAPACITY);
+            info.getReturnValue().add(Holder.direct(ChrysalisAttributes.REDUCED_DETECTION_RANGE.get()));
+            info.getReturnValue().add(Holder.direct(ChrysalisAttributes.DAMAGE_CAPACITY.get()));
         }
     }
 
@@ -54,7 +54,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventLootDropping(ServerLevel serverLevel, DamageSource damageSource, CallbackInfo info) {
-        if (damageSource.is(ChrysalisDamageSources.KILL_WAND) && !(this.chrysalis$livingEntity instanceof Player)) {
+        if (damageSource.is(ChrysalisDamageTypes.KILL_WAND) && !(this.chrysalis$livingEntity instanceof Player)) {
             info.cancel();
             this.dropEquipment(serverLevel);
         }
@@ -75,7 +75,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (self.hasEffect(blindness)) {
             cir.setReturnValue(cir.getReturnValue() / (2.0D * (Objects.requireNonNull(self.getEffect(blindness)).getAmplifier() + 1)));
         } else {
-            double reducedDetectionRangeAttribute = this.getAttributeValue(ChrysalisAttributes.REDUCED_DETECTION_RANGE);
+            double reducedDetectionRangeAttribute = this.getAttributeValue(Holder.direct(ChrysalisAttributes.REDUCED_DETECTION_RANGE.get()));
             if (reducedDetectionRangeAttribute > 0.0D) cir.setReturnValue(cir.getReturnValue() * (1.0D - reducedDetectionRangeAttribute));
         }
     }

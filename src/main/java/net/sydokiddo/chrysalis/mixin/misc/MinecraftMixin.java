@@ -10,7 +10,9 @@ import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
-import net.sydokiddo.chrysalis.client.ChrysalisClient;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.sydokiddo.chrysalis.registry.ChrysalisClientRegistry;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.CSplashManager;
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
 
@@ -46,10 +49,10 @@ public class MinecraftMixin {
     private void chrysalis$getQueuedMusic(CallbackInfoReturnable<MusicInfo> cir) {
 
         Music music = Optionull.map(this.screen, Screen::getBackgroundMusic);
-        if (music == Musics.MENU || Minecraft.getInstance().level == null) ChrysalisClient.clearMusicOnClient(false);
+        if (music == Musics.MENU || Minecraft.getInstance().level == null) ChrysalisClientRegistry.clearMusicOnClient(false);
 
         if (music != Musics.MENU && music != Musics.CREATIVE && music != Musics.END_BOSS && music != Musics.CREDITS) {
-            @Nullable Music queuedMusic = ChrysalisClient.getQueuedMusic();
+            @Nullable Music queuedMusic = ChrysalisClientRegistry.getQueuedMusic();
             if (queuedMusic != null) cir.setReturnValue(new MusicInfo(queuedMusic));
         }
     }
@@ -63,6 +66,7 @@ public class MinecraftMixin {
         if (this.player != null) EntityDataHelper.playItemDroppingSound(this.player);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Mixin(MusicManager.class)
     public static class MusicManagerMixin {
 
@@ -75,21 +79,21 @@ public class MinecraftMixin {
         @Inject(method = "tick", at = @At("HEAD"))
         private void chrysalis$fadeOutMusic(CallbackInfo info) {
 
-            if (ChrysalisClient.fadeOutMusic) {
+            if (ChrysalisClientRegistry.fadeOutMusic) {
 
                 this.currentGain = this.currentGain - 0.01F;
 
                 if (this.currentGain <= 0.0F) {
-                    ChrysalisClient.setQueuedMusic(null, true);
-                    ChrysalisClient.setStructureMusic(null, false);
-                    ChrysalisClient.fadeOutMusic = false;
+                    ChrysalisClientRegistry.setQueuedMusic(null, true);
+                    ChrysalisClientRegistry.setStructureMusic(null, false);
+                    ChrysalisClientRegistry.fadeOutMusic = false;
                 }
             }
 
-            if (ChrysalisClient.resetMusicFade) {
-                ChrysalisClient.fadeOutMusic = false;
+            if (ChrysalisClientRegistry.resetMusicFade) {
+                ChrysalisClientRegistry.fadeOutMusic = false;
                 this.currentGain = 1.0F;
-                ChrysalisClient.resetMusicFade = false;
+                ChrysalisClientRegistry.resetMusicFade = false;
             }
         }
     }

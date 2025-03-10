@@ -45,7 +45,7 @@ public class FillOxygenItem extends DebugUtilityItem {
 
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
-                serverPlayer.playNotifySound(ChrysalisSoundEvents.FILL_OXYGEN_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.playNotifySound(ChrysalisSoundEvents.FILL_OXYGEN_USE.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
                 addParticlesAroundEntity(serverPlayer, ParticleTypes.BUBBLE, 10, 1.0D);
 

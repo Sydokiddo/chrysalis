@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.mixin.entities.hostile;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,6 +26,6 @@ public class EndermanLeaveBlockGoalMixin {
     @Inject(at = @At("HEAD"), method = "canPlaceBlock", cancellable = true)
     private void chrysalis$preventEndermanBlockPlacement(Level level, BlockPos blockPos, BlockState blockState, BlockState secondState, BlockState thirdState, BlockPos secondPos, CallbackInfoReturnable<Boolean> cir) {
         BlockState heldBlockState = this.enderman.getCarriedBlock();
-        if (this.enderman.hasEffect(ChrysalisEffects.BUILDING_FATIGUE) && heldBlockState != null && !heldBlockState.is(ChrysalisTags.ALLOWS_PLACEMENT_WITH_BUILDING_FATIGUE)) cir.setReturnValue(false);
+        if (this.enderman.hasEffect(Holder.direct(ChrysalisEffects.BUILDING_FATIGUE.get())) && heldBlockState != null && !heldBlockState.is(ChrysalisTags.ALLOWS_PLACEMENT_WITH_BUILDING_FATIGUE)) cir.setReturnValue(false);
     }
 }

@@ -2,10 +2,10 @@ package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Mob.class)
@@ -56,9 +56,9 @@ public abstract class MobMixin extends LivingEntity {
      * Mobs being able to pick up items is now determined by the mobWorldInteractions game rule rather than the mobGriefing game rule.
      **/
 
-    @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-    private GameRules.Key<GameRules.BooleanValue> chrysalis$mobsPickingUpItemsWorldInteractionsGameRule(GameRules.Key<GameRules.BooleanValue> oldValue) {
-        return ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS;
+    @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/event/EventHooks;canEntityGrief(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;)Z"))
+    private boolean chrysalis$mobsPickingUpItemsWorldInteractionsGameRule(ServerLevel serverLevel, Entity entity) {
+        return serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS);
     }
 
     /**

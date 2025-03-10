@@ -9,8 +9,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -18,7 +18,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
-import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 
 @SuppressWarnings("unused")
 public class RegistryHelper {
@@ -65,24 +64,24 @@ public class RegistryHelper {
      * Registry helpers for registering potion recipes.
      **/
 
-    public static void registerBasePotionRecipe(Item ingredient, Holder<Potion> resultPotion) {
-        registerPotionRecipe(Potions.AWKWARD, ingredient, resultPotion);
+    public static void registerBasePotionRecipe(PotionBrewing.Builder builder, Item ingredient, Holder<Potion> resultPotion) {
+        registerPotionRecipe(builder, Potions.AWKWARD, ingredient, resultPotion);
     }
 
-    public static void registerLongPotionRecipe(Holder<Potion> startingPotion, Holder<Potion> resultPotion) {
-        registerPotionRecipe(startingPotion, Items.REDSTONE, resultPotion);
+    public static void registerLongPotionRecipe(PotionBrewing.Builder builder, Holder<Potion> startingPotion, Holder<Potion> resultPotion) {
+        registerPotionRecipe(builder, startingPotion, Items.REDSTONE, resultPotion);
     }
 
-    public static void registerStrongPotionRecipe(Holder<Potion> startingPotion, Holder<Potion> resultPotion) {
-        registerPotionRecipe(startingPotion, Items.GLOWSTONE_DUST, resultPotion);
+    public static void registerStrongPotionRecipe(PotionBrewing.Builder builder, Holder<Potion> startingPotion, Holder<Potion> resultPotion) {
+        registerPotionRecipe(builder, startingPotion, Items.GLOWSTONE_DUST, resultPotion);
     }
 
-    public static void registerInvertedPotionRecipe(Holder<Potion> startingPotion, Holder<Potion> resultPotion) {
-        registerPotionRecipe(startingPotion, Items.FERMENTED_SPIDER_EYE, resultPotion);
+    public static void registerInvertedPotionRecipe(PotionBrewing.Builder builder, Holder<Potion> startingPotion, Holder<Potion> resultPotion) {
+        registerPotionRecipe(builder, startingPotion, Items.FERMENTED_SPIDER_EYE, resultPotion);
     }
 
-    public static void registerPotionRecipe(Holder<Potion> startingPotion, Item ingredient, Holder<Potion> resultPotion) {
-        FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> builder.registerPotionRecipe(startingPotion, Ingredient.of(ingredient), resultPotion));
+    public static void registerPotionRecipe(PotionBrewing.Builder builder, Holder<Potion> startingPotion, Item ingredient, Holder<Potion> resultPotion) {
+        builder.addMix(startingPotion, ingredient, resultPotion);
     }
 
     // endregion

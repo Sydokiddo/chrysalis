@@ -6,11 +6,14 @@ import net.minecraft.network.chat.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.CSplashTextRenderer;
 import java.awt.*;
 import java.util.function.UnaryOperator;
 import com.mojang.serialization.Codec;
 
+@OnlyIn(Dist.CLIENT)
 public class AdvancedSplashText implements SplashText {
 
     private static final String defaultFont = "minecraft:default";

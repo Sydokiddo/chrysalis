@@ -6,6 +6,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
@@ -18,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(SplashRenderer.class)
 public class SplashTextMixin {
 
@@ -33,6 +36,7 @@ public class SplashTextMixin {
         SplashTextLoader.renderSplashText(guiGraphics, x, font, y, true, this.splash, null);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Mixin(TitleScreen.class)
     public static class TitleScreenMixin {
 

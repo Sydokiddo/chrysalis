@@ -9,8 +9,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.sydokiddo.chrysalis.ChrysalisMod;
-import net.sydokiddo.chrysalis.client.ChrysalisClient;
+import net.sydokiddo.chrysalis.registry.ChrysalisClientRegistry;
 import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,11 +37,11 @@ public class StructureMusic {
         playerStructures.put(player, newStructure);
 
         if (level.isClientSide()) {
-            ChrysalisClient.setStructureMusic(structureLocation, true);
+            ChrysalisClientRegistry.setStructureMusic(structureLocation, true);
             return;
         }
 
-        if (player instanceof ServerPlayer serverPlayer) ServerPlayNetworking.send(serverPlayer, new StructureChangedPayload(newStructure));
+        if (player instanceof ServerPlayer serverPlayer) PacketDistributor.sendToPlayer(serverPlayer, new StructureChangedPayload(newStructure));
     }
 
     public static void checkAllStructures(ServerLevel serverLevel, Player player) {

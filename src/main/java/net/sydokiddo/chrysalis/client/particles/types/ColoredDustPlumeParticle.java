@@ -2,11 +2,14 @@ package net.sydokiddo.chrysalis.client.particles.types;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import net.sydokiddo.chrysalis.client.particles.options.ColoredDustPlumeParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
+@OnlyIn(Dist.CLIENT)
 public class ColoredDustPlumeParticle extends DustPlumeParticle implements ParticleCommonMethods {
 
     /**
@@ -54,11 +57,12 @@ public class ColoredDustPlumeParticle extends DustPlumeParticle implements Parti
 
     // region Providers
 
-    public static class ColoredDustPlumeParticleProvider implements ParticleProvider<ColoredDustPlumeParticleOptions> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<ColoredDustPlumeParticleOptions> {
 
         private final SpriteSet spriteSet;
 
-        public ColoredDustPlumeParticleProvider(SpriteSet spriteSet) {
+        public Provider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

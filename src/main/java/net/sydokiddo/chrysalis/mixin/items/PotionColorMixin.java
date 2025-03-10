@@ -1,18 +1,20 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.world.effect.MobEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.awt.*;
 
 @Mixin(MobEffect.class)
-public class PotionColorMixin {
+public abstract class PotionColorMixin {
 
-    @Shadow @Final private int color;
+    @Shadow public abstract String getDescriptionId();
 
     /**
      * Changes the default potion colors of blindness, haste, mining fatigue, and wither.
@@ -20,9 +22,14 @@ public class PotionColorMixin {
 
     @Inject(at = @At("RETURN"), method = "getColor", cancellable = true)
     private void chrysalis$changeEffectColors(CallbackInfoReturnable<Integer> cir) {
-        if (this.color == 2039587) cir.setReturnValue(Color.decode("#593F7F").getRGB()); // Blindness
-        if (this.color == 14270531) cir.setReturnValue(Color.decode("#FFB87F").getRGB()); // Haste
-        if (this.color == 4866583) cir.setReturnValue(Color.decode("#5959B2").getRGB()); // Mining Fatigue
-        if (this.color == 7561558) cir.setReturnValue(Color.decode("#764857").getRGB()); // Wither
+        if (this.chrysalis$effectEquals(MobEffects.BLINDNESS)) cir.setReturnValue(Color.decode("#593F7F").getRGB());
+        if (this.chrysalis$effectEquals(MobEffects.DIG_SPEED)) cir.setReturnValue(Color.decode("#FFB87F").getRGB());
+        if (this.chrysalis$effectEquals(MobEffects.DIG_SLOWDOWN)) cir.setReturnValue(Color.decode("#5959B2").getRGB()); // Mining Fatigue
+        if (this.chrysalis$effectEquals(MobEffects.WITHER)) cir.setReturnValue(Color.decode("#764857").getRGB()); // Wither
+    }
+
+    @Unique
+    private boolean chrysalis$effectEquals(Holder<MobEffect> mobEffect) {
+        return this.getDescriptionId().equals(mobEffect.getRegisteredName());
     }
 }

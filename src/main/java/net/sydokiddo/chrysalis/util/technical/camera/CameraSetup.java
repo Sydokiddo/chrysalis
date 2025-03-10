@@ -2,7 +2,10 @@ package net.sydokiddo.chrysalis.util.technical.camera;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class CameraSetup {
 
     /**

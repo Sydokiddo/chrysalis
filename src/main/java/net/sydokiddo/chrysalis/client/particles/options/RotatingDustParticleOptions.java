@@ -9,11 +9,14 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisParticles;
 import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
+@OnlyIn(Dist.CLIENT)
 public class RotatingDustParticleOptions extends ScalableParticleOptionsBase implements ParticleCommonMethods {
 
     /**
@@ -71,6 +74,6 @@ public class RotatingDustParticleOptions extends ScalableParticleOptionsBase imp
 
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.ROTATING_DUST;
+        return ChrysalisParticles.ROTATING_DUST.get();
     }
 }

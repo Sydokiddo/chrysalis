@@ -19,6 +19,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisLivingEntityRenderState;
 import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
@@ -29,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(EntityRenderer.class)
 public abstract class EntityRendererMixin {
 
@@ -49,7 +52,7 @@ public abstract class EntityRendererMixin {
     private void chrysalis$playerHandRadianceGlowing(Entity entity, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
 
         Minecraft minecraft = Minecraft.getInstance();
-        Holder<MobEffect> radianceEffect = ChrysalisEffects.RADIANCE;
+        Holder<MobEffect> radianceEffect = Holder.direct(ChrysalisEffects.RADIANCE.get());
 
         if (entity instanceof Player player && player == minecraft.player && player.hasEffect(radianceEffect) && minecraft.options.getCameraType().isFirstPerson()) {
             MobEffectInstance radianceEffectInstance = Objects.requireNonNull(player.getEffect(radianceEffect));
@@ -57,6 +60,7 @@ public abstract class EntityRendererMixin {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Mixin(LivingEntityRenderer.class)
     public static abstract class LivingEntityRendererMixin {
 
@@ -70,6 +74,7 @@ public abstract class EntityRendererMixin {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Mixin(HumanoidArmorLayer.class)
     public static class HumanoidArmorLayerMixin {
 
@@ -84,6 +89,7 @@ public abstract class EntityRendererMixin {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Mixin(WingsLayer.class)
     public static class WingsLayerMixin {
 

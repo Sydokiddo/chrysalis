@@ -3,6 +3,8 @@ package net.sydokiddo.chrysalis.util.technical.file;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
@@ -11,6 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.io.BufferedReader;
 
+@OnlyIn(Dist.CLIENT)
 public class FileReader<Value> {
 
     private final Function<BufferedReader, Value> bufferReader;

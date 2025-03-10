@@ -3,9 +3,12 @@ package net.sydokiddo.chrysalis.client.particles.types;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
+@OnlyIn(Dist.CLIENT)
 public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
 
     /**
@@ -55,11 +58,12 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
 
     // region Providers
 
-    public static class GlowingSuspendedTownParticleProvider implements ParticleProvider<SimpleParticleType> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
 
-        public GlowingSuspendedTownParticleProvider(SpriteSet spriteSet) {
+        public Provider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

@@ -4,10 +4,13 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.options.SparkleParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
+@OnlyIn(Dist.CLIENT)
 public class SparkleParticle extends FadingEmissiveParticle {
 
     /**
@@ -40,11 +43,12 @@ public class SparkleParticle extends FadingEmissiveParticle {
 
     // region Providers
 
-    public static class SparkleParticleProvider implements ParticleProvider<SparkleParticleOptions> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<SparkleParticleOptions> {
 
         private final SpriteSet spriteSet;
 
-        public SparkleParticleProvider(SpriteSet spriteSet) {
+        public Provider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

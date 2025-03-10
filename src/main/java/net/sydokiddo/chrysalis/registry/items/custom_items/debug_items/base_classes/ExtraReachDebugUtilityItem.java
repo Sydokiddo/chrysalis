@@ -7,6 +7,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CustomCrosshairItem;
 
@@ -24,6 +26,7 @@ public class ExtraReachDebugUtilityItem extends DebugUtilityItem implements Cust
         return ItemAttributeModifiers.builder().add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(ChrysalisMod.id("base_entity_interaction_range"), 64.0D, AttributeModifier.Operation.ADD_VALUE), equipmentSlotGroup).build();
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public boolean shouldDisplayCrosshair(Player player) {
         return Minecraft.getInstance().crosshairPickEntity instanceof LivingEntity;

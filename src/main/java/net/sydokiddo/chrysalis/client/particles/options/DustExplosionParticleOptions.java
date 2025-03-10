@@ -10,12 +10,15 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.ExtraCodecs;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisParticles;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import java.awt.*;
 
+@OnlyIn(Dist.CLIENT)
 public class DustExplosionParticleOptions extends ScalableParticleOptionsBase implements ParticleCommonMethods {
 
     /**
@@ -71,6 +74,6 @@ public class DustExplosionParticleOptions extends ScalableParticleOptionsBase im
 
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.DUST_EXPLOSION;
+        return ChrysalisParticles.DUST_EXPLOSION.get();
     }
 }

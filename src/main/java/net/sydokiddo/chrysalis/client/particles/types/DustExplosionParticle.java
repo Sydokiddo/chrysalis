@@ -5,11 +5,14 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.util.Mth;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import net.sydokiddo.chrysalis.client.particles.options.DustExplosionParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
+@OnlyIn(Dist.CLIENT)
 public class DustExplosionParticle extends ExplodeParticle implements ParticleCommonMethods {
 
     /**
@@ -67,11 +70,12 @@ public class DustExplosionParticle extends ExplodeParticle implements ParticleCo
 
     // region Providers
 
-    public static class DustExplosionParticleProvider implements ParticleProvider<DustExplosionParticleOptions> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<DustExplosionParticleOptions> {
 
         private final SpriteSet spriteSet;
 
-        public DustExplosionParticleProvider(SpriteSet spriteSet) {
+        public Provider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

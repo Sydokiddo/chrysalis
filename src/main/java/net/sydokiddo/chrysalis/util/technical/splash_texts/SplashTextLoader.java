@@ -8,17 +8,24 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.Mth;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.ChrysalisMod;
-import net.sydokiddo.chrysalis.util.technical.file.SimpleFileLoader;
+import net.sydokiddo.chrysalis.util.technical.file.FileLoader;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.types.SimpleSplashText;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.types.SplashText;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.types.SplashTextGroup;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-public class SplashTextLoader implements SimpleFileLoader {
+@OnlyIn(Dist.CLIENT)
+public class SplashTextLoader extends SimplePreparableReloadListener<CompletableFuture<Void>> {
 
     /**
      * Loads custom splash texts from a json file.
@@ -26,14 +33,31 @@ public class SplashTextLoader implements SimpleFileLoader {
 
     private SplashTextLoader() {}
 
+    @Override
+    protected @NotNull CompletableFuture<Void> prepare(@NotNull ResourceManager resourceManager, @NotNull ProfilerFiller profilerFiller) {
+        return CompletableFuture.runAsync(() -> this.load(resourceManager), Runnable::run);
+    }
+
+    @Override
+    protected void apply(@NotNull CompletableFuture<Void> data, @NotNull ResourceManager resourceManager, @NotNull ProfilerFiller profilerFiller) {
+        CompletableFuture.runAsync(() -> {}, Runnable::run);
+    }
+
+    public void load(ResourceManager resourceManager) {
+        FileLoader fileLoader = new FileLoader();
+        this.init(fileLoader, resourceManager);
+        fileLoader.load(resourceManager);
+    }
+
+    public void init(FileLoader fileLoader, ResourceManager resourceManager) {
+        fileLoader.json().find("texts/splashes.json", this::addSplashes);
+        fileLoader.raw().get(ResourceLocation.withDefaultNamespace("texts/splashes.txt"), this::addVanillaSplashes);
+        fileLoader.load(resourceManager);
+    }
+
     public static final SplashTextLoader INSTANCE = new SplashTextLoader();
     private final List<SplashText> splashTexts = new ArrayList<>();
     private int maxWeight = 0;
-
-    @Override
-    public ResourceLocation getFabricId() {
-        return ChrysalisMod.id("splashes");
-    }
 
     public List<SplashText> getSplashTexts() {
         return this.splashTexts;
@@ -41,12 +65,6 @@ public class SplashTextLoader implements SimpleFileLoader {
 
     public int getMaxWeight() {
         return this.maxWeight;
-    }
-
-    @Override
-    public void init(SimpleFileLoader.DataFileLoader dataFileLoader, ResourceManager resourceManager) {
-        dataFileLoader.json().find("texts/splashes.json", this::addSplashes);
-        dataFileLoader.raw().get(ResourceLocation.withDefaultNamespace("texts/splashes.txt"), this::addVanillaSplashes);
     }
 
     private void addSplashes(ResourceLocation resourceLocation, JsonElement jsonElement) {

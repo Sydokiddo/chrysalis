@@ -26,7 +26,7 @@ public interface SittableBlock {
 
         if (level.isClientSide()) return;
 
-        Seat seat = ChrysalisEntities.SEAT.create(level, EntitySpawnReason.TRIGGERED);
+        Seat seat = ChrysalisEntities.SEAT.get().create(level, EntitySpawnReason.TRIGGERED);
         assert seat != null;
         seat.setPos(blockPos.getX() + 0.5D, blockPos.getY() + seatYHeight, blockPos.getZ() + 0.5D);
 

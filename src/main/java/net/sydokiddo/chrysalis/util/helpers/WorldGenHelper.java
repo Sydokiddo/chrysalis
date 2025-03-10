@@ -1,7 +1,9 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
+import net.minecraft.core.Holder;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.biome.Biome;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import java.util.function.Predicate;
 
@@ -12,20 +14,20 @@ public class WorldGenHelper {
      * Various methods for assisting with world generation and properties relating to it.
      **/
 
-    public static Predicate<BiomeSelectionContext> isValidBiomeForMobSpawning() {
-        return context -> !context.getBiomeRegistryEntry().is(ChrysalisTags.WITHOUT_MOB_SPAWNS);
+    public static Predicate<Holder<Biome>> isValidBiomeForMobSpawning() {
+        return context -> !context.is(ChrysalisTags.WITHOUT_MOB_SPAWNS);
     }
 
-    public static Predicate<BiomeSelectionContext> isOverworld() {
-        return context -> context.canGenerateIn(LevelStem.OVERWORLD);
+    public static Predicate<Holder<Biome>> isOverworld() {
+        return context -> !context.is(BiomeTags.IS_OVERWORLD);
     }
 
-    public static Predicate<BiomeSelectionContext> isNether() {
-        return context -> context.canGenerateIn(LevelStem.NETHER);
+    public static Predicate<Holder<Biome>> isNether() {
+        return context -> !context.is(BiomeTags.IS_NETHER);
     }
 
-    public static Predicate<BiomeSelectionContext> isEnd() {
-        return context -> context.canGenerateIn(LevelStem.END);
+    public static Predicate<Holder<Biome>> isEnd() {
+        return context -> !context.is(BiomeTags.IS_END);
     }
 
     public static boolean isNetherOrEnd(Level level) {

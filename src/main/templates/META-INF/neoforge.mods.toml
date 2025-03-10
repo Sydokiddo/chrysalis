@@ -23,5 +23,8 @@ logoFile = "assets/chrysalis/icon.png"
     ordering = "NONE"
     side = "BOTH"
 
+[[mixins]]
+    config = "chrysalis.mixins.json"
+
 [[accessTransformers]]
     file = "META-INF/accesstransformer.cfg"

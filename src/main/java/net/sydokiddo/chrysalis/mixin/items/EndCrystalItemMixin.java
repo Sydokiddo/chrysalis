@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.EndCrystalItem;
@@ -29,6 +30,6 @@ public class EndCrystalItemMixin {
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventEndCrystalPlacement(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         Player player = useOnContext.getPlayer();
-        if (player != null && player.hasEffect(ChrysalisEffects.BUILDING_FATIGUE) && !player.getAbilities().instabuild) cir.setReturnValue(InteractionResult.FAIL);
+        if (player != null && player.hasEffect(Holder.direct(ChrysalisEffects.BUILDING_FATIGUE.get())) && !player.getAbilities().instabuild) cir.setReturnValue(InteractionResult.FAIL);
     }
 }

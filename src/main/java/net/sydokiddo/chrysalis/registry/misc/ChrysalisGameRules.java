@@ -33,7 +33,7 @@ public class ChrysalisGameRules {
         return GameRules.register(name, category, GameRules.IntegerValue.create(defaultValue));
     }
 
-    public static void registerGameRules() {}
+    public static void register() {}
 
     // endregion
 }

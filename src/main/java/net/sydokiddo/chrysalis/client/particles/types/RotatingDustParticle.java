@@ -4,11 +4,14 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
 import net.sydokiddo.chrysalis.client.particles.options.RotatingDustParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
+@OnlyIn(Dist.CLIENT)
 public class RotatingDustParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
 
     /**
@@ -67,11 +70,12 @@ public class RotatingDustParticle extends FadingEmissiveParticle implements Part
 
     // region Providers
 
-    public static class RotatingDustParticleProvider implements ParticleProvider<RotatingDustParticleOptions> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<RotatingDustParticleOptions> {
 
         private final SpriteSet spriteSet;
 
-        public RotatingDustParticleProvider(SpriteSet spriteSet) {
+        public Provider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

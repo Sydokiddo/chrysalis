@@ -12,6 +12,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DamageResistant;
 import net.minecraft.world.level.block.LightBlock;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
@@ -83,6 +85,7 @@ public abstract class ItemMixin {
          * Adds a ChrysalisMod tooltip to any new item registered by the mod.
          **/
 
+        @OnlyIn(Dist.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
         private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
             if (this.getItem().getDescriptionId().contains(ChrysalisMod.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)) {

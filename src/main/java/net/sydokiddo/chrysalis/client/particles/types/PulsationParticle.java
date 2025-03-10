@@ -10,12 +10,15 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.options.LargePulsationParticleOptions;
 import net.sydokiddo.chrysalis.client.particles.options.SmallPulsationParticleOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+@OnlyIn(Dist.CLIENT)
 public class PulsationParticle extends FadingEmissiveParticle {
 
     /**
@@ -90,11 +93,12 @@ public class PulsationParticle extends FadingEmissiveParticle {
 
     // region Providers
 
-    public static class SmallPulsationParticleProvider implements ParticleProvider<SmallPulsationParticleOptions> {
+    @OnlyIn(Dist.CLIENT)
+    public static class SmallProvider implements ParticleProvider<SmallPulsationParticleOptions> {
 
         private final SpriteSet spriteSet;
 
-        public SmallPulsationParticleProvider(SpriteSet spriteSet) {
+        public SmallProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 
@@ -106,11 +110,12 @@ public class PulsationParticle extends FadingEmissiveParticle {
         }
     }
 
-    public static class LargePulsationParticleProvider implements ParticleProvider<LargePulsationParticleOptions> {
+    @OnlyIn(Dist.CLIENT)
+    public static class LargeProvider implements ParticleProvider<LargePulsationParticleOptions> {
 
         private final SpriteSet spriteSet;
 
-        public LargePulsationParticleProvider(SpriteSet spriteSet) {
+        public LargeProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 

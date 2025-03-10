@@ -12,7 +12,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -33,7 +32,7 @@ public class TameMobItem extends DebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, Item.@NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }
@@ -72,7 +71,7 @@ public class TameMobItem extends DebugUtilityItem {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
 
         serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-        serverPlayer.playNotifySound(ChrysalisSoundEvents.TAME_MOB_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+        serverPlayer.playNotifySound(ChrysalisSoundEvents.TAME_MOB_USE.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
         serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
 
         if (tamedMob.level() instanceof ServerLevel serverLevel) {

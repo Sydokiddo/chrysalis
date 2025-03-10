@@ -1,27 +1,35 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.neoforged.fml.loading.FMLLoader;
 
 @SuppressWarnings("unused")
 public class CompatibilityHelper {
 
+    public static boolean isModLoaded(String modID) {
+        return FMLLoader.getLoadingModList().getModFileById(modID) != null;
+    }
+
     public static boolean hasEndlessEncore() {
-        return FabricLoader.getInstance().isModLoaded("endless_encore");
+        return isModLoaded("endless_encore");
     }
 
     public static boolean hasMonsterMash() {
-        return FabricLoader.getInstance().isModLoaded("monster_mash");
+        return isModLoaded("monster_mash");
     }
 
     public static boolean hasMicrocosm() {
-        return FabricLoader.getInstance().isModLoaded("microcosm");
+        return isModLoaded("microcosm");
     }
 
     public static boolean hasNetherExpansion() {
-        return FabricLoader.getInstance().isModLoaded("netherexp");
+        return isModLoaded("netherexp");
     }
 
     public static boolean hasElementalis() {
-        return FabricLoader.getInstance().isModLoaded("elementalis");
+        return isModLoaded("elementalis");
+    }
+
+    public static boolean hasHominid() {
+        return isModLoaded("hominid");
     }
 }

@@ -6,6 +6,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.options.RotatingDustParticleOptions;
 import net.sydokiddo.chrysalis.client.particles.options.SmallPulsationParticleOptions;
 import org.spongepowered.asm.mixin.Final;
@@ -16,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.awt.*;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(LevelEventHandler.class)
 public class LevelEventHandlerMixin {
 

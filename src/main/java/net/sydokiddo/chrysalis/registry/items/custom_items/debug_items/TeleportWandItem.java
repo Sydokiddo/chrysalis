@@ -11,13 +11,14 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CustomCrosshairItem;
@@ -36,7 +37,7 @@ public class TeleportWandItem extends DebugUtilityItem implements CustomCrosshai
      **/
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, Item.@NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }
@@ -75,11 +76,13 @@ public class TeleportWandItem extends DebugUtilityItem implements CustomCrosshai
         return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public boolean shouldDisplayCrosshair(Player player) {
         return this.getHitResult(player).getType() == HitResult.Type.BLOCK;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public ResourceLocation getCrosshairTextureLocation() {
         return ChrysalisMod.id("hud/teleport_wand_crosshair");

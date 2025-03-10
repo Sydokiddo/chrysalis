@@ -12,7 +12,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.sydokiddo.chrysalis.registry.items.ChrysalisDebugItems;
+import net.sydokiddo.chrysalis.registry.items.ChrysalisItems;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.AggroWandItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.RideMobItem;
 import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.TameMobItem;
@@ -44,7 +44,7 @@ public abstract class EntityMixin {
         ItemStack mainHandItem = minecraft.player.getMainHandItem();
         ItemStack offHandItem = minecraft.player.getOffhandItem();
 
-        if (mainHandItem.is(ChrysalisDebugItems.KILL_WAND) && !this.isAttackable()) return;
+        if (mainHandItem.is(ChrysalisItems.KILL_WAND) && !this.isAttackable()) return;
         if (mainHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS) || offHandItem.is(ChrysalisTags.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.chrysalis$entity) > 8 ? 0.5F : 0.0F);
     }
 

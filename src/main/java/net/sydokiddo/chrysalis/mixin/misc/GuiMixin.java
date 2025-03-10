@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.registry.items.custom_items.CustomCrosshairItem;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
@@ -21,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.function.Function;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(Gui.class)
 public class GuiMixin {
 
@@ -44,6 +47,7 @@ public class GuiMixin {
         return resourceLocation;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Mixin(GuiGraphics.class)
     public static abstract class GuiGraphicsMixin {
 

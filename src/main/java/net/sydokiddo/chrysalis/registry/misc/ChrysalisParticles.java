@@ -3,97 +3,142 @@ package net.sydokiddo.chrysalis.registry.misc;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.SpellParticle;
-import net.minecraft.core.Registry;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.ChrysalisMod;
 import net.sydokiddo.chrysalis.client.particles.types.*;
 import net.sydokiddo.chrysalis.client.particles.options.*;
-import net.sydokiddo.chrysalis.util.ChrysalisCoreRegistry;
-import net.sydokiddo.chrysalis.mixin.util.SimpleParticleTypeAccessor;
 import org.jetbrains.annotations.NotNull;
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class ChrysalisParticles {
 
-    public static final ChrysalisCoreRegistry<ParticleType<?>> PARTICLES = ChrysalisCoreRegistry.create(Registries.PARTICLE_TYPE, ChrysalisMod.MOD_ID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, ChrysalisMod.MOD_ID);
 
-    // region Particles
+    // region Simple Particles
 
-    public static final SimpleParticleType
-        MEMORY_FLAME = registerSimpleParticle("memory_flame", false),
-        RADIANCE = registerSimpleParticle("radiance", false),
-        ARTHROPOD_SIGHT = registerSimpleParticle("arthropod_sight", false),
-        CREEPER_SIGHT = registerSimpleParticle("creeper_sight", false),
-        ENDER_SIGHT = registerSimpleParticle("ender_sight", false)
+    public static final Supplier<SimpleParticleType>
+        MEMORY_FLAME = PARTICLE_TYPES.register("memory_flame", () -> new SimpleParticleType(false)),
+        RADIANCE = PARTICLE_TYPES.register("radiance", () -> new SimpleParticleType(false)),
+        ARTHROPOD_SIGHT = PARTICLE_TYPES.register("arthropod_sight", () -> new SimpleParticleType(false)),
+        CREEPER_SIGHT = PARTICLE_TYPES.register("creeper_sight", () -> new SimpleParticleType(false)),
+        ENDER_SIGHT = PARTICLE_TYPES.register("ender_sight", () -> new SimpleParticleType(false))
     ;
 
-    public static final ParticleType<ColoredDustPlumeParticleOptions> COLORED_DUST_PLUME = registerAdvancedParticle(
-        "colored_dust_plume", false, particleType -> ColoredDustPlumeParticleOptions.CODEC, particleType -> ColoredDustPlumeParticleOptions.STREAM_CODEC
-    );
+    // endregion
 
-    public static final ParticleType<DustExplosionParticleOptions> DUST_EXPLOSION = registerAdvancedParticle(
-        "dust_explosion", false, particleType -> DustExplosionParticleOptions.CODEC, particleType -> DustExplosionParticleOptions.STREAM_CODEC
-    );
+    // region Advanced Particles
 
-    public static final ParticleType<RotatingDustParticleOptions> ROTATING_DUST = registerAdvancedParticle(
-        "rotating_dust", false, particleType -> RotatingDustParticleOptions.CODEC, particleType -> RotatingDustParticleOptions.STREAM_CODEC
-    );
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDustPlumeParticleOptions>> COLORED_DUST_PLUME = PARTICLE_TYPES.register("colored_dust_plume", () -> new ParticleType<>(false) {
 
-    public static final ParticleType<SparkleParticleOptions> SPARKLE = registerAdvancedParticle(
-        "sparkle", false, particleType -> SparkleParticleOptions.CODEC, particleType -> SparkleParticleOptions.STREAM_CODEC
-    );
+        @Override
+        public @NotNull MapCodec<ColoredDustPlumeParticleOptions> codec() {
+            return ColoredDustPlumeParticleOptions.CODEC;
+        }
 
-    public static final ParticleType<SmallPulsationParticleOptions> SMALL_PULSATION = registerAdvancedParticle(
-        "small_pulsation", true, particleType -> SmallPulsationParticleOptions.CODEC, particleType -> SmallPulsationParticleOptions.STREAM_CODEC
-    );
+        @Override
+        public @NotNull StreamCodec<? super RegistryFriendlyByteBuf, ColoredDustPlumeParticleOptions> streamCodec() {
+            return ColoredDustPlumeParticleOptions.STREAM_CODEC;
+        }
+    });
 
-    public static final ParticleType<LargePulsationParticleOptions> LARGE_PULSATION = registerAdvancedParticle(
-        "large_pulsation", true, particleType -> LargePulsationParticleOptions.CODEC, particleType -> LargePulsationParticleOptions.STREAM_CODEC
-    );
+    public static final DeferredHolder<ParticleType<?>, ParticleType<DustExplosionParticleOptions>> DUST_EXPLOSION = PARTICLE_TYPES.register("dust_explosion", () -> new ParticleType<>(false) {
+
+        @Override
+        public @NotNull MapCodec<DustExplosionParticleOptions> codec() {
+            return DustExplosionParticleOptions.CODEC;
+        }
+
+        @Override
+        public @NotNull StreamCodec<? super RegistryFriendlyByteBuf, DustExplosionParticleOptions> streamCodec() {
+            return DustExplosionParticleOptions.STREAM_CODEC;
+        }
+    });
+
+    public static final DeferredHolder<ParticleType<?>, ParticleType<RotatingDustParticleOptions>> ROTATING_DUST = PARTICLE_TYPES.register("rotating_dust", () -> new ParticleType<>(false) {
+
+        @Override
+        public @NotNull MapCodec<RotatingDustParticleOptions> codec() {
+            return RotatingDustParticleOptions.CODEC;
+        }
+
+        @Override
+        public @NotNull StreamCodec<? super RegistryFriendlyByteBuf, RotatingDustParticleOptions> streamCodec() {
+            return RotatingDustParticleOptions.STREAM_CODEC;
+        }
+    });
+
+    public static final DeferredHolder<ParticleType<?>, ParticleType<SparkleParticleOptions>> SPARKLE = PARTICLE_TYPES.register("sparkle", () -> new ParticleType<>(false) {
+
+        @Override
+        public @NotNull MapCodec<SparkleParticleOptions> codec() {
+            return SparkleParticleOptions.CODEC;
+        }
+
+        @Override
+        public @NotNull StreamCodec<? super RegistryFriendlyByteBuf, SparkleParticleOptions> streamCodec() {
+            return SparkleParticleOptions.STREAM_CODEC;
+        }
+    });
+
+    public static final DeferredHolder<ParticleType<?>, ParticleType<SmallPulsationParticleOptions>> SMALL_PULSATION = PARTICLE_TYPES.register("small_pulsation", () -> new ParticleType<>(false) {
+
+        @Override
+        public @NotNull MapCodec<SmallPulsationParticleOptions> codec() {
+            return SmallPulsationParticleOptions.CODEC;
+        }
+
+        @Override
+        public @NotNull StreamCodec<? super RegistryFriendlyByteBuf, SmallPulsationParticleOptions> streamCodec() {
+            return SmallPulsationParticleOptions.STREAM_CODEC;
+        }
+    });
+
+    public static final DeferredHolder<ParticleType<?>, ParticleType<LargePulsationParticleOptions>> LARGE_PULSATION = PARTICLE_TYPES.register("large_pulsation", () -> new ParticleType<>(false) {
+
+        @Override
+        public @NotNull MapCodec<LargePulsationParticleOptions> codec() {
+            return LargePulsationParticleOptions.CODEC;
+        }
+
+        @Override
+        public @NotNull StreamCodec<? super RegistryFriendlyByteBuf, LargePulsationParticleOptions> streamCodec() {
+            return LargePulsationParticleOptions.STREAM_CODEC;
+        }
+    });
 
     // endregion
 
     // region Registry
 
-    @SuppressWarnings("all")
-    private static SimpleParticleType registerSimpleParticle(String name, boolean alwaysSpawn) {
-        return PARTICLES.register(name, SimpleParticleTypeAccessor.chrysalis$invokeSimpleParticleType(alwaysSpawn));
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void registerClient(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(MEMORY_FLAME.get(), FlameParticle.Provider::new);
+        event.registerSpriteSet(RADIANCE.get(), SpellParticle.Provider::new);
+        event.registerSpriteSet(ARTHROPOD_SIGHT.get(), SpellParticle.Provider::new);
+        event.registerSpriteSet(CREEPER_SIGHT.get(), SpellParticle.Provider::new);
+        event.registerSpriteSet(ENDER_SIGHT.get(), SpellParticle.Provider::new);
+        event.registerSpriteSet(COLORED_DUST_PLUME.get(), ColoredDustPlumeParticle.Provider::new);
+        event.registerSpriteSet(DUST_EXPLOSION.get(), DustExplosionParticle.Provider::new);
+        event.registerSpriteSet(ROTATING_DUST.get(), RotatingDustParticle.Provider::new);
+        event.registerSpriteSet(SPARKLE.get(), SparkleParticle.Provider::new);
+        event.registerSpriteSet(SMALL_PULSATION.get(), PulsationParticle.SmallProvider::new);
+        event.registerSpriteSet(LARGE_PULSATION.get(), PulsationParticle.LargeProvider::new);
     }
 
-    private static <T extends ParticleOptions> ParticleType<T> registerAdvancedParticle(String name, boolean alwaysSpawn, Function<ParticleType<T>, MapCodec<T>> firstFunction, Function<ParticleType<T>, StreamCodec<? super RegistryFriendlyByteBuf, T>> secondFunction) {
-        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, ChrysalisMod.id(name), new ParticleType<T>(alwaysSpawn) {
-
-            @Override
-            public @NotNull MapCodec<T> codec() {
-                return firstFunction.apply(this);
-            }
-
-            @Override
-            public @NotNull StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec() {
-                return secondFunction.apply(this);
-            }
-        });
-    }
-
-    public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(MEMORY_FLAME, FlameParticle.Provider::new);
-        event.registerSpriteSet(RADIANCE, SpellParticle.Provider::new);
-        event.registerSpriteSet(ARTHROPOD_SIGHT, SpellParticle.Provider::new);
-        event.registerSpriteSet(CREEPER_SIGHT, SpellParticle.Provider::new);
-        event.registerSpriteSet(ENDER_SIGHT, SpellParticle.Provider::new);
-        event.registerSpriteSet(COLORED_DUST_PLUME, ColoredDustPlumeParticle.ColoredDustPlumeParticleProvider::new);
-        event.registerSpriteSet(DUST_EXPLOSION, DustExplosionParticle.DustExplosionParticleProvider::new);
-        event.registerSpriteSet(ROTATING_DUST, RotatingDustParticle.RotatingDustParticleProvider::new);
-        event.registerSpriteSet(SPARKLE, SparkleParticle.SparkleParticleProvider::new);
-        event.registerSpriteSet(SMALL_PULSATION, PulsationParticle.SmallPulsationParticleProvider::new);
-        event.registerSpriteSet(LARGE_PULSATION, PulsationParticle.LargePulsationParticleProvider::new);
+    public static void registerServer(IEventBus eventBus) {
+        PARTICLE_TYPES.register(eventBus);
     }
 
     // endregion

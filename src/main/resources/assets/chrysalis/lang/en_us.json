@@ -195,6 +195,7 @@
   "gui.chrysalis.item.when_used": "When Used with %s:",
   "gui.chrysalis.item.when_eaten": "When Eaten:",
   "gui.chrysalis.item.when_drank": "When Drank:",
+  "gui.chrysalis.item.when_thrown": "When Thrown:",
 
   "gui.chrysalis.item.enchantments": "Enchantments:",
   "gui.chrysalis.item.banner_patterns": "Banner Patterns:",

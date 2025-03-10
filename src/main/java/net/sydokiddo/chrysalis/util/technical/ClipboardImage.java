@@ -1,11 +1,14 @@
 package net.sydokiddo.chrysalis.util.technical;
 
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 
+@OnlyIn(Dist.CLIENT)
 public record ClipboardImage(Image image) implements Transferable {
 
     /**

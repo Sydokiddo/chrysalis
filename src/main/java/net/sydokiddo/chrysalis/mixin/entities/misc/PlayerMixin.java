@@ -23,7 +23,6 @@ import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -52,7 +51,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
     private void chrysalis$definePlayerTags(SynchedEntityData.Builder builder, CallbackInfo info) {
-        builder.define(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.empty());
+        // builder.define(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.empty());
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))
