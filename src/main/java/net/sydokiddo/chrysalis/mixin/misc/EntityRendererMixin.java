@@ -2,6 +2,8 @@ package net.sydokiddo.chrysalis.mixin.misc;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ElytraModel;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -27,6 +29,7 @@ import net.sydokiddo.chrysalis.common.status_effects.ChrysalisEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
@@ -101,6 +104,20 @@ public abstract class EntityRendererMixin {
         private void chrysalis$hideRenderedElytra(PoseStack poseStack, MultiBufferSource multiBufferSource, int color, HumanoidRenderState humanoidRenderState, float float1, float float2, CallbackInfo info) {
             Holder<MobEffect> invisibility = MobEffects.INVISIBILITY;
             if (ChrysalisLivingEntityRenderState.livingEntity.hasEffect(invisibility) && Objects.requireNonNull(ChrysalisLivingEntityRenderState.livingEntity.getEffect(invisibility)).getAmplifier() > 0) info.cancel();
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mixin(ElytraModel.class)
+    public static class ElytraModelMixin {
+
+        /**
+         * Fixes stretched uvs on the elytra model.
+         **/
+
+        @ModifyArg(method = "createLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/geom/builders/CubeListBuilder;addBox(FFFFFFLnet/minecraft/client/model/geom/builders/CubeDeformation;)Lnet/minecraft/client/model/geom/builders/CubeListBuilder;"), index = 6)
+        private static CubeDeformation chrysalis$fixElytraUVs(CubeDeformation cubeDeformation) {
+            return new CubeDeformation(1.0F, 1.0F, 0.2F);
         }
     }
 }

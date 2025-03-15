@@ -67,6 +67,7 @@
     "misc.ClientLevelMixin",
     "misc.ClientLevelMixin$WeatherFixMixin",
     "misc.EntityRendererMixin",
+    "misc.EntityRendererMixin$ElytraModelMixin",
     "misc.EntityRendererMixin$HumanoidArmorLayerMixin",
     "misc.EntityRendererMixin$LivingEntityRendererMixin",
     "misc.EntityRendererMixin$WingsLayerMixin",
