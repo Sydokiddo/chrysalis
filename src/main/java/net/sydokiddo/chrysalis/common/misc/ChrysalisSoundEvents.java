@@ -21,7 +21,6 @@ public class ChrysalisSoundEvents {
 
         SCREENSHOT_SUCCESS = SOUND_EVENTS.register("ui.screenshot.success", SoundEvent::createVariableRangeEvent),
         SPLASH_TEXT_SHUFFLE = SOUND_EVENTS.register("ui.splash_text.shuffle", SoundEvent::createVariableRangeEvent),
-        ENDERMAN_ENCOUNTER_MUSIC = SOUND_EVENTS.register("music.encounter.enderman", SoundEvent::createVariableRangeEvent),
 
         HEAL_USE = SOUND_EVENTS.register("item.heal.use", SoundEvent::createVariableRangeEvent),
         FILL_HUNGER_USE = SOUND_EVENTS.register("item.fill_hunger.use", SoundEvent::createVariableRangeEvent),

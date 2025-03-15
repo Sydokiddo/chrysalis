@@ -15,14 +15,6 @@
       }
     ]
   },
-  "music.encounter.enderman": {
-    "sounds": [
-      {
-        "name": "chrysalis:ui/enderman",
-        "stream": true
-      }
-    ]
-  },
   "item.heal.use": {
     "sounds": [
       "minecraft:random/orb"

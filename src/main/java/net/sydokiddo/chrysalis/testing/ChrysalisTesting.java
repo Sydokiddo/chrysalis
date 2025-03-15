@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common;
+package net.sydokiddo.chrysalis.testing;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
