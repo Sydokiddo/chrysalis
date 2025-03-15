@@ -1,9 +1,13 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.client.multiplayer.PlayerInfo;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stat;
@@ -19,20 +23,26 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
-import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
+import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -191,6 +201,30 @@ public abstract class PlayerMixin extends LivingEntity {
         private void chrysalis$hideEntityKilledByStat(ServerPlayer serverPlayer, Stat<?> stat) {
             LivingEntity killCredit = this.getKillCredit();
             if (killCredit != null && !killCredit.getType().is(ChrysalisTags.HIDDEN_FROM_STATISTICS_MENU)) this.awardStat(Stats.ENTITY_KILLED_BY.get(killCredit.getType()));
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mixin(AbstractClientPlayer.class)
+    public static abstract class AbstractClientPlayerMixin extends Player {
+
+        @Shadow @Nullable protected abstract PlayerInfo getPlayerInfo();
+
+        public AbstractClientPlayerMixin(Level level, BlockPos blockPos, float yRot, GameProfile gameProfile) {
+            super(level, blockPos, yRot, gameProfile);
+        }
+
+        @Inject(at = @At("RETURN"), method = "getSkin", cancellable = true)
+        private void chrysalis$customCapes(CallbackInfoReturnable<PlayerSkin> cir) {
+            if (this.getPlayerInfo() == null) return;
+            if (Chrysalis.IS_DEBUG) cir.setReturnValue(this.chrysalis$setCustomCape(Chrysalis.resourceLocationId("textures/entity/cape/chrysalis.png")));
+            else if (Objects.equals(this.getPlayerInfo().getProfile().getId().toString(), "d92469c6-e198-4db5-99e3-759e84036aea")) cir.setReturnValue(this.chrysalis$setCustomCape(Chrysalis.resourceLocationId("textures/entity/cape/sydokiddo.png")));
+        }
+
+        @Unique
+        private PlayerSkin chrysalis$setCustomCape(ResourceLocation capeLocation) {
+            assert this.getPlayerInfo() != null;
+            return new PlayerSkin(this.getPlayerInfo().getSkin().texture(), this.getPlayerInfo().getSkin().textureUrl(), capeLocation, this.getPlayerInfo().getSkin().elytraTexture(), this.getPlayerInfo().getSkin().model(), true);
         }
     }
 }

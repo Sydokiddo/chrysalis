@@ -212,6 +212,15 @@
       "chars": [
         "\ua022"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/hunger_point.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua023"
+      ]
     }
   ]
 }

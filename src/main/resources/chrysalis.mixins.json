@@ -13,8 +13,8 @@
     "blocks.ChorusPlantMixin",
     "blocks.ChorusPlantMixin$ChorusFlowerBlockMixin",
     "blocks.ChorusPlantMixin$ChorusPlantFeatureMixin",
-    "blocks.GrateBlockMixin",
     "blocks.DispenserBlockMixin",
+    "blocks.GrateBlockMixin",
     "blocks.NetherWartBlockMixin",
     "blocks.PowderSnowBlockMixin",
     "blocks.RespawnBlockMixin",
@@ -67,6 +67,8 @@
     "testing.TestEntityMixin"
   ],
   "client": [
+    "entities.misc.PlayerMixin$AbstractClientPlayerMixin",
+    "misc.AWTHackMixin",
     "misc.ClientLevelMixin",
     "misc.ClientLevelMixin$WeatherFixMixin",
     "misc.EntityRendererMixin",
@@ -77,7 +79,6 @@
     "misc.GameRendererMixin$FogRendererMixin",
     "misc.GuiMixin",
     "misc.GuiMixin$GuiGraphicsMixin",
-    "misc.AWTHackMixin",
     "misc.MinecraftMixin",
     "misc.MinecraftMixin$MusicManagerMixin",
     "misc.SplashTextMixin",

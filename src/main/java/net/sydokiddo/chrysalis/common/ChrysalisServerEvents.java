@@ -29,6 +29,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
+import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
 import net.sydokiddo.chrysalis.util.sounds.music.*;
@@ -127,6 +128,7 @@ public class ChrysalisServerEvents {
         private static void datapackRegistry(DataPackRegistryEvent.NewRegistry event) {
             event.dataPackRegistry(ChrysalisRegistry.BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
             event.dataPackRegistry(ChrysalisRegistry.BLOCK_SOUND_DATA, BlockSoundData.CODEC);
+            event.dataPackRegistry(ChrysalisRegistry.CHARGED_MOB_DROP_DATA, ChargedMobDropData.CODEC);
         }
 
         @SubscribeEvent

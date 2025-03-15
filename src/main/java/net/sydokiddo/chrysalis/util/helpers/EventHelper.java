@@ -12,7 +12,7 @@ import net.minecraft.world.entity.Mob;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
-import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
+import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.ClearMusicPayload;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.QueuedMusicPayload;

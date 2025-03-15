@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.util.entities;
+package net.sydokiddo.chrysalis.util.entities.interfaces;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

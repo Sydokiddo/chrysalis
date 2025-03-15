@@ -25,6 +25,7 @@
   "gui.icon.chrysalis.flame": "\ua020",
   "gui.icon.chrysalis.soul_flame": "\ua021",
   "gui.icon.chrysalis.memory_flame": "\ua022",
+  "gui.icon.chrysalis.hunger_point": "\ua023",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",

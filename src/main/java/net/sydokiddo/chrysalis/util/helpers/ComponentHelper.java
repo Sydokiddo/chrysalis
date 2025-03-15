@@ -93,7 +93,8 @@ public class ComponentHelper {
         WAXED_ICON = Component.translatable("gui.icon.chrysalis.waxed"),
         FLAME_ICON = Component.translatable("gui.icon.chrysalis.flame"),
         SOUL_FLAME_ICON = Component.translatable("gui.icon.chrysalis.soul_flame"),
-        MEMORY_FLAME_ICON = Component.translatable("gui.icon.chrysalis.memory_flame")
+        MEMORY_FLAME_ICON = Component.translatable("gui.icon.chrysalis.memory_flame"),
+        HUNGER_POINT_ICON = Component.translatable("gui.icon.chrysalis.hunger_point")
     ;
 
     // endregion
