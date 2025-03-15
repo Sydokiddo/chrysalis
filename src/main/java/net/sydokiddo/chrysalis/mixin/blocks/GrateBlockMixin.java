@@ -12,19 +12,19 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(HalfTransparentBlock.class)
-public class CopperGrateBlockMixin extends Block {
+public class GrateBlockMixin extends Block {
 
-    private CopperGrateBlockMixin(Properties properties) {
+    private GrateBlockMixin(Properties properties) {
         super(properties);
     }
 
     /**
-     * Occludes blocked faces of any copper grate block when adjacent to each other.
+     * Occludes blocked faces of any grate block when adjacent to each other.
      **/
 
     @Inject(at = @At("HEAD"), method = "skipRendering", cancellable = true)
-    private void chrysalis$occludeCopperGrateFaces(BlockState blockState, BlockState adjacentBlock, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        TagKey<Block> copperGrates = ChrysalisTags.COPPER_GRATES;
-        if (blockState.is(copperGrates)) cir.setReturnValue(adjacentBlock.is(copperGrates) || super.skipRendering(blockState, adjacentBlock, direction));
+    private void chrysalis$occludeGrateFaces(BlockState blockState, BlockState adjacentBlock, Direction direction, CallbackInfoReturnable<Boolean> cir) {
+        TagKey<Block> grates = ChrysalisTags.COPPER_GRATES;
+        if (blockState.is(grates)) cir.setReturnValue(adjacentBlock.is(grates) || super.skipRendering(blockState, adjacentBlock, direction));
     }
 }

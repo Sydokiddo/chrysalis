@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 @OnlyIn(Dist.CLIENT)
-public abstract class EntityOverlayRenderer<S extends LivingEntityRenderState, M extends EntityModel<S>> extends RenderLayer<S, M> {
+public abstract class EntityOverlayRenderer<E extends LivingEntityRenderState, M extends EntityModel<E>> extends RenderLayer<E, M> {
 
     /**
      * A template renderer class for entity texture overlays.
@@ -22,13 +22,13 @@ public abstract class EntityOverlayRenderer<S extends LivingEntityRenderState, M
 
     private final boolean hideWhenInvisible;
 
-    public EntityOverlayRenderer(RenderLayerParent<S, M> renderLayerParent, boolean hideWhenInvisible) {
+    public EntityOverlayRenderer(RenderLayerParent<E, M> renderLayerParent, boolean hideWhenInvisible) {
         super(renderLayerParent);
         this.hideWhenInvisible = hideWhenInvisible;
     }
 
     @Override
-    public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int color, @NotNull S entityRenderState, float float1, float float2) {
+    public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int color, @NotNull E entityRenderState, float float1, float float2) {
         if (this.hideWhenInvisible && entityRenderState.isInvisible) return;
         RenderType renderType = this.renderType();
         if (renderType != null) this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), color, OverlayTexture.NO_OVERLAY);

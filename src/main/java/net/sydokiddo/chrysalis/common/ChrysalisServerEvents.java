@@ -49,7 +49,7 @@ public class ChrysalisServerEvents {
         }
 
         @SubscribeEvent
-        private static void onPreServerTick(ServerTickEvent.Pre event) {
+        private static void onServerPreTick(ServerTickEvent.Pre event) {
 
             if (MusicTracker.ticks > 0) {
                 MusicTracker.ticks -= 1;

@@ -13,6 +13,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ArmorStandItem.class)
 public class ArmorStandItemMixin {
 
+    /**
+     * Prevents players from placing armor stands while under the building fatigue effect in survival mode.
+     **/
+
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventArmorStandPlacement(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         Player player = useOnContext.getPlayer();

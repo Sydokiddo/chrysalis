@@ -15,8 +15,13 @@ public class TNTBlockMixin {
      * Items that can ignite TNT are now driven by the tnt_igniters tag.
      **/
 
-    @Redirect(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
-    private boolean chrysalis$tntIgnitersTag(ItemStack itemStack, Item item) {
+    @Redirect(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z", ordinal = 0))
+    private boolean chrysalis$tntIgnitersTag1(ItemStack itemStack, Item item) {
+        return itemStack.is(ChrysalisTags.TNT_IGNITERS);
+    }
+
+    @Redirect(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z", ordinal = 1))
+    private boolean chrysalis$tntIgnitersTag2(ItemStack itemStack, Item item) {
         return itemStack.is(ChrysalisTags.TNT_IGNITERS);
     }
 }

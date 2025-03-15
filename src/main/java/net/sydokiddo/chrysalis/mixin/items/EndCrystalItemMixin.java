@@ -26,6 +26,10 @@ public class EndCrystalItemMixin {
         return blockState.is(ChrysalisTags.END_CRYSTAL_BASE_BLOCKS);
     }
 
+    /**
+     * Prevents players from placing end crystals while under the building fatigue effect in survival mode.
+     **/
+
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventEndCrystalPlacement(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         Player player = useOnContext.getPlayer();

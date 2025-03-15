@@ -4,6 +4,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.sounds.music.MusicTracker;
@@ -24,6 +26,7 @@ public record StructureChangedPayload(ResourceLocation structureName) implements
     }
 
     @SuppressWarnings("unused")
+    @OnlyIn(Dist.CLIENT)
     public static void handleDataOnClient(final StructureChangedPayload payload, final IPayloadContext context) {
         MusicTracker.setStructureMusic(payload.structureName().toString(), true);
     }

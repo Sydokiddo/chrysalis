@@ -9,8 +9,11 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.GenericStatusEffect;
-import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.MobSightEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.ArthropodSightEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.CreeperSightEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.EnderSightEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.RadianceEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.GenericStatusEffect;
 import java.awt.*;
 
 public class ChrysalisEffects {
@@ -21,10 +24,10 @@ public class ChrysalisEffects {
 
     @SuppressWarnings("unused")
     public static final DeferredHolder<MobEffect, MobEffect>
-        RADIANCE = MOB_EFFECTS.register("radiance", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#FFFFB2").getRGB()).setBlendDuration(5)),
-        ARTHROPOD_SIGHT = MOB_EFFECTS.register("arthropod_sight", () -> new MobSightEffect(MobEffectCategory.NEUTRAL, Color.decode("#A80E0E").getRGB())),
-        CREEPER_SIGHT = MOB_EFFECTS.register("creeper_sight", () -> new MobSightEffect(MobEffectCategory.NEUTRAL, Color.decode("#459333").getRGB())),
-        ENDER_SIGHT = MOB_EFFECTS.register("ender_sight", () -> new MobSightEffect(MobEffectCategory.NEUTRAL, Color.decode("#E079FA").getRGB())),
+        RADIANCE = MOB_EFFECTS.register("radiance", RadianceEffect::new),
+        ARTHROPOD_SIGHT = MOB_EFFECTS.register("arthropod_sight", ArthropodSightEffect::new),
+        CREEPER_SIGHT = MOB_EFFECTS.register("creeper_sight", CreeperSightEffect::new),
+        ENDER_SIGHT = MOB_EFFECTS.register("ender_sight", EnderSightEffect::new),
         HEALTH_REDUCTION = MOB_EFFECTS.register("health_reduction", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#994C4C").getRGB()).addAttributeModifier(Attributes.MAX_HEALTH, Chrysalis.resourceLocationId("effect.health_reduction"), -4.0D, AttributeModifier.Operation.ADD_VALUE)),
         BUILDING_FATIGUE = MOB_EFFECTS.register("building_fatigue", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#79553A").getRGB()))
     ;

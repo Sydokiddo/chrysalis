@@ -75,7 +75,7 @@ public class ChrysalisRegistry {
 
         if (Chrysalis.IS_DEBUG && Chrysalis.registerExampleRegistry) ChrysalisExampleRegistry.init(eventBus);
 
-        ChrysalisItems.register(eventBus); // Aggro Wand has issues
+        ChrysalisItems.register(eventBus);
         ChrysalisDataComponents.register(eventBus);
         ChrysalisCreativeModeTabs.register(eventBus);
         ChrysalisSoundEvents.register(eventBus);
@@ -84,7 +84,7 @@ public class ChrysalisRegistry {
         ChrysalisMemoryModules.register(eventBus);
         ChrysalisDamageTypes.register();
         ChrysalisAttributes.register(eventBus);
-        ChrysalisEffects.register(eventBus); // Particles don't work
+        ChrysalisEffects.register(eventBus);
         ChrysalisGameRules.register();
         ChrysalisCriteriaTriggers.register(eventBus);
     }

@@ -1,5 +1,6 @@
 {
   "values": [
-    "chrysalis:icon"
+    "chrysalis:icon",
+    {"id": "chrysalis:example_icon", "required": false}
   ]
 }

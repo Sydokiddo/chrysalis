@@ -4,6 +4,8 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.sounds.music.MusicTracker;
@@ -24,6 +26,7 @@ public record ClearMusicPayload(boolean shouldFade) implements CustomPacketPaylo
     }
 
     @SuppressWarnings("unused")
+    @OnlyIn(Dist.CLIENT)
     public static void handleDataOnClient(final ClearMusicPayload payload, final IPayloadContext context) {
         MusicTracker.clearMusicOnClient(payload.shouldFade());
     }

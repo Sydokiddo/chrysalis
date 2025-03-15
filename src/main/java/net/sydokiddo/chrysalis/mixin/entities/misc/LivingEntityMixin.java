@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisDamageTypes;
-import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.MobSightEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.MobSightEffect;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;

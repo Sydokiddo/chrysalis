@@ -7,6 +7,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.sounds.music.MusicTracker;
@@ -27,6 +29,7 @@ public record QueuedMusicPayload(Holder<SoundEvent> soundEvent, int minDelay, in
     }
 
     @SuppressWarnings("unused")
+    @OnlyIn(Dist.CLIENT)
     public static void handleDataOnClient(final QueuedMusicPayload payload, final IPayloadContext context) {
         MusicTracker.setQueuedMusic(new Music(payload.soundEvent(), payload.minDelay(), payload.maxDelay(), payload.replaceCurrentMusic()), true);
     }

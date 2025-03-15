@@ -1,25 +1,20 @@
-package net.sydokiddo.chrysalis.registry.status_effects.custom_status_effects;
+package net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes;
 
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.protocol.game.ClientboundSetCameraPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class MobSightEffect extends GenericStatusEffect {
+public class MobSightEffect extends MobEffect {
 
     /**
      * A status effect class that allows for spectator mode shaders to be applied with it.
      **/
 
-    @SuppressWarnings("unused")
-    public MobSightEffect(MobEffectCategory mobEffectCategory, int color) {
-        super(mobEffectCategory, color);
-    }
-
-    public MobSightEffect(MobEffectCategory mobEffectCategory, int color, ParticleOptions particleType) {
-        super(mobEffectCategory, color, particleType);
+    public MobSightEffect(int color) {
+        super(MobEffectCategory.NEUTRAL, color);
     }
 
     @Override

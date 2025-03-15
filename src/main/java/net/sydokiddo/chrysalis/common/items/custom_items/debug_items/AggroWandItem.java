@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.registry.items.custom_items.debug_items;
+package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentType;
@@ -26,13 +26,13 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.sydokiddo.chrysalis.ChrysalisMod;
-import net.sydokiddo.chrysalis.registry.items.ChrysalisDataComponents;
-import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.DebugUtilityItem;
+import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
-import net.sydokiddo.chrysalis.registry.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
@@ -116,11 +116,11 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                         warden.setAttackTarget(livingEntity);
                     }
 
-                    serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.set_target", livingEntity.getName().getString(), linkedMob.getName().getString()));
 
                 } else {
-                    serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_FAIL.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_FAIL.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     DebugUtilityItem.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.linked_mob_missing").withStyle(ChatFormatting.RED));
                 }
 
@@ -140,7 +140,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
                 player.setItemInHand(interactionHand, linkedWand);
 
-                serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_LINK.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_LINK.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.link_mob", livingEntity.getName().getString()));
             }
 
@@ -159,6 +159,6 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public ResourceLocation getCrosshairTextureLocation() {
-        return ChrysalisMod.id("hud/aggro_wand_crosshair");
+        return Chrysalis.resourceLocationId("hud/aggro_wand_crosshair");
     }
 }
