@@ -11,8 +11,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.sydokiddo.chrysalis.ChrysalisMod;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
+import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class PlaceBlockDispenserBehavior implements DispenseItemBehavior {
@@ -40,8 +41,7 @@ public class PlaceBlockDispenserBehavior implements DispenseItemBehavior {
             serverLevel.playSound(null, blockPos, blockState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, blockState.getSoundType().getVolume(), blockState.getSoundType().getPitch());
             serverLevel.gameEvent(null, GameEvent.BLOCK_PLACE, blockPos);
 
-            if (ChrysalisMod.IS_DEBUG) ChrysalisMod.LOGGER.info("{} has been successfully dispensed at {}", blockState.getBlock().getName().getString(), blockPos);
-
+            DebugHelper.sendDispenserMessage(Chrysalis.LOGGER, Chrysalis.IS_DEBUG, blockState.getBlock().getName().getString(), blockPos);
             itemStack.shrink(1);
             return itemStack;
         }

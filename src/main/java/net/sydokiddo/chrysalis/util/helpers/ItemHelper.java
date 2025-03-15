@@ -20,6 +20,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
+import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
 import java.util.List;
 import java.util.Objects;
 
@@ -110,10 +111,11 @@ public class ItemHelper {
      **/
 
     public static int getItemGlowColor(ItemEntity itemEntity) {
-        return 0;
+        return itemEntity.getEntityData().get(ChrysalisRegistry.ITEM_GLOW_COLOR);
     }
 
     public static void setItemGlowColor(ItemEntity itemEntity, int glowColor) {
+        itemEntity.getEntityData().set(ChrysalisRegistry.ITEM_GLOW_COLOR, glowColor);
     }
 
     // endregion

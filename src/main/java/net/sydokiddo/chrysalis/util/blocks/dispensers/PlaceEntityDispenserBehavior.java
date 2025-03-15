@@ -18,7 +18,9 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.dimension.end.EndDragonFight;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
+import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
@@ -75,6 +77,7 @@ public class PlaceEntityDispenserBehavior implements DispenseItemBehavior {
             serverLevel.gameEvent(null, GameEvent.ENTITY_PLACE, blockPos);
             if (this.placeSound != null) serverLevel.playSound(null, blockPos, this.placeSound, entity.getSoundSource(), 1.0F, 0.8F + serverLevel.getRandom().nextFloat() * 0.4F);
 
+            DebugHelper.sendDispenserMessage(Chrysalis.LOGGER, Chrysalis.IS_DEBUG, this.entityType.toString(), blockPos);
             itemStack.shrink(1);
             return itemStack;
         }

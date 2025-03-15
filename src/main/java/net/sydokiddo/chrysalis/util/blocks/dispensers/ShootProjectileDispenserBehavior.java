@@ -14,6 +14,8 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavior {
@@ -45,6 +47,7 @@ public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavio
         entity.setPos(position.x(), position.y(), position.z());
 
         level.addFreshEntity(entity);
+        DebugHelper.sendDispenserMessage(Chrysalis.LOGGER, Chrysalis.IS_DEBUG, entity.getName().getString(), blockSource.pos());
         itemStack.shrink(1);
         return itemStack;
     }

@@ -8,9 +8,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.MobInContainerItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.MobInFluidBucketItem;
+import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavior {
@@ -37,6 +39,7 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
                 level.playSound(null, blockPos, mobInContainerItem.emptySound, SoundSource.NEUTRAL, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
                 mobInContainerItem.checkExtraContent(null, level, itemStack, blockPos);
 
+                DebugHelper.sendDispenserMessage(Chrysalis.LOGGER, Chrysalis.IS_DEBUG, mobInContainerItem.getName().getString(), blockPos);
                 return new ItemStack(mobInContainerItem.returnItem.asItem());
 
             } else if (itemStack.getItem() instanceof MobInFluidBucketItem mobInFluidBucketItem) {
@@ -44,6 +47,7 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
                 mobInFluidBucketItem.emptyContents(null, level, blockPos, null, itemStack);
                 mobInFluidBucketItem.checkExtraContent(null, level, itemStack, blockPos);
 
+                DebugHelper.sendDispenserMessage(Chrysalis.LOGGER, Chrysalis.IS_DEBUG, mobInFluidBucketItem.getName().getString(), blockPos);
                 return new ItemStack(Items.BUCKET);
             }
         }

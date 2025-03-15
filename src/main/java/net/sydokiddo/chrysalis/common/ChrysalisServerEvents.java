@@ -17,8 +17,8 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
@@ -49,7 +49,7 @@ public class ChrysalisServerEvents {
         }
 
         @SubscribeEvent
-        private static void onServerStarted(ServerStartedEvent event) {
+        private static void onPreServerTick(ServerTickEvent.Pre event) {
 
             if (MusicTracker.ticks > 0) {
                 MusicTracker.ticks -= 1;

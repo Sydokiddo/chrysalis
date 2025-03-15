@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -45,13 +46,16 @@ public class ChrysalisExampleRegistry {
      * Note: Do not initialize any methods in this class unless you want a bunch of broken items, blocks, and other things in your game!
      **/
 
-    public ChrysalisExampleRegistry() {
+    public static void init(IEventBus eventBus) {
+        BLOCKS.register(eventBus);
+        registerExampleStructureMusic();
+        registerExampleDispenserMethods();
         Chrysalis.LOGGER.warn("WARNING: {} example registry has been initialized.", Chrysalis.LOGGER.getName());
     }
 
     // region Example Potion Recipe Registries
 
-    public static void registerExamplePotions(PotionBrewing.Builder builder) {
+    private static void registerExamplePotions(PotionBrewing.Builder builder) {
         RegistryHelper.registerBasePotionRecipe(builder, Items.GHAST_TEAR, Potions.REGENERATION);
         RegistryHelper.registerLongPotionRecipe(builder, Potions.REGENERATION, Potions.LONG_REGENERATION);
         RegistryHelper.registerStrongPotionRecipe(builder, Potions.REGENERATION, Potions.STRONG_REGENERATION);
@@ -62,33 +66,33 @@ public class ChrysalisExampleRegistry {
 
     // region Example Item Registries
 
-    public static final DeferredItem<Item> EXAMPLE_ICON = ChrysalisItems.ITEMS.registerItem("example_icon", IconItem::new, ChrysalisItems.debugUtilitySettings());
+    private static final DeferredItem<Item> EXAMPLE_ICON = ChrysalisItems.ITEMS.registerItem("example_icon", IconItem::new, ChrysalisItems.debugUtilitySettings());
 
-    public static final DeferredItem<Item> EXAMPLE_TOOL = ChrysalisItems.ITEMS.registerItem("example_tool",
+    private static final DeferredItem<Item> EXAMPLE_TOOL = ChrysalisItems.ITEMS.registerItem("example_tool",
         properties -> new SwordItem(ToolMaterial.IRON, 3, -2.4F, properties), new Item.Properties());
 
-    public static final DeferredItem<Item> EXAMPLE_ARMOR = ChrysalisItems.ITEMS.registerItem("example_armor",
+    private static final DeferredItem<Item> EXAMPLE_ARMOR = ChrysalisItems.ITEMS.registerItem("example_armor",
         properties -> new ArmorItem(ArmorMaterials.IRON, ArmorType.CHESTPLATE, properties), new Item.Properties());
 
-    public static final DeferredItem<Item> EXAMPLE_MUSIC_DISC = ChrysalisItems.ITEMS.registerItem("example_music_disc",
+    private static final DeferredItem<Item> EXAMPLE_MUSIC_DISC = ChrysalisItems.ITEMS.registerItem("example_music_disc",
         Item::new, RegistryHelper.musicDiscProperties(JukeboxSongs.CAT, Rarity.COMMON));
 
-    public static final DeferredItem<Item> EXAMPLE_SPAWN_EGG = ChrysalisItems.ITEMS.registerItem("example_spawn_egg",
+    private static final DeferredItem<Item> EXAMPLE_SPAWN_EGG = ChrysalisItems.ITEMS.registerItem("example_spawn_egg",
         properties -> new CSpawnEggItem(EntityType.FROG, EntityType.TADPOLE, properties), new Item.Properties());
 
-    public static final DeferredItem<Item> EXAMPLE_MOB_CUSTOM_CONTAINER = ChrysalisItems.ITEMS.registerItem("example_mob_custom_container",
+    private static final DeferredItem<Item> EXAMPLE_MOB_CUSTOM_CONTAINER = ChrysalisItems.ITEMS.registerItem("example_mob_custom_container",
         properties -> new MobInContainerItem(EntityType.ALLAY, SoundEvents.BUCKET_EMPTY, properties), RegistryHelper.mobContainerProperties(Items.GLASS_BOTTLE, Rarity.COMMON));
 
-    public static final DeferredItem<Item> EXAMPLE_MOB_FLUID_BUCKET = ChrysalisItems.ITEMS.registerItem("example_mob_fluid_bucket",
+    private static final DeferredItem<Item> EXAMPLE_MOB_FLUID_BUCKET = ChrysalisItems.ITEMS.registerItem("example_mob_fluid_bucket",
         properties -> new MobInFluidBucketItem(EntityType.COD, Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, properties), RegistryHelper.mobContainerProperties(Items.BUCKET, Rarity.COMMON));
 
-    public static final DeferredItem<Item> EXAMPLE_MOB_SOLID_BUCKET = ChrysalisItems.ITEMS.registerItem("example_mob_solid_bucket",
+    private static final DeferredItem<Item> EXAMPLE_MOB_SOLID_BUCKET = ChrysalisItems.ITEMS.registerItem("example_mob_solid_bucket",
         properties -> new MobInSolidBucketItem(EntityType.SNOW_GOLEM, Blocks.POWDER_SNOW, SoundEvents.BUCKET_EMPTY_POWDER_SNOW, properties), RegistryHelper.mobContainerProperties(Items.BUCKET, Rarity.COMMON));
 
-    public static final DeferredItem<Item> EXAMPLE_ARMOR_TRIM_SMITHING_TEMPLATE = ChrysalisItems.ITEMS.registerItem("example_armor_trim_smithing_template",
+    private static final DeferredItem<Item> EXAMPLE_ARMOR_TRIM_SMITHING_TEMPLATE = ChrysalisItems.ITEMS.registerItem("example_armor_trim_smithing_template",
         SmithingTemplateItem::createArmorTrimTemplate, new Item.Properties().rarity(Rarity.UNCOMMON));
 
-    public static final DeferredItem<Item> EXAMPLE_UPGRADE_SMITHING_TEMPLATE = ChrysalisItems.ITEMS.registerItem("example_upgrade_smithing_template",
+    private static final DeferredItem<Item> EXAMPLE_UPGRADE_SMITHING_TEMPLATE = ChrysalisItems.ITEMS.registerItem("example_upgrade_smithing_template",
         properties -> CSmithingTemplateItem.createUpgradeTemplate("minecraft", "netherite_upgrade", CSmithingTemplateItem.EMPTY_SLOT_INGOT, properties),
         new Item.Properties().rarity(Rarity.UNCOMMON));
 
@@ -96,31 +100,31 @@ public class ChrysalisExampleRegistry {
 
     // region Example Block Registries
 
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Chrysalis.MOD_ID);
+    private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Chrysalis.MOD_ID);
 
-    public static final DeferredBlock<Block> EXAMPLE_BUTTON = registerBlock("example_button",
+    private static final DeferredBlock<Block> EXAMPLE_BUTTON = registerBlock("example_button",
         properties -> new ButtonBlock(BlockSetType.STONE, 20, properties), Blocks.buttonProperties(), new Item.Properties());
 
-    public static final DeferredBlock<Block> EXAMPLE_STONE_PRESSURE_PLATE = registerBlock("example_stone_pressure_plate",
+    private static final DeferredBlock<Block> EXAMPLE_STONE_PRESSURE_PLATE = registerBlock("example_stone_pressure_plate",
         properties -> new PressurePlateBlock(BlockSetType.STONE, properties), RegistryHelper.stonePressurePlateProperties(MapColor.STONE), new Item.Properties());
 
-    public static final DeferredBlock<Block> EXAMPLE_WOODEN_PRESSURE_PLATE = registerBlock("example_wooden_pressure_plate",
+    private static final DeferredBlock<Block> EXAMPLE_WOODEN_PRESSURE_PLATE = registerBlock("example_wooden_pressure_plate",
         properties -> new PressurePlateBlock(BlockSetType.OAK, properties), RegistryHelper.woodenPressurePlateProperties(Blocks.OAK_PLANKS.defaultMapColor()), new Item.Properties());
 
-    public static final DeferredBlock<Block> EXAMPLE_LEAVES = registerBlock("example_leaves",
+    private static final DeferredBlock<Block> EXAMPLE_LEAVES = registerBlock("example_leaves",
         LeavesBlock::new, RegistryHelper.leavesProperties(MapColor.PLANT, SoundType.AZALEA_LEAVES, Blocks::ocelotOrParrot), new Item.Properties());
 
-    public static final DeferredBlock<Block> EXAMPLE_LOG = registerBlock("example_log",
+    private static final DeferredBlock<Block> EXAMPLE_LOG = registerBlock("example_log",
         RotatedPillarBlock::new, Blocks.logProperties(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD), new Item.Properties());
 
-    public static final DeferredBlock<Block> EXAMPLE_SITTABLE_BLOCK = registerBlock("example_sittable_block",
+    private static final DeferredBlock<Block> EXAMPLE_SITTABLE_BLOCK = registerBlock("example_sittable_block",
         ExampleSeatBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), new Item.Properties());
 
-    public static DeferredBlock<Block> registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties settings) {
+    private static DeferredBlock<Block> registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties settings) {
         return registerBlock(name, function, settings, new Item.Properties());
     }
 
-    public static DeferredBlock<Block> registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
+    private static DeferredBlock<Block> registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
         DeferredBlock<Block> block = BLOCKS.registerBlock(name, function, blockSettings);
         ChrysalisItems.ITEMS.registerSimpleBlockItem(block, itemSettings);
         return block;
@@ -130,32 +134,32 @@ public class ChrysalisExampleRegistry {
 
     // region Miscellaneous Example Registries
 
-    public static final ResourceLocation EXAMPLE_GAMEPLAY_LOOT_TABLE = RegistryHelper.registerCustomLootTable(Chrysalis.resourceLocationId("gameplay/example_gameplay_loot_table"));
+    private static final ResourceLocation EXAMPLE_GAMEPLAY_LOOT_TABLE = RegistryHelper.registerCustomLootTable(Chrysalis.resourceLocationId("gameplay/example_gameplay_loot_table"));
 
-    public static void registerExampleStructureMusic() {
-        RegistryHelper.registerStructureMusic("minecraft:village_plains", SoundEvents.MUSIC_CREDITS, 20, 600, false);
+    private static void registerExampleStructureMusic() {
+        RegistryHelper.registerStructureMusic("minecraft:village_plains", SoundEvents.MUSIC_CREDITS, 20, 40, true);
     }
 
-    public static void registerExampleDispenserMethods() {
+    private static void registerExampleDispenserMethods() {
         DispenserBlock.registerBehavior(Blocks.SAND.asItem(), new PlaceBlockDispenserBehavior());
         DispenserBlock.registerBehavior(Items.END_CRYSTAL, new PlaceEntityDispenserBehavior(EntityType.END_CRYSTAL, new Vec3(1.0D, 2.0D, 1.0D), new Vec3(0.5D, 0.0D, 0.5D), ChrysalisTags.END_CRYSTAL_BASE_BLOCKS, SoundEvents.AMETHYST_BLOCK_PLACE));
         DispenserBlock.registerBehavior(Items.BLAZE_POWDER, new ShootProjectileDispenserBehavior(EntityType.SMALL_FIREBALL, SoundEvents.BLAZE_SHOOT));
     }
 
-    public static void sendExampleCameraShake(Entity entity) {
+    private static void sendExampleCameraShake(Entity entity) {
         EventHelper.sendCameraShakeToNearbyPlayers(entity, null, 10.0D, 20, 5, 5);
     }
 
-    public static void sendExampleStatusEffect(Entity entity) {
+    private static void sendExampleStatusEffect(Entity entity) {
         EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0D, new MobEffectInstance(Holder.direct(ChrysalisEffects.RADIANCE.get()), 40));
     }
 
-    public static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
-    public static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
-    public static final RotatingDustParticleOptions EXAMPLE_ROTATING_DUST_PARTICLES = new RotatingDustParticleOptions(ComponentHelper.MEMORY_FIRE_COLOR.getRGB(), true, true, false, 1.0F);
-    public static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false);
-    public static final SmallPulsationParticleOptions EXAMPLE_SMALL_PULSATION_PARTICLES = new SmallPulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 10);
-    public static final LargePulsationParticleOptions EXAMPLE_LARGE_PULSATION_PARTICLES = new LargePulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 20);
+    private static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
+    private static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
+    private static final RotatingDustParticleOptions EXAMPLE_ROTATING_DUST_PARTICLES = new RotatingDustParticleOptions(ComponentHelper.MEMORY_FIRE_COLOR.getRGB(), true, true, false, 1.0F);
+    private static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false);
+    private static final SmallPulsationParticleOptions EXAMPLE_SMALL_PULSATION_PARTICLES = new SmallPulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 10);
+    private static final LargePulsationParticleOptions EXAMPLE_LARGE_PULSATION_PARTICLES = new LargePulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 20);
 
     // endregion
 }

@@ -10,10 +10,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.sydokiddo.chrysalis.registry.items.ChrysalisDataComponents;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -43,7 +44,7 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
     private void chrysalis$defineItemEntityTags(SynchedEntityData.Builder builder, CallbackInfo info) {
-        // builder.define(ChrysalisRegistry.ITEM_GLOW_COLOR, 16777215);
+        builder.define(ChrysalisRegistry.ITEM_GLOW_COLOR, 16777215);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))

@@ -19,11 +19,12 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -51,7 +52,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
     private void chrysalis$definePlayerTags(SynchedEntityData.Builder builder, CallbackInfo info) {
-        // builder.define(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.empty());
+        builder.define(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.empty());
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))

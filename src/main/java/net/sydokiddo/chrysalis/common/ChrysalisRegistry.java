@@ -7,8 +7,13 @@ import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -20,6 +25,7 @@ import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
 import net.sydokiddo.chrysalis.client.particles.types.*;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
+import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
 import net.sydokiddo.chrysalis.util.entities.ChrysalisMemoryModules;
@@ -35,13 +41,13 @@ public class ChrysalisRegistry {
 
     // region Entity Data
 
-//    public static final EntityDataAccessor<Integer>
-//        ITEM_GLOW_COLOR = SynchedEntityData.defineId(ItemEntity.class, EntityDataSerializers.INT)
-//    ;
+    public static final EntityDataAccessor<Integer>
+        ITEM_GLOW_COLOR = SynchedEntityData.defineId(ItemEntity.class, EntityDataSerializers.INT)
+    ;
 
-//    public static final EntityDataAccessor<Optional<UUID>>
-//        ENCOUNTERED_MOB_UUID = SynchedEntityData.defineId(Player.class, EntityDataSerializers.OPTIONAL_UUID)
-//    ;
+    public static final EntityDataAccessor<Optional<UUID>>
+        ENCOUNTERED_MOB_UUID = SynchedEntityData.defineId(Player.class, EntityDataSerializers.OPTIONAL_UUID)
+    ;
 
     // endregion
 
@@ -66,7 +72,10 @@ public class ChrysalisRegistry {
     // endregion
 
     public static void registerAll(IEventBus eventBus) {
-        ChrysalisItems.register(eventBus);
+
+        if (Chrysalis.IS_DEBUG && Chrysalis.registerExampleRegistry) ChrysalisExampleRegistry.init(eventBus);
+
+        ChrysalisItems.register(eventBus); // Aggro Wand has issues
         ChrysalisDataComponents.register(eventBus);
         ChrysalisCreativeModeTabs.register(eventBus);
         ChrysalisSoundEvents.register(eventBus);
@@ -75,7 +84,7 @@ public class ChrysalisRegistry {
         ChrysalisMemoryModules.register(eventBus);
         ChrysalisDamageTypes.register();
         ChrysalisAttributes.register(eventBus);
-        ChrysalisEffects.register(eventBus);
+        ChrysalisEffects.register(eventBus); // Particles don't work
         ChrysalisGameRules.register();
         ChrysalisCriteriaTriggers.register(eventBus);
     }
@@ -87,14 +96,15 @@ public class ChrysalisRegistry {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
-            EntityRenderers.register(ChrysalisEntities.SEAT.get(), SeatRenderer::new); // Works
-            Chrysalis.sendInitializedMessage(true);
+            EntityRenderers.register(ChrysalisEntities.SEAT.get(), SeatRenderer::new);
 
             try {
                 Toolkit.getDefaultToolkit().getSystemClipboard();
             } catch (HeadlessException exception) {
                 Chrysalis.LOGGER.warn("java.awt.headless property was not set properly!");
             }
+
+            DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.CHRYSALIS_VERSION, true);
         }
 
         @SubscribeEvent

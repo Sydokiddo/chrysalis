@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.util.blocks.dispensers;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
@@ -8,8 +9,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.CSpawnEggItem;
+import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class DispenseCustomSpawnEggDispenserBehavior implements DispenseItemBehavior {
@@ -26,9 +29,11 @@ public class DispenseCustomSpawnEggDispenserBehavior implements DispenseItemBeha
         if (!(itemStack.getItem() instanceof CSpawnEggItem cSpawnEggItem)) return itemStack;
         Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
         EntityType<?> entityType = cSpawnEggItem.getType(blockSource.level().registryAccess(), itemStack);
+        BlockPos blockPos = blockSource.pos().relative(direction);
 
         try {
-            entityType.spawn(blockSource.level(), itemStack, null, blockSource.pos().relative(direction), EntitySpawnReason.DISPENSER, direction != Direction.UP, false);
+            DebugHelper.sendDispenserMessage(Chrysalis.LOGGER, Chrysalis.IS_DEBUG, entityType.toString(), blockPos);
+            entityType.spawn(blockSource.level(), itemStack, null, blockPos, EntitySpawnReason.DISPENSER, direction != Direction.UP, false);
         } catch (Exception exception) {
             LOGGER.error("Error while dispensing spawn egg from dispenser at {}", blockSource.pos(), exception);
             return ItemStack.EMPTY;

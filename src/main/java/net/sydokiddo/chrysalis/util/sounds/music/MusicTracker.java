@@ -106,6 +106,7 @@ public class MusicTracker {
             return;
         }
 
+        if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Setting {}'s current structure to {}", player.getName().getString(), structureLocation);
         if (player instanceof ServerPlayer serverPlayer) PacketDistributor.sendToPlayer(serverPlayer, new StructureChangedPayload(newStructure));
     }
 
@@ -133,7 +134,7 @@ public class MusicTracker {
      **/
 
     public static void setStructureMusic(String structure, boolean isFirst) {
-        if (structure == null || Objects.equals(structure, "chrysalis:none")) {
+        if (structure == null || Objects.equals(structure, Chrysalis.stringId("none"))) {
             setQueuedMusic(null, isFirst);
             return;
         }
