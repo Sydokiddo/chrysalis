@@ -14,9 +14,9 @@ import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.entities.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
-import net.sydokiddo.chrysalis.util.sounds.music.ClearMusicPayload;
-import net.sydokiddo.chrysalis.util.sounds.music.QueuedMusicPayload;
-import net.sydokiddo.chrysalis.util.sounds.music.ResetMusicFadePayload;
+import net.sydokiddo.chrysalis.util.sounds.music.payloads.ClearMusicPayload;
+import net.sydokiddo.chrysalis.util.sounds.music.payloads.QueuedMusicPayload;
+import net.sydokiddo.chrysalis.util.sounds.music.payloads.ResetMusicFadePayload;
 import org.joml.Vector4f;
 import java.util.List;
 

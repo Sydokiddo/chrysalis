@@ -16,8 +16,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.sydokiddo.chrysalis.ChrysalisMod;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
 
 @SuppressWarnings("unused")
 public class RegistryHelper {
@@ -29,15 +29,15 @@ public class RegistryHelper {
      **/
 
     public static <T> ResourceKey<Registry<T>> registerBlockDataType(String string) {
-        return ChrysalisMod.key("block/" + string);
+        return Chrysalis.key("block/" + string);
     }
 
     public static <T> ResourceKey<Registry<T>> registerItemDataType(String string) {
-        return ChrysalisMod.key("item/" + string);
+        return Chrysalis.key("item/" + string);
     }
 
     public static <T> ResourceKey<Registry<T>> registerEntityDataType(String string) {
-        return ChrysalisMod.key("entity/" + string);
+        return Chrysalis.key("entity/" + string);
     }
 
     public static <T> ResourceKey<Registry<T>> registerMobVariantDataType(String string) {

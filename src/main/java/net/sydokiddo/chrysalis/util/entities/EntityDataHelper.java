@@ -14,10 +14,9 @@ import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.sydokiddo.chrysalis.ChrysalisMod;
-import net.sydokiddo.chrysalis.registry.ChrysalisRegistry;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisAttributes;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisAttributes;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -122,7 +121,7 @@ public class EntityDataHelper {
         float damageCap = (float) livingEntity.getAttributeValue(Holder.direct(ChrysalisAttributes.DAMAGE_CAPACITY.get()));
 
         if (originalDamage > damageCap && originalDamage < Float.MAX_VALUE && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            if (ChrysalisMod.IS_DEBUG && !livingEntity.level().isClientSide()) ChrysalisMod.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);
+            if (Chrysalis.IS_DEBUG && !livingEntity.level().isClientSide()) Chrysalis.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);
             return damageCap;
         }
 
@@ -130,7 +129,7 @@ public class EntityDataHelper {
     }
 
     public static void playItemDroppingSound(Player player) {
-        player.playNotifySound(ChrysalisSoundEvents.ITEM_DROP.value(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
+        player.playNotifySound(ChrysalisSoundEvents.ITEM_DROP.get(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
     }
 
     public static Optional<UUID> getEncounteredMobUUID(Player player) {

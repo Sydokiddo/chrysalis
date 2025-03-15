@@ -20,7 +20,7 @@ public interface JukeboxInteractionMob {
     default void setJukeboxPlaying(Mob mob, BlockPos blockPos, boolean jukeboxPlaying) {}
 
     @SuppressWarnings("all")
-    class JukeboxListener implements GameEventListener, JukeboxInteractionMob {
+    public class JukeboxListener implements GameEventListener, JukeboxInteractionMob {
 
         public final Mob mob;
         public final PositionSource listenerSource;

@@ -16,7 +16,7 @@ import java.util.List;
 public class CSplashManager extends SplashManager {
 
     /**
-     * The splash manager for ChrysalisMod's custom splash text system.
+     * The splash manager for Chrysalis's custom splash text system.
      **/
 
     public CSplashManager(User user) {

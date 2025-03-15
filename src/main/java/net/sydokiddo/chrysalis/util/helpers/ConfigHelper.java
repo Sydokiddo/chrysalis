@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis.util.helpers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.sydokiddo.chrysalis.ChrysalisMod;
+import net.sydokiddo.chrysalis.Chrysalis;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -18,13 +18,13 @@ public class ConfigHelper {
 
     public static Component genericCategoryName(String modID) {
         MutableComponent icon = ComponentHelper.GEAR_ICON;
-        ComponentHelper.setTooltipIconsFont(icon, ChrysalisMod.MOD_ID);
+        ComponentHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
         return Component.translatable("gui.chrysalis.config_category.generic", icon, Component.translatable("mod." + modID));
     }
 
     public static Component categoryName(String string) {
         MutableComponent icon = ComponentHelper.GEAR_ICON;
-        ComponentHelper.setTooltipIconsFont(icon, ChrysalisMod.MOD_ID);
+        ComponentHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
         return Component.translatable(string, icon, icon);
     }
 

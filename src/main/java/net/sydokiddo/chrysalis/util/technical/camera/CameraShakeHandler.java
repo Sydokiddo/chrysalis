@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.sydokiddo.chrysalis.ChrysalisMod;
+import net.sydokiddo.chrysalis.Chrysalis;
 
 @OnlyIn(Dist.CLIENT)
 public class CameraShakeHandler {
@@ -19,7 +19,7 @@ public class CameraShakeHandler {
 
     public static void shakeCamera(int time, float strength, float frequency) {
         if (strength > CameraShakeHandler.strength) {
-            if (ChrysalisMod.IS_DEBUG) ChrysalisMod.LOGGER.info("Emitting a camera shake of time: {}, strength: {}, and frequency: {}", time, strength, frequency);
+            if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Emitting a camera shake of time: {}, strength: {}, and frequency: {}", time, strength, frequency);
             CameraShakeHandler.time = time;
             CameraShakeHandler.strength = strength;
             CameraShakeHandler.frequency = frequency;
@@ -28,7 +28,7 @@ public class CameraShakeHandler {
 
     public static void resetCamera() {
         if (time == 0 && strength == 0 && frequency == 0) return;
-        if (ChrysalisMod.IS_DEBUG) ChrysalisMod.LOGGER.info("Camera shake has been reset");
+        if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Camera shake has been reset");
         time = 0;
         strength = 0;
         frequency = 0;

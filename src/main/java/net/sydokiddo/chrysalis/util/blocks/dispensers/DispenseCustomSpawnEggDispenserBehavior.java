@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
-import net.sydokiddo.chrysalis.registry.items.custom_items.CSpawnEggItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.CSpawnEggItem;
 import org.jetbrains.annotations.NotNull;
 
 public class DispenseCustomSpawnEggDispenserBehavior implements DispenseItemBehavior {

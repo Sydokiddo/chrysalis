@@ -23,8 +23,8 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraSetup;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
-import net.sydokiddo.chrysalis.registry.status_effects.ChrysalisEffects;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.status_effects.ChrysalisEffects;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -53,9 +53,9 @@ public abstract class GameRendererMixin {
         if (!this.minecraft.options.getCameraType().isFirstPerson() || !(entity instanceof LivingEntity livingEntity)) return;
         EntityType<?> entityType = livingEntity.getType();
 
-        if (entityType.is(ChrysalisTags.HAS_ARTHROPOD_SIGHT) || livingEntity.hasEffect(Holder.direct(ChrysalisEffects.ARTHROPOD_SIGHT.get()))) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
-        if (entityType.is(ChrysalisTags.HAS_CREEPER_SIGHT) || livingEntity.hasEffect(Holder.direct(ChrysalisEffects.CREEPER_SIGHT.get()))) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
-        if (entityType.is(ChrysalisTags.HAS_ENDER_SIGHT) || livingEntity.hasEffect(Holder.direct(ChrysalisEffects.ENDER_SIGHT.get()))) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
+        if (entityType.is(ChrysalisTags.HAS_ARTHROPOD_SIGHT) || livingEntity.hasEffect(ChrysalisEffects.ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
+        if (entityType.is(ChrysalisTags.HAS_CREEPER_SIGHT) || livingEntity.hasEffect(ChrysalisEffects.CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
+        if (entityType.is(ChrysalisTags.HAS_ENDER_SIGHT) || livingEntity.hasEffect(ChrysalisEffects.ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
     }
 
     /**
@@ -101,7 +101,7 @@ public abstract class GameRendererMixin {
 
         @Unique
         private static Holder<MobEffect> chrysalis$getRadianceEffect() {
-            return Holder.direct(ChrysalisEffects.RADIANCE.get());
+            return ChrysalisEffects.RADIANCE;
         }
 
         @Unique

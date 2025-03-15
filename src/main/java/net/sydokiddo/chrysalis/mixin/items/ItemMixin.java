@@ -14,10 +14,10 @@ import net.minecraft.world.item.component.DamageResistant;
 import net.minecraft.world.level.block.LightBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.sydokiddo.chrysalis.ChrysalisMod;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -53,14 +53,14 @@ public abstract class ItemMixin {
             }
 
             int finalFireproofColor = fireproofColor;
-            ComponentHelper.setTooltipIconsFont(fireproofIcon, ChrysalisMod.MOD_ID);
+            ComponentHelper.setTooltipIconsFont(fireproofIcon, Chrysalis.MOD_ID);
             Component fireproofTooltip = ItemHelper.addTooltipWithIcon(fireproofIcon, Component.translatable("gui.chrysalis.item.fireproof").withStyle(style -> style.withItalic(true).withColor(finalFireproofColor)));
             list.add(fireproofTooltip);
         }
 
         if (itemStack.is(ChrysalisTags.WAXED_BLOCK_ITEMS)) {
             MutableComponent waxedIcon = ComponentHelper.WAXED_ICON;
-            ComponentHelper.setTooltipIconsFont(waxedIcon, ChrysalisMod.MOD_ID);
+            ComponentHelper.setTooltipIconsFont(waxedIcon, Chrysalis.MOD_ID);
             Component waxedTooltip = ItemHelper.addTooltipWithIcon(waxedIcon, Component.translatable("gui.chrysalis.item.waxed").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.WAXED_COLOR.getRGB())));
             list.add(waxedTooltip);
         }
@@ -82,16 +82,16 @@ public abstract class ItemMixin {
         @Shadow public abstract Item getItem();
 
         /**
-         * Adds a ChrysalisMod tooltip to any new item registered by the mod.
+         * Adds a Chrysalis tooltip to any new item registered by the mod.
          **/
 
         @OnlyIn(Dist.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
         private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
-            if (this.getItem().getDescriptionId().contains(ChrysalisMod.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)) {
+            if (this.getItem().getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)) {
                 if (!cir.getReturnValue().isEmpty()) cir.getReturnValue().add(CommonComponents.EMPTY);
                 MutableComponent chrysalisIcon = ComponentHelper.CHRYSALIS_ICON;
-                ComponentHelper.setTooltipIconsFont(chrysalisIcon, ChrysalisMod.MOD_ID);
+                ComponentHelper.setTooltipIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
                 Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(ComponentHelper.FIVE_FONT).withColor(ComponentHelper.CHRYSALIS_COLOR.getRGB())));
                 cir.getReturnValue().add(chrysalisTooltip);
             }

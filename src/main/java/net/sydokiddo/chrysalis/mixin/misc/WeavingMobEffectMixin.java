@@ -2,7 +2,7 @@ package net.sydokiddo.chrysalis.mixin.misc;
 
 import net.minecraft.world.effect.WeavingMobEffect;
 import net.minecraft.world.level.GameRules;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;

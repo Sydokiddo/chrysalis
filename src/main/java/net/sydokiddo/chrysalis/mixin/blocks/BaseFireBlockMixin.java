@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis.mixin.blocks;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

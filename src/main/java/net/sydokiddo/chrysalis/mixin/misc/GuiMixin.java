@@ -11,9 +11,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.sydokiddo.chrysalis.ChrysalisMod;
-import net.sydokiddo.chrysalis.registry.items.custom_items.CustomCrosshairItem;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.items.custom_items.CustomCrosshairItem;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -62,7 +62,7 @@ public class GuiMixin {
         private void chrysalis$renderWaxedIcon(Font font, ItemStack itemStack, int offsetX, int offsetY, String string, CallbackInfo info) {
             if (itemStack.is(ChrysalisTags.WAXED_BLOCK_ITEMS)) {
                 this.pose().pushPose();
-                this.blitSprite(RenderType::guiTexturedOverlay, ChrysalisMod.id("hud/waxed_icon"), offsetX - 1, offsetY - 1, 8, 8);
+                this.blitSprite(RenderType::guiTexturedOverlay, Chrysalis.resourceLocationId("hud/waxed_icon"), offsetX - 1, offsetY - 1, 8, 8);
                 this.pose().popPose();
             }
         }

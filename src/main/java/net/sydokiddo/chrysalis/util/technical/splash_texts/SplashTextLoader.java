@@ -13,7 +13,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.sydokiddo.chrysalis.ChrysalisMod;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.technical.file.FileLoader;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.types.SimpleSplashText;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.types.SplashText;
@@ -70,10 +70,10 @@ public class SplashTextLoader extends SimplePreparableReloadListener<Completable
     private void addSplashes(ResourceLocation resourceLocation, JsonElement jsonElement) {
 
         if (!jsonElement.isJsonObject()) {
-            ChrysalisMod.LOGGER.error("Unable to load splash text file: {}, file must be an object containing splash text data", resourceLocation);
+            Chrysalis.LOGGER.error("Unable to load splash text file: {}, file must be an object containing splash text data", resourceLocation);
             return;
         } else {
-            ChrysalisMod.LOGGER.info("Detected splash text file: {}", resourceLocation);
+            Chrysalis.LOGGER.info("Detected splash text file: {}", resourceLocation);
         }
 
         SplashTextGroup.fromJson(jsonElement.getAsJsonObject()).getTexts().filter(SplashText::validate).forEach(this::addSplashes);

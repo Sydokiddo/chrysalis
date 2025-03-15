@@ -13,7 +13,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisParticles;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import java.awt.*;

@@ -9,8 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
-import net.sydokiddo.chrysalis.registry.items.custom_items.MobInContainerItem;
-import net.sydokiddo.chrysalis.registry.items.custom_items.MobInFluidBucketItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.MobInContainerItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.MobInFluidBucketItem;
 import org.jetbrains.annotations.NotNull;
 
 public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavior {

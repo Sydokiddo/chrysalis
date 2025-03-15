@@ -4,7 +4,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.EnderEyeItem;
 import net.minecraft.world.item.context.UseOnContext;
-import net.sydokiddo.chrysalis.registry.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
