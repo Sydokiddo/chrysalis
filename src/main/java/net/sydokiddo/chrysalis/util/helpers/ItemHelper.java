@@ -151,6 +151,11 @@ public class ItemHelper {
         tooltip.add(Component.translatable("gui.chrysalis.item.when_drank").withStyle(ChatFormatting.GRAY));
     }
 
+    public static void addThrowTooltip(List<Component> tooltip) {
+        tooltip.add(CommonComponents.EMPTY);
+        tooltip.add(Component.translatable("gui.chrysalis.item.when_thrown", Minecraft.getInstance().options.keyUse.getTranslatedKeyMessage()).withStyle(ChatFormatting.GRAY));
+    }
+
     public static void addCoordinatesTooltip(List<Component> tooltip, int x, int y, int z) {
         tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.coordinates", x, y, z).withStyle(ChatFormatting.BLUE)));
     }

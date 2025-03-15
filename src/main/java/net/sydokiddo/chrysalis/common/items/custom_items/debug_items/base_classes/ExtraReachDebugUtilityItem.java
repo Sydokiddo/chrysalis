@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -10,12 +11,13 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.items.custom_items.CustomCrosshairItem;
 
 public class ExtraReachDebugUtilityItem extends DebugUtilityItem implements CustomCrosshairItem {
 
     public ExtraReachDebugUtilityItem(Properties properties) {
-        super(properties);
+        super(properties.component(ChrysalisDataComponents.INCREASED_PICK_RADIUS, Unit.INSTANCE));
     }
 
     /**

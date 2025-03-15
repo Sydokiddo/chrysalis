@@ -43,7 +43,6 @@ public class Chrysalis {
 		return ResourceLocation.fromNamespaceAndPath(Chrysalis.MOD_ID, name);
 	}
 
-	@SuppressWarnings("unused")
 	public static String stringId(String name) {
 		return Chrysalis.MOD_ID + ":" + name;
 	}

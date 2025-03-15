@@ -66,7 +66,7 @@ public class ChrysalisExampleRegistry {
 
     // region Example Item Registries
 
-    private static final DeferredItem<Item> EXAMPLE_ICON = ChrysalisItems.ITEMS.registerItem("example_icon", IconItem::new, ChrysalisItems.debugUtilitySettings());
+    private static final DeferredItem<Item> EXAMPLE_ICON = ChrysalisItems.ITEMS.registerItem("example_icon", IconItem::new, ChrysalisItems.iconSettings());
 
     private static final DeferredItem<Item> EXAMPLE_TOOL = ChrysalisItems.ITEMS.registerItem("example_tool",
         properties -> new SwordItem(ToolMaterial.IRON, 3, -2.4F, properties), new Item.Properties());

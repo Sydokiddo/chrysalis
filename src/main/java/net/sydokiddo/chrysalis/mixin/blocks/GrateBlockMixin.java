@@ -24,7 +24,7 @@ public class GrateBlockMixin extends Block {
 
     @Inject(at = @At("HEAD"), method = "skipRendering", cancellable = true)
     private void chrysalis$occludeGrateFaces(BlockState blockState, BlockState adjacentBlock, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        TagKey<Block> grates = ChrysalisTags.COPPER_GRATES;
+        TagKey<Block> grates = ChrysalisTags.GRATES;
         if (blockState.is(grates)) cir.setReturnValue(adjacentBlock.is(grates) || super.skipRendering(blockState, adjacentBlock, direction));
     }
 }

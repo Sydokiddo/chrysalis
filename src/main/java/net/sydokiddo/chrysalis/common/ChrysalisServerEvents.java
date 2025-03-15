@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.common;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.animal.Sheep;
@@ -11,8 +12,10 @@ import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.Evoker;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -23,6 +26,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
@@ -134,6 +138,12 @@ public class ChrysalisServerEvents {
             registrar.playToClient(StructureChangedPayload.TYPE, StructureChangedPayload.CODEC, StructureChangedPayload::handleDataOnClient);
             registrar.playToClient(ClearMusicPayload.TYPE, ClearMusicPayload.CODEC, ClearMusicPayload::handleDataOnClient);
             registrar.playToClient(ResetMusicFadePayload.TYPE, ResetMusicFadePayload.CODEC, ResetMusicFadePayload::handleDataOnClient);
+        }
+
+        @SubscribeEvent
+        private static void modifyDefaultItemComponents(ModifyDefaultComponentsEvent event) {
+            event.modify(Items.DRAGON_EGG, components -> components.set(ChrysalisDataComponents.IMMUNE_TO_ALL_DAMAGE.get(), Unit.INSTANCE).set(ChrysalisDataComponents.IMMUNE_TO_DESPAWNING.get(), Unit.INSTANCE));
+            event.modify(Items.NETHER_STAR, components -> components.set(ChrysalisDataComponents.INCREASED_DESPAWN_TIME.get(), Unit.INSTANCE));
         }
     }
 }

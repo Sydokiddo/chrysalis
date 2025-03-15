@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.common.items;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -18,7 +19,7 @@ public class ChrysalisItems {
     // region Debug Items
 
     public static final DeferredItem<Item>
-        ICON = ITEMS.registerItem("icon", IconItem::new, debugUtilitySettings()),
+        ICON = ITEMS.registerItem("icon", IconItem::new, iconSettings()),
         HEAL = ITEMS.registerItem("heal", HealItem::new, debugUtilitySettings()),
         FILL_HUNGER = ITEMS.registerItem("fill_hunger", FillHungerItem::new, debugUtilitySettings()),
         FILL_OXYGEN = ITEMS.registerItem("fill_oxygen", FillOxygenItem::new, debugUtilitySettings()),
@@ -37,6 +38,10 @@ public class ChrysalisItems {
     // region Registry
 
     public static Item.Properties debugUtilitySettings() {
+        return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+    }
+
+    public static Item.Properties iconSettings() {
         return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC);
     }
 

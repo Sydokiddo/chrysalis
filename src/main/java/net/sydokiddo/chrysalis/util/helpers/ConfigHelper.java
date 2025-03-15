@@ -11,7 +11,7 @@ import java.math.RoundingMode;
 public class ConfigHelper {
 
     /**
-     * Various methods to assist with creating generic config categories and options when paired with a config library mod.
+     * Various methods to assist with creating generic config categories and options when paired with either neoforge's config library or an external config library mod.
      **/
 
     // region Config Option Components

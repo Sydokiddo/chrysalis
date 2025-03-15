@@ -14,7 +14,6 @@ import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -69,7 +68,7 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void chrysalis$makeItemsHaveExtendedLifetime(CallbackInfo info) {
-        if (!this.getItem().isEmpty() && this.firstTick && (this.getItem().is(ChrysalisTags.INCREASED_DESPAWN_TIME)) || this.getItem().has(ChrysalisDataComponents.INCREASED_DESPAWN_TIME)) this.setExtendedLifetime();
+        if (!this.getItem().isEmpty() && this.firstTick && this.getItem().has(ChrysalisDataComponents.INCREASED_DESPAWN_TIME)) this.setExtendedLifetime();
     }
 
     /**
@@ -78,7 +77,7 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V", ordinal = 1))
     private void chrysalis$makeItemsNeverDespawn(ItemEntity itemEntity) {
-        if ((this.getItem().is(ChrysalisTags.IMMUNE_TO_DESPAWNING) || this.getItem().has(ChrysalisDataComponents.IMMUNE_TO_DESPAWNING)) && this.pickupDelay != Short.MAX_VALUE) return;
+        if (this.getItem().has(ChrysalisDataComponents.IMMUNE_TO_DESPAWNING) && this.pickupDelay != Short.MAX_VALUE) return;
         this.discard();
     }
 
@@ -89,7 +88,7 @@ public abstract class ItemEntityMixin extends Entity {
     @Inject(at = @At("HEAD"), method = "hurtServer", cancellable = true)
     private void chrysalis$makeItemsImmune(ServerLevel serverLevel, DamageSource damageSource, float damageAmount, CallbackInfoReturnable<Boolean> cir) {
         if (!this.getItem().isEmpty()) {
-            if ((this.getItem().is(ChrysalisTags.IMMUNE_TO_DAMAGE) || this.getItem().has(ChrysalisDataComponents.IMMUNE_TO_ALL_DAMAGE)) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) cir.setReturnValue(false);
+            if (this.getItem().has(ChrysalisDataComponents.IMMUNE_TO_ALL_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) cir.setReturnValue(false);
             if (!serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_DESTROY_ITEMS_IN_EXPLOSIONS) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) cir.setReturnValue(false);
         }
     }
