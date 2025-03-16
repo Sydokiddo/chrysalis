@@ -12,11 +12,11 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 
-public class CSpawnEggItem extends SpawnEggItem {
+public class CustomSpawnEggItem extends SpawnEggItem {
 
     private final EntityType<? extends Mob> mobOffspring;
 
-    public CSpawnEggItem(EntityType<? extends Mob> entityType, EntityType<? extends Mob> mobOffspring, Properties properties) {
+    public CustomSpawnEggItem(EntityType<? extends Mob> entityType, EntityType<? extends Mob> mobOffspring, Properties properties) {
         super(entityType, properties);
         this.mobOffspring = mobOffspring;
     }

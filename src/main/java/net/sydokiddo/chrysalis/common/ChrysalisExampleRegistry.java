@@ -74,11 +74,14 @@ public class ChrysalisExampleRegistry {
     private static final DeferredItem<Item> EXAMPLE_ARMOR = ChrysalisItems.ITEMS.registerItem("example_armor",
         properties -> new ArmorItem(ArmorMaterials.IRON, ArmorType.CHESTPLATE, properties), new Item.Properties());
 
+    private static final DeferredItem<Item> EXAMPLE_BOW = ChrysalisItems.ITEMS.registerItem("example_bow",
+        properties -> new CustomBowItem(itemStack -> itemStack.is(Items.ARROW), SoundEvents.CROSSBOW_LOADING_START.value(), SoundEvents.CROSSBOW_LOADING_END.value(), null, SoundEvents.CROSSBOW_SHOOT, properties), new Item.Properties());
+
     private static final DeferredItem<Item> EXAMPLE_MUSIC_DISC = ChrysalisItems.ITEMS.registerItem("example_music_disc",
         Item::new, RegistryHelper.musicDiscProperties(JukeboxSongs.CAT, Rarity.COMMON));
 
     private static final DeferredItem<Item> EXAMPLE_SPAWN_EGG = ChrysalisItems.ITEMS.registerItem("example_spawn_egg",
-        properties -> new CSpawnEggItem(EntityType.FROG, EntityType.TADPOLE, properties), new Item.Properties());
+        properties -> new CustomSpawnEggItem(EntityType.FROG, EntityType.TADPOLE, properties), new Item.Properties());
 
     private static final DeferredItem<Item> EXAMPLE_MOB_CUSTOM_CONTAINER = ChrysalisItems.ITEMS.registerItem("example_mob_custom_container",
         properties -> new MobInContainerItem(EntityType.ALLAY, SoundEvents.BUCKET_EMPTY, properties), RegistryHelper.mobContainerProperties(Items.GLASS_BOTTLE, Rarity.COMMON));
@@ -93,7 +96,7 @@ public class ChrysalisExampleRegistry {
         SmithingTemplateItem::createArmorTrimTemplate, new Item.Properties().rarity(Rarity.UNCOMMON));
 
     private static final DeferredItem<Item> EXAMPLE_UPGRADE_SMITHING_TEMPLATE = ChrysalisItems.ITEMS.registerItem("example_upgrade_smithing_template",
-        properties -> CSmithingTemplateItem.createUpgradeTemplate("minecraft", "netherite_upgrade", CSmithingTemplateItem.EMPTY_SLOT_INGOT, properties),
+        properties -> CustomSmithingTemplateItem.createUpgradeTemplate("minecraft", "netherite_upgrade", CustomSmithingTemplateItem.EMPTY_SLOT_INGOT, properties),
         new Item.Properties().rarity(Rarity.UNCOMMON));
 
     // endregion

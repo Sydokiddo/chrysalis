@@ -46,7 +46,7 @@ public class PlaceBlockDispenserBehavior implements DispenseItemBehavior {
             return itemStack;
         }
 
-        LOGGER.error("Error trying to place {} at {}", itemStack.getDisplayName().getString(), blockPos, new Exception());
+        Chrysalis.LOGGER.error("Error trying to place {} at {}", itemStack.getDisplayName().getString(), blockPos, new Exception());
         return BlockHelper.defaultDispenseItemBehavior.dispense(blockSource, itemStack);
     }
 }
