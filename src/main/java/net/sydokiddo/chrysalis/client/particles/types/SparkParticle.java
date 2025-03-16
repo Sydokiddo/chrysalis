@@ -24,6 +24,8 @@ public class SparkParticle extends RotatingFallingParticle implements ParticleCo
         super(level, x, y, z, velocityX, velocityY, velocityZ);
 
         this.pickSprite(spriteSet);
+        this.scale(particleOptions.getScale());
+
         Vector3f color = particleOptions.getFinalColor();
 
         if (particleOptions.shouldRandomizeColor()) {
