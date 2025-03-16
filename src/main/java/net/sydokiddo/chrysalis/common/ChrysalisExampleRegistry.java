@@ -158,9 +158,11 @@ public class ChrysalisExampleRegistry {
     }
 
     private static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
+    private static final ColoredPortalParticleOptions EXAMPLE_COLORED_PORTAL_PARTICLES = new ColoredPortalParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), false);
     private static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
     private static final RotatingDustParticleOptions EXAMPLE_ROTATING_DUST_PARTICLES = new RotatingDustParticleOptions(ComponentHelper.MEMORY_FIRE_COLOR.getRGB(), true, true, false, 1.0F);
     private static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false);
+    private static final SparkParticleOptions EXAMPLE_SPARK_PARTICLES = new SparkParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), false, 1.0F);
     private static final SmallPulsationParticleOptions EXAMPLE_SMALL_PULSATION_PARTICLES = new SmallPulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 10);
     private static final LargePulsationParticleOptions EXAMPLE_LARGE_PULSATION_PARTICLES = new LargePulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 20);
 

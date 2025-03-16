@@ -121,6 +121,7 @@ public class ChrysalisRegistry {
             event.registerSpriteSet(ChrysalisParticles.DUST_EXPLOSION.get(), DustExplosionParticle.Provider::new);
             event.registerSpriteSet(ChrysalisParticles.ROTATING_DUST.get(), RotatingDustParticle.Provider::new);
             event.registerSpriteSet(ChrysalisParticles.SPARKLE.get(), SparkleParticle.Provider::new);
+            event.registerSpriteSet(ChrysalisParticles.SPARK.get(), SparkParticle.Provider::new);
             event.registerSpriteSet(ChrysalisParticles.SMALL_PULSATION.get(), PulsationParticle.SmallProvider::new);
             event.registerSpriteSet(ChrysalisParticles.LARGE_PULSATION.get(), PulsationParticle.LargeProvider::new);
         }
