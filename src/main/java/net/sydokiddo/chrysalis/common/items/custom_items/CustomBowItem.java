@@ -18,6 +18,7 @@ import net.neoforged.neoforge.event.EventHooks;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -28,6 +29,8 @@ public class CustomBowItem extends BowItem {
      **/
 
     private final Predicate<ItemStack> ammo;
+    private final ItemStack fallBackAmmo;
+    private final int minUseDuration;
 
     private final SoundEvent
         loadingStartSound,
@@ -36,9 +39,11 @@ public class CustomBowItem extends BowItem {
         shootingSound
     ;
 
-    public CustomBowItem(Predicate<ItemStack> ammo, SoundEvent loadingStartSound, SoundEvent loadingEndSound, SoundEvent loadingPoweredSound, SoundEvent shootingSound, Properties properties) {
+    public CustomBowItem(Predicate<ItemStack> ammo, ItemStack fallBackAmmo, int minUseDuration, SoundEvent loadingStartSound, SoundEvent loadingEndSound, SoundEvent loadingPoweredSound, SoundEvent shootingSound, Properties properties) {
         super(properties);
         this.ammo = ammo;
+        this.fallBackAmmo = fallBackAmmo;
+        this.minUseDuration = minUseDuration;
         this.loadingStartSound = loadingStartSound;
         this.loadingEndSound = loadingEndSound;
         this.loadingPoweredSound = loadingPoweredSound;
@@ -48,6 +53,11 @@ public class CustomBowItem extends BowItem {
     @Override
     public @NotNull Predicate<ItemStack> getAllSupportedProjectiles() {
         return this.ammo;
+    }
+
+    @Override
+    public @NotNull ItemStack getDefaultCreativeAmmo(@Nullable Player player, @NotNull ItemStack projectileWeaponItem) {
+        return this.fallBackAmmo;
     }
 
     public Projectile getProjectile(@NotNull Level level, @NotNull LivingEntity shooter, @NotNull ItemStack weapon, @NotNull ItemStack ammo, boolean isCrit) {
@@ -95,7 +105,7 @@ public class CustomBowItem extends BowItem {
             int useDuration = this.getUseDuration(itemStack, livingEntity) - useItemTicks;
             useDuration = EventHooks.onArrowLoose(itemStack, level, player, useDuration, !projectile.isEmpty());
 
-            if (useDuration < 0) {
+            if (useDuration < this.minUseDuration) {
                 return false;
             } else {
 
@@ -107,7 +117,7 @@ public class CustomBowItem extends BowItem {
 
                     List<ItemStack> list = draw(itemStack, projectile, player);
                     if (level instanceof ServerLevel serverlevel && !list.isEmpty()) this.shoot(serverlevel, player, player.getUsedItemHand(), itemStack, list, powerForTime * 3.0F, 1.0F, powerForTime == 1.0F, null);
-                    onShoot();
+                    this.onShoot(itemStack, level, livingEntity, useItemTicks);
 
                     if (this.shootingSound != null) level.playSound(null, player.getX(), player.getY(), player.getZ(), this.shootingSound, SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + powerForTime * 0.5F);
                     player.awardStat(Stats.ITEM_USED.get(this));
@@ -117,5 +127,6 @@ public class CustomBowItem extends BowItem {
         }
     }
 
-    public void onShoot() {}
+    @SuppressWarnings("unused")
+    public void onShoot(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity livingEntity, int useItemTicks) {}
 }

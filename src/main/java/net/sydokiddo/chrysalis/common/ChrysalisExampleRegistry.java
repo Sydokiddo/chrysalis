@@ -24,6 +24,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
+import net.sydokiddo.chrysalis.common.items.custom_items.examples.ExampleBowItem;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceEntityDispenserBehavior;
@@ -74,8 +75,7 @@ public class ChrysalisExampleRegistry {
     private static final DeferredItem<Item> EXAMPLE_ARMOR = ChrysalisItems.ITEMS.registerItem("example_armor",
         properties -> new ArmorItem(ArmorMaterials.IRON, ArmorType.CHESTPLATE, properties), new Item.Properties());
 
-    private static final DeferredItem<Item> EXAMPLE_BOW = ChrysalisItems.ITEMS.registerItem("example_bow",
-        properties -> new CustomBowItem(itemStack -> itemStack.is(Items.ARROW), SoundEvents.CROSSBOW_LOADING_START.value(), SoundEvents.CROSSBOW_LOADING_END.value(), null, SoundEvents.CROSSBOW_SHOOT, properties), new Item.Properties());
+    private static final DeferredItem<Item> EXAMPLE_BOW = ChrysalisItems.ITEMS.registerItem("example_bow", ExampleBowItem::new, new Item.Properties());
 
     private static final DeferredItem<Item> EXAMPLE_MUSIC_DISC = ChrysalisItems.ITEMS.registerItem("example_music_disc",
         Item::new, RegistryHelper.musicDiscProperties(JukeboxSongs.CAT, Rarity.COMMON));
