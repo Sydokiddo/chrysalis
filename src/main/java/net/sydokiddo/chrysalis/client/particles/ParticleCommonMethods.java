@@ -53,8 +53,8 @@ public interface ParticleCommonMethods {
         float divider = ((float) age) / (float) lifeTime;
         divider = Mth.clamp(divider, startingBrightness, endingBrightness);
 
-        int int1 = lightColor & 0xFF;
-        int int2 = lightColor >> 16 & 0xFF;
+        int int1 = lightColor & 255;
+        int int2 = lightColor >> 16 & 255;
 
         if ((int1 += (int) (divider * 15.0F * 16.0F)) > 240) int1 = 240;
         return int1 | int2 << 16;

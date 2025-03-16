@@ -33,6 +33,7 @@ public class ChrysalisParticles {
     // region Advanced Particles
 
     public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDustPlumeParticleOptions>> COLORED_DUST_PLUME = PARTICLE_TYPES.register("colored_dust_plume", () -> createAdvancedParticle(ColoredDustPlumeParticleOptions.CODEC, ColoredDustPlumeParticleOptions.STREAM_CODEC));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredPortalParticleOptions>> COLORED_PORTAL = PARTICLE_TYPES.register("colored_portal", () -> createAdvancedParticle(ColoredPortalParticleOptions.CODEC, ColoredPortalParticleOptions.STREAM_CODEC));
     public static final DeferredHolder<ParticleType<?>, ParticleType<DustExplosionParticleOptions>> DUST_EXPLOSION = PARTICLE_TYPES.register("dust_explosion", () -> createAdvancedParticle(DustExplosionParticleOptions.CODEC, DustExplosionParticleOptions.STREAM_CODEC));
     public static final DeferredHolder<ParticleType<?>, ParticleType<RotatingDustParticleOptions>> ROTATING_DUST = PARTICLE_TYPES.register("rotating_dust", () -> createAdvancedParticle(RotatingDustParticleOptions.CODEC, RotatingDustParticleOptions.STREAM_CODEC));
     public static final DeferredHolder<ParticleType<?>, ParticleType<SparkleParticleOptions>> SPARKLE = PARTICLE_TYPES.register("sparkle", () -> createAdvancedParticle(SparkleParticleOptions.CODEC, SparkleParticleOptions.STREAM_CODEC));

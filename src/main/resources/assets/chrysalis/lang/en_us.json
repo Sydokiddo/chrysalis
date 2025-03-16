@@ -62,6 +62,7 @@
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
   "entity.chrysalis.seat": "Seat",
+  "entity.chrysalis.entity_spawner": "Entity Spawner",
 
   "effect.chrysalis.radiance": "Radiance",
   "effect.chrysalis.radiance.desc": "Shrouds the player's screen in a blinding light.",
@@ -327,6 +328,10 @@
   "subtitles.block.podium_spawner.end_cooldown": "Podium Spawner reactivates",
 
   "subtitles.entity.item.drop": "Item dropped",
+
+  "subtitles.entity.entity_spawner.appear": "Something manifests",
+  "subtitles.entity.entity_spawner.about_to_spawn_entity": "Something prepares",
+  "subtitles.entity.entity_spawner.spawn_entity": "Something spawns",
 
   "tag.item.chrysalis.banner_patterns": "Banner Patterns",
   "tag.item.chrysalis.campfires": "Campfires",
