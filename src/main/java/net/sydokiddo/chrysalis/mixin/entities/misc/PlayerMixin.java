@@ -1,6 +1,8 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
+import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
+import net.minecraft.Util;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.resources.PlayerSkin;
@@ -15,18 +17,21 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
@@ -55,6 +60,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Unique private Player chrysalis$player = (Player) (Object) this;
     @Unique private final String chrysalis$encounteredMobUuidTag = "encountered_mob_uuid";
+    @Shadow protected abstract void touch(Entity entity);
 
     /**
      * Adds new data to players.
@@ -74,6 +80,14 @@ public abstract class PlayerMixin extends LivingEntity {
     @Inject(method = "readAdditionalSaveData", at = @At("RETURN"))
     private void chrysalis$readPlayerTags(CompoundTag compoundTag, CallbackInfo info) {
         if (compoundTag.get(this.chrysalis$encounteredMobUuidTag) != null) EntityDataHelper.setEncounteredMobUUID(this.chrysalis$player, compoundTag.getUUID(this.chrysalis$encounteredMobUuidTag));
+    }
+
+    @Inject(method = "createAttributes", at = @At("RETURN"))
+    private static void chrysalis$addPlayerAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> info) {
+        if (info.getReturnValue() != null) {
+            info.getReturnValue().add(ChrysalisAttributes.ITEM_PICK_UP_RANGE);
+            info.getReturnValue().add(ChrysalisAttributes.EXPERIENCE_PICK_UP_RANGE);
+        }
     }
 
     /**
@@ -166,6 +180,52 @@ public abstract class PlayerMixin extends LivingEntity {
                 }
             }));
         }
+    }
+
+    /**
+     * Changes how players interact with the hitboxes of other entities, now respecting the item_pick_up_range and experience_pick_up_range attributes.
+     **/
+
+    @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isSpectator()Z"))
+    private boolean chrysalis$cancelVanillaPlayerTouch(Player player) {
+        return true;
+    }
+
+    @Inject(method = "aiStep", at = @At(value = "RETURN"))
+    private void chrysalis$changePlayerTouch(CallbackInfo info) {
+
+        AABB normalHitboxRange;
+        AABB itemHitboxRange;
+        AABB experienceHitboxRange;
+
+        double itemPickUpRange = this.getAttributeValue(ChrysalisAttributes.ITEM_PICK_UP_RANGE);
+        double experiencePickUpRange = this.getAttributeValue(ChrysalisAttributes.EXPERIENCE_PICK_UP_RANGE);
+
+        if (this.getVehicle() != null && !this.getVehicle().isRemoved()) {
+            normalHitboxRange = this.getBoundingBox().minmax(this.getVehicle().getBoundingBox()).inflate(1.0D, 0.0D, 1.0D);
+            itemHitboxRange = this.getBoundingBox().minmax(this.getVehicle().getBoundingBox()).inflate(itemPickUpRange, 0.0D, itemPickUpRange);
+            experienceHitboxRange = this.getBoundingBox().minmax(this.getVehicle().getBoundingBox()).inflate(experiencePickUpRange, 0.0D, experiencePickUpRange);
+        } else {
+            normalHitboxRange = this.getBoundingBox().inflate(1.0D, 0.5D, 1.0D);
+            itemHitboxRange = this.getBoundingBox().inflate(itemPickUpRange, itemPickUpRange / 2.0D, itemPickUpRange);
+            experienceHitboxRange = this.getBoundingBox().inflate(experiencePickUpRange, experiencePickUpRange / 2.0D, experiencePickUpRange);
+        }
+
+        List<Entity> touchedEntities = this.level().getEntities(this, normalHitboxRange, entity -> !(entity instanceof ItemEntity itemEntity && itemEntity.getOwner() != this) && !(entity instanceof ExperienceOrb));
+        List<ItemEntity> touchedItemEntities = this.level().getEntitiesOfClass(ItemEntity.class, itemHitboxRange, itemEntity -> itemEntity.getOwner() != this);
+        List<ExperienceOrb> touchedExperienceOrbs = this.level().getEntitiesOfClass(ExperienceOrb.class, experienceHitboxRange);
+        List<Entity> experienceList = Lists.newArrayList();
+
+        for (Entity entity : touchedEntities) {
+            if (!entity.isRemoved()) this.touch(entity);
+        }
+
+        for (ItemEntity itemEntity : touchedItemEntities) {
+            if (!itemEntity.isRemoved()) this.touch(itemEntity);
+        }
+
+        experienceList.addAll(touchedExperienceOrbs);
+        if (!experienceList.isEmpty()) this.touch(Util.getRandom(experienceList, this.getRandom()));
     }
 
     /**

@@ -68,7 +68,6 @@ public class ChrysalisTags {
         GRATES = registerBlockTag("grates"),
         LANTERNS = registerBlockTag("lanterns"),
         NETHER_ORES = registerBlockTag("nether_ores"),
-        NETHER_PORTAL_BASE_BLOCKS = registerBlockTag("nether_portal_base_blocks"),
         NETHER_WARTS_CAN_GROW_ON = registerBlockTag("nether_warts_can_grow_on"),
         OPEN_FLOWERS = registerBlockTag("open_flowers"),
         OVERWORLD_ORES = registerBlockTag("overworld_ores"),

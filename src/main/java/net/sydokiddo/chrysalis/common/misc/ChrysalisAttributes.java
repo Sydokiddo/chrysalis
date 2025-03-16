@@ -16,7 +16,9 @@ public class ChrysalisAttributes {
 
     public static final DeferredHolder<Attribute, Attribute>
         REDUCED_DETECTION_RANGE = registerAttribute("reduced_detection_range", 0.0D, 0.0D, 1.0D),
-        DAMAGE_CAPACITY = registerAttribute("damage_capacity", Double.MAX_VALUE, 1.0D, Double.MAX_VALUE)
+        DAMAGE_CAPACITY = registerAttribute("damage_capacity", Double.MAX_VALUE, 1.0D, Double.MAX_VALUE),
+        ITEM_PICK_UP_RANGE = registerAttribute("item_pick_up_range", 1.0D, 1.0D, 16.0D),
+        EXPERIENCE_PICK_UP_RANGE = registerAttribute("experience_pick_up_range", 1.0D, 1.0D, 16.0D)
     ;
 
     // endregion
