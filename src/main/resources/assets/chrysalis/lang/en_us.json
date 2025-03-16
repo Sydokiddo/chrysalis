@@ -289,7 +289,7 @@
   "chrysalis.configuration.reworked_tooltips": "Reworked Tooltips",
   "chrysalis.configuration.reworked_tooltips.tooltip": "Reworks the layout of a number of tooltips to appear cleaner and easier to read.",
   "chrysalis.configuration.chrysalis_tooltip": "Chrysalis Tooltip",
-  "chrysalis.configuration.chrysalis_tooltip.tooltip": "Any new items added by chrysalis will now display a tooltip with the mod's name on them.",
+  "chrysalis.configuration.chrysalis_tooltip.tooltip": "Any new items added by chrysalis will display a tooltip with the mod's name on them.",
 
   "gamerule.mobWorldInteractions": "Allow non-destructive world interactions from mobs",
   "gamerule.dragonGriefing": "Allow for Ender Dragons to destroy blocks",
