@@ -8,6 +8,7 @@ import net.minecraft.world.level.storage.LevelSummary;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.helpers.WorldGenHelper;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -52,6 +53,7 @@ public class LevelMixin {
 
         @ModifyArg(method = "canTriggerBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
         private GameRules.Key<GameRules.BooleanValue> chrysalis$explosionBlockTriggerWorldInteractionsGameRule(GameRules.Key<GameRules.BooleanValue> oldValue) {
+            if (!CConfigOptions.REWORKED_MOB_GRIEFING.get()) return oldValue;
             return ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS;
         }
     }

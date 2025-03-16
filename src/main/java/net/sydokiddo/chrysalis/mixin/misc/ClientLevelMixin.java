@@ -16,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.util.helpers.WorldGenHelper;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -38,7 +39,7 @@ public class ClientLevelMixin {
     private void chrysalis$renderStructureVoidParticle(CallbackInfoReturnable<Block> cir) {
 
         assert this.minecraft.gameMode != null;
-        if (this.minecraft.gameMode.getPlayerMode() != GameType.CREATIVE) return;
+        if (this.minecraft.gameMode.getPlayerMode() != GameType.CREATIVE || !CConfigOptions.IMPROVED_STRUCTURE_VOID_RENDERING.get()) return;
 
         assert this.minecraft.player != null;
         Item item = this.minecraft.player.getMainHandItem().getItem();

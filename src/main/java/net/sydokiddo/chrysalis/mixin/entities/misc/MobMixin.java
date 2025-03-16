@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.event.EventHooks;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
@@ -17,6 +18,7 @@ import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -65,6 +67,7 @@ public abstract class MobMixin extends LivingEntity {
 
     @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/event/EventHooks;canEntityGrief(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;)Z"))
     private boolean chrysalis$mobsPickingUpItemsWorldInteractionsGameRule(ServerLevel serverLevel, Entity entity) {
+        if (!CConfigOptions.REWORKED_MOB_GRIEFING.get()) return EventHooks.canEntityGrief(serverLevel, this);
         return serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS);
     }
 

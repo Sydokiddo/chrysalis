@@ -5,12 +5,18 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.util.helpers.CompatibilityHelper;
 import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
+import net.sydokiddo.chrysalis.util.technical.config.CConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,8 +38,9 @@ public class Chrysalis {
 		CHRYSALIS_INITIALIZED = CompatibilityHelper.isModLoaded(Chrysalis.MOD_ID)
 	;
 
-	public Chrysalis(IEventBus eventBus) {
+	public Chrysalis(ModContainer container, IEventBus eventBus) {
 		ChrysalisRegistry.registerAll(eventBus);
+		container.registerConfig(ModConfig.Type.COMMON, CConfig.CONFIG_SPEC);
 		DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.CHRYSALIS_VERSION, false);
 	}
 
@@ -52,4 +59,13 @@ public class Chrysalis {
 	}
 
 	// endregion
+
+	@SuppressWarnings("unused")
+	@Mod(value = Chrysalis.MOD_ID, dist = Dist.CLIENT)
+	public static class ChrysalisClient {
+
+		public ChrysalisClient(ModContainer container, IEventBus eventBus) {
+			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+		}
+	}
 }

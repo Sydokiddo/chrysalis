@@ -18,6 +18,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,6 +38,7 @@ public abstract class ItemMixin {
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
+        if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
         DamageResistant damageResistant = itemStack.get(DataComponents.DAMAGE_RESISTANT);
 
         if (damageResistant != null && damageResistant.types() == DamageTypeTags.IS_FIRE) {
@@ -88,7 +90,7 @@ public abstract class ItemMixin {
         @OnlyIn(Dist.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
         private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
-            if (this.getItem().getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)) {
+            if (this.getItem().getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) && CConfigOptions.CHRYSALIS_TOOLTIP.get()) {
                 if (!cir.getReturnValue().isEmpty()) cir.getReturnValue().add(CommonComponents.EMPTY);
                 MutableComponent chrysalisIcon = ComponentHelper.CHRYSALIS_ICON;
                 ComponentHelper.setTooltipIconsFont(chrysalisIcon, Chrysalis.MOD_ID);

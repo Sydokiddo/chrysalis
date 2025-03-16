@@ -26,6 +26,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisLivingEntityRenderState;
 import net.sydokiddo.chrysalis.common.status_effects.ChrysalisEffects;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -117,7 +118,8 @@ public abstract class EntityRendererMixin {
 
         @ModifyArg(method = "createLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/geom/builders/CubeListBuilder;addBox(FFFFFFLnet/minecraft/client/model/geom/builders/CubeDeformation;)Lnet/minecraft/client/model/geom/builders/CubeListBuilder;"), index = 6)
         private static CubeDeformation chrysalis$fixElytraUVs(CubeDeformation cubeDeformation) {
-            return new CubeDeformation(1.0F, 1.0F, 0.2F);
+            if (CConfigOptions.FIXED_ELYTRA_MODEL.get()) return new CubeDeformation(1.0F, 1.0F, 0.2F);
+            return new CubeDeformation(1.0F);
         }
     }
 }

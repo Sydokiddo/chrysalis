@@ -23,6 +23,7 @@ import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import net.sydokiddo.chrysalis.util.helpers.CompatibilityHelper;
 import net.sydokiddo.chrysalis.util.technical.ClipboardImage;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
 import javax.swing.*;
 import java.awt.*;
@@ -82,7 +83,7 @@ public class ChrysalisClientEvents {
         }
 
         private static void playScreenshotSound(Minecraft minecraft) {
-            minecraft.getSoundManager().play(SimpleSoundInstance.forUI(ChrysalisSoundEvents.SCREENSHOT_SUCCESS.get(), 1.0F));
+            if (CConfigOptions.SCREENSHOT_SOUND.get()) minecraft.getSoundManager().play(SimpleSoundInstance.forUI(ChrysalisSoundEvents.SCREENSHOT_SUCCESS.get(), 1.0F));
         }
     }
 

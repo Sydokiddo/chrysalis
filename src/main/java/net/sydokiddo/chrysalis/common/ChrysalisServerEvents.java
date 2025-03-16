@@ -40,6 +40,7 @@ import net.sydokiddo.chrysalis.util.sounds.music.payloads.StructureChangedPayloa
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.technical.commands.*;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -87,6 +88,7 @@ public class ChrysalisServerEvents {
 
         @SubscribeEvent
         private static void mobGriefingEvents(EntityMobGriefingEvent event) {
+            if (!CConfigOptions.REWORKED_MOB_GRIEFING.get()) return;
             if (event.getEntity() instanceof Allay allay && allay.getServer() != null) event.setCanGrief(allay.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
             if (event.getEntity() instanceof Evoker evoker && evoker.getServer() != null) event.setCanGrief(evoker.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
             if (event.getEntity() instanceof Fox fox && fox.getServer() != null) event.setCanGrief(fox.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));

@@ -18,6 +18,7 @@ import net.minecraft.world.item.equipment.trim.ArmorTrim;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -60,7 +61,7 @@ public class TooltipMixin extends Item {
 
         @Inject(method = "addToTooltip", at = @At("HEAD"), cancellable = true)
         private void chrysalis$changeArmorTrimTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, CallbackInfo info) {
-            if (this.showInTooltip()) {
+            if (this.showInTooltip() && CConfigOptions.REWORKED_TOOLTIPS.get()) {
                 info.cancel();
                 consumer.accept(Component.translatable("gui.chrysalis.item.armor_trim", this.pattern().value().description().copy().withStyle(ChatFormatting.GRAY), this.material().value().description()).withStyle(this.material().value().description().getStyle()));
             }
@@ -80,6 +81,7 @@ public class TooltipMixin extends Item {
         @Inject(method = "addToTooltip", at = @At("HEAD"), cancellable = true)
         private void chrysalis$changeEnchantmentTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, CallbackInfo info) {
 
+            if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
             info.cancel();
 
             if (this.showInTooltip) {
@@ -123,7 +125,8 @@ public class TooltipMixin extends Item {
 
         @Redirect(method = "getFullname", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;withColor(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/Style;", ordinal = 1))
         private static Style chrysalis$changeEnchantmentTooltipColor(Style style, ChatFormatting chatFormatting) {
-            return Style.EMPTY.withColor(ComponentHelper.ENCHANTMENT_COLOR.getRGB());
+            if (CConfigOptions.REWORKED_TOOLTIPS.get()) return Style.EMPTY.withColor(ComponentHelper.ENCHANTMENT_COLOR.getRGB());
+            return Style.EMPTY.withColor(ChatFormatting.GRAY);
         }
     }
 }

@@ -17,6 +17,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -129,7 +130,7 @@ public class EntityDataHelper {
     }
 
     public static void playItemDroppingSound(Player player) {
-        player.playNotifySound(ChrysalisSoundEvents.ITEM_DROP.get(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
+        if (CConfigOptions.ITEM_DROPPING_SOUND.get()) player.playNotifySound(ChrysalisSoundEvents.ITEM_DROP.get(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
     }
 
     public static Optional<UUID> getEncounteredMobUUID(Player player) {
