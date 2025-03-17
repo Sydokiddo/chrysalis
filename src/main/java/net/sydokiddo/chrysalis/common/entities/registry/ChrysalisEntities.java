@@ -9,6 +9,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.EntitySpawner;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.Seat;
 
 public class ChrysalisEntities {
@@ -19,6 +20,9 @@ public class ChrysalisEntities {
 
     public static final DeferredHolder<EntityType<?>, EntityType<Seat>> SEAT = registerEntityType("seat",
         EntityType.Builder.of(Seat::new, MobCategory.MISC).sized(0.0F, 0.0F).noLootTable().clientTrackingRange(10));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<EntitySpawner>> ENTITY_SPAWNER = registerEntityType("entity_spawner",
+        EntityType.Builder.of(EntitySpawner::new, MobCategory.MISC).sized(0.25F, 0.25F).noLootTable().clientTrackingRange(8));
 
     // endregion
 

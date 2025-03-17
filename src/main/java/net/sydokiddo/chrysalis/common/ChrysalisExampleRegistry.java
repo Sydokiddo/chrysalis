@@ -4,6 +4,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.CommonColors;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -24,7 +26,9 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.EntitySpawner;
 import net.sydokiddo.chrysalis.common.items.custom_items.examples.ExampleBowItem;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceEntityDispenserBehavior;
@@ -157,7 +161,22 @@ public class ChrysalisExampleRegistry {
         EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0D, new MobEffectInstance(Holder.direct(ChrysalisEffects.RADIANCE.get()), 40));
     }
 
+    public static void summonExampleEntitySpawner(Level level, Vec3 position) {
+        EntitySpawner.spawn(
+            level,
+            EntityType.ZOMBIE,
+            position,
+            SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM_BEGIN,
+            SoundEvents.TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM,
+            SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM,
+            ComponentHelper.MEMORY_FIRE_COLOR.getRGB(),
+            CommonColors.WHITE,
+            ChrysalisParticles.MEMORY_FLAME.get()
+        );
+    }
+
     private static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
+    private static final ColoredDirectionalDustParticleOptions EXAMPLE_COLORED_DIRECTIONAL_DUST_PARTICLES = new ColoredDirectionalDustParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), CommonColors.WHITE);
     private static final ColoredPortalParticleOptions EXAMPLE_COLORED_PORTAL_PARTICLES = new ColoredPortalParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), false);
     private static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
     private static final RotatingDustParticleOptions EXAMPLE_ROTATING_DUST_PARTICLES = new RotatingDustParticleOptions(ComponentHelper.MEMORY_FIRE_COLOR.getRGB(), true, true, false, 1.0F);

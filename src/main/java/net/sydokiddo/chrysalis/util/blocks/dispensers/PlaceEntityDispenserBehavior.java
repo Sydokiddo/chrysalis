@@ -63,6 +63,7 @@ public class PlaceEntityDispenserBehavior implements DispenseItemBehavior {
             BlockHelper.playDispenserSound(blockSource);
             BlockHelper.playDispenserAnimation(blockSource, direction);
 
+            if (this.entityType == null) return BlockHelper.defaultDispenseItemBehavior.dispense(blockSource, itemStack);
             Entity entity = this.entityType.create(serverLevel, EntitySpawnReason.DISPENSER);
             assert entity != null;
             entity.setPos(x + this.placementOffset.x(), y + this.placementOffset.y(), z + this.placementOffset.z());

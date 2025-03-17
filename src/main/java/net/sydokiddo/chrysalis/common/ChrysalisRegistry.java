@@ -21,6 +21,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.client.entities.rendering.EntitySpawnerRenderer;
 import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
 import net.sydokiddo.chrysalis.client.particles.types.*;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
@@ -99,6 +100,7 @@ public class ChrysalisRegistry {
         public static void onClientSetup(FMLClientSetupEvent event) {
 
             EntityRenderers.register(ChrysalisEntities.SEAT.get(), SeatRenderer::new);
+            EntityRenderers.register(ChrysalisEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
 
             try {
                 Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -117,6 +119,7 @@ public class ChrysalisRegistry {
             event.registerSpriteSet(ChrysalisParticles.CREEPER_SIGHT.get(), SpellParticle.Provider::new);
             event.registerSpriteSet(ChrysalisParticles.ENDER_SIGHT.get(), SpellParticle.Provider::new);
             event.registerSpriteSet(ChrysalisParticles.COLORED_DUST_PLUME.get(), ColoredDustPlumeParticle.Provider::new);
+            event.registerSpriteSet(ChrysalisParticles.COLORED_DIRECTIONAL_DUST.get(), ColoredDirectionalDustParticle.Provider::new);
             event.registerSpriteSet(ChrysalisParticles.COLORED_PORTAL.get(), ColoredPortalParticle.Provider::new);
             event.registerSpriteSet(ChrysalisParticles.DUST_EXPLOSION.get(), DustExplosionParticle.Provider::new);
             event.registerSpriteSet(ChrysalisParticles.ROTATING_DUST.get(), RotatingDustParticle.Provider::new);

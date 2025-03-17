@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
 import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +40,7 @@ public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavio
         Position position = DispenserBlock.getDispensePosition(blockSource);
         Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
 
+        if (this.entityType == null) return BlockHelper.defaultDispenseItemBehavior.dispense(blockSource, itemStack);
         Entity entity = this.entityType.create(level, EntitySpawnReason.DISPENSER);
         assert entity != null;
 
