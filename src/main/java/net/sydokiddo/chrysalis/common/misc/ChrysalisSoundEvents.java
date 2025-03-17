@@ -34,7 +34,11 @@ public class ChrysalisSoundEvents {
         AGGRO_WAND_SELECT_TARGET_FAIL = SOUND_EVENTS.register("item.aggro_wand.select_target.fail", SoundEvent::createVariableRangeEvent),
         AGGRO_WAND_SELECT_TARGET_SUCCESS = SOUND_EVENTS.register("item.aggro_wand.select_target.success", SoundEvent::createVariableRangeEvent),
 
-        ITEM_DROP = SOUND_EVENTS.register("entity.item.drop", SoundEvent::createVariableRangeEvent)
+        ITEM_DROP = SOUND_EVENTS.register("entity.item.drop", SoundEvent::createVariableRangeEvent),
+
+        ENTITY_SPAWNER_APPEAR = SOUND_EVENTS.register("entity.entity_spawner.appear", SoundEvent::createVariableRangeEvent),
+        ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.about_to_spawn_entity", SoundEvent::createVariableRangeEvent),
+        ENTITY_SPAWNER_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.spawn_entity", SoundEvent::createVariableRangeEvent)
     ;
 
     // endregion

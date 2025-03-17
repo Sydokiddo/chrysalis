@@ -77,7 +77,7 @@ public class ChrysalisRegistry {
     public static void registerAll(IEventBus eventBus) {
 
         if (Chrysalis.IS_DEBUG) {
-            ChrysalisItems.registerTestItems(eventBus);
+            if (Chrysalis.registerTestItems) ChrysalisItems.registerTestItems(eventBus);
             if (Chrysalis.registerExampleRegistry) ChrysalisExampleRegistry.init(eventBus);
         }
 

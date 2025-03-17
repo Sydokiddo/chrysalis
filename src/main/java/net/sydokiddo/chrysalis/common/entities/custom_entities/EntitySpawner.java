@@ -9,7 +9,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.CommonColors;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,6 +23,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.ColoredDirectionalDustParticleOptions;
 import net.sydokiddo.chrysalis.common.entities.registry.ChrysalisEntities;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,9 +35,9 @@ public class EntitySpawner extends Entity {
     private long spawnEntityAfterTicks;
 
     private SoundEvent
-        appearSound = SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM_BEGIN,
-        aboutToSpawnEntitySound = SoundEvents.TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM,
-        spawnEntitySound = SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM
+        appearSound = ChrysalisSoundEvents.ENTITY_SPAWNER_APPEAR.get(),
+        aboutToSpawnEntitySound = ChrysalisSoundEvents.ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY.get(),
+        spawnEntitySound = ChrysalisSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY.get()
     ;
 
     public EntitySpawner(EntityType<? extends EntitySpawner> entityType, Level level) {
@@ -51,7 +51,7 @@ public class EntitySpawner extends Entity {
 
     @SuppressWarnings("unused")
     public static void spawn(Level level, EntityType<?> entityToSpawn, Vec3 position) {
-        spawn(level, entityToSpawn, position, SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM_BEGIN, SoundEvents.TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM, SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM, ComponentHelper.MEMORY_FIRE_COLOR.getRGB(), CommonColors.WHITE, ChrysalisParticles.MEMORY_FLAME.get());
+        spawn(level, entityToSpawn, position, ChrysalisSoundEvents.ENTITY_SPAWNER_APPEAR.get(), ChrysalisSoundEvents.ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY.get(), ChrysalisSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY.get(), ComponentHelper.MEMORY_FIRE_COLOR.getRGB(), CommonColors.WHITE, ChrysalisParticles.MEMORY_FLAME.get());
     }
 
     public static void spawn(Level level, EntityType<?> entityToSpawn, Vec3 position, SoundEvent appearSound, SoundEvent aboutToSpawnEntitySound, SoundEvent spawnEntitySound, int ambientParticleStartingColor, int ambientParticleEndingColor, ParticleOptions spawnParticle) {

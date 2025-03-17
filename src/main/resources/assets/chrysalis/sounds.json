@@ -97,5 +97,27 @@
       "minecraft:random/pop"
     ],
     "subtitle": "subtitles.entity.item.drop"
+  },
+  "entity.entity_spawner.appear": {
+    "sounds": [
+      "minecraft:block/trial_spawner/spawn_item_begin1",
+      "minecraft:block/trial_spawner/spawn_item_begin2",
+      "minecraft:block/trial_spawner/spawn_item_begin3"
+    ],
+    "subtitle": "subtitles.entity.entity_spawner.appear"
+  },
+  "entity.entity_spawner.about_to_spawn_entity": {
+    "sounds": [
+      "minecraft:block/trial_spawner/about_to_spawn_item"
+    ],
+    "subtitle": "subtitles.entity.entity_spawner.about_to_spawn_entity"
+  },
+  "entity.entity_spawner.spawn_entity": {
+    "sounds": [
+      "minecraft:block/trial_spawner/spawn_item1",
+      "minecraft:block/trial_spawner/spawn_item2",
+      "minecraft:block/trial_spawner/spawn_item3"
+    ],
+    "subtitle": "subtitles.entity.entity_spawner.spawn_entity"
   }
 }

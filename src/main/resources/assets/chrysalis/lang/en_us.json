@@ -331,9 +331,9 @@
 
   "subtitles.entity.item.drop": "Item dropped",
 
-  "subtitles.entity.entity_spawner.appear": "Something manifests",
-  "subtitles.entity.entity_spawner.about_to_spawn_entity": "Something prepares",
-  "subtitles.entity.entity_spawner.spawn_entity": "Something spawns",
+  "subtitles.entity.entity_spawner.appear": "Entity manifests",
+  "subtitles.entity.entity_spawner.about_to_spawn_entity": "Entity prepares",
+  "subtitles.entity.entity_spawner.spawn_entity": "Entity spawns",
 
   "tag.item.chrysalis.banner_patterns": "Banner Patterns",
   "tag.item.chrysalis.campfires": "Campfires",

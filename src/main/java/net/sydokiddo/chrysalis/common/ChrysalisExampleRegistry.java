@@ -166,9 +166,9 @@ public class ChrysalisExampleRegistry {
             level,
             EntityType.ZOMBIE,
             position,
-            SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM_BEGIN,
-            SoundEvents.TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM,
-            SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM,
+            SoundEvents.ARROW_HIT_PLAYER,
+            SoundEvents.AMETHYST_BLOCK_RESONATE,
+            SoundEvents.FIRECHARGE_USE,
             ComponentHelper.MEMORY_FIRE_COLOR.getRGB(),
             CommonColors.WHITE,
             ChrysalisParticles.MEMORY_FLAME.get()
