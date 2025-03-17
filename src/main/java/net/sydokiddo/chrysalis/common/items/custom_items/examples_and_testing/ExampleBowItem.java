@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common.items.custom_items.examples;
+package net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -9,7 +9,6 @@ import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.sydokiddo.chrysalis.common.ChrysalisExampleRegistry;
 import net.sydokiddo.chrysalis.common.items.custom_items.CustomBowItem;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,6 +35,5 @@ public class ExampleBowItem extends CustomBowItem {
     public void onShoot(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity livingEntity, int useItemTicks) {
         livingEntity.knockback(0.5D, -Mth.sin(livingEntity.getYRot() * (float) (Math.PI / 180.0D)), Mth.cos(livingEntity.getYRot() * (float) (Math.PI / 180.0D)));
         if (livingEntity instanceof ServerPlayer serverPlayer) serverPlayer.getCooldowns().addCooldown(itemStack, 20);
-        ChrysalisExampleRegistry.summonExampleEntitySpawner(level, livingEntity.getOnPos().getCenter());
     }
 }

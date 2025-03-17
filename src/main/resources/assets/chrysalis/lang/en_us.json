@@ -59,6 +59,8 @@
   "item.chrysalis.debug_stick.desc": "Cycles Between Block States",
   "item.chrysalis.light.desc": "Light Level: %s",
 
+  "item.chrysalis.test_right_click_item": "Test Right Click Item",
+
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
   "entity.chrysalis.seat": "Seat",

@@ -27,7 +27,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.EntitySpawner;
-import net.sydokiddo.chrysalis.common.items.custom_items.examples.ExampleBowItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing.ExampleBowItem;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceBlockDispenserBehavior;

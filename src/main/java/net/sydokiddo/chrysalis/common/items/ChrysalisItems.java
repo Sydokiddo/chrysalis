@@ -11,10 +11,12 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.custom_items.IconItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.*;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing.TestRightClickItem;
 
 public class ChrysalisItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Chrysalis.MOD_ID);
+    private static final DeferredRegister.Items TEST_ITEMS = DeferredRegister.createItems(Chrysalis.MOD_ID);
 
     // region Debug Items
 
@@ -33,6 +35,9 @@ public class ChrysalisItems {
         RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, debugUtilitySettings())
     ;
 
+    @SuppressWarnings("unused")
+    private static final DeferredItem<Item> TEST_RIGHT_CLICK_ITEM = ChrysalisItems.TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1));
+
     // endregion
 
     // region Registry
@@ -47,6 +52,10 @@ public class ChrysalisItems {
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
+    }
+
+    public static void registerTestItems(IEventBus eventBus) {
+        TEST_ITEMS.register(eventBus);
     }
 
     // endregion
