@@ -38,9 +38,6 @@ public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, EntityS
     @Override
     public void render(@NotNull EntitySpawnerRenderState renderState, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
 
-        Entity entity = EntitySpawner.createEntity(EntitySpawnerRenderState.entityToSpawn, EntitySpawnerRenderState.entity.level());
-        assert entity != null;
-
         poseStack.pushPose();
         float scale;
 
@@ -51,6 +48,9 @@ public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, EntityS
 
         scale = Mth.wrapDegrees(renderState.ageInTicks * 40.0F);
         poseStack.mulPose(Axis.YP.rotationDegrees(scale));
+
+        Entity entity = EntitySpawner.createEntity(EntitySpawnerRenderState.entityToSpawn, EntitySpawnerRenderState.entity.level());
+        assert entity != null;
 
         entityRenderer.render(entity, 0.0D, 0.0D, 0.0D, renderState.partialTick, poseStack, bufferSource, packedLight);
         poseStack.popPose();

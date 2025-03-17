@@ -161,7 +161,7 @@ public class ChrysalisExampleRegistry {
         EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0D, new MobEffectInstance(Holder.direct(ChrysalisEffects.RADIANCE.get()), 40));
     }
 
-    public static void summonExampleEntitySpawner(Level level, Vec3 position) {
+    private static void summonExampleEntitySpawner(Level level, Vec3 position) {
         EntitySpawner.spawn(
             level,
             EntityType.ZOMBIE,
