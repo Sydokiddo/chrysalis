@@ -32,15 +32,15 @@ public class ChrysalisParticles {
 
     // region Advanced Particles
 
-    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDustPlumeParticleOptions>> COLORED_DUST_PLUME = PARTICLE_TYPES.register("colored_dust_plume", () -> createAdvancedParticle(ColoredDustPlumeParticleOptions.CODEC, ColoredDustPlumeParticleOptions.STREAM_CODEC));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDirectionalDustParticleOptions>> COLORED_DIRECTIONAL_DUST = PARTICLE_TYPES.register("colored_directional_dust", () -> createAdvancedParticle(ColoredDirectionalDustParticleOptions.CODEC, ColoredDirectionalDustParticleOptions.STREAM_CODEC));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredPortalParticleOptions>> COLORED_PORTAL = PARTICLE_TYPES.register("colored_portal", () -> createAdvancedParticle(ColoredPortalParticleOptions.CODEC, ColoredPortalParticleOptions.STREAM_CODEC));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<DustExplosionParticleOptions>> DUST_EXPLOSION = PARTICLE_TYPES.register("dust_explosion", () -> createAdvancedParticle(DustExplosionParticleOptions.CODEC, DustExplosionParticleOptions.STREAM_CODEC));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<RotatingDustParticleOptions>> ROTATING_DUST = PARTICLE_TYPES.register("rotating_dust", () -> createAdvancedParticle(RotatingDustParticleOptions.CODEC, RotatingDustParticleOptions.STREAM_CODEC));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<SparkleParticleOptions>> SPARKLE = PARTICLE_TYPES.register("sparkle", () -> createAdvancedParticle(SparkleParticleOptions.CODEC, SparkleParticleOptions.STREAM_CODEC));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticleOptions>> SPARK = PARTICLE_TYPES.register("spark", () -> createAdvancedParticle(SparkParticleOptions.CODEC, SparkParticleOptions.STREAM_CODEC));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<SmallPulsationParticleOptions>> SMALL_PULSATION = PARTICLE_TYPES.register("small_pulsation", () -> createAdvancedParticle(SmallPulsationParticleOptions.CODEC, SmallPulsationParticleOptions.STREAM_CODEC));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<LargePulsationParticleOptions>> LARGE_PULSATION = PARTICLE_TYPES.register("large_pulsation", () -> createAdvancedParticle(LargePulsationParticleOptions.CODEC, LargePulsationParticleOptions.STREAM_CODEC));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDustPlumeParticleOptions>> COLORED_DUST_PLUME = PARTICLE_TYPES.register("colored_dust_plume", () -> createAdvancedParticle(ColoredDustPlumeParticleOptions.CODEC, ColoredDustPlumeParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDirectionalDustParticleOptions>> COLORED_DIRECTIONAL_DUST = PARTICLE_TYPES.register("colored_directional_dust", () -> createAdvancedParticle(ColoredDirectionalDustParticleOptions.CODEC, ColoredDirectionalDustParticleOptions.STREAM_CODEC, true));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredPortalParticleOptions>> COLORED_PORTAL = PARTICLE_TYPES.register("colored_portal", () -> createAdvancedParticle(ColoredPortalParticleOptions.CODEC, ColoredPortalParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<DustExplosionParticleOptions>> DUST_EXPLOSION = PARTICLE_TYPES.register("dust_explosion", () -> createAdvancedParticle(DustExplosionParticleOptions.CODEC, DustExplosionParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<RotatingDustParticleOptions>> ROTATING_DUST = PARTICLE_TYPES.register("rotating_dust", () -> createAdvancedParticle(RotatingDustParticleOptions.CODEC, RotatingDustParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<SparkleParticleOptions>> SPARKLE = PARTICLE_TYPES.register("sparkle", () -> createAdvancedParticle(SparkleParticleOptions.CODEC, SparkleParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticleOptions>> SPARK = PARTICLE_TYPES.register("spark", () -> createAdvancedParticle(SparkParticleOptions.CODEC, SparkParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<SmallPulsationParticleOptions>> SMALL_PULSATION = PARTICLE_TYPES.register("small_pulsation", () -> createAdvancedParticle(SmallPulsationParticleOptions.CODEC, SmallPulsationParticleOptions.STREAM_CODEC, true));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<LargePulsationParticleOptions>> LARGE_PULSATION = PARTICLE_TYPES.register("large_pulsation", () -> createAdvancedParticle(LargePulsationParticleOptions.CODEC, LargePulsationParticleOptions.STREAM_CODEC, true));
 
     // endregion
 
@@ -50,8 +50,8 @@ public class ChrysalisParticles {
         return new SimpleParticleType(alwaysShow);
     }
 
-    public static <T extends ParticleOptions> ParticleType<T> createAdvancedParticle(MapCodec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec) {
-        return new ParticleType<>(false) {
+    public static <T extends ParticleOptions> ParticleType<T> createAdvancedParticle(MapCodec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec, boolean alwaysShow) {
+        return new ParticleType<>(alwaysShow) {
 
             @Override
             public @NotNull MapCodec<T> codec() {
