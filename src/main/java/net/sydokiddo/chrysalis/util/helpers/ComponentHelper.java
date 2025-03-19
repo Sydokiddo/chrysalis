@@ -60,7 +60,7 @@ public class ComponentHelper {
         SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
         MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
         WAXED_COLOR = Color.decode("#FABF29"),
-        STAYS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),
+        REMAINS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),
         BLINDNESS_COLOR = Color.decode("#5C4182"),
         HASTE_COLOR = Color.decode("#FFB67F"),
         MINING_FATIGUE_COLOR = Color.decode("#7575B5"),

@@ -29,7 +29,7 @@ public class PlayerManagerMixin {
     }
 
     /**
-     * Places items with the stays_on_death component back into the player's inventory upon respawning.
+     * Places items with the remains_on_death component back into the player's inventory upon respawning.
      **/
 
     @Unique private Inventory chrysalis$savedInventory;

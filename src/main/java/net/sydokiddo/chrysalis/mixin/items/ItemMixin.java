@@ -41,11 +41,11 @@ public abstract class ItemMixin {
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
-        if (itemStack.has(ChrysalisDataComponents.STAYS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
-            MutableComponent staysOnDeathIcon = ComponentHelper.TOOL_ICON;
-            ComponentHelper.setTooltipIconsFont(staysOnDeathIcon, Chrysalis.MOD_ID);
-            Component staysOnDeathTooltip = ItemHelper.addTooltipWithIcon(staysOnDeathIcon, Component.translatable("gui.chrysalis.item.stays_on_death").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.STAYS_ON_DEATH_COLOR.getRGB())));
-            list.add(staysOnDeathTooltip);
+        if (itemStack.has(ChrysalisDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
+            MutableComponent remainsOnDeathIcon = ComponentHelper.TOOL_ICON;
+            ComponentHelper.setTooltipIconsFont(remainsOnDeathIcon, Chrysalis.MOD_ID);
+            Component remainsOnDeathTooltip = ItemHelper.addTooltipWithIcon(remainsOnDeathIcon, Component.translatable("gui.chrysalis.item.remains_on_death").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.REMAINS_ON_DEATH_COLOR.getRGB())));
+            list.add(remainsOnDeathTooltip);
         }
 
         if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;

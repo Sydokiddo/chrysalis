@@ -319,7 +319,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
         @WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"))
         private boolean chrysalis$keepItemOnDeath(ItemStack itemStack, Operation<Boolean> original) {
-            if (itemStack.has(ChrysalisDataComponents.STAYS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) return true;
+            if (itemStack.has(ChrysalisDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) return true;
             return itemStack.isEmpty();
         }
     }

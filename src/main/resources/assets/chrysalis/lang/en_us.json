@@ -212,7 +212,7 @@
   "gui.chrysalis.item.banner_patterns": "Banner Patterns:",
 
   "gui.chrysalis.item.fireproof": "Fireproof",
-  "gui.chrysalis.item.stays_on_death": "Stays on Death",
+  "gui.chrysalis.item.remains_on_death": "Remains on Death",
   "gui.chrysalis.item.waxed": "Waxed",
 
   "gui.chrysalis.item.armor_trim": "%1$s (%2$s)",
