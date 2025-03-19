@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -17,6 +18,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.BuildPreventingEffect;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.Optional;
 import java.util.UUID;
@@ -139,6 +141,11 @@ public class EntityDataHelper {
 
     public static void setEncounteredMobUUID(Player player, UUID uuid) {
         player.getEntityData().set(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.ofNullable(uuid));
+    }
+
+    public static boolean hasBuildPreventingEffect(LivingEntity livingEntity) {
+        Optional<MobEffectInstance> effectList = livingEntity.getActiveEffects().stream().findAny();
+        return effectList.filter(mobEffectInstance -> mobEffectInstance.getEffect().value() instanceof BuildPreventingEffect).isPresent();
     }
 
     // endregion

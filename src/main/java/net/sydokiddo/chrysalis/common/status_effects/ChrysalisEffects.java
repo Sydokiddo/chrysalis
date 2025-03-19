@@ -14,6 +14,7 @@ import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.Creep
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.EnderSightEffect;
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.RadianceEffect;
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.GenericStatusEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.BuildPreventingEffect;
 import java.awt.*;
 
 public class ChrysalisEffects {
@@ -29,7 +30,7 @@ public class ChrysalisEffects {
         CREEPER_SIGHT = MOB_EFFECTS.register("creeper_sight", CreeperSightEffect::new),
         ENDER_SIGHT = MOB_EFFECTS.register("ender_sight", EnderSightEffect::new),
         HEALTH_REDUCTION = MOB_EFFECTS.register("health_reduction", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#994C4C").getRGB()).addAttributeModifier(Attributes.MAX_HEALTH, Chrysalis.resourceLocationId("effect.health_reduction"), -4.0D, AttributeModifier.Operation.ADD_VALUE)),
-        BUILDING_FATIGUE = MOB_EFFECTS.register("building_fatigue", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#79553A").getRGB()))
+        BUILDING_FATIGUE = MOB_EFFECTS.register("building_fatigue", () -> new BuildPreventingEffect(MobEffectCategory.HARMFUL, Color.decode("#79553A").getRGB()))
     ;
 
     // endregion
