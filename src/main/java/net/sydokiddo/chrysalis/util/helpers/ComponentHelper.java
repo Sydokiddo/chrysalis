@@ -55,6 +55,7 @@ public class ComponentHelper {
     public static final Color
         CHRYSALIS_COLOR = Color.decode("#A27FFF"),
         ENCHANTMENT_COLOR = Color.decode("#964CFF"),
+        CURSE_COLOR = Color.decode("#FF5555"),
         FIRE_COLOR = Color.decode("#FF6A00"),
         SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
         MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
@@ -97,7 +98,10 @@ public class ComponentHelper {
         MEMORY_FLAME_ICON = Component.translatable("gui.icon.chrysalis.memory_flame"),
         HUNGER_POINT_ICON = Component.translatable("gui.icon.chrysalis.hunger_point"),
         TOOL_ICON = Component.translatable("gui.icon.chrysalis.tool"),
-        BROKEN_TOOL_ICON = Component.translatable("gui.icon.chrysalis.broken_tool")
+        BROKEN_TOOL_ICON = Component.translatable("gui.icon.chrysalis.broken_tool"),
+        STAR_ICON = Component.translatable("gui.icon.chrysalis.star"),
+        EXPERIENCE_ICON = Component.translatable("gui.icon.chrysalis.experience"),
+        CURSED_EXPERIENCE_ICON = Component.translatable("gui.icon.chrysalis.cursed_experience")
     ;
 
     // endregion

@@ -7,9 +7,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.*;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -17,6 +16,7 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.equipment.trim.ArmorTrim;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.Nullable;
@@ -26,8 +26,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -120,13 +121,44 @@ public class TooltipMixin extends Item {
     public static class EnchantmentMixin {
 
         /**
-         * Changes the color of non-curse enchantment tooltips to a purple color.
+         * Changes the color of non-curse enchantment tooltips to a purple color, and adds an experience icon next to max-level enchantments.
          **/
 
-        @Redirect(method = "getFullname", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;withColor(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/Style;", ordinal = 1))
-        private static Style chrysalis$changeEnchantmentTooltipColor(Style style, ChatFormatting chatFormatting) {
-            if (CConfigOptions.REWORKED_TOOLTIPS.get()) return Style.EMPTY.withColor(ComponentHelper.ENCHANTMENT_COLOR.getRGB());
-            return Style.EMPTY.withColor(ChatFormatting.GRAY);
+        @Inject(method = "getFullname", at = @At("HEAD"), cancellable = true)
+        private static void chrysalis$changeEnchantmentTooltip(Holder<Enchantment> enchantment, int level, CallbackInfoReturnable<Component> cir) {
+            if (CConfigOptions.REWORKED_TOOLTIPS.get()) {
+
+                int color;
+                MutableComponent experienceIcon;
+                int whiteColor = Color.decode("#FFFFFF").getRGB();
+
+                if (enchantment.is(EnchantmentTags.CURSE)) {
+                    color = ComponentHelper.CURSE_COLOR.getRGB();
+                    experienceIcon = ComponentHelper.CURSED_EXPERIENCE_ICON.withColor(whiteColor);
+                } else {
+                    color = ComponentHelper.ENCHANTMENT_COLOR.getRGB();
+                    experienceIcon = ComponentHelper.EXPERIENCE_ICON.withColor(whiteColor);
+                }
+
+                ComponentHelper.setTooltipIconsFont(experienceIcon, Chrysalis.MOD_ID);
+
+                MutableComponent mutableComponent = enchantment.value().description().copy().withColor(color);
+                boolean isNotMax1Level = level != 1 || enchantment.value().getMaxLevel() != 1;
+
+                if (level >= enchantment.value().getMaxLevel()) {
+                    if (isNotMax1Level) chrysalis$addEnchantmentLevel(mutableComponent, level, color).append(CommonComponents.space().append(experienceIcon));
+                    else mutableComponent.append(CommonComponents.space().append(experienceIcon));
+                } else {
+                    if (isNotMax1Level) chrysalis$addEnchantmentLevel(mutableComponent, level, color);
+                }
+
+                cir.setReturnValue(mutableComponent);
+            }
+        }
+
+        @Unique
+        private static MutableComponent chrysalis$addEnchantmentLevel(MutableComponent mutableComponent, int level, int color) {
+            return mutableComponent.append(CommonComponents.space()).append(Component.translatable("enchantment.level." + level).withColor(color));
         }
     }
 }

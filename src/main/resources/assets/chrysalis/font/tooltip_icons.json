@@ -239,6 +239,33 @@
       "chars": [
         "\ua025"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/star.png",
+      "ascent": 9,
+      "height": 12,
+      "chars": [
+        "\ua026"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/experience.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua027"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/cursed_experience.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua028"
+      ]
     }
   ]
 }
