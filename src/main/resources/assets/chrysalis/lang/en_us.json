@@ -26,6 +26,8 @@
   "gui.icon.chrysalis.soul_flame": "\ua021",
   "gui.icon.chrysalis.memory_flame": "\ua022",
   "gui.icon.chrysalis.hunger_point": "\ua023",
+  "gui.icon.chrysalis.tool": "\ua024",
+  "gui.icon.chrysalis.broken_tool": "\ua025",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
@@ -207,6 +209,7 @@
   "gui.chrysalis.item.banner_patterns": "Banner Patterns:",
 
   "gui.chrysalis.item.fireproof": "Fireproof",
+  "gui.chrysalis.item.stays_on_death": "Stays on Death",
   "gui.chrysalis.item.waxed": "Waxed",
 
   "gui.chrysalis.item.armor_trim": "%1$s (%2$s)",

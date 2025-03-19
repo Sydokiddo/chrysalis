@@ -33,6 +33,7 @@
     "entities.misc.LivingEntityMixin",
     "entities.misc.MobMixin",
     "entities.misc.PlayerMixin",
+    "entities.misc.PlayerMixin$InventoryMixin",
     "entities.misc.PlayerMixin$ServerPlayerMixin",
     "entities.passive.AllayMixin",
     "entities.passive.AxolotlMixin",

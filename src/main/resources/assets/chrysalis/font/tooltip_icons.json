@@ -221,6 +221,24 @@
       "chars": [
         "\ua023"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/tool.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua024"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/broken_tool.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua025"
+      ]
     }
   ]
 }

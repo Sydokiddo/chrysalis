@@ -59,6 +59,7 @@ public class ComponentHelper {
         SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
         MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
         WAXED_COLOR = Color.decode("#FABF29"),
+        STAYS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),
         BLINDNESS_COLOR = Color.decode("#5C4182"),
         HASTE_COLOR = Color.decode("#FFB67F"),
         MINING_FATIGUE_COLOR = Color.decode("#7575B5"),
@@ -94,7 +95,9 @@ public class ComponentHelper {
         FLAME_ICON = Component.translatable("gui.icon.chrysalis.flame"),
         SOUL_FLAME_ICON = Component.translatable("gui.icon.chrysalis.soul_flame"),
         MEMORY_FLAME_ICON = Component.translatable("gui.icon.chrysalis.memory_flame"),
-        HUNGER_POINT_ICON = Component.translatable("gui.icon.chrysalis.hunger_point")
+        HUNGER_POINT_ICON = Component.translatable("gui.icon.chrysalis.hunger_point"),
+        TOOL_ICON = Component.translatable("gui.icon.chrysalis.tool"),
+        BROKEN_TOOL_ICON = Component.translatable("gui.icon.chrysalis.broken_tool")
     ;
 
     // endregion

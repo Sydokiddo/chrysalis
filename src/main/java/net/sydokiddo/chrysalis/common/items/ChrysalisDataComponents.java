@@ -22,7 +22,8 @@ public class ChrysalisDataComponents {
         IMMUNE_TO_ALL_DAMAGE = DATA_COMPONENTS.registerComponentType("immune_to_all_damage", (builder) -> builder.persistent(Unit.CODEC)),
         IMMUNE_TO_DESPAWNING = DATA_COMPONENTS.registerComponentType("immune_to_despawning", (builder) -> builder.persistent(Unit.CODEC)),
         INCREASED_DESPAWN_TIME = DATA_COMPONENTS.registerComponentType("increased_despawn_time", (builder) -> builder.persistent(Unit.CODEC)),
-        INCREASED_PICK_RADIUS = DATA_COMPONENTS.registerComponentType("increased_pick_radius", (builder) -> builder.persistent(Unit.CODEC))
+        INCREASED_PICK_RADIUS = DATA_COMPONENTS.registerComponentType("increased_pick_radius", (builder) -> builder.persistent(Unit.CODEC)),
+        STAYS_ON_DEATH = DATA_COMPONENTS.registerComponentType("stays_on_death", (builder) -> builder.persistent(Unit.CODEC))
     ;
 
     // endregion

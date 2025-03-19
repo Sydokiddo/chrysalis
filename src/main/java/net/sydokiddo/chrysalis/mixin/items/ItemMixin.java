@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.LightBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
@@ -37,6 +38,13 @@ public abstract class ItemMixin {
 
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
+
+        if (itemStack.has(ChrysalisDataComponents.STAYS_ON_DEATH)) {
+            MutableComponent staysOnDeathIcon = ComponentHelper.TOOL_ICON;
+            ComponentHelper.setTooltipIconsFont(staysOnDeathIcon, Chrysalis.MOD_ID);
+            Component staysOnDeathTooltip = ItemHelper.addTooltipWithIcon(staysOnDeathIcon, Component.translatable("gui.chrysalis.item.stays_on_death").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.STAYS_ON_DEATH_COLOR.getRGB())));
+            list.add(staysOnDeathTooltip);
+        }
 
         if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
         DamageResistant damageResistant = itemStack.get(DataComponents.DAMAGE_RESISTANT);

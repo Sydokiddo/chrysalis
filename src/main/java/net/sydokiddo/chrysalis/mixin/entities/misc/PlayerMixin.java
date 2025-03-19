@@ -1,6 +1,8 @@
 package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import com.google.common.collect.Lists;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.Util;
 import net.minecraft.client.multiplayer.PlayerInfo;
@@ -31,6 +33,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisAttributes;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
@@ -261,6 +264,16 @@ public abstract class PlayerMixin extends LivingEntity {
         private void chrysalis$hideEntityKilledByStat(ServerPlayer serverPlayer, Stat<?> stat) {
             LivingEntity killCredit = this.getKillCredit();
             if (killCredit != null && !killCredit.getType().is(ChrysalisTags.HIDDEN_FROM_STATISTICS_MENU)) this.awardStat(Stats.ENTITY_KILLED_BY.get(killCredit.getType()));
+        }
+    }
+
+    @Mixin(Inventory.class)
+    public static class InventoryMixin {
+
+        @WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"))
+        private boolean chrysalis$keepItemOnDeath(ItemStack itemStack, Operation<Boolean> original) {
+            if (itemStack.has(ChrysalisDataComponents.STAYS_ON_DEATH)) return true;
+            return itemStack.isEmpty();
         }
     }
 
