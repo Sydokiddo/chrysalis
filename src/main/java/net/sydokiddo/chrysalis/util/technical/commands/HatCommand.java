@@ -41,7 +41,7 @@ public class HatCommand {
 
         if (heldItem.isEmpty()) {
             CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, failNoItemText);
-        } else if (EnchantmentHelper.has(heldItem, EnchantmentEffectComponents.PREVENT_ARMOR_CHANGE)) {
+        } else if (EnchantmentHelper.has(heldItem, EnchantmentEffectComponents.PREVENT_ARMOR_CHANGE) || EnchantmentHelper.has(currentHeadItem, EnchantmentEffectComponents.PREVENT_ARMOR_CHANGE)) {
             CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, failInvalidItemText);
         } else {
 
