@@ -16,7 +16,6 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.equipment.trim.ArmorTrim;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
-import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +27,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -129,36 +127,20 @@ public class TooltipMixin extends Item {
             if (CConfigOptions.REWORKED_TOOLTIPS.get()) {
 
                 int color;
-                MutableComponent experienceIcon;
-                int whiteColor = Color.decode("#FFFFFF").getRGB();
-
-                if (enchantment.is(EnchantmentTags.CURSE)) {
-                    color = ComponentHelper.CURSE_COLOR.getRGB();
-                    experienceIcon = ComponentHelper.CURSED_EXPERIENCE_ICON.withColor(whiteColor);
-                } else {
-                    color = ComponentHelper.ENCHANTMENT_COLOR.getRGB();
-                    experienceIcon = ComponentHelper.EXPERIENCE_ICON.withColor(whiteColor);
-                }
-
-                ComponentHelper.setTooltipIconsFont(experienceIcon, Chrysalis.MOD_ID);
-
+                if (enchantment.is(EnchantmentTags.CURSE)) color = ComponentHelper.CURSE_COLOR.getRGB();
+                else color = ComponentHelper.ENCHANTMENT_COLOR.getRGB();
                 MutableComponent mutableComponent = enchantment.value().description().copy().withColor(color);
-                boolean isNotMax1Level = level != 1 || enchantment.value().getMaxLevel() != 1;
 
-                if (level >= enchantment.value().getMaxLevel()) {
-                    if (isNotMax1Level) chrysalis$addEnchantmentLevel(mutableComponent, level, color).append(CommonComponents.space().append(experienceIcon));
-                    else mutableComponent.append(CommonComponents.space().append(experienceIcon));
-                } else {
-                    if (isNotMax1Level) chrysalis$addEnchantmentLevel(mutableComponent, level, color);
-                }
+                if (level != 1 || enchantment.value().getMaxLevel() != 1) mutableComponent.append(CommonComponents.space())
+                .append(Component.translatable("gui.chrysalis.item.enchantment_level", chrysalis$enchantmentLevelComponent(level), chrysalis$enchantmentLevelComponent(enchantment.value().getMaxLevel())));
 
                 cir.setReturnValue(mutableComponent);
             }
         }
 
         @Unique
-        private static MutableComponent chrysalis$addEnchantmentLevel(MutableComponent mutableComponent, int level, int color) {
-            return mutableComponent.append(CommonComponents.space()).append(Component.translatable("enchantment.level." + level).withColor(color));
+        private static Component chrysalis$enchantmentLevelComponent(int level) {
+            return Component.translatable("enchantment.level." + level);
         }
     }
 }
