@@ -26,6 +26,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawnerData;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
@@ -131,6 +132,7 @@ public class ChrysalisServerEvents {
             event.dataPackRegistry(ChrysalisRegistry.BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
             event.dataPackRegistry(ChrysalisRegistry.BLOCK_SOUND_DATA, BlockSoundData.CODEC);
             event.dataPackRegistry(ChrysalisRegistry.CHARGED_MOB_DROP_DATA, ChargedMobDropData.CODEC);
+            event.dataPackRegistry(ChrysalisRegistry.ENTITY_SPAWNER_CONFIG_DATA, EntitySpawnerData.EntitySpawnerConfig.CODEC);
         }
 
         @SubscribeEvent

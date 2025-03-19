@@ -24,6 +24,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.entities.rendering.EntitySpawnerRenderer;
 import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
 import net.sydokiddo.chrysalis.client.particles.types.*;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawnerData;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
@@ -65,6 +66,7 @@ public class ChrysalisRegistry {
     public static final ResourceKey<Registry<BlockPropertyData>> BLOCK_PROPERTY_DATA = RegistryHelper.registerBlockDataType("properties");
     public static final ResourceKey<Registry<BlockSoundData>> BLOCK_SOUND_DATA = RegistryHelper.registerBlockDataType("sound_group");
     public static final ResourceKey<Registry<ChargedMobDropData>> CHARGED_MOB_DROP_DATA = RegistryHelper.registerEntityDataType("charged_mob_drop");
+    public static final ResourceKey<Registry<EntitySpawnerData.EntitySpawnerConfig>> ENTITY_SPAWNER_CONFIG_DATA = RegistryHelper.registerEntityDataType("entity_spawner_config");
 
     // endregion
 

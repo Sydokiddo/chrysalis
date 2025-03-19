@@ -10,12 +10,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.sydokiddo.chrysalis.client.entities.rendering.render_states.EntitySpawnerRenderState;
-import net.sydokiddo.chrysalis.common.entities.custom_entities.EntitySpawner;
+import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawner;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, EntitySpawnerRenderState> {
+public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, ChrysalisEntityRenderState> {
 
     private final EntityRenderDispatcher entityRenderer;
 
@@ -25,18 +25,12 @@ public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, EntityS
     }
 
     @Override
-    public @NotNull EntitySpawnerRenderState createRenderState() {
-        return new EntitySpawnerRenderState();
+    public @NotNull ChrysalisEntityRenderState createRenderState() {
+        return new ChrysalisEntityRenderState();
     }
 
     @Override
-    public void extractRenderState(@NotNull EntitySpawner entitySpawner, @NotNull EntitySpawnerRenderState renderState, float tickRate) {
-        EntitySpawnerRenderState.entityToSpawn = entitySpawner.entityToSpawn;
-        super.extractRenderState(entitySpawner, renderState, tickRate);
-    }
-
-    @Override
-    public void render(@NotNull EntitySpawnerRenderState renderState, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
+    public void render(@NotNull ChrysalisEntityRenderState renderState, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
 
         poseStack.pushPose();
         float scale;
@@ -49,10 +43,8 @@ public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, EntityS
         scale = Mth.wrapDegrees(renderState.ageInTicks * 40.0F);
         poseStack.mulPose(Axis.YP.rotationDegrees(scale));
 
-        Entity entity = EntitySpawner.createEntity(EntitySpawnerRenderState.entityToSpawn, EntitySpawnerRenderState.entity.level());
-        assert entity != null;
-
-        entityRenderer.render(entity, 0.0D, 0.0D, 0.0D, renderState.partialTick, poseStack, bufferSource, packedLight);
+        Entity entity = EntitySpawner.getOrCreateDisplayEntity(ChrysalisEntityRenderState.entity.level());
+        if (entity != null) this.entityRenderer.render(entity, 0.0D, 0.0D, 0.0D, renderState.partialTick, poseStack, bufferSource, packedLight);
         poseStack.popPose();
     }
 }

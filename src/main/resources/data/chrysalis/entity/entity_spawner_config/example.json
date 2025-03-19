@@ -1,0 +1,48 @@
+{
+  "id": "chrysalis:example",
+  "sounds": [
+    {
+      "appear": "chrysalis:entity.entity_spawner.appear",
+      "about_to_spawn_entity": "chrysalis:entity.entity_spawner.about_to_spawn_entity",
+      "spawn_entity": "chrysalis:entity.entity_spawner.spawn_entity"
+    }
+  ],
+  "particles": [
+    {
+      "starting_color": "#6CD86C",
+      "ending_color": "#FFFFFF"
+    }
+  ],
+  "spawn_potentials": [
+    {
+      "data": {
+        "entity": {
+          "id": "minecraft:zombie"
+        }
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "entity": {
+          "id": "minecraft:skeleton"
+        }
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "entity": {
+          "id": "minecraft:spider"
+        }
+      },
+      "weight": 1
+    }
+  ],
+  "delay": [
+    {
+      "min": 60,
+      "max": 120
+    }
+  ]
+}

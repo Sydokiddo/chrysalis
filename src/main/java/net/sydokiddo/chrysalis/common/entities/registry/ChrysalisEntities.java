@@ -9,7 +9,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.entities.custom_entities.EntitySpawner;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawner;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.Seat;
 
 public class ChrysalisEntities {

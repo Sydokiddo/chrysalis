@@ -26,9 +26,8 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
-import net.sydokiddo.chrysalis.common.entities.custom_entities.EntitySpawner;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawner;
 import net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing.ExampleBowItem;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceEntityDispenserBehavior;
@@ -162,17 +161,7 @@ public class ChrysalisExampleRegistry {
     }
 
     private static void summonExampleEntitySpawner(Level level, Vec3 position) {
-        EntitySpawner.spawn(
-            level,
-            EntityType.ZOMBIE,
-            position,
-            SoundEvents.ARROW_HIT_PLAYER,
-            SoundEvents.AMETHYST_BLOCK_RESONATE,
-            SoundEvents.FIRECHARGE_USE,
-            ComponentHelper.MEMORY_FIRE_COLOR.getRGB(),
-            CommonColors.WHITE,
-            ChrysalisParticles.MEMORY_FLAME.get()
-        );
+        EntitySpawner.create(level, Chrysalis.stringId("example"), position);
     }
 
     private static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);

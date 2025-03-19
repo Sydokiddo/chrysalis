@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common.entities.custom_entities;
+package net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner;
 
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -16,22 +16,28 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.ColoredDirectionalDustParticleOptions;
+import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
 import net.sydokiddo.chrysalis.common.entities.registry.ChrysalisEntities;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import org.jetbrains.annotations.NotNull;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class EntitySpawner extends Entity {
 
     // region Initialization
 
-    public EntityType<?> entityToSpawn = EntityType.ZOMBIE;
+    private static final String defaultId = Chrysalis.stringId("example");
+    public static EntityType<?> entityToSpawn;
+    private static Entity displayEntity;
     private long spawnEntityAfterTicks;
 
     private SoundEvent
@@ -45,32 +51,52 @@ public class EntitySpawner extends Entity {
         this.noPhysics = true;
     }
 
-    private static EntitySpawner create(Level level) {
-        return new EntitySpawner(ChrysalisEntities.ENTITY_SPAWNER.get(), level);
+    public static void create(Level level, Vec3 position) {
+        create(level, null, position);
     }
 
-    @SuppressWarnings("unused")
-    public static void spawn(Level level, EntityType<?> entityToSpawn, Vec3 position) {
-        spawn(level, entityToSpawn, position, ChrysalisSoundEvents.ENTITY_SPAWNER_APPEAR.get(), ChrysalisSoundEvents.ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY.get(), ChrysalisSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY.get(), ComponentHelper.MEMORY_FIRE_COLOR.getRGB(), CommonColors.WHITE, ChrysalisParticles.MEMORY_FLAME.get());
-    }
+    public static void create(Level level, String id, Vec3 position) {
 
-    public static void spawn(Level level, EntityType<?> entityToSpawn, Vec3 position, SoundEvent appearSound, SoundEvent aboutToSpawnEntitySound, SoundEvent spawnEntitySound, int ambientParticleStartingColor, int ambientParticleEndingColor, ParticleOptions spawnParticle) {
+        if (level.isClientSide()) return;
 
-        EntitySpawner entitySpawner = EntitySpawner.create(level);
+        if (id == null) id = defaultId;
+        String finalId = id;
 
-        entitySpawner.entityToSpawn = entityToSpawn;
-        entitySpawner.spawnEntityAfterTicks = level.getRandom().nextIntBetweenInclusive(60, 120);
-        entitySpawner.appearSound = appearSound;
-        entitySpawner.aboutToSpawnEntitySound = aboutToSpawnEntitySound;
-        entitySpawner.spawnEntitySound = spawnEntitySound;
-        entitySpawner.setAmbientParticleStartingColor(ambientParticleStartingColor);
-        entitySpawner.setAmbientParticleEndingColor(ambientParticleEndingColor);
-        entitySpawner.setSpawnParticle(spawnParticle);
+        if (Chrysalis.registryAccess == null) return;
+        List<EntitySpawnerData.EntitySpawnerConfig> list = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.ENTITY_SPAWNER_CONFIG_DATA).stream().filter(entitySpawnerConfig -> Objects.equals(entitySpawnerConfig.getId(), finalId)).toList();
 
-        entitySpawner.moveTo(position);
-        level.addFreshEntity(entitySpawner);
+        EntitySpawner entitySpawner = new EntitySpawner(ChrysalisEntities.ENTITY_SPAWNER.get(), level);
 
-        playSpawnerSound(level, entitySpawner, entitySpawner.appearSound, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F, true);
+        for (EntitySpawnerData.EntitySpawnerConfig entitySpawnerConfig : list) {
+
+            if (list.size() > 1) {
+                Chrysalis.LOGGER.warn("Detected multiple entity spawner configs of the same id: {}", finalId);
+                entitySpawnerConfig = list.getFirst();
+            }
+
+            Optional<SpawnData> optionalSpawnData = entitySpawnerConfig.spawnPotentials().getRandomValue(entitySpawner.level().getRandom());
+            if (optionalSpawnData.isEmpty()) return;
+
+            Optional<EntityType<?>> optionalEntityType = EntityType.by(optionalSpawnData.get().entityToSpawn());
+            if (optionalEntityType.isEmpty()) return;
+
+            entityToSpawn = optionalEntityType.get();
+            displayEntity = createEntity(entityToSpawn, level);
+            entitySpawner.spawnEntityAfterTicks = level.getRandom().nextIntBetweenInclusive(entitySpawnerConfig.getMinDelay(), entitySpawnerConfig.getMaxDelay());
+
+            entitySpawner.appearSound = entitySpawnerConfig.getAppearSound().value();
+            entitySpawner.aboutToSpawnEntitySound = entitySpawnerConfig.getAboutToSpawnEntitySound().value();
+            entitySpawner.spawnEntitySound = entitySpawnerConfig.getSpawnEntitySound().value();
+
+            entitySpawner.setAmbientParticleStartingColor(entitySpawnerConfig.getStartingColorFromString());
+            entitySpawner.setAmbientParticleEndingColor(entitySpawnerConfig.getEndingColorFromString());
+            entitySpawner.setSpawnParticle(entitySpawnerConfig.getSpawnParticle());
+
+            entitySpawner.moveTo(position);
+            level.addFreshEntity(entitySpawner);
+
+            playSpawnerSound(level, entitySpawner, entitySpawner.appearSound, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F, true);
+        }
     }
 
     @SuppressWarnings("all")
@@ -99,9 +125,9 @@ public class EntitySpawner extends Entity {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
-        builder.define(AMBIENT_PARTICLE_STARTING_COLOR, ComponentHelper.MEMORY_FIRE_COLOR.getRGB());
+        builder.define(AMBIENT_PARTICLE_STARTING_COLOR, ComponentHelper.FIRE_COLOR.getRGB());
         builder.define(AMBIENT_PARTICLE_ENDING_COLOR, CommonColors.WHITE);
-        builder.define(SPAWN_PARTICLE, ChrysalisParticles.MEMORY_FLAME.get());
+        builder.define(SPAWN_PARTICLE, ParticleTypes.FLAME);
     }
 
     @Override
@@ -127,27 +153,27 @@ public class EntitySpawner extends Entity {
         }
     }
 
-    public int getAmbientParticleStartingColor() {
+    private int getAmbientParticleStartingColor() {
         return this.getEntityData().get(AMBIENT_PARTICLE_STARTING_COLOR);
     }
 
-    public void setAmbientParticleStartingColor(int startingColor) {
+    private void setAmbientParticleStartingColor(int startingColor) {
         this.getEntityData().set(AMBIENT_PARTICLE_STARTING_COLOR, startingColor);
     }
 
-    public int getAmbientParticleEndingColor() {
+    private int getAmbientParticleEndingColor() {
         return this.getEntityData().get(AMBIENT_PARTICLE_ENDING_COLOR);
     }
 
-    public void setAmbientParticleEndingColor(int endingColor) {
+    private void setAmbientParticleEndingColor(int endingColor) {
         this.getEntityData().set(AMBIENT_PARTICLE_ENDING_COLOR, endingColor);
     }
 
-    public ParticleOptions getSpawnParticle() {
+    private ParticleOptions getSpawnParticle() {
         return this.getEntityData().get(SPAWN_PARTICLE);
     }
 
-    public void setSpawnParticle(ParticleOptions spawnParticle) {
+    private void setSpawnParticle(ParticleOptions spawnParticle) {
         this.getEntityData().set(SPAWN_PARTICLE, spawnParticle);
     }
 
@@ -189,8 +215,8 @@ public class EntitySpawner extends Entity {
 
     private void trySpawningEntity(ServerLevel serverLevel) {
 
-        if (this.entityToSpawn == null) return;
-        Entity entity = createEntity(this.entityToSpawn, serverLevel);
+        if (entityToSpawn == null) return;
+        Entity entity = createEntity(entityToSpawn, serverLevel);
         assert entity != null;
         entity.setPos(this.position().x(), this.position().y(), this.position().z());
 
@@ -206,8 +232,13 @@ public class EntitySpawner extends Entity {
         playSpawnerSound(serverLevel, this, this.spawnEntitySound, 1.0F, (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.2F + 1.0F, true);
     }
 
-    public static Entity createEntity(EntityType<?> entityToSpawn, Level level) {
+    private static Entity createEntity(EntityType<?> entityToSpawn, Level level) {
         return entityToSpawn.create(level, EntitySpawnReason.SPAWNER);
+    }
+
+    public static Entity getOrCreateDisplayEntity(Level level) {
+        if (displayEntity == null && entityToSpawn != null) displayEntity = createEntity(entityToSpawn, level);
+        return displayEntity;
     }
 
     // endregion

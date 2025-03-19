@@ -2,11 +2,10 @@ package net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.sydokiddo.chrysalis.common.entities.custom_entities.EntitySpawner;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawner;
 import org.jetbrains.annotations.NotNull;
 
 public class TestRightClickItem extends Item {
@@ -23,10 +22,6 @@ public class TestRightClickItem extends Item {
 
     @SuppressWarnings("unused")
     private void doRightClickFunctionality(Level level, Player player, InteractionHand interactionHand) {
-        EntitySpawner.spawn(
-            level,
-            EntityType.ZOMBIE,
-            player.getOnPos().getCenter()
-        );
+        EntitySpawner.create(level, player.getOnPos().getCenter());
     }
 }
