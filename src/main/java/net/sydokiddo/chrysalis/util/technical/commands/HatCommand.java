@@ -13,9 +13,9 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.equipment.Equippable;
-import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 import java.util.Objects;
 
@@ -41,7 +41,7 @@ public class HatCommand {
 
         if (heldItem.isEmpty()) {
             CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, failNoItemText);
-        } else if (ItemHelper.getEnchantmentLevel(heldItem, Enchantments.BINDING_CURSE) > 0) {
+        } else if (EnchantmentHelper.has(heldItem, EnchantmentEffectComponents.PREVENT_ARMOR_CHANGE)) {
             CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, failInvalidItemText);
         } else {
 

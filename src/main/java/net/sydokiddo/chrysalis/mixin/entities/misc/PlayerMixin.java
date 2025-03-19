@@ -26,6 +26,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -318,7 +319,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
         @WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"))
         private boolean chrysalis$keepItemOnDeath(ItemStack itemStack, Operation<Boolean> original) {
-            if (itemStack.has(ChrysalisDataComponents.STAYS_ON_DEATH) && !itemStack.has(EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) return true;
+            if (itemStack.has(ChrysalisDataComponents.STAYS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) return true;
             return itemStack.isEmpty();
         }
     }
