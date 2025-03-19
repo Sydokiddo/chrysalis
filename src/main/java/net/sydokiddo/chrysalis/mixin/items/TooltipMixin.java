@@ -125,7 +125,7 @@ public class TooltipMixin extends Item {
          **/
 
         @Inject(method = "getFullname", at = @At("HEAD"), cancellable = true)
-        private static void chrysalis$changeEnchantmentTooltip(Holder<Enchantment> enchantment, int level, CallbackInfoReturnable<Component> cir) {
+        private static void chrysalis$changeEnchantmentNameTooltip(Holder<Enchantment> enchantment, int level, CallbackInfoReturnable<Component> cir) {
             if (CConfigOptions.REWORKED_TOOLTIPS.get()) {
 
                 int color;
