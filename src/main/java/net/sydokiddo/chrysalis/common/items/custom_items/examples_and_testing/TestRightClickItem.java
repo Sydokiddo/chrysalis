@@ -5,6 +5,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawner;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,5 +24,6 @@ public class TestRightClickItem extends Item {
     @SuppressWarnings("unused")
     private void doRightClickFunctionality(Level level, Player player, InteractionHand interactionHand) {
         EntitySpawner.create(level, player.getOnPos().getCenter());
+        Chrysalis.LOGGER.info("UUID: {}", player.getStringUUID());
     }
 }

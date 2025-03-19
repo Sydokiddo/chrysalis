@@ -8,6 +8,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
@@ -91,5 +92,14 @@ public abstract class ItemEntityMixin extends Entity {
             if (this.getItem().has(ChrysalisDataComponents.IMMUNE_TO_ALL_DAMAGE) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) cir.setReturnValue(false);
             if (!serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_DESTROY_ITEMS_IN_EXPLOSIONS) && damageSource.is(DamageTypeTags.IS_EXPLOSION)) cir.setReturnValue(false);
         }
+    }
+
+    /**
+     * Prevents items from being picked up by players who are dying.
+     **/
+
+    @Inject(at = @At("HEAD"), method = "playerTouch", cancellable = true)
+    private void chrysalis$preventItemPickingUp(Player player, CallbackInfo info) {
+        if (!this.level().isClientSide() && player.isDeadOrDying()) info.cancel();
     }
 }

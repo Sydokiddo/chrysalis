@@ -80,6 +80,10 @@ public abstract class MobMixin extends LivingEntity {
         return super.hurtServer(serverLevel, damageSource, EntityDataHelper.getDamageCap(this, damageSource, damageAmount));
     }
 
+    /**
+     * Allows for items dropped from entities killed by charged creepers and other charged entities to be data-driven.
+     **/
+
     @SuppressWarnings("deprecation")
     @Inject(method = "dropCustomDeathLoot", at = @At("HEAD"))
     protected void chrysalis$chargedMobDropData(ServerLevel serverLevel, DamageSource damageSource, boolean recentlyHit, CallbackInfo info) {
@@ -89,7 +93,7 @@ public abstract class MobMixin extends LivingEntity {
 
         for (ChargedMobDropData chargedMobDropData : list) {
 
-            if (chargedMobDropData.droppedItem() == null) return;
+            if (chargedMobDropData.droppedItem() == null || chargedMobDropData.forTesting() && !Chrysalis.IS_DEBUG) return;
             ItemStack itemStack = new ItemStack(chargedMobDropData.droppedItem());
 
             if (damageSource.getEntity() instanceof Creeper creeper && creeper.canDropMobsSkull()) {

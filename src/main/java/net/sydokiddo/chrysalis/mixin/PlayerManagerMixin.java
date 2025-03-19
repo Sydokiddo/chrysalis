@@ -28,6 +28,10 @@ public class PlayerManagerMixin {
         DebugHelper.sendLoggedInMessage(Chrysalis.LOGGER, serverPlayer, Chrysalis.LOGGER.getName(), Chrysalis.CHRYSALIS_VERSION);
     }
 
+    /**
+     * Places items with the stays_on_death component back into the player's inventory upon respawning.
+     **/
+
     @Unique private Inventory chrysalis$savedInventory;
 
     @Inject(method = "respawn", at = @At("HEAD"))

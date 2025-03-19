@@ -9,10 +9,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 
-public record ChargedMobDropData(HolderSet<EntityType<?>> entities, Holder<Item> droppedItem) {
+public record ChargedMobDropData(HolderSet<EntityType<?>> entities, Holder<Item> droppedItem, boolean forTesting) {
 
     public static final Codec<ChargedMobDropData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         RegistryCodecs.homogeneousList(Registries.ENTITY_TYPE).fieldOf("entities").forGetter(ChargedMobDropData::entities),
-        Item.CODEC.fieldOf("dropped_item").forGetter(ChargedMobDropData::droppedItem)
+        Item.CODEC.fieldOf("dropped_item").forGetter(ChargedMobDropData::droppedItem),
+        Codec.BOOL.optionalFieldOf("for_testing", false).forGetter(ChargedMobDropData::forTesting)
     ).apply(instance, ChargedMobDropData::new));
 }
