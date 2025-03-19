@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DamageResistant;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.level.block.LightBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -39,7 +40,7 @@ public abstract class ItemMixin {
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
-        if (itemStack.has(ChrysalisDataComponents.STAYS_ON_DEATH)) {
+        if (itemStack.has(ChrysalisDataComponents.STAYS_ON_DEATH) && !itemStack.has(EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
             MutableComponent staysOnDeathIcon = ComponentHelper.TOOL_ICON;
             ComponentHelper.setTooltipIconsFont(staysOnDeathIcon, Chrysalis.MOD_ID);
             Component staysOnDeathTooltip = ItemHelper.addTooltipWithIcon(staysOnDeathIcon, Component.translatable("gui.chrysalis.item.stays_on_death").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.STAYS_ON_DEATH_COLOR.getRGB())));
