@@ -64,11 +64,16 @@ public class EntitySpawner extends Entity {
 
         if (Chrysalis.registryAccess == null) return;
         List<EntitySpawnerData.EntitySpawnerConfig> list = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.ENTITY_SPAWNER_CONFIG_DATA).stream().filter(entitySpawnerConfig -> Objects.equals(entitySpawnerConfig.getId(), finalId)).toList();
+
+        if (list.isEmpty()) {
+            Chrysalis.LOGGER.error("Could not find entity spawner config of id: {}", finalId);
+            return;
+        }
+
+        if (list.size() > 1) Chrysalis.LOGGER.warn("Detected multiple entity spawner configs of the same id: {}", finalId);
         EntitySpawnerData.EntitySpawnerConfig entitySpawnerConfig = list.getFirst();
 
         EntitySpawner entitySpawner = new EntitySpawner(ChrysalisEntities.ENTITY_SPAWNER.get(), level);
-        if (list.size() > 1) Chrysalis.LOGGER.warn("Detected multiple entity spawner configs of the same id: {}", finalId);
-
         Optional<SpawnData> optionalSpawnData = entitySpawnerConfig.spawnPotentials().getRandomValue(entitySpawner.level().getRandom());
         if (optionalSpawnData.isEmpty()) return;
 
@@ -135,8 +140,6 @@ public class EntitySpawner extends Entity {
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
 
-        setEntityToSpawn(this, getEntityToSpawn(this));
-        setDisplayEntity(this, getDisplayEntity(this));
         setSpawnAfterEntityTicks(this, compoundTag.getLong(this.spawnEntityAfterTicksTag));
         this.setAmbientParticleStartingColor(compoundTag.getInt(this.ambientParticleStartingColorTag));
         this.setAmbientParticleEndingColor(compoundTag.getInt(this.ambientParticleEndingColorTag));
@@ -209,6 +212,11 @@ public class EntitySpawner extends Entity {
     }
 
     private void tickServer(ServerLevel serverLevel) {
+
+        if (getEntityToSpawn(this) == null) {
+            Chrysalis.LOGGER.info("{} has no assigned entity to spawn, despawning it", this.getName().getString());
+            this.kill(serverLevel);
+        }
 
         if ((long) this.tickCount == getSpawnEntityAfterTicks(this) - 36L) playSpawnerSound(serverLevel, this, this.aboutToSpawnEntitySound, 1.0F, 1.0F, false);
 

@@ -1,10 +1,10 @@
 {
-  "id": "chrysalis:example2",
+  "id": "chrysalis:example_2",
   "sounds": [
     {
-      "appear": "chrysalis:item.heal.use",
-      "about_to_spawn_entity": "chrysalis:item.heal.use",
-      "spawn_entity": "chrysalis:item.heal.use"
+      "appear": "chrysalis:entity.entity_spawner.appear",
+      "about_to_spawn_entity": "chrysalis:entity.entity_spawner.about_to_spawn_entity",
+      "spawn_entity": "chrysalis:entity.entity_spawner.spawn_entity"
     }
   ],
   "particles": [
