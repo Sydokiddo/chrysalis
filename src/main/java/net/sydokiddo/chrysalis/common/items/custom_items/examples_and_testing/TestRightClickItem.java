@@ -23,7 +23,6 @@ public class TestRightClickItem extends Item {
 
     @SuppressWarnings("unused")
     private void doRightClickFunctionality(Level level, Player player, InteractionHand interactionHand) {
-        EntitySpawner.create(level, player.getOnPos().getCenter());
-        Chrysalis.LOGGER.info("UUID: {}", player.getStringUUID());
+        EntitySpawner.create(level, level.getRandom().nextFloat() < 0.5F ? Chrysalis.stringId("example") : Chrysalis.stringId("example2"), player.getOnPos().getCenter());
     }
 }

@@ -1,0 +1,29 @@
+{
+  "id": "chrysalis:example2",
+  "sounds": [
+    {
+      "appear": "chrysalis:item.heal.use",
+      "about_to_spawn_entity": "chrysalis:item.heal.use",
+      "spawn_entity": "chrysalis:item.heal.use"
+    }
+  ],
+  "particles": [
+    {}
+  ],
+  "spawn_potentials": [
+    {
+      "data": {
+        "entity": {
+          "id": "minecraft:husk"
+        }
+      },
+      "weight": 1
+    }
+  ],
+  "delay": [
+    {
+      "min": 120,
+      "max": 200
+    }
+  ]
+}

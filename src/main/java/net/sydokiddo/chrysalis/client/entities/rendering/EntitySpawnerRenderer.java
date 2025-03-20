@@ -43,7 +43,8 @@ public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, Chrysal
         scale = Mth.wrapDegrees(renderState.ageInTicks * 40.0F);
         poseStack.mulPose(Axis.YP.rotationDegrees(scale));
 
-        Entity entity = EntitySpawner.getOrCreateDisplayEntity(ChrysalisEntityRenderState.entity.level());
+        if (!(ChrysalisEntityRenderState.entity instanceof EntitySpawner entitySpawner)) return;
+        Entity entity = EntitySpawner.getOrCreateDisplayEntity(entitySpawner, entitySpawner.level());
         if (entity != null) this.entityRenderer.render(entity, 0.0D, 0.0D, 0.0D, renderState.partialTick, poseStack, bufferSource, packedLight);
         poseStack.popPose();
     }

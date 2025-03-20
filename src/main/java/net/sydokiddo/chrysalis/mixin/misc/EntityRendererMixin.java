@@ -44,7 +44,7 @@ public abstract class EntityRendererMixin {
      **/
 
     @Inject(method = "extractRenderState", at = @At("HEAD"))
-    private void chrysalis$addEntityRenderStates(Entity entity, EntityRenderState entityRenderState, float tickCount, CallbackInfo info) {
+    private void chrysalis$addEntityRenderStates(Entity entity, EntityRenderState renderState, float tickCount, CallbackInfo info) {
         ChrysalisEntityRenderState.entity = entity;
     }
 
@@ -73,7 +73,7 @@ public abstract class EntityRendererMixin {
          **/
 
         @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("HEAD"))
-        private void chrysalis$addLivingEntityRenderStates(LivingEntity livingEntity, LivingEntityRenderState livingEntityRenderState, float tickCount, CallbackInfo info) {
+        private void chrysalis$addLivingEntityRenderStates(LivingEntity livingEntity, LivingEntityRenderState renderState, float tickCount, CallbackInfo info) {
             ChrysalisLivingEntityRenderState.livingEntity = livingEntity;
         }
     }

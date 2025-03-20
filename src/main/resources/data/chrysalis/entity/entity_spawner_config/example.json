@@ -10,7 +10,10 @@
   "particles": [
     {
       "starting_color": "#6CD86C",
-      "ending_color": "#FFFFFF"
+      "ending_color": "#FFFFFF",
+      "spawn_particle": {
+        "type": "chrysalis:memory_flame"
+      }
     }
   ],
   "spawn_potentials": [
