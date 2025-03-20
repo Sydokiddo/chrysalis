@@ -30,7 +30,7 @@ public class CoordinatesCommand {
     private static int copyCoordinates(CommandContext<CommandSourceStack> context) {
         ServerPlayer serverPlayer = Objects.requireNonNull(context.getSource().getPlayer());
         new ClipboardManager().setClipboard(0, Component.translatable("gui.chrysalis.coordinates", serverPlayer.getBlockX(), serverPlayer.getBlockY(), serverPlayer.getBlockZ()).getString());
-        serverPlayer.sendSystemMessage(Component.translatable("gui.chrysalis.commands.coordinates.copy.success", serverPlayer.getDisplayName()));
+        CommandCommonMethods.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.commands.coordinates.copy.success", serverPlayer.getDisplayName()));
         return 0;
     }
 

@@ -10,13 +10,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Collection;
-import java.util.Objects;
 
 @Mixin(EnchantCommand.class)
 public class EnchantCommandMixin {
@@ -48,7 +48,7 @@ public class EnchantCommandMixin {
     private static void chrysalis$preventEnchantingIfValueIsTooLow(CommandSourceStack commandSourceStack, Collection<? extends Entity> collection, Holder<Enchantment> holder, int enchantmentLevel, CallbackInfoReturnable<Integer> cir) {
         for (Entity entity : collection) {
             if (entity instanceof LivingEntity livingEntity && enchantmentLevel <= EnchantmentHelper.getTagEnchantmentLevel(holder, livingEntity.getMainHandItem())) {
-                Objects.requireNonNull(commandSourceStack.getPlayer()).sendSystemMessage(Component.translatable("gui.chrysalis.commands.enchant.fail.low_level").withStyle(ChatFormatting.RED));
+                CommandCommonMethods.sendFeedbackMessage(false, commandSourceStack.getPlayer(), Component.translatable("gui.chrysalis.commands.enchant.fail.low_level").withStyle(ChatFormatting.RED));
                 cir.setReturnValue(0);
             }
         }
