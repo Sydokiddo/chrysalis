@@ -16,7 +16,9 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.equipment.trim.ArmorTrim;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
+import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -129,10 +131,18 @@ public class TooltipMixin extends Item {
                 int color;
                 if (enchantment.is(EnchantmentTags.CURSE)) color = ComponentHelper.CURSE_COLOR.getRGB();
                 else color = ComponentHelper.ENCHANTMENT_COLOR.getRGB();
-                MutableComponent mutableComponent = enchantment.value().description().copy().withColor(color);
+
+                MutableComponent warningIcon = ComponentHelper.WARNING_ICON;
+                ComponentHelper.setTooltipIconsFont(warningIcon, Chrysalis.MOD_ID);
+
+                MutableComponent defaultComponent = enchantment.value().description().copy().withColor(color);
+                MutableComponent mutableComponent;
+
+                if (level > enchantment.value().getMaxLevel()) mutableComponent = (MutableComponent) ItemHelper.addTooltipWithIcon(warningIcon, defaultComponent);
+                else mutableComponent = defaultComponent;
 
                 if (level != 1 || enchantment.value().getMaxLevel() != 1) mutableComponent.append(CommonComponents.space())
-                .append(Component.translatable("gui.chrysalis.item.enchantment_level", chrysalis$enchantmentLevelComponent(level), chrysalis$enchantmentLevelComponent(enchantment.value().getMaxLevel())));
+                .append(Component.translatable("gui.chrysalis.item.enchantment_level", chrysalis$enchantmentLevelComponent(level), chrysalis$enchantmentLevelComponent(enchantment.value().getMaxLevel())).withColor(color));
 
                 cir.setReturnValue(mutableComponent);
             }
