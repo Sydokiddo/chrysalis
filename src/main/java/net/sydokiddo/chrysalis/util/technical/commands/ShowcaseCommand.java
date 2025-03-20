@@ -8,6 +8,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 import java.util.Objects;
 
 public class ShowcaseCommand {
@@ -29,8 +30,7 @@ public class ShowcaseCommand {
         Component failText = Component.translatable("gui.chrysalis.commands.showcase.fail").withStyle(ChatFormatting.RED);
 
         if (!itemStack.isEmpty()) context.getSource().getServer().getPlayerList().broadcastSystemMessage(successText, false);
-        else serverPlayer.sendSystemMessage(failText);
-
+        else CommandCommonMethods.sendFeedbackMessage(false, serverPlayer, failText);
         return 1;
     }
 }
