@@ -1,7 +1,9 @@
 package net.sydokiddo.chrysalis.common.items;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.component.CustomData;
 import net.neoforged.bus.api.IEventBus;
@@ -17,6 +19,7 @@ public class ChrysalisDataComponents {
 
     @SuppressWarnings("deprecation")
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CustomData>> LINKED_MOB_DATA = DATA_COMPONENTS.registerComponentType("linked_mob_data", (builder) -> builder.persistent(CustomData.CODEC_WITH_ID).networkSynchronized(CustomData.STREAM_CODEC));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> NAME_COLOR = DATA_COMPONENTS.registerComponentType("name_color", (builder) -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Unit>>
         IMMUNE_TO_ALL_DAMAGE = DATA_COMPONENTS.registerComponentType("immune_to_all_damage", (builder) -> builder.persistent(Unit.CODEC)),

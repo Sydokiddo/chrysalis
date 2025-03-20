@@ -25,11 +25,13 @@ import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
+import java.util.Objects;
 
 @Mixin(Item.class)
 public abstract class ItemMixin {
@@ -107,6 +109,21 @@ public abstract class ItemMixin {
                 Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(ComponentHelper.FIVE_FONT).withColor(ComponentHelper.CHRYSALIS_COLOR.getRGB())));
                 cir.getReturnValue().add(chrysalisTooltip);
             }
+        }
+
+        @Inject(method = "getItemName", at = @At("RETURN"), cancellable = true)
+        private void chrysalis$getItemNameColor(CallbackInfoReturnable<Component> cir) {
+            if (this.has(ChrysalisDataComponents.NAME_COLOR)) cir.setReturnValue(this.chrysalis$nameColorComponent(cir));
+        }
+
+        @Inject(method = "getDisplayName", at = @At("RETURN"), cancellable = true)
+        private void chrysalis$getDisplayNameColor(CallbackInfoReturnable<Component> cir) {
+            if (this.has(ChrysalisDataComponents.NAME_COLOR)) cir.setReturnValue(this.chrysalis$nameColorComponent(cir));
+        }
+
+        @Unique
+        private MutableComponent chrysalis$nameColorComponent(CallbackInfoReturnable<Component> cir) {
+            return cir.getReturnValue().copy().withColor(Objects.requireNonNull(this.get(ChrysalisDataComponents.NAME_COLOR.get())));
         }
     }
 }
