@@ -182,6 +182,9 @@
   "gui.chrysalis.commands.remove_trim.fail.generic": "Nothing changed. Targets either have no item in their hands or the item could not be have any armor trims removed.",
   "gui.chrysalis.commands.remove_trim.fail.no_trim": "%s's held item does not have any applied armor trims",
 
+  "gui.chrysalis.commands.uuid.print.success": "%1$s's UUID: %2$s",
+  "gui.chrysalis.commands.uuid.copy.success": "Copied %s's UUID to clipboard",
+
   "gui.chrysalis.commands.velocity.add.success.single": "Added a velocity of {%1$s, %2$s, %3$s} to %4$s",
   "gui.chrysalis.commands.velocity.add.success.multiple": "Added a velocity of {%1$s, %2$s, %3$s} for %4$s entities",
   "gui.chrysalis.commands.velocity.subtract.success.single": "Subtracted a velocity of {%1$s, %2$s, %3$s} from %4$s",

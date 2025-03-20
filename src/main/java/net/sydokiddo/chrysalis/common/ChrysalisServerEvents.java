@@ -121,6 +121,7 @@ public class ChrysalisServerEvents {
             ShowcaseCommand.register(event.getDispatcher());
             SurfaceCommand.register(event.getDispatcher());
             TrimCommand.register(event.getDispatcher(), event.getBuildContext());
+            UuidCommand.register(event.getDispatcher());
             VelocityCommand.register(event.getDispatcher());
         }
     }
