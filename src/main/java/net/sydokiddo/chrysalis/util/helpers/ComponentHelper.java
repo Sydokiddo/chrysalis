@@ -84,6 +84,8 @@ public class ComponentHelper {
         TOOLTIP_ICON = Component.translatable("gui.icon.chrysalis.tooltip"),
         TOOL_ICON = Component.translatable("gui.icon.chrysalis.tool"),
         BROKEN_TOOL_ICON = Component.translatable("gui.icon.chrysalis.broken_tool"),
+        BOW_ICON = Component.translatable("gui.icon.chrysalis.bow"),
+        ARROW_ICON = Component.translatable("gui.icon.chrysalis.arrow"),
         ARMOR_ICON = Component.translatable("gui.icon.chrysalis.armor"),
         POTION_ICON = Component.translatable("gui.icon.chrysalis.potion"),
         RED_HEART_ICON = Component.translatable("gui.icon.chrysalis.red_heart"),

@@ -46,7 +46,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/star.png",
       "ascent": 9,
-      "height": 12,
+      "height": 11,
       "chars": [
         "\ua004"
       ]
@@ -64,7 +64,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/tool.png",
       "ascent": 10,
-      "height": 12,
+      "height": 13,
       "chars": [
         "\ua006"
       ]
@@ -73,9 +73,27 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/broken_tool.png",
       "ascent": 10,
-      "height": 12,
+      "height": 13,
       "chars": [
         "\ua007"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/bow.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua008"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/arrow.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua009"
       ]
     },
     {
@@ -84,7 +102,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua008"
+        "\ua010"
       ]
     },
     {
@@ -93,7 +111,7 @@
       "ascent": 11,
       "height": 14,
       "chars": [
-        "\ua009"
+        "\ua011"
       ]
     },
     {
@@ -102,7 +120,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua010"
+        "\ua012"
       ]
     },
     {
@@ -111,7 +129,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua011"
+        "\ua013"
       ]
     },
     {
@@ -120,7 +138,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua012"
+        "\ua014"
       ]
     },
     {
@@ -129,7 +147,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua013"
+        "\ua015"
       ]
     },
     {
@@ -138,7 +156,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua014"
+        "\ua016"
       ]
     },
     {
@@ -147,7 +165,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua015"
+        "\ua017"
       ]
     },
     {
@@ -156,7 +174,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua016"
+        "\ua018"
       ]
     },
     {
@@ -165,7 +183,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua017"
+        "\ua019"
       ]
     },
     {
@@ -174,7 +192,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua018"
+        "\ua020"
       ]
     },
     {
@@ -183,7 +201,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua019"
+        "\ua021"
       ]
     },
     {
@@ -192,16 +210,16 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua020"
+        "\ua022"
       ]
     },
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/tooltip_icons/hunger_point.png",
-      "ascent": 10,
-      "height": 12,
+      "ascent": 9,
+      "height": 11,
       "chars": [
-        "\ua021"
+        "\ua023"
       ]
     },
     {
@@ -210,7 +228,7 @@
       "ascent": 10,
       "height": 13,
       "chars": [
-        "\ua022"
+        "\ua024"
       ]
     },
     {
@@ -219,7 +237,7 @@
       "ascent": 8,
       "height": 10,
       "chars": [
-        "\ua023"
+        "\ua025"
       ]
     },
     {
@@ -228,7 +246,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua024"
+        "\ua026"
       ]
     },
     {
@@ -237,7 +255,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua025"
+        "\ua027"
       ]
     },
     {
@@ -246,7 +264,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua026"
+        "\ua028"
       ]
     },
     {
@@ -255,7 +273,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua027"
+        "\ua029"
       ]
     },
     {
@@ -264,7 +282,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua028"
+        "\ua030"
       ]
     },
     {
@@ -273,7 +291,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua029"
+        "\ua031"
       ]
     },
     {
@@ -282,7 +300,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua030"
+        "\ua032"
       ]
     },
     {
@@ -291,7 +309,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua031"
+        "\ua033"
       ]
     }
   ]
