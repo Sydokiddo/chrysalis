@@ -18,7 +18,7 @@ public class ChrysalisDataComponents {
     // region Data Components
 
     @SuppressWarnings("deprecation")
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CustomData>> LINKED_MOB_DATA = DATA_COMPONENTS.registerComponentType("linked_mob_data", (builder) -> builder.persistent(CustomData.CODEC_WITH_ID).networkSynchronized(CustomData.STREAM_CODEC));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CustomData>> SAVED_ENTITY_DATA = DATA_COMPONENTS.registerComponentType("saved_entity_data", (builder) -> builder.persistent(CustomData.CODEC_WITH_ID).networkSynchronized(CustomData.STREAM_CODEC));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> NAME_COLOR = DATA_COMPONENTS.registerComponentType("name_color", (builder) -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Unit>>

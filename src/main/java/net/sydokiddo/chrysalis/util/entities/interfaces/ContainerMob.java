@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.component.CustomData;
+import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import java.util.Optional;
 
 @SuppressWarnings("unused")
@@ -36,7 +37,7 @@ public interface ContainerMob {
 
         itemStack.set(DataComponents.CUSTOM_NAME, mob.getCustomName());
 
-        CustomData.update(DataComponents.BUCKET_ENTITY_DATA, itemStack, (compoundTag) -> {
+        CustomData.update(ItemHelper.SAVED_ENTITY_DATA_COMPONENT, itemStack, (compoundTag) -> {
 
             compoundTag.putBoolean("PersistenceRequired", true);
 

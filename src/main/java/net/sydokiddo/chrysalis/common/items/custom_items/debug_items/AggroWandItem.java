@@ -1,7 +1,6 @@
 package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -11,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.Brain;
@@ -27,7 +27,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
@@ -35,6 +34,7 @@ import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classe
 import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
+import java.util.Optional;
 
 public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
@@ -49,18 +49,16 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         mobUuidString = "mob_uuid"
     ;
 
-    private static final DataComponentType<CustomData> linkedMobDataComponent = ChrysalisDataComponents.LINKED_MOB_DATA.get();
-
-    private static CustomData getLinkedMobData(ItemStack itemStack) {
-        return itemStack.getOrDefault(linkedMobDataComponent, CustomData.EMPTY);
+    private static boolean hasComponent(ItemStack itemStack) {
+        return itemStack.has(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
     }
 
-    private static boolean hasMobName(ItemStack itemStack) {
-        return getLinkedMobData(itemStack).contains(mobNameString);
+    private boolean hasMobName(ItemStack itemStack) {
+        return hasComponent(itemStack) && ItemHelper.getSavedEntityData(itemStack).contains(mobNameString);
     }
 
     public static boolean hasMobUUID(ItemStack itemStack) {
-        return getLinkedMobData(itemStack).contains(mobUuidString);
+        return hasComponent(itemStack) && ItemHelper.getSavedEntityData(itemStack).contains(mobUuidString);
     }
 
     // endregion
@@ -73,7 +71,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
     public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
 
         if (hasMobUUID(itemStack)) {
-            String mobName = hasMobName(itemStack) ? getLinkedMobData(itemStack).copyTag().getString(mobNameString) : ComponentHelper.UNKNOWN.getString();
+            String mobName = this.hasMobName(itemStack) ? ItemHelper.getSavedEntityData(itemStack).copyTag().getString(mobNameString) : ComponentHelper.UNKNOWN.getString();
             list.add(Component.translatable(this.getDescriptionId() + ".linked_mob_tooltip", mobName).withStyle(ChatFormatting.GRAY));
         }
 
@@ -92,9 +90,9 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
             if (hasMobUUID(itemStack)) {
 
-                Mob linkedMob = (Mob) serverPlayer.serverLevel().getEntity(getLinkedMobData(itemStack).copyTag().getUUID(mobUuidString));
+                Optional<Entity> entity = Optional.ofNullable(serverPlayer.serverLevel().getEntity(ItemHelper.getSavedEntityData(itemStack).copyTag().getUUID(mobUuidString)));
 
-                if (linkedMob != null) {
+                if (entity.isPresent() && entity.get() instanceof Mob linkedMob) {
 
                     addSparkleParticles(mob);
                     addParticlesAroundEntity(linkedMob, ParticleTypes.ANGRY_VILLAGER, 5, 1.5D);
@@ -125,7 +123,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                 }
 
                 ItemStack unlinkedWand = itemStack.copy();
-                unlinkedWand.remove(linkedMobDataComponent);
+                unlinkedWand.remove(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
                 player.setItemInHand(interactionHand, unlinkedWand);
 
             } else {
@@ -133,7 +131,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                 addSparkleParticles(mob);
                 ItemStack linkedWand = itemStack.copy();
 
-                CustomData.update(linkedMobDataComponent, linkedWand, (compoundTag) -> {
+                CustomData.update(ItemHelper.SAVED_ENTITY_DATA_COMPONENT, linkedWand, (compoundTag) -> {
                     compoundTag.putString(mobNameString, livingEntity.getName().getString());
                     compoundTag.putUUID(mobUuidString, livingEntity.getUUID());
                 });

@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -21,6 +23,7 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import java.util.List;
 import java.util.Objects;
 
@@ -105,6 +108,16 @@ public class ItemHelper {
     public static boolean listContainsName(ItemStack itemStack, List<String> list) {
         for (String name : list) if (nameContains(itemStack, name)) return true;
         return false;
+    }
+
+    /**
+     * Gets an item's saved entity data component.
+     **/
+
+    public static final DataComponentType<CustomData> SAVED_ENTITY_DATA_COMPONENT = ChrysalisDataComponents.SAVED_ENTITY_DATA.get();
+
+    public static CustomData getSavedEntityData(ItemStack itemStack) {
+        return itemStack.getOrDefault(SAVED_ENTITY_DATA_COMPONENT, CustomData.EMPTY);
     }
 
     // endregion

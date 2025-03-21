@@ -2,7 +2,7 @@
   "model": {
     "type": "minecraft:condition",
     "property": "minecraft:has_component",
-    "component": "chrysalis:linked_mob_data",
+    "component": "chrysalis:saved_entity_data",
     "on_false": {
       "type": "minecraft:model",
       "model": "chrysalis:item/aggro_wand_unlinked"
