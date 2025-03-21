@@ -20,12 +20,12 @@ public abstract class TestEntityMixin implements EntityAccess {
     @Unique Entity chrysalis$entity = (Entity) (Object) this;
     @Shadow public abstract Level level();
 
-    @Inject(at = @At("TAIL"), method = "walkingStepSound")
+    @Inject(method = "walkingStepSound", at = @At("TAIL"))
     private void chrysalis$emitPulsationParticleFromWalking(BlockPos blockPos, BlockState blockState, CallbackInfo info) {
         this.chrysalis$emitPulsationParticle(false);
     }
 
-    @Inject(at = @At("TAIL"), method = "playMuffledStepSound")
+    @Inject(method = "playMuffledStepSound", at = @At("TAIL"))
     private void chrysalis$emitPulsationParticleFromMuffledWalking(BlockState blockState, BlockPos blockPos, CallbackInfo info) {
         this.chrysalis$emitPulsationParticle(true);
     }
