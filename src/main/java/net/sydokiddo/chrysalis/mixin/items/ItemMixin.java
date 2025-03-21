@@ -90,12 +90,12 @@ public abstract class ItemMixin {
 
         if (itemStack.is(Items.DEBUG_STICK)) {
             ItemHelper.addUseTooltip(list);
-            list.add(CommonComponents.space().append(Component.translatable("item.chrysalis.debug_stick.desc").withStyle(ChatFormatting.BLUE)));
+            list.add(CommonComponents.space().append(Component.translatable("item.chrysalis.debug_stick.description").withStyle(ChatFormatting.BLUE)));
         }
 
         if (itemStack.is(Items.LIGHT)) {
             BlockItemStateProperties blockItemStateProperties = itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
-            list.add(Component.translatable("item.chrysalis.light.desc", blockItemStateProperties.get(LightBlock.LEVEL) != null ? blockItemStateProperties.get(LightBlock.LEVEL) : 15).withStyle(ChatFormatting.GRAY));
+            list.add(Component.translatable("item.chrysalis.light.description", blockItemStateProperties.get(LightBlock.LEVEL) != null ? blockItemStateProperties.get(LightBlock.LEVEL) : 15).withStyle(ChatFormatting.GRAY));
         }
     }
 

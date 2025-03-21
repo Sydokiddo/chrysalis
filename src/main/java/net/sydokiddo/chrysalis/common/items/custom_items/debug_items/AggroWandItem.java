@@ -78,7 +78,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         }
 
         ItemHelper.addUseTooltip(list);
-        String descriptionString = hasMobUUID(itemStack) ? ".desc_linked" : ".desc_unlinked";
+        String descriptionString = hasMobUUID(itemStack) ? ".description_linked" : ".description_unlinked";
         list.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + descriptionString).withStyle(ChatFormatting.BLUE)));
     }
 

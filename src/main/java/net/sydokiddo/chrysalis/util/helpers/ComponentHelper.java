@@ -56,6 +56,7 @@ public class ComponentHelper {
     public static final Color
         CHRYSALIS_COLOR = Color.decode("#A27FFF"),
         ENCHANTMENT_COLOR = Color.decode("#964CFF"),
+        EXPERIENCE_COLOR = Color.decode("#B9E85C"),
         CURSE_COLOR = Color.decode("#FF5555"),
         WAXED_COLOR = Color.decode("#FABF29"),
         REMAINS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),

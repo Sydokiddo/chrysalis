@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "chrysalis:item/copying_spawn_egg_uncopied"
+  }
+}

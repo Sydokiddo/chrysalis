@@ -30,7 +30,7 @@ public class DebugUtilityItem extends Item {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + ".desc").withStyle(ChatFormatting.BLUE)));
+        list.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + ".description").withStyle(ChatFormatting.BLUE)));
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }
 

@@ -13,12 +13,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.sydokiddo.chrysalis.client.particles.options.SparkParticleOptions;
+import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import java.awt.*;
 
 @Mixin(ThrownExperienceBottle.class)
 public abstract class ThrownExperienceBottleMixin extends ThrowableItemProjectile {
@@ -39,7 +39,7 @@ public abstract class ThrownExperienceBottleMixin extends ThrowableItemProjectil
 
             for (int particleAmount = 0; particleAmount < 12; ++particleAmount) {
                 serverLevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.EXPERIENCE_BOTTLE)), this.getRandomX(1.0D), this.getY(1.2D), this.getRandomZ(1.0D), 1, 0.0D, 0.0D, 0.0D, 0.2D);
-                serverLevel.sendParticles(new SparkParticleOptions(Color.decode("#B9E85C").getRGB(), true, MathHelper.getFloatBetween(serverLevel.getRandom(), 1.0F, 4.0F)), this.getRandomX(1.0D), this.getY(1.2D), this.getRandomZ(1.0D), 1, 0.0D, 0.0D, 0.0D, 0.2D);
+                serverLevel.sendParticles(new SparkParticleOptions(ComponentHelper.EXPERIENCE_COLOR.getRGB(), true, MathHelper.getFloatBetween(serverLevel.getRandom(), 1.0F, 4.0F)), this.getRandomX(1.0D), this.getY(1.2D), this.getRandomZ(1.0D), 1, 0.0D, 0.0D, 0.0D, 0.2D);
             }
 
             ExperienceOrb.award(serverLevel, this.position(), 6 + this.level().getRandom().nextInt(10) + this.level().getRandom().nextInt(10));
