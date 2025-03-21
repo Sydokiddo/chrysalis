@@ -265,7 +265,7 @@ public class EntitySpawner extends Entity {
     }
 
     public static Entity getOrCreateDisplayEntity(EntitySpawner entitySpawner, Level level) {
-        if (entitySpawner.getDisplayEntity() == null) entitySpawner.setDisplayEntity(entitySpawner.createEntity(entitySpawner.getEntityToSpawn(), level));
+        if (entitySpawner.getDisplayEntity() == null && entitySpawner.getEntityToSpawn() != null) entitySpawner.setDisplayEntity(entitySpawner.createEntity(entitySpawner.getEntityToSpawn(), level));
         return entitySpawner.getDisplayEntity();
     }
 
