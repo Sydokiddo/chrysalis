@@ -102,6 +102,11 @@ public class ItemHelper {
         return customName != null && customName.getString().contains(name);
     }
 
+    public static boolean listContainsName(ItemStack itemStack, List<String> list) {
+        for (String name : list) if (nameContains(itemStack, name)) return true;
+        return false;
+    }
+
     // endregion
 
     // region Item Entities

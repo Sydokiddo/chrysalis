@@ -58,12 +58,18 @@ public abstract class ItemMixin {
             MutableComponent fireproofIcon = ComponentHelper.FLAME_ICON;
             int fireproofColor = ComponentHelper.FIRE_COLOR.getRGB();
 
-            if (ItemHelper.nameContains(itemStack, "soul") || ItemHelper.nameContains(itemStack, "Soul")) {
+            if (ItemHelper.listContainsName(itemStack, ComponentHelper.SOUL_FIRE_NAMES)) {
                 fireproofIcon = ComponentHelper.SOUL_FLAME_ICON;
                 fireproofColor = ComponentHelper.SOUL_FIRE_COLOR.getRGB();
-            } else if (ItemHelper.nameContains(itemStack, "memory") || ItemHelper.nameContains(itemStack, "Memory") || ItemHelper.nameContains(itemStack, "memories") || ItemHelper.nameContains(itemStack, "Memories")) {
+            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.TREACHEROUS_FIRE_NAMES)) {
+                fireproofIcon = ComponentHelper.TREACHEROUS_FLAME_ICON;
+                fireproofColor = ComponentHelper.TREACHEROUS_FIRE_COLOR.getRGB();
+            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.MEMORY_FIRE_NAMES)) {
                 fireproofIcon = ComponentHelper.MEMORY_FLAME_ICON;
                 fireproofColor = ComponentHelper.MEMORY_FIRE_COLOR.getRGB();
+            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.VOID_FIRE_NAMES)) {
+                fireproofIcon = ComponentHelper.VOID_FLAME_ICON;
+                fireproofColor = ComponentHelper.VOID_FIRE_COLOR.getRGB();
             }
 
             int finalFireproofColor = fireproofColor;

@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.sydokiddo.chrysalis.Chrysalis;
 import java.awt.*;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class ComponentHelper {
@@ -56,11 +57,13 @@ public class ComponentHelper {
         CHRYSALIS_COLOR = Color.decode("#A27FFF"),
         ENCHANTMENT_COLOR = Color.decode("#964CFF"),
         CURSE_COLOR = Color.decode("#FF5555"),
-        FIRE_COLOR = Color.decode("#FF6A00"),
-        SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
-        MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
         WAXED_COLOR = Color.decode("#FABF29"),
         REMAINS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),
+        FIRE_COLOR = Color.decode("#FF6A00"),
+        SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
+        TREACHEROUS_FIRE_COLOR = Color.decode("#FD4D4D"),
+        MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
+        VOID_FIRE_COLOR = Color.decode("#C920D3"),
         BLINDNESS_COLOR = Color.decode("#5C4182"),
         HASTE_COLOR = Color.decode("#FFB67F"),
         MINING_FATIGUE_COLOR = Color.decode("#7575B5"),
@@ -71,15 +74,17 @@ public class ComponentHelper {
 
     // region Icons
 
-    @SuppressWarnings("unused")
     public static final MutableComponent
         CHRYSALIS_ICON = Component.translatable("gui.icon.chrysalis.mod_icon"),
         GEAR_ICON = Component.translatable("gui.icon.chrysalis.gear"),
         WARNING_ICON = Component.translatable("gui.icon.chrysalis.warning"),
         QUESTION_MARK_ICON = Component.translatable("gui.icon.chrysalis.question_mark"),
+        STAR_ICON = Component.translatable("gui.icon.chrysalis.star"),
         TOOLTIP_ICON = Component.translatable("gui.icon.chrysalis.tooltip"),
-        POTION_ICON = Component.translatable("gui.icon.chrysalis.potion"),
+        TOOL_ICON = Component.translatable("gui.icon.chrysalis.tool"),
+        BROKEN_TOOL_ICON = Component.translatable("gui.icon.chrysalis.broken_tool"),
         ARMOR_ICON = Component.translatable("gui.icon.chrysalis.armor"),
+        POTION_ICON = Component.translatable("gui.icon.chrysalis.potion"),
         RED_HEART_ICON = Component.translatable("gui.icon.chrysalis.red_heart"),
         ORANGE_HEART_ICON = Component.translatable("gui.icon.chrysalis.orange_heart"),
         YELLOW_HEART_ICON = Component.translatable("gui.icon.chrysalis.yellow_heart"),
@@ -91,17 +96,16 @@ public class ComponentHelper {
         GRAY_HEART_ICON = Component.translatable("gui.icon.chrysalis.gray_heart"),
         BLACK_HEART_ICON = Component.translatable("gui.icon.chrysalis.black_heart"),
         BROWN_HEART_ICON = Component.translatable("gui.icon.chrysalis.brown_heart"),
-        SNOUT_ICON = Component.translatable("gui.icon.chrysalis.snout"),
+        HUNGER_POINT_ICON = Component.translatable("gui.icon.chrysalis.hunger_point"),
         WAXED_ICON = Component.translatable("gui.icon.chrysalis.waxed"),
+        SNOUT_ICON = Component.translatable("gui.icon.chrysalis.snout"),
         FLAME_ICON = Component.translatable("gui.icon.chrysalis.flame"),
         SOUL_FLAME_ICON = Component.translatable("gui.icon.chrysalis.soul_flame"),
+        TREACHEROUS_FLAME_ICON = Component.translatable("gui.icon.chrysalis.treacherous_flame"),
         MEMORY_FLAME_ICON = Component.translatable("gui.icon.chrysalis.memory_flame"),
-        HUNGER_POINT_ICON = Component.translatable("gui.icon.chrysalis.hunger_point"),
-        TOOL_ICON = Component.translatable("gui.icon.chrysalis.tool"),
-        BROKEN_TOOL_ICON = Component.translatable("gui.icon.chrysalis.broken_tool"),
-        STAR_ICON = Component.translatable("gui.icon.chrysalis.star"),
-        EXPERIENCE_ICON = Component.translatable("gui.icon.chrysalis.experience"),
-        CURSED_EXPERIENCE_ICON = Component.translatable("gui.icon.chrysalis.cursed_experience")
+        VOID_FLAME_ICON = Component.translatable("gui.icon.chrysalis.void_flame"),
+        EXPERIENCE_ORB_ICON = Component.translatable("gui.icon.chrysalis.experience_orb"),
+        CURSED_EXPERIENCE_ORB_ICON = Component.translatable("gui.icon.chrysalis.cursed_experience_orb")
     ;
 
     // endregion
@@ -118,6 +122,52 @@ public class ComponentHelper {
     public static void setTooltipIconsFont(MutableComponent mutableComponent, String modID) {
         mutableComponent.setStyle(mutableComponent.getStyle().withFont(ResourceLocation.fromNamespaceAndPath(modID, TOOLTIP_ICONS_NAME)));
     }
+
+    // endregion
+
+    // region Name Lists
+
+    public static final List<String> SOUL_FIRE_NAMES = List.of(
+        "soul",
+        "Soul",
+        "sculk",
+        "Sculk",
+        "warden",
+        "Warden"
+    );
+
+    public static final List<String> TREACHEROUS_FIRE_NAMES = List.of(
+        "treacherous",
+        "Treacherous",
+        "treachery",
+        "Treachery",
+        "sanctum",
+        "Sanctum",
+        "carcass",
+        "Carcass"
+    );
+
+    public static final List<String> MEMORY_FIRE_NAMES = List.of(
+        "memory",
+        "Memory",
+        "memories",
+        "Memories",
+        "kaleidoscope",
+        "Kaleidoscope",
+        "ethereal",
+        "Ethereal",
+        "everlasting",
+        "Everlasting"
+    );
+
+    public static final List<String> VOID_FIRE_NAMES = List.of(
+        "void",
+        "Void",
+        "corrupt",
+        "Corrupt",
+        "ender",
+        "Ender"
+    );
 
     // endregion
 }

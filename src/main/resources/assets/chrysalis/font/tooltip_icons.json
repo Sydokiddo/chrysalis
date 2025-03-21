@@ -44,182 +44,20 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/tooltip.png",
-      "ascent": 10,
-      "height": 13,
+      "file": "chrysalis:gui/sprites/tooltip_icons/star.png",
+      "ascent": 9,
+      "height": 12,
       "chars": [
         "\ua004"
       ]
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/potion.png",
-      "ascent": 11,
-      "height": 14,
-      "chars": [
-        "\ua005"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/armor.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua006"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/red_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua007"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/orange_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua008"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/yellow_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua009"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/green_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua010"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/blue_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua011"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/purple_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua012"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/pink_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua013"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/white_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua014"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/gray_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua015"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/black_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua016"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/brown_heart.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua017"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/snout.png",
-      "ascent": 8,
-      "height": 10,
-      "chars": [
-        "\ua018"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/waxed.png",
+      "file": "chrysalis:gui/sprites/tooltip_icons/tooltip.png",
       "ascent": 10,
       "height": 13,
       "chars": [
-        "\ua019"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua020"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/soul_flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua021"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/memory_flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua022"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/hunger_point.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua023"
+        "\ua005"
       ]
     },
     {
@@ -228,7 +66,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua024"
+        "\ua006"
       ]
     },
     {
@@ -237,13 +75,175 @@
       "ascent": 10,
       "height": 12,
       "chars": [
+        "\ua007"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/armor.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua008"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/potion.png",
+      "ascent": 11,
+      "height": 14,
+      "chars": [
+        "\ua009"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/red_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua010"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/orange_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua011"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/yellow_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua012"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/green_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua013"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/blue_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua014"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/purple_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua015"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/pink_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua016"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/white_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua017"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/gray_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua018"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/black_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua019"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/brown_heart.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua020"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/hunger_point.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua021"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/waxed.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua022"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/snout.png",
+      "ascent": 8,
+      "height": 10,
+      "chars": [
+        "\ua023"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua024"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/soul_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
         "\ua025"
       ]
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/star.png",
-      "ascent": 9,
+      "file": "chrysalis:gui/sprites/tooltip_icons/treacherous_flame.png",
+      "ascent": 10,
       "height": 12,
       "chars": [
         "\ua026"
@@ -251,7 +251,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/experience.png",
+      "file": "chrysalis:gui/sprites/tooltip_icons/memory_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -260,11 +260,29 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/cursed_experience.png",
+      "file": "chrysalis:gui/sprites/tooltip_icons/void_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
         "\ua028"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/experience_orb.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua029"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/cursed_experience_orb.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua030"
       ]
     }
   ]
