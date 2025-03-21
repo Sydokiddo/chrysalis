@@ -242,7 +242,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/treacherous_flame.png",
+      "file": "chrysalis:gui/sprites/tooltip_icons/memory_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -251,7 +251,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/memory_flame.png",
+      "file": "chrysalis:gui/sprites/tooltip_icons/void_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -260,7 +260,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/void_flame.png",
+      "file": "chrysalis:gui/sprites/tooltip_icons/treacherous_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -269,7 +269,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/experience_orb.png",
+      "file": "chrysalis:gui/sprites/tooltip_icons/necrotic_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -278,11 +278,20 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/tooltip_icons/cursed_experience_orb.png",
+      "file": "chrysalis:gui/sprites/tooltip_icons/experience_orb.png",
       "ascent": 10,
       "height": 12,
       "chars": [
         "\ua030"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/cursed_experience_orb.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua031"
       ]
     }
   ]

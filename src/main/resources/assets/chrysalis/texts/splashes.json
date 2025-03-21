@@ -12,7 +12,7 @@
     { "text": "Ooo, secret splash text!" },
     { "text": { "text": "\ua023", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "\ua010\ua011\ua012\ua013\ua014\ua015\ua016\ua017\ua018\ua019\ua020", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
-    { "text": { "text": "\ua024\ua025\ua026\ua027\ua028", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
+    { "text": { "text": "\ua028\ua024\ua029\ua026\ua025\ua027", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "Also try Elysium!" }, "weight": 1 }
   ]
 }

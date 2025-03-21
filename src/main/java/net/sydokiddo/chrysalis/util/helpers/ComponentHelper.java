@@ -61,9 +61,10 @@ public class ComponentHelper {
         REMAINS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),
         FIRE_COLOR = Color.decode("#FF6A00"),
         SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
-        TREACHEROUS_FIRE_COLOR = Color.decode("#FD4D4D"),
         MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
         VOID_FIRE_COLOR = Color.decode("#C920D3"),
+        TREACHEROUS_FIRE_COLOR = Color.decode("#FD4D4D"),
+        NECROTIC_FIRE_COLOR = Color.decode("#AFB42B"),
         BLINDNESS_COLOR = Color.decode("#5C4182"),
         HASTE_COLOR = Color.decode("#FFB67F"),
         MINING_FATIGUE_COLOR = Color.decode("#7575B5"),
@@ -101,9 +102,10 @@ public class ComponentHelper {
         SNOUT_ICON = Component.translatable("gui.icon.chrysalis.snout"),
         FLAME_ICON = Component.translatable("gui.icon.chrysalis.flame"),
         SOUL_FLAME_ICON = Component.translatable("gui.icon.chrysalis.soul_flame"),
-        TREACHEROUS_FLAME_ICON = Component.translatable("gui.icon.chrysalis.treacherous_flame"),
         MEMORY_FLAME_ICON = Component.translatable("gui.icon.chrysalis.memory_flame"),
         VOID_FLAME_ICON = Component.translatable("gui.icon.chrysalis.void_flame"),
+        TREACHEROUS_FLAME_ICON = Component.translatable("gui.icon.chrysalis.treacherous_flame"),
+        NECROTIC_FLAME_ICON = Component.translatable("gui.icon.chrysalis.necrotic_flame"),
         EXPERIENCE_ORB_ICON = Component.translatable("gui.icon.chrysalis.experience_orb"),
         CURSED_EXPERIENCE_ORB_ICON = Component.translatable("gui.icon.chrysalis.cursed_experience_orb")
     ;
@@ -133,18 +135,9 @@ public class ComponentHelper {
         "sculk",
         "Sculk",
         "warden",
-        "Warden"
-    );
-
-    public static final List<String> TREACHEROUS_FIRE_NAMES = List.of(
-        "treacherous",
-        "Treacherous",
-        "treachery",
-        "Treachery",
-        "sanctum",
-        "Sanctum",
-        "carcass",
-        "Carcass"
+        "Warden",
+        "banshee",
+        "Banshee"
     );
 
     public static final List<String> MEMORY_FIRE_NAMES = List.of(
@@ -167,6 +160,28 @@ public class ComponentHelper {
         "Corrupt",
         "ender",
         "Ender"
+    );
+
+    public static final List<String> TREACHEROUS_FIRE_NAMES = List.of(
+        "treacherous",
+        "Treacherous",
+        "treachery",
+        "Treachery",
+        "sanctum",
+        "Sanctum",
+        "carcass",
+        "Carcass"
+    );
+
+    public static final List<String> NECROTIC_FIRE_NAMES = List.of(
+        "necro",
+        "Necro",
+        "undead",
+        "Undead",
+        "zombie",
+        "Zombie",
+        "blight",
+        "Blight"
     );
 
     // endregion
