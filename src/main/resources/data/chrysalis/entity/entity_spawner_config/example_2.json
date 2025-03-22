@@ -2,9 +2,9 @@
   "id": "chrysalis:example_2",
   "sounds": [
     {
-      "appear": "chrysalis:entity.entity_spawner.appear",
-      "about_to_spawn_entity": "chrysalis:entity.entity_spawner.about_to_spawn_entity",
-      "spawn_entity": "chrysalis:entity.entity_spawner.spawn_entity"
+      "appear": "chrysalis:item.heal.use",
+      "about_to_spawn_entity": "chrysalis:item.fill_hunger.use",
+      "spawn_entity": "chrysalis:item.fill_oxygen.use"
     }
   ],
   "particles": [
