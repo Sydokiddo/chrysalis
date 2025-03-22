@@ -10,10 +10,10 @@
     { "text": { "text": "Uses strikethrough text!", "strikethrough": true }, "weight": 5 },
     { "text": { "text": "Uses obfuscated text!", "obfuscated": true }, "weight": 5 },
     { "text": "Ooo, secret splash text!" },
-    { "text": { "text": "\ua025", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
-    { "text": { "text": "\ua012\ua013\ua014\ua015\ua016\ua017\ua018\ua019\ua020\ua021\ua022", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
-    { "text": { "text": "\ua030\ua026\ua031\ua028\ua027\ua029", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
-    { "text": { "text": "\ua034\ua035\ua036\ua037\ua038\ua039\ua040\ua041\ua042\ua043\ua044\ua045\ua046\ua047\ua048\ua049", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
+    { "text": { "text": "\ua029", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
+    { "text": { "text": "\ua016\ua017\ua018\ua019\ua020\ua021\ua022\ua023\ua024\ua025\ua026", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
+    { "text": { "text": "\ua034\ua030\ua035\ua032\ua031\ua033", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
+    { "text": { "text": "\ua038\ua039\ua040\ua041\ua042\ua043\ua044\ua045\ua046\ua047\ua048\ua049\ua050\ua051\ua052\ua053", "font": "chrysalis:tooltip_icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "Also try Elysium!" }, "weight": 5 }
   ]
 }
