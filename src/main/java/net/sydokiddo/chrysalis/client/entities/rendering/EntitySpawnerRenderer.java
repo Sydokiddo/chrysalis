@@ -13,6 +13,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawner;
 import org.jetbrains.annotations.NotNull;
+import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, ChrysalisEntityRenderState> {
@@ -44,8 +45,8 @@ public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, Chrysal
         poseStack.mulPose(Axis.YP.rotationDegrees(scale));
 
         if (!(ChrysalisEntityRenderState.entity instanceof EntitySpawner entitySpawner)) return;
-        Entity entity = EntitySpawner.getOrCreateDisplayEntity(entitySpawner, entitySpawner.level());
-        if (entity != null) this.entityRenderer.render(entity, 0.0D, 0.0D, 0.0D, renderState.partialTick, poseStack, bufferSource, packedLight);
+        Optional<Entity> entity = EntitySpawner.createEntity(entitySpawner);
+        entity.ifPresent(value -> this.entityRenderer.render(value, 0.0D, 0.0D, 0.0D, renderState.partialTick, poseStack, bufferSource, packedLight));
         poseStack.popPose();
     }
 }

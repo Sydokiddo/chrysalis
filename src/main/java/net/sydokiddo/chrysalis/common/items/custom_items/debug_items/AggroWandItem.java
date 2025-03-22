@@ -34,7 +34,6 @@ import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classe
 import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
-import java.util.Optional;
 
 public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
@@ -49,16 +48,12 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         mobUuidString = "mob_uuid"
     ;
 
-    private static boolean hasComponent(ItemStack itemStack) {
-        return itemStack.has(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
-    }
-
-    private boolean hasMobName(ItemStack itemStack) {
-        return hasComponent(itemStack) && ItemHelper.getSavedEntityData(itemStack).contains(mobNameString);
+    private static boolean hasMobName(ItemStack itemStack) {
+        return ItemHelper.getSavedEntityData(itemStack).contains(mobNameString);
     }
 
     public static boolean hasMobUUID(ItemStack itemStack) {
-        return hasComponent(itemStack) && ItemHelper.getSavedEntityData(itemStack).contains(mobUuidString);
+        return ItemHelper.getSavedEntityData(itemStack).contains(mobUuidString);
     }
 
     // endregion
@@ -71,7 +66,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
     public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
 
         if (hasMobUUID(itemStack)) {
-            String mobName = this.hasMobName(itemStack) ? ItemHelper.getSavedEntityData(itemStack).copyTag().getString(mobNameString) : ComponentHelper.UNKNOWN.getString();
+            String mobName = hasMobName(itemStack) ? ItemHelper.getSavedEntityData(itemStack).copyTag().getString(mobNameString) : ComponentHelper.UNKNOWN.getString();
             list.add(Component.translatable(this.getDescriptionId() + ".linked_mob_tooltip", mobName).withStyle(ChatFormatting.GRAY));
         }
 
@@ -86,60 +81,55 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
     public static InteractionResult doInteraction(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
-        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && livingEntity instanceof Mob mob) {
+        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && livingEntity instanceof Mob clickedMob) {
 
             if (hasMobUUID(itemStack)) {
 
-                Optional<Entity> entity = Optional.ofNullable(serverPlayer.serverLevel().getEntity(ItemHelper.getSavedEntityData(itemStack).copyTag().getUUID(mobUuidString)));
+                Entity entity = serverPlayer.serverLevel().getEntity(ItemHelper.getSavedEntityData(itemStack).copyTag().getUUID(mobUuidString));
 
-                if (entity.isPresent() && entity.get() instanceof Mob linkedMob) {
+                if (entity instanceof Mob linkedMob) {
 
-                    addSparkleParticles(mob);
+                    addSparkleParticles(clickedMob);
                     addParticlesAroundEntity(linkedMob, ParticleTypes.ANGRY_VILLAGER, 5, 1.5D);
 
-                    linkedMob.setTarget(livingEntity);
+                    linkedMob.setTarget(clickedMob);
 
                     Brain<?> brain = linkedMob.getBrain();
-                    brain.setMemory(MemoryModuleType.ATTACK_TARGET, livingEntity);
-                    brain.setMemory(MemoryModuleType.ANGRY_AT, livingEntity.getUUID());
+                    brain.setMemory(MemoryModuleType.ATTACK_TARGET, clickedMob);
+                    brain.setMemory(MemoryModuleType.ANGRY_AT, clickedMob.getUUID());
                     brain.setActiveActivityIfPossible(Activity.FIGHT);
 
                     if (linkedMob instanceof Goat) {
                         brain.setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, 0);
-                        brain.setMemory(MemoryModuleType.RAM_TARGET, livingEntity.getBoundingBox().getCenter());
+                        brain.setMemory(MemoryModuleType.RAM_TARGET, clickedMob.getBoundingBox().getCenter());
                     }
 
-                    if (linkedMob instanceof Warden warden && !warden.isDiggingOrEmerging() && warden.canTargetEntity(livingEntity)) {
-                        warden.increaseAngerAt(livingEntity, AngerLevel.ANGRY.getMinimumAnger() + 20, false);
-                        warden.setAttackTarget(livingEntity);
+                    if (linkedMob instanceof Warden warden && !warden.isDiggingOrEmerging() && warden.canTargetEntity(clickedMob)) {
+                        warden.increaseAngerAt(clickedMob, AngerLevel.ANGRY.getMinimumAnger() + 20, false);
+                        warden.setAttackTarget(clickedMob);
                     }
 
                     serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-                    DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.set_target", livingEntity.getName().getString(), linkedMob.getName().getString()));
+                    DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.set_target", clickedMob.getName().getString(), linkedMob.getName().getString()));
 
                 } else {
                     serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_FAIL.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     DebugUtilityItem.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.linked_mob_missing").withStyle(ChatFormatting.RED));
                 }
 
-                ItemStack unlinkedWand = itemStack.copy();
-                unlinkedWand.remove(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
-                player.setItemInHand(interactionHand, unlinkedWand);
+                itemStack.remove(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
 
             } else {
 
-                addSparkleParticles(mob);
-                ItemStack linkedWand = itemStack.copy();
+                addSparkleParticles(clickedMob);
 
-                CustomData.update(ItemHelper.SAVED_ENTITY_DATA_COMPONENT, linkedWand, (compoundTag) -> {
-                    compoundTag.putString(mobNameString, livingEntity.getName().getString());
-                    compoundTag.putUUID(mobUuidString, livingEntity.getUUID());
+                CustomData.update(ItemHelper.SAVED_ENTITY_DATA_COMPONENT, itemStack, (compoundTag) -> {
+                    compoundTag.putString(mobNameString, clickedMob.getName().getString());
+                    compoundTag.putUUID(mobUuidString, clickedMob.getUUID());
                 });
 
-                player.setItemInHand(interactionHand, linkedWand);
-
                 serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_LINK.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.link_mob", livingEntity.getName().getString()));
+                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.link_mob", clickedMob.getName().getString()));
             }
 
             serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);

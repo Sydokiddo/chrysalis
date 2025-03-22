@@ -36,8 +36,6 @@ public class EntitySpawner extends Entity {
     // region Initialization
 
     private static final String defaultId = Chrysalis.stringId("example");
-    private EntityType<?> entityToSpawn;
-    private Entity displayEntity;
     private long spawnEntityAfterTicks;
 
     private SoundEvent
@@ -77,11 +75,7 @@ public class EntitySpawner extends Entity {
         Optional<SpawnData> optionalSpawnData = entitySpawnerConfig.spawnPotentials().getRandomValue(entitySpawner.level().getRandom());
         if (optionalSpawnData.isEmpty()) return;
 
-        Optional<EntityType<?>> optionalEntityType = EntityType.by(optionalSpawnData.get().entityToSpawn());
-        if (optionalEntityType.isEmpty()) return;
-
-        entitySpawner.setEntityToSpawn(optionalEntityType.get());
-        entitySpawner.setDisplayEntity(entitySpawner.createEntity(entitySpawner.getEntityToSpawn(), level));
+        entitySpawner.setSpawnedEntity(optionalSpawnData.get().entityToSpawn());
         entitySpawner.setSpawnAfterEntityTicks(level.getRandom().nextIntBetweenInclusive(entitySpawnerConfig.getMinDelay(), entitySpawnerConfig.getMaxDelay()));
 
         entitySpawner.appearSound = entitySpawnerConfig.getAppearSound().value();
@@ -109,11 +103,14 @@ public class EntitySpawner extends Entity {
     // region Entity Data
 
     private final String
+        spawnedEntityTag = "spawned_entity",
         spawnEntityAfterTicksTag = "spawn_entity_after_ticks",
         ambientParticleStartingColorTag = "ambient_particle_starting_color",
         ambientParticleEndingColorTag = "ambient_particle_ending_color",
         spawnParticleTag = "spawn_particle"
     ;
+
+    private static final EntityDataAccessor<CompoundTag> SPAWNED_ENTITY = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.COMPOUND_TAG);
 
     private static final EntityDataAccessor<Integer>
         AMBIENT_PARTICLE_STARTING_COLOR = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.INT),
@@ -124,6 +121,7 @@ public class EntitySpawner extends Entity {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
+        builder.define(SPAWNED_ENTITY, new CompoundTag());
         builder.define(AMBIENT_PARTICLE_STARTING_COLOR, ComponentHelper.FIRE_COLOR.getRGB());
         builder.define(AMBIENT_PARTICLE_ENDING_COLOR, CommonColors.WHITE);
         builder.define(SPAWN_PARTICLE, ParticleTypes.FLAME);
@@ -131,6 +129,7 @@ public class EntitySpawner extends Entity {
 
     @Override
     protected void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
+        if (!this.getSpawnedEntity().isEmpty()) compoundTag.put(this.spawnedEntityTag, this.getSpawnedEntity());
         compoundTag.putLong(this.spawnEntityAfterTicksTag, this.getSpawnEntityAfterTicks());
         compoundTag.putInt(this.ambientParticleStartingColorTag, this.getAmbientParticleStartingColor());
         compoundTag.putInt(this.ambientParticleEndingColorTag, this.getAmbientParticleEndingColor());
@@ -140,6 +139,7 @@ public class EntitySpawner extends Entity {
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
 
+        if (compoundTag.contains(this.spawnedEntityTag, 10)) this.setSpawnedEntity(compoundTag.getCompound(this.spawnedEntityTag));
         this.setSpawnAfterEntityTicks(compoundTag.getLong(this.spawnEntityAfterTicksTag));
         this.setAmbientParticleStartingColor(compoundTag.getInt(this.ambientParticleStartingColorTag));
         this.setAmbientParticleEndingColor(compoundTag.getInt(this.ambientParticleEndingColorTag));
@@ -152,20 +152,16 @@ public class EntitySpawner extends Entity {
         }
     }
 
-    private EntityType<?> getEntityToSpawn() {
-        return this.entityToSpawn;
+    private CompoundTag getSpawnedEntity() {
+        return this.getEntityData().get(SPAWNED_ENTITY);
     }
 
-    private void setEntityToSpawn(EntityType<?> entityToSpawn) {
-        this.entityToSpawn = entityToSpawn;
+    private void setSpawnedEntity(CompoundTag compoundTag) {
+        this.getEntityData().set(SPAWNED_ENTITY, compoundTag);
     }
 
-    private Entity getDisplayEntity() {
-        return this.displayEntity;
-    }
-
-    private void setDisplayEntity(Entity displayEntity) {
-        this.displayEntity = displayEntity;
+    public static Optional<Entity> createEntity(EntitySpawner entitySpawner) {
+        return EntityType.create(entitySpawner.getSpawnedEntity(), entitySpawner.level(), EntitySpawnReason.SPAWNER);
     }
 
     private long getSpawnEntityAfterTicks() {
@@ -213,7 +209,7 @@ public class EntitySpawner extends Entity {
 
     private void tickServer(ServerLevel serverLevel) {
 
-        if (this.getEntityToSpawn() == null) {
+        if (this.getSpawnedEntity().isEmpty()) {
             Chrysalis.LOGGER.info("{} has no assigned entity to spawn, despawning it", this.getName().getString());
             this.kill(serverLevel);
         }
@@ -243,30 +239,21 @@ public class EntitySpawner extends Entity {
 
     private void trySpawningEntity(ServerLevel serverLevel) {
 
-        if (this.getEntityToSpawn() == null) return;
-        Entity entity = createEntity(this.getEntityToSpawn(), serverLevel);
-        assert entity != null;
-        entity.setPos(this.position().x(), this.position().y(), this.position().z());
+        if (this.getSpawnedEntity().isEmpty()) return;
+        Optional<Entity> entity = createEntity(this);
+        if (entity.isEmpty()) return;
 
-        serverLevel.addFreshEntity(entity);
+        entity.get().setPos(this.position().x(), this.position().y(), this.position().z());
+        serverLevel.addFreshEntity(entity.get());
 
         for (int particleAmount = 0; particleAmount < 20; particleAmount++) {
-            double xRandomRange = entity.getX() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
-            double yRandomRange = entity.getY() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
-            double zRandomRange = entity.getZ() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
+            double xRandomRange = entity.get().getX() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
+            double yRandomRange = entity.get().getY() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
+            double zRandomRange = entity.get().getZ() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
             serverLevel.sendParticles(this.getSpawnParticle(), xRandomRange, yRandomRange, zRandomRange, 1, 0.0D, 0.0D, 0.0D, 0.05D);
         }
 
         this.playSpawnerSound(serverLevel, this, this.spawnEntitySound, 1.0F, (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.2F + 1.0F, true);
-    }
-
-    private Entity createEntity(EntityType<?> entityToSpawn, Level level) {
-        return entityToSpawn.create(level, EntitySpawnReason.SPAWNER);
-    }
-
-    public static Entity getOrCreateDisplayEntity(EntitySpawner entitySpawner, Level level) {
-        if (entitySpawner.getDisplayEntity() == null && entitySpawner.getEntityToSpawn() != null) entitySpawner.setDisplayEntity(entitySpawner.createEntity(entitySpawner.getEntityToSpawn(), level));
-        return entitySpawner.getDisplayEntity();
     }
 
     // endregion
