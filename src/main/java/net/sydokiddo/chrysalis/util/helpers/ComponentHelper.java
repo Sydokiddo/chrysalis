@@ -104,6 +104,7 @@ public class ComponentHelper {
         GRAY_HEART_ICON = Component.translatable("gui.icon.chrysalis.gray_heart"),
         BLACK_HEART_ICON = Component.translatable("gui.icon.chrysalis.black_heart"),
         BROWN_HEART_ICON = Component.translatable("gui.icon.chrysalis.brown_heart"),
+        BROKEN_HEART_ICON = Component.translatable("gui.icon.chrysalis.broken_heart"),
         HUNGER_POINT_ICON = Component.translatable("gui.icon.chrysalis.hunger_point"),
         WAXED_ICON = Component.translatable("gui.icon.chrysalis.waxed"),
         SNOUT_ICON = Component.translatable("gui.icon.chrysalis.snout"),

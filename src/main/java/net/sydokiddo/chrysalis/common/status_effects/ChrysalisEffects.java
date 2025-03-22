@@ -29,7 +29,7 @@ public class ChrysalisEffects {
         ARTHROPOD_SIGHT = MOB_EFFECTS.register("arthropod_sight", ArthropodSightEffect::new),
         CREEPER_SIGHT = MOB_EFFECTS.register("creeper_sight", CreeperSightEffect::new),
         ENDER_SIGHT = MOB_EFFECTS.register("ender_sight", EnderSightEffect::new),
-        HEALTH_REDUCTION = MOB_EFFECTS.register("health_reduction", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#994C4C").getRGB()).addAttributeModifier(Attributes.MAX_HEALTH, Chrysalis.resourceLocationId("effect.health_reduction"), -4.0D, AttributeModifier.Operation.ADD_VALUE)),
+        HEALTH_REDUCTION = MOB_EFFECTS.register("health_reduction", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#B53F6B").getRGB()).addAttributeModifier(Attributes.MAX_HEALTH, Chrysalis.resourceLocationId("effect.health_reduction"), -4.0D, AttributeModifier.Operation.ADD_VALUE)),
         BUILDING_FATIGUE = MOB_EFFECTS.register("building_fatigue", () -> new BuildPreventingEffect(MobEffectCategory.HARMFUL, Color.decode("#79553A").getRGB()))
     ;
 
