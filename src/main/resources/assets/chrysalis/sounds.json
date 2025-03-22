@@ -118,6 +118,6 @@
       "minecraft:block/trial_spawner/spawn_item2",
       "minecraft:block/trial_spawner/spawn_item3"
     ],
-    "subtitle": "subtitles.entity.entity_spawner.spawn_entity"
+    "subtitle": "subtitles.entity.generic_spawner.spawn_entity"
   }
 }

@@ -311,6 +311,150 @@
       "chars": [
         "\ua033"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/redstone_dust.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua034"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/copper_ingot.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua035"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/resin_brick.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua036"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/gold_ingot.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua037"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/glowstone_dust.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua038"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/emerald.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua039"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/prismarine_crystals.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua040"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/diamond.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua041"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/lapis_lazuli.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua042"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/echo_shard.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua043"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/amethyst_shard.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua044"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/nether_quartz.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua045"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/iron_ingot.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua046"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/coal.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua047"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/netherite_ingot.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua048"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/tooltip_icons/netherite_scrap.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua049"
+      ]
     }
   ]
 }

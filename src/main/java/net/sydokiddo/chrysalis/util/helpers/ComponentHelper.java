@@ -110,7 +110,23 @@ public class ComponentHelper {
         TREACHEROUS_FLAME_ICON = Component.translatable("gui.icon.chrysalis.treacherous_flame"),
         NECROTIC_FLAME_ICON = Component.translatable("gui.icon.chrysalis.necrotic_flame"),
         EXPERIENCE_ORB_ICON = Component.translatable("gui.icon.chrysalis.experience_orb"),
-        CURSED_EXPERIENCE_ORB_ICON = Component.translatable("gui.icon.chrysalis.cursed_experience_orb")
+        CURSED_EXPERIENCE_ORB_ICON = Component.translatable("gui.icon.chrysalis.cursed_experience_orb"),
+        REDSTONE_DUST_ICON = Component.translatable("gui.icon.chrysalis.redstone_dust"),
+        COPPER_INGOT_ICON = Component.translatable("gui.icon.chrysalis.copper_ingot"),
+        RESIN_BRICK_ICON = Component.translatable("gui.icon.chrysalis.resin_brick"),
+        GOLD_INGOT_ICON = Component.translatable("gui.icon.chrysalis.gold_ingot"),
+        GLOWSTONE_DUST_ICON = Component.translatable("gui.icon.chrysalis.glowstone_dust"),
+        EMERALD_ICON = Component.translatable("gui.icon.chrysalis.emerald"),
+        PRISMARINE_CRYSTALS_ICON = Component.translatable("gui.icon.chrysalis.prismarine_crystals"),
+        DIAMOND_ICON = Component.translatable("gui.icon.chrysalis.diamond"),
+        LAPIS_LAZULI_ICON = Component.translatable("gui.icon.chrysalis.lapis_lazuli"),
+        ECHO_SHARD_ICON = Component.translatable("gui.icon.chrysalis.echo_shard"),
+        AMETHYST_SHARD_ICON = Component.translatable("gui.icon.chrysalis.amethyst_shard"),
+        NETHER_QUARTZ_ICON = Component.translatable("gui.icon.chrysalis.nether_quartz"),
+        IRON_INGOT_ICON = Component.translatable("gui.icon.chrysalis.iron_ingot"),
+        COAL_ICON = Component.translatable("gui.icon.chrysalis.coal"),
+        NETHERITE_INGOT_ICON = Component.translatable("gui.icon.chrysalis.netherite_ingot"),
+        NETHERITE_SCRAP_ICON = Component.translatable("gui.icon.chrysalis.netherite_scrap")
     ;
 
     // endregion
