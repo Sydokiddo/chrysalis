@@ -19,6 +19,10 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractSpawnerEntity extends Entity {
 
+    /**
+     * A base spawner entity class that all spawner entities extend.
+     **/
+
     public AbstractSpawnerEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
         this.noPhysics = true;

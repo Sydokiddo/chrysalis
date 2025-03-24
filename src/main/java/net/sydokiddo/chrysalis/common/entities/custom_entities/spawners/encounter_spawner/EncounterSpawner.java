@@ -29,6 +29,10 @@ import java.util.Optional;
 
 public class EncounterSpawner extends AbstractSpawnerEntity {
 
+    /**
+     * An entity that spawns a given entity when a survival mode player goes near it, then despawns itself.
+     **/
+
     // region Initialization
 
     public EncounterSpawner(EntityType<?> entityType, Level level) {

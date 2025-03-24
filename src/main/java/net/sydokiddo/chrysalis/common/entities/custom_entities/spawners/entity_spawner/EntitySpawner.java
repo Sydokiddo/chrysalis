@@ -33,6 +33,10 @@ import java.util.Optional;
 
 public class EntitySpawner extends AbstractSpawnerEntity {
 
+    /**
+     * An entity that plays an animation before spawning a given entity from it.
+     **/
+
     // region Initialization
 
     private static final String defaultId = Chrysalis.stringId("example");

@@ -14,6 +14,10 @@ import java.util.List;
 
 public class EntitySpawnerData {
 
+    /**
+     * The base codec for data driven entity spawner properties.
+     **/
+
     private record SoundsData(Holder<SoundEvent> appear, Holder<SoundEvent> aboutToSpawnEntity, Holder<SoundEvent> spawnEntity) {
 
         public static final Codec<SoundsData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
