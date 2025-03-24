@@ -1,14 +1,12 @@
 {
   "providers": [
     {
-      "type": "space",
-      "advances": {
-        " ": 4
-      }
+      "type": "reference",
+      "id": "minecraft:include/space"
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/font/five_alt.png",
+      "file": "chrysalis:gui/fonts/five_alt.png",
       "ascent": 8,
       "chars": [
         "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",

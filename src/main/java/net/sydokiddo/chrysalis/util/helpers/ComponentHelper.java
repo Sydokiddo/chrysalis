@@ -56,8 +56,10 @@ public class ComponentHelper {
     public static final Color
         CHRYSALIS_COLOR = Color.decode("#A27FFF"),
         ENCHANTMENT_COLOR = Color.decode("#964CFF"),
-        EXPERIENCE_COLOR = Color.decode("#B9E85C"),
+        ENCHANTMENT_DARKER_COLOR = Color.decode("#6426C1"),
         CURSE_COLOR = Color.decode("#FF5555"),
+        CURSE_DARKER_COLOR = Color.decode("#C12626"),
+        EXPERIENCE_COLOR = Color.decode("#B9E85C"),
         WAXED_COLOR = Color.decode("#FABF29"),
         REMAINS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),
         FIRE_COLOR = Color.decode("#FF6A00"),
@@ -140,7 +142,10 @@ public class ComponentHelper {
 
     public static final ResourceLocation
         FIVE_FONT = Chrysalis.resourceLocationId("five"),
-        FIVE_ALT_FONT = Chrysalis.resourceLocationId("five_alt")
+        FIVE_ALT_FONT = Chrysalis.resourceLocationId("five_alt"),
+        FIVE_LOWERED_FONT = Chrysalis.resourceLocationId("five_lowered"),
+        FIVE_ALT_LOWERED_FONT = Chrysalis.resourceLocationId("five_alt_lowered"),
+        GALACTIC_ALT_FONT = Chrysalis.resourceLocationId("galactic_alt")
     ;
 
     public static final String TOOLTIP_ICONS_NAME = "tooltip_icons";

@@ -6,8 +6,8 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/fonts/five.png",
-      "ascent": 8,
+      "file": "chrysalis:gui/fonts/galactic_alt.png",
+      "ascent": 7,
       "chars": [
         "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
         "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
