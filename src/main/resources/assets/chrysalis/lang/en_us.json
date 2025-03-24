@@ -374,7 +374,7 @@
   "subtitles.entity.item.drop": "Item dropped",
 
   "subtitles.entity.generic_spawner.spawn_entity": "Entity spawns",
-  "subtitles.entity.generic_spawner.change_mob": "Spawner reacts",
+  "subtitles.entity.generic_spawner.change_entity": "Spawner reacts",
   "subtitles.entity.entity_spawner.appear": "Entity manifests",
   "subtitles.entity.entity_spawner.about_to_spawn_entity": "Entity prepares",
 

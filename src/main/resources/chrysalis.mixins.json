@@ -50,6 +50,7 @@
     "items.PotionColorMixin",
     "items.ShearsItemMixin",
     "items.ShieldItemMixin",
+    "items.SpawnEggItemMixin",
     "items.ToolMaterialMixin",
     "items.TooltipMixin",
     "items.TooltipMixin$ArmorTrimMixin",

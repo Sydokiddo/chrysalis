@@ -119,5 +119,22 @@
       "minecraft:block/trial_spawner/spawn_item3"
     ],
     "subtitle": "subtitles.entity.generic_spawner.spawn_entity"
+  },
+  "entity.encounter_spawner.spawn_entity": {
+    "sounds": [
+      "minecraft:block/trial_spawner/spawn1",
+      "minecraft:block/trial_spawner/spawn2",
+      "minecraft:block/trial_spawner/spawn3",
+      "minecraft:block/trial_spawner/spawn4"
+    ],
+    "subtitle": "subtitles.entity.generic_spawner.spawn_entity"
+  },
+  "entity.generic_spawner.change_entity": {
+    "sounds": [
+      "chrysalis:misc/spawner/change_entity1",
+      "chrysalis:misc/spawner/change_entity2",
+      "chrysalis:misc/spawner/change_entity3"
+    ],
+    "subtitle": "subtitles.entity.generic_spawner.change_entity"
   }
 }

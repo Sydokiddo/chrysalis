@@ -6,7 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawner;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
 import org.jetbrains.annotations.NotNull;
 
 public class TestRightClickItem extends Item {
@@ -23,6 +23,6 @@ public class TestRightClickItem extends Item {
 
     @SuppressWarnings("unused")
     private void doRightClickFunctionality(Level level, Player player, InteractionHand interactionHand) {
-        EntitySpawner.create(level, level.getRandom().nextFloat() < 0.5F ? Chrysalis.stringId("example") : Chrysalis.stringId("example_2"), player.getOnPos().getCenter());
+        EntitySpawner.create(level, Chrysalis.stringId("example"), player.getOnPos().getCenter());
     }
 }

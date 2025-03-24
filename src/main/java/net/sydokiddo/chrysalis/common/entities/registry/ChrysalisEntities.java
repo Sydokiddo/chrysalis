@@ -9,7 +9,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawner;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.encounter_spawner.EncounterSpawner;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.Seat;
 
 public class ChrysalisEntities {
@@ -23,6 +24,9 @@ public class ChrysalisEntities {
 
     public static final DeferredHolder<EntityType<?>, EntityType<EntitySpawner>> ENTITY_SPAWNER = registerEntityType("entity_spawner",
         EntityType.Builder.of(EntitySpawner::new, MobCategory.MISC).sized(0.25F, 0.25F).noLootTable().clientTrackingRange(8));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<EncounterSpawner>> ENCOUNTER_SPAWNER = registerEntityType("encounter_spawner",
+        EntityType.Builder.of(EncounterSpawner::new, MobCategory.MISC).sized(0.75F, 0.75F).noLootTable().clientTrackingRange(8));
 
     // endregion
 

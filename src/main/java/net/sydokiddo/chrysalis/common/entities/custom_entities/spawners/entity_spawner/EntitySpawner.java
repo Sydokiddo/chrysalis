@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner;
+package net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
@@ -8,25 +8,21 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.CommonColors;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SpawnData;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.ColoredDirectionalDustParticleOptions;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.AbstractSpawnerEntity;
 import net.sydokiddo.chrysalis.common.entities.registry.ChrysalisEntities;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
@@ -35,7 +31,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class EntitySpawner extends Entity {
+public class EntitySpawner extends AbstractSpawnerEntity {
 
     // region Initialization
 
@@ -44,7 +40,6 @@ public class EntitySpawner extends Entity {
 
     public EntitySpawner(EntityType<? extends EntitySpawner> entityType, Level level) {
         super(entityType, level);
-        this.noPhysics = true;
     }
 
     public static void create(Level level, Vec3 position) {
@@ -90,27 +85,26 @@ public class EntitySpawner extends Entity {
         entitySpawner.playSpawnerSound(level, entitySpawner, entitySpawner.getAppearSound().value(), (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F, true);
     }
 
-    private void playSpawnerSound(Level level, Entity entity, SoundEvent soundEvent, float pitch, boolean emitGameEvent) {
-        level.playSound(null, entity.blockPosition(), soundEvent, SoundSource.NEUTRAL, 1.0F, pitch);
-        if (emitGameEvent && level instanceof ServerLevel serverLevel) serverLevel.gameEvent(entity, GameEvent.ENTITY_PLACE, entity.position());
-    }
-
     // endregion
 
     // region Entity Data
 
     private final String
-        entityToSpawnTag = "entity_to_spawn",
         spawnEntityAfterTicksTag = "spawn_entity_after_ticks",
-        ambientParticleStartingColorTag = "ambient_particle_starting_color",
-        ambientParticleEndingColorTag = "ambient_particle_ending_color",
-        spawnParticleTag = "spawn_particle",
         appearSoundTag = "appear_sound",
         aboutToSpawnEntitySoundTag = "about_to_spawn_entity_sound",
-        spawnEntitySoundTag = "spawn_entity_sound"
+        ambientParticleStartingColorTag = "ambient_particle_starting_color",
+        ambientParticleEndingColorTag = "ambient_particle_ending_color",
+        spawnParticleTag = "spawn_particle"
     ;
 
     private static final EntityDataAccessor<CompoundTag> ENTITY_TO_SPAWN = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.COMPOUND_TAG);
+
+    private static final EntityDataAccessor<String>
+        APPEAR_SOUND = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.STRING),
+        ABOUT_TO_SPAWN_ENTITY_SOUND = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.STRING),
+        SPAWN_ENTITY_SOUND = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.STRING)
+    ;
 
     private static final EntityDataAccessor<Integer>
         AMBIENT_PARTICLE_STARTING_COLOR = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.INT),
@@ -119,59 +113,51 @@ public class EntitySpawner extends Entity {
 
     private static final EntityDataAccessor<ParticleOptions> SPAWN_PARTICLE = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.PARTICLE);
 
-    private static final EntityDataAccessor<String>
-        APPEAR_SOUND = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.STRING),
-        ABOUT_TO_SPAWN_ENTITY_SOUND = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.STRING),
-        SPAWN_ENTITY_SOUND = SynchedEntityData.defineId(EntitySpawner.class, EntityDataSerializers.STRING)
-    ;
-
     @Override
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         builder.define(ENTITY_TO_SPAWN, new CompoundTag());
         this.setSpawnAfterEntityTicks(this.level().getRandom().nextIntBetweenInclusive(60, 120));
-        builder.define(AMBIENT_PARTICLE_STARTING_COLOR, ComponentHelper.FIRE_COLOR.getRGB());
-        builder.define(AMBIENT_PARTICLE_ENDING_COLOR, CommonColors.WHITE);
-        builder.define(SPAWN_PARTICLE, ParticleTypes.FLAME);
         builder.define(APPEAR_SOUND, ChrysalisSoundEvents.ENTITY_SPAWNER_APPEAR.get().location().toString());
         builder.define(ABOUT_TO_SPAWN_ENTITY_SOUND, ChrysalisSoundEvents.ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY.get().location().toString());
         builder.define(SPAWN_ENTITY_SOUND, ChrysalisSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY.get().location().toString());
+        builder.define(AMBIENT_PARTICLE_STARTING_COLOR, ComponentHelper.FIRE_COLOR.getRGB());
+        builder.define(AMBIENT_PARTICLE_ENDING_COLOR, CommonColors.WHITE);
+        builder.define(SPAWN_PARTICLE, ParticleTypes.FLAME);
     }
 
     @Override
     protected void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         if (!this.getEntityToSpawn().isEmpty()) compoundTag.put(this.entityToSpawnTag, this.getEntityToSpawn());
         compoundTag.putLong(this.spawnEntityAfterTicksTag, this.getSpawnEntityAfterTicks());
-        compoundTag.putInt(this.ambientParticleStartingColorTag, this.getAmbientParticleStartingColor());
-        compoundTag.putInt(this.ambientParticleEndingColorTag, this.getAmbientParticleEndingColor());
-        compoundTag.put(this.spawnParticleTag, ParticleTypes.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.getSpawnParticle()).getOrThrow());
         compoundTag.put(this.appearSoundTag, SoundEvent.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.getAppearSound()).getOrThrow());
         compoundTag.put(this.aboutToSpawnEntitySoundTag, SoundEvent.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.getAboutToSpawnEntitySound()).getOrThrow());
         compoundTag.put(this.spawnEntitySoundTag, SoundEvent.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.getSpawnEntitySound()).getOrThrow());
+        compoundTag.putInt(this.ambientParticleStartingColorTag, this.getAmbientParticleStartingColor());
+        compoundTag.putInt(this.ambientParticleEndingColorTag, this.getAmbientParticleEndingColor());
+        compoundTag.put(this.spawnParticleTag, ParticleTypes.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.getSpawnParticle()).getOrThrow());
     }
 
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
 
-        int tagType = 10;
-
-        if (compoundTag.contains(this.entityToSpawnTag, tagType)) this.setEntityToSpawn(compoundTag.getCompound(this.entityToSpawnTag));
+        if (compoundTag.contains(this.entityToSpawnTag, this.tagType)) this.setEntityToSpawn(compoundTag.getCompound(this.entityToSpawnTag));
         this.setSpawnAfterEntityTicks(compoundTag.getLong(this.spawnEntityAfterTicksTag));
 
-        if (compoundTag.contains(this.appearSoundTag, tagType)) {
+        if (compoundTag.contains(this.appearSoundTag, this.tagType)) {
             SoundEvent.CODEC
             .parse(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), compoundTag.get(this.appearSoundTag))
             .resultOrPartial(particle -> Chrysalis.LOGGER.warn("Failed to parse entity spawner appear sound: '{}'", particle))
             .ifPresent(this::setAppearSound);
         }
 
-        if (compoundTag.contains(this.aboutToSpawnEntitySoundTag, tagType)) {
+        if (compoundTag.contains(this.aboutToSpawnEntitySoundTag, this.tagType)) {
             SoundEvent.CODEC
             .parse(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), compoundTag.get(this.aboutToSpawnEntitySoundTag))
             .resultOrPartial(particle -> Chrysalis.LOGGER.warn("Failed to parse entity spawner about to spawn entity sound: '{}'", particle))
             .ifPresent(this::setAboutToSpawnEntitySound);
         }
 
-        if (compoundTag.contains(this.spawnEntitySoundTag, tagType)) {
+        if (compoundTag.contains(this.spawnEntitySoundTag, this.tagType)) {
             SoundEvent.CODEC
             .parse(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), compoundTag.get(this.spawnEntitySoundTag))
             .resultOrPartial(particle -> Chrysalis.LOGGER.warn("Failed to parse entity spawner spawn entity sound: '{}'", particle))
@@ -181,7 +167,7 @@ public class EntitySpawner extends Entity {
         this.setAmbientParticleStartingColor(compoundTag.getInt(this.ambientParticleStartingColorTag));
         this.setAmbientParticleEndingColor(compoundTag.getInt(this.ambientParticleEndingColorTag));
 
-        if (compoundTag.contains(this.spawnParticleTag, tagType)) {
+        if (compoundTag.contains(this.spawnParticleTag, this.tagType)) {
             ParticleTypes.CODEC
             .parse(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), compoundTag.get(this.spawnParticleTag))
             .resultOrPartial(particle -> Chrysalis.LOGGER.warn("Failed to parse entity spawner particle options: '{}'", particle))
@@ -189,16 +175,14 @@ public class EntitySpawner extends Entity {
         }
     }
 
-    private CompoundTag getEntityToSpawn() {
+    @Override
+    public CompoundTag getEntityToSpawn() {
         return this.getEntityData().get(ENTITY_TO_SPAWN);
     }
 
-    private void setEntityToSpawn(CompoundTag compoundTag) {
+    @Override
+    public void setEntityToSpawn(CompoundTag compoundTag) {
         this.getEntityData().set(ENTITY_TO_SPAWN, compoundTag);
-    }
-
-    public static Optional<Entity> createEntity(EntitySpawner entitySpawner) {
-        return EntityType.create(entitySpawner.getEntityToSpawn(), entitySpawner.level(), EntitySpawnReason.SPAWNER);
     }
 
     private long getSpawnEntityAfterTicks() {
@@ -207,6 +191,32 @@ public class EntitySpawner extends Entity {
 
     private void setSpawnAfterEntityTicks(long spawnEntityAfterTicks) {
         this.spawnEntityAfterTicks = spawnEntityAfterTicks;
+    }
+
+    private Holder<SoundEvent> getAppearSound() {
+        return this.getSound(APPEAR_SOUND);
+    }
+
+    private void setAppearSound(Holder<SoundEvent> soundEvent) {
+        this.setSound(APPEAR_SOUND, soundEvent);
+    }
+
+    private Holder<SoundEvent> getAboutToSpawnEntitySound() {
+        return this.getSound(ABOUT_TO_SPAWN_ENTITY_SOUND);
+    }
+
+    private void setAboutToSpawnEntitySound(Holder<SoundEvent> soundEvent) {
+        this.setSound(ABOUT_TO_SPAWN_ENTITY_SOUND, soundEvent);
+    }
+
+    @Override
+    public Holder<SoundEvent> getSpawnEntitySound() {
+        return this.getSound(SPAWN_ENTITY_SOUND);
+    }
+
+    @Override
+    public void setSpawnEntitySound(Holder<SoundEvent> soundEvent) {
+        this.setSound(SPAWN_ENTITY_SOUND, soundEvent);
     }
 
     private int getAmbientParticleStartingColor() {
@@ -233,50 +243,14 @@ public class EntitySpawner extends Entity {
         this.getEntityData().set(SPAWN_PARTICLE, spawnParticle);
     }
 
-    private Holder<SoundEvent> getSound(EntityDataAccessor<String> soundString) {
-        return Holder.direct(SoundEvent.createVariableRangeEvent(ResourceLocation.parse(this.getEntityData().get(soundString))));
-    }
-
-    private void setSound(EntityDataAccessor<String> entityDataAccessor, Holder<SoundEvent> soundEvent) {
-        this.getEntityData().set(entityDataAccessor, soundEvent.value().location().toString());
-    }
-
-    private Holder<SoundEvent> getAppearSound() {
-        return this.getSound(APPEAR_SOUND);
-    }
-
-    private void setAppearSound(Holder<SoundEvent> soundEvent) {
-        this.setSound(APPEAR_SOUND, soundEvent);
-    }
-
-    private Holder<SoundEvent> getAboutToSpawnEntitySound() {
-        return this.getSound(ABOUT_TO_SPAWN_ENTITY_SOUND);
-    }
-
-    private void setAboutToSpawnEntitySound(Holder<SoundEvent> soundEvent) {
-        this.setSound(ABOUT_TO_SPAWN_ENTITY_SOUND, soundEvent);
-    }
-
-    private Holder<SoundEvent> getSpawnEntitySound() {
-        return this.getSound(SPAWN_ENTITY_SOUND);
-    }
-
-    private void setSpawnEntitySound(Holder<SoundEvent> soundEvent) {
-        this.setSound(SPAWN_ENTITY_SOUND, soundEvent);
-    }
-
     // endregion
 
     // region Ticking, AI, and Entity Events
 
     @Override
-    public void tick() {
-        super.tick();
-        if (this.level() instanceof ServerLevel serverlevel) this.tickServer(serverlevel);
-        else this.tickClient();
-    }
+    public void tickServer(ServerLevel serverLevel) {
 
-    private void tickServer(ServerLevel serverLevel) {
+        super.tickServer(serverLevel);
 
         if (this.getEntityToSpawn().isEmpty()) {
             Chrysalis.LOGGER.info("{} has no assigned entity to spawn, despawning it", this.getName().getString());
@@ -291,7 +265,11 @@ public class EntitySpawner extends Entity {
         }
     }
 
-    private void tickClient() {
+    @Override
+    public void tickClient() {
+
+        super.tickClient();
+
         if (this.level().getGameTime() % 5L == 0L) {
 
             Vec3 position = this.position();
@@ -316,49 +294,12 @@ public class EntitySpawner extends Entity {
         if (entity.get() instanceof Mob mob) EventHooks.finalizeMobSpawn(mob, serverLevel, serverLevel.getCurrentDifficultyAt(this.blockPosition()), EntitySpawnReason.SPAWNER, null);
         serverLevel.addFreshEntity(entity.get());
 
-        for (int particleAmount = 0; particleAmount < 20; particleAmount++) {
-            double xRandomRange = entity.get().getX() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
-            double yRandomRange = entity.get().getY() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
-            double zRandomRange = entity.get().getZ() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
-            serverLevel.sendParticles(this.getSpawnParticle(), xRandomRange, yRandomRange, zRandomRange, 1, 0.0D, 0.0D, 0.0D, 0.05D);
-        }
-
+        this.emitSpawnParticles(serverLevel, entity.get(), this.getSpawnParticle());
         this.playSpawnerSound(serverLevel, this, this.getSpawnEntitySound().value(), (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.2F + 1.0F, true);
     }
 
-    // endregion
-
-    // region Miscellaneous
-
-    @Override
-    public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float v) {
-        return false;
-    }
-
-    @Override
-    protected boolean canAddPassenger(@NotNull Entity entity) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    protected boolean couldAcceptPassenger() {
-        return false;
-    }
-
-    @Override
-    protected void addPassenger(@NotNull Entity entity) {
-        throw new IllegalStateException("Should never addPassenger without checking couldAcceptPassenger()");
-    }
-
-    @Override
-    public @NotNull PushReaction getPistonPushReaction() {
-        return PushReaction.IGNORE;
-    }
-
-    @Override
-    public boolean isIgnoringBlockTriggers() {
-        return true;
+    public static Optional<Entity> createEntity(EntitySpawner entitySpawner) {
+        return EntityType.create(entitySpawner.getEntityToSpawn(), entitySpawner.level(), EntitySpawnReason.SPAWNER);
     }
 
     // endregion

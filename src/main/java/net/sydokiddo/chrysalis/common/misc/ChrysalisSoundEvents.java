@@ -38,7 +38,9 @@ public class ChrysalisSoundEvents {
 
         ENTITY_SPAWNER_APPEAR = SOUND_EVENTS.register("entity.entity_spawner.appear", SoundEvent::createVariableRangeEvent),
         ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.about_to_spawn_entity", SoundEvent::createVariableRangeEvent),
-        ENTITY_SPAWNER_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.spawn_entity", SoundEvent::createVariableRangeEvent)
+        ENTITY_SPAWNER_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.spawn_entity", SoundEvent::createVariableRangeEvent),
+        ENCOUNTER_SPAWNER_SPAWN_ENTITY = SOUND_EVENTS.register("entity.encounter_spawner.spawn_entity", SoundEvent::createVariableRangeEvent),
+        GENERIC_SPAWNER_CHANGE_ENTITY = SOUND_EVENTS.register("entity.generic_spawner.change_entity", SoundEvent::createVariableRangeEvent)
     ;
 
     // endregion

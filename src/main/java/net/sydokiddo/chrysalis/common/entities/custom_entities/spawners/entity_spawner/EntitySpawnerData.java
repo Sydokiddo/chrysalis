@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner;
+package net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

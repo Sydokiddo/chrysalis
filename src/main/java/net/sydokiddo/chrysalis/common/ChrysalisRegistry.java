@@ -21,10 +21,11 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.client.entities.rendering.EncounterSpawnerRenderer;
 import net.sydokiddo.chrysalis.client.entities.rendering.EntitySpawnerRenderer;
 import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
 import net.sydokiddo.chrysalis.client.particles.types.*;
-import net.sydokiddo.chrysalis.common.entities.custom_entities.entity_spawner.EntitySpawnerData;
+import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
@@ -108,6 +109,7 @@ public class ChrysalisRegistry {
 
             EntityRenderers.register(ChrysalisEntities.SEAT.get(), SeatRenderer::new);
             EntityRenderers.register(ChrysalisEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
+            EntityRenderers.register(ChrysalisEntities.ENCOUNTER_SPAWNER.get(), EncounterSpawnerRenderer::new);
 
             try {
                 Toolkit.getDefaultToolkit().getSystemClipboard();
