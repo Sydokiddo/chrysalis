@@ -17,6 +17,14 @@ public class CompatibilityHelper {
         return isModLoaded("monster_mash");
     }
 
+    public static boolean hasTheBeginningAndTheEnd() {
+        return isModLoaded("the_beginning_and_the_end");
+    }
+
+    public static boolean hasEarthshift() {
+        return isModLoaded("earthshift");
+    }
+
     public static boolean hasMicrocosm() {
         return isModLoaded("microcosm");
     }
