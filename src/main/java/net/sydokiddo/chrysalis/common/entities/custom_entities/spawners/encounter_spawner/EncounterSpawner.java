@@ -178,6 +178,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
 
             this.setEntityToSpawn(compoundTag);
             this.playSpawnerSound(player.level(), this, ChrysalisSoundEvents.GENERIC_SPAWNER_CHANGE_ENTITY.get(), 1.0F, false);
+            if (this.level() instanceof ServerLevel serverLevel) for (int amount = 0; amount < 8; ++amount) serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(entityType.getHeight() + 1.0D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
 
             player.level().gameEvent(player, GameEvent.BLOCK_CHANGE, this.blockPosition());
             itemInHand.shrink(1);

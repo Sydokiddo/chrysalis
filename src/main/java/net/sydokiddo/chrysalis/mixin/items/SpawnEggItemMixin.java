@@ -20,6 +20,6 @@ public class SpawnEggItemMixin {
     private void chrysalis$playSpawnerChangeEntitySound(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         BlockPos blockPos = useOnContext.getClickedPos();
         useOnContext.getLevel().playSound(null, blockPos, ChrysalisSoundEvents.GENERIC_SPAWNER_CHANGE_ENTITY.get(), SoundSource.BLOCKS);
-        if (useOnContext.getLevel() instanceof ServerLevel serverLevel) for (int amount = 0; amount < 8; ++amount) serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, blockPos.getCenter().x(), blockPos.getY() + 1, blockPos.getCenter().z(), 1, 0.0, 0.0, 0.0, 0.0);
+        if (useOnContext.getLevel() instanceof ServerLevel serverLevel) for (int amount = 0; amount < 8; ++amount) serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, blockPos.getCenter().x(), blockPos.getY() + 1, blockPos.getCenter().z(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
     }
 }
