@@ -12,6 +12,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.AggroWandItem;
@@ -37,6 +39,7 @@ public abstract class EntityMixin {
      * Allows for items in the increased_pick_radius tag to be able to select entities within a wider range when far away from them.
      **/
 
+    @OnlyIn(Dist.CLIENT)
     @Inject(method = "getPickRadius", at = @At("RETURN"), cancellable = true)
     private void chrysalis$increasedPickRadius(CallbackInfoReturnable<Float> cir) {
 

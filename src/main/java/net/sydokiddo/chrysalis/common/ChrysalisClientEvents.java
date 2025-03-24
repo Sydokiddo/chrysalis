@@ -42,7 +42,7 @@ public class ChrysalisClientEvents {
         @SubscribeEvent
         private static void onClientTick(ClientTickEvent.Post event) {
 
-            while (ChrysalisRegistry.PANORAMIC_SCREENSHOT_KEY.consumeClick()) {
+            while (ChrysalisRegistry.ClientRegistry.PANORAMIC_SCREENSHOT_KEY.consumeClick()) {
 
                 Minecraft minecraft = Minecraft.getInstance();
                 if (!CompatibilityHelper.isModLoaded("essential")) playScreenshotSound(minecraft);
@@ -97,7 +97,7 @@ public class ChrysalisClientEvents {
 
         @SubscribeEvent
         private static void registerKeyMappings(RegisterKeyMappingsEvent event) {
-            event.register(ChrysalisRegistry.PANORAMIC_SCREENSHOT_KEY);
+            event.register(ChrysalisRegistry.ClientRegistry.PANORAMIC_SCREENSHOT_KEY);
         }
 
         @SubscribeEvent
