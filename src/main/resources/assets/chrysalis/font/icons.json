@@ -339,7 +339,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/experience_orb.png",
+      "file": "chrysalis:gui/sprites/icons/purity_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -348,7 +348,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/cursed_experience_orb.png",
+      "file": "chrysalis:gui/sprites/icons/experience_orb.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -357,11 +357,20 @@
     },
     {
       "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/cursed_experience_orb.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua039"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/redstone_dust.png",
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua039"
+        "\ua040"
       ]
     },
     {
@@ -370,7 +379,7 @@
       "ascent": 9,
       "height": 10,
       "chars": [
-        "\ua040"
+        "\ua041"
       ]
     },
     {
@@ -379,7 +388,7 @@
       "ascent": 9,
       "height": 10,
       "chars": [
-        "\ua041"
+        "\ua042"
       ]
     },
     {
@@ -388,7 +397,7 @@
       "ascent": 9,
       "height": 10,
       "chars": [
-        "\ua042"
+        "\ua043"
       ]
     },
     {
@@ -397,7 +406,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua043"
+        "\ua044"
       ]
     },
     {
@@ -406,7 +415,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua044"
+        "\ua045"
       ]
     },
     {
@@ -415,7 +424,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua045"
+        "\ua046"
       ]
     },
     {
@@ -424,7 +433,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua046"
+        "\ua047"
       ]
     },
     {
@@ -433,7 +442,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua047"
+        "\ua048"
       ]
     },
     {
@@ -442,7 +451,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua048"
+        "\ua049"
       ]
     },
     {
@@ -451,7 +460,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua049"
+        "\ua050"
       ]
     },
     {
@@ -460,7 +469,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua050"
+        "\ua051"
       ]
     },
     {
@@ -469,7 +478,7 @@
       "ascent": 9,
       "height": 10,
       "chars": [
-        "\ua051"
+        "\ua052"
       ]
     },
     {
@@ -478,7 +487,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua052"
+        "\ua053"
       ]
     },
     {
@@ -487,7 +496,7 @@
       "ascent": 9,
       "height": 10,
       "chars": [
-        "\ua053"
+        "\ua054"
       ]
     },
     {
@@ -496,7 +505,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua054"
+        "\ua055"
       ]
     }
   ]

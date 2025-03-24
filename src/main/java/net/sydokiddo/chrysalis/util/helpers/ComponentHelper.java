@@ -68,6 +68,7 @@ public class ComponentHelper {
         VOID_FIRE_COLOR = Color.decode("#C920D3"),
         TREACHEROUS_FIRE_COLOR = Color.decode("#FD4D4D"),
         NECROTIC_FIRE_COLOR = Color.decode("#AFB42B"),
+        PURITY_FIRE_COLOR = Color.decode("#FF8A8A"),
         BLINDNESS_COLOR = Color.decode("#5C4182"),
         HASTE_COLOR = Color.decode("#FFB67F"),
         MINING_FATIGUE_COLOR = Color.decode("#7575B5"),
@@ -116,6 +117,7 @@ public class ComponentHelper {
         VOID_FLAME_ICON = Component.translatable("gui.icon.chrysalis.void_flame"),
         TREACHEROUS_FLAME_ICON = Component.translatable("gui.icon.chrysalis.treacherous_flame"),
         NECROTIC_FLAME_ICON = Component.translatable("gui.icon.chrysalis.necrotic_flame"),
+        PURITY_FLAME_ICON = Component.translatable("gui.icon.chrysalis.purity_flame"),
         EXPERIENCE_ORB_ICON = Component.translatable("gui.icon.chrysalis.experience_orb"),
         CURSED_EXPERIENCE_ORB_ICON = Component.translatable("gui.icon.chrysalis.cursed_experience_orb"),
         REDSTONE_DUST_ICON = Component.translatable("gui.icon.chrysalis.redstone_dust"),
@@ -177,7 +179,9 @@ public class ComponentHelper {
         "ethereal",
         "Ethereal",
         "everlasting",
-        "Everlasting"
+        "Everlasting",
+        "ichor",
+        "Ichor"
     );
 
     public static final List<String> VOID_FIRE_NAMES = List.of(
@@ -186,7 +190,9 @@ public class ComponentHelper {
         "corrupt",
         "Corrupt",
         "ender",
-        "Ender"
+        "Ender",
+        "endless",
+        "Endless"
     );
 
     public static final List<String> TREACHEROUS_FIRE_NAMES = List.of(
@@ -209,6 +215,21 @@ public class ComponentHelper {
         "Zombie",
         "blight",
         "Blight"
+    );
+
+    public static final List<String> PURITY_FIRE_NAMES = List.of(
+        "purity",
+        "Purity",
+        "purify",
+        "Purify",
+        "purified",
+        "Purified",
+        "purification",
+        "Purification",
+        "gumpkin",
+        "Gumpkin",
+        "hominid",
+        "Hominid"
     );
 
     // endregion

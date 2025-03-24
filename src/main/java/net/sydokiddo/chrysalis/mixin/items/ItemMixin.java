@@ -73,6 +73,9 @@ public abstract class ItemMixin {
             } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.NECROTIC_FIRE_NAMES)) {
                 fireproofIcon = ComponentHelper.NECROTIC_FLAME_ICON;
                 fireproofColor = ComponentHelper.NECROTIC_FIRE_COLOR.getRGB();
+            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.PURITY_FIRE_NAMES)) {
+                fireproofIcon = ComponentHelper.PURITY_FLAME_ICON;
+                fireproofColor = ComponentHelper.PURITY_FIRE_COLOR.getRGB();
             }
 
             int finalFireproofColor = fireproofColor;
