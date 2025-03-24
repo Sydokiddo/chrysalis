@@ -140,7 +140,7 @@ public class TooltipMixin extends Item {
                 }
 
                 MutableComponent warningIcon = ComponentHelper.WARNING_ICON;
-                ComponentHelper.setTooltipIconsFont(warningIcon, Chrysalis.MOD_ID);
+                ComponentHelper.setIconsFont(warningIcon, Chrysalis.MOD_ID);
 
                 MutableComponent defaultComponent = enchantment.value().description().copy().withColor(color);
                 MutableComponent mainComponent;

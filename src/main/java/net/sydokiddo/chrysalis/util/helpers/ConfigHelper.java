@@ -18,13 +18,13 @@ public class ConfigHelper {
 
     public static Component genericCategoryName(String modID) {
         MutableComponent icon = ComponentHelper.GEAR_ICON;
-        ComponentHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
+        ComponentHelper.setIconsFont(icon, Chrysalis.MOD_ID);
         return Component.translatable("gui.chrysalis.config_category.generic", icon, Component.translatable("mod." + modID));
     }
 
     public static Component categoryName(String string) {
         MutableComponent icon = ComponentHelper.GEAR_ICON;
-        ComponentHelper.setTooltipIconsFont(icon, Chrysalis.MOD_ID);
+        ComponentHelper.setIconsFont(icon, Chrysalis.MOD_ID);
         return Component.translatable(string, icon, icon);
     }
 

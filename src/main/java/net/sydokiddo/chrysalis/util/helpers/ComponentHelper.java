@@ -148,10 +148,8 @@ public class ComponentHelper {
         GALACTIC_ALT_FONT = Chrysalis.resourceLocationId("galactic_alt")
     ;
 
-    public static final String TOOLTIP_ICONS_NAME = "tooltip_icons";
-
-    public static void setTooltipIconsFont(MutableComponent mutableComponent, String modID) {
-        mutableComponent.setStyle(mutableComponent.getStyle().withFont(ResourceLocation.fromNamespaceAndPath(modID, TOOLTIP_ICONS_NAME)));
+    public static void setIconsFont(MutableComponent mutableComponent, String modID) {
+        mutableComponent.setStyle(mutableComponent.getStyle().withFont(ResourceLocation.fromNamespaceAndPath(modID, "icons")));
     }
 
     // endregion

@@ -45,7 +45,7 @@ public abstract class ItemMixin {
 
         if (itemStack.has(ChrysalisDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
             MutableComponent remainsOnDeathIcon = ComponentHelper.TOOL_ICON;
-            ComponentHelper.setTooltipIconsFont(remainsOnDeathIcon, Chrysalis.MOD_ID);
+            ComponentHelper.setIconsFont(remainsOnDeathIcon, Chrysalis.MOD_ID);
             Component remainsOnDeathTooltip = ItemHelper.addTooltipWithIcon(remainsOnDeathIcon, Component.translatable("gui.chrysalis.item.remains_on_death").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.REMAINS_ON_DEATH_COLOR.getRGB())));
             list.add(remainsOnDeathTooltip);
         }
@@ -76,14 +76,14 @@ public abstract class ItemMixin {
             }
 
             int finalFireproofColor = fireproofColor;
-            ComponentHelper.setTooltipIconsFont(fireproofIcon, Chrysalis.MOD_ID);
+            ComponentHelper.setIconsFont(fireproofIcon, Chrysalis.MOD_ID);
             Component fireproofTooltip = ItemHelper.addTooltipWithIcon(fireproofIcon, Component.translatable("gui.chrysalis.item.fireproof").withStyle(style -> style.withItalic(true).withColor(finalFireproofColor)));
             list.add(fireproofTooltip);
         }
 
         if (itemStack.is(ChrysalisTags.WAXED_BLOCK_ITEMS)) {
             MutableComponent waxedIcon = ComponentHelper.WAXED_ICON;
-            ComponentHelper.setTooltipIconsFont(waxedIcon, Chrysalis.MOD_ID);
+            ComponentHelper.setIconsFont(waxedIcon, Chrysalis.MOD_ID);
             Component waxedTooltip = ItemHelper.addTooltipWithIcon(waxedIcon, Component.translatable("gui.chrysalis.item.waxed").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.WAXED_COLOR.getRGB())));
             list.add(waxedTooltip);
         }
@@ -114,7 +114,7 @@ public abstract class ItemMixin {
             if (this.getItem().getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) && CConfigOptions.CHRYSALIS_TOOLTIP.get()) {
                 if (!cir.getReturnValue().isEmpty()) cir.getReturnValue().add(CommonComponents.EMPTY);
                 MutableComponent chrysalisIcon = ComponentHelper.CHRYSALIS_ICON;
-                ComponentHelper.setTooltipIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
+                ComponentHelper.setIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
                 Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(ComponentHelper.FIVE_FONT).withColor(ComponentHelper.CHRYSALIS_COLOR.getRGB())));
                 cir.getReturnValue().add(chrysalisTooltip);
             }
