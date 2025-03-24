@@ -250,7 +250,8 @@
   "gui.chrysalis.item.waxed": "Waxed",
 
   "gui.chrysalis.item.armor_trim": "%1$s (%2$s)",
-  "gui.chrysalis.item.enchantment_level": "(%1$s / %2$s)",
+  "gui.chrysalis.item.enchantment_level": "%1$s%2$s",
+  "gui.chrysalis.item.enchantment_max_level": "/%s",
   "gui.chrysalis.item.tooltip_with_icon": "%1$s %2$s",
 
   "gui.chrysalis.none": "None",
