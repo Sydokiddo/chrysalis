@@ -124,7 +124,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
 
     private boolean hasNearbyPlayer() {
 
-        double distance = 16.0D;
+        double distance = 8.0D;
 
         for (Player player : this.level().players()) {
             if (EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(player) && EntitySelector.LIVING_ENTITY_STILL_ALIVE.test(player)) {

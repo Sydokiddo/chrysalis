@@ -131,9 +131,9 @@
   },
   "entity.generic_spawner.change_entity": {
     "sounds": [
-      "chrysalis:misc/spawner/change_entity1",
-      "chrysalis:misc/spawner/change_entity2",
-      "chrysalis:misc/spawner/change_entity3"
+      "chrysalis:entity/spawner/change_entity1",
+      "chrysalis:entity/spawner/change_entity2",
+      "chrysalis:entity/spawner/change_entity3"
     ],
     "subtitle": "subtitles.entity.generic_spawner.change_entity"
   }
