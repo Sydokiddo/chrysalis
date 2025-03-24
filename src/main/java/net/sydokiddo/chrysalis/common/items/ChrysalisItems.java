@@ -32,11 +32,9 @@ public class ChrysalisItems {
         KILL_WAND = ITEMS.registerItem("kill_wand", KillWandItem::new, debugUtilitySettings().attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.MAINHAND))),
         AGGRO_WAND = ITEMS.registerItem("aggro_wand", AggroWandItem::new, debugUtilitySettings().attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.HAND))),
         TAME_MOB = ITEMS.registerItem("tame_mob", TameMobItem::new, debugUtilitySettings()),
-        RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, debugUtilitySettings())
+        RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, debugUtilitySettings()),
+        TEST_RIGHT_CLICK_ITEM = ChrysalisItems.TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
     ;
-
-    @SuppressWarnings("unused")
-    private static final DeferredItem<Item> TEST_RIGHT_CLICK_ITEM = ChrysalisItems.TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1));
 
     // endregion
 
