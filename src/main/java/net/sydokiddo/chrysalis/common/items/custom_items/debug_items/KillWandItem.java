@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -12,6 +13,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisDamageTypes;
@@ -67,7 +69,7 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public boolean shouldDisplayCrosshair(Player player) {
-        return super.shouldDisplayCrosshair(player) && player.getMainHandItem().getItem() == this;
+        return (super.shouldDisplayCrosshair(player) || Minecraft.getInstance().crosshairPickEntity != null && Minecraft.getInstance().crosshairPickEntity.getType().is(ChrysalisTags.DISPLAYS_KILL_WAND_CROSSHAIR)) && player.getMainHandItem().getItem() == this;
     }
 
     @OnlyIn(Dist.CLIENT)

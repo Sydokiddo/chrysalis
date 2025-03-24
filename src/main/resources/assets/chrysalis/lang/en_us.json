@@ -442,6 +442,7 @@
   "tag.entity_type.chrysalis.always_plays_encounter_music": "Always Plays Encounter Music",
   "tag.entity_type.chrysalis.can_spawn_on_leaves": "Can Spawn On Leaves",
   "tag.entity_type.chrysalis.cannot_ride_boats": "Cannot Ride Boats",
+  "tag.entity_type.chrysalis.displays_kill_wand_crosshair": "Displays Kill Wand Crosshair",
   "tag.entity_type.chrysalis.enders": "Enders",
   "tag.entity_type.chrysalis.golems": "Golems",
   "tag.entity_type.chrysalis.has_arthropod_sight": "Has Arthropod Sight",
