@@ -17,11 +17,13 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.EventHooks;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.ColoredDirectionalDustParticleOptions;
 import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
@@ -311,6 +313,7 @@ public class EntitySpawner extends Entity {
         if (entity.isEmpty()) return;
 
         entity.get().setPos(this.position().x(), this.position().y(), this.position().z());
+        if (entity.get() instanceof Mob mob) EventHooks.finalizeMobSpawn(mob, serverLevel, serverLevel.getCurrentDifficultyAt(this.blockPosition()), EntitySpawnReason.SPAWNER, null);
         serverLevel.addFreshEntity(entity.get());
 
         for (int particleAmount = 0; particleAmount < 20; particleAmount++) {
