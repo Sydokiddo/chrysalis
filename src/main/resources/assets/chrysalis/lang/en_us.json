@@ -251,8 +251,9 @@
   "gui.chrysalis.item.waxed": "Waxed",
 
   "gui.chrysalis.item.armor_trim": "%1$s (%2$s)",
-  "gui.chrysalis.item.enchantment_level": "%1$s%2$s",
-  "gui.chrysalis.item.enchantment_max_level": "/%s",
+  "gui.chrysalis.item.enchantment.applies_to": "Applies To:",
+  "gui.chrysalis.item.enchantment.level": "%1$s%2$s",
+  "gui.chrysalis.item.enchantment.max_level": "/%s",
   "gui.chrysalis.item.tooltip_with_icon": "%1$s %2$s",
 
   "gui.chrysalis.none": "None",
@@ -463,5 +464,25 @@
   "tag.damage_type.chrysalis.is_ranged": "Is Ranged",
   "tag.damage_type.chrysalis.does_not_explode_end_crystals": "Does Not Explode End Crystals",
 
-  "tag.worldgen.chrysalis.biome.without_mob_spawns": "Biomes Without Mob Spawns"
+  "tag.worldgen.chrysalis.biome.without_mob_spawns": "Biomes Without Mob Spawns",
+
+  "tag.item.minecraft.enchantable.armor": "Armor",
+  "tag.item.minecraft.enchantable.bow": "Bows",
+  "tag.item.minecraft.enchantable.chest_armor": "Chestplates",
+  "tag.item.minecraft.enchantable.crossbow": "Crossbows",
+  "tag.item.minecraft.enchantable.durability": "Items with Durability",
+  "tag.item.minecraft.enchantable.equippable": "Equippable Items",
+  "tag.item.minecraft.enchantable.fire_aspect": "Swords and Maces",
+  "tag.item.minecraft.enchantable.fishing": "Fishing Rods",
+  "tag.item.minecraft.enchantable.foot_armor": "Boots",
+  "tag.item.minecraft.enchantable.head_armor": "Helmets",
+  "tag.item.minecraft.enchantable.leg_armor": "Leggings",
+  "tag.item.minecraft.enchantable.mace": "Maces",
+  "tag.item.minecraft.enchantable.mining": "Mining Tools and Shears",
+  "tag.item.minecraft.enchantable.mining_loot": "Mining Tools",
+  "tag.item.minecraft.enchantable.sharp_weapon": "Swords and Axes",
+  "tag.item.minecraft.enchantable.sword": "Swords",
+  "tag.item.minecraft.enchantable.trident": "Tridents",
+  "tag.item.minecraft.enchantable.vanishing": "Various Items",
+  "tag.item.minecraft.enchantable.weapon": "Melee Weapons"
 }

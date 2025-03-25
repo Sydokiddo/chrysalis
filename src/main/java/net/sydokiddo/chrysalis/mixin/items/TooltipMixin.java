@@ -148,8 +148,8 @@ public class TooltipMixin extends Item {
                 if (level > enchantment.value().getMaxLevel()) mainComponent = (MutableComponent) ItemHelper.addTooltipWithIcon(warningIcon, defaultComponent);
                 else mainComponent = defaultComponent;
 
-                if (level != 1 || enchantment.value().getMaxLevel() != 1) mainComponent.append(CommonComponents.space()).append(Component.translatable("gui.chrysalis.item.enchantment_level",
-                chrysalis$enchantmentLevelComponent(level).copy().withColor(color), Component.translatable("gui.chrysalis.item.enchantment_max_level", chrysalis$enchantmentLevelComponent(enchantment.value().getMaxLevel())).copy()
+                if (level != 1 || enchantment.value().getMaxLevel() != 1) mainComponent.append(CommonComponents.space()).append(Component.translatable("gui.chrysalis.item.enchantment.level",
+                chrysalis$enchantmentLevelComponent(level).copy().withColor(color), Component.translatable("gui.chrysalis.item.enchantment.max_level", chrysalis$enchantmentLevelComponent(enchantment.value().getMaxLevel())).copy()
                 .withStyle(mainComponent.getStyle().withFont(ComponentHelper.FIVE_LOWERED_FONT).withColor(darkerColor)).copy()));
 
                 cir.setReturnValue(mainComponent);

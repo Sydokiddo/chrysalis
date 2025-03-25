@@ -1,16 +1,19 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentHolder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DamageResistant;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.LightBlock;
@@ -30,6 +33,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +44,7 @@ public abstract class ItemMixin {
      * Adds tooltips to various items.
      **/
 
+    @SuppressWarnings("deprecation")
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
@@ -99,6 +104,19 @@ public abstract class ItemMixin {
         if (itemStack.is(Items.LIGHT)) {
             BlockItemStateProperties blockItemStateProperties = itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
             list.add(Component.translatable("item.chrysalis.light.description", blockItemStateProperties.get(LightBlock.LEVEL) != null ? blockItemStateProperties.get(LightBlock.LEVEL) : 15).withStyle(ChatFormatting.GRAY));
+        }
+
+        if (itemStack.has(DataComponents.STORED_ENCHANTMENTS)) {
+
+            list.add(CommonComponents.EMPTY);
+            list.add(Component.translatable("gui.chrysalis.item.enchantment.applies_to").withStyle(ChatFormatting.GRAY));
+
+            for (Holder<Enchantment> holder : Objects.requireNonNull(itemStack.get(DataComponents.STORED_ENCHANTMENTS)).keySet()) {
+                String modId = ResourceLocation.fromNamespaceAndPath(holder.getRegisteredName().split(":")[0], holder.getRegisteredName().split(":")[1]).getNamespace();
+                if (holder.value().getSupportedItems().unwrapKey().isEmpty()) return;
+                String enchantmentTag = Arrays.toString(holder.value().getSupportedItems().unwrapKey().get().location().toString().split(modId + ":enchantable/")).replace("[, ", "").replace("]", "");
+                list.add(CommonComponents.space().append(Component.translatable("tag.item." + modId + ".enchantable." + enchantmentTag).withStyle(ChatFormatting.BLUE)));
+            }
         }
     }
 
