@@ -80,6 +80,7 @@
     "misc.GuiMixin",
     "misc.GuiMixin$GuiGraphicsMixin",
     "misc.MinecraftMixin",
+    "misc.MinecraftMixin$CreativeModeInventoryScreenMixin",
     "misc.MinecraftMixin$MusicManagerMixin",
     "misc.SplashTextMixin",
     "misc.SplashTextMixin$TitleScreenMixin"

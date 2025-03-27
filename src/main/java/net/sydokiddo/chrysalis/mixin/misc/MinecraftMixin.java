@@ -4,6 +4,7 @@ import net.minecraft.Optionull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.User;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.SplashManager;
 import net.minecraft.client.sounds.MusicInfo;
@@ -13,6 +14,7 @@ import net.minecraft.sounds.Musics;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.sounds.music.MusicTracker;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.CSplashManager;
 import org.jetbrains.annotations.Nullable;
@@ -95,6 +97,20 @@ public class MinecraftMixin {
                 this.currentGain = 1.0F;
                 MusicTracker.resetMusicFade = false;
             }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mixin(CreativeModeInventoryScreen.class)
+    public static class CreativeModeInventoryScreenMixin {
+
+        /**
+         * Plays the generic UI click sound whenever a creative mode tab is clicked.
+         **/
+
+        @Inject(method = "mouseReleased", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/CreativeModeInventoryScreen;selectTab(Lnet/minecraft/world/item/CreativeModeTab;)V"))
+        private void chrysalis$playCreativeTabClickSound(double x, double y, int keyPressed, CallbackInfoReturnable<Boolean> cir) {
+            EventHelper.playUIClickSound(Minecraft.getInstance());
         }
     }
 }

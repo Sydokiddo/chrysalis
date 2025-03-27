@@ -3,7 +3,6 @@ package net.sydokiddo.chrysalis.common;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -22,6 +21,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import net.sydokiddo.chrysalis.util.helpers.CompatibilityHelper;
+import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.technical.ClipboardImage;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
@@ -83,7 +83,7 @@ public class ChrysalisClientEvents {
         }
 
         private static void playScreenshotSound(Minecraft minecraft) {
-            if (CConfigOptions.SCREENSHOT_SOUND.get()) minecraft.getSoundManager().play(SimpleSoundInstance.forUI(ChrysalisSoundEvents.SCREENSHOT_SUCCESS.get(), 1.0F));
+            if (CConfigOptions.SCREENSHOT_SOUND.get()) EventHelper.playUIClickSound(minecraft, ChrysalisSoundEvents.SCREENSHOT_SUCCESS);
         }
     }
 

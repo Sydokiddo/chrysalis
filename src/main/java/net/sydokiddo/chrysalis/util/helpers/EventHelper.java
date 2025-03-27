@@ -1,14 +1,19 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
 import com.mojang.blaze3d.shaders.FogShape;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogParameters;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.Mob;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
@@ -157,6 +162,20 @@ public class EventHelper {
 
     public static FogParameters createCustomFog(float start, float end, FogShape fogShape, Vector4f vector4f) {
         return new FogParameters(start, end, fogShape, vector4f.x(), vector4f.y(), vector4f.z(), vector4f.w());
+    }
+
+    // endregion
+
+    // region Miscellaneous
+
+    @OnlyIn(Dist.CLIENT)
+    public static void playUIClickSound(Minecraft minecraft) {
+        playUIClickSound(minecraft, SoundEvents.UI_BUTTON_CLICK);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void playUIClickSound(Minecraft minecraft, Holder<SoundEvent> soundEvent) {
+        minecraft.getSoundManager().play(SimpleSoundInstance.forUI(soundEvent, 1.0F));
     }
 
     // endregion
