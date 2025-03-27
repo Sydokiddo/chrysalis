@@ -485,5 +485,24 @@
   "tag.item.minecraft.enchantable.sword": "Swords",
   "tag.item.minecraft.enchantable.trident": "Tridents",
   "tag.item.minecraft.enchantable.vanishing": "Various Items",
-  "tag.item.minecraft.enchantable.weapon": "Melee Weapons"
+  "tag.item.minecraft.enchantable.weapon": "Melee Weapons",
+
+  "tag.item.chrysalis.enchantable.animal_armor": "Animal Armor",
+  "tag.item.chrysalis.enchantable.axe": "Axes",
+  "tag.item.chrysalis.enchantable.brush": "Brushes",
+  "tag.item.chrysalis.enchantable.bundle": "Bundles",
+  "tag.item.chrysalis.enchantable.compass": "Compasses",
+  "tag.item.chrysalis.enchantable.elytra": "Elytra",
+  "tag.item.chrysalis.enchantable.flint_and_steel": "Flint and Steel",
+  "tag.item.chrysalis.enchantable.food_on_a_stick": "Foods on a Stick",
+  "tag.item.chrysalis.enchantable.hoe": "Hoes",
+  "tag.item.chrysalis.enchantable.horse_armor": "Horse Armor",
+  "tag.item.chrysalis.enchantable.pickaxe": "Pickaxes",
+  "tag.item.chrysalis.enchantable.shears": "Shears",
+  "tag.item.chrysalis.enchantable.shield": "Shields",
+  "tag.item.chrysalis.enchantable.shovel": "Shovels",
+  "tag.item.chrysalis.enchantable.shulker_box": "Shulker Boxes",
+  "tag.item.chrysalis.enchantable.spyglass": "Spyglasses",
+  "tag.item.chrysalis.enchantable.storage": "Storage Items",
+  "tag.item.chrysalis.enchantable.wolf_armor": "Wolf Armor"
 }

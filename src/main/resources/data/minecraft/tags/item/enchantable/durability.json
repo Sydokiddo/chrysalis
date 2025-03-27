@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "#chrysalis:enchantable/axe",
+    "#chrysalis:enchantable/brush",
+    "#chrysalis:enchantable/elytra",
+    "#chrysalis:enchantable/flint_and_steel",
+    "#chrysalis:enchantable/food_on_a_stick",
+    "#chrysalis:enchantable/hoe",
+    "#chrysalis:enchantable/pickaxe",
+    "#chrysalis:enchantable/shears",
+    "#chrysalis:enchantable/shield",
+    "#chrysalis:enchantable/shovel",
+    "#minecraft:enchantable/armor",
+    "#minecraft:enchantable/bow",
+    "#minecraft:enchantable/crossbow",
+    "#minecraft:enchantable/fishing",
+    "#minecraft:enchantable/mining",
+    "#minecraft:enchantable/trident",
+    "#minecraft:enchantable/weapon"
+  ]
+}

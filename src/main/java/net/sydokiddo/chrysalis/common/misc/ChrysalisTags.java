@@ -45,7 +45,25 @@ public class ChrysalisTags {
         STONE_PRESSURE_PLATE_ITEMS = registerItemTag("stone_pressure_plates"),
         TNT_IGNITERS = registerItemTag("tnt_igniters"),
         TORCH_ITEMS = registerItemTag("torches"),
-        WAXED_BLOCK_ITEMS = registerItemTag("waxed_blocks")
+        WAXED_BLOCK_ITEMS = registerItemTag("waxed_blocks"),
+        ENCHANTABLE_ANIMAL_ARMOR = registerItemTag("enchantable/animal_armor"),
+        ENCHANTABLE_AXE = registerItemTag("enchantable/axe"),
+        ENCHANTABLE_BRUSH = registerItemTag("enchantable/brush"),
+        ENCHANTABLE_BUNDLE = registerItemTag("enchantable/bundle"),
+        ENCHANTABLE_COMPASS = registerItemTag("enchantable/compass"),
+        ENCHANTABLE_ELYTRA = registerItemTag("enchantable/elytra"),
+        ENCHANTABLE_FLINT_AND_STEEL = registerItemTag("enchantable/flint_and_steel"),
+        ENCHANTABLE_FOOD_ON_A_STICK = registerItemTag("enchantable/food_on_a_stick"),
+        ENCHANTABLE_HOE = registerItemTag("enchantable/hoe"),
+        ENCHANTABLE_HORSE_ARMOR = registerItemTag("enchantable/horse_armor"),
+        ENCHANTABLE_PICKAXE = registerItemTag("enchantable/pickaxe"),
+        ENCHANTABLE_SHEARS = registerItemTag("enchantable/shears"),
+        ENCHANTABLE_SHIELD = registerItemTag("enchantable/shield"),
+        ENCHANTABLE_SHOVEL = registerItemTag("enchantable/shovel"),
+        ENCHANTABLE_SHULKER_BOX = registerItemTag("enchantable/shulker_box"),
+        ENCHANTABLE_SPYGLASS = registerItemTag("enchantable/spyglass"),
+        ENCHANTABLE_STORAGE = registerItemTag("enchantable/storage"),
+        ENCHANTABLE_WOLF_ARMOR = registerItemTag("enchantable/wolf_armor")
     ;
 
     // endregion

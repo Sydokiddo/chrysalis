@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#chrysalis:enchantable/brush",
+    "#chrysalis:enchantable/compass",
+    "#chrysalis:enchantable/spyglass",
+    "#chrysalis:enchantable/bundle"
+  ]
+}

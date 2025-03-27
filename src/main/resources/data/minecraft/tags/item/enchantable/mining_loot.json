@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#chrysalis:enchantable/axe",
+    "#chrysalis:enchantable/hoe",
+    "#chrysalis:enchantable/pickaxe",
+    "#chrysalis:enchantable/shovel"
+  ]
+}
