@@ -507,6 +507,15 @@
       "chars": [
         "\ua055"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/remains_on_death.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua056"
+      ]
     }
   ]
 }

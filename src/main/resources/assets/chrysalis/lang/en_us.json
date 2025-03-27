@@ -58,6 +58,7 @@
   "gui.icon.chrysalis.coal": "\ua053",
   "gui.icon.chrysalis.netherite_ingot": "\ua054",
   "gui.icon.chrysalis.netherite_scrap": "\ua055",
+  "gui.icon.chrysalis.remains_on_death": "\ua056",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",

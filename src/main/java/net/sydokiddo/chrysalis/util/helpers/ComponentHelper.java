@@ -135,7 +135,8 @@ public class ComponentHelper {
         IRON_INGOT_ICON = Component.translatable("gui.icon.chrysalis.iron_ingot"),
         COAL_ICON = Component.translatable("gui.icon.chrysalis.coal"),
         NETHERITE_INGOT_ICON = Component.translatable("gui.icon.chrysalis.netherite_ingot"),
-        NETHERITE_SCRAP_ICON = Component.translatable("gui.icon.chrysalis.netherite_scrap")
+        NETHERITE_SCRAP_ICON = Component.translatable("gui.icon.chrysalis.netherite_scrap"),
+        REMAINS_ON_DEATH_ICON = Component.translatable("gui.icon.chrysalis.remains_on_death")
     ;
 
     // endregion
