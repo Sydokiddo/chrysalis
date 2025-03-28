@@ -7,6 +7,7 @@ public class CConfigOptions {
     public static Supplier<Boolean>
         ITEM_DROPPING_SOUND = () -> true,
         SCREENSHOT_SOUND = () -> true,
+        SPAWN_EGG_USE_SOUND = () -> true,
         REWORKED_MOB_GRIEFING = () -> true,
         IMPROVED_STRUCTURE_VOID_RENDERING = () -> true,
         IMPROVED_GRATE_RENDERING = () -> true,

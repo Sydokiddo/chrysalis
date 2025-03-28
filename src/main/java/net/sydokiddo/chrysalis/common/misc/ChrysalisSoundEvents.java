@@ -33,7 +33,10 @@ public class ChrysalisSoundEvents {
         AGGRO_WAND_LINK = SOUND_EVENTS.register("item.aggro_wand.link", SoundEvent::createVariableRangeEvent),
         AGGRO_WAND_SELECT_TARGET_FAIL = SOUND_EVENTS.register("item.aggro_wand.select_target.fail", SoundEvent::createVariableRangeEvent),
         AGGRO_WAND_SELECT_TARGET_SUCCESS = SOUND_EVENTS.register("item.aggro_wand.select_target.success", SoundEvent::createVariableRangeEvent),
+        COPYING_SPAWN_EGG_COPY_ENTITY = SOUND_EVENTS.register("item.copying_spawn_egg.copy_entity", SoundEvent::createVariableRangeEvent),
+        COPYING_SPAWN_EGG_REMOVE_COPIED_ENTITY = SOUND_EVENTS.register("item.copying_spawn_egg.remove_copied_entity", SoundEvent::createVariableRangeEvent),
 
+        SPAWN_EGG_USE = SOUND_EVENTS.register("item.spawn_egg.use", SoundEvent::createVariableRangeEvent),
         ITEM_DROP = SOUND_EVENTS.register("entity.item.drop", SoundEvent::createVariableRangeEvent),
 
         ENTITY_SPAWNER_APPEAR = SOUND_EVENTS.register("entity.entity_spawner.appear", SoundEvent::createVariableRangeEvent),

@@ -1,0 +1,15 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "minecraft:entity_data",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "chrysalis:item/copying_spawn_egg_uncopied"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "chrysalis:item/copying_spawn_egg_copied"
+    }
+  }
+}

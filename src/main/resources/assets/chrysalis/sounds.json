@@ -92,6 +92,28 @@
     ],
     "subtitle": "subtitles.item.aggro_wand.select_target.success"
   },
+  "item.copying_spawn_egg.copy_entity": {
+    "sounds": [
+      "minecraft:mob/chicken/plop"
+    ],
+    "subtitle": "subtitles.item.copying_spawn_egg.copy_entity"
+  },
+  "item.copying_spawn_egg.remove_copied_entity": {
+    "sounds": [
+      "minecraft:mob/turtle/egg/drop_egg1",
+      "minecraft:mob/turtle/egg/drop_egg2"
+    ],
+    "subtitle": "subtitles.item.copying_spawn_egg.remove_copied_entity"
+  },
+  "item.spawn_egg.use": {
+    "sounds": [
+      "chrysalis:item/spawn_egg/use1",
+      "chrysalis:item/spawn_egg/use2",
+      "chrysalis:item/spawn_egg/use3",
+      "chrysalis:item/spawn_egg/use4"
+    ],
+    "subtitle": "subtitles.entity.generic_spawner.spawn_entity"
+  },
   "entity.item.drop": {
     "sounds": [
       "minecraft:random/pop"

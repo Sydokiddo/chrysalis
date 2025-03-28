@@ -33,6 +33,7 @@ public class ChrysalisCreativeModeTabs {
             output.accept(ChrysalisItems.AGGRO_WAND);
             output.accept(ChrysalisItems.TAME_MOB);
             output.accept(ChrysalisItems.RIDE_MOB);
+            output.accept(ChrysalisItems.COPYING_SPAWN_EGG);
             if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) output.accept(ChrysalisItems.TEST_RIGHT_CLICK_ITEM);
         })
     .build());

@@ -516,6 +516,15 @@
       "chars": [
         "\ua056"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/egg.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua057"
+      ]
     }
   ]
 }

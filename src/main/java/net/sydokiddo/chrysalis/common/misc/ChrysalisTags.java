@@ -108,6 +108,7 @@ public class ChrysalisTags {
         ALWAYS_PLAYS_ENCOUNTER_MUSIC = registerEntityTag("always_plays_encounter_music"),
         CAN_SPAWN_ON_LEAVES = registerEntityTag("can_spawn_on_leaves"),
         CANNOT_RIDE_BOATS = registerEntityTag("cannot_ride_boats"),
+        COPYING_SPAWN_EGG_BLACKLISTED = registerEntityTag("copying_spawn_egg_blacklisted"),
         DISPLAYS_KILL_WAND_CROSSHAIR = registerEntityTag("displays_kill_wand_crosshair"),
         ENDERS = registerEntityTag("enders"),
         GOLEMS = registerEntityTag("golems"),

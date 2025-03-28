@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEgg;
 import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.CustomSpawnEggItem;
 import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
@@ -26,7 +27,7 @@ public class DispenseCustomSpawnEggDispenserBehavior implements DispenseItemBeha
     @Override
     public @NotNull ItemStack dispense(@NotNull BlockSource blockSource, ItemStack itemStack) {
 
-        if (!(itemStack.getItem() instanceof CustomSpawnEggItem customSpawnEggItem)) return itemStack;
+        if (!(itemStack.getItem() instanceof CustomSpawnEggItem customSpawnEggItem) || itemStack.getItem() instanceof CopyingSpawnEgg && CopyingSpawnEgg.getCustomData(itemStack).isEmpty()) return BlockHelper.defaultDispenseItemBehavior.dispense(blockSource, itemStack);
         Direction direction = blockSource.state().getValue(DispenserBlock.FACING);
         EntityType<?> entityType = customSpawnEggItem.getType(blockSource.level().registryAccess(), itemStack);
         BlockPos blockPos = blockSource.pos().relative(direction);

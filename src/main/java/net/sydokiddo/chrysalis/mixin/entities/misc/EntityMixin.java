@@ -17,6 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.AggroWandItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEgg;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.RideMobItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.TameMobItem;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
@@ -68,8 +69,17 @@ public abstract class EntityMixin {
 
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
     private void chrysalis$debugItemInteractions(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!this.isAlive() || !(this.chrysalis$entity instanceof LivingEntity livingEntity)) return;
+
+        if (!this.isAlive()) return;
         ItemStack itemStack = player.getItemInHand(interactionHand);
+
+        // Non-Living Entity Interactions
+
+        if (itemStack.getItem() instanceof CopyingSpawnEgg copyingSpawnEgg) cir.setReturnValue(CopyingSpawnEgg.copyEntity(copyingSpawnEgg, itemStack, player, this.chrysalis$entity, interactionHand));
+
+        // Living Entity Interactions
+
+        if (!(this.chrysalis$entity instanceof LivingEntity livingEntity)) return;
         if (itemStack.getItem() instanceof AggroWandItem) cir.setReturnValue(AggroWandItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof TameMobItem) cir.setReturnValue(TameMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof RideMobItem) cir.setReturnValue(RideMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));

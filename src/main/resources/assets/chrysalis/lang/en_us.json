@@ -59,6 +59,7 @@
   "gui.icon.chrysalis.netherite_ingot": "\ua054",
   "gui.icon.chrysalis.netherite_scrap": "\ua055",
   "gui.icon.chrysalis.remains_on_death": "\ua056",
+  "gui.icon.chrysalis.egg": "\ua057",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
@@ -237,6 +238,8 @@
   "gui.chrysalis.aggro_wand.link_mob": "Successfully linked to %s, interact with another mob to set it as the attack target",
   "gui.chrysalis.aggro_wand.set_target": "Set %1$s as %2$s's attack target",
   "gui.chrysalis.aggro_wand.linked_mob_missing": "Linked mob could not be found",
+  "gui.chrysalis.copying_spawn_egg.copy_message": "Copied Entity: %s",
+  "gui.chrysalis.copying_spawn_egg.remove_message": "Copied Entity Removed",
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",
@@ -256,6 +259,7 @@
   "gui.chrysalis.item.enchantment.level": "%1$s%2$s",
   "gui.chrysalis.item.enchantment.max_level": "/%s",
   "gui.chrysalis.item.tooltip_with_icon": "%1$s %2$s",
+  "gui.chrysalis.item.tooltip_with_icon.both_sides": "%1$s %2$s %1$s",
 
   "gui.chrysalis.none": "None",
   "gui.chrysalis.unknown": "Unknown",
@@ -325,6 +329,8 @@
   "chrysalis.configuration.item_dropping_sound.tooltip": "Dropping an item will play a popping sound.",
   "chrysalis.configuration.screenshot_sound": "Screenshot Sound",
   "chrysalis.configuration.screenshot_sound.tooltip": "Taking a screenshot will play a camera sound.",
+  "chrysalis.configuration.spawn_egg_use_sound": "Spawn Egg Use Sound",
+  "chrysalis.configuration.spawn_egg_use_sound.tooltip": "Spawning an entity with a spawn egg will play an egg cracking sound.",
   "chrysalis.configuration.reworked_mob_griefing": "Reworked Mob Griefing",
   "chrysalis.configuration.reworked_mob_griefing.tooltip": "Passive world interactions from mobs, such as villagers collecting crops or allays picking up items, are now determined by the passiveWorldInteractions game rule instead of the mobGriefing game rule. Bosses now have their own unique game rules for griefing.",
   "chrysalis.configuration.improved_structure_void_rendering": "Improved Structure Void Rendering",
@@ -369,6 +375,7 @@
   "subtitles.item.aggro_wand.select_target.fail": "Target selection fails",
   "subtitles.item.aggro_wand.select_target.success": "Target selected",
   "subtitles.item.copying_spawn_egg.copy_entity": "Entity copied",
+  "subtitles.item.copying_spawn_egg.remove_copied_entity": "Copied entity removed",
 
   "subtitles.block.podium_spawner.ambient": "Podium Spawner crackles",
   "subtitles.block.podium_spawner.spawn_mob": "Podium Spawner spawns a mob",
@@ -445,6 +452,7 @@
   "tag.entity_type.chrysalis.always_plays_encounter_music": "Always Plays Encounter Music",
   "tag.entity_type.chrysalis.can_spawn_on_leaves": "Can Spawn On Leaves",
   "tag.entity_type.chrysalis.cannot_ride_boats": "Cannot Ride Boats",
+  "tag.entity_type.chrysalis.copying_spawn_egg_blacklisted": "Copying Spawn Egg Blacklisted",
   "tag.entity_type.chrysalis.displays_kill_wand_crosshair": "Displays Kill Wand Crosshair",
   "tag.entity_type.chrysalis.enders": "Enders",
   "tag.entity_type.chrysalis.golems": "Golems",

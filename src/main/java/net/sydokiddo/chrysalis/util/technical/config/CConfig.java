@@ -11,6 +11,7 @@ public class CConfig {
     private CConfig(ModConfigSpec.Builder builder) {
         CConfigOptions.ITEM_DROPPING_SOUND = builder.define("item_dropping_sound", true);
         CConfigOptions.SCREENSHOT_SOUND = builder.define("screenshot_sound", true);
+        CConfigOptions.SPAWN_EGG_USE_SOUND = builder.define("spawn_egg_use_sound", true);
         CConfigOptions.REWORKED_MOB_GRIEFING = builder.define("reworked_mob_griefing", true);
         CConfigOptions.IMPROVED_STRUCTURE_VOID_RENDERING = builder.define("improved_structure_void_rendering", true);
         CConfigOptions.IMPROVED_GRATE_RENDERING = builder.define("improved_grate_rendering", true);
