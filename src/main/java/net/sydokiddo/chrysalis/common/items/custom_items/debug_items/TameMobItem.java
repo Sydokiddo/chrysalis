@@ -43,24 +43,27 @@ public class TameMobItem extends DebugUtilityItem {
 
     public static InteractionResult doInteraction(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
-        if (livingEntity instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame()) {
+        if (!player.isShiftKeyDown()) {
 
-            if (!livingEntity.level().isClientSide()) {
-                tamableAnimal.tame(player);
-                playTameEvents(player, tamableAnimal, itemStack);
+            if (livingEntity instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame()) {
+
+                if (!livingEntity.level().isClientSide()) {
+                    tamableAnimal.tame(player);
+                    playTameEvents(player, tamableAnimal, itemStack);
+                }
+
+                return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
             }
 
-            return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
-        }
+            if (livingEntity instanceof AbstractHorse abstractHorse && !abstractHorse.isTamed()) {
 
-        if (livingEntity instanceof AbstractHorse abstractHorse && !abstractHorse.isTamed()) {
+                if (!livingEntity.level().isClientSide()) {
+                    abstractHorse.tameWithName(player);
+                    playTameEvents(player, abstractHorse, itemStack);
+                }
 
-            if (!livingEntity.level().isClientSide()) {
-                abstractHorse.tameWithName(player);
-                playTameEvents(player, abstractHorse, itemStack);
+                return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
             }
-
-            return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
         return InteractionResult.PASS;

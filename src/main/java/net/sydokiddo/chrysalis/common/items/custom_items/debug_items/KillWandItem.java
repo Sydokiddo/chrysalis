@@ -14,6 +14,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisDamageTypes;
@@ -44,9 +45,9 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
     @Override
     public boolean hurtEnemy(@NotNull ItemStack itemStack, @NotNull LivingEntity target, LivingEntity self) {
 
-        if (self.level() instanceof ServerLevel serverLevel && (self instanceof Player player && player.isCreative() || !target.isInvulnerable())) {
+        if (self.level() instanceof ServerLevel serverLevel && self instanceof Player player && !EntityDataHelper.targetIsLinkedAllay(target, player) && (player.isCreative() || !target.isInvulnerable())) {
 
-            target.hurtServer(serverLevel, target.damageSources().source(ChrysalisDamageTypes.KILL_WAND, self), Float.MAX_VALUE);
+            target.hurtServer(serverLevel, target.damageSources().source(ChrysalisDamageTypes.KILL_WAND, player), Float.MAX_VALUE);
 
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverLevel, EntitySpawnReason.TRIGGERED);
             assert lightningBolt != null;
@@ -63,7 +64,7 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
 
     @Nullable @Override
     public DamageSource getDamageSource(LivingEntity livingEntity) {
-        return livingEntity.damageSources().source(ChrysalisDamageTypes.KILL_WAND);
+        return livingEntity.damageSources().source(ChrysalisDamageTypes.KILL_WAND, livingEntity);
     }
 
     @OnlyIn(Dist.CLIENT)
