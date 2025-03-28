@@ -17,7 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
 import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.AggroWandItem;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEgg;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEggItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.RideMobItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.TameMobItem;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
@@ -75,7 +75,7 @@ public abstract class EntityMixin {
 
         // Non-Living Entity Interactions
 
-        if (itemStack.getItem() instanceof CopyingSpawnEgg copyingSpawnEgg) cir.setReturnValue(CopyingSpawnEgg.copyEntity(copyingSpawnEgg, itemStack, player, this.chrysalis$entity, interactionHand));
+        if (itemStack.getItem() instanceof CopyingSpawnEggItem copyingSpawnEggItem) cir.setReturnValue(CopyingSpawnEggItem.copyEntity(copyingSpawnEggItem, itemStack, player, this.chrysalis$entity, interactionHand));
 
         // Living Entity Interactions
 

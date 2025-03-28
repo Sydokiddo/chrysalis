@@ -22,7 +22,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.event.EventHooks;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.AbstractSpawnerEntity;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEgg;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEggItem;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisDamageTypes;
 import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
 import org.jetbrains.annotations.NotNull;
@@ -174,7 +174,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
     public @NotNull InteractionResult interact(@NotNull Player player, @NotNull InteractionHand interactionHand) {
 
         ItemStack itemInHand = player.getItemInHand(interactionHand);
-        if (itemInHand.getItem() instanceof CopyingSpawnEgg && CopyingSpawnEgg.getCustomData(itemInHand).isEmpty()) return super.interact(player, interactionHand);
+        if (itemInHand.getItem() instanceof CopyingSpawnEggItem && CopyingSpawnEggItem.getCustomData(itemInHand).isEmpty()) return super.interact(player, interactionHand);
 
         if (!player.level().isClientSide() && !player.isSecondaryUseActive() && itemInHand.getItem() instanceof SpawnEggItem spawnEggItem) {
 

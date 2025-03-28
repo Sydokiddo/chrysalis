@@ -33,7 +33,7 @@ public class ChrysalisItems {
         AGGRO_WAND = ITEMS.registerItem("aggro_wand", AggroWandItem::new, debugUtilitySettings().attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.HAND))),
         TAME_MOB = ITEMS.registerItem("tame_mob", TameMobItem::new, debugUtilitySettings()),
         RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, debugUtilitySettings()),
-        COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEgg::new, debugUtilitySettings()),
+        COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEggItem::new, debugUtilitySettings()),
         TEST_RIGHT_CLICK_ITEM = ChrysalisItems.TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
     ;
 

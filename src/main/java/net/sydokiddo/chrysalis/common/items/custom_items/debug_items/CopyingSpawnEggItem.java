@@ -37,9 +37,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class CopyingSpawnEgg extends CustomSpawnEggItem {
+public class CopyingSpawnEggItem extends CustomSpawnEggItem {
 
-    public CopyingSpawnEgg(Properties properties) {
+    public CopyingSpawnEggItem(Properties properties) {
         super(null, null, properties);
     }
 
@@ -92,9 +92,9 @@ public class CopyingSpawnEgg extends CustomSpawnEggItem {
         return super.use(level, player, interactionHand);
     }
 
-    public static InteractionResult copyEntity(CopyingSpawnEgg copyingSpawnEgg, ItemStack itemStack, Player player, Entity entity, InteractionHand interactionHand) {
+    public static InteractionResult copyEntity(CopyingSpawnEggItem copyingSpawnEggItem, ItemStack itemStack, Player player, Entity entity, InteractionHand interactionHand) {
 
-        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && entity.getType() != copyingSpawnEgg.getType(player.level().registryAccess(), itemStack) && !entity.getType().is(ChrysalisTags.COPYING_SPAWN_EGG_BLACKLISTED)) {
+        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && !serverPlayer.isShiftKeyDown() && entity.getType() != copyingSpawnEggItem.getType(player.level().registryAccess(), itemStack) && !entity.getType().is(ChrysalisTags.COPYING_SPAWN_EGG_BLACKLISTED)) {
             CustomData.update(DataComponents.ENTITY_DATA, itemStack, (compoundTag) -> compoundTag.putString("id", entity.getType().toShortString()));
             useItem(serverPlayer, itemStack, ChrysalisSoundEvents.COPYING_SPAWN_EGG_COPY_ENTITY.get());
             serverPlayer.sendSystemMessage(createTextComponent(Component.translatable("gui.chrysalis.copying_spawn_egg.copy_message", entity.getType().getDescription().getString())), true);
