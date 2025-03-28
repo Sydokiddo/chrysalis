@@ -78,6 +78,12 @@
     ],
     "subtitle": "subtitles.item.aggro_wand.link"
   },
+  "item.aggro_wand.select_target.success": {
+    "sounds": [
+      "minecraft:item/goat_horn/call2"
+    ],
+    "subtitle": "subtitles.item.aggro_wand.select_target.success"
+  },
   "item.aggro_wand.select_target.fail": {
     "sounds": [
       "minecraft:mob/villager/no1",
@@ -86,11 +92,11 @@
     ],
     "subtitle": "subtitles.item.aggro_wand.select_target.fail"
   },
-  "item.aggro_wand.select_target.success": {
+  "item.aggro_wand.remove_linked_mob": {
     "sounds": [
-      "minecraft:item/goat_horn/call2"
+      "minecraft:random/fizz"
     ],
-    "subtitle": "subtitles.item.aggro_wand.select_target.success"
+    "subtitle": "subtitles.item.aggro_wand.remove_linked_mob"
   },
   "item.copying_spawn_egg.copy_entity": {
     "sounds": [

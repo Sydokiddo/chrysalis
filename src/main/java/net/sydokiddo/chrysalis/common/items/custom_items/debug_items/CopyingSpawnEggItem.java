@@ -49,6 +49,10 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
         return itemStack.getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
     }
 
+    /**
+     * Adds a custom tooltip to the copying spawn egg item.
+     **/
+
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> list, @NotNull TooltipFlag tooltipFlag) {
 
@@ -66,6 +70,10 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
     // endregion
 
     // region Interactions
+
+    /**
+     * When right-clicked on an entity, the entity type will be copied to the item which will then work like a normal spawn egg for said entity.
+     **/
 
     @Override
     public @NotNull InteractionResult useOn(@NotNull UseOnContext context) {
@@ -118,6 +126,8 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
 
     // endregion
 
+    // region Miscellaneous
+
     @Override
     public @NotNull EntityType<?> getType(HolderLookup.@NotNull Provider registries, @NotNull ItemStack itemStack) {
 
@@ -138,4 +148,6 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
     public @NotNull FeatureFlagSet requiredFeatures() {
         return FeatureFlagSet.of();
     }
+
+    // endregion
 }

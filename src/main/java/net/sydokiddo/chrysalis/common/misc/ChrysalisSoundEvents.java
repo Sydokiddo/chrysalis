@@ -31,8 +31,9 @@ public class ChrysalisSoundEvents {
         TAME_MOB_USE = SOUND_EVENTS.register("item.tame_mob.use", SoundEvent::createVariableRangeEvent),
         RIDE_MOB_USE = SOUND_EVENTS.register("item.ride_mob.use", SoundEvent::createVariableRangeEvent),
         AGGRO_WAND_LINK = SOUND_EVENTS.register("item.aggro_wand.link", SoundEvent::createVariableRangeEvent),
-        AGGRO_WAND_SELECT_TARGET_FAIL = SOUND_EVENTS.register("item.aggro_wand.select_target.fail", SoundEvent::createVariableRangeEvent),
         AGGRO_WAND_SELECT_TARGET_SUCCESS = SOUND_EVENTS.register("item.aggro_wand.select_target.success", SoundEvent::createVariableRangeEvent),
+        AGGRO_WAND_SELECT_TARGET_FAIL = SOUND_EVENTS.register("item.aggro_wand.select_target.fail", SoundEvent::createVariableRangeEvent),
+        AGGRO_WAND_REMOVE_LINKED_MOB = SOUND_EVENTS.register("item.aggro_wand.remove_linked_mob", SoundEvent::createVariableRangeEvent),
         COPYING_SPAWN_EGG_COPY_ENTITY = SOUND_EVENTS.register("item.copying_spawn_egg.copy_entity", SoundEvent::createVariableRangeEvent),
         COPYING_SPAWN_EGG_REMOVE_COPIED_ENTITY = SOUND_EVENTS.register("item.copying_spawn_egg.remove_copied_entity", SoundEvent::createVariableRangeEvent),
 

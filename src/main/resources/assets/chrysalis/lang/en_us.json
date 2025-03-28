@@ -235,9 +235,10 @@
   "gui.chrysalis.teleport_to_spawnpoint.message.success": "Successfully teleported to spawnpoint",
   "gui.chrysalis.teleport_to_spawnpoint.message.fail": "You have no set spawnpoint",
   "gui.chrysalis.tame_mob.message": "%s has successfully been tamed",
-  "gui.chrysalis.aggro_wand.link_mob": "Successfully linked to %s, interact with another mob to set it as the attack target",
-  "gui.chrysalis.aggro_wand.set_target": "Set %1$s as %2$s's attack target",
-  "gui.chrysalis.aggro_wand.linked_mob_missing": "Linked mob could not be found",
+  "gui.chrysalis.aggro_wand.link_message": "Successfully linked to %s, interact with another mob to set it as the attack target",
+  "gui.chrysalis.aggro_wand.select_target_message.success": "Set %1$s as %2$s's attack target",
+  "gui.chrysalis.aggro_wand.select_target_message.fail": "Linked mob could not be found",
+  "gui.chrysalis.aggro_wand.remove_linked_mob_message": "Linked mob removed",
   "gui.chrysalis.copying_spawn_egg.copy_message": "Copied Entity: %s",
   "gui.chrysalis.copying_spawn_egg.remove_message": "Copied Entity Removed",
 
@@ -374,6 +375,7 @@
   "subtitles.item.aggro_wand.link": "Mob linked",
   "subtitles.item.aggro_wand.select_target.fail": "Target selection fails",
   "subtitles.item.aggro_wand.select_target.success": "Target selected",
+  "subtitles.item.aggro_wand.remove_linked_mob": "Linked mob removed",
   "subtitles.item.copying_spawn_egg.copy_entity": "Entity copied",
   "subtitles.item.copying_spawn_egg.remove_copied_entity": "Copied entity removed",
 

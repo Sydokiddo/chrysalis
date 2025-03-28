@@ -1,11 +1,13 @@
 package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -23,6 +25,7 @@ import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -41,7 +44,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         super(properties);
     }
 
-    // region Item Components
+    // region Components and Tooltips
 
     private static final String
         mobNameString = "mob_name",
@@ -55,8 +58,6 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
     public static boolean hasMobUUID(ItemStack itemStack) {
         return ItemHelper.getSavedEntityData(itemStack).contains(mobUuidString);
     }
-
-    // endregion
 
     /**
      * Adds a custom tooltip to the aggro wand item.
@@ -75,13 +76,17 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         list.add(CommonComponents.space().append(Component.translatable(this.getDescriptionId() + descriptionString).withStyle(ChatFormatting.BLUE)));
     }
 
+    // endregion
+
+    // region Interactions
+
     /**
      * When right-clicked on a mob, the mob will be bound to the item, and then the next mob that is right-clicked on will be set as the previous mob's attack target.
      **/
 
     public static InteractionResult doInteraction(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
 
-        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && livingEntity instanceof Mob clickedMob) {
+        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && !serverPlayer.isShiftKeyDown() && livingEntity instanceof Mob clickedMob) {
 
             if (hasMobUUID(itemStack)) {
 
@@ -109,12 +114,12 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                         warden.setAttackTarget(clickedMob);
                     }
 
-                    serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-                    DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.set_target", clickedMob.getName().getString(), linkedMob.getName().getString()));
+                    playSound(serverPlayer, ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS.get());
+                    DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.select_target_message.success", clickedMob.getName().getString(), linkedMob.getName().getString()));
 
                 } else {
-                    serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_FAIL.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-                    DebugUtilityItem.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.linked_mob_missing").withStyle(ChatFormatting.RED));
+                    playSound(serverPlayer, ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_FAIL.get());
+                    DebugUtilityItem.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.select_target_message.fail").withStyle(ChatFormatting.RED));
                 }
 
                 itemStack.remove(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
@@ -128,16 +133,43 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                     compoundTag.putUUID(mobUuidString, clickedMob.getUUID());
                 });
 
-                serverPlayer.playNotifySound(ChrysalisSoundEvents.AGGRO_WAND_LINK.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.link_mob", clickedMob.getName().getString()));
+                playSound(serverPlayer, ChrysalisSoundEvents.AGGRO_WAND_LINK.get());
+                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.link_message", clickedMob.getName().getString()));
             }
 
-            serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
-            return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
+            return useItem(serverPlayer, itemStack, interactionHand);
         }
 
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public @NotNull InteractionResult use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand interactionHand) {
+
+        ItemStack itemStack = player.getItemInHand(interactionHand);
+
+        if (itemStack.has(ItemHelper.SAVED_ENTITY_DATA_COMPONENT) && player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && serverPlayer.isShiftKeyDown()) {
+            itemStack.remove(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
+            playSound(serverPlayer, ChrysalisSoundEvents.AGGRO_WAND_REMOVE_LINKED_MOB.get());
+            DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.remove_linked_mob_message").withStyle(ChatFormatting.RED));
+            return useItem(serverPlayer, itemStack, interactionHand);
+        }
+
+        return super.use(level, player, interactionHand);
+    }
+
+    private static InteractionResult useItem(ServerPlayer serverPlayer, ItemStack itemStack, InteractionHand interactionHand) {
+        serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+        serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
+        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(serverPlayer.getItemInHand(interactionHand));
+    }
+
+    // endregion
+
+    // region Miscellaneous
+
+    private static void playSound(ServerPlayer serverPlayer, SoundEvent soundEvent) {
+        serverPlayer.playNotifySound(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
     private static void addSparkleParticles(Mob mob) {
@@ -146,7 +178,15 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
+    public boolean shouldDisplayCrosshair(Player player) {
+        return super.shouldDisplayCrosshair(player) && Minecraft.getInstance().crosshairPickEntity instanceof Mob && !player.isShiftKeyDown();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Override
     public ResourceLocation getCrosshairTextureLocation() {
         return Chrysalis.resourceLocationId("hud/aggro_wand_crosshair");
     }
+
+    // endregion
 }

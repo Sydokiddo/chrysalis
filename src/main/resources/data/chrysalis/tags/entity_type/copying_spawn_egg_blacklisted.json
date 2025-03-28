@@ -1,5 +1,6 @@
 {
   "values": [
+    "minecraft:player",
     "chrysalis:encounter_spawner"
   ]
 }
