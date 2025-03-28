@@ -118,7 +118,7 @@ public class ChrysalisClientEvents {
                 event.insertAfter(ChrysalisItems.AGGRO_WAND.toStack(), ChrysalisItems.TAME_MOB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(ChrysalisItems.TAME_MOB.toStack(), ChrysalisItems.RIDE_MOB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(ChrysalisItems.RIDE_MOB.toStack(), ChrysalisItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) event.insertAfter(ChrysalisItems.RIDE_MOB.toStack(), ChrysalisItems.TEST_RIGHT_CLICK_ITEM.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) event.insertAfter(ChrysalisItems.COPYING_SPAWN_EGG.toStack(), ChrysalisItems.TEST_RIGHT_CLICK_ITEM.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.accept(Items.ENDER_DRAGON_SPAWN_EGG.getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.accept(Items.WITHER_SPAWN_EGG.getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
