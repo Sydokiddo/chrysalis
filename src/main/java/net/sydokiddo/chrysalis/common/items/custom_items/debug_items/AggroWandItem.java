@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -122,11 +123,12 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                     DebugUtilityItem.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.select_target_message.fail").withStyle(ChatFormatting.RED));
                 }
 
-                itemStack.remove(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
+                removeComponents(itemStack);
 
             } else {
 
                 addSparkleParticles(clickedMob);
+                itemStack.set(DataComponents.ITEM_NAME, Component.translatable(itemStack.getItem().getDescriptionId() + ".linked", clickedMob.getName().getString()));
 
                 CustomData.update(ItemHelper.SAVED_ENTITY_DATA_COMPONENT, itemStack, (compoundTag) -> {
                     compoundTag.putString(mobNameString, clickedMob.getName().getString());
@@ -149,7 +151,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         ItemStack itemStack = player.getItemInHand(interactionHand);
 
         if (itemStack.has(ItemHelper.SAVED_ENTITY_DATA_COMPONENT) && player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && serverPlayer.isShiftKeyDown()) {
-            itemStack.remove(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
+            removeComponents(itemStack);
             playSound(serverPlayer, ChrysalisSoundEvents.AGGRO_WAND_REMOVE_LINKED_MOB.get());
             DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.remove_linked_mob_message").withStyle(ChatFormatting.RED));
             return useItem(serverPlayer, itemStack, interactionHand);
@@ -174,6 +176,11 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
     private static void addSparkleParticles(Mob mob) {
         addParticlesAroundEntity(mob, ParticleTypes.HAPPY_VILLAGER, 10, 1.5D);
+    }
+
+    private static void removeComponents(ItemStack itemStack) {
+        itemStack.set(DataComponents.ITEM_NAME, Component.translatable(itemStack.getItem().getDescriptionId()));
+        itemStack.remove(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);
     }
 
     @OnlyIn(Dist.CLIENT)
