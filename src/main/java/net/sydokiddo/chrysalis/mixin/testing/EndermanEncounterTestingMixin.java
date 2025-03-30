@@ -12,11 +12,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(EnderMan.class)
-public abstract class TestEndermanMixin extends Monster implements EncounterMusicMob {
+public abstract class EndermanEncounterTestingMixin extends Monster implements EncounterMusicMob {
 
     @Shadow public abstract boolean isCreepy();
 
-    private TestEndermanMixin(EntityType<? extends Monster> entityType, Level level) {
+    private EndermanEncounterTestingMixin(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
 

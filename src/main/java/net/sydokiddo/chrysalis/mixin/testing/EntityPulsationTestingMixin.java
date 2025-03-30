@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Entity.class)
-public abstract class TestEntityMixin implements EntityAccess {
+public abstract class EntityPulsationTestingMixin implements EntityAccess {
 
     @Unique Entity chrysalis$entity = (Entity) (Object) this;
     @Shadow public abstract Level level();

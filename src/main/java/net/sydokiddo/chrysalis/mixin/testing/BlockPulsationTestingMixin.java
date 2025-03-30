@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BlockBehaviour.class)
-public class BlockBehaviorMixin {
+public class BlockPulsationTestingMixin {
 
     @Inject(method = "onProjectileHit", at = @At("HEAD"))
     private void chrysalis$emitPulsationParticleFromProjectiles(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile, CallbackInfo info) {

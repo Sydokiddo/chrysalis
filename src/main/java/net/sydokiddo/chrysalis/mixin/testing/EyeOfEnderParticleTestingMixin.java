@@ -20,7 +20,7 @@ import java.awt.*;
 
 @OnlyIn(Dist.CLIENT)
 @Mixin(LevelEventHandler.class)
-public class LevelEventHandlerMixin {
+public class EyeOfEnderParticleTestingMixin {
 
     @Shadow @Final private Level level;
 

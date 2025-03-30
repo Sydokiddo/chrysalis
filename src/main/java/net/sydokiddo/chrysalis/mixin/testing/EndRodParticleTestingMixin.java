@@ -13,9 +13,9 @@ import java.awt.*;
 
 @OnlyIn(Dist.CLIENT)
 @Mixin(EndRodParticle.class)
-public class EndRodParticleMixin extends SimpleAnimatedParticle {
+public class EndRodParticleTestingMixin extends SimpleAnimatedParticle {
 
-    private EndRodParticleMixin(ClientLevel clientLevel, double x, double y, double z, SpriteSet spriteSet, float gravity) {
+    private EndRodParticleTestingMixin(ClientLevel clientLevel, double x, double y, double z, SpriteSet spriteSet, float gravity) {
         super(clientLevel, x, y, z, spriteSet, gravity);
     }
 

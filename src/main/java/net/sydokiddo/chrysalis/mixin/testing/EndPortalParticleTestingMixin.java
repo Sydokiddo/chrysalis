@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.awt.*;
 
 @Mixin(EndPortalBlock.class)
-public class EndPortalBlockMixin {
+public class EndPortalParticleTestingMixin {
 
     @Inject(method = "animateTick", at = @At("HEAD"), cancellable = true)
     private void chrysalis$changeEndPortalParticles(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource, CallbackInfo info) {

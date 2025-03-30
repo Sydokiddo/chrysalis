@@ -73,8 +73,8 @@ public class TameMobItem extends DebugUtilityItem {
 
         if (!(player instanceof ServerPlayer serverPlayer)) return;
 
-        serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
         serverPlayer.playNotifySound(CSoundEvents.TAME_MOB_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+        serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
         serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
 
         if (tamedMob.level() instanceof ServerLevel serverLevel) {

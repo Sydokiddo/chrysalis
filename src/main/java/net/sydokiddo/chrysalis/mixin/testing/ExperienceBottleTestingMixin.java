@@ -21,9 +21,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ThrownExperienceBottle.class)
-public abstract class ThrownExperienceBottleMixin extends ThrowableItemProjectile {
+public abstract class ExperienceBottleTestingMixin extends ThrowableItemProjectile {
 
-    public ThrownExperienceBottleMixin(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
+    public ExperienceBottleTestingMixin(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
         super(entityType, level);
     }
 
