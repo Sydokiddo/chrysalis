@@ -346,7 +346,9 @@
   "chrysalis.configuration.reworked_tooltips": "Reworked Tooltips",
   "chrysalis.configuration.reworked_tooltips.tooltip": "Reworks the layout of a number of tooltips to appear cleaner and easier to read.",
   "chrysalis.configuration.chrysalis_tooltip": "Chrysalis Tooltip",
-  "chrysalis.configuration.chrysalis_tooltip.tooltip": "Any new items added by chrysalis will display a tooltip with the mod's name on them.",
+  "chrysalis.configuration.chrysalis_tooltip.tooltip": "All new items added by chrysalis will display a tooltip with the mod's name on them.",
+  "chrysalis.configuration.chrysalis_creative_mode_tab": "Chrysalis Creative Mode Tab",
+  "chrysalis.configuration.chrysalis_creative_mode_tab.tooltip": "All new items added by chrysalis will be given their own creative mode tab. Requires restarting!",
 
   "gamerule.mobWorldInteractions": "Allow non-destructive world interactions from mobs",
   "gamerule.dragonGriefing": "Allow for Ender Dragons to destroy blocks",

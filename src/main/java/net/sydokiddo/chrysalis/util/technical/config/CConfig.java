@@ -18,6 +18,7 @@ public class CConfig {
         CConfigOptions.FIXED_ELYTRA_MODEL = builder.define("fixed_elytra_model", true);
         CConfigOptions.REWORKED_TOOLTIPS = builder.define("reworked_tooltips", true);
         CConfigOptions.CHRYSALIS_TOOLTIP = builder.define("chrysalis_tooltip", true);
+        CConfigOptions.CHRYSALIS_CREATIVE_MODE_TAB = builder.define("chrysalis_creative_mode_tab", true);
     }
 
     static {

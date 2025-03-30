@@ -13,6 +13,7 @@ public class CConfigOptions {
         IMPROVED_GRATE_RENDERING = () -> true,
         FIXED_ELYTRA_MODEL = () -> true,
         REWORKED_TOOLTIPS = () -> true,
-        CHRYSALIS_TOOLTIP = () -> true
+        CHRYSALIS_TOOLTIP = () -> true,
+        CHRYSALIS_CREATIVE_MODE_TAB = () -> true
     ;
 }
