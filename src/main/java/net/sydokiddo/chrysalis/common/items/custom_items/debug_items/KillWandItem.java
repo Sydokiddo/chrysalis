@@ -45,7 +45,7 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
     @Override
     public boolean hurtEnemy(@NotNull ItemStack itemStack, @NotNull LivingEntity target, LivingEntity self) {
 
-        if (self.level() instanceof ServerLevel serverLevel && self instanceof Player player && !EntityDataHelper.targetIsLinkedAllay(target, player) && (player.isCreative() || !target.isInvulnerable())) {
+        if (self.level() instanceof ServerLevel serverLevel && self instanceof Player player && canAttack(target, player)) {
 
             target.hurtServer(serverLevel, target.damageSources().source(CDamageTypes.KILL_WAND, player), Float.MAX_VALUE);
 
@@ -67,10 +67,16 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
         return livingEntity.damageSources().source(CDamageTypes.KILL_WAND, livingEntity);
     }
 
+    public static boolean canAttack(Entity target, Player player) {
+        return target.isAttackable() && !EntityDataHelper.targetIsLinkedAllay(target, player) && (player.isCreative() || !target.isInvulnerable());
+    }
+
     @OnlyIn(Dist.CLIENT)
     @Override
     public boolean shouldDisplayCrosshair(Player player) {
-        return (super.shouldDisplayCrosshair(player) || Minecraft.getInstance().crosshairPickEntity != null && Minecraft.getInstance().crosshairPickEntity.getType().is(CTags.DISPLAYS_KILL_WAND_CROSSHAIR)) && player.getMainHandItem().getItem() == this;
+        Entity crosshairEntity = Minecraft.getInstance().crosshairPickEntity;
+        if (crosshairEntity != null && !canAttack(crosshairEntity, player)) return false;
+        return (super.shouldDisplayCrosshair(player) || crosshairEntity != null && crosshairEntity.getType().is(CTags.DISPLAYS_KILL_WAND_CROSSHAIR)) && player.getMainHandItem().getItem() == this;
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -15,11 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
-import net.sydokiddo.chrysalis.common.items.CItems;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.AggroWandItem;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEggItem;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.RideMobItem;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.TameMobItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.*;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,7 +29,6 @@ import java.util.Objects;
 public abstract class EntityMixin {
 
     @Unique private Entity chrysalis$entity = (Entity) (Object) this;
-    @Shadow public abstract boolean isAttackable();
     @Shadow public abstract boolean isAlive();
 
     /**
@@ -49,7 +44,7 @@ public abstract class EntityMixin {
         ItemStack mainHandItem = minecraft.player.getMainHandItem();
         ItemStack offHandItem = minecraft.player.getOffhandItem();
 
-        if (mainHandItem.is(CItems.KILL_WAND) && !this.isAttackable()) return;
+        if (mainHandItem.getItem() instanceof KillWandItem && !KillWandItem.canAttack(this.chrysalis$entity, minecraft.player)) return;
         if (mainHandItem.has(CDataComponents.INCREASED_PICK_RADIUS) || offHandItem.has(CDataComponents.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.chrysalis$entity) > 8 ? 0.5F : 0.0F);
     }
 
