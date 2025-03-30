@@ -175,7 +175,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
     }
 
     private static void addSparkleParticles(Mob mob) {
-        addParticlesAroundEntity(mob, ParticleTypes.HAPPY_VILLAGER, 10, 1.5D);
+        addParticlesAroundEntity(mob, ParticleTypes.HAPPY_VILLAGER, 10, 0.8D);
     }
 
     private static void removeComponents(ItemStack itemStack) {

@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.custom_items.CustomSpawnEggItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
@@ -105,10 +107,14 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
     public static InteractionResult copyEntity(CopyingSpawnEggItem copyingSpawnEggItem, ItemStack itemStack, Player player, Entity entity, InteractionHand interactionHand) {
 
         if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && !serverPlayer.isShiftKeyDown() && entity.getType() != copyingSpawnEggItem.getType(player.level().registryAccess(), itemStack) && !entity.getType().is(CTags.COPYING_SPAWN_EGG_BLACKLISTED)) {
+
             itemStack.set(DataComponents.ITEM_NAME, Component.translatable(copyingSpawnEggItem.getDescriptionId() + ".copied", entity.getType().getDescription().getString()));
             CustomData.update(DataComponents.ENTITY_DATA, itemStack, (compoundTag) -> compoundTag.putString("id", entity.getType().toShortString()));
+
             useItem(serverPlayer, itemStack, CSoundEvents.COPYING_SPAWN_EGG_COPY_ENTITY.get());
+            DebugUtilityItem.addParticlesAroundEntity(entity, ParticleTypes.HAPPY_VILLAGER, 10, 0.8D);
             sendMessage(serverPlayer, Component.translatable("gui.chrysalis.copying_spawn_egg.copy_message", entity.getType().getDescription().getString()));
+
             return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
 
