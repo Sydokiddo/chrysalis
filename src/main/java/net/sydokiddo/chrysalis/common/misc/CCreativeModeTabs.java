@@ -15,10 +15,10 @@ public class CCreativeModeTabs {
      * Registers the debug utility items in the creative mode inventory.
      **/
 
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Chrysalis.MOD_ID);
+    private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Chrysalis.MOD_ID);
 
     @SuppressWarnings("unused")
-    public static final Supplier<CreativeModeTab> CHRYSALIS_TAB = CREATIVE_MODE_TAB.register("chrysalis_tab", () -> CreativeModeTab.builder()
+    private static final Supplier<CreativeModeTab> CHRYSALIS_TAB = CREATIVE_MODE_TAB.register("chrysalis_tab", () -> CreativeModeTab.builder()
         .icon(() -> new ItemStack(CItems.ICON.get()))
         .title(Component.translatable("mod.chrysalis"))
         .displayItems((parameters, output) -> {

@@ -13,7 +13,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 
 public class CDataComponents {
 
-    public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Chrysalis.MOD_ID);
+    private static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Chrysalis.MOD_ID);
 
     // region Data Components
 

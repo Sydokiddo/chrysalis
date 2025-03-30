@@ -10,7 +10,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 
 public class CCriteriaTriggers {
 
-    public static final DeferredRegister<CriterionTrigger<?>> CRITERIA_TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, Chrysalis.MOD_ID);
+    private static final DeferredRegister<CriterionTrigger<?>> CRITERIA_TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, Chrysalis.MOD_ID);
 
     // region Criteria Triggers
 

@@ -10,7 +10,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 
 public class CAttributes {
 
-    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, Chrysalis.MOD_ID);
+    private static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, Chrysalis.MOD_ID);
 
     // region Attributes
 
@@ -25,7 +25,7 @@ public class CAttributes {
 
     // region Registry
 
-    public static DeferredHolder<Attribute, Attribute> registerAttribute(String name, double baseValue, double minValue, double maxValue) {
+    private static DeferredHolder<Attribute, Attribute> registerAttribute(String name, double baseValue, double minValue, double maxValue) {
         return ATTRIBUTES.register(name, builder -> new RangedAttribute("attribute." + Chrysalis.MOD_ID + "." + name, baseValue, minValue, maxValue).setSyncable(true));
     }
 

@@ -15,7 +15,7 @@ import net.sydokiddo.chrysalis.common.entities.custom_entities.Seat;
 
 public class CEntities {
 
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.createEntities(Chrysalis.MOD_ID);
+    private static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.createEntities(Chrysalis.MOD_ID);
 
     // region Entities
 

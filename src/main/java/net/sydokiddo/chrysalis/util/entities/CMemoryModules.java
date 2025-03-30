@@ -16,7 +16,7 @@ public class CMemoryModules {
      * Template memory modules that can be used for mobs.
      **/
 
-    public static final DeferredRegister<MemoryModuleType<?>> MEMORY_MODULES = DeferredRegister.create(Registries.MEMORY_MODULE_TYPE, Chrysalis.MOD_ID);
+    private static final DeferredRegister<MemoryModuleType<?>> MEMORY_MODULES = DeferredRegister.create(Registries.MEMORY_MODULE_TYPE, Chrysalis.MOD_ID);
 
     // region Memory Modules
 

@@ -19,7 +19,7 @@ import java.awt.*;
 
 public class CStatusEffects {
 
-    public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, Chrysalis.MOD_ID);
+    private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, Chrysalis.MOD_ID);
 
     // region Status Effects
 
