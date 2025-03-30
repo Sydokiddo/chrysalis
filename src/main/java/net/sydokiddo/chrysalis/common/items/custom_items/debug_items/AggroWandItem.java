@@ -174,10 +174,6 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
         serverPlayer.playNotifySound(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
-    private static void addSparkleParticles(Mob mob) {
-        addParticlesAroundEntity(mob, ParticleTypes.HAPPY_VILLAGER, 10, 0.8D);
-    }
-
     private static void removeComponents(ItemStack itemStack) {
         itemStack.set(DataComponents.ITEM_NAME, Component.translatable(itemStack.getItem().getDescriptionId()));
         itemStack.remove(ItemHelper.SAVED_ENTITY_DATA_COMPONENT);

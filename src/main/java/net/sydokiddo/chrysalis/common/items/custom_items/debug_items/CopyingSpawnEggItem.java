@@ -3,7 +3,6 @@ package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -112,7 +111,7 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
             CustomData.update(DataComponents.ENTITY_DATA, itemStack, (compoundTag) -> compoundTag.putString("id", entity.getType().toShortString()));
 
             useItem(serverPlayer, itemStack, CSoundEvents.COPYING_SPAWN_EGG_COPY_ENTITY.get());
-            DebugUtilityItem.addParticlesAroundEntity(entity, ParticleTypes.HAPPY_VILLAGER, 10, 0.8D);
+            DebugUtilityItem.addSparkleParticles(entity);
             sendMessage(serverPlayer, Component.translatable("gui.chrysalis.copying_spawn_egg.copy_message", entity.getType().getDescription().getString()));
 
             return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));

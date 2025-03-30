@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_class
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -51,6 +52,10 @@ public class DebugUtilityItem extends Item {
             double random = serverLevel.getRandom().nextGaussian() * 0.02D;
             serverLevel.sendParticles(particleType, entity.getRandomX(range), entity.getRandomY() + 0.5D, entity.getRandomZ(range), 1, 0.0D, random, random, random);
         }
+    }
+
+    public static void addSparkleParticles(Entity entity) {
+        addParticlesAroundEntity(entity, ParticleTypes.HAPPY_VILLAGER, 10, 0.8D);
     }
 
     public static void sendFeedbackMessage(boolean requiresGameRule, ServerPlayer serverPlayer, Component message) {
