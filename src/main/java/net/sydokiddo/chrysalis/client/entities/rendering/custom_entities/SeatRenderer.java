@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.client.entities.rendering;
+package net.sydokiddo.chrysalis.client.entities.rendering.custom_entities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;

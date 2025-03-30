@@ -16,7 +16,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.StructureChangedPayload;
 import org.jetbrains.annotations.Nullable;
@@ -138,7 +138,7 @@ public class MusicTracker {
             setQueuedMusic(null, isFirst);
             return;
         }
-        setQueuedMusic(ChrysalisSoundEvents.structures.get(structure), isFirst);
+        setQueuedMusic(CSoundEvents.structures.get(structure), isFirst);
     }
 
     // endregion

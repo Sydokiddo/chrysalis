@@ -35,7 +35,7 @@ import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classe
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
@@ -115,11 +115,11 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                         warden.setAttackTarget(clickedMob);
                     }
 
-                    playSound(serverPlayer, ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS.get());
+                    playSound(serverPlayer, CSoundEvents.AGGRO_WAND_SELECT_TARGET_SUCCESS.get());
                     DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.select_target_message.success", clickedMob.getName().getString(), linkedMob.getName().getString()));
 
                 } else {
-                    playSound(serverPlayer, ChrysalisSoundEvents.AGGRO_WAND_SELECT_TARGET_FAIL.get());
+                    playSound(serverPlayer, CSoundEvents.AGGRO_WAND_SELECT_TARGET_FAIL.get());
                     DebugUtilityItem.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.select_target_message.fail").withStyle(ChatFormatting.RED));
                 }
 
@@ -135,7 +135,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                     compoundTag.putUUID(mobUuidString, clickedMob.getUUID());
                 });
 
-                playSound(serverPlayer, ChrysalisSoundEvents.AGGRO_WAND_LINK.get());
+                playSound(serverPlayer, CSoundEvents.AGGRO_WAND_LINK.get());
                 DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.link_message", clickedMob.getName().getString()));
             }
 
@@ -152,7 +152,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
 
         if (itemStack.has(ItemHelper.SAVED_ENTITY_DATA_COMPONENT) && player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && serverPlayer.isShiftKeyDown()) {
             removeComponents(itemStack);
-            playSound(serverPlayer, ChrysalisSoundEvents.AGGRO_WAND_REMOVE_LINKED_MOB.get());
+            playSound(serverPlayer, CSoundEvents.AGGRO_WAND_REMOVE_LINKED_MOB.get());
             DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.remove_linked_mob_message").withStyle(ChatFormatting.RED));
             return useItem(serverPlayer, itemStack, interactionHand);
         }

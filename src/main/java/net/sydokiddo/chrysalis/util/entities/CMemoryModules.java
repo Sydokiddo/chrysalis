@@ -10,7 +10,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import java.util.Optional;
 
 @SuppressWarnings("unused")
-public class ChrysalisMemoryModules {
+public class CMemoryModules {
 
     /**
      * Template memory modules that can be used for mobs.

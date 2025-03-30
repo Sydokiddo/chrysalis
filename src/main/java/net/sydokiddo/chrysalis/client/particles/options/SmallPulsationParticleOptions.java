@@ -13,7 +13,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
+import net.sydokiddo.chrysalis.common.misc.CParticles;
 import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
@@ -75,6 +75,6 @@ public class SmallPulsationParticleOptions implements ParticleOptions, ParticleC
 
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.SMALL_PULSATION.get();
+        return CParticles.SMALL_PULSATION.get();
     }
 }

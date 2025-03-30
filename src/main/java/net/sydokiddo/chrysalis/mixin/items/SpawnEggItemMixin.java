@@ -11,7 +11,7 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -30,7 +30,7 @@ public class SpawnEggItemMixin {
     @Inject(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;gameEvent(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/Holder;Lnet/minecraft/core/BlockPos;)V", ordinal = 0))
     private void chrysalis$playSpawnerChangeEntitySound(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         BlockPos blockPos = useOnContext.getClickedPos();
-        useOnContext.getLevel().playSound(null, blockPos, ChrysalisSoundEvents.GENERIC_SPAWNER_CHANGE_ENTITY.get(), SoundSource.BLOCKS);
+        useOnContext.getLevel().playSound(null, blockPos, CSoundEvents.GENERIC_SPAWNER_CHANGE_ENTITY.get(), SoundSource.BLOCKS);
         if (useOnContext.getLevel() instanceof ServerLevel serverLevel) for (int amount = 0; amount < 8; ++amount) serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, blockPos.getCenter().x(), blockPos.getY() + 1, blockPos.getCenter().z(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
     }
 
@@ -50,6 +50,6 @@ public class SpawnEggItemMixin {
 
     @Unique
     private void chrysalis$playSpawnEggSound(Level level, BlockPos blockPos) {
-        if (CConfigOptions.SPAWN_EGG_USE_SOUND.get()) level.playSound(null, blockPos, ChrysalisSoundEvents.SPAWN_EGG_USE.get(), SoundSource.NEUTRAL);
+        if (CConfigOptions.SPAWN_EGG_USE_SOUND.get()) level.playSound(null, blockPos, CSoundEvents.SPAWN_EGG_USE.get(), SoundSource.NEUTRAL);
     }
 }

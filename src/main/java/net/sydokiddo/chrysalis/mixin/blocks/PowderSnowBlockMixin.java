@@ -5,8 +5,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.PowderSnowBlock;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,7 +24,7 @@ public class PowderSnowBlockMixin {
     @ModifyArg(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis$powderSnowWorldInteractionsGameRule(GameRules.Key<GameRules.BooleanValue> oldValue) {
         if (!CConfigOptions.REWORKED_MOB_GRIEFING.get()) return oldValue;
-        return ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS;
+        return CGameRules.RULE_MOB_WORLD_INTERACTIONS;
     }
 
     /**
@@ -33,6 +33,6 @@ public class PowderSnowBlockMixin {
 
     @Inject(method = "canEntityWalkOnPowderSnow", at = @At("HEAD"), cancellable = true)
     private static void chrysalis$powderSnowWalkableItemsTag(Entity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.FEET).is(ChrysalisTags.POWDER_SNOW_WALKABLE_ITEMS)) cir.setReturnValue(true);
+        if (entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.FEET).is(CTags.POWDER_SNOW_WALKABLE_ITEMS)) cir.setReturnValue(true);
     }
 }

@@ -14,7 +14,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
 import org.jetbrains.annotations.NotNull;
 
-public class ChrysalisParticles {
+public class CParticles {
 
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, Chrysalis.MOD_ID);
 

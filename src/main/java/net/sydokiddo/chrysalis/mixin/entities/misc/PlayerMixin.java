@@ -39,15 +39,15 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
-import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisAttributes;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.CRegistry;
+import net.sydokiddo.chrysalis.common.items.CDataComponents;
+import net.sydokiddo.chrysalis.common.misc.CAttributes;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
 import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -80,7 +80,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
     private void chrysalis$definePlayerTags(SynchedEntityData.Builder builder, CallbackInfo info) {
-        builder.define(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.empty());
+        builder.define(CRegistry.ENCOUNTERED_MOB_UUID, Optional.empty());
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))
@@ -97,8 +97,8 @@ public abstract class PlayerMixin extends LivingEntity {
     @Inject(method = "createAttributes", at = @At("RETURN"))
     private static void chrysalis$addPlayerAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> info) {
         if (info.getReturnValue() != null) {
-            info.getReturnValue().add(ChrysalisAttributes.ITEM_PICK_UP_RANGE);
-            info.getReturnValue().add(ChrysalisAttributes.EXPERIENCE_PICK_UP_RANGE);
+            info.getReturnValue().add(CAttributes.ITEM_PICK_UP_RANGE);
+            info.getReturnValue().add(CAttributes.EXPERIENCE_PICK_UP_RANGE);
         }
     }
 
@@ -124,7 +124,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
             List<? extends Mob> nearbyEncounteredMobs = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(128.0D), entity -> {
                 boolean defaultReturnValue = entity instanceof EncounterMusicMob encounterMusicMob && entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(this.chrysalis$player) <= encounterMusicMob.chrysalis$getFinalEncounterMusicRange();
-                if (entity.getType().is(ChrysalisTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC)) return defaultReturnValue;
+                if (entity.getType().is(CTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC)) return defaultReturnValue;
                 else return defaultReturnValue && entity.getTarget() != null;
             });
 
@@ -157,7 +157,7 @@ public abstract class PlayerMixin extends LivingEntity {
     @Inject(method = "isSecondaryUseActive", at = @At(value = "RETURN"), cancellable = true)
     private void chrysalis$allowBlockUseWhileSneaking(CallbackInfoReturnable<Boolean> cir) {
         BlockHitResult blockHitResult = this.chrysalis$getPlayerPOVHitResult();
-        if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(ChrysalisTags.ALLOWS_USE_WHILE_SNEAKING)) cir.setReturnValue(false);
+        if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(CTags.ALLOWS_USE_WHILE_SNEAKING)) cir.setReturnValue(false);
     }
 
     /**
@@ -175,7 +175,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Redirect(method = "dropEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;dropAll()V"))
     private void chrysalis$setDeathItemsToNeverDespawn(Inventory inventory) {
-        if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_PLAYER_DEATH_ITEM_DESPAWNING)) {
+        if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(CGameRules.RULE_PLAYER_DEATH_ITEM_DESPAWNING)) {
             inventory.dropAll();
         } else {
             inventory.compartments.forEach((getInventory) -> getInventory.forEach(itemStack -> {
@@ -210,8 +210,8 @@ public abstract class PlayerMixin extends LivingEntity {
         AABB itemHitboxRange;
         AABB experienceHitboxRange;
 
-        double itemPickUpRange = this.getAttributeValue(ChrysalisAttributes.ITEM_PICK_UP_RANGE);
-        double experiencePickUpRange = this.getAttributeValue(ChrysalisAttributes.EXPERIENCE_PICK_UP_RANGE);
+        double itemPickUpRange = this.getAttributeValue(CAttributes.ITEM_PICK_UP_RANGE);
+        double experiencePickUpRange = this.getAttributeValue(CAttributes.EXPERIENCE_PICK_UP_RANGE);
 
         if (this.getVehicle() != null && !this.getVehicle().isRemoved()) {
             normalHitboxRange = this.getBoundingBox().minmax(this.getVehicle().getBoundingBox()).inflate(1.0D, 0.0D, 1.0D);
@@ -246,7 +246,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "killedEntity", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$hideEntityKilledStat(ServerLevel serverLevel, LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
-        if (livingEntity != null && livingEntity.getType().is(ChrysalisTags.HIDDEN_FROM_STATISTICS_MENU)) cir.setReturnValue(true);
+        if (livingEntity != null && livingEntity.getType().is(CTags.HIDDEN_FROM_STATISTICS_MENU)) cir.setReturnValue(true);
     }
 
     /**
@@ -259,7 +259,7 @@ public abstract class PlayerMixin extends LivingEntity {
         super.dropCustomDeathLoot(serverLevel, damageSource, recentlyHit);
 
         if (Chrysalis.registryAccess == null) return;
-        List<PlayerLootTableData> list = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.PLAYER_LOOT_TABLE_DATA).stream().filter(codec -> Objects.equals(codec.uuid(), this.getStringUUID())).toList();
+        List<PlayerLootTableData> list = Chrysalis.registryAccess.lookupOrThrow(CRegistry.PLAYER_LOOT_TABLE_DATA).stream().filter(codec -> Objects.equals(codec.uuid(), this.getStringUUID())).toList();
 
         for (PlayerLootTableData playerLootTableData : list) {
 
@@ -310,7 +310,7 @@ public abstract class PlayerMixin extends LivingEntity {
         @Redirect(method = "die", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;awardStat(Lnet/minecraft/stats/Stat;)V", ordinal = 0))
         private void chrysalis$hideEntityKilledByStat(ServerPlayer serverPlayer, Stat<?> stat) {
             LivingEntity killCredit = this.getKillCredit();
-            if (killCredit != null && !killCredit.getType().is(ChrysalisTags.HIDDEN_FROM_STATISTICS_MENU)) this.awardStat(Stats.ENTITY_KILLED_BY.get(killCredit.getType()));
+            if (killCredit != null && !killCredit.getType().is(CTags.HIDDEN_FROM_STATISTICS_MENU)) this.awardStat(Stats.ENTITY_KILLED_BY.get(killCredit.getType()));
         }
     }
 
@@ -319,7 +319,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
         @WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"))
         private boolean chrysalis$keepItemOnDeath(ItemStack itemStack, Operation<Boolean> original) {
-            if (itemStack.has(ChrysalisDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) return true;
+            if (itemStack.has(CDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) return true;
             return itemStack.isEmpty();
         }
     }

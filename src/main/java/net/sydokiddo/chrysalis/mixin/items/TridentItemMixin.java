@@ -5,7 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.level.Level;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisCriteriaTriggers;
+import net.sydokiddo.chrysalis.common.misc.CCriteriaTriggers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,6 +20,6 @@ public class TridentItemMixin {
 
     @Inject(method = "releaseUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;startAutoSpinAttack(IFLnet/minecraft/world/item/ItemStack;)V"))
     private void chrysalis$useRiptideTridentCriteriaTrigger(ItemStack itemStack, Level level, LivingEntity livingEntity, int usedTicks, CallbackInfoReturnable<Boolean> cir) {
-        if (livingEntity instanceof ServerPlayer serverPlayer) ChrysalisCriteriaTriggers.USE_RIPTIDE_TRIDENT.get().trigger(serverPlayer);
+        if (livingEntity instanceof ServerPlayer serverPlayer) CCriteriaTriggers.USE_RIPTIDE_TRIDENT.get().trigger(serverPlayer);
     }
 }

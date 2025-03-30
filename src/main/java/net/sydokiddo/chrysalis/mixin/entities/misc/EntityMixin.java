@@ -14,13 +14,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
-import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
+import net.sydokiddo.chrysalis.common.items.CDataComponents;
+import net.sydokiddo.chrysalis.common.items.CItems;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.AggroWandItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEggItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.RideMobItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.TameMobItem;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -49,8 +49,8 @@ public abstract class EntityMixin {
         ItemStack mainHandItem = minecraft.player.getMainHandItem();
         ItemStack offHandItem = minecraft.player.getOffhandItem();
 
-        if (mainHandItem.is(ChrysalisItems.KILL_WAND) && !this.isAttackable()) return;
-        if (mainHandItem.has(ChrysalisDataComponents.INCREASED_PICK_RADIUS) || offHandItem.has(ChrysalisDataComponents.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.chrysalis$entity) > 8 ? 0.5F : 0.0F);
+        if (mainHandItem.is(CItems.KILL_WAND) && !this.isAttackable()) return;
+        if (mainHandItem.has(CDataComponents.INCREASED_PICK_RADIUS) || offHandItem.has(CDataComponents.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.chrysalis$entity) > 8 ? 0.5F : 0.0F);
     }
 
     /**
@@ -96,7 +96,7 @@ public abstract class EntityMixin {
 
         @Inject(method = "canSummon", at = @At("HEAD"), cancellable = true)
         private void chrysalis$hideEntityFromSummonCommand(CallbackInfoReturnable<Boolean> cir) {
-            if (this.is(ChrysalisTags.HIDDEN_FROM_SUMMON_COMMAND)) cir.setReturnValue(false);
+            if (this.is(CTags.HIDDEN_FROM_SUMMON_COMMAND)) cir.setReturnValue(false);
         }
     }
 }

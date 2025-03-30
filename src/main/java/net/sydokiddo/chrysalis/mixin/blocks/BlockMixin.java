@@ -14,8 +14,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.CRegistry;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,7 +38,7 @@ public class BlockMixin {
     private void chrysalis$blockSoundData(BlockState blockState, CallbackInfoReturnable<SoundType> cir) {
 
         if (Chrysalis.registryAccess == null) return;
-        Optional<BlockSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
+        Optional<BlockSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(CRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
 
         if (optional.isPresent()) {
             if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
@@ -59,7 +59,7 @@ public class BlockMixin {
         private void chrysalis$blockNoteBlockInstrumentData(CallbackInfoReturnable<NoteBlockInstrument> cir) {
 
             if (Chrysalis.registryAccess == null) return;
-            Optional<BlockSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(this.asState().getBlockHolder())).findFirst();
+            Optional<BlockSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(CRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(this.asState().getBlockHolder())).findFirst();
 
             if (optional.isPresent()) {
                 if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || Objects.equals(optional.get().noteBlockInstrument(), "null")) return;
@@ -158,7 +158,7 @@ public class BlockMixin {
 
         @Unique
         private Optional<BlockPropertyData> chrysalis$getBlockPropertyData(BlockState blockState) {
-            return Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.BLOCK_PROPERTY_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
+            return Chrysalis.registryAccess.lookupOrThrow(CRegistry.BLOCK_PROPERTY_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
         }
 
         /**
@@ -192,7 +192,7 @@ public class BlockMixin {
 
         @Inject(at = @At("HEAD"), method = "ocelotOrParrot", cancellable = true)
         private static void chrysalis$canSpawnOnLeavesEntityTag(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType, CallbackInfoReturnable<Boolean> cir) {
-            cir.setReturnValue(entityType.is(ChrysalisTags.CAN_SPAWN_ON_LEAVES));
+            cir.setReturnValue(entityType.is(CTags.CAN_SPAWN_ON_LEAVES));
         }
     }
 }

@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.sydokiddo.chrysalis.Chrysalis;
 
 @SuppressWarnings("unused")
-public class ChrysalisTags {
+public class CTags {
 
     // region Item Tags
 

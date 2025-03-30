@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis.mixin.blocks;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,6 +18,6 @@ public class BaseFireBlockMixin {
 
     @Inject(at = @At("HEAD"), method = "inPortalDimension", cancellable = true)
     private static void chrysalis$preventNetherPortalActivating(Level level, CallbackInfoReturnable<Boolean> cir) {
-        if (level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_DO_NETHER_PORTAL_ACTIVATING)) cir.setReturnValue(false);
+        if (level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(CGameRules.RULE_DO_NETHER_PORTAL_ACTIVATING)) cir.setReturnValue(false);
     }
 }

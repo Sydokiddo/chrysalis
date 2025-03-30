@@ -25,7 +25,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisLivingEntityRenderState;
-import net.sydokiddo.chrysalis.common.status_effects.ChrysalisEffects;
+import net.sydokiddo.chrysalis.common.status_effects.CStatusEffects;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -56,7 +56,7 @@ public abstract class EntityRendererMixin {
     private void chrysalis$playerHandRadianceGlowing(Entity entity, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
 
         Minecraft minecraft = Minecraft.getInstance();
-        Holder<MobEffect> radianceEffect = Holder.direct(ChrysalisEffects.RADIANCE.get());
+        Holder<MobEffect> radianceEffect = Holder.direct(CStatusEffects.RADIANCE.get());
 
         if (entity instanceof Player player && player == minecraft.player && player.hasEffect(radianceEffect) && minecraft.options.getCameraType().isFirstPerson()) {
             MobEffectInstance radianceEffectInstance = Objects.requireNonNull(player.getEffect(radianceEffect));

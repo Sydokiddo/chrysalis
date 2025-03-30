@@ -4,7 +4,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.animal.Dolphin;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -18,6 +18,6 @@ public class DolphinMixin {
 
     @Redirect(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/tags/TagKey;)Z"))
     private boolean chrysalis$dolphinFoodTag(ItemStack itemStack, TagKey<Item> tagKey) {
-        return itemStack.is(ChrysalisTags.DOLPHIN_FOODS);
+        return itemStack.is(CTags.DOLPHIN_FOODS);
     }
 }

@@ -15,9 +15,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisAttributes;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.CRegistry;
+import net.sydokiddo.chrysalis.common.misc.CAttributes;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.BuildPreventingEffect;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.Optional;
@@ -121,7 +121,7 @@ public class EntityDataHelper {
 
     public static float getDamageCap(LivingEntity livingEntity, DamageSource damageSource, float originalDamage) {
 
-        float damageCap = (float) livingEntity.getAttributeValue(ChrysalisAttributes.DAMAGE_CAPACITY);
+        float damageCap = (float) livingEntity.getAttributeValue(CAttributes.DAMAGE_CAPACITY);
 
         if (originalDamage > damageCap && originalDamage < Float.MAX_VALUE && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             if (Chrysalis.IS_DEBUG && !livingEntity.level().isClientSide()) Chrysalis.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);
@@ -132,15 +132,15 @@ public class EntityDataHelper {
     }
 
     public static void playItemDroppingSound(Player player) {
-        if (CConfigOptions.ITEM_DROPPING_SOUND.get()) player.playNotifySound(ChrysalisSoundEvents.ITEM_DROP.get(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
+        if (CConfigOptions.ITEM_DROPPING_SOUND.get()) player.playNotifySound(CSoundEvents.ITEM_DROP.get(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
     }
 
     public static Optional<UUID> getEncounteredMobUUID(Player player) {
-        return player.getEntityData().get(ChrysalisRegistry.ENCOUNTERED_MOB_UUID);
+        return player.getEntityData().get(CRegistry.ENCOUNTERED_MOB_UUID);
     }
 
     public static void setEncounteredMobUUID(Player player, UUID uuid) {
-        player.getEntityData().set(ChrysalisRegistry.ENCOUNTERED_MOB_UUID, Optional.ofNullable(uuid));
+        player.getEntityData().set(CRegistry.ENCOUNTERED_MOB_UUID, Optional.ofNullable(uuid));
     }
 
     public static boolean hasBuildPreventingEffect(LivingEntity livingEntity) {

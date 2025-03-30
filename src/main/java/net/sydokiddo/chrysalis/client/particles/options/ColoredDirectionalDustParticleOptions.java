@@ -11,7 +11,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
+import net.sydokiddo.chrysalis.common.misc.CParticles;
 import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
@@ -35,6 +35,6 @@ public record ColoredDirectionalDustParticleOptions(int startingColor, int endin
 
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.COLORED_DIRECTIONAL_DUST.get();
+        return CParticles.COLORED_DIRECTIONAL_DUST.get();
     }
 }

@@ -4,7 +4,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import java.util.function.Predicate;
 
 @SuppressWarnings("unused")
@@ -15,7 +15,7 @@ public class WorldGenHelper {
      **/
 
     public static Predicate<Holder<Biome>> isValidBiomeForMobSpawning() {
-        return context -> !context.is(ChrysalisTags.WITHOUT_MOB_SPAWNS);
+        return context -> !context.is(CTags.WITHOUT_MOB_SPAWNS);
     }
 
     public static Predicate<Holder<Biome>> isOverworld() {

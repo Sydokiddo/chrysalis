@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.sydokiddo.chrysalis.Chrysalis;
 
-public class ChrysalisDamageTypes {
+public class CDamageTypes {
 
     // region Damage Types
 

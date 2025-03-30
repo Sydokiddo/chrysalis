@@ -23,8 +23,8 @@ import net.neoforged.neoforge.event.EventHooks;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.AbstractSpawnerEntity;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEggItem;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisDamageTypes;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CDamageTypes;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 
@@ -53,7 +53,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
     @Override
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         builder.define(ENTITY_TO_SPAWN, new CompoundTag());
-        builder.define(SPAWN_ENTITY_SOUND, ChrysalisSoundEvents.ENCOUNTER_SPAWNER_SPAWN_ENTITY.get().location().toString());
+        builder.define(SPAWN_ENTITY_SOUND, CSoundEvents.ENCOUNTER_SPAWNER_SPAWN_ENTITY.get().location().toString());
         builder.define(PARTICLE, ParticleTypes.FLAME);
     }
 
@@ -183,7 +183,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
             compoundTag.putString("id", entityType.toShortString());
 
             this.setEntityToSpawn(compoundTag);
-            this.playSpawnerSound(player.level(), this, ChrysalisSoundEvents.GENERIC_SPAWNER_CHANGE_ENTITY.get(), 1.0F, false);
+            this.playSpawnerSound(player.level(), this, CSoundEvents.GENERIC_SPAWNER_CHANGE_ENTITY.get(), 1.0F, false);
             if (this.level() instanceof ServerLevel serverLevel) for (int amount = 0; amount < 8; ++amount) serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(entityType.getHeight() + 1.0D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
 
             player.level().gameEvent(player, GameEvent.BLOCK_CHANGE, this.blockPosition());
@@ -208,7 +208,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
     @Override
     public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
 
-        if (damageSource.is(ChrysalisDamageTypes.KILL_WAND)) {
+        if (damageSource.is(CDamageTypes.KILL_WAND)) {
             this.kill(serverLevel);
             return true;
         }

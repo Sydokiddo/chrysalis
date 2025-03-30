@@ -18,8 +18,8 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.ScreenshotEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.items.CItems;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.util.helpers.CompatibilityHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.technical.ClipboardImage;
@@ -34,7 +34,7 @@ import java.util.Comparator;
 import java.util.Optional;
 
 @SuppressWarnings("unused")
-public class ChrysalisClientEvents {
+public class CClientEvents {
 
     @EventBusSubscriber(modid = Chrysalis.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
     public static class GameEventBus {
@@ -42,7 +42,7 @@ public class ChrysalisClientEvents {
         @SubscribeEvent
         private static void onClientTick(ClientTickEvent.Post event) {
 
-            while (ChrysalisRegistry.ClientRegistry.PANORAMIC_SCREENSHOT_KEY.consumeClick()) {
+            while (CRegistry.ClientRegistry.PANORAMIC_SCREENSHOT_KEY.consumeClick()) {
 
                 Minecraft minecraft = Minecraft.getInstance();
                 if (!CompatibilityHelper.isModLoaded("essential")) playScreenshotSound(minecraft);
@@ -83,7 +83,7 @@ public class ChrysalisClientEvents {
         }
 
         private static void playScreenshotSound(Minecraft minecraft) {
-            if (CConfigOptions.SCREENSHOT_SOUND.get()) EventHelper.playUIClickSound(minecraft, ChrysalisSoundEvents.SCREENSHOT_SUCCESS);
+            if (CConfigOptions.SCREENSHOT_SOUND.get()) EventHelper.playUIClickSound(minecraft, CSoundEvents.SCREENSHOT_SUCCESS);
         }
     }
 
@@ -97,28 +97,28 @@ public class ChrysalisClientEvents {
 
         @SubscribeEvent
         private static void registerKeyMappings(RegisterKeyMappingsEvent event) {
-            event.register(ChrysalisRegistry.ClientRegistry.PANORAMIC_SCREENSHOT_KEY);
+            event.register(CRegistry.ClientRegistry.PANORAMIC_SCREENSHOT_KEY);
         }
 
         @SubscribeEvent
         public static void addItemsToCreativeTabs(BuildCreativeModeTabContentsEvent event) {
 
-            if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) event.insertAfter(Items.CREAKING_HEART.getDefaultInstance(), ChrysalisItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) event.insertAfter(Items.CREAKING_HEART.getDefaultInstance(), CItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
             if (event.getTabKey() == CreativeModeTabs.OP_BLOCKS && event.hasPermissions()) {
-                event.insertAfter(Items.DEBUG_STICK.getDefaultInstance(), ChrysalisItems.HEAL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.HEAL.toStack(), ChrysalisItems.FILL_HUNGER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.FILL_HUNGER.toStack(), ChrysalisItems.FILL_OXYGEN.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.FILL_OXYGEN.toStack(), ChrysalisItems.GIVE_RESISTANCE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.GIVE_RESISTANCE.toStack(), ChrysalisItems.CLEAR_EFFECTS.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.CLEAR_EFFECTS.toStack(), ChrysalisItems.TELEPORT_TO_SPAWNPOINT.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.TELEPORT_TO_SPAWNPOINT.toStack(), ChrysalisItems.TELEPORT_WAND.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.TELEPORT_WAND.toStack(), ChrysalisItems.KILL_WAND.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.KILL_WAND.toStack(), ChrysalisItems.AGGRO_WAND.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.AGGRO_WAND.toStack(), ChrysalisItems.TAME_MOB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.TAME_MOB.toStack(), ChrysalisItems.RIDE_MOB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                event.insertAfter(ChrysalisItems.RIDE_MOB.toStack(), ChrysalisItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) event.insertAfter(ChrysalisItems.COPYING_SPAWN_EGG.toStack(), ChrysalisItems.TEST_RIGHT_CLICK_ITEM.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(Items.DEBUG_STICK.getDefaultInstance(), CItems.HEAL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.HEAL.toStack(), CItems.FILL_HUNGER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.FILL_HUNGER.toStack(), CItems.FILL_OXYGEN.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.FILL_OXYGEN.toStack(), CItems.GIVE_RESISTANCE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.GIVE_RESISTANCE.toStack(), CItems.CLEAR_EFFECTS.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.CLEAR_EFFECTS.toStack(), CItems.TELEPORT_TO_SPAWNPOINT.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.TELEPORT_TO_SPAWNPOINT.toStack(), CItems.TELEPORT_WAND.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.TELEPORT_WAND.toStack(), CItems.KILL_WAND.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.KILL_WAND.toStack(), CItems.AGGRO_WAND.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.AGGRO_WAND.toStack(), CItems.TAME_MOB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.TAME_MOB.toStack(), CItems.RIDE_MOB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.RIDE_MOB.toStack(), CItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) event.insertAfter(CItems.COPYING_SPAWN_EGG.toStack(), CItems.TEST_RIGHT_CLICK_ITEM.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.accept(Items.ENDER_DRAGON_SPAWN_EGG.getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.accept(Items.WITHER_SPAWN_EGG.getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }

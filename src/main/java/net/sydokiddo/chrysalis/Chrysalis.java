@@ -13,7 +13,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.common.CRegistry;
 import net.sydokiddo.chrysalis.util.helpers.CompatibilityHelper;
 import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
 import net.sydokiddo.chrysalis.util.technical.config.CConfig;
@@ -40,7 +40,7 @@ public class Chrysalis {
 	;
 
 	public Chrysalis(ModContainer container, IEventBus eventBus) {
-		ChrysalisRegistry.registerAll(eventBus);
+		CRegistry.registerAll(eventBus);
 		container.registerConfig(ModConfig.Type.COMMON, CConfig.CONFIG_SPEC);
 		DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.CHRYSALIS_VERSION, false);
 	}

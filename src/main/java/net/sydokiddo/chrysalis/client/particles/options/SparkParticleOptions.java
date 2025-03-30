@@ -12,7 +12,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
+import net.sydokiddo.chrysalis.common.misc.CParticles;
 import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
@@ -57,6 +57,6 @@ public class SparkParticleOptions extends ScalableParticleOptionsBase implements
 
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.SPARK.get();
+        return CParticles.SPARK.get();
     }
 }

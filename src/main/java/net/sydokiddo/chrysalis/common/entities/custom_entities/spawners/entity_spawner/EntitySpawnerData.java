@@ -8,7 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.SpawnData;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import java.awt.*;
 import java.util.List;
 
@@ -21,9 +21,9 @@ public class EntitySpawnerData {
     private record SoundsData(Holder<SoundEvent> appear, Holder<SoundEvent> aboutToSpawnEntity, Holder<SoundEvent> spawnEntity) {
 
         public static final Codec<SoundsData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            SoundEvent.CODEC.optionalFieldOf("appear", ChrysalisSoundEvents.ENTITY_SPAWNER_APPEAR).forGetter(SoundsData::appear),
-            SoundEvent.CODEC.optionalFieldOf("about_to_spawn_entity", ChrysalisSoundEvents.ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY).forGetter(SoundsData::aboutToSpawnEntity),
-            SoundEvent.CODEC.optionalFieldOf("spawn_entity", ChrysalisSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY).forGetter(SoundsData::aboutToSpawnEntity)
+            SoundEvent.CODEC.optionalFieldOf("appear", CSoundEvents.ENTITY_SPAWNER_APPEAR).forGetter(SoundsData::appear),
+            SoundEvent.CODEC.optionalFieldOf("about_to_spawn_entity", CSoundEvents.ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY).forGetter(SoundsData::aboutToSpawnEntity),
+            SoundEvent.CODEC.optionalFieldOf("spawn_entity", CSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY).forGetter(SoundsData::aboutToSpawnEntity)
         ).apply(instance, SoundsData::new));
     }
 

@@ -20,10 +20,10 @@ import net.minecraft.world.level.block.LightBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
+import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,7 +48,7 @@ public abstract class ItemMixin {
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
-        if (itemStack.has(ChrysalisDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
+        if (itemStack.has(CDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
             MutableComponent remainsOnDeathIcon = ComponentHelper.REMAINS_ON_DEATH_ICON;
             ComponentHelper.setIconsFont(remainsOnDeathIcon, Chrysalis.MOD_ID);
             Component remainsOnDeathTooltip = ItemHelper.addTooltipWithIcon(remainsOnDeathIcon, Component.translatable("gui.chrysalis.item.remains_on_death").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.REMAINS_ON_DEATH_COLOR.getRGB())));
@@ -89,7 +89,7 @@ public abstract class ItemMixin {
             list.add(fireproofTooltip);
         }
 
-        if (itemStack.is(ChrysalisTags.WAXED_BLOCK_ITEMS)) {
+        if (itemStack.is(CTags.WAXED_BLOCK_ITEMS)) {
             MutableComponent waxedIcon = ComponentHelper.WAXED_ICON;
             ComponentHelper.setIconsFont(waxedIcon, Chrysalis.MOD_ID);
             Component waxedTooltip = ItemHelper.addTooltipWithIcon(waxedIcon, Component.translatable("gui.chrysalis.item.waxed").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.WAXED_COLOR.getRGB())));
@@ -143,17 +143,17 @@ public abstract class ItemMixin {
 
         @Inject(method = "getItemName", at = @At("RETURN"), cancellable = true)
         private void chrysalis$getItemNameColor(CallbackInfoReturnable<Component> cir) {
-            if (this.has(ChrysalisDataComponents.NAME_COLOR)) cir.setReturnValue(this.chrysalis$nameColorComponent(cir));
+            if (this.has(CDataComponents.NAME_COLOR)) cir.setReturnValue(this.chrysalis$nameColorComponent(cir));
         }
 
         @Inject(method = "getDisplayName", at = @At("RETURN"), cancellable = true)
         private void chrysalis$getDisplayNameColor(CallbackInfoReturnable<Component> cir) {
-            if (this.has(ChrysalisDataComponents.NAME_COLOR)) cir.setReturnValue(this.chrysalis$nameColorComponent(cir));
+            if (this.has(CDataComponents.NAME_COLOR)) cir.setReturnValue(this.chrysalis$nameColorComponent(cir));
         }
 
         @Unique
         private MutableComponent chrysalis$nameColorComponent(CallbackInfoReturnable<Component> cir) {
-            return cir.getReturnValue().copy().withColor(Objects.requireNonNull(this.get(ChrysalisDataComponents.NAME_COLOR.get())));
+            return cir.getReturnValue().copy().withColor(Objects.requireNonNull(this.get(CDataComponents.NAME_COLOR.get())));
         }
     }
 }

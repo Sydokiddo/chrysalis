@@ -11,13 +11,13 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
+import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.common.items.custom_items.CustomCrosshairItem;
 
 public class ExtraReachDebugUtilityItem extends DebugUtilityItem implements CustomCrosshairItem {
 
     public ExtraReachDebugUtilityItem(Properties properties) {
-        super(properties.component(ChrysalisDataComponents.INCREASED_PICK_RADIUS, Unit.INSTANCE));
+        super(properties.component(CDataComponents.INCREASED_PICK_RADIUS, Unit.INSTANCE));
     }
 
     /**

@@ -6,7 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.entity.EntityAccess;
-import net.sydokiddo.chrysalis.testing.ChrysalisTesting;
+import net.sydokiddo.chrysalis.testing.CTesting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -32,6 +32,6 @@ public abstract class TestEntityMixin implements EntityAccess {
 
     @Unique
     private void chrysalis$emitPulsationParticle(boolean muffled) {
-        ChrysalisTesting.emitPulsationParticle(this.level(), this.chrysalis$entity, Direction.UP, 0, muffled);
+        CTesting.emitPulsationParticle(this.level(), this.chrysalis$entity, Direction.UP, 0, muffled);
     }
 }

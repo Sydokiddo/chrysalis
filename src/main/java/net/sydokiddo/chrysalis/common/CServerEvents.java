@@ -27,8 +27,8 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
-import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.items.CDataComponents;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
@@ -46,7 +46,7 @@ import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class ChrysalisServerEvents {
+public class CServerEvents {
 
     @EventBusSubscriber(modid = Chrysalis.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
     public static class GameEventBus {
@@ -91,16 +91,16 @@ public class ChrysalisServerEvents {
         @SubscribeEvent
         private static void mobGriefingEvents(EntityMobGriefingEvent event) {
             if (!CConfigOptions.REWORKED_MOB_GRIEFING.get()) return;
-            if (event.getEntity() instanceof Allay allay && allay.getServer() != null) event.setCanGrief(allay.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
-            if (event.getEntity() instanceof Evoker evoker && evoker.getServer() != null) event.setCanGrief(evoker.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
-            if (event.getEntity() instanceof Fox fox && fox.getServer() != null) event.setCanGrief(fox.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
-            if (event.getEntity() instanceof Piglin piglin && piglin.getServer() != null) event.setCanGrief(piglin.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
-            if (event.getEntity() instanceof Rabbit rabbit && rabbit.getServer() != null) event.setCanGrief(rabbit.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
-            if (event.getEntity() instanceof Sheep sheep && sheep.getServer() != null) event.setCanGrief(sheep.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
-            if (event.getEntity() instanceof SnowGolem snowGolem && snowGolem.getServer() != null) event.setCanGrief(snowGolem.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
-            if (event.getEntity() instanceof Villager villager && villager.getServer() != null) event.setCanGrief(villager.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS));
-            if (event.getEntity() instanceof EnderDragon enderDragon && enderDragon.getServer() != null) event.setCanGrief(enderDragon.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_DRAGON_GRIEFING));
-            if (event.getEntity() instanceof WitherBoss wither && wither.getServer() != null) event.setCanGrief(wither.getServer().getGameRules().getBoolean(ChrysalisGameRules.RULE_WITHER_GRIEFING));
+            if (event.getEntity() instanceof Allay allay && allay.getServer() != null) event.setCanGrief(allay.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
+            if (event.getEntity() instanceof Evoker evoker && evoker.getServer() != null) event.setCanGrief(evoker.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
+            if (event.getEntity() instanceof Fox fox && fox.getServer() != null) event.setCanGrief(fox.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
+            if (event.getEntity() instanceof Piglin piglin && piglin.getServer() != null) event.setCanGrief(piglin.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
+            if (event.getEntity() instanceof Rabbit rabbit && rabbit.getServer() != null) event.setCanGrief(rabbit.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
+            if (event.getEntity() instanceof Sheep sheep && sheep.getServer() != null) event.setCanGrief(sheep.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
+            if (event.getEntity() instanceof SnowGolem snowGolem && snowGolem.getServer() != null) event.setCanGrief(snowGolem.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
+            if (event.getEntity() instanceof Villager villager && villager.getServer() != null) event.setCanGrief(villager.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
+            if (event.getEntity() instanceof EnderDragon enderDragon && enderDragon.getServer() != null) event.setCanGrief(enderDragon.getServer().getGameRules().getBoolean(CGameRules.RULE_DRAGON_GRIEFING));
+            if (event.getEntity() instanceof WitherBoss wither && wither.getServer() != null) event.setCanGrief(wither.getServer().getGameRules().getBoolean(CGameRules.RULE_WITHER_GRIEFING));
         }
 
         @SubscribeEvent
@@ -131,11 +131,11 @@ public class ChrysalisServerEvents {
 
         @SubscribeEvent
         private static void datapackRegistry(DataPackRegistryEvent.NewRegistry event) {
-            event.dataPackRegistry(ChrysalisRegistry.BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
-            event.dataPackRegistry(ChrysalisRegistry.BLOCK_SOUND_DATA, BlockSoundData.CODEC);
-            event.dataPackRegistry(ChrysalisRegistry.CHARGED_MOB_DROP_DATA, ChargedMobDropData.CODEC);
-            event.dataPackRegistry(ChrysalisRegistry.PLAYER_LOOT_TABLE_DATA, PlayerLootTableData.CODEC);
-            event.dataPackRegistry(ChrysalisRegistry.ENTITY_SPAWNER_CONFIG_DATA, EntitySpawnerData.EntitySpawnerConfig.CODEC);
+            event.dataPackRegistry(CRegistry.BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
+            event.dataPackRegistry(CRegistry.BLOCK_SOUND_DATA, BlockSoundData.CODEC);
+            event.dataPackRegistry(CRegistry.CHARGED_MOB_DROP_DATA, ChargedMobDropData.CODEC);
+            event.dataPackRegistry(CRegistry.PLAYER_LOOT_TABLE_DATA, PlayerLootTableData.CODEC);
+            event.dataPackRegistry(CRegistry.ENTITY_SPAWNER_CONFIG_DATA, EntitySpawnerData.EntitySpawnerConfig.CODEC);
         }
 
         @SubscribeEvent
@@ -151,8 +151,8 @@ public class ChrysalisServerEvents {
 
         @SubscribeEvent
         private static void modifyDefaultItemComponents(ModifyDefaultComponentsEvent event) {
-            event.modify(Items.DRAGON_EGG, components -> components.set(ChrysalisDataComponents.IMMUNE_TO_ALL_DAMAGE.get(), Unit.INSTANCE).set(ChrysalisDataComponents.IMMUNE_TO_DESPAWNING.get(), Unit.INSTANCE));
-            event.modify(Items.NETHER_STAR, components -> components.set(ChrysalisDataComponents.INCREASED_DESPAWN_TIME.get(), Unit.INSTANCE));
+            event.modify(Items.DRAGON_EGG, components -> components.set(CDataComponents.IMMUNE_TO_ALL_DAMAGE.get(), Unit.INSTANCE).set(CDataComponents.IMMUNE_TO_DESPAWNING.get(), Unit.INSTANCE));
+            event.modify(Items.NETHER_STAR, components -> components.set(CDataComponents.INCREASED_DESPAWN_TIME.get(), Unit.INSTANCE));
         }
     }
 }

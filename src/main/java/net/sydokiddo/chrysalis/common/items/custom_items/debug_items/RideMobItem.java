@@ -13,7 +13,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class RideMobItem extends DebugUtilityItem {
                 serverPlayer.startRiding(livingEntity);
 
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-                serverPlayer.playNotifySound(ChrysalisSoundEvents.RIDE_MOB_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.playNotifySound(CSoundEvents.RIDE_MOB_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
                 DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("commands.ride.mount.success", serverPlayer.getName().getString(), livingEntity.getName().getString()));
             }

@@ -6,7 +6,7 @@ import net.minecraft.world.item.EndCrystalItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,7 +23,7 @@ public class EndCrystalItemMixin {
 
     @Redirect(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private boolean chrysalis$changeEndCrystalPlacing(BlockState blockState, Block block){
-        return blockState.is(ChrysalisTags.END_CRYSTAL_BASE_BLOCKS);
+        return blockState.is(CTags.END_CRYSTAL_BASE_BLOCKS);
     }
 
     /**

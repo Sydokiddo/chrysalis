@@ -13,11 +13,11 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisDamageTypes;
+import net.sydokiddo.chrysalis.common.misc.CDamageTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
@@ -47,7 +47,7 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
 
         if (self.level() instanceof ServerLevel serverLevel && self instanceof Player player && !EntityDataHelper.targetIsLinkedAllay(target, player) && (player.isCreative() || !target.isInvulnerable())) {
 
-            target.hurtServer(serverLevel, target.damageSources().source(ChrysalisDamageTypes.KILL_WAND, player), Float.MAX_VALUE);
+            target.hurtServer(serverLevel, target.damageSources().source(CDamageTypes.KILL_WAND, player), Float.MAX_VALUE);
 
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverLevel, EntitySpawnReason.TRIGGERED);
             assert lightningBolt != null;
@@ -64,13 +64,13 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
 
     @Nullable @Override
     public DamageSource getDamageSource(LivingEntity livingEntity) {
-        return livingEntity.damageSources().source(ChrysalisDamageTypes.KILL_WAND, livingEntity);
+        return livingEntity.damageSources().source(CDamageTypes.KILL_WAND, livingEntity);
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
     public boolean shouldDisplayCrosshair(Player player) {
-        return (super.shouldDisplayCrosshair(player) || Minecraft.getInstance().crosshairPickEntity != null && Minecraft.getInstance().crosshairPickEntity.getType().is(ChrysalisTags.DISPLAYS_KILL_WAND_CROSSHAIR)) && player.getMainHandItem().getItem() == this;
+        return (super.shouldDisplayCrosshair(player) || Minecraft.getInstance().crosshairPickEntity != null && Minecraft.getInstance().crosshairPickEntity.getType().is(CTags.DISPLAYS_KILL_WAND_CROSSHAIR)) && player.getMainHandItem().getItem() == this;
     }
 
     @OnlyIn(Dist.CLIENT)

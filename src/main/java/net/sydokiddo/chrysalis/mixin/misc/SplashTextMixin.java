@@ -10,7 +10,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -60,7 +60,7 @@ public class SplashTextMixin {
             if (x > splashTextX + maxRangeX || x < splashTextX - maxRangeX || y > splashTextY + maxRangeY || y < splashTextY - maxRangeY) return;
 
             if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Splash text has been refreshed");
-            EventHelper.playUIClickSound(minecraft, ChrysalisSoundEvents.SPLASH_TEXT_SHUFFLE);
+            EventHelper.playUIClickSound(minecraft, CSoundEvents.SPLASH_TEXT_SHUFFLE);
             this.splash = null;
             this.splash = minecraft.getSplashManager().getSplash();
             SplashTextLoader.lifeTime = 0;

@@ -28,9 +28,9 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.custom_items.CustomSpawnEggItem;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import org.jetbrains.annotations.NotNull;
@@ -93,7 +93,7 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
             if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && serverPlayer.isShiftKeyDown()) {
                 itemStack.set(DataComponents.ITEM_NAME, Component.translatable(this.getDescriptionId()));
                 itemStack.remove(DataComponents.ENTITY_DATA);
-                useItem(player, itemStack, ChrysalisSoundEvents.COPYING_SPAWN_EGG_REMOVE_COPIED_ENTITY.get());
+                useItem(player, itemStack, CSoundEvents.COPYING_SPAWN_EGG_REMOVE_COPIED_ENTITY.get());
                 sendMessage(serverPlayer, Component.translatable("gui.chrysalis.copying_spawn_egg.remove_message").withStyle(ChatFormatting.RED));
                 return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
             }
@@ -104,10 +104,10 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
 
     public static InteractionResult copyEntity(CopyingSpawnEggItem copyingSpawnEggItem, ItemStack itemStack, Player player, Entity entity, InteractionHand interactionHand) {
 
-        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && !serverPlayer.isShiftKeyDown() && entity.getType() != copyingSpawnEggItem.getType(player.level().registryAccess(), itemStack) && !entity.getType().is(ChrysalisTags.COPYING_SPAWN_EGG_BLACKLISTED)) {
+        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && !serverPlayer.isShiftKeyDown() && entity.getType() != copyingSpawnEggItem.getType(player.level().registryAccess(), itemStack) && !entity.getType().is(CTags.COPYING_SPAWN_EGG_BLACKLISTED)) {
             itemStack.set(DataComponents.ITEM_NAME, Component.translatable(copyingSpawnEggItem.getDescriptionId() + ".copied", entity.getType().getDescription().getString()));
             CustomData.update(DataComponents.ENTITY_DATA, itemStack, (compoundTag) -> compoundTag.putString("id", entity.getType().toShortString()));
-            useItem(serverPlayer, itemStack, ChrysalisSoundEvents.COPYING_SPAWN_EGG_COPY_ENTITY.get());
+            useItem(serverPlayer, itemStack, CSoundEvents.COPYING_SPAWN_EGG_COPY_ENTITY.get());
             sendMessage(serverPlayer, Component.translatable("gui.chrysalis.copying_spawn_egg.copy_message", entity.getType().getDescription().getString()));
             return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }
@@ -128,7 +128,7 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
     }
 
     private static void sendMessage(ServerPlayer serverPlayer, Component component) {
-        if (serverPlayer.serverLevel().getGameRules().getBoolean(ChrysalisGameRules.RULE_SEND_DEBUG_UTILITY_FEEDBACK)) serverPlayer.sendSystemMessage(createTextComponent(component), true);
+        if (serverPlayer.serverLevel().getGameRules().getBoolean(CGameRules.RULE_SEND_DEBUG_UTILITY_FEEDBACK)) serverPlayer.sendSystemMessage(createTextComponent(component), true);
     }
 
     // endregion

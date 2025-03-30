@@ -9,7 +9,7 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.block.Block;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +30,7 @@ public abstract class ToolMaterialMixin {
     @Inject(method = "applySwordProperties", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$createSwordProperties(Item.Properties properties, float attackDamage, float attackSpeed, CallbackInfoReturnable<Item.Properties> cir) {
         HolderGetter<Block> holderGetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-        TagKey<Block> mineableWithSwordsTag = ChrysalisTags.MINEABLE_WITH_SWORDS;
+        TagKey<Block> mineableWithSwordsTag = CTags.MINEABLE_WITH_SWORDS;
         cir.setReturnValue(this.applyCommonProperties(properties).component(DataComponents.TOOL, new Tool(List.of(Tool.Rule.minesAndDrops(holderGetter.getOrThrow(mineableWithSwordsTag), 15.0F),
         Tool.Rule.overrideSpeed(holderGetter.getOrThrow(mineableWithSwordsTag), 1.5F)), 1.0F, 2)).attributes(this.createSwordAttributes(attackDamage, attackSpeed)));
     }

@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.sydokiddo.chrysalis.testing.ChrysalisTesting;
+import net.sydokiddo.chrysalis.testing.CTesting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public class BlockBehaviorMixin {
 
     @Inject(method = "onProjectileHit", at = @At("HEAD"))
     private void chrysalis$emitPulsationParticleFromProjectiles(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile, CallbackInfo info) {
-        ChrysalisTesting.emitPulsationParticle(level, projectile, blockHitResult.getDirection(), 1, projectile.isUnderWater() || blockHitResult.getDirection() == Direction.UP && projectile.getBlockStateOn().is(BlockTags.COMBINATION_STEP_SOUND_BLOCKS));
+        CTesting.emitPulsationParticle(level, projectile, blockHitResult.getDirection(), 1, projectile.isUnderWater() || blockHitResult.getDirection() == Direction.UP && projectile.getBlockStateOn().is(BlockTags.COMBINATION_STEP_SOUND_BLOCKS));
     }
 
     @Mixin(Block.class)
@@ -29,7 +29,7 @@ public class BlockBehaviorMixin {
 
         @Inject(method = "fallOn", at = @At("HEAD"))
         public void chrysalis$emitPulsationParticleFromFalling(Level level, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance, CallbackInfo info) {
-            ChrysalisTesting.emitPulsationParticle(level, entity, Direction.UP, 2, entity.isUnderWater() || entity.getBlockStateOn().is(BlockTags.COMBINATION_STEP_SOUND_BLOCKS));
+            CTesting.emitPulsationParticle(level, entity, Direction.UP, 2, entity.isUnderWater() || entity.getBlockStateOn().is(BlockTags.COMBINATION_STEP_SOUND_BLOCKS));
         }
     }
 }

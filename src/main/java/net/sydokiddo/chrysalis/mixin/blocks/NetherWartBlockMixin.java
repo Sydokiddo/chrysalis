@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,6 +19,6 @@ public class NetherWartBlockMixin {
 
     @Inject(method = "mayPlaceOn", at = @At("HEAD"), cancellable = true)
     private void chrysalis$netherWartCanGrowOnTag(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(blockState.is(ChrysalisTags.NETHER_WARTS_CAN_GROW_ON));
+        cir.setReturnValue(blockState.is(CTags.NETHER_WARTS_CAN_GROW_ON));
     }
 }

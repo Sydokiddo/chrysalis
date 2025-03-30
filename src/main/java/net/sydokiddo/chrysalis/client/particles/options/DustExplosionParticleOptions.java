@@ -13,7 +13,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
+import net.sydokiddo.chrysalis.common.misc.CParticles;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import java.awt.*;
@@ -74,6 +74,6 @@ public class DustExplosionParticleOptions extends ScalableParticleOptionsBase im
 
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.DUST_EXPLOSION.get();
+        return CParticles.DUST_EXPLOSION.get();
     }
 }

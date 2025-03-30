@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
@@ -61,7 +61,7 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
                 serverPlayer.getCooldowns().addCooldown(itemStack, 60);
 
             } else {
-                serverPlayer.playNotifySound(ChrysalisSoundEvents.TELEPORT_TO_SPAWNPOINT_FAIL.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.playNotifySound(CSoundEvents.TELEPORT_TO_SPAWNPOINT_FAIL.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 DebugUtilityItem.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.teleport_to_spawnpoint.message.fail").withStyle(ChatFormatting.RED));
             }
         }

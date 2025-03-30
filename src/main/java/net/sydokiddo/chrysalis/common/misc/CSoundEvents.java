@@ -7,11 +7,11 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.common.CRegistry;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChrysalisSoundEvents {
+public class CSoundEvents {
 
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Chrysalis.MOD_ID);
 
@@ -57,8 +57,8 @@ public class ChrysalisSoundEvents {
 
         SOUND_EVENTS.register(eventBus);
 
-        for (Map.Entry<String, ChrysalisRegistry.StructureMusicSound> structure : ChrysalisRegistry.registeredStructures.entrySet()) {
-            ChrysalisRegistry.StructureMusicSound musicSound = structure.getValue();
+        for (Map.Entry<String, CRegistry.StructureMusicSound> structure : CRegistry.registeredStructures.entrySet()) {
+            CRegistry.StructureMusicSound musicSound = structure.getValue();
             structures.put(structure.getKey(), new Music(musicSound.soundEvent(), musicSound.minDelay(), musicSound.maxDelay(), musicSound.replaceCurrentMusic()));
         }
     }

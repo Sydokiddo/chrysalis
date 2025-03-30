@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.RespawnAnchorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,7 +30,7 @@ public abstract class RespawnBlockMixin {
 
     @Inject(at = @At("HEAD"), method = "useWithoutItem", cancellable = true)
     private void chrysalis$interactWithBed(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!level.isClientSide() && level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_BEDS_EXPLODE) && !level.dimensionType().bedWorks()) {
+        if (!level.isClientSide() && level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(CGameRules.RULE_BEDS_EXPLODE) && !level.dimensionType().bedWorks()) {
             player.displayClientMessage(Component.translatable("gui.chrysalis.block.bed.invalid_dimension"), true);
             cir.setReturnValue(InteractionResult.SUCCESS_SERVER);
         }
@@ -47,7 +47,7 @@ public abstract class RespawnBlockMixin {
 
         @Inject(method = "isRespawnFuel", at = @At("HEAD"), cancellable = true)
         private static void chrysalis$chargesRespawnAnchorsTag(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
-            cir.setReturnValue(itemStack.is(ChrysalisTags.CHARGES_RESPAWN_ANCHORS));
+            cir.setReturnValue(itemStack.is(CTags.CHARGES_RESPAWN_ANCHORS));
         }
 
         /**
@@ -56,7 +56,7 @@ public abstract class RespawnBlockMixin {
 
         @Inject(at = @At("HEAD"), method = "useWithoutItem", cancellable = true)
         private void chrysalis$interactWithRespawnAnchor(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
-            if (!level.isClientSide() && level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_RESPAWN_ANCHORS_EXPLODE) && blockState.getValue(CHARGE) > 0 && !level.dimensionType().respawnAnchorWorks()) {
+            if (!level.isClientSide() && level instanceof ServerLevel serverLevel && !serverLevel.getGameRules().getBoolean(CGameRules.RULE_RESPAWN_ANCHORS_EXPLODE) && blockState.getValue(CHARGE) > 0 && !level.dimensionType().respawnAnchorWorks()) {
                 player.displayClientMessage(Component.translatable("gui.chrysalis.block.generic_respawn_block.invalid_dimension"), true);
                 cir.setReturnValue(InteractionResult.SUCCESS_SERVER);
             }

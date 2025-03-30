@@ -17,7 +17,7 @@ import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.BuildPreventingEffect;
 import java.awt.*;
 
-public class ChrysalisEffects {
+public class CStatusEffects {
 
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, Chrysalis.MOD_ID);
 

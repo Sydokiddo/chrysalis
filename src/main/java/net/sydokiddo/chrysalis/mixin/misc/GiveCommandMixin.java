@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.commands.GiveCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,7 +26,7 @@ public class GiveCommandMixin {
 
         ItemStack itemStack = itemInput.createItemStack(1, false);
 
-        if (itemStack.is(ChrysalisTags.CANNOT_GIVE_WITH_COMMANDS)) {
+        if (itemStack.is(CTags.CANNOT_GIVE_WITH_COMMANDS)) {
             commandSourceStack.sendFailure(Component.translatable("gui.chrysalis.commands.give.fail.invalid_item"));
             cir.setReturnValue(0);
         }

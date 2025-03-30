@@ -21,28 +21,28 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.client.entities.rendering.EncounterSpawnerRenderer;
-import net.sydokiddo.chrysalis.client.entities.rendering.EntitySpawnerRenderer;
-import net.sydokiddo.chrysalis.client.entities.rendering.SeatRenderer;
+import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.EncounterSpawnerRenderer;
+import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.EntitySpawnerRenderer;
+import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.SeatRenderer;
 import net.sydokiddo.chrysalis.client.particles.types.*;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
-import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
+import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
 import net.sydokiddo.chrysalis.util.helpers.DebugHelper;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
-import net.sydokiddo.chrysalis.util.entities.ChrysalisMemoryModules;
-import net.sydokiddo.chrysalis.common.entities.registry.ChrysalisEntities;
-import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
+import net.sydokiddo.chrysalis.util.entities.CMemoryModules;
+import net.sydokiddo.chrysalis.common.entities.registry.CEntities;
+import net.sydokiddo.chrysalis.common.items.CItems;
 import net.sydokiddo.chrysalis.common.misc.*;
-import net.sydokiddo.chrysalis.common.status_effects.ChrysalisEffects;
+import net.sydokiddo.chrysalis.common.status_effects.CStatusEffects;
 import org.lwjgl.glfw.GLFW;
 import java.awt.*;
 import java.util.*;
 
-public class ChrysalisRegistry {
+public class CRegistry {
 
     // region Entity Data
 
@@ -76,22 +76,22 @@ public class ChrysalisRegistry {
     public static void registerAll(IEventBus eventBus) {
 
         if (Chrysalis.IS_DEBUG) {
-            if (Chrysalis.registerTestItems) ChrysalisItems.registerTestItems(eventBus);
-            if (Chrysalis.registerExampleRegistry) ChrysalisExampleRegistry.init(eventBus);
+            if (Chrysalis.registerTestItems) CItems.registerTestItems(eventBus);
+            if (Chrysalis.registerExampleRegistry) CExampleRegistry.init(eventBus);
         }
 
-        ChrysalisItems.register(eventBus);
-        ChrysalisDataComponents.register(eventBus);
-        ChrysalisCreativeModeTabs.register(eventBus);
-        ChrysalisSoundEvents.register(eventBus);
-        ChrysalisParticles.register(eventBus);
-        ChrysalisEntities.register(eventBus);
-        ChrysalisMemoryModules.register(eventBus);
-        ChrysalisDamageTypes.register();
-        ChrysalisAttributes.register(eventBus);
-        ChrysalisEffects.register(eventBus);
-        ChrysalisGameRules.register();
-        ChrysalisCriteriaTriggers.register(eventBus);
+        CItems.register(eventBus);
+        CDataComponents.register(eventBus);
+        CCreativeModeTabs.register(eventBus);
+        CSoundEvents.register(eventBus);
+        CParticles.register(eventBus);
+        CEntities.register(eventBus);
+        CMemoryModules.register(eventBus);
+        CDamageTypes.register();
+        CAttributes.register(eventBus);
+        CStatusEffects.register(eventBus);
+        CGameRules.register();
+        CCriteriaTriggers.register(eventBus);
     }
 
     @SuppressWarnings("unused")
@@ -103,9 +103,9 @@ public class ChrysalisRegistry {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
-            EntityRenderers.register(ChrysalisEntities.SEAT.get(), SeatRenderer::new);
-            EntityRenderers.register(ChrysalisEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
-            EntityRenderers.register(ChrysalisEntities.ENCOUNTER_SPAWNER.get(), EncounterSpawnerRenderer::new);
+            EntityRenderers.register(CEntities.SEAT.get(), SeatRenderer::new);
+            EntityRenderers.register(CEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
+            EntityRenderers.register(CEntities.ENCOUNTER_SPAWNER.get(), EncounterSpawnerRenderer::new);
 
             try {
                 Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -118,20 +118,20 @@ public class ChrysalisRegistry {
 
         @SubscribeEvent
         public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
-            event.registerSpriteSet(ChrysalisParticles.MEMORY_FLAME.get(), FlameParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.RADIANCE.get(), SpellParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.ARTHROPOD_SIGHT.get(), SpellParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.CREEPER_SIGHT.get(), SpellParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.ENDER_SIGHT.get(), SpellParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.COLORED_DUST_PLUME.get(), ColoredDustPlumeParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.COLORED_DIRECTIONAL_DUST.get(), ColoredDirectionalDustParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.COLORED_PORTAL.get(), ColoredPortalParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.DUST_EXPLOSION.get(), DustExplosionParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.ROTATING_DUST.get(), RotatingDustParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.SPARKLE.get(), SparkleParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.SPARK.get(), SparkParticle.Provider::new);
-            event.registerSpriteSet(ChrysalisParticles.SMALL_PULSATION.get(), PulsationParticle.SmallProvider::new);
-            event.registerSpriteSet(ChrysalisParticles.LARGE_PULSATION.get(), PulsationParticle.LargeProvider::new);
+            event.registerSpriteSet(CParticles.MEMORY_FLAME.get(), FlameParticle.Provider::new);
+            event.registerSpriteSet(CParticles.RADIANCE.get(), SpellParticle.Provider::new);
+            event.registerSpriteSet(CParticles.ARTHROPOD_SIGHT.get(), SpellParticle.Provider::new);
+            event.registerSpriteSet(CParticles.CREEPER_SIGHT.get(), SpellParticle.Provider::new);
+            event.registerSpriteSet(CParticles.ENDER_SIGHT.get(), SpellParticle.Provider::new);
+            event.registerSpriteSet(CParticles.COLORED_DUST_PLUME.get(), ColoredDustPlumeParticle.Provider::new);
+            event.registerSpriteSet(CParticles.COLORED_DIRECTIONAL_DUST.get(), ColoredDirectionalDustParticle.Provider::new);
+            event.registerSpriteSet(CParticles.COLORED_PORTAL.get(), ColoredPortalParticle.Provider::new);
+            event.registerSpriteSet(CParticles.DUST_EXPLOSION.get(), DustExplosionParticle.Provider::new);
+            event.registerSpriteSet(CParticles.ROTATING_DUST.get(), RotatingDustParticle.Provider::new);
+            event.registerSpriteSet(CParticles.SPARKLE.get(), SparkleParticle.Provider::new);
+            event.registerSpriteSet(CParticles.SPARK.get(), SparkParticle.Provider::new);
+            event.registerSpriteSet(CParticles.SMALL_PULSATION.get(), PulsationParticle.SmallProvider::new);
+            event.registerSpriteSet(CParticles.LARGE_PULSATION.get(), PulsationParticle.LargeProvider::new);
         }
     }
 }

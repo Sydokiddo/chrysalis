@@ -2,7 +2,7 @@ package net.sydokiddo.chrysalis.common.misc;
 
 import net.minecraft.world.level.GameRules;
 
-public class ChrysalisGameRules {
+public class CGameRules {
 
     // region Game Rules
 

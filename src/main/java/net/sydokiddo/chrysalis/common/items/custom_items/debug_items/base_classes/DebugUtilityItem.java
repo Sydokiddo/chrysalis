@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class DebugUtilityItem extends Item {
     }
 
     public static void sendFeedbackMessage(boolean requiresGameRule, ServerPlayer serverPlayer, Component message) {
-        if (requiresGameRule && !serverPlayer.serverLevel().getGameRules().getBoolean(ChrysalisGameRules.RULE_SEND_DEBUG_UTILITY_FEEDBACK)) return;
+        if (requiresGameRule && !serverPlayer.serverLevel().getGameRules().getBoolean(CGameRules.RULE_SEND_DEBUG_UTILITY_FEEDBACK)) return;
         serverPlayer.sendSystemMessage(message);
     }
 }

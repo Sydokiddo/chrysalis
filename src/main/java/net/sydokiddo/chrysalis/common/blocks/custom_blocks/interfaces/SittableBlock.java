@@ -5,7 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.sydokiddo.chrysalis.common.entities.registry.ChrysalisEntities;
+import net.sydokiddo.chrysalis.common.entities.registry.CEntities;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.Seat;
 
 public interface SittableBlock {
@@ -26,7 +26,7 @@ public interface SittableBlock {
 
         if (level.isClientSide()) return;
 
-        Seat seat = ChrysalisEntities.SEAT.get().create(level, EntitySpawnReason.TRIGGERED);
+        Seat seat = CEntities.SEAT.get().create(level, EntitySpawnReason.TRIGGERED);
         assert seat != null;
         seat.setPos(blockPos.getX() + 0.5D, blockPos.getY() + seatYHeight, blockPos.getZ() + 0.5D);
 

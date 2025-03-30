@@ -6,10 +6,10 @@ import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
+import net.sydokiddo.chrysalis.common.items.CItems;
 import java.util.function.Supplier;
 
-public class ChrysalisCreativeModeTabs {
+public class CCreativeModeTabs {
 
     /**
      * Registers the debug utility items in the creative mode inventory.
@@ -19,22 +19,22 @@ public class ChrysalisCreativeModeTabs {
 
     @SuppressWarnings("unused")
     public static final Supplier<CreativeModeTab> CHRYSALIS_TAB = CREATIVE_MODE_TAB.register("chrysalis_tab", () -> CreativeModeTab.builder()
-        .icon(() -> new ItemStack(ChrysalisItems.ICON.get()))
+        .icon(() -> new ItemStack(CItems.ICON.get()))
         .title(Component.translatable("mod.chrysalis"))
         .displayItems((parameters, output) -> {
-            output.accept(ChrysalisItems.HEAL);
-            output.accept(ChrysalisItems.FILL_HUNGER);
-            output.accept(ChrysalisItems.FILL_OXYGEN);
-            output.accept(ChrysalisItems.GIVE_RESISTANCE);
-            output.accept(ChrysalisItems.CLEAR_EFFECTS);
-            output.accept(ChrysalisItems.TELEPORT_TO_SPAWNPOINT);
-            output.accept(ChrysalisItems.TELEPORT_WAND);
-            output.accept(ChrysalisItems.KILL_WAND);
-            output.accept(ChrysalisItems.AGGRO_WAND);
-            output.accept(ChrysalisItems.TAME_MOB);
-            output.accept(ChrysalisItems.RIDE_MOB);
-            output.accept(ChrysalisItems.COPYING_SPAWN_EGG);
-            if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) output.accept(ChrysalisItems.TEST_RIGHT_CLICK_ITEM);
+            output.accept(CItems.HEAL);
+            output.accept(CItems.FILL_HUNGER);
+            output.accept(CItems.FILL_OXYGEN);
+            output.accept(CItems.GIVE_RESISTANCE);
+            output.accept(CItems.CLEAR_EFFECTS);
+            output.accept(CItems.TELEPORT_TO_SPAWNPOINT);
+            output.accept(CItems.TELEPORT_WAND);
+            output.accept(CItems.KILL_WAND);
+            output.accept(CItems.AGGRO_WAND);
+            output.accept(CItems.TAME_MOB);
+            output.accept(CItems.RIDE_MOB);
+            output.accept(CItems.COPYING_SPAWN_EGG);
+            if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) output.accept(CItems.TEST_RIGHT_CLICK_ITEM);
         })
     .build());
 

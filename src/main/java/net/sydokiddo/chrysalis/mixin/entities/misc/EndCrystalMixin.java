@@ -4,7 +4,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -18,6 +18,6 @@ public class EndCrystalMixin {
 
     @Redirect(method = "hurtServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/DamageSource;is(Lnet/minecraft/tags/TagKey;)Z"))
     private boolean chrysalis$doesNotExplodeEndCrystalsTag(DamageSource damageSource, TagKey<DamageType> tagKey) {
-        return damageSource.is(ChrysalisTags.DOES_NOT_EXPLODE_END_CRYSTALS);
+        return damageSource.is(CTags.DOES_NOT_EXPLODE_END_CRYSTALS);
     }
 }

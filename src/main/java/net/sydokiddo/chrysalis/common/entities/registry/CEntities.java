@@ -13,7 +13,7 @@ import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.encounte
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.Seat;
 
-public class ChrysalisEntities {
+public class CEntities {
 
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.createEntities(Chrysalis.MOD_ID);
 

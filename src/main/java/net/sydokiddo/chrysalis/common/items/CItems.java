@@ -13,7 +13,7 @@ import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.*;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing.TestRightClickItem;
 
-public class ChrysalisItems {
+public class CItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Chrysalis.MOD_ID);
     private static final DeferredRegister.Items TEST_ITEMS = DeferredRegister.createItems(Chrysalis.MOD_ID);
@@ -34,7 +34,7 @@ public class ChrysalisItems {
         TAME_MOB = ITEMS.registerItem("tame_mob", TameMobItem::new, debugUtilitySettings()),
         RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, debugUtilitySettings()),
         COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEggItem::new, debugUtilitySettings()),
-        TEST_RIGHT_CLICK_ITEM = ChrysalisItems.TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
+        TEST_RIGHT_CLICK_ITEM = TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
     ;
 
     // endregion

@@ -11,12 +11,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.EventHooks;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisGameRules;
+import net.sydokiddo.chrysalis.common.CRegistry;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.util.entities.interfaces.ChargedMob;
 import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.NotNull;
@@ -51,7 +51,7 @@ public abstract class MobMixin extends LivingEntity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void chrysalis$refreshEncounterMusic(CallbackInfo info) {
-        if (!this.level().isClientSide() && this.getType().is(ChrysalisTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC) && this.tickCount % 20 == 0) this.chrysalis$tryToSendEncounterMusic(true);
+        if (!this.level().isClientSide() && this.getType().is(CTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC) && this.tickCount % 20 == 0) this.chrysalis$tryToSendEncounterMusic(true);
         this.chrysalis$tryToSendEncounterMusic(false);
     }
 
@@ -68,7 +68,7 @@ public abstract class MobMixin extends LivingEntity {
     @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/event/EventHooks;canEntityGrief(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;)Z"))
     private boolean chrysalis$mobsPickingUpItemsWorldInteractionsGameRule(ServerLevel serverLevel, Entity entity) {
         if (!CConfigOptions.REWORKED_MOB_GRIEFING.get()) return EventHooks.canEntityGrief(serverLevel, this);
-        return serverLevel.getGameRules().getBoolean(ChrysalisGameRules.RULE_MOB_WORLD_INTERACTIONS);
+        return serverLevel.getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS);
     }
 
     /**
@@ -89,7 +89,7 @@ public abstract class MobMixin extends LivingEntity {
     protected void chrysalis$chargedMobDropData(ServerLevel serverLevel, DamageSource damageSource, boolean recentlyHit, CallbackInfo info) {
 
         if (Chrysalis.registryAccess == null) return;
-        List<ChargedMobDropData> list = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.CHARGED_MOB_DROP_DATA).stream().filter(codec -> codec.entities().contains(this.getType().builtInRegistryHolder())).toList();
+        List<ChargedMobDropData> list = Chrysalis.registryAccess.lookupOrThrow(CRegistry.CHARGED_MOB_DROP_DATA).stream().filter(codec -> codec.entities().contains(this.getType().builtInRegistryHolder())).toList();
 
         for (ChargedMobDropData chargedMobDropData : list) {
 

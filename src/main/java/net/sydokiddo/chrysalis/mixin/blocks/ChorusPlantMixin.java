@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ChorusPlantFeature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -31,7 +31,7 @@ public abstract class ChorusPlantMixin extends PipeBlock {
      * Chorus plants are now placeable on any blocks in the chorus_plants_can_grow_on tag.
      **/
 
-    @Unique private static TagKey<Block> chrysalis$chorusPlantsCanGrowOnTag = ChrysalisTags.CHORUS_PLANTS_CAN_GROW_ON;
+    @Unique private static TagKey<Block> chrysalis$chorusPlantsCanGrowOnTag = CTags.CHORUS_PLANTS_CAN_GROW_ON;
 
     @Inject(method = "getStateWithConnections", at = @At("HEAD"), cancellable = true)
     private static void chrysalis$chorusPlantGetStateWithConnections(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, CallbackInfoReturnable<BlockState> cir) {
@@ -96,7 +96,7 @@ public abstract class ChorusPlantMixin extends PipeBlock {
          * Chorus flowers are now placeable on and can tick on any blocks in the chorus_plants_can_grow_on tag.
          **/
 
-        @Unique private static TagKey<Block> chrysalis$chorusPlantsCanGrowOnTag = ChrysalisTags.CHORUS_PLANTS_CAN_GROW_ON;
+        @Unique private static TagKey<Block> chrysalis$chorusPlantsCanGrowOnTag = CTags.CHORUS_PLANTS_CAN_GROW_ON;
 
         @Inject(method = "canSurvive", at = @At("HEAD"), cancellable = true)
         private void chrysalis$chorusFlowerCanBePlacedOn(BlockState blockState, LevelReader levelReader, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
@@ -130,7 +130,7 @@ public abstract class ChorusPlantMixin extends PipeBlock {
             WorldGenLevel worldGenLevel = featurePlaceContext.level();
             BlockPos blockPos = featurePlaceContext.origin();
 
-            if (worldGenLevel.isEmptyBlock(blockPos) && worldGenLevel.getBlockState(blockPos.below()).is(ChrysalisTags.CHORUS_PLANTS_CAN_GROW_ON)) {
+            if (worldGenLevel.isEmptyBlock(blockPos) && worldGenLevel.getBlockState(blockPos.below()).is(CTags.CHORUS_PLANTS_CAN_GROW_ON)) {
                 ChorusFlowerBlock.generatePlant(worldGenLevel, blockPos, featurePlaceContext.random(), 8);
                 cir.setReturnValue(true);
             }

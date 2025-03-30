@@ -28,7 +28,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
 import net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing.ExampleBowItem;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisTags;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceBlockDispenserBehavior;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.PlaceEntityDispenserBehavior;
 import net.sydokiddo.chrysalis.util.blocks.dispensers.ShootProjectileDispenserBehavior;
@@ -36,13 +36,13 @@ import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 import net.sydokiddo.chrysalis.common.blocks.custom_blocks.ExampleSeatBlock;
-import net.sydokiddo.chrysalis.common.items.ChrysalisItems;
+import net.sydokiddo.chrysalis.common.items.CItems;
 import net.sydokiddo.chrysalis.common.items.custom_items.*;
-import net.sydokiddo.chrysalis.common.status_effects.ChrysalisEffects;
+import net.sydokiddo.chrysalis.common.status_effects.CStatusEffects;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public class ChrysalisExampleRegistry {
+public class CExampleRegistry {
 
     /**
      * A variety of examples for things that can be registered with Chrysalis.
@@ -70,35 +70,35 @@ public class ChrysalisExampleRegistry {
 
     // region Example Item Registries
 
-    private static final DeferredItem<Item> EXAMPLE_ICON = ChrysalisItems.ITEMS.registerItem("example_icon", IconItem::new, ChrysalisItems.iconSettings());
+    private static final DeferredItem<Item> EXAMPLE_ICON = CItems.ITEMS.registerItem("example_icon", IconItem::new, CItems.iconSettings());
 
-    private static final DeferredItem<Item> EXAMPLE_TOOL = ChrysalisItems.ITEMS.registerItem("example_tool",
+    private static final DeferredItem<Item> EXAMPLE_TOOL = CItems.ITEMS.registerItem("example_tool",
         properties -> new SwordItem(ToolMaterial.IRON, 3, -2.4F, properties), new Item.Properties());
 
-    private static final DeferredItem<Item> EXAMPLE_ARMOR = ChrysalisItems.ITEMS.registerItem("example_armor",
+    private static final DeferredItem<Item> EXAMPLE_ARMOR = CItems.ITEMS.registerItem("example_armor",
         properties -> new ArmorItem(ArmorMaterials.IRON, ArmorType.CHESTPLATE, properties), new Item.Properties());
 
-    private static final DeferredItem<Item> EXAMPLE_BOW = ChrysalisItems.ITEMS.registerItem("example_bow", ExampleBowItem::new, new Item.Properties());
+    private static final DeferredItem<Item> EXAMPLE_BOW = CItems.ITEMS.registerItem("example_bow", ExampleBowItem::new, new Item.Properties());
 
-    private static final DeferredItem<Item> EXAMPLE_MUSIC_DISC = ChrysalisItems.ITEMS.registerItem("example_music_disc",
+    private static final DeferredItem<Item> EXAMPLE_MUSIC_DISC = CItems.ITEMS.registerItem("example_music_disc",
         Item::new, RegistryHelper.musicDiscProperties(JukeboxSongs.CAT, Rarity.COMMON));
 
-    private static final DeferredItem<Item> EXAMPLE_SPAWN_EGG = ChrysalisItems.ITEMS.registerItem("example_spawn_egg",
+    private static final DeferredItem<Item> EXAMPLE_SPAWN_EGG = CItems.ITEMS.registerItem("example_spawn_egg",
         properties -> new CustomSpawnEggItem(EntityType.FROG, EntityType.TADPOLE, properties), new Item.Properties());
 
-    private static final DeferredItem<Item> EXAMPLE_MOB_CUSTOM_CONTAINER = ChrysalisItems.ITEMS.registerItem("example_mob_custom_container",
+    private static final DeferredItem<Item> EXAMPLE_MOB_CUSTOM_CONTAINER = CItems.ITEMS.registerItem("example_mob_custom_container",
         properties -> new MobInContainerItem(EntityType.ALLAY, SoundEvents.BUCKET_EMPTY, properties), RegistryHelper.mobContainerProperties(Items.GLASS_BOTTLE, Rarity.COMMON));
 
-    private static final DeferredItem<Item> EXAMPLE_MOB_FLUID_BUCKET = ChrysalisItems.ITEMS.registerItem("example_mob_fluid_bucket",
+    private static final DeferredItem<Item> EXAMPLE_MOB_FLUID_BUCKET = CItems.ITEMS.registerItem("example_mob_fluid_bucket",
         properties -> new MobInFluidBucketItem(EntityType.COD, Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, properties), RegistryHelper.mobContainerProperties(Items.BUCKET, Rarity.COMMON));
 
-    private static final DeferredItem<Item> EXAMPLE_MOB_SOLID_BUCKET = ChrysalisItems.ITEMS.registerItem("example_mob_solid_bucket",
+    private static final DeferredItem<Item> EXAMPLE_MOB_SOLID_BUCKET = CItems.ITEMS.registerItem("example_mob_solid_bucket",
         properties -> new MobInSolidBucketItem(EntityType.SNOW_GOLEM, Blocks.POWDER_SNOW, SoundEvents.BUCKET_EMPTY_POWDER_SNOW, properties), RegistryHelper.mobContainerProperties(Items.BUCKET, Rarity.COMMON));
 
-    private static final DeferredItem<Item> EXAMPLE_ARMOR_TRIM_SMITHING_TEMPLATE = ChrysalisItems.ITEMS.registerItem("example_armor_trim_smithing_template",
+    private static final DeferredItem<Item> EXAMPLE_ARMOR_TRIM_SMITHING_TEMPLATE = CItems.ITEMS.registerItem("example_armor_trim_smithing_template",
         SmithingTemplateItem::createArmorTrimTemplate, new Item.Properties().rarity(Rarity.UNCOMMON));
 
-    private static final DeferredItem<Item> EXAMPLE_UPGRADE_SMITHING_TEMPLATE = ChrysalisItems.ITEMS.registerItem("example_upgrade_smithing_template",
+    private static final DeferredItem<Item> EXAMPLE_UPGRADE_SMITHING_TEMPLATE = CItems.ITEMS.registerItem("example_upgrade_smithing_template",
         properties -> CustomSmithingTemplateItem.createUpgradeTemplate("minecraft", "netherite_upgrade", CustomSmithingTemplateItem.EMPTY_SLOT_INGOT, properties),
         new Item.Properties().rarity(Rarity.UNCOMMON));
 
@@ -132,7 +132,7 @@ public class ChrysalisExampleRegistry {
 
     private static DeferredBlock<Block> registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
         DeferredBlock<Block> block = BLOCKS.registerBlock(name, function, blockSettings);
-        ChrysalisItems.ITEMS.registerSimpleBlockItem(block, itemSettings);
+        CItems.ITEMS.registerSimpleBlockItem(block, itemSettings);
         return block;
     }
 
@@ -148,7 +148,7 @@ public class ChrysalisExampleRegistry {
 
     private static void registerExampleDispenserMethods() {
         DispenserBlock.registerBehavior(Blocks.SAND.asItem(), new PlaceBlockDispenserBehavior());
-        DispenserBlock.registerBehavior(Items.END_CRYSTAL, new PlaceEntityDispenserBehavior(EntityType.END_CRYSTAL, new Vec3(1.0D, 2.0D, 1.0D), new Vec3(0.5D, 0.0D, 0.5D), ChrysalisTags.END_CRYSTAL_BASE_BLOCKS, SoundEvents.AMETHYST_BLOCK_PLACE));
+        DispenserBlock.registerBehavior(Items.END_CRYSTAL, new PlaceEntityDispenserBehavior(EntityType.END_CRYSTAL, new Vec3(1.0D, 2.0D, 1.0D), new Vec3(0.5D, 0.0D, 0.5D), CTags.END_CRYSTAL_BASE_BLOCKS, SoundEvents.AMETHYST_BLOCK_PLACE));
         DispenserBlock.registerBehavior(Items.BLAZE_POWDER, new ShootProjectileDispenserBehavior(EntityType.SMALL_FIREBALL, SoundEvents.BLAZE_SHOOT));
     }
 
@@ -157,7 +157,7 @@ public class ChrysalisExampleRegistry {
     }
 
     private static void sendExampleStatusEffect(Entity entity) {
-        EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0D, new MobEffectInstance(Holder.direct(ChrysalisEffects.RADIANCE.get()), 40));
+        EventHelper.sendStatusEffectToNearbyPlayers(entity, null, 10.0D, new MobEffectInstance(Holder.direct(CStatusEffects.RADIANCE.get()), 40));
     }
 
     private static void summonExampleEntitySpawner(Level level, Vec3 position) {

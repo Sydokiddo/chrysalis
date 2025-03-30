@@ -21,10 +21,10 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.ColoredDirectionalDustParticleOptions;
-import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
+import net.sydokiddo.chrysalis.common.CRegistry;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.AbstractSpawnerEntity;
-import net.sydokiddo.chrysalis.common.entities.registry.ChrysalisEntities;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisSoundEvents;
+import net.sydokiddo.chrysalis.common.entities.registry.CEntities;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
@@ -58,7 +58,7 @@ public class EntitySpawner extends AbstractSpawnerEntity {
         String finalId = id;
 
         if (Chrysalis.registryAccess == null) return;
-        List<EntitySpawnerData.EntitySpawnerConfig> list = Chrysalis.registryAccess.lookupOrThrow(ChrysalisRegistry.ENTITY_SPAWNER_CONFIG_DATA).stream().filter(entitySpawnerConfig -> Objects.equals(entitySpawnerConfig.getId(), finalId)).toList();
+        List<EntitySpawnerData.EntitySpawnerConfig> list = Chrysalis.registryAccess.lookupOrThrow(CRegistry.ENTITY_SPAWNER_CONFIG_DATA).stream().filter(entitySpawnerConfig -> Objects.equals(entitySpawnerConfig.getId(), finalId)).toList();
 
         if (list.isEmpty()) {
             Chrysalis.LOGGER.error("Could not find entity spawner config of id: {}", finalId);
@@ -68,7 +68,7 @@ public class EntitySpawner extends AbstractSpawnerEntity {
         if (list.size() > 1) Chrysalis.LOGGER.warn("Detected multiple entity spawner configs of the same id: {}", finalId);
         EntitySpawnerData.EntitySpawnerConfig entitySpawnerConfig = list.getFirst();
 
-        EntitySpawner entitySpawner = new EntitySpawner(ChrysalisEntities.ENTITY_SPAWNER.get(), level);
+        EntitySpawner entitySpawner = new EntitySpawner(CEntities.ENTITY_SPAWNER.get(), level);
         Optional<SpawnData> optionalSpawnData = entitySpawnerConfig.spawnPotentials().getRandomValue(entitySpawner.level().getRandom());
         if (optionalSpawnData.isEmpty()) return;
 
@@ -121,9 +121,9 @@ public class EntitySpawner extends AbstractSpawnerEntity {
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         builder.define(ENTITY_TO_SPAWN, new CompoundTag());
         this.setSpawnAfterEntityTicks(this.level().getRandom().nextIntBetweenInclusive(60, 120));
-        builder.define(APPEAR_SOUND, ChrysalisSoundEvents.ENTITY_SPAWNER_APPEAR.get().location().toString());
-        builder.define(ABOUT_TO_SPAWN_ENTITY_SOUND, ChrysalisSoundEvents.ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY.get().location().toString());
-        builder.define(SPAWN_ENTITY_SOUND, ChrysalisSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY.get().location().toString());
+        builder.define(APPEAR_SOUND, CSoundEvents.ENTITY_SPAWNER_APPEAR.get().location().toString());
+        builder.define(ABOUT_TO_SPAWN_ENTITY_SOUND, CSoundEvents.ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY.get().location().toString());
+        builder.define(SPAWN_ENTITY_SOUND, CSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY.get().location().toString());
         builder.define(AMBIENT_PARTICLE_STARTING_COLOR, ComponentHelper.FIRE_COLOR.getRGB());
         builder.define(AMBIENT_PARTICLE_ENDING_COLOR, CommonColors.WHITE);
         builder.define(SPAWN_PARTICLE, ParticleTypes.FLAME);

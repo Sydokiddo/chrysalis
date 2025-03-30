@@ -12,7 +12,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.particles.ParticleCommonMethods;
-import net.sydokiddo.chrysalis.common.misc.ChrysalisParticles;
+import net.sydokiddo.chrysalis.common.misc.CParticles;
 import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
@@ -74,6 +74,6 @@ public class RotatingDustParticleOptions extends ScalableParticleOptionsBase imp
 
     @Override
     public @NotNull ParticleType<?> getType() {
-        return ChrysalisParticles.ROTATING_DUST.get();
+        return CParticles.ROTATING_DUST.get();
     }
 }

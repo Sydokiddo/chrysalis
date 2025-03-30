@@ -22,8 +22,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
-import net.sydokiddo.chrysalis.common.ChrysalisRegistry;
-import net.sydokiddo.chrysalis.common.items.ChrysalisDataComponents;
+import net.sydokiddo.chrysalis.common.CRegistry;
+import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import java.util.List;
 import java.util.Objects;
 
@@ -114,7 +114,7 @@ public class ItemHelper {
      * Gets an item's saved entity data component.
      **/
 
-    public static final DataComponentType<CustomData> SAVED_ENTITY_DATA_COMPONENT = ChrysalisDataComponents.SAVED_ENTITY_DATA.get();
+    public static final DataComponentType<CustomData> SAVED_ENTITY_DATA_COMPONENT = CDataComponents.SAVED_ENTITY_DATA.get();
 
     public static CustomData getSavedEntityData(ItemStack itemStack) {
         return itemStack.getOrDefault(SAVED_ENTITY_DATA_COMPONENT, CustomData.EMPTY);
@@ -129,11 +129,11 @@ public class ItemHelper {
      **/
 
     public static int getItemGlowColor(ItemEntity itemEntity) {
-        return itemEntity.getEntityData().get(ChrysalisRegistry.ITEM_GLOW_COLOR);
+        return itemEntity.getEntityData().get(CRegistry.ITEM_GLOW_COLOR);
     }
 
     public static void setItemGlowColor(ItemEntity itemEntity, int glowColor) {
-        itemEntity.getEntityData().set(ChrysalisRegistry.ITEM_GLOW_COLOR, glowColor);
+        itemEntity.getEntityData().set(CRegistry.ITEM_GLOW_COLOR, glowColor);
     }
 
     // endregion
