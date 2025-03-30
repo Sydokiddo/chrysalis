@@ -22,8 +22,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
@@ -35,12 +33,6 @@ import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
 import net.sydokiddo.chrysalis.util.sounds.music.*;
-import net.sydokiddo.chrysalis.util.sounds.music.payloads.ClearMusicPayload;
-import net.sydokiddo.chrysalis.util.sounds.music.payloads.QueuedMusicPayload;
-import net.sydokiddo.chrysalis.util.sounds.music.payloads.ResetMusicFadePayload;
-import net.sydokiddo.chrysalis.util.sounds.music.payloads.StructureChangedPayload;
-import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
-import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.technical.commands.*;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.List;
@@ -59,8 +51,8 @@ public class CServerEvents {
         @SubscribeEvent
         private static void onServerPreTick(ServerTickEvent.Pre event) {
 
-            if (MusicTracker.ticks > 0) {
-                MusicTracker.ticks -= 1;
+            if (MusicTracker.onServer.ticks > 0) {
+                MusicTracker.onServer.ticks -= 1;
                 return;
             }
 
@@ -68,23 +60,23 @@ public class CServerEvents {
 
             for (ServerPlayer serverPlayer : list) {
                 if (!serverPlayer.isAlive()) return;
-                MusicTracker.checkAllStructures(serverPlayer.serverLevel(), serverPlayer);
+                MusicTracker.onServer.checkAllStructures(serverPlayer.serverLevel(), serverPlayer);
             }
 
-            MusicTracker.ticks = 250;
+            MusicTracker.onServer.ticks = 250;
         }
 
         @SubscribeEvent
         private static void onServerStopping(ServerStoppingEvent event) {
-            MusicTracker.clearMusicOnClient(false);
-            if (!MusicTracker.playerStructures.isEmpty()) MusicTracker.playerStructures.clear();
+            MusicTracker.onClient.clearMusic(false);
+            if (!MusicTracker.onServer.playerStructures.isEmpty()) MusicTracker.onServer.playerStructures.clear();
         }
 
         @SubscribeEvent
         private static void onPlayerDisconnect(PlayerEvent.PlayerLoggedOutEvent event) {
             if (event.getEntity() instanceof ServerPlayer serverPlayer) {
                 EventHelper.clearMusicOnServer(serverPlayer, false);
-                MusicTracker.playerStructures.remove(serverPlayer);
+                MusicTracker.onServer.playerStructures.remove(serverPlayer);
             }
         }
 
@@ -136,17 +128,6 @@ public class CServerEvents {
             event.dataPackRegistry(CRegistry.CHARGED_MOB_DROP_DATA, ChargedMobDropData.CODEC);
             event.dataPackRegistry(CRegistry.PLAYER_LOOT_TABLE_DATA, PlayerLootTableData.CODEC);
             event.dataPackRegistry(CRegistry.ENTITY_SPAWNER_CONFIG_DATA, EntitySpawnerData.EntitySpawnerConfig.CODEC);
-        }
-
-        @SubscribeEvent
-        private static void payloadRegistry(RegisterPayloadHandlersEvent event) {
-            final PayloadRegistrar registrar = event.registrar("1");
-            registrar.playToClient(CameraShakePayload.TYPE, CameraShakePayload.CODEC, CameraShakePayload::handleDataOnClient);
-            registrar.playToClient(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC, CameraShakeResetPayload::handleDataOnClient);
-            registrar.playToClient(QueuedMusicPayload.TYPE, QueuedMusicPayload.CODEC, QueuedMusicPayload::handleDataOnClient);
-            registrar.playToClient(StructureChangedPayload.TYPE, StructureChangedPayload.CODEC, StructureChangedPayload::handleDataOnClient);
-            registrar.playToClient(ClearMusicPayload.TYPE, ClearMusicPayload.CODEC, ClearMusicPayload::handleDataOnClient);
-            registrar.playToClient(ResetMusicFadePayload.TYPE, ResetMusicFadePayload.CODEC, ResetMusicFadePayload::handleDataOnClient);
         }
 
         @SubscribeEvent

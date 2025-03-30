@@ -28,6 +28,6 @@ public record StructureChangedPayload(ResourceLocation structureName) implements
     @SuppressWarnings("unused")
     @OnlyIn(Dist.CLIENT)
     public static void handleDataOnClient(final StructureChangedPayload payload, final IPayloadContext context) {
-        MusicTracker.setStructureMusic(payload.structureName().toString(), true);
+        MusicTracker.onClient.setStructureMusic(payload.structureName().toString(), true);
     }
 }

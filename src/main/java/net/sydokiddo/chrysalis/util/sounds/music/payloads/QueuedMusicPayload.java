@@ -31,6 +31,6 @@ public record QueuedMusicPayload(Holder<SoundEvent> soundEvent, int minDelay, in
     @SuppressWarnings("unused")
     @OnlyIn(Dist.CLIENT)
     public static void handleDataOnClient(final QueuedMusicPayload payload, final IPayloadContext context) {
-        MusicTracker.setQueuedMusic(new Music(payload.soundEvent(), payload.minDelay(), payload.maxDelay(), payload.replaceCurrentMusic()), true);
+        MusicTracker.onClient.setQueuedMusic(new Music(payload.soundEvent(), payload.minDelay(), payload.maxDelay(), payload.replaceCurrentMusic()), true);
     }
 }

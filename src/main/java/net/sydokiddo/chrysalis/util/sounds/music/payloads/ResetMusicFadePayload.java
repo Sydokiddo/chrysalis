@@ -28,6 +28,6 @@ public record ResetMusicFadePayload(int protocolVersion) implements CustomPacket
     @SuppressWarnings("unused")
     @OnlyIn(Dist.CLIENT)
     public static void handleDataOnClient(final ResetMusicFadePayload payload, final IPayloadContext context) {
-        MusicTracker.resetMusicFade = true;
+        MusicTracker.onClient.resetMusicFade = true;
     }
 }

@@ -28,6 +28,6 @@ public record ClearMusicPayload(boolean shouldFade) implements CustomPacketPaylo
     @SuppressWarnings("unused")
     @OnlyIn(Dist.CLIENT)
     public static void handleDataOnClient(final ClearMusicPayload payload, final IPayloadContext context) {
-        MusicTracker.clearMusicOnClient(payload.shouldFade());
+        MusicTracker.onClient.clearMusic(payload.shouldFade());
     }
 }

@@ -17,12 +17,20 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.ScreenshotEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.CItems;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.util.helpers.CompatibilityHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
+import net.sydokiddo.chrysalis.util.sounds.music.payloads.ClearMusicPayload;
+import net.sydokiddo.chrysalis.util.sounds.music.payloads.QueuedMusicPayload;
+import net.sydokiddo.chrysalis.util.sounds.music.payloads.ResetMusicFadePayload;
+import net.sydokiddo.chrysalis.util.sounds.music.payloads.StructureChangedPayload;
 import net.sydokiddo.chrysalis.util.technical.ClipboardImage;
+import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
+import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
 import javax.swing.*;
@@ -91,13 +99,24 @@ public class CClientEvents {
     public static class ModEventBus {
 
         @SubscribeEvent
-        private static void registerClientResources(AddClientReloadListenersEvent event) {
+        private static void clientResourceRegistry(AddClientReloadListenersEvent event) {
             event.addListener(Chrysalis.resourceLocationId("splashes"), SplashTextLoader.INSTANCE);
         }
 
         @SubscribeEvent
-        private static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+        private static void keyMappingRegistry(RegisterKeyMappingsEvent event) {
             event.register(CRegistry.ClientRegistry.PANORAMIC_SCREENSHOT_KEY);
+        }
+
+        @SubscribeEvent
+        private static void payloadRegistry(RegisterPayloadHandlersEvent event) {
+            final PayloadRegistrar registrar = event.registrar("1");
+            registrar.playToClient(CameraShakePayload.TYPE, CameraShakePayload.CODEC, CameraShakePayload::handleDataOnClient);
+            registrar.playToClient(CameraShakeResetPayload.TYPE, CameraShakeResetPayload.CODEC, CameraShakeResetPayload::handleDataOnClient);
+            registrar.playToClient(QueuedMusicPayload.TYPE, QueuedMusicPayload.CODEC, QueuedMusicPayload::handleDataOnClient);
+            registrar.playToClient(StructureChangedPayload.TYPE, StructureChangedPayload.CODEC, StructureChangedPayload::handleDataOnClient);
+            registrar.playToClient(ClearMusicPayload.TYPE, ClearMusicPayload.CODEC, ClearMusicPayload::handleDataOnClient);
+            registrar.playToClient(ResetMusicFadePayload.TYPE, ResetMusicFadePayload.CODEC, ResetMusicFadePayload::handleDataOnClient);
         }
 
         @SubscribeEvent

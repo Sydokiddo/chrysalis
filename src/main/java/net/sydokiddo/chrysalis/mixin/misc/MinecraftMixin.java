@@ -51,10 +51,10 @@ public class MinecraftMixin {
     private void chrysalis$getQueuedMusic(CallbackInfoReturnable<MusicInfo> cir) {
 
         Music music = Optionull.map(this.screen, Screen::getBackgroundMusic);
-        if (music == Musics.MENU || Minecraft.getInstance().level == null) MusicTracker.clearMusicOnClient(false);
+        if (music == Musics.MENU || Minecraft.getInstance().level == null) MusicTracker.onClient.clearMusic(false);
 
         if (music != Musics.MENU && music != Musics.CREATIVE && music != Musics.END_BOSS && music != Musics.CREDITS) {
-            @Nullable Music queuedMusic = MusicTracker.getQueuedMusic();
+            @Nullable Music queuedMusic = MusicTracker.onClient.getQueuedMusic();
             if (queuedMusic != null) cir.setReturnValue(new MusicInfo(queuedMusic));
         }
     }
@@ -81,21 +81,21 @@ public class MinecraftMixin {
         @Inject(method = "tick", at = @At("HEAD"))
         private void chrysalis$fadeOutMusic(CallbackInfo info) {
 
-            if (MusicTracker.fadeOutMusic) {
+            if (MusicTracker.onClient.fadeOutMusic) {
 
                 this.currentGain = this.currentGain - 0.01F;
 
                 if (this.currentGain <= 0.0F) {
-                    MusicTracker.setQueuedMusic(null, true);
-                    MusicTracker.setStructureMusic(null, false);
-                    MusicTracker.fadeOutMusic = false;
+                    MusicTracker.onClient.setQueuedMusic(null, true);
+                    MusicTracker.onClient.setStructureMusic(null, false);
+                    MusicTracker.onClient.fadeOutMusic = false;
                 }
             }
 
-            if (MusicTracker.resetMusicFade) {
-                MusicTracker.fadeOutMusic = false;
+            if (MusicTracker.onClient.resetMusicFade) {
+                MusicTracker.onClient.fadeOutMusic = false;
                 this.currentGain = 1.0F;
-                MusicTracker.resetMusicFade = false;
+                MusicTracker.onClient.resetMusicFade = false;
             }
         }
     }
