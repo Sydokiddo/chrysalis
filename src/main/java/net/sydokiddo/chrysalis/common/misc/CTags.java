@@ -131,9 +131,10 @@ public class CTags {
     // region Damage Type Tags
 
     public static final TagKey<DamageType>
+        BYPASSES_DAMAGE_CAPACITY = registerDamageTypeTag("bypasses_damage_capacity"),
+        DOES_NOT_EXPLODE_END_CRYSTALS = registerDamageTypeTag("does_not_explode_end_crystals"),
         IS_MAGIC = registerDamageTypeTag("is_magic"),
-        IS_RANGED = registerDamageTypeTag("is_ranged"),
-        DOES_NOT_EXPLODE_END_CRYSTALS = registerDamageTypeTag("does_not_explode_end_crystals")
+        IS_RANGED = registerDamageTypeTag("is_ranged")
     ;
 
     // endregion

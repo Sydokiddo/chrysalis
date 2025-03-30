@@ -474,9 +474,10 @@
   "tag.entity_type.chrysalis.villagers": "Villagers",
   "tag.entity_type.chrysalis.warden_ignored": "Warden Ignored",
 
+  "tag.damage_type.chrysalis.bypasses_damage_capacity": "Bypasses Damage Capacity",
+  "tag.damage_type.chrysalis.does_not_explode_end_crystals": "Does Not Explode End Crystals",
   "tag.damage_type.chrysalis.is_magic": "Is Magic",
   "tag.damage_type.chrysalis.is_ranged": "Is Ranged",
-  "tag.damage_type.chrysalis.does_not_explode_end_crystals": "Does Not Explode End Crystals",
 
   "tag.worldgen.chrysalis.biome.without_mob_spawns": "Biomes Without Mob Spawns",
 

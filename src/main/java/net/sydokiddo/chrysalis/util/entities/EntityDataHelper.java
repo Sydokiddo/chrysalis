@@ -3,7 +3,6 @@ package net.sydokiddo.chrysalis.util.entities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -18,6 +17,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.CRegistry;
 import net.sydokiddo.chrysalis.common.misc.CAttributes;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.BuildPreventingEffect;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.Optional;
@@ -123,7 +123,7 @@ public class EntityDataHelper {
 
         float damageCap = (float) livingEntity.getAttributeValue(CAttributes.DAMAGE_CAPACITY);
 
-        if (originalDamage > damageCap && originalDamage < Float.MAX_VALUE && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+        if (originalDamage > damageCap && originalDamage < Float.MAX_VALUE && !damageSource.is(CTags.BYPASSES_DAMAGE_CAPACITY)) {
             if (Chrysalis.IS_DEBUG && !livingEntity.level().isClientSide()) Chrysalis.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);
             return damageCap;
         }
