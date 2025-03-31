@@ -2,8 +2,6 @@ package net.sydokiddo.chrysalis.common;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.particle.FlameParticle;
-import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -19,12 +17,10 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.EncounterSpawnerRenderer;
 import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.EntitySpawnerRenderer;
 import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.SeatRenderer;
-import net.sydokiddo.chrysalis.client.particles.types.*;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
@@ -101,7 +97,7 @@ public class CRegistry {
         public static final KeyMapping PANORAMIC_SCREENSHOT_KEY = new KeyMapping("key.chrysalis.panoramic_screenshot", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_F6, "key.categories.misc");
 
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
+        private static void onClientSetup(FMLClientSetupEvent event) {
 
             EntityRenderers.register(CEntities.SEAT.get(), SeatRenderer::new);
             EntityRenderers.register(CEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
@@ -114,24 +110,6 @@ public class CRegistry {
             }
 
             DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.CHRYSALIS_VERSION, true);
-        }
-
-        @SubscribeEvent
-        public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
-            event.registerSpriteSet(CParticles.MEMORY_FLAME.get(), FlameParticle.Provider::new);
-            event.registerSpriteSet(CParticles.RADIANCE.get(), SpellParticle.Provider::new);
-            event.registerSpriteSet(CParticles.ARTHROPOD_SIGHT.get(), SpellParticle.Provider::new);
-            event.registerSpriteSet(CParticles.CREEPER_SIGHT.get(), SpellParticle.Provider::new);
-            event.registerSpriteSet(CParticles.ENDER_SIGHT.get(), SpellParticle.Provider::new);
-            event.registerSpriteSet(CParticles.COLORED_DUST_PLUME.get(), ColoredDustPlumeParticle.Provider::new);
-            event.registerSpriteSet(CParticles.COLORED_DIRECTIONAL_DUST.get(), ColoredDirectionalDustParticle.Provider::new);
-            event.registerSpriteSet(CParticles.COLORED_PORTAL.get(), ColoredPortalParticle.Provider::new);
-            event.registerSpriteSet(CParticles.DUST_EXPLOSION.get(), DustExplosionParticle.Provider::new);
-            event.registerSpriteSet(CParticles.ROTATING_DUST.get(), RotatingDustParticle.Provider::new);
-            event.registerSpriteSet(CParticles.SPARKLE.get(), SparkleParticle.Provider::new);
-            event.registerSpriteSet(CParticles.SPARK.get(), SparkParticle.Provider::new);
-            event.registerSpriteSet(CParticles.SMALL_PULSATION.get(), PulsationParticle.SmallProvider::new);
-            event.registerSpriteSet(CParticles.LARGE_PULSATION.get(), PulsationParticle.LargeProvider::new);
         }
     }
 }
