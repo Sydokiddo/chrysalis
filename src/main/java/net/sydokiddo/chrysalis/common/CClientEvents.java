@@ -125,8 +125,10 @@ public class CClientEvents {
             event.registerSpriteSet(CParticles.MEMORY_FLAME.get(), FlameParticle.Provider::new);
             event.registerSpriteSet(CParticles.RADIANCE.get(), SpellParticle.Provider::new);
             event.registerSpriteSet(CParticles.ARTHROPOD_SIGHT.get(), SpellParticle.Provider::new);
+            event.registerSpriteSet(CParticles.BLIND_SIGHT.get(), SpellParticle.Provider::new);
             event.registerSpriteSet(CParticles.CREEPER_SIGHT.get(), SpellParticle.Provider::new);
             event.registerSpriteSet(CParticles.ENDER_SIGHT.get(), SpellParticle.Provider::new);
+            event.registerSpriteSet(CParticles.RESIN_SIGHT.get(), SpellParticle.Provider::new);
             event.registerSpriteSet(CParticles.COLORED_DUST_PLUME.get(), ColoredDustPlumeParticle.Provider::new);
             event.registerSpriteSet(CParticles.COLORED_DIRECTIONAL_DUST.get(), ColoredDirectionalDustParticle.Provider::new);
             event.registerSpriteSet(CParticles.COLORED_PORTAL.get(), ColoredPortalParticle.Provider::new);

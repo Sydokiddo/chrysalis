@@ -24,8 +24,10 @@ public class CParticles {
         MEMORY_FLAME = PARTICLE_TYPES.register("memory_flame", () -> createSimpleParticle(false)),
         RADIANCE = PARTICLE_TYPES.register("radiance", () -> createSimpleParticle(false)),
         ARTHROPOD_SIGHT = PARTICLE_TYPES.register("arthropod_sight", () -> createSimpleParticle(false)),
+        BLIND_SIGHT = PARTICLE_TYPES.register("blind_sight", () -> createSimpleParticle(false)),
         CREEPER_SIGHT = PARTICLE_TYPES.register("creeper_sight", () -> createSimpleParticle(false)),
-        ENDER_SIGHT = PARTICLE_TYPES.register("ender_sight", () -> createSimpleParticle(false))
+        ENDER_SIGHT = PARTICLE_TYPES.register("ender_sight", () -> createSimpleParticle(false)),
+        RESIN_SIGHT = PARTICLE_TYPES.register("resin_sight", () -> createSimpleParticle(false))
     ;
 
     // endregion

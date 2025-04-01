@@ -20,6 +20,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraSetup;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
@@ -54,8 +55,10 @@ public abstract class GameRendererMixin {
         EntityType<?> entityType = livingEntity.getType();
 
         if (entityType.is(CTags.HAS_ARTHROPOD_SIGHT) || livingEntity.hasEffect(CStatusEffects.ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
+        if (entityType.is(CTags.HAS_BLIND_SIGHT) || livingEntity.hasEffect(CStatusEffects.BLIND_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("blind_sight"));
         if (entityType.is(CTags.HAS_CREEPER_SIGHT) || livingEntity.hasEffect(CStatusEffects.CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
         if (entityType.is(CTags.HAS_ENDER_SIGHT) || livingEntity.hasEffect(CStatusEffects.ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
+        if (entityType.is(CTags.HAS_RESIN_SIGHT) || livingEntity.hasEffect(CStatusEffects.RESIN_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("resin_sight"));
     }
 
     /**
