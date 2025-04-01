@@ -26,6 +26,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
+import net.sydokiddo.chrysalis.common.blocks.custom_blocks.examples_and_testing.*;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
 import net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing.ExampleBowItem;
 import net.sydokiddo.chrysalis.common.misc.CTags;
@@ -35,7 +36,6 @@ import net.sydokiddo.chrysalis.util.blocks.dispensers.ShootProjectileDispenserBe
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
-import net.sydokiddo.chrysalis.common.blocks.custom_blocks.ExampleSeatBlock;
 import net.sydokiddo.chrysalis.common.items.CItems;
 import net.sydokiddo.chrysalis.common.items.custom_items.*;
 import net.sydokiddo.chrysalis.common.status_effects.CStatusEffects;
@@ -123,8 +123,20 @@ public class CExampleRegistry {
     private static final DeferredBlock<Block> EXAMPLE_LOG = registerBlock("example_log",
         RotatedPillarBlock::new, Blocks.logProperties(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD), new Item.Properties());
 
+    private static final DeferredBlock<Block> EXAMPLE_LAYER_BLOCK = registerBlock("example_layer_block",
+        ExampleLayerBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW), new Item.Properties());
+
     private static final DeferredBlock<Block> EXAMPLE_SITTABLE_BLOCK = registerBlock("example_sittable_block",
         ExampleSeatBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), new Item.Properties());
+
+    private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_BLOCK = registerBlock("example_dissipating_block",
+        ExampleDissipatingBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW_BLOCK), new Item.Properties());
+
+    private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_LAYER_BLOCK = registerBlock("example_dissipating_layer_block",
+        ExampleDissipatingLayerBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW), new Item.Properties());
+
+    private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_MULTIFACE_BLOCK = registerBlock("example_dissipating_multiface_block",
+        ExampleDissipatingMultifaceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.RESIN_CLUMP), new Item.Properties());
 
     private static DeferredBlock<Block> registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties settings) {
         return registerBlock(name, function, settings, new Item.Properties());
