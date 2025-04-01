@@ -164,5 +164,115 @@
       "chrysalis:entity/spawner/change_entity3"
     ],
     "subtitle": "subtitles.entity.generic_spawner.change_entity"
+  },
+  "item.armor.equip_shield": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_shield"
+  },
+  "item.armor.equip_totem_of_undying": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_totem_of_undying"
+  },
+  "item.armor.equip_carved_pumpkin": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_carved_pumpkin"
+  },
+  "item.armor.equip_skeleton_skull": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_skeleton_skull"
+  },
+  "item.armor.equip_wither_skeleton_skull": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_wither_skeleton_skull"
+  },
+  "item.armor.equip_player_head": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_player_head"
+  },
+  "item.armor.equip_zombie_head": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_zombie_head"
+  },
+  "item.armor.equip_creeper_head": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_creeper_head"
+  },
+  "item.armor.equip_piglin_head": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_piglin_head"
+  },
+  "item.armor.equip_dragon_head": {
+    "sounds": [
+      "minecraft:item/armor/equip_generic1",
+      "minecraft:item/armor/equip_generic2",
+      "minecraft:item/armor/equip_generic3",
+      "minecraft:item/armor/equip_generic4",
+      "minecraft:item/armor/equip_generic5",
+      "minecraft:item/armor/equip_generic6"
+    ],
+    "subtitle": "subtitles.item.armor.equip_dragon_head"
   }
 }

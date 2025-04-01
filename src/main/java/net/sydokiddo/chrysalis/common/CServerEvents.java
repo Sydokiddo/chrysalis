@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.common;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.animal.Sheep;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.monster.Evoker;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
@@ -28,6 +30,7 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.common.misc.CGameRules;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
@@ -136,14 +139,16 @@ public class CServerEvents {
         private static void modifyDefaultItemComponents(ModifyDefaultComponentsEvent event) {
             event.modify(Items.DRAGON_EGG, components -> components.set(CDataComponents.IMMUNE_TO_ALL_DAMAGE.get(), Unit.INSTANCE).set(CDataComponents.IMMUNE_TO_DESPAWNING.get(), Unit.INSTANCE));
             event.modify(Items.NETHER_STAR, components -> components.set(CDataComponents.INCREASED_DESPAWN_TIME.get(), Unit.INSTANCE));
-            event.modify(Items.CARVED_PUMPKIN, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
-            event.modify(Items.SKELETON_SKULL, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
-            event.modify(Items.WITHER_SKELETON_SKULL, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
-            event.modify(Items.PLAYER_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
-            event.modify(Items.ZOMBIE_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
-            event.modify(Items.CREEPER_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
-            event.modify(Items.PIGLIN_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
-            event.modify(Items.DRAGON_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
+            event.modify(Items.SHIELD, components -> components.set(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.OFFHAND).setEquipSound(CSoundEvents.EQUIP_SHIELD).setSwappable(false).build()));
+            event.modify(Items.TOTEM_OF_UNDYING, components -> components.set(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.OFFHAND).setEquipSound(CSoundEvents.EQUIP_TOTEM_OF_UNDYING).setSwappable(false).build()));
+            event.modify(Items.CARVED_PUMPKIN, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_CARVED_PUMPKIN)));
+            event.modify(Items.SKELETON_SKULL, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_SKELETON_SKULL)));
+            event.modify(Items.WITHER_SKELETON_SKULL, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_WITHER_SKELETON_SKULL)));
+            event.modify(Items.PLAYER_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_PLAYER_HEAD)));
+            event.modify(Items.ZOMBIE_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_ZOMBIE_HEAD)));
+            event.modify(Items.CREEPER_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_CREEPER_HEAD)));
+            event.modify(Items.PIGLIN_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_PIGLIN_HEAD)));
+            event.modify(Items.DRAGON_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_DRAGON_HEAD)));
         }
     }
 }

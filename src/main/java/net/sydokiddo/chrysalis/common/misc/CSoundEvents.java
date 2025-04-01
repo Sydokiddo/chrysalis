@@ -44,7 +44,18 @@ public class CSoundEvents {
         ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.about_to_spawn_entity", SoundEvent::createVariableRangeEvent),
         ENTITY_SPAWNER_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.spawn_entity", SoundEvent::createVariableRangeEvent),
         ENCOUNTER_SPAWNER_SPAWN_ENTITY = SOUND_EVENTS.register("entity.encounter_spawner.spawn_entity", SoundEvent::createVariableRangeEvent),
-        GENERIC_SPAWNER_CHANGE_ENTITY = SOUND_EVENTS.register("entity.generic_spawner.change_entity", SoundEvent::createVariableRangeEvent)
+        GENERIC_SPAWNER_CHANGE_ENTITY = SOUND_EVENTS.register("entity.generic_spawner.change_entity", SoundEvent::createVariableRangeEvent),
+
+        EQUIP_SHIELD = SOUND_EVENTS.register("item.armor.equip_shield", SoundEvent::createVariableRangeEvent),
+        EQUIP_TOTEM_OF_UNDYING = SOUND_EVENTS.register("item.armor.equip_totem_of_undying", SoundEvent::createVariableRangeEvent),
+        EQUIP_CARVED_PUMPKIN = SOUND_EVENTS.register("item.armor.equip_carved_pumpkin", SoundEvent::createVariableRangeEvent),
+        EQUIP_SKELETON_SKULL = SOUND_EVENTS.register("item.armor.equip_skeleton_skull", SoundEvent::createVariableRangeEvent),
+        EQUIP_WITHER_SKELETON_SKULL = SOUND_EVENTS.register("item.armor.equip_wither_skeleton_skull", SoundEvent::createVariableRangeEvent),
+        EQUIP_PLAYER_HEAD = SOUND_EVENTS.register("item.armor.equip_player_head", SoundEvent::createVariableRangeEvent),
+        EQUIP_ZOMBIE_HEAD = SOUND_EVENTS.register("item.armor.equip_zombie_head", SoundEvent::createVariableRangeEvent),
+        EQUIP_CREEPER_HEAD = SOUND_EVENTS.register("item.armor.equip_creeper_head", SoundEvent::createVariableRangeEvent),
+        EQUIP_PIGLIN_HEAD = SOUND_EVENTS.register("item.armor.equip_piglin_head", SoundEvent::createVariableRangeEvent),
+        EQUIP_DRAGON_HEAD = SOUND_EVENTS.register("item.armor.equip_dragon_head", SoundEvent::createVariableRangeEvent)
     ;
 
     // endregion
