@@ -167,12 +167,10 @@
   },
   "item.armor.equip_shield": {
     "sounds": [
-      "minecraft:item/armor/equip_generic1",
-      "minecraft:item/armor/equip_generic2",
-      "minecraft:item/armor/equip_generic3",
-      "minecraft:item/armor/equip_generic4",
-      "minecraft:item/armor/equip_generic5",
-      "minecraft:item/armor/equip_generic6"
+      "chrysalis:item/equipment/shield/equip1",
+      "chrysalis:item/equipment/shield/equip2",
+      "chrysalis:item/equipment/shield/equip3",
+      "chrysalis:item/equipment/shield/equip4"
     ],
     "subtitle": "subtitles.item.armor.equip_shield"
   },
