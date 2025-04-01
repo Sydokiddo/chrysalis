@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.advancements.AdvancementsScreen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.renderer.RenderType;
@@ -118,6 +119,20 @@ public class GuiMixin {
         @Inject(method = "slotClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/CreativeModeInventoryScreen$ItemPickerMenu;setCarried(Lnet/minecraft/world/item/ItemStack;)V", ordinal = 1))
         private void chrysalis$playDeleteItemSound(Slot slot, int slotId, int mouseButton, ClickType type, CallbackInfo info) {
             if (!this.menu.getCarried().isEmpty()) EventHelper.playUIClickSound(Minecraft.getInstance(), CSoundEvents.CREATIVE_MODE_DELETE_ITEM);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mixin(AdvancementsScreen.class)
+    public static class AdvancementsScreenMixin {
+
+        /**
+         * Plays the generic UI click sound whenever an advancement tab is clicked.
+         **/
+
+        @Inject(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientAdvancements;setSelectedTab(Lnet/minecraft/advancements/AdvancementHolder;Z)V"))
+        private void chrysalis$playAdvancementTabClickSound(double x, double y, int keyPressed, CallbackInfoReturnable<Boolean> cir) {
+            EventHelper.playUIClickSound(Minecraft.getInstance());
         }
     }
 }
