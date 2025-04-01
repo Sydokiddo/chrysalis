@@ -81,6 +81,7 @@
     "misc.GuiMixin$AdvancementsScreenMixin",
     "misc.GuiMixin$CreativeModeInventoryScreenMixin",
     "misc.GuiMixin$GuiGraphicsMixin",
+    "misc.GuiMixin$ShulkerBoxScreenMixin",
     "misc.MinecraftMixin",
     "misc.MinecraftMixin$MusicManagerMixin",
     "misc.SplashTextMixin",

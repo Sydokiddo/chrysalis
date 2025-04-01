@@ -8,13 +8,13 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.advancements.AdvancementsScreen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.ShulkerBoxScreen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -133,6 +133,24 @@ public class GuiMixin {
         @Inject(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientAdvancements;setSelectedTab(Lnet/minecraft/advancements/AdvancementHolder;Z)V"))
         private void chrysalis$playAdvancementTabClickSound(double x, double y, int keyPressed, CallbackInfoReturnable<Boolean> cir) {
             EventHelper.playUIClickSound(Minecraft.getInstance());
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mixin(ShulkerBoxScreen.class)
+    public abstract static class ShulkerBoxScreenMixin extends AbstractContainerScreen<ShulkerBoxMenu> {
+
+        private ShulkerBoxScreenMixin(ShulkerBoxMenu menu, Inventory playerInventory, Component title) {
+            super(menu, playerInventory, title);
+        }
+
+        /**
+         * Slightly lowers the inventory label on the shulker box ui to be consistent with the position of small chests.
+         **/
+
+        @Inject(method = "<init>", at = @At(value = "RETURN"))
+        private void chrysalis$lowerShulkerBoxInventoryLabel(ShulkerBoxMenu menu, Inventory playerInventory, Component title, CallbackInfo info) {
+            this.inventoryLabelY = this.inventoryLabelY + 1;
         }
     }
 }
