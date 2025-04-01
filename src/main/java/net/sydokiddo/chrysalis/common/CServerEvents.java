@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.common;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.animal.Fox;
@@ -31,6 +32,7 @@ import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
+import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
 import net.sydokiddo.chrysalis.util.sounds.music.*;
 import net.sydokiddo.chrysalis.util.technical.commands.*;
@@ -134,6 +136,14 @@ public class CServerEvents {
         private static void modifyDefaultItemComponents(ModifyDefaultComponentsEvent event) {
             event.modify(Items.DRAGON_EGG, components -> components.set(CDataComponents.IMMUNE_TO_ALL_DAMAGE.get(), Unit.INSTANCE).set(CDataComponents.IMMUNE_TO_DESPAWNING.get(), Unit.INSTANCE));
             event.modify(Items.NETHER_STAR, components -> components.set(CDataComponents.INCREASED_DESPAWN_TIME.get(), Unit.INSTANCE));
+            event.modify(Items.CARVED_PUMPKIN, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
+            event.modify(Items.SKELETON_SKULL, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
+            event.modify(Items.WITHER_SKELETON_SKULL, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
+            event.modify(Items.PLAYER_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
+            event.modify(Items.ZOMBIE_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
+            event.modify(Items.CREEPER_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
+            event.modify(Items.PIGLIN_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
+            event.modify(Items.DRAGON_HEAD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent()));
         }
     }
 }

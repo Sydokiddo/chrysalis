@@ -9,6 +9,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.sydokiddo.chrysalis.common.CRegistry;
@@ -118,6 +120,18 @@ public class ItemHelper {
 
     public static CustomData getSavedEntityData(ItemStack itemStack) {
         return itemStack.getOrDefault(SAVED_ENTITY_DATA_COMPONENT, CustomData.EMPTY);
+    }
+
+    /**
+     * Sets the equippable component for carved pumpkins and mob heads.
+     **/
+
+    public static Equippable setHeadEquippableComponent() {
+        return Equippable.builder(EquipmentSlot.HEAD).setDamageOnHurt(false).build();
+    }
+
+    public static Equippable setHeadEquippableComponent(Holder<SoundEvent> equipSound) {
+        return Equippable.builder(EquipmentSlot.HEAD).setEquipSound(equipSound).setDamageOnHurt(false).build();
     }
 
     // endregion
