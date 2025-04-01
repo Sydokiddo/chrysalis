@@ -134,6 +134,14 @@ public class ItemHelper {
         return Equippable.builder(EquipmentSlot.HEAD).setEquipSound(equipSound).setDamageOnHurt(false).build();
     }
 
+    public static Equippable setOffhandEquippableComponent() {
+        return Equippable.builder(EquipmentSlot.OFFHAND).setSwappable(false).build();
+    }
+
+    public static Equippable setOffhandEquippableComponent(Holder<SoundEvent> equipSound) {
+        return Equippable.builder(EquipmentSlot.OFFHAND).setEquipSound(equipSound).setSwappable(false).build();
+    }
+
     // endregion
 
     // region Item Entities

@@ -3,7 +3,6 @@ package net.sydokiddo.chrysalis.common;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Unit;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.animal.Sheep;
@@ -15,7 +14,6 @@ import net.minecraft.world.entity.monster.Evoker;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
@@ -139,8 +137,8 @@ public class CServerEvents {
         private static void modifyDefaultItemComponents(ModifyDefaultComponentsEvent event) {
             event.modify(Items.DRAGON_EGG, components -> components.set(CDataComponents.IMMUNE_TO_ALL_DAMAGE.get(), Unit.INSTANCE).set(CDataComponents.IMMUNE_TO_DESPAWNING.get(), Unit.INSTANCE));
             event.modify(Items.NETHER_STAR, components -> components.set(CDataComponents.INCREASED_DESPAWN_TIME.get(), Unit.INSTANCE));
-            event.modify(Items.SHIELD, components -> components.set(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.OFFHAND).setEquipSound(CSoundEvents.EQUIP_SHIELD).setSwappable(false).build()));
-            event.modify(Items.TOTEM_OF_UNDYING, components -> components.set(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.OFFHAND).setEquipSound(CSoundEvents.EQUIP_TOTEM_OF_UNDYING).setSwappable(false).build()));
+            event.modify(Items.SHIELD, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setOffhandEquippableComponent(CSoundEvents.EQUIP_SHIELD)));
+            event.modify(Items.TOTEM_OF_UNDYING, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setOffhandEquippableComponent(CSoundEvents.EQUIP_TOTEM_OF_UNDYING)));
             event.modify(Items.CARVED_PUMPKIN, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_CARVED_PUMPKIN)));
             event.modify(Items.SKELETON_SKULL, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_SKELETON_SKULL)));
             event.modify(Items.WITHER_SKELETON_SKULL, components -> components.set(DataComponents.EQUIPPABLE, ItemHelper.setHeadEquippableComponent(CSoundEvents.EQUIP_WITHER_SKELETON_SKULL)));
