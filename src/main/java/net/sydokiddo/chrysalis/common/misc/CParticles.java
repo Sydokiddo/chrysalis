@@ -27,7 +27,9 @@ public class CParticles {
         BLIND_SIGHT = PARTICLE_TYPES.register("blind_sight", () -> createSimpleParticle(false)),
         CREEPER_SIGHT = PARTICLE_TYPES.register("creeper_sight", () -> createSimpleParticle(false)),
         ENDER_SIGHT = PARTICLE_TYPES.register("ender_sight", () -> createSimpleParticle(false)),
-        RESIN_SIGHT = PARTICLE_TYPES.register("resin_sight", () -> createSimpleParticle(false))
+        RESIN_SIGHT = PARTICLE_TYPES.register("resin_sight", () -> createSimpleParticle(false)),
+        SKELETAL_SIGHT = PARTICLE_TYPES.register("skeletal_sight", () -> createSimpleParticle(false)),
+        ZOMBIE_SIGHT = PARTICLE_TYPES.register("zombie_sight", () -> createSimpleParticle(false))
     ;
 
     // endregion

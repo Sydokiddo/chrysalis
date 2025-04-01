@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes;
+package net.sydokiddo.chrysalis.common.status_effects.custom_status_effects;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;

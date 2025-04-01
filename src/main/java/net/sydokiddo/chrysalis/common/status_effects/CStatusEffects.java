@@ -9,9 +9,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.*;
-import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.GenericStatusEffect;
-import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.BuildPreventingEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.GenericStatusEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.BuildPreventingEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.built_in_effects.*;
 import java.awt.*;
 
 public class CStatusEffects {
@@ -28,6 +28,8 @@ public class CStatusEffects {
         CREEPER_SIGHT = MOB_EFFECTS.register("creeper_sight", CreeperSightEffect::new),
         ENDER_SIGHT = MOB_EFFECTS.register("ender_sight", EnderSightEffect::new),
         RESIN_SIGHT = MOB_EFFECTS.register("resin_sight", ResinSightEffect::new),
+        SKELETAL_SIGHT = MOB_EFFECTS.register("skeletal_sight", SkeletalSightEffect::new),
+        ZOMBIE_SIGHT = MOB_EFFECTS.register("zombie_sight", ZombieSightEffect::new),
         HEALTH_REDUCTION = MOB_EFFECTS.register("health_reduction", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#B53F6B").getRGB()).addAttributeModifier(Attributes.MAX_HEALTH, Chrysalis.resourceLocationId("effect.health_reduction"), -4.0D, AttributeModifier.Operation.ADD_VALUE)),
         BUILDING_FATIGUE = MOB_EFFECTS.register("building_fatigue", () -> new BuildPreventingEffect(MobEffectCategory.HARMFUL, Color.decode("#79553A").getRGB()))
     ;

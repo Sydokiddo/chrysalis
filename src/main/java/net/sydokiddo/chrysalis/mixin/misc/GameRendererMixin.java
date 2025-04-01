@@ -59,10 +59,12 @@ public abstract class GameRendererMixin {
         EntityType<?> entityType = livingEntity.getType();
 
         if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_ARTHROPOD_SIGHT, CStatusEffects.ARTHROPOD_SIGHT, CTags.GIVES_ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
-        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_BLIND_SIGHT, CStatusEffects.BLIND_SIGHT, CTags.GIVES_BLIND_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("blind_sight"));
+        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_BLIND_SIGHT, CStatusEffects.BLIND_SIGHT, CTags.GIVES_BLIND_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("blind"));
         if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_CREEPER_SIGHT, CStatusEffects.CREEPER_SIGHT, CTags.GIVES_CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
         if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_ENDER_SIGHT, CStatusEffects.ENDER_SIGHT, CTags.GIVES_ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
-        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_RESIN_SIGHT, CStatusEffects.RESIN_SIGHT, CTags.GIVES_RESIN_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("resin_sight"));
+        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_RESIN_SIGHT, CStatusEffects.RESIN_SIGHT, CTags.GIVES_RESIN_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("resin"));
+        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_SKELETAL_SIGHT, CStatusEffects.SKELETAL_SIGHT, CTags.GIVES_SKELETAL_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("grayscale"));
+        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_ZOMBIE_SIGHT, CStatusEffects.ZOMBIE_SIGHT, CTags.GIVES_ZOMBIE_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("zombie"));
     }
 
     @Unique

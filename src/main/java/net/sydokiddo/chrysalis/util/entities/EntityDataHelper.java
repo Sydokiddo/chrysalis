@@ -19,7 +19,7 @@ import net.sydokiddo.chrysalis.common.CRegistry;
 import net.sydokiddo.chrysalis.common.misc.CAttributes;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
-import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.BuildPreventingEffect;
+import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.BuildPreventingEffect;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.Optional;
 import java.util.UUID;
