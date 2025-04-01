@@ -21,6 +21,8 @@ public class CSoundEvents {
 
         SCREENSHOT_SUCCESS = SOUND_EVENTS.register("ui.screenshot.success", SoundEvent::createVariableRangeEvent),
         SPLASH_TEXT_SHUFFLE = SOUND_EVENTS.register("ui.splash_text.shuffle", SoundEvent::createVariableRangeEvent),
+        CREATIVE_MODE_DELETE_ITEM = SOUND_EVENTS.register("ui.creative_mode.delete_item", SoundEvent::createVariableRangeEvent),
+        CREATIVE_MODE_DELETE_ALL_ITEMS = SOUND_EVENTS.register("ui.creative_mode.delete_all_items", SoundEvent::createVariableRangeEvent),
 
         HEAL_USE = SOUND_EVENTS.register("item.heal.use", SoundEvent::createVariableRangeEvent),
         FILL_HUNGER_USE = SOUND_EVENTS.register("item.fill_hunger.use", SoundEvent::createVariableRangeEvent),

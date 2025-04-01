@@ -15,6 +15,22 @@
       }
     ]
   },
+  "ui.creative_mode.delete_item": {
+    "sounds": [
+      {
+        "name": "chrysalis:ui/splash_text_shuffle",
+        "stream": true
+      }
+    ]
+  },
+  "ui.creative_mode.delete_all_items": {
+    "sounds": [
+      {
+        "name": "chrysalis:ui/screenshot_success",
+        "stream": true
+      }
+    ]
+  },
   "item.heal.use": {
     "sounds": [
       "minecraft:random/orb"
