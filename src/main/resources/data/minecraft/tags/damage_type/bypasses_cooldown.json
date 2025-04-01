@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "chrysalis:mob_attack_bypasses_cooldown",
+    "minecraft:generic_kill",
+    "chrysalis:kill_wand"
+  ]
+}
