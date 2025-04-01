@@ -1,10 +1,10 @@
 package net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes;
 
-import net.minecraft.network.protocol.game.ClientboundSetCameraPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class MobSightEffect extends MobEffect {
@@ -19,10 +19,6 @@ public class MobSightEffect extends MobEffect {
 
     @Override
     public void onEffectStarted(@NotNull LivingEntity livingEntity, int amplifier) {
-        tryRefreshingPostEffect(livingEntity);
-    }
-
-    public static void tryRefreshingPostEffect(LivingEntity livingEntity) {
-        if (livingEntity instanceof ServerPlayer serverPlayer) serverPlayer.connection.send(new ClientboundSetCameraPacket(serverPlayer));
+        if (livingEntity instanceof ServerPlayer serverPlayer) EntityDataHelper.updateCurrentShader(serverPlayer);
     }
 }

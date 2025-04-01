@@ -2,6 +2,7 @@ package net.sydokiddo.chrysalis.mixin.entities.misc;
 
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,10 +11,13 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.common.misc.CAttributes;
 import net.sydokiddo.chrysalis.common.misc.CDamageTypes;
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.base_classes.MobSightEffect;
+import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
@@ -92,11 +96,16 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     /**
-     * Refreshes any mob sight rendering effects when the effect wears out.
+     * Refreshes any current shaders.
      **/
 
     @Inject(method = "tickEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;updateGlowingStatus()V"))
     private void chrysalis$updateMobSightStatuses(CallbackInfo info) {
-        if (this.getActiveEffects().stream().noneMatch(mobEffectInstance -> mobEffectInstance.getEffect() instanceof MobSightEffect)) MobSightEffect.tryRefreshingPostEffect(this.chrysalis$livingEntity);
+        if (this.chrysalis$livingEntity instanceof ServerPlayer serverPlayer && this.getActiveEffects().stream().noneMatch(mobEffectInstance -> mobEffectInstance.getEffect() instanceof MobSightEffect)) EntityDataHelper.updateCurrentShader(serverPlayer);
+    }
+
+    @Inject(method = "onEquipItem", at = @At(value = "HEAD"))
+    private void chrysalis$updateHeadItemShader(EquipmentSlot equipmentSlot, ItemStack oldItem, ItemStack newItem, CallbackInfo info) {
+        if (CConfigOptions.MOB_HEAD_SHADERS.get() && this.chrysalis$livingEntity instanceof ServerPlayer serverPlayer && equipmentSlot == EquipmentSlot.HEAD) EntityDataHelper.updateCurrentShader(serverPlayer);
     }
 }

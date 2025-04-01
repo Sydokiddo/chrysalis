@@ -1,6 +1,7 @@
 package net.sydokiddo.chrysalis.util.entities;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.protocol.game.ClientboundSetCameraPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -146,6 +147,10 @@ public class EntityDataHelper {
     public static boolean hasBuildPreventingEffect(LivingEntity livingEntity) {
         Optional<MobEffectInstance> effectList = livingEntity.getActiveEffects().stream().findAny();
         return effectList.filter(mobEffectInstance -> mobEffectInstance.getEffect().value() instanceof BuildPreventingEffect).isPresent();
+    }
+
+    public static void updateCurrentShader(ServerPlayer serverPlayer) {
+        serverPlayer.connection.send(new ClientboundSetCameraPacket(serverPlayer));
     }
 
     // endregion

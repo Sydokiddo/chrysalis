@@ -12,6 +12,7 @@ public class CConfigOptions {
         IMPROVED_STRUCTURE_VOID_RENDERING = () -> true,
         IMPROVED_GRATE_RENDERING = () -> true,
         FIXED_ELYTRA_MODEL = () -> true,
+        MOB_HEAD_SHADERS = () -> true,
         REWORKED_TOOLTIPS = () -> true,
         CHRYSALIS_TOOLTIP = () -> true,
         CHRYSALIS_CREATIVE_MODE_TAB = () -> true

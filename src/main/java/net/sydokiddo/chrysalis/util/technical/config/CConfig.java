@@ -16,6 +16,7 @@ public class CConfig {
         CConfigOptions.IMPROVED_STRUCTURE_VOID_RENDERING = builder.define("improved_structure_void_rendering", true);
         CConfigOptions.IMPROVED_GRATE_RENDERING = builder.define("improved_grate_rendering", true);
         CConfigOptions.FIXED_ELYTRA_MODEL = builder.define("fixed_elytra_model", true);
+        CConfigOptions.MOB_HEAD_SHADERS = builder.define("mob_head_shaders", true);
         CConfigOptions.REWORKED_TOOLTIPS = builder.define("reworked_tooltips", true);
         CConfigOptions.CHRYSALIS_TOOLTIP = builder.define("chrysalis_tooltip", true);
         CConfigOptions.CHRYSALIS_CREATIVE_MODE_TAB = builder.define("chrysalis_creative_mode_tab", true);

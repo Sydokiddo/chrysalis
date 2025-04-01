@@ -12,12 +12,15 @@ import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
@@ -26,6 +29,7 @@ import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeHandler;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.common.status_effects.CStatusEffects;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -54,11 +58,16 @@ public abstract class GameRendererMixin {
         if (!this.minecraft.options.getCameraType().isFirstPerson() || !(entity instanceof LivingEntity livingEntity)) return;
         EntityType<?> entityType = livingEntity.getType();
 
-        if (entityType.is(CTags.HAS_ARTHROPOD_SIGHT) || livingEntity.hasEffect(CStatusEffects.ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
-        if (entityType.is(CTags.HAS_BLIND_SIGHT) || livingEntity.hasEffect(CStatusEffects.BLIND_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("blind_sight"));
-        if (entityType.is(CTags.HAS_CREEPER_SIGHT) || livingEntity.hasEffect(CStatusEffects.CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
-        if (entityType.is(CTags.HAS_ENDER_SIGHT) || livingEntity.hasEffect(CStatusEffects.ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
-        if (entityType.is(CTags.HAS_RESIN_SIGHT) || livingEntity.hasEffect(CStatusEffects.RESIN_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("resin_sight"));
+        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_ARTHROPOD_SIGHT, CStatusEffects.ARTHROPOD_SIGHT, CTags.GIVES_ARTHROPOD_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("spider"));
+        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_BLIND_SIGHT, CStatusEffects.BLIND_SIGHT, CTags.GIVES_BLIND_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("blind_sight"));
+        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_CREEPER_SIGHT, CStatusEffects.CREEPER_SIGHT, CTags.GIVES_CREEPER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("creeper"));
+        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_ENDER_SIGHT, CStatusEffects.ENDER_SIGHT, CTags.GIVES_ENDER_SIGHT)) this.setPostEffect(ResourceLocation.withDefaultNamespace("invert"));
+        if (this.chrysalis$shouldDisplayShader(entityType, livingEntity, CTags.HAS_RESIN_SIGHT, CStatusEffects.RESIN_SIGHT, CTags.GIVES_RESIN_SIGHT)) this.setPostEffect(Chrysalis.resourceLocationId("resin_sight"));
+    }
+
+    @Unique
+    private boolean chrysalis$shouldDisplayShader(EntityType<?> entityType, LivingEntity livingEntity, TagKey<EntityType<?>> entityWithShader, Holder<MobEffect> shaderEffect, TagKey<Item> itemWithShader) {
+        return entityType.is(entityWithShader) || livingEntity.hasEffect(shaderEffect) || CConfigOptions.MOB_HEAD_SHADERS.get() && livingEntity.getItemBySlot(EquipmentSlot.HEAD).is(itemWithShader);
     }
 
     /**
