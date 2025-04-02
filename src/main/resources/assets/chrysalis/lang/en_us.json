@@ -59,7 +59,10 @@
   "gui.icon.chrysalis.netherite_ingot": "\ua054",
   "gui.icon.chrysalis.netherite_scrap": "\ua055",
   "gui.icon.chrysalis.remains_on_death": "\ua056",
-  "gui.icon.chrysalis.egg": "\ua057",
+  "gui.icon.chrysalis.vibration": "\ua057",
+  "gui.icon.chrysalis.muffled": "\ua058",
+  "gui.icon.chrysalis.music_note": "\ua059",
+  "gui.icon.chrysalis.egg": "\ua060",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
@@ -264,6 +267,7 @@
 
   "gui.chrysalis.item.fireproof": "Fireproof",
   "gui.chrysalis.item.remains_on_death": "Remains on Death",
+  "gui.chrysalis.item.muffled": "Muffled",
   "gui.chrysalis.item.waxed": "Waxed",
 
   "gui.chrysalis.item.armor_trim": "%1$s (%2$s)",
@@ -416,6 +420,9 @@
   "subtitles.item.armor.equip_creeper_head": "Creeper Head hisses",
   "subtitles.item.armor.equip_piglin_head": "Piglin Head snorts",
   "subtitles.item.armor.equip_dragon_head": "Dragon Head growls",
+
+  "subtitles.ui.creative_mode.delete_item": "Item deleted",
+  "subtitles.ui.creative_mode.delete_all_items": "Inventory cleared",
 
   "tag.item.chrysalis.banner_patterns": "Banner Patterns",
   "tag.item.chrysalis.campfires": "Campfires",

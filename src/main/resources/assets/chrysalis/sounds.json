@@ -21,7 +21,8 @@
         "name": "chrysalis:ui/creative_mode_delete_item",
         "stream": true
       }
-    ]
+    ],
+    "subtitle": "subtitles.ui.creative_mode.delete_item"
   },
   "ui.creative_mode.delete_all_items": {
     "sounds": [
@@ -29,7 +30,8 @@
         "name": "chrysalis:ui/creative_mode_delete_all_items",
         "stream": true
       }
-    ]
+    ],
+    "subtitle": "subtitles.ui.creative_mode.delete_all_items"
   },
   "item.heal.use": {
     "sounds": [

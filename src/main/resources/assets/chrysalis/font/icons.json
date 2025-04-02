@@ -519,11 +519,38 @@
     },
     {
       "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/vibration.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua057"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/muffled.png",
+      "ascent": 10,
+      "height": 14,
+      "chars": [
+        "\ua058"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/music_note.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua059"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/egg.png",
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua057"
+        "\ua060"
       ]
     }
   ]

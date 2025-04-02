@@ -95,6 +95,15 @@ public abstract class ItemEntityMixin extends Entity {
     }
 
     /**
+     * Makes any item with the muffled data component not create vibrations when dropped.
+     **/
+
+    @Inject(at = @At("HEAD"), method = "dampensVibrations", cancellable = true)
+    private void chrysalis$makeItemMuffled(CallbackInfoReturnable<Boolean> cir) {
+        if (this.getItem().has(CDataComponents.MUFFLED)) cir.setReturnValue(true);
+    }
+
+    /**
      * Prevents items from being picked up by players who are dying or are in spectator mode.
      **/
 

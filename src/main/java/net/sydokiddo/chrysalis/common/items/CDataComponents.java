@@ -26,7 +26,8 @@ public class CDataComponents {
         IMMUNE_TO_DESPAWNING = DATA_COMPONENTS.registerComponentType("immune_to_despawning", (builder) -> builder.persistent(Unit.CODEC)),
         INCREASED_DESPAWN_TIME = DATA_COMPONENTS.registerComponentType("increased_despawn_time", (builder) -> builder.persistent(Unit.CODEC)),
         INCREASED_PICK_RADIUS = DATA_COMPONENTS.registerComponentType("increased_pick_radius", (builder) -> builder.persistent(Unit.CODEC)),
-        REMAINS_ON_DEATH = DATA_COMPONENTS.registerComponentType("remains_on_death", (builder) -> builder.persistent(Unit.CODEC))
+        REMAINS_ON_DEATH = DATA_COMPONENTS.registerComponentType("remains_on_death", (builder) -> builder.persistent(Unit.CODEC)),
+        MUFFLED = DATA_COMPONENTS.registerComponentType("muffled", (builder) -> builder.persistent(Unit.CODEC))
     ;
 
     // endregion

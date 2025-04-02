@@ -55,6 +55,13 @@ public abstract class ItemMixin {
             list.add(remainsOnDeathTooltip);
         }
 
+        if (itemStack.has(CDataComponents.MUFFLED)) {
+            MutableComponent muffledIcon = ComponentHelper.MUFFLED_ICON;
+            ComponentHelper.setIconsFont(muffledIcon, Chrysalis.MOD_ID);
+            Component muffledTooltip = ItemHelper.addTooltipWithIcon(muffledIcon, Component.translatable("gui.chrysalis.item.muffled").withStyle(style -> style.withItalic(true).withColor(ComponentHelper.SOUL_FIRE_COLOR.getRGB())));
+            list.add(muffledTooltip);
+        }
+
         if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
         DamageResistant damageResistant = itemStack.get(DataComponents.DAMAGE_RESISTANT);
 
