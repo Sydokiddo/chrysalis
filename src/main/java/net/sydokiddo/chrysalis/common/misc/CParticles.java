@@ -45,6 +45,7 @@ public class CParticles {
     public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticleOptions>> SPARK = PARTICLE_TYPES.register("spark", () -> createAdvancedParticle(SparkParticleOptions.CODEC, SparkParticleOptions.STREAM_CODEC, false));
     public static final DeferredHolder<ParticleType<?>, ParticleType<SmallPulsationParticleOptions>> SMALL_PULSATION = PARTICLE_TYPES.register("small_pulsation", () -> createAdvancedParticle(SmallPulsationParticleOptions.CODEC, SmallPulsationParticleOptions.STREAM_CODEC, true));
     public static final DeferredHolder<ParticleType<?>, ParticleType<LargePulsationParticleOptions>> LARGE_PULSATION = PARTICLE_TYPES.register("large_pulsation", () -> createAdvancedParticle(LargePulsationParticleOptions.CODEC, LargePulsationParticleOptions.STREAM_CODEC, true));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<MusicNoteParticleOptions>> MUSIC_NOTE = PARTICLE_TYPES.register("music_note", () -> createAdvancedParticle(MusicNoteParticleOptions.CODEC, MusicNoteParticleOptions.STREAM_CODEC, false));
 
     // endregion
 
