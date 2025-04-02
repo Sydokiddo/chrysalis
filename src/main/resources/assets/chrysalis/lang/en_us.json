@@ -100,7 +100,9 @@
   "item.chrysalis.copying_spawn_egg.description_uncopied": "Copies Targeted Entity",
   "item.chrysalis.copying_spawn_egg.description_copied": "Spawns Copied Entity",
   "item.chrysalis.key": "Key",
+  "item.chrysalis.key.description": "A generic key item used as a fallback for all unlockable blocks.",
   "item.chrysalis.admin_key": "Admin Key",
+  "item.chrysalis.admin_key.description": "A key item that can be used to unlock any unlockable block.",
   "item.chrysalis.debug_stick.description": "Cycles Between Block States",
   "item.chrysalis.light.description": "Light Level: %s",
 

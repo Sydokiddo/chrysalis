@@ -9,6 +9,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.custom_items.IconItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.CreativeModeDescriptionItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.*;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing.TestRightClickItem;
@@ -34,8 +35,8 @@ public class CItems {
         TAME_MOB = ITEMS.registerItem("tame_mob", TameMobItem::new, debugUtilitySettings(1)),
         RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, debugUtilitySettings(1)),
         COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEggItem::new, debugUtilitySettings(1)),
-        KEY = ITEMS.registerItem("key", Item::new, new Item.Properties()),
-        ADMIN_KEY = ITEMS.registerItem("admin_key", Item::new, debugUtilitySettings(64)),
+        KEY = ITEMS.registerItem("key", CreativeModeDescriptionItem::new, new Item.Properties()),
+        ADMIN_KEY = ITEMS.registerItem("admin_key", CreativeModeDescriptionItem::new, debugUtilitySettings(64)),
         TEST_RIGHT_CLICK_ITEM = TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
     ;
 
