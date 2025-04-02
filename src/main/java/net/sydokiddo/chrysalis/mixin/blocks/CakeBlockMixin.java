@@ -30,6 +30,6 @@ public class CakeBlockMixin {
 
     @Inject(method = "useWithoutItem", at = @At("RETURN"))
     private void chrysalis$emitCakeEatingParticles(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        if (level instanceof ServerLevel serverLevel) BlockHelper.emitDestroyParticlesAtHitPosition(serverLevel, blockState, blockHitResult, 8, 0.0D);
+        if (level instanceof ServerLevel serverLevel) BlockHelper.emitBlockParticlesAtHitPosition(serverLevel, blockState, blockHitResult, 8, 0.0D);
     }
 }

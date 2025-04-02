@@ -65,7 +65,7 @@ public class BlockHelper {
         blockSource.level().levelEvent(2000, blockSource.pos(), direction.get3DDataValue());
     }
 
-    public static void emitDestroyParticlesAtHitPosition(ServerLevel serverLevel, BlockState blockState, BlockHitResult blockHitResult, int amount, double yOffset) {
+    public static void emitBlockParticlesAtHitPosition(ServerLevel serverLevel, BlockState blockState, BlockHitResult blockHitResult, int amount, double yOffset) {
 
         Direction direction = blockHitResult.getDirection();
         Vec3 hitResultLocation = blockHitResult.getLocation().relative(direction, 0.2D);
