@@ -1,6 +1,5 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -38,8 +37,7 @@ public class ComponentHelper {
     }
 
     public static Component getMoonPhaseComponent(Level level) {
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level != null && !minecraft.level.dimensionType().hasFixedTime()) return Component.translatable("gui.chrysalis.moon_phase." + (level.getMoonPhase() + 1));
+        if (!level.dimensionType().hasFixedTime()) return Component.translatable("gui.chrysalis.moon_phase." + (level.getMoonPhase() + 1));
         else return NONE;
     }
 
@@ -69,6 +67,21 @@ public class ComponentHelper {
         TREACHEROUS_FIRE_COLOR = Color.decode("#FD4D4D"),
         NECROTIC_FIRE_COLOR = Color.decode("#AFB42B"),
         PURITY_FIRE_COLOR = Color.decode("#FF8A8A"),
+        REDSTONE_COLOR = Color.decode("#971607"),
+        COPPER_COLOR = Color.decode("#B4684D"),
+        RESIN_COLOR = Color.decode("#FC7812"),
+        GOLD_COLOR = Color.decode("#DEB12D"),
+        GLOWSTONE_COLOR = Color.decode("#FFBC5E"),
+        EMERALD_COLOR = Color.decode("#11A036"),
+        PRISMARINE_COLOR = Color.decode("#91C5B7"),
+        DIAMOND_COLOR = Color.decode("#6EECD2"),
+        LAPIS_COLOR = Color.decode("#416E97"),
+        AMETHYST_COLOR = Color.decode("#9A5CC6"),
+        QUARTZ_COLOR = Color.decode("#E3D4C4"),
+        IRON_COLOR = Color.decode("#ECECEC"),
+        COAL_COLOR = Color.decode("#393E46"),
+        NETHERITE_COLOR = Color.decode("#625859"),
+        NETHERITE_SCRAP_COLOR = Color.decode("#7E6059"),
         BLINDNESS_COLOR = Color.decode("#5C4182"),
         HASTE_COLOR = Color.decode("#FFB67F"),
         MINING_FATIGUE_COLOR = Color.decode("#7575B5"),
