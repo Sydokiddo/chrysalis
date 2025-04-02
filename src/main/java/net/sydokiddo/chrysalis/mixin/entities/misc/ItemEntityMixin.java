@@ -95,11 +95,11 @@ public abstract class ItemEntityMixin extends Entity {
     }
 
     /**
-     * Prevents items from being picked up by players who are dying.
+     * Prevents items from being picked up by players who are dying or are in spectator mode.
      **/
 
     @Inject(at = @At("HEAD"), method = "playerTouch", cancellable = true)
     private void chrysalis$preventItemPickingUp(Player player, CallbackInfo info) {
-        if (!this.level().isClientSide() && player.isDeadOrDying()) info.cancel();
+        if (!this.level().isClientSide() && (player.isDeadOrDying() || player.isSpectator())) info.cancel();
     }
 }

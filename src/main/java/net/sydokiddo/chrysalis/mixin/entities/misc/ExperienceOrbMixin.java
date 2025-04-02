@@ -18,11 +18,11 @@ public abstract class ExperienceOrbMixin extends Entity {
     }
 
     /**
-     * Prevents experience orbs from being picked up by players who are dying.
+     * Prevents experience orbs from being picked up by players who are dying or are in spectator mode.
      **/
 
     @Inject(at = @At("HEAD"), method = "playerTouch", cancellable = true)
     private void chrysalis$preventExperiencePickingUp(Player player, CallbackInfo info) {
-        if (!this.level().isClientSide() && player.isDeadOrDying()) info.cancel();
+        if (!this.level().isClientSide() && (player.isDeadOrDying() || player.isSpectator())) info.cancel();
     }
 }
