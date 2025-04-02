@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class CreativeModeDescriptionItem extends Item {
 
         if (tooltipFlag.isCreative()) {
             list.add(CommonComponents.EMPTY);
-            list.add(Component.translatable(this.getDescriptionId() + ".description").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+            ItemHelper.addItalicDescriptionTooltip(list, this, ChatFormatting.GRAY, false);
         }
 
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);

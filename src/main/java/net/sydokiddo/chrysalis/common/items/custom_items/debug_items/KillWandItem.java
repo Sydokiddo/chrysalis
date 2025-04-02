@@ -33,7 +33,7 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         ItemHelper.addAttackTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }

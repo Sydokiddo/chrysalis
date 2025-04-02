@@ -29,7 +29,7 @@ public class FillOxygenItem extends DebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         ItemHelper.addUseTooltip(list);
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
     }

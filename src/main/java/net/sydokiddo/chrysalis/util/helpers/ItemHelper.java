@@ -220,6 +220,18 @@ public class ItemHelper {
         tooltip.add(CommonComponents.space().append(ComponentHelper.UNKNOWN.copy().withStyle(ChatFormatting.BLUE)));
     }
 
+    public static void addDescriptionTooltip(List<Component> tooltip, Item item, ChatFormatting color, boolean addSpace) {
+        Component component = Component.translatable(item.getDescriptionId() + ".description").withStyle(color);
+        if (addSpace) tooltip.add(CommonComponents.space().append(component));
+        else tooltip.add(component);
+    }
+
+    public static void addItalicDescriptionTooltip(List<Component> tooltip, Item item, ChatFormatting color, boolean addSpace) {
+        Component component = Component.translatable(item.getDescriptionId() + ".description").withStyle(color).withStyle(ChatFormatting.ITALIC);
+        if (addSpace) tooltip.add(CommonComponents.space().append(component));
+        else tooltip.add(component);
+    }
+
     public static Component addTooltipWithIcon(Component icon, Component tooltip) {
         return Component.translatable("gui.chrysalis.item.tooltip_with_icon", icon, tooltip);
     }

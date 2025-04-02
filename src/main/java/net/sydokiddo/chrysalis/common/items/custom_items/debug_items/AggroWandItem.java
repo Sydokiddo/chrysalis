@@ -65,7 +65,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
      **/
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> list, @NotNull TooltipFlag tooltipFlag) {
 
         if (hasMobUUID(itemStack)) {
             String mobName = hasMobName(itemStack) ? ItemHelper.getSavedEntityData(itemStack).copyTag().getString(mobNameString) : ComponentHelper.UNKNOWN.getString();
