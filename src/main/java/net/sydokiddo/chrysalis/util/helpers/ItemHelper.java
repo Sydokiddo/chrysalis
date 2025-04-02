@@ -9,6 +9,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -126,20 +127,16 @@ public class ItemHelper {
      * Sets the equippable component for carved pumpkins and mob heads.
      **/
 
-    public static Equippable setHeadEquippableComponent() {
-        return Equippable.builder(EquipmentSlot.HEAD).setDamageOnHurt(false).build();
-    }
-
     public static Equippable setHeadEquippableComponent(Holder<SoundEvent> equipSound) {
         return Equippable.builder(EquipmentSlot.HEAD).setEquipSound(equipSound).setDamageOnHurt(false).build();
     }
 
-    public static Equippable setOffhandEquippableComponent() {
-        return Equippable.builder(EquipmentSlot.OFFHAND).setSwappable(false).build();
+    public static Equippable setHeadOverlayEquippableComponent(Holder<SoundEvent> equipSound, ResourceLocation cameraOverlayLocation) {
+        return Equippable.builder(EquipmentSlot.HEAD).setEquipSound(equipSound).setDamageOnHurt(false).setCameraOverlay(cameraOverlayLocation).build();
     }
 
-    public static Equippable setOffhandEquippableComponent(Holder<SoundEvent> equipSound) {
-        return Equippable.builder(EquipmentSlot.OFFHAND).setEquipSound(equipSound).setSwappable(false).build();
+    public static Equippable setOffhandEquippableComponent(Holder<SoundEvent> equipSound, boolean damageOnHurt) {
+        return Equippable.builder(EquipmentSlot.OFFHAND).setEquipSound(equipSound).setDamageOnHurt(damageOnHurt).setSwappable(false).build();
     }
 
     // endregion

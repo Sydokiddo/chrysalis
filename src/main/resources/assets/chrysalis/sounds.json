@@ -18,7 +18,7 @@
   "ui.creative_mode.delete_item": {
     "sounds": [
       {
-        "name": "chrysalis:ui/splash_text_shuffle",
+        "name": "chrysalis:ui/creative_mode_delete_item",
         "stream": true
       }
     ]
@@ -26,7 +26,7 @@
   "ui.creative_mode.delete_all_items": {
     "sounds": [
       {
-        "name": "chrysalis:ui/screenshot_success",
+        "name": "chrysalis:ui/creative_mode_delete_all_items",
         "stream": true
       }
     ]
@@ -192,45 +192,37 @@
   },
   "item.armor.equip_totem_of_undying": {
     "sounds": [
-      "minecraft:item/armor/equip_generic1",
-      "minecraft:item/armor/equip_generic2",
-      "minecraft:item/armor/equip_generic3",
-      "minecraft:item/armor/equip_generic4",
-      "minecraft:item/armor/equip_generic5",
-      "minecraft:item/armor/equip_generic6"
+      "chrysalis:item/equipment/totem_of_undying/equip1",
+      "chrysalis:item/equipment/totem_of_undying/equip2",
+      "chrysalis:item/equipment/totem_of_undying/equip3",
+      "chrysalis:item/equipment/totem_of_undying/equip4"
     ],
     "subtitle": "subtitles.item.armor.equip_totem_of_undying"
   },
   "item.armor.equip_carved_pumpkin": {
     "sounds": [
-      "minecraft:item/armor/equip_generic1",
-      "minecraft:item/armor/equip_generic2",
-      "minecraft:item/armor/equip_generic3",
-      "minecraft:item/armor/equip_generic4",
-      "minecraft:item/armor/equip_generic5",
-      "minecraft:item/armor/equip_generic6"
+      "chrysalis:item/equipment/carved_pumpkin/equip1",
+      "chrysalis:item/equipment/carved_pumpkin/equip2",
+      "chrysalis:item/equipment/carved_pumpkin/equip3",
+      "chrysalis:item/equipment/carved_pumpkin/equip4"
     ],
     "subtitle": "subtitles.item.armor.equip_carved_pumpkin"
   },
   "item.armor.equip_skeleton_skull": {
     "sounds": [
-      "minecraft:item/armor/equip_generic1",
-      "minecraft:item/armor/equip_generic2",
-      "minecraft:item/armor/equip_generic3",
-      "minecraft:item/armor/equip_generic4",
-      "minecraft:item/armor/equip_generic5",
-      "minecraft:item/armor/equip_generic6"
+      "chrysalis:item/equipment/skeleton_skull/equip1",
+      "chrysalis:item/equipment/skeleton_skull/equip2",
+      "chrysalis:item/equipment/skeleton_skull/equip3",
+      "chrysalis:item/equipment/skeleton_skull/equip4"
     ],
     "subtitle": "subtitles.item.armor.equip_skeleton_skull"
   },
   "item.armor.equip_wither_skeleton_skull": {
     "sounds": [
-      "minecraft:item/armor/equip_generic1",
-      "minecraft:item/armor/equip_generic2",
-      "minecraft:item/armor/equip_generic3",
-      "minecraft:item/armor/equip_generic4",
-      "minecraft:item/armor/equip_generic5",
-      "minecraft:item/armor/equip_generic6"
+      "chrysalis:item/equipment/wither_skeleton_skull/equip1",
+      "chrysalis:item/equipment/wither_skeleton_skull/equip2",
+      "chrysalis:item/equipment/wither_skeleton_skull/equip3",
+      "chrysalis:item/equipment/wither_skeleton_skull/equip4"
     ],
     "subtitle": "subtitles.item.armor.equip_wither_skeleton_skull"
   },
@@ -247,45 +239,37 @@
   },
   "item.armor.equip_zombie_head": {
     "sounds": [
-      "minecraft:item/armor/equip_generic1",
-      "minecraft:item/armor/equip_generic2",
-      "minecraft:item/armor/equip_generic3",
-      "minecraft:item/armor/equip_generic4",
-      "minecraft:item/armor/equip_generic5",
-      "minecraft:item/armor/equip_generic6"
+      "chrysalis:item/equipment/zombie_head/equip1",
+      "chrysalis:item/equipment/zombie_head/equip2",
+      "chrysalis:item/equipment/zombie_head/equip3",
+      "chrysalis:item/equipment/zombie_head/equip4"
     ],
     "subtitle": "subtitles.item.armor.equip_zombie_head"
   },
   "item.armor.equip_creeper_head": {
     "sounds": [
-      "minecraft:item/armor/equip_generic1",
-      "minecraft:item/armor/equip_generic2",
-      "minecraft:item/armor/equip_generic3",
-      "minecraft:item/armor/equip_generic4",
-      "minecraft:item/armor/equip_generic5",
-      "minecraft:item/armor/equip_generic6"
+      "chrysalis:item/equipment/creeper_head/equip1",
+      "chrysalis:item/equipment/creeper_head/equip2",
+      "chrysalis:item/equipment/creeper_head/equip3",
+      "chrysalis:item/equipment/creeper_head/equip4"
     ],
     "subtitle": "subtitles.item.armor.equip_creeper_head"
   },
   "item.armor.equip_piglin_head": {
     "sounds": [
-      "minecraft:item/armor/equip_generic1",
-      "minecraft:item/armor/equip_generic2",
-      "minecraft:item/armor/equip_generic3",
-      "minecraft:item/armor/equip_generic4",
-      "minecraft:item/armor/equip_generic5",
-      "minecraft:item/armor/equip_generic6"
+      "chrysalis:item/equipment/piglin_head/equip1",
+      "chrysalis:item/equipment/piglin_head/equip2",
+      "chrysalis:item/equipment/piglin_head/equip3",
+      "chrysalis:item/equipment/piglin_head/equip4"
     ],
     "subtitle": "subtitles.item.armor.equip_piglin_head"
   },
   "item.armor.equip_dragon_head": {
     "sounds": [
-      "minecraft:item/armor/equip_generic1",
-      "minecraft:item/armor/equip_generic2",
-      "minecraft:item/armor/equip_generic3",
-      "minecraft:item/armor/equip_generic4",
-      "minecraft:item/armor/equip_generic5",
-      "minecraft:item/armor/equip_generic6"
+      "chrysalis:item/equipment/dragon_head/equip1",
+      "chrysalis:item/equipment/dragon_head/equip2",
+      "chrysalis:item/equipment/dragon_head/equip3",
+      "chrysalis:item/equipment/dragon_head/equip4"
     ],
     "subtitle": "subtitles.item.armor.equip_dragon_head"
   }

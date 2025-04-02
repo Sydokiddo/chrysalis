@@ -175,7 +175,12 @@ public class EventHelper {
 
     @OnlyIn(Dist.CLIENT)
     public static void playUIClickSound(Minecraft minecraft, Holder<SoundEvent> soundEvent) {
-        minecraft.getSoundManager().play(SimpleSoundInstance.forUI(soundEvent, 1.0F));
+        playUIClickSound(minecraft, soundEvent, 1.0F);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void playUIClickSound(Minecraft minecraft, Holder<SoundEvent> soundEvent, float pitch) {
+        minecraft.getSoundManager().play(SimpleSoundInstance.forUI(soundEvent, pitch));
     }
 
     // endregion

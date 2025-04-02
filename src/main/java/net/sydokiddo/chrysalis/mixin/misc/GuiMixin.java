@@ -110,15 +110,15 @@ public class GuiMixin {
 
         @Inject(method = "slotClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handleCreativeModeItemAdd(Lnet/minecraft/world/item/ItemStack;I)V", ordinal = 0))
         private void chrysalis$playDeleteAllItemsSound(Slot slot, int slotId, int mouseButton, ClickType type, CallbackInfo info) {
-            if (!this.chrysalis$playedItemDeleteSound && this.minecraft != null && this.minecraft.player != null && !this.minecraft.player.getInventory().isEmpty()) {
-                EventHelper.playUIClickSound(Minecraft.getInstance(), CSoundEvents.CREATIVE_MODE_DELETE_ALL_ITEMS);
+            if (!this.chrysalis$playedItemDeleteSound && this.minecraft != null && this.minecraft.level != null && this.minecraft.player != null && !this.minecraft.player.getInventory().isEmpty()) {
+                EventHelper.playUIClickSound(Minecraft.getInstance(), CSoundEvents.CREATIVE_MODE_DELETE_ALL_ITEMS, 0.8F + this.minecraft.level.random.nextFloat() * 0.4F);
                 this.chrysalis$playedItemDeleteSound = true;
             }
         }
 
         @Inject(method = "slotClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/CreativeModeInventoryScreen$ItemPickerMenu;setCarried(Lnet/minecraft/world/item/ItemStack;)V", ordinal = 1))
         private void chrysalis$playDeleteItemSound(Slot slot, int slotId, int mouseButton, ClickType type, CallbackInfo info) {
-            if (!this.menu.getCarried().isEmpty()) EventHelper.playUIClickSound(Minecraft.getInstance(), CSoundEvents.CREATIVE_MODE_DELETE_ITEM);
+            if (!this.menu.getCarried().isEmpty() && this.minecraft != null && this.minecraft.level != null) EventHelper.playUIClickSound(Minecraft.getInstance(), CSoundEvents.CREATIVE_MODE_DELETE_ITEM, 0.8F + this.minecraft.level.random.nextFloat() * 0.4F);
         }
     }
 
