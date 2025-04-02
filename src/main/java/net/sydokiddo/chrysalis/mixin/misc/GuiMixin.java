@@ -9,9 +9,12 @@ import net.minecraft.client.gui.screens.advancements.AdvancementsScreen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.ShulkerBoxScreen;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -111,14 +114,19 @@ public class GuiMixin {
         @Inject(method = "slotClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handleCreativeModeItemAdd(Lnet/minecraft/world/item/ItemStack;I)V", ordinal = 0))
         private void chrysalis$playDeleteAllItemsSound(Slot slot, int slotId, int mouseButton, ClickType type, CallbackInfo info) {
             if (!this.chrysalis$playedItemDeleteSound && this.minecraft != null && this.minecraft.level != null && this.minecraft.player != null && !this.minecraft.player.getInventory().isEmpty()) {
-                EventHelper.playUIClickSound(Minecraft.getInstance(), CSoundEvents.CREATIVE_MODE_DELETE_ALL_ITEMS, 0.8F + this.minecraft.level.random.nextFloat() * 0.4F);
+                this.chrysalis$tryPlayingSound(CSoundEvents.CREATIVE_MODE_DELETE_ALL_ITEMS, this.minecraft.level);
                 this.chrysalis$playedItemDeleteSound = true;
             }
         }
 
         @Inject(method = "slotClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/CreativeModeInventoryScreen$ItemPickerMenu;setCarried(Lnet/minecraft/world/item/ItemStack;)V", ordinal = 1))
         private void chrysalis$playDeleteItemSound(Slot slot, int slotId, int mouseButton, ClickType type, CallbackInfo info) {
-            if (!this.menu.getCarried().isEmpty() && this.minecraft != null && this.minecraft.level != null) EventHelper.playUIClickSound(Minecraft.getInstance(), CSoundEvents.CREATIVE_MODE_DELETE_ITEM, 0.8F + this.minecraft.level.random.nextFloat() * 0.4F);
+            if (!this.menu.getCarried().isEmpty() && this.minecraft != null && this.minecraft.level != null) this.chrysalis$tryPlayingSound(CSoundEvents.CREATIVE_MODE_DELETE_ITEM, this.minecraft.level);
+        }
+
+        @Unique
+        private void chrysalis$tryPlayingSound(Holder<SoundEvent> soundEvent, ClientLevel level) {
+            if (CConfigOptions.CREATIVE_MODE_ITEM_DELETING_SOUNDS.get()) EventHelper.playUIClickSound(Minecraft.getInstance(), soundEvent, 0.8F + level.getRandom().nextFloat() * 0.4F);
         }
     }
 

@@ -22,18 +22,20 @@ public class CItems {
 
     public static final DeferredItem<Item>
         ICON = ITEMS.registerItem("icon", IconItem::new, iconSettings()),
-        HEAL = ITEMS.registerItem("heal", HealItem::new, debugUtilitySettings()),
-        FILL_HUNGER = ITEMS.registerItem("fill_hunger", FillHungerItem::new, debugUtilitySettings()),
-        FILL_OXYGEN = ITEMS.registerItem("fill_oxygen", FillOxygenItem::new, debugUtilitySettings()),
-        GIVE_RESISTANCE = ITEMS.registerItem("give_resistance", GiveResistanceItem::new, debugUtilitySettings()),
-        CLEAR_EFFECTS = ITEMS.registerItem("clear_effects", ClearEffectsItem::new, debugUtilitySettings()),
-        TELEPORT_TO_SPAWNPOINT = ITEMS.registerItem("teleport_to_spawnpoint", TeleportToSpawnpointItem::new, debugUtilitySettings()),
-        TELEPORT_WAND = ITEMS.registerItem("teleport_wand", TeleportWandItem::new, debugUtilitySettings().useCooldown(3.0F)),
-        KILL_WAND = ITEMS.registerItem("kill_wand", KillWandItem::new, debugUtilitySettings().attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.MAINHAND))),
-        AGGRO_WAND = ITEMS.registerItem("aggro_wand", AggroWandItem::new, debugUtilitySettings().attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.HAND))),
-        TAME_MOB = ITEMS.registerItem("tame_mob", TameMobItem::new, debugUtilitySettings()),
-        RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, debugUtilitySettings()),
-        COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEggItem::new, debugUtilitySettings()),
+        HEAL = ITEMS.registerItem("heal", HealItem::new, debugUtilitySettings(1)),
+        FILL_HUNGER = ITEMS.registerItem("fill_hunger", FillHungerItem::new, debugUtilitySettings(1)),
+        FILL_OXYGEN = ITEMS.registerItem("fill_oxygen", FillOxygenItem::new, debugUtilitySettings(1)),
+        GIVE_RESISTANCE = ITEMS.registerItem("give_resistance", GiveResistanceItem::new, debugUtilitySettings(1)),
+        CLEAR_EFFECTS = ITEMS.registerItem("clear_effects", ClearEffectsItem::new, debugUtilitySettings(1)),
+        TELEPORT_TO_SPAWNPOINT = ITEMS.registerItem("teleport_to_spawnpoint", TeleportToSpawnpointItem::new, debugUtilitySettings(1)),
+        TELEPORT_WAND = ITEMS.registerItem("teleport_wand", TeleportWandItem::new, debugUtilitySettings(1).useCooldown(3.0F)),
+        KILL_WAND = ITEMS.registerItem("kill_wand", KillWandItem::new, debugUtilitySettings(1).attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.MAINHAND))),
+        AGGRO_WAND = ITEMS.registerItem("aggro_wand", AggroWandItem::new, debugUtilitySettings(1).attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.HAND))),
+        TAME_MOB = ITEMS.registerItem("tame_mob", TameMobItem::new, debugUtilitySettings(1)),
+        RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, debugUtilitySettings(1)),
+        COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEggItem::new, debugUtilitySettings(1)),
+        KEY = ITEMS.registerItem("key", Item::new, new Item.Properties()),
+        ADMIN_KEY = ITEMS.registerItem("admin_key", Item::new, debugUtilitySettings(64)),
         TEST_RIGHT_CLICK_ITEM = TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
     ;
 
@@ -41,8 +43,8 @@ public class CItems {
 
     // region Registry
 
-    public static Item.Properties debugUtilitySettings() {
-        return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+    public static Item.Properties debugUtilitySettings(int maxStackSize) {
+        return new Item.Properties().stacksTo(maxStackSize).rarity(Rarity.EPIC).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
     }
 
     public static Item.Properties iconSettings() {

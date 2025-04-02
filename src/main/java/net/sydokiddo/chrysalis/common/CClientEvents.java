@@ -146,6 +146,7 @@ public class CClientEvents {
         @SubscribeEvent
         private static void addItemsToCreativeTabs(BuildCreativeModeTabContentsEvent event) {
 
+            if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) event.insertBefore(Items.TRIAL_KEY.getDefaultInstance(), CItems.KEY.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) event.insertAfter(Items.CREAKING_HEART.getDefaultInstance(), CItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
             if (event.getTabKey() == CreativeModeTabs.OP_BLOCKS && event.hasPermissions()) {
@@ -161,7 +162,8 @@ public class CClientEvents {
                 event.insertAfter(CItems.AGGRO_WAND.toStack(), CItems.TAME_MOB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.TAME_MOB.toStack(), CItems.RIDE_MOB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.RIDE_MOB.toStack(), CItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) event.insertAfter(CItems.COPYING_SPAWN_EGG.toStack(), CItems.TEST_RIGHT_CLICK_ITEM.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.COPYING_SPAWN_EGG.toStack(), CItems.ADMIN_KEY.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) event.insertAfter(CItems.ADMIN_KEY.toStack(), CItems.TEST_RIGHT_CLICK_ITEM.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.accept(Items.ENDER_DRAGON_SPAWN_EGG.getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.accept(Items.WITHER_SPAWN_EGG.getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
