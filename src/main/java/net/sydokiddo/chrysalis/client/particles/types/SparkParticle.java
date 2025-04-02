@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
-public class SparkParticle extends RotatingFallingParticle implements ParticleCommonMethods {
+public class SparkParticle extends RotatingGravityParticle implements ParticleCommonMethods {
 
     /**
      * A falling spark particle that fades out, with options to configure the color and scale.
@@ -21,7 +21,7 @@ public class SparkParticle extends RotatingFallingParticle implements ParticleCo
     // region Initialization and Ticking
 
     public SparkParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SparkParticleOptions particleOptions, SpriteSet spriteSet) {
-        super(level, x, y, z, velocityX, velocityY, velocityZ);
+        super(level, x, y, z, velocityX, velocityY, velocityZ, true);
 
         this.pickSprite(spriteSet);
         this.scale(particleOptions.getScale());

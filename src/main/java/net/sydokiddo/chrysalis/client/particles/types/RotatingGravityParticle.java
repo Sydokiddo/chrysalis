@@ -8,22 +8,24 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("unused")
 @OnlyIn(Dist.CLIENT)
-public class RotatingFallingParticle extends RisingParticle {
+public class RotatingGravityParticle extends RisingParticle {
 
     /**
-     * A particle effect that rotates and falls, with custom physics for colliding with a block.
+     * A particle effect that rotates and either falls or rises, with custom physics for colliding with a block.
      **/
 
     // region Initialization and Ticking
 
-    public RotatingFallingParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+    private final boolean hasGravity;
+
+    public RotatingGravityParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, boolean hasGravity) {
         super(level, x, y, z, velocityX, velocityY, velocityZ);
+        this.hasGravity = hasGravity;
         this.scale(1.1F + (float) this.random.nextInt(6) / 10.0F);
         this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 12;
         this.roll = this.oRoll = this.random.nextFloat() * (float) (2.0F * Math.PI);
-        this.yd = -0.25D;
+        this.yd = hasGravity ? -0.25D : 0.25D;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class RotatingFallingParticle extends RisingParticle {
             this.xd = this.xd + (Math.random() * 2.0D - 1.0D) * 0.2D;
             this.yd = 0.3D + (double) this.level.getRandom().nextInt(11) / 100.0D;
             this.zd = this.zd + (Math.random() * 2.0D - 1.0D) * 0.2D;
-        } else if (this.age <= 10) {
+        } else if (this.age <= 10 && this.hasGravity) {
             this.yd = this.yd - (0.05D + (double) this.age / 200.0D);
         }
 
@@ -59,18 +61,37 @@ public class RotatingFallingParticle extends RisingParticle {
 
     // region Providers
 
+    @SuppressWarnings("unused")
     @OnlyIn(Dist.CLIENT)
-    public static class Provider implements ParticleProvider<SimpleParticleType> {
+    public static class FallingProvider implements ParticleProvider<SimpleParticleType> {
 
         private final SpriteSet spriteSet;
 
-        public Provider(SpriteSet spriteSet) {
+        public FallingProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 
         @Override
         public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            RotatingFallingParticle particle = new RotatingFallingParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ);
+            RotatingGravityParticle particle = new RotatingGravityParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, true);
+            particle.pickSprite(this.spriteSet);
+            return particle;
+        }
+    }
+
+    @SuppressWarnings("unused")
+    @OnlyIn(Dist.CLIENT)
+    public static class RisingProvider implements ParticleProvider<SimpleParticleType> {
+
+        private final SpriteSet spriteSet;
+
+        public RisingProvider(SpriteSet spriteSet) {
+            this.spriteSet = spriteSet;
+        }
+
+        @Override
+        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+            RotatingGravityParticle particle = new RotatingGravityParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, false);
             particle.pickSprite(this.spriteSet);
             return particle;
         }
