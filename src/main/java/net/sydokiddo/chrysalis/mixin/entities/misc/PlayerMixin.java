@@ -206,6 +206,8 @@ public abstract class PlayerMixin extends LivingEntity {
     @Inject(method = "aiStep", at = @At(value = "RETURN"))
     private void chrysalis$changePlayerTouch(CallbackInfo info) {
 
+        if (this.isDeadOrDying() || this.isSpectator()) return;
+
         AABB normalHitboxRange;
         AABB itemHitboxRange;
         AABB experienceHitboxRange;
