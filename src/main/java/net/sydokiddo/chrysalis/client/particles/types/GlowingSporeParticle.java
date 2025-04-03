@@ -21,7 +21,7 @@ public class GlowingSporeParticle extends FadingEmissiveParticle implements Part
     public GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet, false);
         this.setSize(0.001F, 0.001F);
-        this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
+        this.lifetime = (int) (8.0D / (this.random.nextDouble() * 0.8D + 0.2D)) + 4;
         this.hasPhysics = true;
         this.xd = velocityX;
         this.yd = velocityY;

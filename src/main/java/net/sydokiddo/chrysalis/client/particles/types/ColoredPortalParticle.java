@@ -46,11 +46,11 @@ public class ColoredPortalParticle extends TextureSheetParticle implements Parti
         this.zd = velocityZ;
 
         this.quadSize = 0.1F * (this.random.nextFloat() * 0.2F + 0.5F);
-        this.lifetime = (int) (Math.random() * 10.0D) + 40;
+        this.lifetime = (int) (this.random.nextDouble() * 10.0D) + 40;
 
         if (particleOptions.isReverse()) {
             this.quadSize *= 1.5F;
-            this.lifetime = (int) (Math.random() * 2.0D) + 60;
+            this.lifetime = (int) (this.random.nextDouble() * 2.0D) + 60;
         }
 
         this.startingColor = particleOptions.getFinalStartingColor();

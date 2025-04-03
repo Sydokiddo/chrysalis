@@ -21,7 +21,7 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
         super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet, animateTextures);
         this.setSize(0.02F, 0.02F);
         this.quadSize = this.quadSize * (this.random.nextFloat() * 0.6F + 0.5F);
-        this.lifetime = (int) (20.0D / (Math.random() * 0.8D + 0.2D));
+        this.lifetime = (int) (20.0D / (this.random.nextDouble() * 0.8D + 0.2D));
         this.xd *= 0.02D;
         this.yd *= 0.02D;
         this.zd *= 0.02D;

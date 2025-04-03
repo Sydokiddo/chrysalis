@@ -20,14 +20,17 @@ public class RotatingDustParticle extends FadingEmissiveParticle implements Part
 
     // region Initialization and Ticking
 
+    private final boolean reverse;
+
     public RotatingDustParticle(ClientLevel clientLevel, double x, double y, double z, RotatingDustParticleOptions particleOptions, SpriteSet spriteSet) {
         super(clientLevel, x, y, z, particleOptions.isEmissive() ? 1.0F : 0.0F, 0.0F, spriteSet, false);
 
-        this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
+        this.lifetime = (int) (8.0D / (this.random.nextDouble() * 0.8D + 0.2D)) + 4;
         this.roll = this.oRoll = this.random.nextFloat() * (float) (2.0F * Math.PI);
         float speed = 0.025F;
         this.yd = this.yd * 0.01F + (particleOptions.hasGravity() ? -speed : speed);
         this.hasPhysics = particleOptions.hasGravity();
+        this.reverse = this.random.nextBoolean();
 
         this.scale(particleOptions.getScale() * 4.0F);
         this.pickSprite(spriteSet);
@@ -52,7 +55,7 @@ public class RotatingDustParticle extends FadingEmissiveParticle implements Part
 
         if (!this.removed) {
             this.oRoll = this.roll;
-            this.roll = this.roll + 0.1F;
+            this.roll = this.reverse ? this.roll - 0.1F : this.roll + 0.1F;
             this.move(this.xd, this.yd, this.zd);
         }
     }

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
-public class MusicNoteParticle extends RisingParticle implements ParticleCommonMethods {
+public class MusicNoteParticle extends NoteParticle implements ParticleCommonMethods {
 
     /**
      * A floating music note particle effect that rotates over time, with options to configure the color and scale.
@@ -19,16 +19,18 @@ public class MusicNoteParticle extends RisingParticle implements ParticleCommonM
 
     // region Initialization and Ticking
 
-    private final boolean emissive;
+    private final boolean
+        reverse,
+        emissive
+    ;
 
-    public MusicNoteParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, MusicNoteParticleOptions particleOptions, SpriteSet spriteSet) {
-        super(level, x, y, z, velocityX, velocityY, velocityZ);
-
-        this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
-        this.roll = this.oRoll = this.random.nextFloat() * (float) (2.0F * Math.PI);
+    public MusicNoteParticle(ClientLevel clientLevel, double x, double y, double z, MusicNoteParticleOptions particleOptions, SpriteSet spriteSet) {
+        super(clientLevel, x, y, z, particleOptions.getColor());
 
         this.pickSprite(spriteSet);
         this.scale(particleOptions.getScale());
+        this.reverse = this.random.nextBoolean();
+        this.lifetime = 16;
 
         Vector3f color = particleOptions.getFinalColor();
 
@@ -52,7 +54,7 @@ public class MusicNoteParticle extends RisingParticle implements ParticleCommonM
 
         if (!this.removed) {
             this.oRoll = this.roll;
-            this.roll = this.roll + 0.1F;
+            this.roll = this.reverse ? this.roll - 0.025F : this.roll + 0.025F;
             this.move(this.xd, this.yd, this.zd);
         }
 
@@ -94,7 +96,7 @@ public class MusicNoteParticle extends RisingParticle implements ParticleCommonM
 
         @Override
         public Particle createParticle(@NotNull MusicNoteParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new MusicNoteParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions, this.spriteSet);
+            return new MusicNoteParticle(clientLevel, x, y, z, particleOptions, this.spriteSet);
         }
     }
 

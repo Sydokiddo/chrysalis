@@ -19,11 +19,11 @@ public class RotatingGravityParticle extends RisingParticle {
 
     private final boolean hasGravity;
 
-    public RotatingGravityParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, boolean hasGravity) {
-        super(level, x, y, z, velocityX, velocityY, velocityZ);
+    public RotatingGravityParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, boolean hasGravity) {
+        super(clientLevel, x, y, z, velocityX, velocityY, velocityZ);
         this.hasGravity = hasGravity;
         this.scale(1.1F + (float) this.random.nextInt(6) / 10.0F);
-        this.lifetime = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 12;
+        this.lifetime = (int) (8.0D / (this.random.nextDouble() * 0.8D + 0.2D)) + 12;
         this.roll = this.oRoll = this.random.nextFloat() * (float) (2.0F * Math.PI);
         this.yd = hasGravity ? -0.25D : 0.25D;
     }
@@ -35,9 +35,9 @@ public class RotatingGravityParticle extends RisingParticle {
         if (this.age > this.lifetime / 2) this.setAlpha(1.0F - Mth.clamp((float) this.age / (float) this.lifetime, 0.0F, 1.0F));
 
         if (this.age == 1) {
-            this.xd = this.xd + (Math.random() * 2.0D - 1.0D) * 0.2D;
+            this.xd = this.xd + (this.random.nextDouble() * 2.0D - 1.0D) * 0.2D;
             this.yd = 0.3D + (double) this.level.getRandom().nextInt(11) / 100.0D;
-            this.zd = this.zd + (Math.random() * 2.0D - 1.0D) * 0.2D;
+            this.zd = this.zd + (this.random.nextDouble() * 2.0D - 1.0D) * 0.2D;
         } else if (this.age <= 10 && this.hasGravity) {
             this.yd = this.yd - (0.05D + (double) this.age / 200.0D);
         }
