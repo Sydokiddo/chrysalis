@@ -107,6 +107,7 @@
   "item.chrysalis.light.description": "Light Level: %s",
 
   "item.chrysalis.test_right_click_item": "Test Right Click Item",
+  "item.chrysalis.test_right_click_item.description": "An item for testing right click functionality. Only meant for debug environments!",
 
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
