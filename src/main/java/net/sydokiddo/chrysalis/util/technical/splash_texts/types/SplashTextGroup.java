@@ -6,14 +6,17 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.chat.Style;
 import java.util.List;
 import com.mojang.serialization.Codec;
+import net.minecraft.util.ExtraCodecs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
 import java.util.stream.Stream;
 
 @OnlyIn(Dist.CLIENT)
-public record SplashTextGroup(Style defaultStyle, List<SplashText> splashTexts) {
+public record SplashTextGroup(int totalWeight, Style defaultStyle, List<SplashText> splashTexts) {
 
     public static final Codec<SplashTextGroup> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        ExtraCodecs.intRange(1, SplashTextLoader.defaultMaxWeight).orElse(SplashTextLoader.defaultMaxWeight).optionalFieldOf("total_weight", SplashTextLoader.defaultWeight).forGetter(SplashTextGroup::totalWeight),
         Style.Serializer.CODEC.optionalFieldOf("default_style", Style.EMPTY).forGetter(SplashTextGroup::defaultStyle),
         SplashText.CODEC.listOf().fieldOf("entries").forGetter(SplashTextGroup::splashTexts)
     ).apply(instance, SplashTextGroup::new));

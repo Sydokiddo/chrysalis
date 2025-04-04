@@ -1,4 +1,5 @@
 {
+  "total_weight": 1,
   "entries": [
     { "text": { "text": "Powered by Chrysalis!", "color": "#A27FFF" }, "weight": 20 },
     { "text": { "text": "\ua000", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 5 },

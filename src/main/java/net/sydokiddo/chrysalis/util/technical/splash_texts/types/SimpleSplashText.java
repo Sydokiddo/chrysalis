@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
 
 @OnlyIn(Dist.CLIENT)
 public class SimpleSplashText implements SplashText {
@@ -24,7 +25,7 @@ public class SimpleSplashText implements SplashText {
 
     @Override
     public int getWeight() {
-        return AdvancedSplashText.defaultWeight;
+        return SplashTextLoader.defaultWeight;
     }
 
     @Override

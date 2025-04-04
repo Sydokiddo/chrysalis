@@ -57,10 +57,17 @@ public class SplashTextLoader extends SimplePreparableReloadListener<Completable
 
     public static final SplashTextLoader INSTANCE = new SplashTextLoader();
     private final List<SplashText> splashTexts = new ArrayList<>();
+    private int totalWeight = 0;
     private int maxWeight = 0;
+    public static final int defaultWeight = 1;
+    public static final int defaultMaxWeight = 1000;
 
     public List<SplashText> getSplashTexts() {
         return this.splashTexts;
+    }
+
+    public int getTotalWeight() {
+        return this.totalWeight;
     }
 
     public int getMaxWeight() {
@@ -76,6 +83,8 @@ public class SplashTextLoader extends SimplePreparableReloadListener<Completable
             Chrysalis.LOGGER.info("Detected splash text file: {}", resourceLocation);
         }
 
+        this.totalWeight = SplashTextGroup.fromJson(jsonElement.getAsJsonObject()).totalWeight();
+        if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Splash text ({}) total weight: {}", resourceLocation, this.getTotalWeight());
         SplashTextGroup.fromJson(jsonElement.getAsJsonObject()).getTexts().filter(SplashText::validate).forEach(this::addSplashes);
     }
 

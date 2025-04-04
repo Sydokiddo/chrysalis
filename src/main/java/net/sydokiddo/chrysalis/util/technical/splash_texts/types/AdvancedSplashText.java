@@ -12,14 +12,13 @@ import net.sydokiddo.chrysalis.util.technical.splash_texts.CSplashTextRenderer;
 import java.awt.*;
 import java.util.function.UnaryOperator;
 import com.mojang.serialization.Codec;
+import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
 
 @OnlyIn(Dist.CLIENT)
 public class AdvancedSplashText implements SplashText {
 
     private static final String defaultFont = "minecraft:default";
     private static final String defaultColor = "#FFFF55";
-    public static final int defaultWeight = 1;
-    public static final int defaultMaxWeight = 1000;
 
     public static final Codec<AdvancedSplashText> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ComponentSerialization.CODEC.fieldOf("text").forGetter(null),
@@ -30,7 +29,7 @@ public class AdvancedSplashText implements SplashText {
         Codec.BOOL.optionalFieldOf("underlined", false).forGetter(null),
         Codec.BOOL.optionalFieldOf("strikethrough", false).forGetter(null),
         Codec.BOOL.optionalFieldOf("obfuscated", false).forGetter(null),
-        ExtraCodecs.intRange(1, defaultMaxWeight).orElse(defaultMaxWeight).optionalFieldOf("weight", defaultWeight).forGetter(null)
+        ExtraCodecs.intRange(1, SplashTextLoader.defaultMaxWeight).orElse(SplashTextLoader.defaultMaxWeight).optionalFieldOf("weight", SplashTextLoader.defaultWeight).forGetter(null)
     ).apply(instance, AdvancedSplashText::new));
 
     private MutableComponent text;
@@ -56,7 +55,7 @@ public class AdvancedSplashText implements SplashText {
     }
 
     public AdvancedSplashText(MutableComponent mutableComponent) {
-        this(mutableComponent, String.valueOf(ResourceLocation.parse(defaultFont)), defaultColor, false, false, false, false, false, defaultWeight);
+        this(mutableComponent, String.valueOf(ResourceLocation.parse(defaultFont)), defaultColor, false, false, false, false, false, SplashTextLoader.defaultWeight);
     }
 
     @Override
@@ -66,7 +65,7 @@ public class AdvancedSplashText implements SplashText {
 
     @Override
     public int getWeight() {
-        return this.weight;
+        return Math.min(this.weight * SplashTextLoader.INSTANCE.getTotalWeight(), SplashTextLoader.defaultMaxWeight);
     }
 
     @Override
