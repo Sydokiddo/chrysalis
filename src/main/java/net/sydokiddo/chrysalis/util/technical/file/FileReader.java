@@ -22,7 +22,7 @@ public class FileReader<Value> {
         this.bufferReader = bufferReader;
     }
 
-    public record FilePath(String basePath, Function<ResourceLocation, Boolean> predicate) {
+    private record FilePath(String basePath, Function<ResourceLocation, Boolean> predicate) {
         public static FilePath simple(String string) {
             return new FilePath(string, path -> true);
         }
