@@ -75,7 +75,7 @@ public class AdvancedSplashText implements SplashText {
         return this;
     }
 
-    public void modifyText(UnaryOperator<MutableComponent> unaryOperator) {
+    private void modifyText(UnaryOperator<MutableComponent> unaryOperator) {
         this.text = unaryOperator.apply(this.text);
     }
 
