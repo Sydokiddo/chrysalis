@@ -1,7 +1,7 @@
 {
   "values": [
-    "#minecraft:sword_efficient",
     "minecraft:cobweb",
+    "#minecraft:sword_efficient",
     {"id": "#minecraft:sword_instantly_mines", "required": false}
   ]
 }

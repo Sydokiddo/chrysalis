@@ -5,6 +5,7 @@
     "minecraft:seagrass",
     "minecraft:tall_seagrass",
     "minecraft:kelp",
+    "minecraft:kelp_plant",
     "#minecraft:coral_plants",
     {"id": "minecraft:short_dry_grass", "required": false},
     {"id": "minecraft:tall_dry_grass", "required": false},
