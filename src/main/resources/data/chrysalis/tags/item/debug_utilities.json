@@ -12,6 +12,8 @@
     "chrysalis:aggro_wand",
     "chrysalis:tame_mob",
     "chrysalis:ride_mob",
-    "chrysalis:copying_spawn_egg"
+    "chrysalis:drain_fluids",
+    "chrysalis:copying_spawn_egg",
+    "chrysalis:admin_key"
   ]
 }

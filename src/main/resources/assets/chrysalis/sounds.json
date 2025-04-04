@@ -75,18 +75,6 @@
     ],
     "subtitle": "subtitles.item.teleport_to_spawnpoint.fail"
   },
-  "item.tame_mob.use": {
-    "sounds": [
-      "minecraft:random/orb"
-    ],
-    "subtitle": "subtitles.item.tame_mob.use"
-  },
-  "item.ride_mob.use": {
-    "sounds": [
-      "minecraft:mob/horse/leather"
-    ],
-    "subtitle": "subtitles.item.ride_mob.use"
-  },
   "item.aggro_wand.link": {
     "sounds": [
       "minecraft:block/chain/break1",
@@ -115,6 +103,26 @@
       "minecraft:random/fizz"
     ],
     "subtitle": "subtitles.item.aggro_wand.remove_linked_mob"
+  },
+  "item.tame_mob.use": {
+    "sounds": [
+      "minecraft:random/orb"
+    ],
+    "subtitle": "subtitles.item.tame_mob.use"
+  },
+  "item.ride_mob.use": {
+    "sounds": [
+      "minecraft:mob/horse/leather"
+    ],
+    "subtitle": "subtitles.item.ride_mob.use"
+  },
+  "item.drain_fluids.use": {
+    "sounds": [
+      "minecraft:block/sponge/absorb1",
+      "minecraft:block/sponge/absorb2",
+      "minecraft:block/sponge/absorb3"
+    ],
+    "subtitle": "subtitles.item.drain_fluids.use"
   },
   "item.copying_spawn_egg.copy_entity": {
     "sounds": [

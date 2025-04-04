@@ -34,6 +34,7 @@ public class CItems {
         AGGRO_WAND = ITEMS.registerItem("aggro_wand", AggroWandItem::new, debugUtilitySettings(1).attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.HAND))),
         TAME_MOB = ITEMS.registerItem("tame_mob", TameMobItem::new, debugUtilitySettings(1)),
         RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, debugUtilitySettings(1)),
+        DRAIN_FLUIDS = ITEMS.registerItem("drain_fluids", DrainFluidsItem::new, debugUtilitySettings(1)),
         COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEggItem::new, debugUtilitySettings(1)),
         KEY = ITEMS.registerItem("key", CreativeModeDescriptionItem::new, new Item.Properties()),
         ADMIN_KEY = ITEMS.registerItem("admin_key", CreativeModeDescriptionItem::new, debugUtilitySettings(64)),

@@ -35,6 +35,7 @@ public class CCreativeModeTabs {
             output.accept(CItems.AGGRO_WAND);
             output.accept(CItems.TAME_MOB);
             output.accept(CItems.RIDE_MOB);
+            output.accept(CItems.DRAIN_FLUIDS);
             output.accept(CItems.COPYING_SPAWN_EGG);
             output.accept(CItems.KEY);
             output.accept(CItems.ADMIN_KEY);

@@ -94,6 +94,8 @@
   "item.chrysalis.tame_mob.description": "Automatically Tames Mob",
   "item.chrysalis.ride_mob": "Ride Mob",
   "item.chrysalis.ride_mob.description": "Mounts Targeted Mob",
+  "item.chrysalis.drain_fluids": "Drain Fluids",
+  "item.chrysalis.drain_fluids.description": "Drains Nearby Fluids",
   "item.chrysalis.copying_spawn_egg": "Copying Spawn Egg",
   "item.chrysalis.copying_spawn_egg.copied": "Copying Spawn Egg (%s)",
   "item.chrysalis.copying_spawn_egg.copied_entity_tooltip": "Copied Entity: %s",
@@ -107,7 +109,7 @@
   "item.chrysalis.light.description": "Light Level: %s",
 
   "item.chrysalis.test_right_click_item": "Test Right Click Item",
-  "item.chrysalis.test_right_click_item.description": "An item for testing right click functionality. Only meant for debug environments!",
+  "item.chrysalis.test_right_click_item.description": "An item for testing right-click functionality. Only meant for debug environments!",
 
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
@@ -252,11 +254,12 @@
   "gui.chrysalis.fill_oxygen.message": "Successfully replenished oxygen for %s",
   "gui.chrysalis.teleport_to_spawnpoint.message.success": "Successfully teleported to spawnpoint",
   "gui.chrysalis.teleport_to_spawnpoint.message.fail": "You have no set spawnpoint",
-  "gui.chrysalis.tame_mob.message": "%s has successfully been tamed",
   "gui.chrysalis.aggro_wand.link_message": "Successfully linked to %s, interact with another mob to set it as the attack target",
   "gui.chrysalis.aggro_wand.select_target_message.success": "Set %1$s as %2$s's attack target",
   "gui.chrysalis.aggro_wand.select_target_message.fail": "Linked mob could not be found",
   "gui.chrysalis.aggro_wand.remove_linked_mob_message": "Linked mob removed",
+  "gui.chrysalis.tame_mob.message": "%s has successfully been tamed",
+  "gui.chrysalis.drain_fluids.message": "Successfully drained nearby fluids",
   "gui.chrysalis.copying_spawn_egg.copy_message": "Copied Entity: %s",
   "gui.chrysalis.copying_spawn_egg.remove_message": "Copied Entity Removed",
 
@@ -398,12 +401,13 @@
   "subtitles.item.give_resistance.use": "Player fortifies",
   "subtitles.item.clear_effects.use": "Player clears effects",
   "subtitles.item.teleport_to_spawnpoint.fail": "Teleportation fails",
-  "subtitles.item.tame_mob.use": "Mob tamed",
-  "subtitles.item.ride_mob.use": "Mob mounted",
   "subtitles.item.aggro_wand.link": "Mob linked",
   "subtitles.item.aggro_wand.select_target.fail": "Target selection fails",
   "subtitles.item.aggro_wand.select_target.success": "Target selected",
   "subtitles.item.aggro_wand.remove_linked_mob": "Linked mob removed",
+  "subtitles.item.tame_mob.use": "Mob tamed",
+  "subtitles.item.ride_mob.use": "Mob mounted",
+  "subtitles.item.drain_fluids.use": "Fluids drained",
   "subtitles.item.copying_spawn_egg.copy_entity": "Entity copied",
   "subtitles.item.copying_spawn_egg.remove_copied_entity": "Copied entity removed",
 
