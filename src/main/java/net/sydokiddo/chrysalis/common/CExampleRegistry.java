@@ -138,6 +138,9 @@ public class CExampleRegistry {
     private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_MULTIFACE_BLOCK = registerBlock("example_dissipating_multiface_block",
         ExampleDissipatingMultifaceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.RESIN_CLUMP), new Item.Properties());
 
+    private static final DeferredBlock<Block> EXAMPLE_FLUIDLOGGED_BLOCK = registerBlock("example_fluidlogged_block",
+        ExampleFluidloggedBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_GRATE), new Item.Properties());
+
     private static DeferredBlock<Block> registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties settings) {
         return registerBlock(name, function, settings, new Item.Properties());
     }
