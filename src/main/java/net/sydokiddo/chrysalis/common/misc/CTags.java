@@ -96,6 +96,7 @@ public class CTags {
         END_CRYSTAL_BASE_BLOCKS = registerBlockTag("end_crystal_base_blocks"),
         END_ORES = registerBlockTag("end_ores"),
         GRATES = registerBlockTag("grates"),
+        INHERENTLY_WATERLOGGED = registerBlockTag("inherently_waterlogged"),
         LANTERNS = registerBlockTag("lanterns"),
         NETHER_ORES = registerBlockTag("nether_ores"),
         NETHER_WARTS_CAN_GROW_ON = registerBlockTag("nether_warts_can_grow_on"),

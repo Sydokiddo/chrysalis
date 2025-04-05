@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
@@ -82,7 +83,7 @@ public class DrainFluidsItem extends DebugUtilityItem {
                 } else {
                     if (blockState.getValueOrElse(BlockStateProperties.WATERLOGGED, false)) {
                         level.setBlockAndUpdate(fluidPos, blockState.setValue(BlockStateProperties.WATERLOGGED, false));
-                    } else if (blockState.getBlock() instanceof SeagrassBlock || blockState.getBlock() instanceof TallSeagrassBlock || blockState.getBlock() instanceof KelpBlock || blockState.getBlock() instanceof KelpPlantBlock) {
+                    } else if (blockState.is(CTags.INHERENTLY_WATERLOGGED)) {
                         Block.dropResources(blockState, level, fluidPos, blockState.hasBlockEntity() ? level.getBlockEntity(fluidPos) : null);
                         level.setBlockAndUpdate(fluidPos, Blocks.AIR.defaultBlockState());
                     }
