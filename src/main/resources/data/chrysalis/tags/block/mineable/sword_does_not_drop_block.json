@@ -1,0 +1,6 @@
+{
+  "values": [
+    "#minecraft:sword_efficient",
+    {"id": "#minecraft:sword_instantly_mines", "required": false}
+  ]
+}

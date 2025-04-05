@@ -70,7 +70,7 @@ public class CExampleRegistry {
 
     // region Example Item Registries
 
-    private static final DeferredItem<Item> EXAMPLE_ICON = CItems.ITEMS.registerItem("example_icon", IconItem::new, CItems.iconSettings());
+    private static final DeferredItem<Item> EXAMPLE_ICON = CItems.ITEMS.registerItem("example_icon", IconItem::new, RegistryHelper.iconProperties());
 
     private static final DeferredItem<Item> EXAMPLE_TOOL = CItems.ITEMS.registerItem("example_tool",
         properties -> new SwordItem(ToolMaterial.IRON, 3, -2.4F, properties), new Item.Properties());

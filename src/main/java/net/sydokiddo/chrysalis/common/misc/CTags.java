@@ -79,7 +79,12 @@ public class CTags {
 
     public static final TagKey<Block>
         MINEABLE_WITH_SHEARS = registerBlockTag("mineable/shears"),
+        MINEABLE_WITH_SHEARS_FAST = registerBlockTag("mineable/shears_fast"),
+        MINEABLE_WITH_SHEARS_NORMAL = registerBlockTag("mineable/shears_normal"),
+        MINEABLE_WITH_SHEARS_SLOW = registerBlockTag("mineable/shears_slow"),
         MINEABLE_WITH_SWORDS = registerBlockTag("mineable/sword"),
+        MINEABLE_WITH_SWORDS_DOES_NOT_DROP_BLOCK = registerBlockTag("mineable/sword_does_not_drop_block"),
+        MINEABLE_WITH_SWORDS_DROPS_BLOCK = registerBlockTag("mineable/sword_drops_block"),
         ALLOWS_BEACON_BEAM_PASSTHROUGH = registerBlockTag("allows_beacon_beam_passthrough"),
         ALLOWS_PLACEMENT_WITH_BUILDING_FATIGUE = registerBlockTag("allows_placement_with_building_fatigue"),
         ALLOWS_USE_WHILE_SNEAKING = registerBlockTag("allows_use_while_sneaking"),

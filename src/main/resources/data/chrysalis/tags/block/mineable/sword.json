@@ -1,7 +1,6 @@
 {
   "values": [
-    "minecraft:cobweb",
-    "#minecraft:sword_efficient",
-    {"id": "#minecraft:sword_instantly_mines", "required": false}
+    "#chrysalis:mineable/sword_does_not_drop_block",
+    "#chrysalis:mineable/sword_drops_block"
   ]
 }

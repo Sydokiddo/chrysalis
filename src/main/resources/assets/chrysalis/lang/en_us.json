@@ -477,7 +477,12 @@
   "tag.item.chrysalis.waxed_blocks": "Waxed Blocks",
 
   "tag.block.chrysalis.mineable.shears": "Mineable With Shears",
+  "tag.block.chrysalis.mineable.shears_fast": "Mineable With Shears (Fast)",
+  "tag.block.chrysalis.mineable.shears_normal": "Mineable With Shears (Normal)",
+  "tag.block.chrysalis.mineable.shears_slow": "Mineable With Shears (Slow)",
   "tag.block.chrysalis.mineable.sword": "Mineable With Swords",
+  "tag.block.chrysalis.mineable.sword_does_not_drop_block": "Mineable With Swords (Does Not Drop Block)",
+  "tag.block.chrysalis.mineable.sword_drops_block": "Mineable With Swords (Drops Block)",
   "tag.block.chrysalis.allows_beacon_beam_passthrough": "Allows Beacon Beam Passthrough",
   "tag.block.chrysalis.allows_placement_with_building_fatigue": "Allows Placement with Building Fatigue",
   "tag.block.chrysalis.allows_use_while_sneaking": "Allows Use While Sneaking",
