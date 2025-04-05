@@ -73,24 +73,26 @@ public class DrainFluidsItem extends DebugUtilityItem {
             16,
             Integer.MAX_VALUE,
             (getPos, consumer) -> { for (Direction direction : Direction.values()) consumer.accept(getPos.relative(direction)); },
-            fluidPos -> {
-
-                BlockState blockState = level.getBlockState(fluidPos);
-                if (blockState.getFluidState().isEmpty()) return BlockPos.TraversalNodeStatus.SKIP;
-
-                if (blockState.getBlock() instanceof LiquidBlock) {
-                    level.setBlockAndUpdate(fluidPos, Blocks.AIR.defaultBlockState());
-                } else {
-                    if (blockState.getValueOrElse(BlockStateProperties.WATERLOGGED, false)) {
-                        level.setBlockAndUpdate(fluidPos, blockState.setValue(BlockStateProperties.WATERLOGGED, false));
-                    } else if (blockState.is(CTags.INHERENTLY_WATERLOGGED)) {
-                        Block.dropResources(blockState, level, fluidPos, blockState.hasBlockEntity() ? level.getBlockEntity(fluidPos) : null);
-                        level.setBlockAndUpdate(fluidPos, Blocks.AIR.defaultBlockState());
-                    }
-                }
-
-                return BlockPos.TraversalNodeStatus.ACCEPT;
-            }
+            fluidPos -> this.updateFluidPos(level, fluidPos)
         ) > 1;
+    }
+
+    private BlockPos.TraversalNodeStatus updateFluidPos(Level level, BlockPos fluidPos) {
+
+        BlockState blockState = level.getBlockState(fluidPos);
+        if (blockState.getFluidState().isEmpty()) return BlockPos.TraversalNodeStatus.SKIP;
+
+        if (blockState.getBlock() instanceof LiquidBlock) {
+            level.setBlockAndUpdate(fluidPos, Blocks.AIR.defaultBlockState());
+        } else {
+            if (blockState.getValueOrElse(BlockStateProperties.WATERLOGGED, false)) {
+                level.setBlockAndUpdate(fluidPos, blockState.setValue(BlockStateProperties.WATERLOGGED, false));
+            } else if (blockState.is(CTags.INHERENTLY_WATERLOGGED)) {
+                Block.dropResources(blockState, level, fluidPos, blockState.hasBlockEntity() ? level.getBlockEntity(fluidPos) : null);
+                level.setBlockAndUpdate(fluidPos, Blocks.AIR.defaultBlockState());
+            }
+        }
+
+        return BlockPos.TraversalNodeStatus.ACCEPT;
     }
 }
