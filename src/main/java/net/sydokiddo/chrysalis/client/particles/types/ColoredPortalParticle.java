@@ -22,12 +22,16 @@ public class ColoredPortalParticle extends TextureSheetParticle implements Parti
 
     private final ColoredPortalParticleOptions particleOptions;
 
-    private final double xStart;
-    private final double yStart;
-    private final double zStart;
+    private final double
+        xStart,
+        yStart,
+        zStart
+    ;
 
-    private final Vector3f startingColor;
-    private final Vector3f endingColor;
+    private final Vector3f
+        startingColor,
+        endingColor
+    ;
 
     public ColoredPortalParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, @NotNull ColoredPortalParticleOptions particleOptions) {
         super(clientLevel, x, y, z);

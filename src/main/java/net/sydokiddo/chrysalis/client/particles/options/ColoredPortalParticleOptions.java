@@ -35,8 +35,11 @@ public class ColoredPortalParticleOptions implements ParticleOptions, ParticleCo
         ColoredPortalParticleOptions::new
     );
 
-    private final int startingColor;
-    private final int endingColor;
+    private final int
+        startingColor,
+        endingColor
+    ;
+
     private final boolean reverse;
 
     public ColoredPortalParticleOptions(int startingColor, int endingColor, boolean reverse) {

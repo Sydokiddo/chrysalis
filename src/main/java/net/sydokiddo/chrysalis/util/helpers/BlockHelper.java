@@ -26,11 +26,11 @@ public class BlockHelper {
      * Methods to get various pieces of information from blocks.
      **/
 
-    public static boolean isBlockStateFree(BlockState blockState) {
-        return blockState.is(BlockTags.REPLACEABLE);
+    public static boolean isFree(BlockState blockState) {
+        return blockState.is(BlockTags.REPLACEABLE) || blockState.isEmpty() || blockState.isAir();
     }
 
-    public static ToIntFunction<BlockState> blockStateShouldEmitLight(int lightAmount) {
+    public static ToIntFunction<BlockState> shouldEmitLight(int lightAmount) {
         return blockState -> blockState.getValue(BlockStateProperties.LIT) ? lightAmount : 0;
     }
 

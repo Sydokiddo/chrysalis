@@ -32,7 +32,7 @@ public class CDataComponents {
 
     // endregion
 
-    // region registry
+    // region Registry
 
     public static void register(IEventBus eventBus) {
         DATA_COMPONENTS.register(eventBus);

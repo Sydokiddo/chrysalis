@@ -37,8 +37,11 @@ public class DustExplosionParticleOptions extends ScalableParticleOptionsBase im
         DustExplosionParticleOptions::new
     );
 
-    private final int startingColor;
-    private final int endingColor;
+    private final int
+        startingColor,
+        endingColor
+    ;
+
     private final boolean emissive;
 
     public DustExplosionParticleOptions(int startingColor, int endingColor, boolean emissive, float scale) {

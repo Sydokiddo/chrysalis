@@ -32,7 +32,6 @@ public class CEntities {
 
     // region Registry
 
-    @SuppressWarnings("all")
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> registerEntityType(String name, EntityType.Builder<T> builder) {
         ResourceKey<EntityType<?>> resourceKey = ResourceKey.create(Registries.ENTITY_TYPE, Chrysalis.resourceLocationId(name));
         return ENTITY_TYPES.register(name, () -> builder.build(resourceKey));

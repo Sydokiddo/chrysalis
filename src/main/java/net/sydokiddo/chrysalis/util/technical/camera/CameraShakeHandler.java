@@ -14,8 +14,11 @@ public class CameraShakeHandler {
      **/
 
     private static int time = 0;
-    private static float strength = 0;
-    private static float frequency = 0;
+
+    private static float
+        strength = 0.0F,
+        frequency = 0.0F
+    ;
 
     public static void shakeCamera(int time, float strength, float frequency) {
         if (strength > CameraShakeHandler.strength) {
@@ -27,11 +30,11 @@ public class CameraShakeHandler {
     }
 
     public static void resetCamera() {
-        if (time == 0 && strength == 0 && frequency == 0) return;
+        if (time == 0 && strength == 0.0F && frequency == 0.0F) return;
         if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Camera shake has been reset");
         time = 0;
-        strength = 0;
-        frequency = 0;
+        strength = 0.0F;
+        frequency = 0.0F;
     }
 
     public static void handleCameraShake(CameraSetup cameraSetup) {
@@ -48,8 +51,8 @@ public class CameraShakeHandler {
             float strength = CameraShakeHandler.strength / 4.0F;
             float frequency = CameraShakeHandler.frequency / 2.0F;
 
-            float yaw = (float) (cameraSetup.getYaw() + strength * Math.cos(ticksExistedDelta * frequency + 1));
-            float pitch = (float) (cameraSetup.getPitch() + strength * Math.cos(ticksExistedDelta * frequency + 2));
+            float yaw = (float) (cameraSetup.getYaw() + strength * Math.cos(ticksExistedDelta * frequency + 1.0F));
+            float pitch = (float) (cameraSetup.getPitch() + strength * Math.cos(ticksExistedDelta * frequency + 2.0F));
             float roll = (float) (cameraSetup.getRoll() + strength * Math.cos(ticksExistedDelta * frequency));
 
             if (!Minecraft.getInstance().isPaused()) {

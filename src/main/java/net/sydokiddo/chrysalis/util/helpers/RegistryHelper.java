@@ -1,8 +1,15 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
 import com.google.common.collect.Sets;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -11,6 +18,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -18,47 +26,14 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.CRegistry;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 public class RegistryHelper {
 
-    // region Data Pack Registry
+    // region Registries
 
-    /**
-     * Registry methods for various custom data types for data packs.
-     **/
-
-    public static <T> ResourceKey<Registry<T>> registerBlockDataType(String string) {
-        return Chrysalis.key("block/" + string);
-    }
-
-    public static <T> ResourceKey<Registry<T>> registerItemDataType(String string) {
-        return Chrysalis.key("item/" + string);
-    }
-
-    public static <T> ResourceKey<Registry<T>> registerEntityDataType(String string) {
-        return Chrysalis.key("entity/" + string);
-    }
-
-    public static <T> ResourceKey<Registry<T>> registerMobVariantDataType(String string) {
-        return registerEntityDataType("mob_variant/" + string);
-    }
-
-    // endregion
-
-    // region Music Registry
-
-    /**
-     * Registry for custom structure-specific music.
-     **/
-
-    public static void registerStructureMusic(String structureName, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
-        CRegistry.registeredStructures.put(structureName, new CRegistry.StructureMusicSound(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
-    }
-
-    // endregion
-
-    // region Potion Recipe Registry
+    // region Potion Recipes
 
     /**
      * Registry helpers for registering potion recipes.
@@ -86,11 +61,115 @@ public class RegistryHelper {
 
     // endregion
 
-    // region Item Properties
+    // region Game Rules
+
+    /**
+     * Registry methods for custom game rules.
+     **/
+
+    public static GameRules.Key<GameRules.BooleanValue> registerBooleanGameRule(String name, GameRules.Category category, boolean defaultValue) {
+        return GameRules.register(name, category, GameRules.BooleanValue.create(defaultValue));
+    }
+
+    public static GameRules.Key<GameRules.IntegerValue> registerIntegerGameRule(String name, GameRules.Category category, int defaultValue) {
+        return GameRules.register(name, category, GameRules.IntegerValue.create(defaultValue));
+    }
+
+    // endregion
+
+    // region Data Packs
+
+    /**
+     * Registry methods for various custom data types for data packs.
+     **/
+
+    public static <T> ResourceKey<Registry<T>> registerBlockDataType(String string) {
+        return Chrysalis.key("block/" + string);
+    }
+
+    public static <T> ResourceKey<Registry<T>> registerItemDataType(String string) {
+        return Chrysalis.key("item/" + string);
+    }
+
+    public static <T> ResourceKey<Registry<T>> registerEntityDataType(String string) {
+        return Chrysalis.key("entity/" + string);
+    }
+
+    public static <T> ResourceKey<Registry<T>> registerMobVariantDataType(String string) {
+        return registerEntityDataType("mob_variant/" + string);
+    }
+
+    // endregion
+
+    // region Loot Tables
+
+    /**
+     * Registry helpers for assisting with custom loot tables.
+     **/
+
+    public static ResourceLocation registerCustomLootTable(String name) {
+        return registerCustomLootTable(ResourceLocation.parse(name));
+    }
+
+    public static ResourceLocation registerCustomLootTable(ResourceLocation resourceLocation) {
+        Sets.newHashSet().add(resourceLocation);
+        return resourceLocation;
+    }
+
+    // endregion
+
+    // region Music
+
+    /**
+     * Registry for custom structure-specific music.
+     **/
+
+    public static void registerStructureMusic(String structureName, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
+        CRegistry.registeredStructures.put(structureName, new CRegistry.StructureMusicSound(soundEvent, minDelay, maxDelay, replaceCurrentMusic));
+    }
+
+    // endregion
+
+    // region Particles
+
+    public static SimpleParticleType registerSimpleParticle(boolean alwaysShow) {
+        return new SimpleParticleType(alwaysShow);
+    }
+
+    public static <T extends ParticleOptions> ParticleType<T> registerAdvancedParticle(MapCodec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec, boolean alwaysShow) {
+        return new ParticleType<>(alwaysShow) {
+
+            @Override
+            public @NotNull MapCodec<T> codec() {
+                return codec;
+            }
+
+            @Override
+            public @NotNull StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec() {
+                return streamCodec;
+            }
+        };
+    }
+
+    // endregion
+
+    // endregion
+
+    // region Properties
+
+    // region Items
 
     /**
      * Registry helpers for registering various common item properties.
      **/
+
+    public static Item.Properties iconProperties() {
+        return new Item.Properties().stacksTo(1).rarity(Rarity.EPIC);
+    }
+
+    public static Item.Properties debugUtilityProperties(int maxStackSize) {
+        return new Item.Properties().stacksTo(maxStackSize).rarity(Rarity.EPIC).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+    }
 
     public static Item.Properties musicDiscProperties(ResourceKey<JukeboxSong> jukeboxSong, Rarity rarity) {
         return new Item.Properties().stacksTo(1).jukeboxPlayable(jukeboxSong).rarity(rarity);
@@ -102,7 +181,7 @@ public class RegistryHelper {
 
     // endregion
 
-    // region Block Properties
+    // region Blocks
 
     /**
      * Registry helpers for registering various common block properties.
@@ -125,21 +204,6 @@ public class RegistryHelper {
     }
 
     // endregion
-
-    // region Loot Table Registry
-
-    /**
-     * Registry helpers for assisting with custom loot tables.
-     **/
-
-    public static ResourceLocation registerCustomLootTable(String name) {
-        return registerCustomLootTable(ResourceLocation.parse(name));
-    }
-
-    public static ResourceLocation registerCustomLootTable(ResourceLocation resourceLocation) {
-        Sets.newHashSet().add(resourceLocation);
-        return resourceLocation;
-    }
 
     // endregion
 }

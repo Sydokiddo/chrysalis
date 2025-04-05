@@ -13,9 +13,12 @@ public class CameraSetup {
      **/
 
     private final Camera camera;
-    private float yaw;
-    private float pitch;
-    private float roll;
+
+    private float
+        yaw,
+        pitch,
+        roll
+    ;
 
     public CameraSetup(Camera camera) {
         this.camera = camera;

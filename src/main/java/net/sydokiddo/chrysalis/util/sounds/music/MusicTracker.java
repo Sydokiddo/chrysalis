@@ -31,8 +31,11 @@ public class MusicTracker {
     public static class onClient {
 
         @Nullable private static Music queuedMusic = null;
-        public static boolean fadeOutMusic = false;
-        public static boolean resetMusicFade = false;
+
+        public static boolean
+            fadeOutMusic = false,
+            resetMusicFade = false
+        ;
 
         /**
          * Gets the music tracker's current queued music.

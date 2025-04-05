@@ -17,8 +17,10 @@ import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
 @OnlyIn(Dist.CLIENT)
 public class AdvancedSplashText implements SplashText {
 
-    private static final String defaultFont = "minecraft:default";
-    private static final String defaultColor = "#FFFF55";
+    private static final String
+        defaultFont = "minecraft:default",
+        defaultColor = "#FFFF55"
+    ;
 
     public static final Codec<AdvancedSplashText> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ComponentSerialization.CODEC.fieldOf("text").forGetter(null),
@@ -29,17 +31,24 @@ public class AdvancedSplashText implements SplashText {
         Codec.BOOL.optionalFieldOf("underlined", false).forGetter(null),
         Codec.BOOL.optionalFieldOf("strikethrough", false).forGetter(null),
         Codec.BOOL.optionalFieldOf("obfuscated", false).forGetter(null),
-        ExtraCodecs.intRange(1, SplashTextLoader.defaultMaxWeight).orElse(SplashTextLoader.defaultMaxWeight).optionalFieldOf("weight", SplashTextLoader.defaultWeight).forGetter(null)
+        ExtraCodecs.intRange(SplashTextLoader.defaultMinWeight, SplashTextLoader.defaultMaxWeight).orElse(SplashTextLoader.defaultMaxWeight).optionalFieldOf("weight", SplashTextLoader.defaultWeight).forGetter(null)
     ).apply(instance, AdvancedSplashText::new));
 
     private MutableComponent text;
-    private final String font;
-    private final String color;
-    private final boolean bold;
-    private final boolean italic;
-    private final boolean underlined;
-    private final boolean strikethrough;
-    private final boolean obfuscated;
+
+    private final String
+        font,
+        color
+    ;
+
+    private final boolean
+        bold,
+        italic,
+        underlined,
+        strikethrough,
+        obfuscated
+    ;
+
     private final int weight;
 
     public AdvancedSplashText(Component splashText, String font, String color, boolean bold, boolean italic, boolean underlined, boolean strikethrough, boolean obfuscated, int weight) {

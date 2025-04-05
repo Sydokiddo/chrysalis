@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
 
-    @Unique ItemEntity chrysalis$itemEntity = (ItemEntity) (Object) this;
+    @Unique private ItemEntity chrysalis$itemEntity = (ItemEntity) (Object) this;
     @Shadow public abstract ItemStack getItem();
     @Shadow public abstract void setExtendedLifetime();
     @Shadow private int pickupDelay;

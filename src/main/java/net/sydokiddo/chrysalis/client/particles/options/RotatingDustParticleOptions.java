@@ -38,9 +38,12 @@ public class RotatingDustParticleOptions extends ScalableParticleOptionsBase imp
     );
 
     private final int color;
-    private final boolean randomizeColor;
-    private final boolean emissive;
-    private final boolean hasGravity;
+
+    private final boolean
+        randomizeColor,
+        emissive,
+        hasGravity
+    ;
 
     public RotatingDustParticleOptions(int color, boolean randomizeColor, boolean emissive, boolean hasGravity, float scale) {
         super(scale);

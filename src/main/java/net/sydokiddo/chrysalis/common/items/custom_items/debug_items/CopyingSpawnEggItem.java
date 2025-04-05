@@ -129,7 +129,7 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
     private static Component createTextComponent(Component component) {
         MutableComponent eggIcon = ComponentHelper.EGG_ICON;
         ComponentHelper.setIconsFont(eggIcon, Chrysalis.MOD_ID);
-        return ItemHelper.addTooltipWithIconBothSides(eggIcon, component);
+        return ItemHelper.addTooltipWithIconOnBothSides(eggIcon, component);
     }
 
     private static void sendMessage(ServerPlayer serverPlayer, Component component) {

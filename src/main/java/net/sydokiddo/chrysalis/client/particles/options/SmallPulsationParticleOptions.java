@@ -36,10 +36,13 @@ public class SmallPulsationParticleOptions implements ParticleOptions, ParticleC
         SmallPulsationParticleOptions::new
     );
 
-    private final int color;
+    private final int
+        color,
+        direction,
+        lifeTime
+    ;
+
     private final boolean randomizeColor;
-    private final int direction;
-    private final int lifeTime;
 
     public SmallPulsationParticleOptions(int color, boolean randomizeColor, int direction, int lifeTime) {
         this.color = color;

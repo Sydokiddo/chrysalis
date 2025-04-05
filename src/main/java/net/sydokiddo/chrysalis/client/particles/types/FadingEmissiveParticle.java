@@ -20,8 +20,12 @@ public class FadingEmissiveParticle extends TextureSheetParticle implements Part
     // region Initialization and Ticking
 
     private final SpriteSet spriteSet;
-    private final float startingBrightness;
-    private final float endingBrightness;
+
+    private final float
+        startingBrightness,
+        endingBrightness
+    ;
+
     private final boolean animateTextures;
 
     public FadingEmissiveParticle(ClientLevel clientLevel, double x, double y, double z, float startingBrightness, float endingBrightness, SpriteSet spriteSet, boolean animateTextures) {

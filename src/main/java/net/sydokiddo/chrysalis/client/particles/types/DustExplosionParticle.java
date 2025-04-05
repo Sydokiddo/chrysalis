@@ -21,8 +21,11 @@ public class DustExplosionParticle extends ExplodeParticle implements ParticleCo
 
     // region Initialization and Ticking
 
-    private final Vector3f startingColor;
-    private final Vector3f endingColor;
+    private final Vector3f
+        startingColor,
+        endingColor
+    ;
+
     private final boolean emissive;
 
     public DustExplosionParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, DustExplosionParticleOptions particleOptions, SpriteSet spriteSet) {

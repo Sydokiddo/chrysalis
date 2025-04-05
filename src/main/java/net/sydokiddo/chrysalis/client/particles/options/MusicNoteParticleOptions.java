@@ -36,8 +36,11 @@ public class MusicNoteParticleOptions extends ScalableParticleOptionsBase implem
     );
 
     private final int color;
-    private final boolean randomizeColor;
-    private final boolean emissive;
+
+    private final boolean
+        randomizeColor,
+        emissive
+    ;
 
     public MusicNoteParticleOptions(int color, boolean randomizeColor, boolean emissive, float scale) {
         super(scale);

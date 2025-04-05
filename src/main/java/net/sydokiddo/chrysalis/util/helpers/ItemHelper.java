@@ -236,7 +236,7 @@ public class ItemHelper {
         return Component.translatable("gui.chrysalis.item.tooltip_with_icon", icon, tooltip);
     }
 
-    public static Component addTooltipWithIconBothSides(Component icon, Component tooltip) {
+    public static Component addTooltipWithIconOnBothSides(Component icon, Component tooltip) {
         return Component.translatable("gui.chrysalis.item.tooltip_with_icon.both_sides", icon, tooltip, icon);
     }
 

@@ -68,7 +68,7 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
     }
 
     public static boolean canAttack(Entity target, Player player) {
-        return target.isAttackable() && !EntityDataHelper.targetIsLinkedAllay(target, player) && (player.isCreative() || !target.isInvulnerable());
+        return target.isAttackable() && !EntityDataHelper.isTargetLinkedAllay(target, player) && (player.isCreative() || !target.isInvulnerable());
     }
 
     @OnlyIn(Dist.CLIENT)

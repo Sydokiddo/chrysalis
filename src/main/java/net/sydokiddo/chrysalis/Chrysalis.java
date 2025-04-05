@@ -25,8 +25,11 @@ public class Chrysalis {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger("Chrysalis");
 	public static RegistryAccess registryAccess;
-	public static boolean registerTestItems = true;
-	public static boolean registerExampleRegistry = false;
+
+	public static boolean
+		registerTestItems = true,
+		registerExampleRegistry = false
+	;
 
 	public static final String
 		MOD_ID = "chrysalis",

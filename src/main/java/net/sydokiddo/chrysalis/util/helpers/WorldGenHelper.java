@@ -14,7 +14,7 @@ public class WorldGenHelper {
      * Various methods for assisting with world generation and properties relating to it.
      **/
 
-    public static Predicate<Holder<Biome>> isValidBiomeForMobSpawning() {
+    public static Predicate<Holder<Biome>> canMobsSpawn() {
         return context -> !context.is(CTags.WITHOUT_MOB_SPAWNS);
     }
 

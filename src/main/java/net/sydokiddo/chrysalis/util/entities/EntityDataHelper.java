@@ -34,37 +34,37 @@ public class EntityDataHelper {
     // region General Entity Data
 
     public static boolean isPlayerStarving(ServerPlayer serverPlayer) {
-        return serverPlayer.getFoodData().getFoodLevel() <= 6.0F && !serverPlayer.getAbilities().instabuild;
+        return !serverPlayer.getAbilities().instabuild && serverPlayer.getFoodData().getFoodLevel() <= 6.0F;
     }
 
-    public static boolean isEntityMoving(LivingEntity livingEntity) {
+    public static boolean isLivingEntityMoving(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) return player.getKnownMovement().horizontalDistanceSqr() > 0.0D;
-        return livingEntity.getDeltaMovement().horizontalDistanceSqr() > 0.0D;
+        else return livingEntity.getDeltaMovement().horizontalDistanceSqr() > 0.0D;
     }
 
-    public static boolean isMobWithAIMoving(Mob mob) {
-        return isEntityMoving(mob) && !mob.isNoAi() && !mob.isPassenger();
+    public static boolean isMobMoving(Mob mob) {
+        return !mob.isNoAi() && !mob.isPassenger() && isLivingEntityMoving(mob);
     }
 
-    public static boolean isEntityInFluid(LivingEntity livingEntity) {
+    public static boolean isInFluid(LivingEntity livingEntity) {
         return livingEntity.isInLiquid() || livingEntity.isInPowderSnow;
     }
 
-    public static boolean targetIsImmunePlayer(Entity target, Entity player) {
-        return target instanceof Player playerTarget && player instanceof Player playerOwner && !playerOwner.canHarmPlayer(playerTarget);
+    public static boolean isTargetImmunePlayer(Entity target, Entity owner) {
+        return target instanceof Player targetedPlayer && owner instanceof Player player && !player.canHarmPlayer(targetedPlayer);
     }
 
-    public static boolean targetIsAttachedToLead(Entity target, Player player) {
-        return target instanceof Mob mob && mob.isLeashed() && mob.getLeashHolder() == player;
+    public static boolean isTargetAttachedToLead(Entity target, Player leadHolder) {
+        return target instanceof Mob mob && mob.isLeashed() && mob.getLeashHolder() == leadHolder;
     }
 
-    public static boolean targetIsLinkedAllay(Entity target, Player player) {
+    public static boolean isTargetLinkedAllay(Entity target, Player player) {
         if (!(target instanceof Allay allay)) return false;
         Optional<UUID> optional = allay.getBrain().getMemory(MemoryModuleType.LIKED_PLAYER);
         return optional.isPresent() && player.getUUID().equals(optional.get());
     }
 
-    public static boolean getCustomNameTagName(String name, Mob mob) {
+    public static boolean getCustomName(Mob mob, String name) {
         return mob.hasCustomName() && name.equals(ChatFormatting.stripFormatting(mob.getName().getString()));
     }
 

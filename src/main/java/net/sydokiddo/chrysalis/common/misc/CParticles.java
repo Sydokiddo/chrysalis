@@ -1,18 +1,14 @@
 package net.sydokiddo.chrysalis.common.misc;
 
-import com.mojang.serialization.MapCodec;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
-import org.jetbrains.annotations.NotNull;
+import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 
 public class CParticles {
 
@@ -21,54 +17,35 @@ public class CParticles {
     // region Simple Particles
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType>
-        MEMORY_FLAME = PARTICLE_TYPES.register("memory_flame", () -> createSimpleParticle(false)),
-        RADIANCE = PARTICLE_TYPES.register("radiance", () -> createSimpleParticle(false)),
-        ARTHROPOD_SIGHT = PARTICLE_TYPES.register("arthropod_sight", () -> createSimpleParticle(false)),
-        BLIND_SIGHT = PARTICLE_TYPES.register("blind_sight", () -> createSimpleParticle(false)),
-        CREEPER_SIGHT = PARTICLE_TYPES.register("creeper_sight", () -> createSimpleParticle(false)),
-        ENDER_SIGHT = PARTICLE_TYPES.register("ender_sight", () -> createSimpleParticle(false)),
-        RESIN_SIGHT = PARTICLE_TYPES.register("resin_sight", () -> createSimpleParticle(false)),
-        SKELETAL_SIGHT = PARTICLE_TYPES.register("skeletal_sight", () -> createSimpleParticle(false)),
-        ZOMBIE_SIGHT = PARTICLE_TYPES.register("zombie_sight", () -> createSimpleParticle(false))
+        MEMORY_FLAME = PARTICLE_TYPES.register("memory_flame", () -> RegistryHelper.registerSimpleParticle(false)),
+        RADIANCE = PARTICLE_TYPES.register("radiance", () -> RegistryHelper.registerSimpleParticle(false)),
+        ARTHROPOD_SIGHT = PARTICLE_TYPES.register("arthropod_sight", () -> RegistryHelper.registerSimpleParticle(false)),
+        BLIND_SIGHT = PARTICLE_TYPES.register("blind_sight", () -> RegistryHelper.registerSimpleParticle(false)),
+        CREEPER_SIGHT = PARTICLE_TYPES.register("creeper_sight", () -> RegistryHelper.registerSimpleParticle(false)),
+        ENDER_SIGHT = PARTICLE_TYPES.register("ender_sight", () -> RegistryHelper.registerSimpleParticle(false)),
+        RESIN_SIGHT = PARTICLE_TYPES.register("resin_sight", () -> RegistryHelper.registerSimpleParticle(false)),
+        SKELETAL_SIGHT = PARTICLE_TYPES.register("skeletal_sight", () -> RegistryHelper.registerSimpleParticle(false)),
+        ZOMBIE_SIGHT = PARTICLE_TYPES.register("zombie_sight", () -> RegistryHelper.registerSimpleParticle(false))
     ;
 
     // endregion
 
     // region Advanced Particles
 
-    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDustPlumeParticleOptions>> COLORED_DUST_PLUME = PARTICLE_TYPES.register("colored_dust_plume", () -> createAdvancedParticle(ColoredDustPlumeParticleOptions.CODEC, ColoredDustPlumeParticleOptions.STREAM_CODEC, false));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDirectionalDustParticleOptions>> COLORED_DIRECTIONAL_DUST = PARTICLE_TYPES.register("colored_directional_dust", () -> createAdvancedParticle(ColoredDirectionalDustParticleOptions.CODEC, ColoredDirectionalDustParticleOptions.STREAM_CODEC, true));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredPortalParticleOptions>> COLORED_PORTAL = PARTICLE_TYPES.register("colored_portal", () -> createAdvancedParticle(ColoredPortalParticleOptions.CODEC, ColoredPortalParticleOptions.STREAM_CODEC, false));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<DustExplosionParticleOptions>> DUST_EXPLOSION = PARTICLE_TYPES.register("dust_explosion", () -> createAdvancedParticle(DustExplosionParticleOptions.CODEC, DustExplosionParticleOptions.STREAM_CODEC, false));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<RotatingDustParticleOptions>> ROTATING_DUST = PARTICLE_TYPES.register("rotating_dust", () -> createAdvancedParticle(RotatingDustParticleOptions.CODEC, RotatingDustParticleOptions.STREAM_CODEC, false));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<SparkleParticleOptions>> SPARKLE = PARTICLE_TYPES.register("sparkle", () -> createAdvancedParticle(SparkleParticleOptions.CODEC, SparkleParticleOptions.STREAM_CODEC, false));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticleOptions>> SPARK = PARTICLE_TYPES.register("spark", () -> createAdvancedParticle(SparkParticleOptions.CODEC, SparkParticleOptions.STREAM_CODEC, false));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<SmallPulsationParticleOptions>> SMALL_PULSATION = PARTICLE_TYPES.register("small_pulsation", () -> createAdvancedParticle(SmallPulsationParticleOptions.CODEC, SmallPulsationParticleOptions.STREAM_CODEC, true));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<LargePulsationParticleOptions>> LARGE_PULSATION = PARTICLE_TYPES.register("large_pulsation", () -> createAdvancedParticle(LargePulsationParticleOptions.CODEC, LargePulsationParticleOptions.STREAM_CODEC, true));
-    public static final DeferredHolder<ParticleType<?>, ParticleType<MusicNoteParticleOptions>> MUSIC_NOTE = PARTICLE_TYPES.register("music_note", () -> createAdvancedParticle(MusicNoteParticleOptions.CODEC, MusicNoteParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDustPlumeParticleOptions>> COLORED_DUST_PLUME = PARTICLE_TYPES.register("colored_dust_plume", () -> RegistryHelper.registerAdvancedParticle(ColoredDustPlumeParticleOptions.CODEC, ColoredDustPlumeParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDirectionalDustParticleOptions>> COLORED_DIRECTIONAL_DUST = PARTICLE_TYPES.register("colored_directional_dust", () -> RegistryHelper.registerAdvancedParticle(ColoredDirectionalDustParticleOptions.CODEC, ColoredDirectionalDustParticleOptions.STREAM_CODEC, true));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredPortalParticleOptions>> COLORED_PORTAL = PARTICLE_TYPES.register("colored_portal", () -> RegistryHelper.registerAdvancedParticle(ColoredPortalParticleOptions.CODEC, ColoredPortalParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<DustExplosionParticleOptions>> DUST_EXPLOSION = PARTICLE_TYPES.register("dust_explosion", () -> RegistryHelper.registerAdvancedParticle(DustExplosionParticleOptions.CODEC, DustExplosionParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<RotatingDustParticleOptions>> ROTATING_DUST = PARTICLE_TYPES.register("rotating_dust", () -> RegistryHelper.registerAdvancedParticle(RotatingDustParticleOptions.CODEC, RotatingDustParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<SparkleParticleOptions>> SPARKLE = PARTICLE_TYPES.register("sparkle", () -> RegistryHelper.registerAdvancedParticle(SparkleParticleOptions.CODEC, SparkleParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticleOptions>> SPARK = PARTICLE_TYPES.register("spark", () -> RegistryHelper.registerAdvancedParticle(SparkParticleOptions.CODEC, SparkParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<SmallPulsationParticleOptions>> SMALL_PULSATION = PARTICLE_TYPES.register("small_pulsation", () -> RegistryHelper.registerAdvancedParticle(SmallPulsationParticleOptions.CODEC, SmallPulsationParticleOptions.STREAM_CODEC, true));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<LargePulsationParticleOptions>> LARGE_PULSATION = PARTICLE_TYPES.register("large_pulsation", () -> RegistryHelper.registerAdvancedParticle(LargePulsationParticleOptions.CODEC, LargePulsationParticleOptions.STREAM_CODEC, true));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<MusicNoteParticleOptions>> MUSIC_NOTE = PARTICLE_TYPES.register("music_note", () -> RegistryHelper.registerAdvancedParticle(MusicNoteParticleOptions.CODEC, MusicNoteParticleOptions.STREAM_CODEC, false));
 
     // endregion
 
     // region Registry
-
-    public static SimpleParticleType createSimpleParticle(boolean alwaysShow) {
-        return new SimpleParticleType(alwaysShow);
-    }
-
-    public static <T extends ParticleOptions> ParticleType<T> createAdvancedParticle(MapCodec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec, boolean alwaysShow) {
-        return new ParticleType<>(alwaysShow) {
-
-            @Override
-            public @NotNull MapCodec<T> codec() {
-                return codec;
-            }
-
-            @Override
-            public @NotNull StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec() {
-                return streamCodec;
-            }
-        };
-    }
 
     public static void register(IEventBus eventBus) {
         PARTICLE_TYPES.register(eventBus);

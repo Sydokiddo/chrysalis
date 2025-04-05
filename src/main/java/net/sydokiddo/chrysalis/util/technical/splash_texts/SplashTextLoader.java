@@ -57,10 +57,17 @@ public class SplashTextLoader extends SimplePreparableReloadListener<Completable
 
     public static final SplashTextLoader INSTANCE = new SplashTextLoader();
     private final List<SplashText> splashTexts = new ArrayList<>();
-    private int totalWeight = 0;
-    private int maxWeight = 0;
-    public static final int defaultWeight = 1;
-    public static final int defaultMaxWeight = 1000;
+
+    private int
+        totalWeight = 0,
+        maxWeight = 0
+    ;
+
+    public static final int
+        defaultWeight = 1,
+        defaultMinWeight = 1,
+        defaultMaxWeight = 1000
+    ;
 
     public List<SplashText> getSplashTexts() {
         return this.splashTexts;

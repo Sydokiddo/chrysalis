@@ -30,7 +30,7 @@ public class PlaceBlockDispenserBehavior implements DispenseItemBehavior {
         BlockPos blockPos = blockSource.pos().relative(direction);
         ServerLevel serverLevel = blockSource.level();
 
-        if (BlockHelper.isBlockStateFree(serverLevel.getBlockState(blockPos)) && !serverLevel.isOutsideBuildHeight(blockPos) && itemStack.getItem() instanceof BlockItem blockItem) {
+        if (BlockHelper.isFree(serverLevel.getBlockState(blockPos)) && !serverLevel.isOutsideBuildHeight(blockPos) && itemStack.getItem() instanceof BlockItem blockItem) {
 
             BlockState blockState = blockItem.getBlock().defaultBlockState();
 
