@@ -44,9 +44,7 @@ import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.common.misc.CAttributes;
 import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
-import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
-import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -99,36 +97,6 @@ public abstract class PlayerMixin extends LivingEntity {
         if (info.getReturnValue() != null) {
             info.getReturnValue().add(CAttributes.ITEM_PICK_UP_RANGE);
             info.getReturnValue().add(CAttributes.EXPERIENCE_PICK_UP_RANGE);
-        }
-    }
-
-    /**
-     * Clears an encounter mob's music if the player goes outside their range.
-     **/
-
-    @Unique private boolean chrysalis$shouldClearMusic = false;
-
-    @Inject(method = "tick", at = @At("HEAD"))
-    private void chrysalis$checkNearbyEncounteredMobs(CallbackInfo info) {
-
-        if (this.level().isClientSide()) return;
-        Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(this.chrysalis$player);
-
-        if (this.chrysalis$shouldClearMusic && this.chrysalis$player instanceof ServerPlayer serverPlayer) {
-            EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
-            EventHelper.clearMusicOnServer(serverPlayer, true);
-            this.chrysalis$shouldClearMusic = false;
-        }
-
-        if (encounteredMobUuid.isPresent()) {
-
-            List<? extends Mob> nearbyEncounteredMobs = this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(128.0D), entity -> {
-                boolean defaultReturnValue = entity instanceof EncounterMusicMob encounterMusicMob && entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(this.chrysalis$player) <= encounterMusicMob.chrysalis$getFinalEncounterMusicRange();
-                if (entity.getType().is(CTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC)) return defaultReturnValue;
-                else return defaultReturnValue && entity.getTarget() != null;
-            });
-
-            if (nearbyEncounteredMobs.isEmpty()) this.chrysalis$shouldClearMusic = true;
         }
     }
 

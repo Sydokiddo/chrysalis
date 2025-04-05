@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.*;
 import net.sydokiddo.chrysalis.common.misc.CTags;
@@ -91,7 +92,7 @@ public abstract class EntityMixin {
 
         @Inject(method = "canSummon", at = @At("HEAD"), cancellable = true)
         private void chrysalis$hideEntityFromSummonCommand(CallbackInfoReturnable<Boolean> cir) {
-            if (this.is(CTags.HIDDEN_FROM_SUMMON_COMMAND)) cir.setReturnValue(false);
+            if (!Chrysalis.IS_DEBUG && this.is(CTags.HIDDEN_FROM_SUMMON_COMMAND)) cir.setReturnValue(false);
         }
     }
 }

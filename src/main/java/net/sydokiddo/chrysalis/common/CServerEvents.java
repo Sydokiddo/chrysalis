@@ -3,7 +3,10 @@ package net.sydokiddo.chrysalis.common;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.animal.Sheep;
@@ -23,6 +26,7 @@ import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
@@ -30,9 +34,12 @@ import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_s
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
+import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
+import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.util.sounds.codecs.BlockSoundData;
@@ -40,6 +47,8 @@ import net.sydokiddo.chrysalis.util.sounds.music.*;
 import net.sydokiddo.chrysalis.util.technical.commands.*;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @SuppressWarnings("unused")
 public class CServerEvents {
@@ -82,6 +91,37 @@ public class CServerEvents {
                 EventHelper.clearMusicOnServer(serverPlayer, false);
                 MusicTracker.onServer.playerStructures.remove(serverPlayer);
             }
+        }
+
+        private static boolean shouldClearMusic = false;
+
+        @SubscribeEvent
+        private static void onPlayerPreTick(PlayerTickEvent.Pre event) {
+
+            if (event.getEntity().level().isClientSide()) return;
+            Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(event.getEntity());
+
+            if (shouldClearMusic && event.getEntity() instanceof ServerPlayer serverPlayer) {
+                EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+                EventHelper.clearMusicOnServer(serverPlayer, true);
+                shouldClearMusic = false;
+            }
+
+            if (encounteredMobUuid.isPresent()) {
+
+                List<? extends Mob> nearbyEncounteredMobs = event.getEntity().level().getEntitiesOfClass(Mob.class, event.getEntity().getBoundingBox().inflate(128.0D), entity -> {
+                    boolean defaultReturnValue = entity instanceof EncounterMusicMob encounterMusicMob && entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(event.getEntity()) <= encounterMusicMob.chrysalis$getFinalEncounterMusicRange();
+                    if (entity.getType().is(CTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC)) return defaultReturnValue;
+                    else return defaultReturnValue && entity.getTarget() != null;
+                });
+
+                if (nearbyEncounteredMobs.isEmpty()) shouldClearMusic = true;
+            }
+        }
+
+        @SubscribeEvent
+        private static void onPlayerPostTick(PlayerTickEvent.Post event) {
+            if (event.getEntity() instanceof ServerPlayer serverPlayer && serverPlayer.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.SKULLS) && serverPlayer.tickCount % 20 == 0) EntityDataHelper.updateCurrentShader(serverPlayer);
         }
 
         @SubscribeEvent
