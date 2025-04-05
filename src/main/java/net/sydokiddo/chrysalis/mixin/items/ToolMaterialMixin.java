@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.mixin.items;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
@@ -12,7 +13,9 @@ import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
@@ -37,5 +40,18 @@ public abstract class ToolMaterialMixin {
             Tool.Rule.overrideSpeed(holderGetter.getOrThrow(CTags.MINEABLE_WITH_SWORDS_DOES_NOT_DROP_BLOCK), 1.5F)
         ), 1.0F, 2))
         .attributes(this.createSwordAttributes(attackDamage, attackSpeed)));
+    }
+
+    @Mixin(DiggerItem.class)
+    public static abstract class DiggerItemMixin {
+
+        /**
+         * Makes axes only lose 1 durability in combat instead of 2.
+         **/
+
+        @ModifyConstant(method = "postHurtEnemy", constant = @Constant(intValue = 2))
+        private int chrysalis$changeAxeDurabilityLoss(int constant) {
+            return 1;
+        }
     }
 }

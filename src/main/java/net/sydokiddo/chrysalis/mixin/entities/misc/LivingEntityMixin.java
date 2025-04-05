@@ -108,4 +108,13 @@ public abstract class LivingEntityMixin extends Entity {
     private void chrysalis$updateHeadItemShader(EquipmentSlot equipmentSlot, ItemStack oldItem, ItemStack newItem, CallbackInfo info) {
         if (CConfigOptions.MOB_HEAD_SHADERS.get() && this.chrysalis$livingEntity instanceof ServerPlayer serverPlayer && equipmentSlot == EquipmentSlot.HEAD) EntityDataHelper.updateCurrentShader(serverPlayer);
     }
+
+    /**
+     * Changes the shield's delay from 5 to 0 ticks.
+     **/
+
+    @ModifyConstant(method = "getItemBlockingWith", constant = @Constant(intValue = 5))
+    private int chrysalis$changeShieldUseDelay(int constant) {
+        return 0;
+    }
 }

@@ -99,7 +99,7 @@ public class CExampleRegistry {
         SmithingTemplateItem::createArmorTrimTemplate, new Item.Properties().rarity(Rarity.UNCOMMON));
 
     private static final DeferredItem<Item> EXAMPLE_UPGRADE_SMITHING_TEMPLATE = CItems.ITEMS.registerItem("example_upgrade_smithing_template",
-        properties -> CustomSmithingTemplateItem.createUpgradeTemplate("minecraft", "netherite_upgrade", CustomSmithingTemplateItem.EMPTY_SLOT_INGOT, properties),
+        properties -> CustomSmithingTemplateItem.createUpgradeTemplate("minecraft", "netherite_upgrade", CustomSmithingTemplateItem.INGOT, properties),
         new Item.Properties().rarity(Rarity.UNCOMMON));
 
     // endregion

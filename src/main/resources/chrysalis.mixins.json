@@ -56,6 +56,7 @@
     "items.SmithingTemplateItemMixin",
     "items.SpawnEggItemMixin",
     "items.ToolMaterialMixin",
+    "items.ToolMaterialMixin$DiggerItemMixin",
     "items.TooltipMixin",
     "items.TooltipMixin$ArmorTrimMixin",
     "items.TooltipMixin$EnchantmentMixin",

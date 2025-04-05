@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SmithingTemplateItem;
+import net.sydokiddo.chrysalis.Chrysalis;
 import java.util.List;
 
 public class CustomSmithingTemplateItem extends SmithingTemplateItem {
@@ -24,8 +25,17 @@ public class CustomSmithingTemplateItem extends SmithingTemplateItem {
             createDescription(modID, smithingTemplateName + ".ingredients", DESCRIPTION_FORMAT),
             createDescription(modID, smithingTemplateName + ".base_slot_description", TITLE_FORMAT),
             createDescription(modID, smithingTemplateName + ".additions_slot_description", TITLE_FORMAT),
-            List.of(EMPTY_SLOT_HELMET, EMPTY_SLOT_SWORD, EMPTY_SLOT_CHESTPLATE, EMPTY_SLOT_PICKAXE,
-            EMPTY_SLOT_LEGGINGS, EMPTY_SLOT_AXE, EMPTY_SLOT_BOOTS, EMPTY_SLOT_HOE, EMPTY_SLOT_SHOVEL),
+            List.of(
+                HELMET,
+                SWORD,
+                CHESTPLATE,
+                PICKAXE,
+                LEGGINGS,
+                AXE,
+                BOOTS,
+                HOE,
+                SHOVEL
+            ),
             List.of(upgradeIcon),
             properties
         );
@@ -42,23 +52,40 @@ public class CustomSmithingTemplateItem extends SmithingTemplateItem {
 
     @SuppressWarnings("unused")
     public static final ResourceLocation
-        EMPTY_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet"),
-        EMPTY_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate"),
-        EMPTY_SLOT_LEGGINGS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_leggings"),
-        EMPTY_SLOT_BOOTS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_boots"),
+        HELMET = ResourceLocation.withDefaultNamespace("container/slot/helmet"),
+        CHESTPLATE = ResourceLocation.withDefaultNamespace("container/slot/chestplate"),
+        LEGGINGS = ResourceLocation.withDefaultNamespace("container/slot/leggings"),
+        BOOTS = ResourceLocation.withDefaultNamespace("container/slot/boots"),
+        ELYTRA = Chrysalis.resourceLocationId("slots/elytra"),
+        SADDLE = ResourceLocation.withDefaultNamespace("container/slot/saddle"),
+        HORSE_ARMOR = ResourceLocation.withDefaultNamespace("container/slot/horse_armor"),
+        WOLF_ARMOR = Chrysalis.resourceLocationId("slots/wolf_armor"),
 
-        EMPTY_SLOT_SWORD = ResourceLocation.withDefaultNamespace("item/empty_slot_sword"),
-        EMPTY_SLOT_PICKAXE = ResourceLocation.withDefaultNamespace("item/empty_slot_pickaxe"),
-        EMPTY_SLOT_AXE = ResourceLocation.withDefaultNamespace("item/empty_slot_axe"),
-        EMPTY_SLOT_SHOVEL = ResourceLocation.withDefaultNamespace("item/empty_slot_shovel"),
-        EMPTY_SLOT_HOE = ResourceLocation.withDefaultNamespace("item/empty_slot_hoe"),
+        SWORD = ResourceLocation.withDefaultNamespace("container/slot/sword"),
+        PICKAXE = ResourceLocation.withDefaultNamespace("container/slot/pickaxe"),
+        AXE = ResourceLocation.withDefaultNamespace("container/slot/axe"),
+        SHOVEL = ResourceLocation.withDefaultNamespace("container/slot/shovel"),
+        HOE = ResourceLocation.withDefaultNamespace("container/slot/hoe"),
+        SHEARS = Chrysalis.resourceLocationId("slots/shears"),
+        BOW = Chrysalis.resourceLocationId("slots/bow"),
+        CROSSBOW = Chrysalis.resourceLocationId("slots/crossbow"),
+        SHIELD = ResourceLocation.withDefaultNamespace("container/slot/shield"),
+        FISHING_ROD = Chrysalis.resourceLocationId("slots/fishing_rod"),
+        FLINT_AND_STEEL = Chrysalis.resourceLocationId("slots/flint_and_steel"),
+        BRUSH = Chrysalis.resourceLocationId("slots/brush"),
+        COMPASS = Chrysalis.resourceLocationId("slots/compass"),
+        SPYGLASS = Chrysalis.resourceLocationId("slots/spyglass"),
+        BUNDLE = Chrysalis.resourceLocationId("slots/bundle"),
 
-        EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("item/empty_slot_ingot"),
-        EMPTY_SLOT_REDSTONE_DUST = ResourceLocation.withDefaultNamespace("item/empty_slot_redstone_dust"),
-        EMPTY_SLOT_EMERALD = ResourceLocation.withDefaultNamespace("item/empty_slot_emerald"),
-        EMPTY_SLOT_DIAMOND = ResourceLocation.withDefaultNamespace("item/empty_slot_diamond"),
-        EMPTY_SLOT_LAPIS_LAZULI = ResourceLocation.withDefaultNamespace("item/empty_slot_lapis_lazuli"),
-        EMPTY_SLOT_AMETHYST_SHARD = ResourceLocation.withDefaultNamespace("item/empty_slot_amethyst_shard"),
-        EMPTY_SLOT_QUARTZ = ResourceLocation.withDefaultNamespace("item/empty_slot_quartz")
+        INGOT = ResourceLocation.withDefaultNamespace("container/slot/ingot"),
+        REDSTONE_DUST = ResourceLocation.withDefaultNamespace("container/slot/redstone_dust"),
+        EMERALD = ResourceLocation.withDefaultNamespace("container/slot/emerald"),
+        PRISMARINE_CRYSTALS = Chrysalis.resourceLocationId("slots/prismarine_crystals"),
+        DIAMOND = ResourceLocation.withDefaultNamespace("container/slot/diamond"),
+        LAPIS_LAZULI = ResourceLocation.withDefaultNamespace("container/slot/lapis_lazuli"),
+        ECHO_SHARD = Chrysalis.resourceLocationId("slots/echo_shard"),
+        AMETHYST_SHARD = ResourceLocation.withDefaultNamespace("container/slot/amethyst_shard"),
+        QUARTZ = ResourceLocation.withDefaultNamespace("container/slot/quartz"),
+        NETHERITE_SCRAP = Chrysalis.resourceLocationId("slots/netherite_scrap")
     ;
 }
