@@ -17,12 +17,15 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.sydokiddo.chrysalis.common.blocks.CBlockStateProperties;
+import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.Fluidlogged;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
+import java.util.Optional;
 
 public class DrainFluidsItem extends DebugUtilityItem {
 
@@ -74,7 +77,7 @@ public class DrainFluidsItem extends DebugUtilityItem {
             Integer.MAX_VALUE,
             (getPos, consumer) -> { for (Direction direction : Direction.values()) consumer.accept(getPos.relative(direction)); },
             fluidPos -> this.updateFluidPos(level, fluidPos)
-        ) > 1;
+        ) > 0;
     }
 
     private BlockPos.TraversalNodeStatus updateFluidPos(Level level, BlockPos fluidPos) {
@@ -85,7 +88,12 @@ public class DrainFluidsItem extends DebugUtilityItem {
         if (blockState.getBlock() instanceof LiquidBlock) {
             level.setBlockAndUpdate(fluidPos, Blocks.AIR.defaultBlockState());
         } else {
-            if (blockState.getValueOrElse(BlockStateProperties.WATERLOGGED, false)) {
+
+            Optional<Fluidlogged> fluidLoggedState = blockState.getOptionalValue(CBlockStateProperties.FLUIDLOGGED);
+
+            if (fluidLoggedState.isPresent() && fluidLoggedState.get() != Fluidlogged.AIR) {
+                level.setBlockAndUpdate(fluidPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, Fluidlogged.AIR));
+            } else if (blockState.getValueOrElse(BlockStateProperties.WATERLOGGED, false)) {
                 level.setBlockAndUpdate(fluidPos, blockState.setValue(BlockStateProperties.WATERLOGGED, false));
             } else if (blockState.is(CTags.INHERENTLY_WATERLOGGED)) {
                 Block.dropResources(blockState, level, fluidPos, blockState.hasBlockEntity() ? level.getBlockEntity(fluidPos) : null);
