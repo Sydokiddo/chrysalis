@@ -1,6 +1,5 @@
 package net.sydokiddo.chrysalis.common;
 
-import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.FlameParticle;
@@ -29,13 +28,10 @@ import net.sydokiddo.chrysalis.util.sounds.music.payloads.ClearMusicPayload;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.QueuedMusicPayload;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.ResetMusicFadePayload;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.StructureChangedPayload;
-import net.sydokiddo.chrysalis.util.technical.ClipboardImage;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.SplashTextLoader;
-import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 
 @SuppressWarnings("unused")
@@ -50,7 +46,7 @@ public class CClientEvents {
             while (CRegistry.ClientRegistry.PANORAMIC_SCREENSHOT_KEY.consumeClick()) {
 
                 Minecraft minecraft = Minecraft.getInstance();
-                if (canPlayScreenshotEvents()) playScreenshotSound(minecraft);
+                if (canPlayScreenshotEvents(null, false)) playScreenshotSound(minecraft);
 
                 Component message = Component.translatable("screenshot.success",
                 Component.literal("panorama_0.png – panorama_5.png").withStyle(ChatFormatting.UNDERLINE).withStyle((style) -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE,
@@ -64,23 +60,11 @@ public class CClientEvents {
 
         @SubscribeEvent
         private static void onScreenShot(ScreenshotEvent event) {
-
-            if (event.getScreenshotFile().getName().contains("panorama") || !canPlayScreenshotEvents()) return;
-            Minecraft minecraft = Minecraft.getInstance();
-            playScreenshotSound(minecraft);
-
-            try (NativeImage copiedImage = event.getImage().mappedCopy(function -> (function))) {
-                copiedImage.writeToFile(event.getScreenshotFile());
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new ClipboardImage(new ImageIcon(event.getScreenshotFile().toString()).getImage()), null);
-                Component message = Component.translatable("gui.chrysalis.screenshot_copied");
-                minecraft.gui.getChat().addMessage(message);
-                minecraft.getNarrator().sayNow(message);
-            } catch (Exception exception) {
-                Chrysalis.LOGGER.warn("Failed to copy screenshot to clipboard", exception);
-            }
+            if (canPlayScreenshotEvents(event, true)) playScreenshotSound(Minecraft.getInstance());
         }
 
-        private static boolean canPlayScreenshotEvents() {
+        public static boolean canPlayScreenshotEvents(ScreenshotEvent event, boolean checkForPanorama) {
+            if (checkForPanorama && event != null && event.getScreenshotFile().getName().contains("panorama")) return false;
             return !CompatibilityHelper.isModLoaded("essential") && !CompatibilityHelper.isModLoaded("optifine") && !CompatibilityHelper.isModLoaded("optifabric") && !Minecraft.ON_OSX;
         }
 

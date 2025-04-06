@@ -88,6 +88,7 @@
     "misc.GuiMixin$ShulkerBoxScreenMixin",
     "misc.MinecraftMixin",
     "misc.MinecraftMixin$MusicManagerMixin",
+    "misc.MinecraftMixin$ScreenshotMixin",
     "misc.SplashTextMixin",
     "misc.SplashTextMixin$TitleScreenMixin"
   ],

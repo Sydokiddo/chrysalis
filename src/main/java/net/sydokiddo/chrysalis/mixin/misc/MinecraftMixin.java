@@ -1,19 +1,26 @@
 package net.sydokiddo.chrysalis.mixin.misc;
 
+import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.Optionull;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Screenshot;
 import net.minecraft.client.User;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.SplashManager;
 import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.client.sounds.MusicManager;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.event.ScreenshotEvent;
+import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.CClientEvents;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.sounds.music.MusicTracker;
+import net.sydokiddo.chrysalis.util.technical.ClipboardImage;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.CSplashManager;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -23,6 +30,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.util.function.Consumer;
 
 @OnlyIn(Dist.CLIENT)
 @Mixin(Minecraft.class)
@@ -94,6 +105,27 @@ public class MinecraftMixin {
                 MusicTracker.onClient.fadeOutMusic = false;
                 this.currentGain = 1.0F;
                 MusicTracker.onClient.resetMusicFade = false;
+            }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mixin(Screenshot.class)
+    public static class ScreenshotMixin {
+
+        @Inject(method = "lambda$_grab$2", at = @At("TAIL"))
+        private static void chrysalis$copyScreenshotToClipboard(NativeImage nativeimage, File file, ScreenshotEvent event, Consumer<?> messageConsumer, CallbackInfo info) {
+
+            if (!CClientEvents.GameEventBus.canPlayScreenshotEvents(event, true)) return;
+
+            try {
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new ClipboardImage(new ImageIcon(event.getScreenshotFile().toString()).getImage()), null);
+                Minecraft minecraft = Minecraft.getInstance();
+                Component message = Component.translatable("gui.chrysalis.screenshot_copied");
+                minecraft.gui.getChat().addMessage(message);
+                minecraft.getNarrator().sayNow(message);
+            } catch (Exception exception) {
+                Chrysalis.LOGGER.warn("Failed to copy screenshot to clipboard", exception);
             }
         }
     }
