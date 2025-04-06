@@ -19,6 +19,10 @@ import javax.annotation.Nullable;
 
 public class ExampleFluidloggedBlock extends Block implements SimpleFluidloggedBlock {
 
+    /**
+     * An example class to show how to set up a fluidloggable block.
+     **/
+
     public ExampleFluidloggedBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(CBlockStateProperties.FLUIDLOGGED, Fluidlogged.AIR));
@@ -47,6 +51,6 @@ public class ExampleFluidloggedBlock extends Block implements SimpleFluidloggedB
 
     @Override
     public int getLightEmission(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
-        return SimpleFluidloggedBlock.getLightEmission(blockState, 0);
+        return SimpleFluidloggedBlock.getLightEmission(blockState);
     }
 }

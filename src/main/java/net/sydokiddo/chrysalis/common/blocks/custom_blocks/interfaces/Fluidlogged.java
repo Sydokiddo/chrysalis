@@ -5,6 +5,10 @@ import org.jetbrains.annotations.NotNull;
 
 public enum Fluidlogged implements StringRepresentable {
 
+    /**
+     * An enum for the different fluid types for fluidloggable blocks.
+     **/
+
     AIR("air"),
     WATER("water"),
     LAVA("lava");
