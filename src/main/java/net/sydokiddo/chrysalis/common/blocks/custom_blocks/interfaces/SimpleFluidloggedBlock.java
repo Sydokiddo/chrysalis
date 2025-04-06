@@ -22,6 +22,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.sydokiddo.chrysalis.common.blocks.CBlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
@@ -32,24 +34,25 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
 
     // region Fluid Maps
 
-    Supplier<ImmutableBiMap<Fluid, Fluidlogged>> STATE_FROM_FLUID = Suppliers.memoize(
-        () -> ImmutableBiMap.<Fluid, Fluidlogged>builder()
-            .put(Fluids.EMPTY, Fluidlogged.AIR)
-            .put(Fluids.WATER, Fluidlogged.WATER)
-            .put(Fluids.LAVA, Fluidlogged.LAVA)
+    Map<Fluid, FluidloggedState> stateFromFluidMap = new HashMap<>();
+
+    Supplier<ImmutableBiMap<Fluid, FluidloggedState>> STATE_FROM_FLUID = Suppliers.memoize(
+        () -> ImmutableBiMap.<Fluid, FluidloggedState>builder()
+            .put(Fluids.EMPTY, FluidloggedState.AIR)
+            .putAll(stateFromFluidMap.entrySet())
         .build()
     );
 
-    Supplier<ImmutableBiMap<Fluidlogged, Fluid>> FLUID_FROM_STATE = Suppliers.memoize(
+    Supplier<ImmutableBiMap<FluidloggedState, Fluid>> FLUID_FROM_STATE = Suppliers.memoize(
         () -> STATE_FROM_FLUID.get().inverse()
     );
 
-    private static Fluidlogged getStateFromFluid(Fluid fluid) {
+    private static FluidloggedState getStateFromFluid(Fluid fluid) {
         return STATE_FROM_FLUID.get().get(fluid);
     }
 
-    private static Fluid getFluidFromState(Fluidlogged fluidlogged) {
-        return FLUID_FROM_STATE.get().get(fluidlogged);
+    private static Fluid getFluidFromState(FluidloggedState fluidloggedState) {
+        return FLUID_FROM_STATE.get().get(fluidloggedState);
     }
 
     // endregion
@@ -63,9 +66,9 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
     }
 
     static FluidState getFluidState(BlockState blockState, FluidState defaultFluidState) {
-        Fluidlogged fluidlogged = blockState.getValue(CBlockStateProperties.FLUIDLOGGED);
-        Fluid fluidFromState = getFluidFromState(fluidlogged);
-        if (fluidlogged != Fluidlogged.AIR && fluidlogged == getStateFromFluid(fluidFromState)) return fluidFromState.defaultFluidState().setValue(FlowingFluid.FALLING, false);
+        FluidloggedState fluidloggedState = blockState.getValue(CBlockStateProperties.FLUIDLOGGED);
+        Fluid fluidFromState = getFluidFromState(fluidloggedState);
+        if (fluidloggedState != FluidloggedState.AIR && fluidloggedState == getStateFromFluid(fluidFromState)) return fluidFromState.defaultFluidState().setValue(FlowingFluid.FALLING, false);
         else return defaultFluidState;
     }
 
@@ -86,14 +89,14 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
 
     @Override
     default boolean canPlaceLiquid(@Nullable Player player, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull BlockState blockState, @NotNull Fluid fluid) {
-        EnumProperty<Fluidlogged> fluidloggedProperty = CBlockStateProperties.FLUIDLOGGED;
-        return (blockState.getValue(fluidloggedProperty) == Fluidlogged.AIR || blockState.getValue(fluidloggedProperty) == getStateFromFluid(fluid) && fluid == getFluidFromState(getStateFromFluid(fluid)));
+        EnumProperty<FluidloggedState> fluidloggedState = CBlockStateProperties.FLUIDLOGGED;
+        return (blockState.getValue(fluidloggedState) == FluidloggedState.AIR || blockState.getValue(fluidloggedState) == getStateFromFluid(fluid) && fluid == getFluidFromState(getStateFromFluid(fluid)));
     }
 
     @Override
     default boolean placeLiquid(@NotNull LevelAccessor level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, @NotNull FluidState fluidState) {
 
-        if (blockState.getValue(CBlockStateProperties.FLUIDLOGGED) != Fluidlogged.AIR) return false;
+        if (blockState.getValue(CBlockStateProperties.FLUIDLOGGED) != FluidloggedState.AIR) return false;
 
         if (!level.isClientSide()) {
             if (fluidState.getType() == getFluidFromState(getStateFromFluid(fluidState.getType()))) level.setBlock(blockPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, getStateFromFluid(fluidState.getType())), 3);
@@ -106,14 +109,14 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
     @Override
     default @NotNull ItemStack pickupBlock(@Nullable Player player, @NotNull LevelAccessor level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
 
-        Fluidlogged fluidlogged = blockState.getValue(CBlockStateProperties.FLUIDLOGGED);
-        if (fluidlogged == Fluidlogged.AIR) return ItemStack.EMPTY;
+        FluidloggedState fluidloggedState = blockState.getValue(CBlockStateProperties.FLUIDLOGGED);
+        if (fluidloggedState == FluidloggedState.AIR) return ItemStack.EMPTY;
 
-        level.setBlock(blockPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, Fluidlogged.AIR), 3);
+        level.setBlock(blockPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, FluidloggedState.AIR), 3);
         if (!blockState.canSurvive(level, blockPos)) level.destroyBlock(blockPos, true);
 
-        Fluid fluidFromState = getFluidFromState(fluidlogged);
-        if (fluidlogged == getStateFromFluid(fluidFromState)) return new ItemStack(fluidFromState.getBucket());
+        Fluid fluidFromState = getFluidFromState(fluidloggedState);
+        if (fluidloggedState == getStateFromFluid(fluidFromState)) return new ItemStack(fluidFromState.getBucket());
         else return ItemStack.EMPTY;
     }
 

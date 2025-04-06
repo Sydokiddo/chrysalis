@@ -28,7 +28,7 @@ public class Chrysalis {
 
 	public static boolean
 		registerTestItems = true,
-		registerExampleRegistry = true
+		registerExampleRegistry = false
 	;
 
 	public static final String

@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.common.blocks.CBlockStateProperties;
-import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.Fluidlogged;
+import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.FluidloggedState;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
@@ -89,10 +89,10 @@ public class DrainFluidsItem extends DebugUtilityItem {
             level.setBlockAndUpdate(fluidPos, Blocks.AIR.defaultBlockState());
         } else {
 
-            Optional<Fluidlogged> fluidLoggedState = blockState.getOptionalValue(CBlockStateProperties.FLUIDLOGGED);
+            Optional<FluidloggedState> fluidloggedState = blockState.getOptionalValue(CBlockStateProperties.FLUIDLOGGED);
 
-            if (fluidLoggedState.isPresent() && fluidLoggedState.get() != Fluidlogged.AIR) {
-                level.setBlockAndUpdate(fluidPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, Fluidlogged.AIR));
+            if (fluidloggedState.isPresent() && fluidloggedState.get() != FluidloggedState.AIR) {
+                level.setBlockAndUpdate(fluidPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, FluidloggedState.AIR));
             } else if (blockState.getValueOrElse(BlockStateProperties.WATERLOGGED, false)) {
                 level.setBlockAndUpdate(fluidPos, blockState.setValue(BlockStateProperties.WATERLOGGED, false));
             } else if (blockState.is(CTags.INHERENTLY_WATERLOGGED)) {

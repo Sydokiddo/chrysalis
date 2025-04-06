@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FluidState;
 import net.sydokiddo.chrysalis.common.blocks.CBlockStateProperties;
-import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.Fluidlogged;
+import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.FluidloggedState;
 import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.SimpleFluidloggedBlock;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
@@ -25,7 +25,7 @@ public class ExampleFluidloggedBlock extends Block implements SimpleFluidloggedB
 
     public ExampleFluidloggedBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(CBlockStateProperties.FLUIDLOGGED, Fluidlogged.AIR));
+        this.registerDefaultState(this.defaultBlockState().setValue(CBlockStateProperties.FLUIDLOGGED, FluidloggedState.AIR));
     }
 
     @Override

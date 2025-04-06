@@ -22,10 +22,13 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.CRegistry;
+import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.FluidloggedState;
+import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.SimpleFluidloggedBlock;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
@@ -149,6 +152,14 @@ public class RegistryHelper {
                 return streamCodec;
             }
         };
+    }
+
+    // endregion
+
+    // region Fluids
+
+    public static void registerFluidForFluidlogging(Fluid fluid, FluidloggedState fluidloggedStateState) {
+        SimpleFluidloggedBlock.stateFromFluidMap.put(fluid, fluidloggedStateState);
     }
 
     // endregion

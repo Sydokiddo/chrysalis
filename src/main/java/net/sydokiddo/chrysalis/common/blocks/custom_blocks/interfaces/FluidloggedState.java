@@ -3,7 +3,7 @@ package net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
-public enum Fluidlogged implements StringRepresentable {
+public enum FluidloggedState implements StringRepresentable {
 
     /**
      * An enum for the different fluid types for fluidloggable blocks.
@@ -15,7 +15,7 @@ public enum Fluidlogged implements StringRepresentable {
 
     private final String fluidName;
 
-    Fluidlogged(String fluidName) {
+    FluidloggedState(String fluidName) {
         this.fluidName = fluidName;
     }
 
