@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.CSplashTextRenderer;
 import java.awt.*;
 import java.util.function.UnaryOperator;
@@ -31,7 +32,8 @@ public class AdvancedSplashText implements SplashText {
         Codec.BOOL.optionalFieldOf("underlined", false).forGetter(null),
         Codec.BOOL.optionalFieldOf("strikethrough", false).forGetter(null),
         Codec.BOOL.optionalFieldOf("obfuscated", false).forGetter(null),
-        ExtraCodecs.intRange(SplashTextLoader.defaultMinWeight, SplashTextLoader.defaultMaxWeight).orElse(SplashTextLoader.defaultMaxWeight).optionalFieldOf("weight", SplashTextLoader.defaultWeight).forGetter(null)
+        ExtraCodecs.intRange(SplashTextLoader.defaultMinWeight, SplashTextLoader.defaultMaxWeight).orElse(SplashTextLoader.defaultMaxWeight).optionalFieldOf("weight", SplashTextLoader.defaultWeight).forGetter(null),
+        Codec.BOOL.optionalFieldOf("for_testing", false).forGetter(null)
     ).apply(instance, AdvancedSplashText::new));
 
     private MutableComponent text;
@@ -46,12 +48,13 @@ public class AdvancedSplashText implements SplashText {
         italic,
         underlined,
         strikethrough,
-        obfuscated
+        obfuscated,
+        forTesting
     ;
 
     private final int weight;
 
-    public AdvancedSplashText(Component splashText, String font, String color, boolean bold, boolean italic, boolean underlined, boolean strikethrough, boolean obfuscated, int weight) {
+    public AdvancedSplashText(Component splashText, String font, String color, boolean bold, boolean italic, boolean underlined, boolean strikethrough, boolean obfuscated, int weight, boolean forTesting) {
         this.text = (MutableComponent) splashText;
         this.font = font;
         this.color = color;
@@ -61,10 +64,11 @@ public class AdvancedSplashText implements SplashText {
         this.strikethrough = strikethrough;
         this.obfuscated = obfuscated;
         this.weight = weight;
+        this.forTesting = forTesting;
     }
 
     public AdvancedSplashText(MutableComponent mutableComponent) {
-        this(mutableComponent, String.valueOf(ResourceLocation.parse(defaultFont)), defaultColor, false, false, false, false, false, SplashTextLoader.defaultWeight);
+        this(mutableComponent, String.valueOf(ResourceLocation.parse(defaultFont)), defaultColor, false, false, false, false, false, SplashTextLoader.defaultWeight, false);
     }
 
     @Override
@@ -74,6 +78,7 @@ public class AdvancedSplashText implements SplashText {
 
     @Override
     public int getWeight() {
+        if (!Chrysalis.IS_DEBUG && this.forTesting) return 0;
         return Math.min(this.weight * SplashTextLoader.INSTANCE.getTotalWeight(), SplashTextLoader.defaultMaxWeight);
     }
 

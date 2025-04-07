@@ -510,11 +510,65 @@
     },
     {
       "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/water.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua056"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/lava.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua057"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/flowsludge.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua058"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/molten_void.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua059"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/ectoplasm.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua060"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/biomire.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua061"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/remains_on_death.png",
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua056"
+        "\ua062"
       ]
     },
     {
@@ -523,7 +577,7 @@
       "ascent": 10,
       "height": 13,
       "chars": [
-        "\ua057"
+        "\ua063"
       ]
     },
     {
@@ -532,7 +586,7 @@
       "ascent": 10,
       "height": 14,
       "chars": [
-        "\ua058"
+        "\ua064"
       ]
     },
     {
@@ -541,7 +595,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua059"
+        "\ua065"
       ]
     },
     {
@@ -550,7 +604,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua060"
+        "\ua066"
       ]
     }
   ]

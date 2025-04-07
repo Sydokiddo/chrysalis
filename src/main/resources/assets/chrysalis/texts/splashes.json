@@ -14,7 +14,8 @@
     { "text": { "text": "\ua030", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "\ua016\ua017\ua018\ua019\ua020\ua021\ua022\ua023\ua024\ua025\ua026", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "\ua035\ua031\ua036\ua033\ua032\ua034\ua037", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
-    { "text": { "text": "\ua040\ua041\ua042\ua043\ua044\ua045\ua046\ua047\ua048\ua049\ua050\ua051\ua052\ua053\ua054\ua055", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
-    { "text": { "text": "Also try Elysium!" }, "weight": 5 }
+    { "text": { "text": "Also try Elysium!" }, "weight": 5 },
+    { "text": { "text": "\ua040\ua041\ua042\ua043\ua044\ua045\ua046\ua047\ua048\ua049\ua050\ua051\ua052\ua053\ua054\ua055", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 5, "for_testing": true },
+    { "text": { "text": "\ua056\ua057\ua058\ua059\ua060\ua061", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 5, "for_testing": true }
   ]
 }
