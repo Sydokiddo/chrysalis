@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes;
+package net.sydokiddo.chrysalis.common.items.custom_items.debug_items.shared_classes;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Unit;

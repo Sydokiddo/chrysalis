@@ -8,8 +8,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.custom_items.IconItem;
 import net.sydokiddo.chrysalis.common.items.custom_items.CreativeModeDescriptionItem;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.*;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.ExtraReachDebugUtilityItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.shared_classes.ExtraReachDebugUtilityItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.types.*;
 import net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing.TestRightClickItem;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 

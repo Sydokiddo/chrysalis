@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
+package net.sydokiddo.chrysalis.common.items.custom_items.debug_items.types;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -22,7 +22,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.CustomCrosshairItem;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.shared_classes.DebugUtilityItem;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 

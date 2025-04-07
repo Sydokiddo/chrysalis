@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
+package net.sydokiddo.chrysalis.common.items.custom_items.debug_items.types;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -13,19 +13,19 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.shared_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
-public class FillOxygenItem extends DebugUtilityItem {
+public class HealItem extends DebugUtilityItem {
 
-    public FillOxygenItem(Properties properties) {
+    public HealItem(Properties properties) {
         super(properties);
     }
 
     /**
-     * Adds a custom tooltip to the fill oxygen item.
+     * Adds a custom tooltip to the heal item.
      **/
 
     @Override
@@ -35,23 +35,23 @@ public class FillOxygenItem extends DebugUtilityItem {
     }
 
     /**
-     * Fills the user's oxygen bar to the maximum value when right-clicked with.
+     * Sets the user to full health when right-clicked with.
      **/
 
     @Override
     public @NotNull InteractionResult use(@NotNull Level level, Player player, @NotNull InteractionHand interactionHand) {
 
-        if (player.getAirSupply() < player.getMaxAirSupply()) {
+        if (player.getHealth() < player.getMaxHealth()) {
 
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
-                serverPlayer.playNotifySound(CSoundEvents.FILL_OXYGEN_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.playNotifySound(CSoundEvents.HEAL_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-                addParticlesAroundEntity(serverPlayer, ParticleTypes.BUBBLE, 10, 1.0D);
+                addParticlesAroundEntity(serverPlayer, ParticleTypes.HEART, 10, 1.0D);
 
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
-                serverPlayer.setAirSupply(serverPlayer.getMaxAirSupply());
-                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.fill_oxygen.message", serverPlayer.getName().getString()));
+                serverPlayer.setHealth(serverPlayer.getMaxHealth());
+                DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.heal.message", serverPlayer.getName().getString()));
             }
 
             return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(interactionHand));

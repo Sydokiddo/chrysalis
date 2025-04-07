@@ -43,7 +43,7 @@ public abstract class ToolMaterialMixin {
     }
 
     @Mixin(DiggerItem.class)
-    public static abstract class DiggerItemMixin {
+    public static class DiggerItemMixin {
 
         /**
          * Makes axes only lose 1 durability in combat instead of 2.

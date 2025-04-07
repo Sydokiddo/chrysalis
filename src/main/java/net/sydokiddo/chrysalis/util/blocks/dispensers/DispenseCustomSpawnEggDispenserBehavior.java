@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEggItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.types.CopyingSpawnEggItem;
 import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.CustomSpawnEggItem;
 import net.sydokiddo.chrysalis.util.helpers.DebugHelper;

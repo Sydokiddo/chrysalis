@@ -22,7 +22,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.event.EventHooks;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.AbstractSpawnerEntity;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.CopyingSpawnEggItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.types.CopyingSpawnEggItem;
 import net.sydokiddo.chrysalis.common.misc.CDamageTypes;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import org.jetbrains.annotations.NotNull;

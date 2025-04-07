@@ -70,7 +70,7 @@ public class TooltipMixin extends Item {
     }
 
     @Mixin(ItemEnchantments.class)
-    public static abstract class ItemEnchantmentsMixin {
+    public static class ItemEnchantmentsMixin {
 
         @Shadow @Final boolean showInTooltip;
         @Shadow @Final Object2IntOpenHashMap<Holder<Enchantment>> enchantments;

@@ -37,7 +37,7 @@ public abstract class RespawnBlockMixin {
     }
 
     @Mixin(RespawnAnchorBlock.class)
-    public static abstract class RespawnAnchorBlockMixin {
+    public static class RespawnAnchorBlockMixin {
 
         @Shadow @Final public static IntegerProperty CHARGE;
 

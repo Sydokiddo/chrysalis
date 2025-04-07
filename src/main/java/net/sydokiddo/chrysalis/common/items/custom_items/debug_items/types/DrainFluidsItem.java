@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.common.items.custom_items.debug_items;
+package net.sydokiddo.chrysalis.common.items.custom_items.debug_items.types;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.common.blocks.CBlockStateProperties;
 import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.FluidloggedState;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.base_classes.DebugUtilityItem;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.shared_classes.DebugUtilityItem;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;

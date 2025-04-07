@@ -154,7 +154,7 @@ public class GuiMixin {
 
     @OnlyIn(Dist.CLIENT)
     @Mixin(ShulkerBoxScreen.class)
-    public abstract static class ShulkerBoxScreenMixin extends AbstractContainerScreen<ShulkerBoxMenu> {
+    public static abstract class ShulkerBoxScreenMixin extends AbstractContainerScreen<ShulkerBoxMenu> {
 
         private ShulkerBoxScreenMixin(ShulkerBoxMenu menu, Inventory playerInventory, Component title) {
             super(menu, playerInventory, title);

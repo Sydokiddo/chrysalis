@@ -45,7 +45,7 @@ public class LevelMixin {
     }
 
     @Mixin(ServerExplosion.class)
-    public static abstract class ServerExplosionMixin {
+    public static class ServerExplosionMixin {
 
         /**
          * Block-interactive explosions (such as wind charges) are now driven by the mobWorldInteractions game rule rather than the mobGriefing game rule.

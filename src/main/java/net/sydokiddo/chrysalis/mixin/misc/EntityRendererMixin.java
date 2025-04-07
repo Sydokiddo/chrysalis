@@ -37,7 +37,7 @@ import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
 @Mixin(EntityRenderer.class)
-public abstract class EntityRendererMixin {
+public class EntityRendererMixin {
 
     /**
      * Allows for the entity field to be accessed from the entity renderer class.
@@ -66,7 +66,7 @@ public abstract class EntityRendererMixin {
 
     @OnlyIn(Dist.CLIENT)
     @Mixin(LivingEntityRenderer.class)
-    public static abstract class LivingEntityRendererMixin {
+    public static class LivingEntityRendererMixin {
 
         /**
          * Allows for the livingEntity field to be accessed from the living entity renderer class.

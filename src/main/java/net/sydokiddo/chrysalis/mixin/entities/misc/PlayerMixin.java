@@ -258,7 +258,7 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     @Mixin(ServerPlayer.class)
-    public abstract static class ServerPlayerMixin extends Player {
+    public static abstract class ServerPlayerMixin extends Player {
 
         private ServerPlayerMixin(Level level, BlockPos blockPos, float rotation, GameProfile gameProfile) {
             super(level, blockPos, rotation, gameProfile);

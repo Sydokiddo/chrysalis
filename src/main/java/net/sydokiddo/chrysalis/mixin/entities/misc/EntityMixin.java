@@ -16,7 +16,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
-import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.*;
+import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.types.*;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
