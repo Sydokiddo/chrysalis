@@ -187,7 +187,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
             if (this.level() instanceof ServerLevel serverLevel) for (int amount = 0; amount < 8; ++amount) serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(entityType.getHeight() + 1.0D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
 
             player.level().gameEvent(player, GameEvent.BLOCK_CHANGE, this.blockPosition());
-            itemInHand.shrink(1);
+            itemInHand.consume(1, player);
 
             return InteractionResult.SUCCESS_SERVER;
         }
