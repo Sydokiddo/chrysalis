@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "chrysalis:mob_attack_no_knockback"
+    "chrysalis:mob_attack_no_knockback",
+    "chrysalis:stab"
   ]
 }

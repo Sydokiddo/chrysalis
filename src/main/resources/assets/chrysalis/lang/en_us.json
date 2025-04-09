@@ -316,6 +316,17 @@
   "gui.chrysalis.weather.thundering": "Thundering",
   "gui.chrysalis.weather.snowing": "Snowing",
 
+  "death.attack.chrysalis.crush": "%1$s was crushed by %2$s",
+  "death.attack.chrysalis.crush.item": "%1$s was crushed by %2$s using %3$s",
+  "death.attack.chrysalis.pulverize": "%1$s was pulverized by %2$s",
+  "death.attack.chrysalis.pulverize.item": "%1$s was pulverized by %2$s using %3$s",
+  "death.attack.chrysalis.stab": "%1$s was stabbed by %2$s",
+  "death.attack.chrysalis.stab.item": "%1$s was stabbed by %2$s using %3$s",
+  "death.attack.chrysalis.pelt": "%1$s was pelted by %2$s",
+  "death.attack.chrysalis.pelt.item": "%1$s was pelted by %2$s using %3$s",
+  "death.attack.chrysalis.splatter": "%1$s was splattered by %2$s",
+  "death.attack.chrysalis.splatter.item": "%1$s was splattered by %2$s using %3$s",
+
   "gui.chrysalis.config_controller.blocks_singular": "%s Block",
   "gui.chrysalis.config_controller.blocks_plural": "%s Blocks",
   "gui.chrysalis.config_controller.ticks_singular": "%s Tick",

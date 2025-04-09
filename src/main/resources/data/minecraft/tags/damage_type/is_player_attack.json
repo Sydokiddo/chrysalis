@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "chrysalis:kill_wand"
+    "chrysalis:kill_wand",
+    "chrysalis:stab"
   ]
 }

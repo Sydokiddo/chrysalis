@@ -19,7 +19,12 @@ public class CDamageTypes {
         MOB_ATTACK_BYPASSES_RESISTANCE = registerDamageType("mob_attack_bypasses_resistance"),
         MOB_ATTACK_BYPASSES_SHIELD = registerDamageType("mob_attack_bypasses_shield"),
         MOB_ATTACK_NO_KNOCKBACK = registerDamageType("mob_attack_no_knockback"),
-        KILL_WAND = registerDamageType("kill_wand")
+        KILL_WAND = registerDamageType("kill_wand"),
+        CRUSH = registerDamageType("crush"),
+        PULVERIZE = registerDamageType("pulverize"),
+        STAB = registerDamageType("stab"),
+        PELT = registerDamageType("pelt"),
+        SPLATTER = registerDamageType("splatter")
     ;
 
     // endregion
