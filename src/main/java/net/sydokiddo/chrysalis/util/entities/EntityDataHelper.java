@@ -3,6 +3,7 @@ package net.sydokiddo.chrysalis.util.entities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.protocol.game.ClientboundSetCameraPacket;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -12,7 +13,12 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.CRegistry;
@@ -21,6 +27,8 @@ import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.BuildPreventingEffect;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -151,6 +159,13 @@ public class EntityDataHelper {
 
     public static void updateCurrentShader(ServerPlayer serverPlayer) {
         serverPlayer.connection.send(new ClientboundSetCameraPacket(serverPlayer));
+    }
+
+    public static List<ItemStack> getNonLivingEntityLootTable(Entity entity, ResourceKey<LootTable> lootTableKey) {
+        LootTable lootTable = Objects.requireNonNull(entity.level().getServer()).reloadableRegistries().getLootTable(lootTableKey);
+        if (!(entity.level() instanceof ServerLevel serverLevel)) return List.of();
+        LootParams lootParams = new LootParams.Builder(serverLevel).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.THIS_ENTITY, entity).create(LootContextParamSets.GIFT);
+        return lootTable.getRandomItems(lootParams);
     }
 
     // endregion

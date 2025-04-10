@@ -1,6 +1,5 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
-import com.google.common.collect.Sets;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -11,7 +10,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
@@ -100,23 +98,6 @@ public class RegistryHelper {
 
     public static <T> ResourceKey<Registry<T>> registerMobVariantDataType(String string) {
         return registerEntityDataType("mob_variant/" + string);
-    }
-
-    // endregion
-
-    // region Loot Tables
-
-    /**
-     * Registry helpers for assisting with custom loot tables.
-     **/
-
-    public static ResourceLocation registerCustomLootTable(String name) {
-        return registerCustomLootTable(ResourceLocation.parse(name));
-    }
-
-    public static ResourceLocation registerCustomLootTable(ResourceLocation resourceLocation) {
-        Sets.newHashSet().add(resourceLocation);
-        return resourceLocation;
     }
 
     // endregion

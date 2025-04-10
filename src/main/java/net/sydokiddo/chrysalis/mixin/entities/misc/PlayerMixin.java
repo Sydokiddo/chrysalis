@@ -250,8 +250,8 @@ public abstract class PlayerMixin extends LivingEntity {
 
                 if (damageSource.getEntity() instanceof Player && this.lastHurtByPlayer != null) builder = builder.withParameter(LootContextParams.LAST_DAMAGE_PLAYER, this.lastHurtByPlayer).withLuck(this.lastHurtByPlayer.getLuck());
 
-                LootParams lootparams = builder.create(LootContextParamSets.ENTITY);
-                lootTable.getRandomItems(lootparams, this.getLootTableSeed(), itemStack -> this.spawnAtLocation(serverLevel, itemStack));
+                LootParams lootParams = builder.create(LootContextParamSets.ENTITY);
+                lootTable.getRandomItems(lootParams, this.getLootTableSeed(), itemStack -> this.spawnAtLocation(serverLevel, itemStack));
                 this.dropExperience(serverLevel, this);
             }
         }
