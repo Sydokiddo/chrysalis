@@ -33,7 +33,7 @@ public class Chrysalis {
 
 	public static final String
 		MOD_ID = "chrysalis",
-		CHRYSALIS_VERSION = FMLLoader.getLoadingModList().getModFileById(Chrysalis.MOD_ID).versionString()
+		MOD_VERSION = FMLLoader.getLoadingModList().getModFileById(Chrysalis.MOD_ID).versionString()
 	;
 
 	@SuppressWarnings("unused")
@@ -45,7 +45,7 @@ public class Chrysalis {
 	public Chrysalis(ModContainer container, IEventBus eventBus) {
 		CRegistry.registerAll(eventBus);
 		container.registerConfig(ModConfig.Type.COMMON, CConfig.CONFIG_SPEC);
-		DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.CHRYSALIS_VERSION, false);
+		DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.MOD_VERSION, false);
 	}
 
 	// region Common Methods

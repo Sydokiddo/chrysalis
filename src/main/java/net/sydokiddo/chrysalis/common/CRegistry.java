@@ -113,7 +113,7 @@ public class CRegistry {
                 Chrysalis.LOGGER.warn("java.awt.headless property was not set properly!");
             }
 
-            DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.CHRYSALIS_VERSION, true);
+            DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.MOD_VERSION, true);
         }
     }
 }

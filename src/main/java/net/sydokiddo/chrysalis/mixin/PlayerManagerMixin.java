@@ -25,7 +25,7 @@ public class PlayerManagerMixin {
 
     @Inject(method = "placeNewPlayer", at = @At(value = "TAIL"))
     private void chrysalis$onPlayerConnectToServer(Connection connection, ServerPlayer serverPlayer, CommonListenerCookie commonListenerCookie, CallbackInfo info) {
-        DebugHelper.sendLoggedInMessage(Chrysalis.LOGGER, serverPlayer, Chrysalis.LOGGER.getName(), Chrysalis.CHRYSALIS_VERSION);
+        DebugHelper.sendLoggedInMessage(Chrysalis.LOGGER, serverPlayer, Chrysalis.LOGGER.getName(), Chrysalis.MOD_VERSION);
     }
 
     /**
