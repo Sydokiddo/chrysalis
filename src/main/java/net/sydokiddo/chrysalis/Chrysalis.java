@@ -23,53 +23,53 @@ import org.slf4j.LoggerFactory;
 @Mod(Chrysalis.MOD_ID)
 public class Chrysalis {
 
-	public static final Logger LOGGER = LoggerFactory.getLogger("Chrysalis");
-	public static RegistryAccess registryAccess;
+    public static final Logger LOGGER = LoggerFactory.getLogger("Chrysalis");
+    public static RegistryAccess registryAccess;
 
-	public static boolean
-		registerTestItems = true,
-		registerExampleRegistry = false
-	;
+    public static boolean
+        registerTestItems = true,
+        registerExampleRegistry = false
+    ;
 
-	public static final String
-		MOD_ID = "chrysalis",
-		MOD_VERSION = FMLLoader.getLoadingModList().getModFileById(Chrysalis.MOD_ID).versionString()
-	;
+    public static final String
+        MOD_ID = "chrysalis",
+        MOD_VERSION = FMLLoader.getLoadingModList().getModFileById(Chrysalis.MOD_ID).versionString()
+    ;
 
-	@SuppressWarnings("unused")
-	public static final boolean
-		IS_DEBUG = SharedConstants.IS_RUNNING_IN_IDE,
-		CHRYSALIS_INITIALIZED = CompatibilityHelper.isModLoaded(Chrysalis.MOD_ID)
-	;
+    @SuppressWarnings("unused")
+    public static final boolean
+        IS_DEBUG = SharedConstants.IS_RUNNING_IN_IDE,
+        CHRYSALIS_INITIALIZED = CompatibilityHelper.isModLoaded(Chrysalis.MOD_ID)
+    ;
 
-	public Chrysalis(ModContainer container, IEventBus eventBus) {
-		CRegistry.registerAll(eventBus);
-		container.registerConfig(ModConfig.Type.COMMON, CConfig.CONFIG_SPEC);
-		DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.MOD_VERSION, false);
-	}
+    public Chrysalis(ModContainer container, IEventBus eventBus) {
+        CRegistry.registerAll(eventBus);
+        container.registerConfig(ModConfig.Type.COMMON, CConfig.CONFIG_SPEC);
+        DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.MOD_VERSION, false);
+    }
 
-	// region Common Methods
+    // region Common Methods
 
-	public static ResourceLocation resourceLocationId(String name) {
-		return ResourceLocation.fromNamespaceAndPath(Chrysalis.MOD_ID, name);
-	}
+    public static ResourceLocation resourceLocationId(String name) {
+        return ResourceLocation.fromNamespaceAndPath(Chrysalis.MOD_ID, name);
+    }
 
-	public static String stringId(String name) {
-		return Chrysalis.MOD_ID + ":" + name;
-	}
+    public static String stringId(String name) {
+        return Chrysalis.MOD_ID + ":" + name;
+    }
 
-	public static <T> ResourceKey<Registry<T>> key(String name) {
-		return ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace(name));
-	}
+    public static <T> ResourceKey<Registry<T>> key(String name) {
+        return ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace(name));
+    }
 
-	// endregion
+    // endregion
 
-	@SuppressWarnings("unused")
-	@Mod(value = Chrysalis.MOD_ID, dist = Dist.CLIENT)
-	public static class ChrysalisClient {
+    @SuppressWarnings("unused")
+    @Mod(value = Chrysalis.MOD_ID, dist = Dist.CLIENT)
+    public static class ChrysalisClient {
 
-		public ChrysalisClient(ModContainer container, IEventBus eventBus) {
-			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-		}
-	}
+        public ChrysalisClient(ModContainer container, IEventBus eventBus) {
+            container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        }
+    }
 }
