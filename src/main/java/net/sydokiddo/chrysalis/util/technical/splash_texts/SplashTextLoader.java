@@ -51,7 +51,7 @@ public class SplashTextLoader extends SimplePreparableReloadListener<Completable
 
     public void init(FileLoader fileLoader, ResourceManager resourceManager) {
         fileLoader.json().find("texts/splashes.json", this::addSplashes);
-        fileLoader.raw().get(ResourceLocation.withDefaultNamespace("texts/splashes.txt"), this::addVanillaSplashes);
+        fileLoader.raw().find("texts/splashes.txt", this::addVanillaSplashes);
         fileLoader.load(resourceManager);
     }
 
@@ -100,7 +100,7 @@ public class SplashTextLoader extends SimplePreparableReloadListener<Completable
         this.splashTexts.add(splashText);
     }
 
-    private void addVanillaSplashes(Stream<String> stream) {
+    private void addVanillaSplashes(ResourceLocation resourceLocation, Stream<String> stream) {
         stream.map(SimpleSplashText::new).forEach(this::addSplashes);
     }
 
