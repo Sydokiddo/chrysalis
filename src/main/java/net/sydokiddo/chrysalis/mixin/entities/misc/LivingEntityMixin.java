@@ -29,7 +29,7 @@ import java.util.Objects;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 
-    @Unique LivingEntity chrysalis$livingEntity = (LivingEntity) (Object) this;
+    @Unique private LivingEntity chrysalis$livingEntity = (LivingEntity) (Object) this;
     @Shadow protected abstract void dropEquipment(ServerLevel serverLevel);
     @Shadow public abstract double getAttributeValue(Holder<Attribute> holder);
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> holder);

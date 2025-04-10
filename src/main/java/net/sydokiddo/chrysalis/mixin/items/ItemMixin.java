@@ -46,7 +46,7 @@ public class ItemMixin {
 
     @SuppressWarnings("deprecation")
     @Inject(method = "appendHoverText", at = @At("RETURN"))
-    private void chrysalis$addTooltipToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
+    private void chrysalis$addTooltipsToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
         if (itemStack.has(CDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
             MutableComponent remainsOnDeathIcon = ComponentHelper.REMAINS_ON_DEATH_ICON;
