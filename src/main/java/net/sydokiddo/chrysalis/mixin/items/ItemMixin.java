@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Mixin(Item.class)
-public abstract class ItemMixin {
+public class ItemMixin {
 
     /**
      * Adds tooltips to various items.

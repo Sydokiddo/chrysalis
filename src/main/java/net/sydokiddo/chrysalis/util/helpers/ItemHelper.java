@@ -198,6 +198,16 @@ public class ItemHelper {
         tooltip.add(Component.translatable("gui.chrysalis.item.when_damage_blocked").withStyle(ChatFormatting.GRAY));
     }
 
+    public static void addCanPlaceTooltip(List<Component> tooltip) {
+        tooltip.add(CommonComponents.EMPTY);
+        tooltip.add(Component.translatable("item.canPlace").withStyle(ChatFormatting.GRAY));
+    }
+
+    public static void addCanBreakTooltip(List<Component> tooltip) {
+        tooltip.add(CommonComponents.EMPTY);
+        tooltip.add(Component.translatable("item.canBreak").withStyle(ChatFormatting.GRAY));
+    }
+
     public static void addCoordinatesTooltip(List<Component> tooltip, int x, int y, int z) {
         tooltip.add(CommonComponents.space().append(Component.translatable("gui.chrysalis.coordinates", x, y, z).withStyle(ChatFormatting.BLUE)));
     }
