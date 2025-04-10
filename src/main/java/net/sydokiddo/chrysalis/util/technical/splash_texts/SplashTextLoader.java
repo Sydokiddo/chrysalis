@@ -50,7 +50,7 @@ public class SplashTextLoader extends SimplePreparableReloadListener<Completable
     }
 
     public void init(FileLoader fileLoader, ResourceManager resourceManager) {
-        fileLoader.json().find("texts/splashes.json", this::addSplashes);
+        fileLoader.json().find("texts/splashes.json", this::addModSplashes);
         fileLoader.raw().find("texts/splashes.txt", this::addVanillaSplashes);
         fileLoader.load(resourceManager);
     }
@@ -81,7 +81,7 @@ public class SplashTextLoader extends SimplePreparableReloadListener<Completable
         return this.maxWeight;
     }
 
-    private void addSplashes(ResourceLocation resourceLocation, JsonElement jsonElement) {
+    private void addModSplashes(ResourceLocation resourceLocation, JsonElement jsonElement) {
 
         if (!jsonElement.isJsonObject()) {
             Chrysalis.LOGGER.error("Unable to load splash text file: {}, file must be an object containing splash text data", resourceLocation);
@@ -95,13 +95,13 @@ public class SplashTextLoader extends SimplePreparableReloadListener<Completable
         SplashTextGroup.fromJson(jsonElement.getAsJsonObject()).getTexts().filter(SplashText::validate).forEach(this::addSplashes);
     }
 
+    private void addVanillaSplashes(ResourceLocation resourceLocation, Stream<String> stream) {
+        stream.map(SimpleSplashText::new).forEach(this::addSplashes);
+    }
+
     private void addSplashes(SplashText splashText) {
         this.maxWeight += splashText.getWeight();
         this.splashTexts.add(splashText);
-    }
-
-    private void addVanillaSplashes(ResourceLocation resourceLocation, Stream<String> stream) {
-        stream.map(SimpleSplashText::new).forEach(this::addSplashes);
     }
 
     public static int lifeTime = 15;
