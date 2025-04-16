@@ -25,6 +25,7 @@ import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.SeatRen
 import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.FluidloggedState;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
+import net.sydokiddo.chrysalis.util.blocks.codecs.BlockConversionData;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
@@ -65,6 +66,7 @@ public class CRegistry {
 
     public static final ResourceKey<Registry<BlockPropertyData>> BLOCK_PROPERTY_DATA = RegistryHelper.registerBlockDataType("properties");
     public static final ResourceKey<Registry<BlockSoundData>> BLOCK_SOUND_DATA = RegistryHelper.registerBlockDataType("sound_group");
+    public static final ResourceKey<Registry<BlockConversionData>> BLOCK_CONVERSION_DATA = RegistryHelper.registerBlockDataType("conversion");
     public static final ResourceKey<Registry<ChargedMobDropData>> CHARGED_MOB_DROP_DATA = RegistryHelper.registerEntityDataType("charged_mob_drop");
     public static final ResourceKey<Registry<PlayerLootTableData>> PLAYER_LOOT_TABLE_DATA = RegistryHelper.registerEntityDataType("player_loot_table");
     public static final ResourceKey<Registry<EntitySpawnerData.EntitySpawnerConfig>> ENTITY_SPAWNER_CONFIG_DATA = RegistryHelper.registerEntityDataType("entity_spawner_config");
@@ -82,6 +84,7 @@ public class CRegistry {
         CDataComponents.register(eventBus);
         CCreativeModeTabs.register(eventBus);
         CSoundEvents.register(eventBus);
+        CGameEvents.register(eventBus);
         CParticles.register(eventBus);
         CEntities.register(eventBus);
         CMemoryModules.register(eventBus);

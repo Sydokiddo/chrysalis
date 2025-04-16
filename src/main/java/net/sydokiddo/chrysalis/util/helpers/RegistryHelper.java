@@ -1,5 +1,6 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -7,8 +8,10 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -99,6 +102,8 @@ public class RegistryHelper {
     public static <T> ResourceKey<Registry<T>> registerMobVariantDataType(String string) {
         return registerEntityDataType("mob_variant/" + string);
     }
+
+    public static final Codec<Holder<Block>> SINGULAR_BLOCK_CODEC = RegistryFixedCodec.create(Registries.BLOCK);
 
     // endregion
 

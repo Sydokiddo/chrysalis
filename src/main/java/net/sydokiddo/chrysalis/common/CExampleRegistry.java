@@ -2,7 +2,6 @@ package net.sydokiddo.chrysalis.common;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.CommonColors;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -154,8 +153,6 @@ public class CExampleRegistry {
     // endregion
 
     // region Miscellaneous Example Registries
-
-    private static final ResourceLocation EXAMPLE_GAMEPLAY_LOOT_TABLE = RegistryHelper.registerCustomLootTable(Chrysalis.resourceLocationId("gameplay/example_gameplay_loot_table"));
 
     private static void registerExampleStructureMusic() {
         RegistryHelper.registerStructureMusic("minecraft:village_plains", SoundEvents.MUSIC_CREDITS, 20, 600, false);

@@ -1,11 +1,24 @@
 package net.sydokiddo.chrysalis.common;
 
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.Unit;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Rabbit;
@@ -17,13 +30,20 @@ import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.Evoker;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -32,9 +52,11 @@ import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
+import net.sydokiddo.chrysalis.common.misc.CGameEvents;
 import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
+import net.sydokiddo.chrysalis.util.blocks.codecs.BlockConversionData;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
@@ -160,6 +182,46 @@ public class CServerEvents {
             UuidCommand.register(event.getDispatcher());
             VelocityCommand.register(event.getDispatcher());
         }
+
+        @SubscribeEvent
+        private static void onUseItemOnBlock(UseItemOnBlockEvent event) {
+
+            if (Chrysalis.registryAccess == null) return;
+            Optional<BlockConversionData> optional = Chrysalis.registryAccess.lookupOrThrow(CRegistry.BLOCK_CONVERSION_DATA).stream().filter(codec -> codec.startingBlocks().contains(event.getLevel().getBlockState(event.getPos()).getBlockHolder()) && codec.usedItems().contains(event.getItemStack().getItemHolder())).findFirst();
+
+            if (optional.isPresent() && event.getPlayer() != null) {
+
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getOffhandItem().is(Items.SHIELD) && !event.getPlayer().isSecondaryUseActive()) return;
+                event.getLevel().setBlockAndUpdate(event.getPos(), optional.get().resultingBlock().value().withPropertiesOf(event.getLevel().getBlockState(event.getPos())));
+
+                SoundEvent soundEvent = optional.get().soundEvent().value();
+                Holder<GameEvent> gameEvent = optional.get().gameEvent();
+                BlockState particleState = optional.get().particleState().value().defaultBlockState();
+
+                if (soundEvent != SoundEvents.EMPTY) event.getLevel().playSound(null, event.getPos(), soundEvent, SoundSource.BLOCKS, 1.0F, optional.get().randomizeSoundPitch() ? 0.8F + event.getLevel().getRandom().nextFloat() * 0.4F : 1.0F);
+                if (gameEvent != CGameEvents.EMPTY) event.getLevel().gameEvent(gameEvent, event.getPos(), GameEvent.Context.of(event.getPlayer(), event.getLevel().getBlockState(event.getPos())));
+
+                if (event.getFace() != null) {
+                    if (particleState.getRenderShape() != RenderShape.INVISIBLE) ParticleUtils.spawnParticlesOnBlockFace(event.getLevel(), event.getPos(), new BlockParticleOption(ParticleTypes.BLOCK, particleState), UniformInt.of(3, 5), event.getFace(), () -> ParticleUtils.getRandomSpeedRanges(event.getLevel().getRandom()), 0.55D);
+                    if (optional.get().returnedItem() != Items.AIR) Block.popResourceFromFace(event.getLevel(), event.getPos(), event.getFace(), new ItemStack(optional.get().returnedItem()));
+                }
+
+                switch (optional.get().useInteraction()) {
+
+                    case "consume_item" -> {
+                        if (!event.getItemStack().getCraftingRemainder().isEmpty()) event.getPlayer().setItemInHand(event.getHand(), ItemUtils.createFilledResult(event.getItemStack(), event.getPlayer(), event.getItemStack().getCraftingRemainder()));
+                        else event.getItemStack().consume(1, event.getPlayer());
+                    }
+
+                    case "consume_durability" -> event.getItemStack().hurtAndBreak(1, event.getPlayer(), LivingEntity.getSlotForHand(event.getHand()));
+                }
+
+                event.getPlayer().awardStat(Stats.ITEM_USED.get(event.getItemStack().getItem()));
+                if (event.getPlayer() instanceof ServerPlayer serverPlayer) CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, event.getPos(), event.getItemStack());
+
+                event.cancelWithResult(InteractionResult.SUCCESS);
+            }
+        }
     }
 
     @EventBusSubscriber(modid = Chrysalis.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
@@ -169,6 +231,7 @@ public class CServerEvents {
         private static void datapackRegistry(DataPackRegistryEvent.NewRegistry event) {
             event.dataPackRegistry(CRegistry.BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
             event.dataPackRegistry(CRegistry.BLOCK_SOUND_DATA, BlockSoundData.CODEC);
+            event.dataPackRegistry(CRegistry.BLOCK_CONVERSION_DATA, BlockConversionData.CODEC);
             event.dataPackRegistry(CRegistry.CHARGED_MOB_DROP_DATA, ChargedMobDropData.CODEC);
             event.dataPackRegistry(CRegistry.PLAYER_LOOT_TABLE_DATA, PlayerLootTableData.CODEC);
             event.dataPackRegistry(CRegistry.ENTITY_SPAWNER_CONFIG_DATA, EntitySpawnerData.EntitySpawnerConfig.CODEC);

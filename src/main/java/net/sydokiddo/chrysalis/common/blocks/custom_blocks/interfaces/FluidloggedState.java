@@ -19,6 +19,7 @@ public enum FluidloggedState implements StringRepresentable {
         this.fluidName = fluidName;
     }
 
+    @Override
     public String toString() {
         return this.fluidName;
     }
