@@ -12,7 +12,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -22,7 +21,6 @@ import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.EncounterSpawnerRenderer;
 import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.EntitySpawnerRenderer;
 import net.sydokiddo.chrysalis.client.entities.rendering.custom_entities.SeatRenderer;
-import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.FluidloggedState;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockConversionData;
@@ -93,8 +91,6 @@ public class CRegistry {
         CStatusEffects.register(eventBus);
         CGameRules.register();
         CCriteriaTriggers.register(eventBus);
-        RegistryHelper.registerFluidForFluidlogging(Fluids.WATER, FluidloggedState.WATER);
-        RegistryHelper.registerFluidForFluidlogging(Fluids.LAVA, FluidloggedState.LAVA);
     }
 
     @SuppressWarnings("unused")

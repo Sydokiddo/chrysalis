@@ -39,6 +39,8 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
     Supplier<ImmutableBiMap<Fluid, FluidloggedState>> STATE_FROM_FLUID = Suppliers.memoize(
         () -> ImmutableBiMap.<Fluid, FluidloggedState>builder()
             .put(Fluids.EMPTY, FluidloggedState.AIR)
+            .put(Fluids.WATER, FluidloggedState.WATER)
+            .put(Fluids.LAVA, FluidloggedState.LAVA)
             .putAll(stateFromFluidMap.entrySet())
         .build()
     );

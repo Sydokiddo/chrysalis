@@ -34,7 +34,7 @@ public class ExampleFluidloggedBlock extends Block implements SimpleFluidloggedB
         builder.add(CBlockStateProperties.FLUIDLOGGED);
     }
 
-    @Nullable
+    @Nullable @Override
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext blockPlaceContext) {
         return SimpleFluidloggedBlock.getStateForPlacement(blockPlaceContext, this.defaultBlockState());
     }

@@ -26,6 +26,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.particles.options.*;
 import net.sydokiddo.chrysalis.common.blocks.custom_blocks.examples_and_testing.*;
+import net.sydokiddo.chrysalis.common.blocks.custom_blocks.interfaces.FluidloggedState;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
 import net.sydokiddo.chrysalis.common.items.custom_items.examples_and_testing.ExampleBowItem;
 import net.sydokiddo.chrysalis.common.misc.CTags;
@@ -53,6 +54,7 @@ public class CExampleRegistry {
         BLOCKS.register(eventBus);
         registerExampleStructureMusic();
         registerExampleDispenserMethods();
+        registerExampleFluidsForFluidLogging();
         Chrysalis.LOGGER.warn("WARNING: {} example registry has been initialized.", Chrysalis.LOGGER.getName());
     }
 
@@ -174,6 +176,11 @@ public class CExampleRegistry {
 
     private static void summonExampleEntitySpawner(Level level, Vec3 position) {
         EntitySpawner.create(level, Chrysalis.stringId("example"), position);
+    }
+
+    private static void registerExampleFluidsForFluidLogging() {
+        RegistryHelper.registerFluidForFluidlogging(Fluids.WATER, FluidloggedState.WATER);
+        RegistryHelper.registerFluidForFluidlogging(Fluids.LAVA, FluidloggedState.LAVA);
     }
 
     private static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
