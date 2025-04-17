@@ -1,0 +1,12 @@
+{
+  "starting_blocks": "minecraft:carved_pumpkin",
+  "resulting_block": "minecraft:jack_o_lantern",
+  "used_items": "minecraft:torch",
+  "use_interaction": "consume_item",
+  "sound_event": "minecraft:block.wood.place",
+  "randomize_sound_pitch": true,
+  "game_event": "minecraft:block_change",
+  "particle_state": "minecraft:torch",
+  "requires_sneaking": false,
+  "for_testing": true
+}
