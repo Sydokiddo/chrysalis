@@ -111,8 +111,7 @@ public class BlockMixin {
         private void chrysalis$blockEmissiveRenderingDate(BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
 
             if (Chrysalis.registryAccess == null) return;
-            BlockState blockState = blockGetter.getBlockState(blockPos);
-            Optional<BlockPropertyData> optional = this.chrysalis$getBlockPropertyData(blockState);
+            Optional<BlockPropertyData> optional = this.chrysalis$getBlockPropertyData(blockGetter.getBlockState(blockPos));
 
             if (optional.isPresent()) {
                 if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;

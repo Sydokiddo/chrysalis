@@ -187,11 +187,17 @@ public class CServerEvents {
         private static void onUseItemOnBlock(UseItemOnBlockEvent event) {
 
             if (Chrysalis.registryAccess == null) return;
-            Optional<BlockConversionData> optional = Chrysalis.registryAccess.lookupOrThrow(CRegistry.BLOCK_CONVERSION_DATA).stream().filter(codec -> codec.startingBlocks().contains(event.getLevel().getBlockState(event.getPos()).getBlockHolder()) && codec.usedItems().contains(event.getItemStack().getItemHolder())).findFirst();
+
+            Optional<BlockConversionData> optional = Chrysalis.registryAccess.lookupOrThrow(CRegistry.BLOCK_CONVERSION_DATA).stream().filter
+            (
+                codec ->
+                codec.startingBlocks().contains(event.getLevel().getBlockState(event.getPos()).getBlockHolder()) &&
+                codec.usedItems().contains(event.getItemStack().getItemHolder())
+            ).findFirst();
 
             if (optional.isPresent() && event.getPlayer() != null) {
 
-                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getOffhandItem().is(Items.SHIELD) && !event.getPlayer().isSecondaryUseActive()) return;
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || optional.get().requiresSneaking() && !event.getPlayer().isShiftKeyDown() || event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getOffhandItem().is(Items.SHIELD) && !event.getPlayer().isSecondaryUseActive()) return;
                 event.getLevel().setBlockAndUpdate(event.getPos(), optional.get().resultingBlock().value().withPropertiesOf(event.getLevel().getBlockState(event.getPos())));
 
                 SoundEvent soundEvent = optional.get().soundEvent().value();

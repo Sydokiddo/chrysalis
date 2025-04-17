@@ -16,7 +16,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.sydokiddo.chrysalis.common.misc.CGameEvents;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 
-public record BlockConversionData(HolderSet<Block> startingBlocks, Holder<Block> resultingBlock, HolderSet<Item> usedItems, String useInteraction, Holder<Item> returnedItem, Holder<SoundEvent> soundEvent, boolean randomizeSoundPitch, Holder<GameEvent> gameEvent, Holder<Block> particleState, boolean forTesting) {
+public record BlockConversionData(HolderSet<Block> startingBlocks, Holder<Block> resultingBlock, HolderSet<Item> usedItems, String useInteraction, Holder<Item> returnedItem, Holder<SoundEvent> soundEvent, boolean randomizeSoundPitch, Holder<GameEvent> gameEvent, Holder<Block> particleState, boolean requiresSneaking, boolean forTesting) {
 
     /**
      * Converts information from a json file into specified block conversion data.
@@ -32,6 +32,7 @@ public record BlockConversionData(HolderSet<Block> startingBlocks, Holder<Block>
         Codec.BOOL.optionalFieldOf("randomize_sound_pitch", false).forGetter(BlockConversionData::randomizeSoundPitch),
         GameEvent.CODEC.optionalFieldOf("game_event", CGameEvents.EMPTY).forGetter(BlockConversionData::gameEvent),
         RegistryHelper.SINGULAR_BLOCK_CODEC.optionalFieldOf("particle_state", Blocks.AIR.defaultBlockState().getBlockHolder()).forGetter(BlockConversionData::particleState),
+        Codec.BOOL.optionalFieldOf("requires_sneaking", false).forGetter(BlockConversionData::requiresSneaking),
         Codec.BOOL.optionalFieldOf("for_testing", false).forGetter(BlockConversionData::forTesting)
     ).apply(instance, BlockConversionData::new));
 }
