@@ -197,7 +197,7 @@ public class CServerEvents {
 
             if (optional.isPresent() && event.getPlayer() != null) {
 
-                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || optional.get().requiresSneaking() && !event.getPlayer().isShiftKeyDown() || event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getOffhandItem().is(Items.SHIELD) && !event.getPlayer().isSecondaryUseActive()) return;
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || optional.get().requiresSneaking() && !event.getPlayer().isShiftKeyDown() || !optional.get().requiresSneaking() && event.getPlayer().isShiftKeyDown() || event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getOffhandItem().is(Items.SHIELD) && !event.getPlayer().isSecondaryUseActive()) return;
                 event.getLevel().setBlockAndUpdate(event.getPos(), optional.get().resultingBlock().value().withPropertiesOf(event.getLevel().getBlockState(event.getPos())));
 
                 SoundEvent soundEvent = optional.get().soundEvent().value();
