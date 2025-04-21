@@ -7,6 +7,6 @@
   "randomize_sound_pitch": true,
   "game_event": "minecraft:block_change",
   "particle_state": "minecraft:torch",
-  "requires_sneaking": false,
+  "sneaking_requirement": "not_sneaking",
   "for_testing": true
 }

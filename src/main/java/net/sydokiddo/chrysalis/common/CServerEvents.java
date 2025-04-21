@@ -39,6 +39,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
@@ -197,7 +198,19 @@ public class CServerEvents {
 
             if (optional.isPresent() && event.getPlayer() != null) {
 
-                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || optional.get().requiresSneaking() && !event.getPlayer().isShiftKeyDown() || !optional.get().requiresSneaking() && event.getPlayer().isShiftKeyDown() || event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getOffhandItem().is(Items.SHIELD) && !event.getPlayer().isSecondaryUseActive()) return;
+                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getOffhandItem().is(Tags.Items.TOOLS_SHIELD) && !event.getPlayer().isSecondaryUseActive()) return;
+
+                switch (optional.get().sneakingRequirement()) {
+
+                    case "sneaking" -> {
+                        if (!event.getPlayer().isShiftKeyDown()) return;
+                    }
+
+                    case "not_sneaking" -> {
+                        if (event.getPlayer().isShiftKeyDown()) return;
+                    }
+                }
+
                 event.getLevel().setBlockAndUpdate(event.getPos(), optional.get().resultingBlock().value().withPropertiesOf(event.getLevel().getBlockState(event.getPos())));
 
                 SoundEvent soundEvent = optional.get().soundEvent().value();

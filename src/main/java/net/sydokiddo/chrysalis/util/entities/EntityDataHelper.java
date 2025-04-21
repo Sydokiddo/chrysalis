@@ -46,13 +46,17 @@ public class EntityDataHelper {
         return !serverPlayer.getAbilities().instabuild && serverPlayer.getFoodData().getFoodLevel() <= 6.0F;
     }
 
+    public static boolean isMoving(Entity entity) {
+        return entity.getDeltaMovement().horizontalDistanceSqr() > 0.0D;
+    }
+
     public static boolean isLivingEntityMoving(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) return player.getKnownMovement().horizontalDistanceSqr() > 0.0D;
-        else return livingEntity.getDeltaMovement().horizontalDistanceSqr() > 0.0D;
+        else return isMoving(livingEntity);
     }
 
     public static boolean isMobMoving(Mob mob) {
-        return !mob.isNoAi() && !mob.isPassenger() && isLivingEntityMoving(mob);
+        return isLivingEntityMoving(mob) && !mob.isNoAi() && !mob.isPassenger();
     }
 
     public static boolean isInFluid(LivingEntity livingEntity) {
