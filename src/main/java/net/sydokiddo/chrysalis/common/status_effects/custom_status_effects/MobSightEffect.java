@@ -4,7 +4,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class MobSightEffect extends MobEffect {
@@ -19,6 +19,6 @@ public class MobSightEffect extends MobEffect {
 
     @Override
     public void onEffectStarted(@NotNull LivingEntity livingEntity, int amplifier) {
-        if (livingEntity instanceof ServerPlayer serverPlayer) EntityDataHelper.updateCurrentShader(serverPlayer);
+        if (livingEntity instanceof ServerPlayer serverPlayer) EntityHelper.updateCurrentShader(serverPlayer);
     }
 }

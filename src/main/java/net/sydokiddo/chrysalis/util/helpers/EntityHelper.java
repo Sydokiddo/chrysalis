@@ -1,4 +1,4 @@
-package net.sydokiddo.chrysalis.util.entities;
+package net.sydokiddo.chrysalis.util.helpers;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.protocol.game.ClientboundSetCameraPacket;
@@ -34,7 +34,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @SuppressWarnings("unused")
-public class EntityDataHelper {
+public class EntityHelper {
 
     /**
      * Accesses various pieces of data from entities.
@@ -174,7 +174,7 @@ public class EntityDataHelper {
     }
 
     public static void dropFromLootTable(Entity entity, ResourceKey<LootTable> lootTableKey) {
-        List<ItemStack> lootTable = EntityDataHelper.getNonLivingEntityLootTable(entity, lootTableKey);
+        List<ItemStack> lootTable = EntityHelper.getNonLivingEntityLootTable(entity, lootTableKey);
         if (entity.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) for (ItemStack itemStack : lootTable) entity.spawnAtLocation(serverLevel, itemStack);
     }
 

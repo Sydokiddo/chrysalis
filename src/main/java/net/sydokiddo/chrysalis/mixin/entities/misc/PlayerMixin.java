@@ -44,7 +44,7 @@ import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.common.misc.CAttributes;
 import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -83,13 +83,13 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))
     private void chrysalis$addPlayerTags(CompoundTag compoundTag, CallbackInfo info) {
-        Optional<UUID> uUID = EntityDataHelper.getEncounteredMobUUID(this.chrysalis$player);
+        Optional<UUID> uUID = EntityHelper.getEncounteredMobUUID(this.chrysalis$player);
         uUID.ifPresent(value -> compoundTag.putUUID(this.chrysalis$encounteredMobUuidTag, value));
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("RETURN"))
     private void chrysalis$readPlayerTags(CompoundTag compoundTag, CallbackInfo info) {
-        if (compoundTag.get(this.chrysalis$encounteredMobUuidTag) != null) EntityDataHelper.setEncounteredMobUUID(this.chrysalis$player, compoundTag.getUUID(this.chrysalis$encounteredMobUuidTag));
+        if (compoundTag.get(this.chrysalis$encounteredMobUuidTag) != null) EntityHelper.setEncounteredMobUUID(this.chrysalis$player, compoundTag.getUUID(this.chrysalis$encounteredMobUuidTag));
     }
 
     @Inject(method = "createAttributes", at = @At("RETURN"))
@@ -134,7 +134,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At(value = "TAIL"))
     private void chrysalis$playInventoryItemDroppingSound(ItemStack itemStack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
-        if (!itemStack.isEmpty() && retainOwnership) EntityDataHelper.playItemDroppingSound(this.chrysalis$player);
+        if (!itemStack.isEmpty() && retainOwnership) EntityHelper.playItemDroppingSound(this.chrysalis$player);
     }
 
     /**
@@ -270,7 +270,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
         @Redirect(method = "hurtServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
         private boolean chrysalis$hurtPlayerWithDamageCap(Player player, ServerLevel serverLevel, DamageSource damageSource, float damageAmount) {
-            return super.hurtServer(serverLevel, damageSource, EntityDataHelper.getDamageCap(this, damageSource, damageAmount));
+            return super.hurtServer(serverLevel, damageSource, EntityHelper.getDamageCap(this, damageSource, damageAmount));
         }
 
         /**

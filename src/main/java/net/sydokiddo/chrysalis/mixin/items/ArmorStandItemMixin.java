@@ -4,7 +4,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorStandItem;
 import net.minecraft.world.item.context.UseOnContext;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,6 +20,6 @@ public class ArmorStandItemMixin {
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventArmorStandPlacement(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         Player player = useOnContext.getPlayer();
-        if (player != null && EntityDataHelper.hasBuildPreventingEffect(player) && !player.getAbilities().instabuild) cir.setReturnValue(InteractionResult.FAIL);
+        if (player != null && EntityHelper.hasBuildPreventingEffect(player) && !player.getAbilities().instabuild) cir.setReturnValue(InteractionResult.FAIL);
     }
 }

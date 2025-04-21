@@ -9,7 +9,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.technical.commands.util.CommandCommonMethods;
 import java.util.Objects;
@@ -43,11 +43,11 @@ public class CoordinatesCommand {
         int y = serverPlayer.getBlockY();
         int z = serverPlayer.getBlockZ();
 
-        if (EntityDataHelper.isInOverworld(serverPlayer)) {
+        if (EntityHelper.isInOverworld(serverPlayer)) {
             dimensionString = Level.NETHER.location().toString();
             x = x / 8;
             z = z / 8;
-        } else if (EntityDataHelper.isInNether(serverPlayer)) {
+        } else if (EntityHelper.isInNether(serverPlayer)) {
             dimensionString = Level.OVERWORLD.location().toString();
             x = x * 8;
             z = z * 8;

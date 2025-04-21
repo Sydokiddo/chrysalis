@@ -5,7 +5,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.BlockState;
 import net.sydokiddo.chrysalis.common.misc.CTags;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,6 +21,6 @@ public class BlockItemMixin {
     @Inject(method = "canPlace", at = @At("HEAD"), cancellable = true)
     private void chrysalis$preventPlayerBlockPlacement(BlockPlaceContext blockPlaceContext, BlockState blockState, CallbackInfoReturnable<Boolean> cir) {
         Player player = blockPlaceContext.getPlayer();
-        if (player != null && EntityDataHelper.hasBuildPreventingEffect(player) && !player.getAbilities().instabuild && !blockState.is(CTags.ALLOWS_PLACEMENT_WITH_BUILDING_FATIGUE)) cir.setReturnValue(false);
+        if (player != null && EntityHelper.hasBuildPreventingEffect(player) && !player.getAbilities().instabuild && !blockState.is(CTags.ALLOWS_PLACEMENT_WITH_BUILDING_FATIGUE)) cir.setReturnValue(false);
     }
 }

@@ -59,7 +59,7 @@ import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockConversionData;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
 import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
@@ -122,10 +122,10 @@ public class CServerEvents {
         private static void onPlayerPreTick(PlayerTickEvent.Pre event) {
 
             if (event.getEntity().level().isClientSide()) return;
-            Optional<UUID> encounteredMobUuid = EntityDataHelper.getEncounteredMobUUID(event.getEntity());
+            Optional<UUID> encounteredMobUuid = EntityHelper.getEncounteredMobUUID(event.getEntity());
 
             if (shouldClearMusic && event.getEntity() instanceof ServerPlayer serverPlayer) {
-                EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+                EntityHelper.setEncounteredMobUUID(serverPlayer, null);
                 EventHelper.clearMusicOnServer(serverPlayer, true);
                 shouldClearMusic = false;
             }
@@ -144,7 +144,7 @@ public class CServerEvents {
 
         @SubscribeEvent
         private static void onPlayerPostTick(PlayerTickEvent.Post event) {
-            if (event.getEntity() instanceof ServerPlayer serverPlayer && serverPlayer.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.SKULLS) && serverPlayer.tickCount % 20 == 0) EntityDataHelper.updateCurrentShader(serverPlayer);
+            if (event.getEntity() instanceof ServerPlayer serverPlayer && serverPlayer.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.SKULLS) && serverPlayer.tickCount % 20 == 0) EntityHelper.updateCurrentShader(serverPlayer);
         }
 
         @SubscribeEvent

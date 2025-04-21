@@ -14,7 +14,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.misc.CTags;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.shared_classes.ExtraReachDebugUtilityItem;
 import net.sydokiddo.chrysalis.common.misc.CDamageTypes;
@@ -68,7 +68,7 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
     }
 
     public static boolean canAttack(Entity target, Player player) {
-        return target.isAttackable() && !EntityDataHelper.isTargetLinkedAllay(target, player) && (player.isCreative() || !target.isInvulnerable());
+        return target.isAttackable() && !EntityHelper.isTargetLinkedAllay(target, player) && (player.isCreative() || !target.isInvulnerable());
     }
 
     @OnlyIn(Dist.CLIENT)

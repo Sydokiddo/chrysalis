@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.sydokiddo.chrysalis.common.misc.CAttributes;
 import net.sydokiddo.chrysalis.common.misc.CDamageTypes;
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.MobSightEffect;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
@@ -101,12 +101,12 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "tickEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;updateGlowingStatus()V"))
     private void chrysalis$updateMobSightStatuses(CallbackInfo info) {
-        if (this.chrysalis$livingEntity instanceof ServerPlayer serverPlayer && this.getActiveEffects().stream().noneMatch(mobEffectInstance -> mobEffectInstance.getEffect() instanceof MobSightEffect)) EntityDataHelper.updateCurrentShader(serverPlayer);
+        if (this.chrysalis$livingEntity instanceof ServerPlayer serverPlayer && this.getActiveEffects().stream().noneMatch(mobEffectInstance -> mobEffectInstance.getEffect() instanceof MobSightEffect)) EntityHelper.updateCurrentShader(serverPlayer);
     }
 
     @Inject(method = "onEquipItem", at = @At(value = "HEAD"))
     private void chrysalis$updateHeadItemShader(EquipmentSlot equipmentSlot, ItemStack oldItem, ItemStack newItem, CallbackInfo info) {
-        if (CConfigOptions.MOB_HEAD_SHADERS.get() && this.chrysalis$livingEntity instanceof ServerPlayer serverPlayer && equipmentSlot == EquipmentSlot.HEAD) EntityDataHelper.updateCurrentShader(serverPlayer);
+        if (CConfigOptions.MOB_HEAD_SHADERS.get() && this.chrysalis$livingEntity instanceof ServerPlayer serverPlayer && equipmentSlot == EquipmentSlot.HEAD) EntityHelper.updateCurrentShader(serverPlayer);
     }
 
     /**

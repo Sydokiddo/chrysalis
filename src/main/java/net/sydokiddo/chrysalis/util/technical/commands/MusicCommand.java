@@ -16,7 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import java.util.Collection;
 
@@ -68,7 +68,7 @@ public class MusicCommand {
         for (Player player : players) {
 
             if (player instanceof ServerPlayer serverPlayer) {
-                EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+                EntityHelper.setEncounteredMobUUID(serverPlayer, null);
                 EventHelper.sendMusic(serverPlayer, soundEvent, minDelay, maxDelay, replaceCurrentMusic);
             }
 
@@ -89,7 +89,7 @@ public class MusicCommand {
         for (Player player : players) {
 
             if (player instanceof ServerPlayer serverPlayer) {
-                EntityDataHelper.setEncounteredMobUUID(serverPlayer, null);
+                EntityHelper.setEncounteredMobUUID(serverPlayer, null);
                 EventHelper.clearMusicOnServer(serverPlayer, shouldFade);
             }
 

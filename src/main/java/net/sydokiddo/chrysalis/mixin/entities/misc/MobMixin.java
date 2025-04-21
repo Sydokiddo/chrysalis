@@ -15,7 +15,7 @@ import net.sydokiddo.chrysalis.common.CRegistry;
 import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.util.entities.interfaces.ChargedMob;
 import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
@@ -77,7 +77,7 @@ public abstract class MobMixin extends LivingEntity {
 
     @Override
     public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
-        return super.hurtServer(serverLevel, damageSource, EntityDataHelper.getDamageCap(this, damageSource, damageAmount));
+        return super.hurtServer(serverLevel, damageSource, EntityHelper.getDamageCap(this, damageSource, damageAmount));
     }
 
     /**

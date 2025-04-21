@@ -18,7 +18,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.ScreenshotEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.CClientEvents;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.util.sounds.music.MusicTracker;
 import net.sydokiddo.chrysalis.util.technical.ClipboardImage;
 import net.sydokiddo.chrysalis.util.technical.splash_texts.CSplashManager;
@@ -74,7 +74,7 @@ public class MinecraftMixin {
 
     @Inject(method = "handleKeybinds", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;swing(Lnet/minecraft/world/InteractionHand;)V"))
     private void chrysalis$playKeyPressItemDroppingSound(CallbackInfo info) {
-        if (this.player != null) EntityDataHelper.playItemDroppingSound(this.player);
+        if (this.player != null) EntityHelper.playItemDroppingSound(this.player);
     }
 
     @OnlyIn(Dist.CLIENT)

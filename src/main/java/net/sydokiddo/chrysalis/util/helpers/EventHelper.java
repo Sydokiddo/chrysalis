@@ -18,7 +18,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.ClearMusicPayload;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.QueuedMusicPayload;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.ResetMusicFadePayload;
@@ -104,8 +103,8 @@ public class EventHelper {
         if (!(mob instanceof EncounterMusicMob encounterMusicMob) || !playOnFirstTick && !checkEncounterMusicRefreshing(mob)) return;
 
         for (ServerPlayer serverPlayer : getNearbyPlayers(mob, encounterMusicMob.chrysalis$getFinalEncounterMusicRange())) {
-            if (EntityDataHelper.getEncounteredMobUUID(serverPlayer).isPresent()) return;
-            EntityDataHelper.setEncounteredMobUUID(serverPlayer, mob.getUUID());
+            if (EntityHelper.getEncounteredMobUUID(serverPlayer).isPresent()) return;
+            EntityHelper.setEncounteredMobUUID(serverPlayer, mob.getUUID());
             sendMusic(serverPlayer, soundEvent, 10, 10, true);
         }
     }

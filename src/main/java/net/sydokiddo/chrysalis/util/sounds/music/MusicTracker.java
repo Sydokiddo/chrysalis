@@ -17,7 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
-import net.sydokiddo.chrysalis.util.entities.EntityDataHelper;
+import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.StructureChangedPayload;
 import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
@@ -55,7 +55,7 @@ public class MusicTracker {
             Minecraft minecraft = Minecraft.getInstance();
             Player player = minecraft.player;
 
-            if (getQueuedMusic() == music || player != null && EntityDataHelper.getEncounteredMobUUID(player).isPresent()) return;
+            if (getQueuedMusic() == music || player != null && EntityHelper.getEncounteredMobUUID(player).isPresent()) return;
 
             queuedMusic = music;
 
