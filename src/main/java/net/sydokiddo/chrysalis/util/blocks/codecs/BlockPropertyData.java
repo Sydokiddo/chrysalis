@@ -6,6 +6,7 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
+import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 
 public record BlockPropertyData(HolderSet<Block> blocks, float destroyTime, boolean requiresTool, int lightLevel, boolean emissiveRendering, boolean replaceable, boolean ignitedByLava, boolean spawnsTerrainParticles, boolean forTesting) {
 
@@ -22,6 +23,6 @@ public record BlockPropertyData(HolderSet<Block> blocks, float destroyTime, bool
         Codec.BOOL.fieldOf("replaceable").forGetter(BlockPropertyData::replaceable),
         Codec.BOOL.fieldOf("ignited_by_lava").forGetter(BlockPropertyData::ignitedByLava),
         Codec.BOOL.fieldOf("spawns_terrain_particles").forGetter(BlockPropertyData::spawnsTerrainParticles),
-        Codec.BOOL.optionalFieldOf("for_testing", false).forGetter(BlockPropertyData::forTesting)
+        Codec.BOOL.optionalFieldOf(ComponentHelper.forTestingString, false).forGetter(BlockPropertyData::forTesting)
     ).apply(instance, BlockPropertyData::new));
 }

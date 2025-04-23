@@ -59,6 +59,7 @@ import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockConversionData;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
+import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.util.entities.codecs.ChargedMobDropData;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
@@ -202,13 +203,15 @@ public class CServerEvents {
 
                 switch (optional.get().sneakingRequirement()) {
 
+                    case ComponentHelper.noneString -> {}
                     case "sneaking" -> {
                         if (!event.getPlayer().isShiftKeyDown()) return;
                     }
-
                     case "not_sneaking" -> {
                         if (event.getPlayer().isShiftKeyDown()) return;
                     }
+
+                    default -> Chrysalis.LOGGER.warn("Unknown Sneaking Requirement: {}", optional.get().sneakingRequirement());
                 }
 
                 event.getLevel().setBlockAndUpdate(event.getPos(), optional.get().resultingBlock().value().withPropertiesOf(event.getLevel().getBlockState(event.getPos())));
@@ -227,12 +230,14 @@ public class CServerEvents {
 
                 switch (optional.get().useInteraction()) {
 
+                    case ComponentHelper.noneString -> {}
                     case "consume_item" -> {
                         if (!event.getItemStack().getCraftingRemainder().isEmpty()) event.getPlayer().setItemInHand(event.getHand(), ItemUtils.createFilledResult(event.getItemStack(), event.getPlayer(), event.getItemStack().getCraftingRemainder()));
                         else event.getItemStack().consume(1, event.getPlayer());
                     }
-
                     case "consume_durability" -> event.getItemStack().hurtAndBreak(1, event.getPlayer(), LivingEntity.getSlotForHand(event.getHand()));
+
+                    default -> Chrysalis.LOGGER.warn("Unknown Use Interaction: {}", optional.get().useInteraction());
                 }
 
                 event.getPlayer().awardStat(Stats.ITEM_USED.get(event.getItemStack().getItem()));

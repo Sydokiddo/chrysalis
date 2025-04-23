@@ -11,6 +11,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import java.util.Objects;
 
 public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSound, Holder<SoundEvent> stepSound, Holder<SoundEvent> placeSound, Holder<SoundEvent> hitSound, Holder<SoundEvent> fallSound, float volume, float pitch, String noteBlockInstrument, boolean forTesting) {
@@ -29,7 +30,7 @@ public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSo
         Codec.FLOAT.fieldOf("volume").forGetter(BlockSoundData::volume),
         Codec.FLOAT.fieldOf("pitch").forGetter(BlockSoundData::pitch),
         Codec.STRING.optionalFieldOf("note_block_instrument", "null").forGetter(BlockSoundData::noteBlockInstrument),
-        Codec.BOOL.optionalFieldOf("for_testing", false).forGetter(BlockSoundData::forTesting)
+        Codec.BOOL.optionalFieldOf(ComponentHelper.forTestingString, false).forGetter(BlockSoundData::forTesting)
     ).apply(instance, BlockSoundData::new));
 
     @SuppressWarnings("deprecation")

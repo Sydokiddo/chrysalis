@@ -21,6 +21,11 @@ public class ComponentHelper {
         UNKNOWN = Component.translatable("gui.chrysalis.unknown")
     ;
 
+    public static final String
+        noneString = "none",
+        forTestingString = "for_testing"
+    ;
+
     public static Component getWeatherComponent(Level level, Holder<Biome> biome, BlockPos blockPos) {
 
         MutableComponent weatherType;
