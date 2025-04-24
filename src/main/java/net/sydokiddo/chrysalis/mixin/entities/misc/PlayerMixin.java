@@ -46,6 +46,7 @@ import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.util.entities.codecs.PlayerLootTableData;
 import net.sydokiddo.chrysalis.util.helpers.EntityHelper;
 import net.sydokiddo.chrysalis.common.misc.CTags;
+import net.sydokiddo.chrysalis.util.helpers.EventHelper;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -134,7 +135,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At(value = "TAIL"))
     private void chrysalis$playInventoryItemDroppingSound(ItemStack itemStack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
-        if (!itemStack.isEmpty() && retainOwnership) EntityHelper.playItemDroppingSound(this.chrysalis$player);
+        if (!itemStack.isEmpty() && retainOwnership) EventHelper.playItemDroppingSound(this.chrysalis$player);
     }
 
     /**

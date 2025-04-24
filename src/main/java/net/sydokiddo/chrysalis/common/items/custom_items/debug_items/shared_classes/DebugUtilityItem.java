@@ -49,8 +49,10 @@ public class DebugUtilityItem extends Item {
         if (!(entity.level() instanceof ServerLevel serverLevel)) return;
 
         for (int particleAmount = 0; particleAmount < amount; ++particleAmount) {
-            double random = serverLevel.getRandom().nextGaussian() * 0.02D;
-            serverLevel.sendParticles(particleType, entity.getRandomX(range), entity.getRandomY() + 0.5D, entity.getRandomZ(range), 1, 0.0D, random, random, random);
+            double randomX = serverLevel.getRandom().nextGaussian() * 0.02D;
+            double randomY = serverLevel.getRandom().nextGaussian() * 0.02D;
+            double randomZ = serverLevel.getRandom().nextGaussian() * 0.02D;
+            serverLevel.sendParticles(particleType, entity.getRandomX(range), entity.getRandomY() + 0.5D, entity.getRandomZ(range), 1, randomX, randomY, randomZ, 0.0D);
         }
     }
 

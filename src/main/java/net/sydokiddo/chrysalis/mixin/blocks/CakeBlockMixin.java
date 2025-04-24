@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
-import net.sydokiddo.chrysalis.util.helpers.BlockHelper;
+import net.sydokiddo.chrysalis.util.helpers.ParticleHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,6 +44,6 @@ public class CakeBlockMixin {
 
     @Inject(method = "useWithoutItem", at = @At("RETURN"))
     private void chrysalis$emitCakeEatingParticles(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        if (level instanceof ServerLevel serverLevel) BlockHelper.emitBlockParticlesAtHitPosition(serverLevel, blockState, blockHitResult, 8, 0.0D);
+        if (level instanceof ServerLevel serverLevel) ParticleHelper.emitBlockParticlesAtHitPosition(serverLevel, blockState, blockHitResult, 0.0D, 8, 0.0D);
     }
 }

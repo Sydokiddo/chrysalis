@@ -40,7 +40,7 @@ public class RegistryHelper {
     // region Potion Recipes
 
     /**
-     * Registry helpers for registering potion recipes.
+     * Registry methods for registering potion recipes.
      **/
 
     public static void registerBasePotionRecipe(PotionBrewing.Builder builder, Item ingredient, Holder<Potion> resultPotion) {
@@ -110,7 +110,7 @@ public class RegistryHelper {
     // region Music
 
     /**
-     * Registry for custom structure-specific music.
+     * Registry methods for custom structure-specific music.
      **/
 
     public static void registerStructureMusic(String structureName, Holder<SoundEvent> soundEvent, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
@@ -120,6 +120,10 @@ public class RegistryHelper {
     // endregion
 
     // region Particles
+
+    /**
+     * Registry methods for custom particles.
+     **/
 
     public static SimpleParticleType registerSimpleParticle(boolean alwaysShow) {
         return new SimpleParticleType(alwaysShow);
@@ -144,6 +148,10 @@ public class RegistryHelper {
 
     // region Fluids
 
+    /**
+     * Registry methods for linking a fluidlogging state to a specific fluid type.
+     **/
+
     public static void registerFluidForFluidlogging(Fluid fluid, FluidloggedState fluidloggedStateState) {
         SimpleFluidloggedBlock.stateFromFluidMap.put(fluid, fluidloggedStateState);
     }
@@ -157,7 +165,7 @@ public class RegistryHelper {
     // region Items
 
     /**
-     * Registry helpers for registering various common item properties.
+     * Registry methods for registering various common item properties.
      **/
 
     public static Item.Properties iconProperties() {
@@ -181,7 +189,7 @@ public class RegistryHelper {
     // region Blocks
 
     /**
-     * Registry helpers for registering various common block properties.
+     * Registry methods for registering various common block properties.
      **/
 
     public static BlockBehaviour.Properties stonePressurePlateProperties(MapColor mapColor) {

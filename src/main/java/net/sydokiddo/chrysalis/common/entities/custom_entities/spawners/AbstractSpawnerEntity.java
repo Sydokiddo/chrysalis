@@ -88,10 +88,10 @@ public abstract class AbstractSpawnerEntity extends Entity {
 
     public void emitSpawnParticles(ServerLevel serverLevel, Entity entity, ParticleOptions particleOptions) {
         for (int particleAmount = 0; particleAmount < 20; particleAmount++) {
-            double xRandomRange = entity.getX() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
-            double yRandomRange = entity.getY() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
-            double zRandomRange = entity.getZ() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
-            serverLevel.sendParticles(particleOptions, xRandomRange, yRandomRange, zRandomRange, 1, 0.0D, 0.0D, 0.0D, 0.05D);
+            double x = entity.getX() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
+            double y = entity.getY() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
+            double z = entity.getZ() + 0.5D + (this.getRandom().nextDouble() - 0.5D) * 2.0D;
+            serverLevel.sendParticles(particleOptions, x, y, z, 1, 0.0D, 0.0D, 0.0D, 0.05D);
         }
     }
 

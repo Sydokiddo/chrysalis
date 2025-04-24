@@ -12,15 +12,18 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakePayload;
 import net.sydokiddo.chrysalis.util.technical.camera.CameraShakeResetPayload;
 import net.sydokiddo.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.ClearMusicPayload;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.QueuedMusicPayload;
 import net.sydokiddo.chrysalis.util.sounds.music.payloads.ResetMusicFadePayload;
+import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.joml.Vector4f;
 import java.util.List;
 
@@ -166,6 +169,14 @@ public class EventHelper {
     // endregion
 
     // region Miscellaneous
+
+    /**
+     * UI sound events.
+     **/
+
+    public static void playItemDroppingSound(Player player) {
+        if (CConfigOptions.ITEM_DROPPING_SOUND.get()) player.playNotifySound(CSoundEvents.ITEM_DROP.get(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
+    }
 
     @OnlyIn(Dist.CLIENT)
     public static void playUIClickSound(Minecraft minecraft) {

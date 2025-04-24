@@ -25,6 +25,7 @@ import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.Abstract
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.types.CopyingSpawnEggItem;
 import net.sydokiddo.chrysalis.common.misc.CDamageTypes;
 import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
+import net.sydokiddo.chrysalis.util.helpers.ParticleHelper;
 import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 
@@ -184,7 +185,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
 
             this.setEntityToSpawn(compoundTag);
             this.playSpawnerSound(player.level(), this, CSoundEvents.GENERIC_SPAWNER_CHANGE_ENTITY.get(), 1.0F, false);
-            if (this.level() instanceof ServerLevel serverLevel) for (int amount = 0; amount < 8; ++amount) serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(entityType.getHeight() + 1.0D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            if (this.level() instanceof ServerLevel serverLevel) ParticleHelper.emitLargeSmokeParticles(serverLevel, this.getX(), this.getY(entityType.getHeight() + 1.0D), this.getZ(), 8);
 
             player.level().gameEvent(player, GameEvent.BLOCK_CHANGE, this.blockPosition());
             itemInHand.consume(1, player);

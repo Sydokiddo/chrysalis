@@ -52,7 +52,7 @@ public class DebugHelper {
 
     // region Blocks
 
-    public static void sendWaxingMessage(Logger logger, boolean shouldSend, String blockName, Player player, BlockPos blockPos) {
+    public static void sendWaxedMessage(Logger logger, boolean shouldSend, String blockName, Player player, BlockPos blockPos) {
         if (shouldSend && !player.level().isClientSide()) logger.info("{} has been waxed by {} at {}", blockName, player.getName().getString(), blockPos);
     }
 

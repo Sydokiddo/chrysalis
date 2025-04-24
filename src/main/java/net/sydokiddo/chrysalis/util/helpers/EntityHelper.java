@@ -24,10 +24,8 @@ import net.minecraft.world.phys.AABB;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.CRegistry;
 import net.sydokiddo.chrysalis.common.misc.CAttributes;
-import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.common.status_effects.custom_status_effects.BuildPreventingEffect;
-import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -37,14 +35,10 @@ import java.util.UUID;
 public class EntityHelper {
 
     /**
-     * Accesses various pieces of data from entities.
+     * Accesses various pieces of information from entities.
      **/
 
-    // region General Entity Data
-
-    public static boolean isPlayerStarving(ServerPlayer serverPlayer) {
-        return !serverPlayer.getAbilities().instabuild && serverPlayer.getFoodData().getFoodLevel() <= 6.0F;
-    }
+    // region Movement Checks
 
     public static boolean isMoving(Entity entity) {
         return entity.getDeltaMovement().horizontalDistanceSqr() > 0.0D;
@@ -59,30 +53,63 @@ public class EntityHelper {
         return isLivingEntityMoving(mob) && !mob.isNoAi() && !mob.isPassenger();
     }
 
-    public static boolean isInFluid(LivingEntity livingEntity) {
-        return livingEntity.isInLiquid() || livingEntity.isInPowderSnow;
+    // endregion
+
+    // region Look Direction Checks
+
+    public static boolean isLookingUp(Entity entity) {
+        return entity.getXRot() < -45.0F;
     }
 
-    public static boolean isTargetImmunePlayer(Entity target, Entity owner) {
-        return target instanceof Player targetedPlayer && owner instanceof Player player && !player.canHarmPlayer(targetedPlayer);
+    public static boolean isLookingForward(Entity entity) {
+        return entity.getXRot() > -45.0F && entity.getXRot() < 45.0F;
     }
 
-    public static boolean isTargetAttachedToLead(Entity target, Player leadHolder) {
-        return target instanceof Mob mob && mob.isLeashed() && mob.getLeashHolder() == leadHolder;
+    public static boolean isLookingDown(Entity entity) {
+        return entity.getXRot() > 45.0F;
     }
 
-    public static boolean isTargetLinkedAllay(Entity target, Player player) {
-        if (!(target instanceof Allay allay)) return false;
+    // endregion
+
+    // region Damage Checks
+
+    public static float getDamageCap(LivingEntity livingEntity, DamageSource damageSource, float originalDamage) {
+
+        float damageCap = (float) livingEntity.getAttributeValue(CAttributes.DAMAGE_CAPACITY);
+
+        if (originalDamage > damageCap && originalDamage < Float.MAX_VALUE && !damageSource.is(CTags.BYPASSES_DAMAGE_CAPACITY)) {
+            if (Chrysalis.IS_DEBUG && !livingEntity.level().isClientSide()) Chrysalis.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);
+            return damageCap;
+        }
+
+        return originalDamage;
+    }
+
+    public static boolean targetIsImmunePlayer(Entity owner, Entity target) {
+        if (!(owner instanceof Player playerOwner) || !(target instanceof Player playerTarget)) return false;
+        return !playerOwner.canHarmPlayer(playerTarget);
+    }
+
+    public static boolean targetIsLinkedAllay(Entity owner, Entity target) {
+        if (!(target instanceof Allay allay) || !(owner instanceof Player player)) return false;
         Optional<UUID> optional = allay.getBrain().getMemory(MemoryModuleType.LIKED_PLAYER);
-        return optional.isPresent() && player.getUUID().equals(optional.get());
+        return optional.isPresent() && player.getUUID() == optional.get();
     }
 
-    public static boolean getCustomName(Mob mob, String name) {
-        return mob.hasCustomName() && name.equals(ChatFormatting.stripFormatting(mob.getName().getString()));
+    // endregion
+
+    // region Loot Tables
+
+    public static List<ItemStack> getNonLivingEntityLootTable(Entity entity, ResourceKey<LootTable> lootTableKey) {
+        LootTable lootTable = Objects.requireNonNull(entity.level().getServer()).reloadableRegistries().getLootTable(lootTableKey);
+        if (!(entity.level() instanceof ServerLevel serverLevel)) return List.of();
+        LootParams lootParams = new LootParams.Builder(serverLevel).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.THIS_ENTITY, entity).create(LootContextParamSets.GIFT);
+        return lootTable.getRandomItems(lootParams);
     }
 
-    public static boolean isPlayerWithUUID(LivingEntity livingEntity, String uuid) {
-        return livingEntity instanceof Player player && player.getStringUUID().equals(uuid);
+    public static void dropFromLootTable(Entity entity, ResourceKey<LootTable> lootTableKey) {
+        List<ItemStack> lootTable = EntityHelper.getNonLivingEntityLootTable(entity, lootTableKey);
+        if (entity.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) for (ItemStack itemStack : lootTable) entity.spawnAtLocation(serverLevel, itemStack);
     }
 
     // endregion
@@ -107,46 +134,22 @@ public class EntityHelper {
 
     // endregion
 
-    // region Look Direction Checks
+    // region Miscellaneous Data
 
-    public static boolean isLookingUp(Entity entity) {
-        return entity.getXRot() < -45.0F;
+    public static boolean isInFluid(LivingEntity livingEntity) {
+        return livingEntity.isInLiquid() || livingEntity.isInPowderSnow;
     }
 
-    public static boolean isLookingForward(Entity entity) {
-        return entity.getXRot() > -45.0F && entity.getXRot() < 45.0F;
+    public static boolean getCustomName(Mob mob, String name) {
+        return mob.hasCustomName() && name.equals(ChatFormatting.stripFormatting(mob.getName().getString()));
     }
 
-    public static boolean isLookingDown(Entity entity) {
-        return entity.getXRot() > 45.0F;
+    public static boolean isPlayerStarving(ServerPlayer serverPlayer) {
+        return !serverPlayer.getAbilities().instabuild && serverPlayer.getFoodData().getFoodLevel() <= 6.0F;
     }
 
-    // endregion
-
-    // region Miscellaneous
-
-    public static AABB setHitboxSize(Entity entity, float width, float height) {
-        double x = entity.position().x();
-        double y = entity.position().y();
-        double z = entity.position().z();
-        float dividedWidth = width / 2.0F;
-        return new AABB(x - (double) dividedWidth, y, z - (double) dividedWidth, x + (double) dividedWidth, y + (double) height, z + (double) dividedWidth);
-    }
-
-    public static float getDamageCap(LivingEntity livingEntity, DamageSource damageSource, float originalDamage) {
-
-        float damageCap = (float) livingEntity.getAttributeValue(CAttributes.DAMAGE_CAPACITY);
-
-        if (originalDamage > damageCap && originalDamage < Float.MAX_VALUE && !damageSource.is(CTags.BYPASSES_DAMAGE_CAPACITY)) {
-            if (Chrysalis.IS_DEBUG && !livingEntity.level().isClientSide()) Chrysalis.LOGGER.info("{} has taken damage higher than {}, setting damage amount to {}", livingEntity.getName().getString(), damageCap, damageCap);
-            return damageCap;
-        }
-
-        return originalDamage;
-    }
-
-    public static void playItemDroppingSound(Player player) {
-        if (CConfigOptions.ITEM_DROPPING_SOUND.get()) player.playNotifySound(CSoundEvents.ITEM_DROP.get(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
+    public static boolean isPlayerWithUUID(LivingEntity livingEntity, String uuid) {
+        return livingEntity instanceof Player player && player.getStringUUID().equals(uuid);
     }
 
     public static Optional<UUID> getEncounteredMobUUID(Player player) {
@@ -166,16 +169,12 @@ public class EntityHelper {
         serverPlayer.connection.send(new ClientboundSetCameraPacket(serverPlayer));
     }
 
-    public static List<ItemStack> getNonLivingEntityLootTable(Entity entity, ResourceKey<LootTable> lootTableKey) {
-        LootTable lootTable = Objects.requireNonNull(entity.level().getServer()).reloadableRegistries().getLootTable(lootTableKey);
-        if (!(entity.level() instanceof ServerLevel serverLevel)) return List.of();
-        LootParams lootParams = new LootParams.Builder(serverLevel).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.THIS_ENTITY, entity).create(LootContextParamSets.GIFT);
-        return lootTable.getRandomItems(lootParams);
-    }
-
-    public static void dropFromLootTable(Entity entity, ResourceKey<LootTable> lootTableKey) {
-        List<ItemStack> lootTable = EntityHelper.getNonLivingEntityLootTable(entity, lootTableKey);
-        if (entity.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) for (ItemStack itemStack : lootTable) entity.spawnAtLocation(serverLevel, itemStack);
+    public static AABB setHitboxSize(Entity entity, float width, float height) {
+        double x = entity.position().x();
+        double y = entity.position().y();
+        double z = entity.position().z();
+        float dividedWidth = width / 2.0F;
+        return new AABB(x - (double) dividedWidth, y, z - (double) dividedWidth, x + (double) dividedWidth, y + (double) height, z + (double) dividedWidth);
     }
 
     // endregion
