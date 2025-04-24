@@ -29,7 +29,7 @@ public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSo
         SoundEvent.CODEC.fieldOf("fall_sound").forGetter(BlockSoundData::fallSound),
         Codec.FLOAT.fieldOf("volume").forGetter(BlockSoundData::volume),
         Codec.FLOAT.fieldOf("pitch").forGetter(BlockSoundData::pitch),
-        Codec.STRING.optionalFieldOf("note_block_instrument", "null").forGetter(BlockSoundData::noteBlockInstrument),
+        Codec.STRING.optionalFieldOf("note_block_instrument", ComponentHelper.noneString).forGetter(BlockSoundData::noteBlockInstrument),
         Codec.BOOL.optionalFieldOf(ComponentHelper.forTestingString, false).forGetter(BlockSoundData::forTesting)
     ).apply(instance, BlockSoundData::new));
 
@@ -39,7 +39,7 @@ public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSo
     }
 
     public static NoteBlockInstrument getNoteBlockInstrument(String string) {
-        if (Objects.equals(string, "null")) return null;
+        if (Objects.equals(string, ComponentHelper.noneString) || Objects.equals(string, ComponentHelper.nullString)) return null;
         NoteBlockInstrument noteBlockInstrument = StringRepresentable.fromEnum(NoteBlockInstrument::values).byName(string);
         if (noteBlockInstrument != null) return noteBlockInstrument;
         else throw new IllegalArgumentException("Invalid note block instrument '" + string + "'");

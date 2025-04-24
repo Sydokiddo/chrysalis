@@ -203,7 +203,7 @@ public class CServerEvents {
 
                 switch (optional.get().sneakingRequirement()) {
 
-                    case ComponentHelper.noneString -> {}
+                    case ComponentHelper.noneString, ComponentHelper.nullString -> {}
                     case "sneaking" -> {
                         if (!event.getPlayer().isShiftKeyDown()) return;
                     }
@@ -211,7 +211,7 @@ public class CServerEvents {
                         if (event.getPlayer().isShiftKeyDown()) return;
                     }
 
-                    default -> Chrysalis.LOGGER.warn("Unknown Sneaking Requirement: {}", optional.get().sneakingRequirement());
+                    default -> Chrysalis.LOGGER.warn("Unknown Sneaking Requirement: '{}'", optional.get().sneakingRequirement());
                 }
 
                 event.getLevel().setBlockAndUpdate(event.getPos(), optional.get().resultingBlock().value().withPropertiesOf(event.getLevel().getBlockState(event.getPos())));
@@ -230,7 +230,7 @@ public class CServerEvents {
 
                 switch (optional.get().useInteraction()) {
 
-                    case ComponentHelper.noneString -> {}
+                    case ComponentHelper.noneString, ComponentHelper.nullString -> {}
                     case "consume_item" -> {
                         if (!event.getItemStack().getCraftingRemainder().isEmpty()) event.getPlayer().setItemInHand(event.getHand(), ItemUtils.createFilledResult(event.getItemStack(), event.getPlayer(), event.getItemStack().getCraftingRemainder()));
                         else event.getItemStack().consume(1, event.getPlayer());

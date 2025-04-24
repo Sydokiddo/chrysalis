@@ -23,6 +23,7 @@ public class ComponentHelper {
 
     public static final String
         noneString = "none",
+        nullString = "null",
         forTestingString = "for_testing"
     ;
 
