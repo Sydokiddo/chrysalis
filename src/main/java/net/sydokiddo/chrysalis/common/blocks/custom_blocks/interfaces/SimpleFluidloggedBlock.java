@@ -91,31 +91,43 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
 
     @Override
     default boolean canPlaceLiquid(@Nullable Player player, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull BlockState blockState, @NotNull Fluid fluid) {
+        return tryCanPlaceLiquid(blockState, fluid);
+    }
+
+    static boolean tryCanPlaceLiquid(BlockState blockState, @NotNull Fluid fluid) {
         EnumProperty<FluidloggedState> fluidloggedState = CBlockStateProperties.FLUIDLOGGED;
         return (blockState.getValue(fluidloggedState) == FluidloggedState.AIR || blockState.getValue(fluidloggedState) == getStateFromFluid(fluid) && fluid == getFluidFromState(getStateFromFluid(fluid)));
     }
 
     @Override
-    default boolean placeLiquid(@NotNull LevelAccessor level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, @NotNull FluidState fluidState) {
+    default boolean placeLiquid(@NotNull LevelAccessor levelAccessor, @NotNull BlockPos blockPos, @NotNull BlockState blockState, @NotNull FluidState fluidState) {
+        return tryPlaceLiquid(levelAccessor, blockPos, blockState, fluidState);
+    }
+
+    static boolean tryPlaceLiquid(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState, FluidState fluidState) {
 
         if (blockState.getValue(CBlockStateProperties.FLUIDLOGGED) != FluidloggedState.AIR) return false;
 
-        if (!level.isClientSide()) {
-            if (fluidState.getType() == getFluidFromState(getStateFromFluid(fluidState.getType()))) level.setBlock(blockPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, getStateFromFluid(fluidState.getType())), 3);
-            level.scheduleTick(blockPos, fluidState.getType(), fluidState.getType().getTickDelay(level));
+        if (!levelAccessor.isClientSide()) {
+            if (fluidState.getType() == getFluidFromState(getStateFromFluid(fluidState.getType()))) levelAccessor.setBlock(blockPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, getStateFromFluid(fluidState.getType())), 3);
+            levelAccessor.scheduleTick(blockPos, fluidState.getType(), fluidState.getType().getTickDelay(levelAccessor));
         }
 
         return true;
     }
 
     @Override
-    default @NotNull ItemStack pickupBlock(@Nullable Player player, @NotNull LevelAccessor level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
+    default @NotNull ItemStack pickupBlock(@Nullable Player player, @NotNull LevelAccessor levelAccessor, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
+        return tryPickupBlock(levelAccessor, blockPos, blockState);
+    }
+
+    static ItemStack tryPickupBlock(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState) {
 
         FluidloggedState fluidloggedState = blockState.getValue(CBlockStateProperties.FLUIDLOGGED);
         if (fluidloggedState == FluidloggedState.AIR) return ItemStack.EMPTY;
 
-        level.setBlock(blockPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, FluidloggedState.AIR), 3);
-        if (!blockState.canSurvive(level, blockPos)) level.destroyBlock(blockPos, true);
+        levelAccessor.setBlock(blockPos, blockState.setValue(CBlockStateProperties.FLUIDLOGGED, FluidloggedState.AIR), 3);
+        if (!blockState.canSurvive(levelAccessor, blockPos)) levelAccessor.destroyBlock(blockPos, true);
 
         Fluid fluidFromState = getFluidFromState(fluidloggedState);
         if (fluidloggedState == getStateFromFluid(fluidFromState)) return new ItemStack(fluidFromState.getBucket());
@@ -124,6 +136,10 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
 
     @Override
     default @NotNull Optional<SoundEvent> getPickupSound(@NotNull BlockState blockState) {
+        return tryGetPickupSound(blockState);
+    }
+
+    static Optional<SoundEvent> tryGetPickupSound(BlockState blockState) {
         return getFluidFromState(blockState.getValue(CBlockStateProperties.FLUIDLOGGED)).getPickupSound();
     }
 
