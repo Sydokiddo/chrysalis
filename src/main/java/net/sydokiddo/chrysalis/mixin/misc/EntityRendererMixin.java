@@ -25,6 +25,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisLivingEntityRenderState;
+import net.sydokiddo.chrysalis.common.misc.CTags;
 import net.sydokiddo.chrysalis.common.status_effects.CStatusEffects;
 import net.sydokiddo.chrysalis.util.technical.config.CConfigOptions;
 import org.spongepowered.asm.mixin.Mixin;
@@ -75,6 +76,16 @@ public class EntityRendererMixin {
         @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("HEAD"))
         private void chrysalis$addLivingEntityRenderStates(LivingEntity livingEntity, LivingEntityRenderState renderState, float tickCount, CallbackInfo info) {
             ChrysalisLivingEntityRenderState.livingEntity = livingEntity;
+        }
+
+        /**
+         * Determines whether living entities in specific tags flip over upon death similarly to spiders, or if they don't flip over at all.
+         **/
+
+        @Inject(method = "getFlipDegrees", at = @At("HEAD"), cancellable = true)
+        private void chrysalis$changeEntityFlippingUponDeath(CallbackInfoReturnable<Float> cir) {
+            if (ChrysalisLivingEntityRenderState.livingEntity.getType().is(CTags.DOES_NOT_FLIP_OVER_UPON_DEATH)) cir.setReturnValue(0.0F);
+            else if (ChrysalisLivingEntityRenderState.livingEntity.getType().is(CTags.FLIPS_OVER_UPON_DEATH)) cir.setReturnValue(180.0F);
         }
     }
 
