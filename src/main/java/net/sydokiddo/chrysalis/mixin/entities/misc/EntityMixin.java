@@ -23,6 +23,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
@@ -31,6 +32,8 @@ public abstract class EntityMixin {
 
     @Unique private Entity chrysalis$entity = (Entity) (Object) this;
     @Shadow public abstract boolean isAlive();
+    @Shadow public abstract boolean isInWater();
+    @Shadow public abstract boolean isInLava();
 
     /**
      * Allows for items in the increased_pick_radius tag to be able to select entities within a wider range when far away from them.
@@ -79,6 +82,15 @@ public abstract class EntityMixin {
         if (itemStack.getItem() instanceof AggroWandItem) cir.setReturnValue(AggroWandItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof TameMobItem) cir.setReturnValue(TameMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof RideMobItem) cir.setReturnValue(RideMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
+    }
+
+    /**
+     * Prevents the fire extinguished sound from spamming while standing in both water and lava at the same time.
+     **/
+
+    @Inject(method = "playEntityOnFireExtinguishedSound", at = @At("HEAD"), cancellable = true)
+    private void chrysalis$preventFireExtinguishedSoundSpamming(CallbackInfo info) {
+        if (this.isInWater() && this.isInLava()) info.cancel();
     }
 
     @Mixin(EntityType.class)
