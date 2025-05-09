@@ -185,7 +185,7 @@ public class CExampleRegistry {
 
     private static final ColoredDustPlumeParticleOptions EXAMPLE_COLORED_DUST_PLUME_PARTICLES = new ColoredDustPlumeParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), true, true, 1.0F);
     private static final ColoredDirectionalDustParticleOptions EXAMPLE_COLORED_DIRECTIONAL_DUST_PARTICLES = new ColoredDirectionalDustParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), CommonColors.WHITE);
-    private static final ColoredPortalParticleOptions EXAMPLE_COLORED_PORTAL_PARTICLES = new ColoredPortalParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), false);
+    private static final ColoredPortalParticleOptions EXAMPLE_COLORED_PORTAL_PARTICLES = new ColoredPortalParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), false, false);
     private static final DustExplosionParticleOptions EXAMPLE_DUST_EXPLOSION_PARTICLES = new DustExplosionParticleOptions(ComponentHelper.FIRE_COLOR.getRGB(), ComponentHelper.SOUL_FIRE_COLOR.getRGB(), true, 1.0F);
     private static final RotatingDustParticleOptions EXAMPLE_ROTATING_DUST_PARTICLES = new RotatingDustParticleOptions(ComponentHelper.MEMORY_FIRE_COLOR.getRGB(), true, true, false, 1.0F);
     private static final SparkleParticleOptions EXAMPLE_SPARKLE_PARTICLES = new SparkleParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false);

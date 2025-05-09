@@ -25,12 +25,14 @@ public class ColoredPortalParticleOptions implements ParticleOptions, ParticleCo
     public static final MapCodec<ColoredPortalParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.startingColorString, Color.LIGHT_GRAY.getRGB()).forGetter(ColoredPortalParticleOptions::getStartingColor),
         ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.endingColorString, Color.LIGHT_GRAY.getRGB()).forGetter(ColoredPortalParticleOptions::getEndingColor),
+        Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor),
         Codec.BOOL.optionalFieldOf("reverse", false).forGetter(ColoredPortalParticleOptions::isReverse))
     .apply(instance, ColoredPortalParticleOptions::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ColoredPortalParticleOptions> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.INT, ColoredPortalParticleOptions::getStartingColor,
         ByteBufCodecs.INT, ColoredPortalParticleOptions::getEndingColor,
+        ByteBufCodecs.BOOL, ParticleCommonMethods::shouldRandomizeColor,
         ByteBufCodecs.BOOL, ColoredPortalParticleOptions::isReverse,
         ColoredPortalParticleOptions::new
     );
@@ -40,19 +42,23 @@ public class ColoredPortalParticleOptions implements ParticleOptions, ParticleCo
         endingColor
     ;
 
-    private final boolean reverse;
+    private final boolean
+        randomizeColor,
+        reverse
+    ;
 
-    public ColoredPortalParticleOptions(int startingColor, int endingColor, boolean reverse) {
+    public ColoredPortalParticleOptions(int startingColor, int endingColor, boolean randomizeColor, boolean reverse) {
         this.startingColor = startingColor;
         this.endingColor = endingColor;
+        this.randomizeColor = randomizeColor;
         this.reverse = reverse;
     }
 
-    private int getStartingColor() {
+    public int getStartingColor() {
         return this.startingColor;
     }
 
-    private int getEndingColor() {
+    public int getEndingColor() {
         return this.endingColor;
     }
 
@@ -62,6 +68,11 @@ public class ColoredPortalParticleOptions implements ParticleOptions, ParticleCo
 
     public Vector3f getFinalEndingColor() {
         return ARGB.vector3fFromRGB24(this.endingColor);
+    }
+
+    @Override
+    public boolean shouldRandomizeColor() {
+        return this.randomizeColor;
     }
 
     public boolean isReverse() {

@@ -100,6 +100,7 @@ public class CClientEvents {
         @SubscribeEvent
         private static void particleProviderRegistry(RegisterParticleProvidersEvent event) {
             event.registerSpriteSet(CParticles.MEMORY_FLAME.get(), FlameParticle.Provider::new);
+            event.registerSpriteSet(CParticles.LAVA_BUBBLE.get(), CustomBubbleParticle.LavaProvider::new);
             event.registerSpriteSet(CParticles.RADIANCE.get(), SpellParticle.Provider::new);
             event.registerSpriteSet(CParticles.ARTHROPOD_SIGHT.get(), SpellParticle.Provider::new);
             event.registerSpriteSet(CParticles.BLIND_SIGHT.get(), SpellParticle.Provider::new);

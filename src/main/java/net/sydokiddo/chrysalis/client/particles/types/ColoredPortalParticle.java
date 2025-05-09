@@ -52,13 +52,20 @@ public class ColoredPortalParticle extends TextureSheetParticle implements Parti
         this.quadSize = 0.1F * (this.random.nextFloat() * 0.2F + 0.5F);
         this.lifetime = (int) (this.random.nextDouble() * 10.0D) + 40;
 
+        float colorRandomizer = this.random.nextFloat() * 0.6F + 0.4F;
+
+        if (particleOptions.shouldRandomizeColor()) {
+            this.startingColor = new Vector3f(particleOptions.getFinalStartingColor().x() * colorRandomizer, particleOptions.getFinalStartingColor().y() * colorRandomizer, particleOptions.getFinalStartingColor().z() * colorRandomizer);
+            this.endingColor = new Vector3f(particleOptions.getFinalEndingColor().x() * colorRandomizer, particleOptions.getFinalEndingColor().y() * colorRandomizer, particleOptions.getFinalEndingColor().z() * colorRandomizer);
+        } else {
+            this.startingColor = particleOptions.getFinalStartingColor();
+            this.endingColor = particleOptions.getFinalEndingColor();
+        }
+
         if (particleOptions.isReverse()) {
             this.quadSize *= 1.5F;
             this.lifetime = (int) (this.random.nextDouble() * 2.0D) + 60;
         }
-
-        this.startingColor = particleOptions.getFinalStartingColor();
-        this.endingColor = particleOptions.getFinalEndingColor();
     }
 
     @Override
@@ -95,7 +102,7 @@ public class ColoredPortalParticle extends TextureSheetParticle implements Parti
 
     @Override
     public @NotNull ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     @Override
@@ -123,19 +130,7 @@ public class ColoredPortalParticle extends TextureSheetParticle implements Parti
 
     @Override
     public int getLightColor(float tickRate) {
-
-        int original = super.getLightColor(tickRate);
-
-        float math1 = (float) this.age / (float) this.lifetime;
-        math1 *= math1;
-        math1 *= math1;
-
-        int int1 = original & 255;
-        int int2 = original >> 16 & 255;
-        int2 += (int) (math1 * 15.0F * 16.0F);
-        if (int2 > 240) int2 = 240;
-
-        return int1 | int2 << 16;
+        return this.fadeLightColor(1.0F, 0.0F, this.age, this.lifetime, super.getLightColor(tickRate));
     }
 
     @Override

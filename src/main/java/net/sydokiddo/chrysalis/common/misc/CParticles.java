@@ -18,6 +18,7 @@ public class CParticles {
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType>
         MEMORY_FLAME = PARTICLE_TYPES.register("memory_flame", () -> RegistryHelper.registerSimpleParticle(false)),
+        LAVA_BUBBLE = PARTICLE_TYPES.register("lava_bubble", () -> RegistryHelper.registerSimpleParticle(false)),
         RADIANCE = PARTICLE_TYPES.register("radiance", () -> RegistryHelper.registerSimpleParticle(false)),
         ARTHROPOD_SIGHT = PARTICLE_TYPES.register("arthropod_sight", () -> RegistryHelper.registerSimpleParticle(false)),
         BLIND_SIGHT = PARTICLE_TYPES.register("blind_sight", () -> RegistryHelper.registerSimpleParticle(false)),
