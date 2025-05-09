@@ -11,6 +11,7 @@ public class CConfigOptions {
         CREATIVE_MODE_ITEM_DELETING_SOUNDS = () -> true,
         REWORKED_MOB_GRIEFING = () -> true,
         IMPROVED_STRUCTURE_VOID_RENDERING = () -> true,
+        IMPROVED_GLASS_RENDERING = () -> true,
         IMPROVED_GRATE_RENDERING = () -> true,
         CHANGE_DEFAULT_VAULT_KEY = () -> true,
         FIXED_ELYTRA_MODEL = () -> true,

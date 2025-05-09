@@ -379,6 +379,8 @@
   "chrysalis.configuration.reworked_mob_griefing.tooltip": "Passive world interactions from mobs, such as villagers collecting crops or allays picking up items, are now determined by the passiveWorldInteractions game rule instead of the mobGriefing game rule. Bosses now have their own unique game rules for griefing.",
   "chrysalis.configuration.improved_structure_void_rendering": "Improved Structure Void Rendering",
   "chrysalis.configuration.improved_structure_void_rendering.tooltip": "Structure voids now render similarly to barriers, and now utilize a full hitbox.",
+  "chrysalis.configuration.improved_glass_rendering": "Improved Glass Rendering",
+  "chrysalis.configuration.improved_glass_rendering.tooltip": "Glass and glass pane blocks no longer occlude blocks of the same classification while next to each other.",
   "chrysalis.configuration.improved_grate_rendering": "Improved Grate Rendering",
   "chrysalis.configuration.improved_grate_rendering.tooltip": "Grate blocks no longer occlude blocks of the same classification while next to each other.",
   "chrysalis.configuration.change_default_vault_key": "Change Default Vault Key",

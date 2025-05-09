@@ -15,6 +15,7 @@ public class CConfig {
         CConfigOptions.CREATIVE_MODE_ITEM_DELETING_SOUNDS = builder.define("creative_mode_item_deleting_sounds", true);
         CConfigOptions.REWORKED_MOB_GRIEFING = builder.define("reworked_mob_griefing", true);
         CConfigOptions.IMPROVED_STRUCTURE_VOID_RENDERING = builder.define("improved_structure_void_rendering", true);
+        CConfigOptions.IMPROVED_GLASS_RENDERING = builder.define("improved_glass_rendering", true);
         CConfigOptions.IMPROVED_GRATE_RENDERING = builder.define("improved_grate_rendering", true);
         CConfigOptions.CHANGE_DEFAULT_VAULT_KEY = builder.define("change_default_vault_key", true);
         CConfigOptions.FIXED_ELYTRA_MODEL = builder.define("fixed_elytra_model", true);
