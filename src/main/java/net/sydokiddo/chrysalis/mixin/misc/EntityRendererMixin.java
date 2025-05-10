@@ -9,11 +9,14 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.client.renderer.entity.layers.WingsLayer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,8 +24,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
 import net.sydokiddo.chrysalis.client.entities.rendering.render_states.ChrysalisLivingEntityRenderState;
 import net.sydokiddo.chrysalis.common.misc.CTags;
@@ -86,6 +91,28 @@ public class EntityRendererMixin {
         private void chrysalis$changeEntityFlippingUponDeath(CallbackInfoReturnable<Float> cir) {
             if (ChrysalisLivingEntityRenderState.livingEntity.getType().is(CTags.DOES_NOT_FLIP_OVER_UPON_DEATH)) cir.setReturnValue(0.0F);
             else if (ChrysalisLivingEntityRenderState.livingEntity.getType().is(CTags.FLIPS_OVER_UPON_DEATH)) cir.setReturnValue(180.0F);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mixin(PlayerRenderer.class)
+    public static class PlayerRendererMixin {
+
+        /**
+         * Hides a player's name tag if they are wearing any item in the hides_name_tags item tag.
+         **/
+
+        @Inject(method = "renderNameTag(Lnet/minecraft/client/renderer/entity/state/PlayerRenderState;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At("HEAD"), cancellable = true)
+        private void chrysalis$hidePlayerNameTag(PlayerRenderState playerRenderState, Component component, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, CallbackInfo info) {
+
+            if (!CConfigOptions.NAME_TAG_HIDING.get()) return;
+
+            for (ItemStack equipmentSlot : ChrysalisLivingEntityRenderState.livingEntity.getArmorSlots()) {
+                if (equipmentSlot.is(CTags.HIDES_NAME_TAGS)) {
+                    if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("{} is wearing a name tag hiding item!", ChrysalisLivingEntityRenderState.livingEntity.getName().getString());
+                    info.cancel();
+                }
+            }
         }
     }
 

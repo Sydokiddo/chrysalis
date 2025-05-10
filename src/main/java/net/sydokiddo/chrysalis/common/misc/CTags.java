@@ -37,6 +37,7 @@ public class CTags {
         GIVES_SKELETAL_SIGHT = registerItemTag("gives_skeletal_sight"),
         GIVES_ZOMBIE_SIGHT = registerItemTag("gives_zombie_sight"),
         GRATE_ITEMS = registerItemTag("grates"),
+        HIDES_NAME_TAGS = registerItemTag("hides_name_tags"),
         HORSE_ARMOR = registerItemTag("horse_armor"),
         LANTERN_ITEMS = registerItemTag("lanterns"),
         NETHER_ORE_ITEMS = registerItemTag("nether_ores"),

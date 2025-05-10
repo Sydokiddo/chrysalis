@@ -5,8 +5,12 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -40,6 +44,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
@@ -252,7 +257,12 @@ public class CServerEvents {
     public static class ModEventBus {
 
         @SubscribeEvent
-        private static void datapackRegistry(DataPackRegistryEvent.NewRegistry event) {
+        private static void resourcePackRegistry(AddPackFindersEvent event) {
+            event.addPackFinders(Chrysalis.resourceLocationId("resourcepacks/no_carved_pumpkin_overlay"), PackType.CLIENT_RESOURCES, Component.translatable("pack.chrysalis.no_carved_pumpkin_overlay.name"), PackSource.BUILT_IN, false, Pack.Position.TOP);
+        }
+
+        @SubscribeEvent
+        private static void dataPackRegistry(DataPackRegistryEvent.NewRegistry event) {
             event.dataPackRegistry(CRegistry.BLOCK_PROPERTY_DATA, BlockPropertyData.CODEC);
             event.dataPackRegistry(CRegistry.BLOCK_SOUND_DATA, BlockSoundData.CODEC);
             event.dataPackRegistry(CRegistry.BLOCK_CONVERSION_DATA, BlockConversionData.CODEC);

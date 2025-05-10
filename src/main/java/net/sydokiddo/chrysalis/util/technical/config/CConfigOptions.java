@@ -16,6 +16,7 @@ public class CConfigOptions {
         CHANGE_DEFAULT_VAULT_KEY = () -> true,
         FIXED_ELYTRA_MODEL = () -> true,
         MOB_HEAD_SHADERS = () -> true,
+        NAME_TAG_HIDING = () -> true,
         REWORKED_TOOLTIPS = () -> true,
         CHRYSALIS_TOOLTIP = () -> true,
         CHRYSALIS_CREATIVE_MODE_TAB = () -> true

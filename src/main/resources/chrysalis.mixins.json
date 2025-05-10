@@ -79,6 +79,7 @@
     "misc.EntityRendererMixin$ElytraModelMixin",
     "misc.EntityRendererMixin$HumanoidArmorLayerMixin",
     "misc.EntityRendererMixin$LivingEntityRendererMixin",
+    "misc.EntityRendererMixin$PlayerRendererMixin",
     "misc.EntityRendererMixin$WingsLayerMixin",
     "misc.GameRendererMixin",
     "misc.GameRendererMixin$FogRendererMixin",

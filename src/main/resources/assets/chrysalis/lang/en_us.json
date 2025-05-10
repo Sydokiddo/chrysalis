@@ -3,6 +3,9 @@
   "gui.wiki": "Wiki",
   "gui.developer_wiki": "Developer Wiki",
 
+  "pack.chrysalis.no_carved_pumpkin_overlay.name": "No Carved Pumpkin Overlay",
+  "pack.chrysalis.no_carved_pumpkin_overlay.description": "Removes the overlay of carved pumpkins",
+
   "gui.chrysalis.icon.mod_icon": "\ua000",
   "gui.chrysalis.icon.gear": "\ua001",
   "gui.chrysalis.icon.warning": "\ua002",
@@ -389,6 +392,8 @@
   "chrysalis.configuration.fixed_elytra_model.tooltip": "Elytra no longer have stretched uvs on their sides.",
   "chrysalis.configuration.mob_head_shaders": "Mob Head Shaders",
   "chrysalis.configuration.mob_head_shaders.tooltip": "Wearing a mob head will now display the specific mob's spectator mode shader.",
+  "chrysalis.configuration.name_tag_hiding": "Name Tag Hiding",
+  "chrysalis.configuration.name_tag_hiding.tooltip": "Wearing a carved pumpkin or a mob head will hide your name tag from other players.",
   "chrysalis.configuration.reworked_tooltips": "Reworked Tooltips",
   "chrysalis.configuration.reworked_tooltips.tooltip": "Reworks the layout of a number of tooltips to appear cleaner and easier to read.",
   "chrysalis.configuration.chrysalis_tooltip": "Chrysalis Tooltip",
@@ -484,6 +489,7 @@
   "tag.item.chrysalis.gives_skeletal_sight": "Gives Skeletal Sight",
   "tag.item.chrysalis.gives_zombie_sight": "Gives Zombie Sight",
   "tag.item.chrysalis.grates": "Grates",
+  "tag.item.chrysalis.hides_name_tags": "Hides Name Tags",
   "tag.item.chrysalis.horse_armor": "Horse Armor",
   "tag.item.chrysalis.lanterns": "Lanterns",
   "tag.item.chrysalis.nether_ores": "Nether Ores",

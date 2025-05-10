@@ -20,6 +20,7 @@ public class CConfig {
         CConfigOptions.CHANGE_DEFAULT_VAULT_KEY = builder.define("change_default_vault_key", true);
         CConfigOptions.FIXED_ELYTRA_MODEL = builder.define("fixed_elytra_model", true);
         CConfigOptions.MOB_HEAD_SHADERS = builder.define("mob_head_shaders", true);
+        CConfigOptions.NAME_TAG_HIDING = builder.define("name_tag_hiding", true);
         CConfigOptions.REWORKED_TOOLTIPS = builder.define("reworked_tooltips", true);
         CConfigOptions.CHRYSALIS_TOOLTIP = builder.define("chrysalis_tooltip", true);
         CConfigOptions.CHRYSALIS_CREATIVE_MODE_TAB = builder.define("chrysalis_creative_mode_tab", true);
