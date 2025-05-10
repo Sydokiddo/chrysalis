@@ -57,12 +57,12 @@ public class CItems {
 
     // region Registry
 
-    public static void register(IEventBus eventBus) {
-        ITEMS.register(eventBus);
-    }
-
     private static DeferredItem<BlockItem> registerItemForVanillaBlock(String name, Block block) {
         return ITEMS.register(name, (key) -> new BlockItem(block, new Item.Properties().setId(ResourceKey.create(Registries.ITEM, key)).overrideDescription(block.getDescriptionId())));
+    }
+
+    public static void register(IEventBus eventBus) {
+        ITEMS.register(eventBus);
     }
 
     public static void registerTestItems(IEventBus eventBus) {
