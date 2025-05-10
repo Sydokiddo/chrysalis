@@ -308,8 +308,8 @@ public abstract class PlayerMixin extends LivingEntity {
         @Inject(at = @At("RETURN"), method = "getSkin", cancellable = true)
         private void chrysalis$customCapes(CallbackInfoReturnable<PlayerSkin> cir) {
             if (this.getPlayerInfo() == null) return;
-            if (Chrysalis.IS_DEBUG) cir.setReturnValue(this.chrysalis$setCustomCape(Chrysalis.resourceLocationId("textures/entity/cape/chrysalis.png")));
-            else if (Objects.equals(this.getPlayerInfo().getProfile().getId().toString(), "d92469c6-e198-4db5-99e3-759e84036aea")) cir.setReturnValue(this.chrysalis$setCustomCape(Chrysalis.resourceLocationId("textures/entity/cape/sydokiddo.png")));
+            if (Objects.equals(this.getPlayerInfo().getProfile().getId().toString(), "d92469c6-e198-4db5-99e3-759e84036aea")) cir.setReturnValue(this.chrysalis$setCustomCape(Chrysalis.resourceLocationId("textures/entity/cape/sydokiddo.png")));
+            else if (Chrysalis.IS_DEBUG) cir.setReturnValue(this.chrysalis$setCustomCape(Chrysalis.resourceLocationId("textures/entity/cape/chrysalis.png")));
         }
 
         @Unique
