@@ -1,0 +1,55 @@
+{
+	"parent": "minecraft:block/block",
+	"textures": {
+		"portal": "chrysalis:block/end_portal",
+		"emissive_primary": "chrysalis:block/end_portal_emissive_primary",
+		"emissive_secondary": "chrysalis:block/end_portal_emissive_secondary",
+		"particle": "#portal"
+	},
+	"elements": [
+		{
+			"name": "Portal",
+			"from": [0, 0, 0],
+			"to": [16, 6, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3, 8]},
+			"faces": {
+				"north": {"uv": [0, 10, 16, 16], "texture": "#portal", "cullface": "north"},
+				"east": {"uv": [0, 10, 16, 16], "texture": "#portal", "cullface": "east"},
+				"south": {"uv": [0, 10, 16, 16], "texture": "#portal", "cullface": "south"},
+				"west": {"uv": [0, 10, 16, 16], "texture": "#portal", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#portal"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#portal", "cullface": "down"}
+			}
+		},
+		{
+			"name": "Emissive_Primary",
+			"from": [-0.01, -0.01, -0.01],
+			"to": [16.01, 6.01, 16.01],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3, 8]},
+			"faces": {
+				"north": {"uv": [0, 10, 16, 16], "texture": "#emissive_primary", "cullface": "north"},
+				"east": {"uv": [0, 10, 16, 16], "texture": "#emissive_primary", "cullface": "east"},
+				"south": {"uv": [0, 10, 16, 16], "texture": "#emissive_primary", "cullface": "south"},
+				"west": {"uv": [0, 10, 16, 16], "texture": "#emissive_primary", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#emissive_primary"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#emissive_primary", "cullface": "down"}
+			},
+			"neoforge_data": {"block_light": 12}
+		},
+		{
+			"name": "Emissive_Secondary",
+			"from": [-0.01, -0.01, -0.01],
+			"to": [16.01, 6.01, 16.01],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3, 8]},
+			"faces": {
+				"north": {"uv": [0, 10, 16, 16], "texture": "#emissive_secondary", "cullface": "north"},
+				"east": {"uv": [0, 10, 16, 16], "texture": "#emissive_secondary", "cullface": "east"},
+				"south": {"uv": [0, 10, 16, 16], "texture": "#emissive_secondary", "cullface": "south"},
+				"west": {"uv": [0, 10, 16, 16], "texture": "#emissive_secondary", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#emissive_secondary"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#emissive_secondary", "cullface": "down"}
+			},
+			"neoforge_data": {"block_light": 8}
+		}
+	]
+}

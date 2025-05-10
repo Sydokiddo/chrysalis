@@ -1,7 +1,12 @@
 package net.sydokiddo.chrysalis.common.items;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -42,12 +47,22 @@ public class CItems {
         TEST_RIGHT_CLICK_ITEM = TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
     ;
 
+    public static final DeferredItem<BlockItem>
+        NETHER_PORTAL = registerItemForVanillaBlock("nether_portal", Blocks.NETHER_PORTAL),
+        END_PORTAL = registerItemForVanillaBlock("end_portal", Blocks.END_PORTAL),
+        END_GATEWAY = registerItemForVanillaBlock("end_gateway", Blocks.END_GATEWAY)
+    ;
+
     // endregion
 
     // region Registry
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
+    }
+
+    private static DeferredItem<BlockItem> registerItemForVanillaBlock(String name, Block block) {
+        return ITEMS.register(name, (key) -> new BlockItem(block, new Item.Properties().setId(ResourceKey.create(Registries.ITEM, key)).overrideDescription(block.getDescriptionId())));
     }
 
     public static void registerTestItems(IEventBus eventBus) {

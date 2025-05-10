@@ -44,6 +44,7 @@ public class CTags {
         OPEN_FLOWER_ITEMS = registerItemTag("open_flowers"),
         OVERWORLD_ORE_ITEMS = registerItemTag("overworld_ores"),
         PIGLIN_BARTERING_ITEMS = registerItemTag("piglin_bartering_items"),
+        PORTALS = registerItemTag("portals"),
         POWDER_SNOW_WALKABLE_ITEMS = registerItemTag("powder_snow_walkable_items"),
         PRESSURE_PLATE_ITEMS = registerItemTag("pressure_plates"),
         PRISMARINE_BLOCK_ITEMS = registerItemTag("prismarine_blocks"),

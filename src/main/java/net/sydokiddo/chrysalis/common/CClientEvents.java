@@ -124,6 +124,12 @@ public class CClientEvents {
         @SubscribeEvent
         private static void addItemsToCreativeTabs(BuildCreativeModeTabContentsEvent event) {
 
+            if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+                event.insertAfter(Items.ENDER_EYE.getDefaultInstance(), CItems.NETHER_PORTAL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.NETHER_PORTAL.toStack(), CItems.END_PORTAL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.END_PORTAL.toStack(), CItems.END_GATEWAY.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            }
+
             if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) event.insertBefore(Items.TRIAL_KEY.getDefaultInstance(), CItems.KEY.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) event.insertAfter(Items.CREAKING_HEART.getDefaultInstance(), CItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 

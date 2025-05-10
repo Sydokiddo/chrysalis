@@ -39,6 +39,9 @@ public class CCreativeModeTabs {
             output.accept(CItems.COPYING_SPAWN_EGG);
             output.accept(CItems.KEY);
             output.accept(CItems.ADMIN_KEY);
+            output.accept(CItems.NETHER_PORTAL);
+            output.accept(CItems.END_PORTAL);
+            output.accept(CItems.END_GATEWAY);
             if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) output.accept(CItems.TEST_RIGHT_CLICK_ITEM);
         })
     .build());
