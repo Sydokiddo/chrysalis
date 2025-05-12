@@ -27,7 +27,7 @@ public class Chrysalis {
     public static RegistryAccess registryAccess;
 
     public static boolean
-        registerTestItems = true,
+        registerTestItems = false,
         registerExampleRegistry = false
     ;
 

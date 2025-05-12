@@ -10,9 +10,13 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.sydokiddo.chrysalis.Chrysalis;
+import net.sydokiddo.chrysalis.common.CRegistry;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import java.util.Objects;
+import java.util.Optional;
 
 public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSound, Holder<SoundEvent> stepSound, Holder<SoundEvent> placeSound, Holder<SoundEvent> hitSound, Holder<SoundEvent> fallSound, float volume, float pitch, String noteBlockInstrument, boolean forTesting) {
 
@@ -36,6 +40,19 @@ public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSo
     @SuppressWarnings("deprecation")
     public SoundType toSoundType() {
         return new SoundType(this.volume(), this.pitch(), this.breakSound().value(), this.stepSound().value(), this.placeSound().value(), this.hitSound().value(), this.fallSound().value());
+    }
+
+    public static SoundType getFinalSoundType(BlockState blockState) {
+
+        if (Chrysalis.registryAccess == null) return null;
+        Optional<BlockSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(CRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
+
+        if (optional.isPresent()) {
+            if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return null;
+            return optional.get().toSoundType();
+        }
+
+        return null;
     }
 
     public static NoteBlockInstrument getNoteBlockInstrument(String string) {

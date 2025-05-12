@@ -10,6 +10,7 @@
     "blocks.BlockMixin",
     "blocks.BlockMixin$BlocksRegistryMixin",
     "blocks.BlockMixin$BlockStateBaseMixin",
+    "blocks.BlockMixin$IBlockStateExtensionClass",
     "blocks.CakeBlockMixin",
     "blocks.ChorusPlantMixin",
     "blocks.ChorusPlantMixin$ChorusFlowerBlockMixin",

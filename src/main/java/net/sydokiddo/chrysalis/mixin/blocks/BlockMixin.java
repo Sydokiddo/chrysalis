@@ -1,8 +1,10 @@
 package net.sydokiddo.chrysalis.mixin.blocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -13,6 +15,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.extensions.IBlockExtension;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.CRegistry;
 import net.sydokiddo.chrysalis.common.misc.CTags;
@@ -35,15 +38,8 @@ public class BlockMixin {
      **/
 
     @Inject(at = @At("HEAD"), method = "getSoundType", cancellable = true)
-    private void chrysalis$blockSoundData(BlockState blockState, CallbackInfoReturnable<SoundType> cir) {
-
-        if (Chrysalis.registryAccess == null) return;
-        Optional<BlockSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(CRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
-
-        if (optional.isPresent()) {
-            if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return;
-            cir.setReturnValue(optional.get().toSoundType());
-        }
+    private void chrysalis$vanillaBlockSoundData(BlockState blockState, CallbackInfoReturnable<SoundType> cir) {
+        if (BlockSoundData.getFinalSoundType(blockState) != null) cir.setReturnValue(BlockSoundData.getFinalSoundType(blockState));
     }
 
     @Mixin(BlockBehaviour.BlockStateBase.class)
@@ -192,6 +188,19 @@ public class BlockMixin {
         @Inject(at = @At("HEAD"), method = "ocelotOrParrot", cancellable = true)
         private static void chrysalis$canSpawnOnLeavesEntityTag(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType, CallbackInfoReturnable<Boolean> cir) {
             cir.setReturnValue(entityType.is(CTags.CAN_SPAWN_ON_LEAVES));
+        }
+    }
+
+    @Mixin(IBlockExtension.class)
+    public interface IBlockStateExtensionClass {
+
+        /**
+         * Gets the block sound data on neoforge's getSoundType method alongside the vanilla one.
+         **/
+
+        @Inject(at = @At("HEAD"), method = "getSoundType", cancellable = true)
+        private void chrysalis$neoForgeBlockSoundData(BlockState blockState, LevelReader levelReader, BlockPos blockPos, Entity entity, CallbackInfoReturnable<SoundType> cir) {
+            if (BlockSoundData.getFinalSoundType(blockState) != null) cir.setReturnValue(BlockSoundData.getFinalSoundType(blockState));
         }
     }
 }

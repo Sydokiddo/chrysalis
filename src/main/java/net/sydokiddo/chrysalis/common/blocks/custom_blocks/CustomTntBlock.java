@@ -23,6 +23,8 @@ public class CustomTntBlock extends TntBlock {
      * A class for custom tnt blocks, with a customizable sound and the primed tnt entity that spawns when ignited.
      **/
 
+    // region Initialization
+
     public CustomTntBlock(Properties properties) {
         super(properties);
     }
@@ -34,6 +36,10 @@ public class CustomTntBlock extends TntBlock {
     public SoundEvent getSoundEvent() {
         return SoundEvents.TNT_PRIMED;
     }
+
+    // endregion
+
+    // region Exploding
 
     @Override
     public void onCaughtFire(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @Nullable Direction direction, @Nullable LivingEntity owner) {
@@ -60,4 +66,6 @@ public class CustomTntBlock extends TntBlock {
     }
 
     public void setWasExplodedData(Entity entity) {}
+
+    // endregion
 }
