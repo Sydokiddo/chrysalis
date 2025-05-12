@@ -153,6 +153,7 @@ public class RegistryHelper {
      **/
 
     public static void registerFluidForFluidlogging(Fluid fluid, FluidloggedState fluidloggedStateState) {
+        if (Chrysalis.registryAccess == null) return;
         SimpleFluidloggedBlock.stateFromFluidMap.put(fluid, fluidloggedStateState);
     }
 

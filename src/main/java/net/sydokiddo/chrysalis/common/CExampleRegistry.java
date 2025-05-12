@@ -51,7 +51,8 @@ public class CExampleRegistry {
      **/
 
     public static void init(IEventBus eventBus) {
-        BLOCKS.register(eventBus);
+        EXAMPLE_ITEMS.register(eventBus);
+        EXAMPLE_BLOCKS.register(eventBus);
         registerExampleStructureMusic();
         registerExampleDispenserMethods();
         registerExampleFluidsForFluidLogging();
@@ -107,48 +108,52 @@ public class CExampleRegistry {
 
     // region Example Block Registries
 
-    private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Chrysalis.MOD_ID);
+    private static final DeferredRegister.Items EXAMPLE_ITEMS = DeferredRegister.createItems(Chrysalis.MOD_ID);
+    private static final DeferredRegister.Blocks EXAMPLE_BLOCKS = DeferredRegister.createBlocks(Chrysalis.MOD_ID);
 
-    private static final DeferredBlock<Block> EXAMPLE_BUTTON = registerBlock("example_button",
+    private static final DeferredBlock<Block> EXAMPLE_BUTTON = registerExampleBlock("example_button",
         properties -> new ButtonBlock(BlockSetType.STONE, 20, properties), Blocks.buttonProperties(), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_STONE_PRESSURE_PLATE = registerBlock("example_stone_pressure_plate",
+    private static final DeferredBlock<Block> EXAMPLE_STONE_PRESSURE_PLATE = registerExampleBlock("example_stone_pressure_plate",
         properties -> new PressurePlateBlock(BlockSetType.STONE, properties), RegistryHelper.stonePressurePlateProperties(MapColor.STONE), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_WOODEN_PRESSURE_PLATE = registerBlock("example_wooden_pressure_plate",
+    private static final DeferredBlock<Block> EXAMPLE_WOODEN_PRESSURE_PLATE = registerExampleBlock("example_wooden_pressure_plate",
         properties -> new PressurePlateBlock(BlockSetType.OAK, properties), RegistryHelper.woodenPressurePlateProperties(Blocks.OAK_PLANKS.defaultMapColor()), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_LEAVES = registerBlock("example_leaves",
+    private static final DeferredBlock<Block> EXAMPLE_LEAVES = registerExampleBlock("example_leaves",
         LeavesBlock::new, RegistryHelper.leavesProperties(MapColor.PLANT, SoundType.AZALEA_LEAVES, Blocks::ocelotOrParrot), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_LOG = registerBlock("example_log",
+    private static final DeferredBlock<Block> EXAMPLE_LOG = registerExampleBlock("example_log",
         RotatedPillarBlock::new, Blocks.logProperties(MapColor.WOOD, MapColor.PODZOL, SoundType.WOOD), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_LAYER_BLOCK = registerBlock("example_layer_block",
+    private static final DeferredBlock<Block> EXAMPLE_LAYER_BLOCK = registerExampleBlock("example_layer_block",
         ExampleLayerBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_SITTABLE_BLOCK = registerBlock("example_sittable_block",
+    private static final DeferredBlock<Block> EXAMPLE_SITTABLE_BLOCK = registerExampleBlock("example_sittable_block",
         ExampleSeatBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_BLOCK = registerBlock("example_dissipating_block",
+    private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_BLOCK = registerExampleBlock("example_dissipating_block",
         ExampleDissipatingBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW_BLOCK), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_LAYER_BLOCK = registerBlock("example_dissipating_layer_block",
+    private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_LAYER_BLOCK = registerExampleBlock("example_dissipating_layer_block",
         ExampleDissipatingLayerBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_MULTIFACE_BLOCK = registerBlock("example_dissipating_multiface_block",
+    private static final DeferredBlock<Block> EXAMPLE_DISSIPATING_MULTIFACE_BLOCK = registerExampleBlock("example_dissipating_multiface_block",
         ExampleDissipatingMultifaceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.RESIN_CLUMP), new Item.Properties());
 
-    private static final DeferredBlock<Block> EXAMPLE_FLUIDLOGGED_BLOCK = registerBlock("example_fluidlogged_block",
+    private static final DeferredBlock<Block> EXAMPLE_FLUIDLOGGED_BLOCK = registerExampleBlock("example_fluidlogged_block",
         ExampleFluidloggedBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_GRATE), new Item.Properties());
 
-    private static DeferredBlock<Block> registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties settings) {
-        return registerBlock(name, function, settings, new Item.Properties());
+    private static final DeferredBlock<Block> EXAMPLE_TNT = registerExampleBlock("example_tnt",
+        ExampleTntBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.TNT), new Item.Properties());
+
+    private static DeferredBlock<Block> registerExampleBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties settings) {
+        return registerExampleBlock(name, function, settings, new Item.Properties());
     }
 
-    private static DeferredBlock<Block> registerBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
-        DeferredBlock<Block> block = BLOCKS.registerBlock(name, function, blockSettings);
-        CItems.ITEMS.registerSimpleBlockItem(block, itemSettings);
+    private static DeferredBlock<Block> registerExampleBlock(String name, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
+        DeferredBlock<Block> block = EXAMPLE_BLOCKS.registerBlock(name, function, blockSettings);
+        EXAMPLE_ITEMS.registerSimpleBlockItem(block, itemSettings);
         return block;
     }
 
