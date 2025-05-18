@@ -93,6 +93,8 @@ public class CServerEvents {
         @SubscribeEvent
         private static void onServerPreTick(ServerTickEvent.Pre event) {
 
+            if (Chrysalis.registryAccess == null) Chrysalis.registryAccess = event.getServer().registryAccess();
+
             if (MusicTracker.onServer.ticks > 0) {
                 MusicTracker.onServer.ticks -= 1;
                 return;
