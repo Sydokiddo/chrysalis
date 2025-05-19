@@ -157,6 +157,10 @@
   "gui.chrysalis.commands.generic.fail.invalid_entity": "%s is not a valid entity for this command",
   "gui.chrysalis.commands.generic.fail.no_item": "%s is not holding any item",
 
+  "gui.chrysalis.commands.chrysalis.version.not_debug": "Chrysalis Version: v%s",
+  "gui.chrysalis.commands.chrysalis.version.debug": "Chrysalis Version: v%s (Debug)",
+  "gui.chrysalis.commands.chrysalis.reload": "Reloaded all Chrysalis data registries",
+
   "gui.chrysalis.commands.camera_shake.success.single": "Emitted a camera shake for %s",
   "gui.chrysalis.commands.camera_shake.success.multiple": "Emitted a camera shake for %s players",
   "gui.chrysalis.commands.camera_shake.reset.success.single": "Reset %s's camera shake",

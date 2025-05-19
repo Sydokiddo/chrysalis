@@ -93,16 +93,14 @@ public class CServerEvents {
         @SubscribeEvent
         private static void onServerPreTick(ServerTickEvent.Pre event) {
 
-            if (Chrysalis.registryAccess == null) Chrysalis.registryAccess = event.getServer().registryAccess();
+            if (Chrysalis.registryAccess == null || Chrysalis.registryAccess != event.getServer().registryAccess()) Chrysalis.registryAccess = event.getServer().registryAccess();
 
             if (MusicTracker.onServer.ticks > 0) {
                 MusicTracker.onServer.ticks -= 1;
                 return;
             }
 
-            List<ServerPlayer> list = event.getServer().getPlayerList().getPlayers();
-
-            for (ServerPlayer serverPlayer : list) {
+            for (ServerPlayer serverPlayer : event.getServer().getPlayerList().getPlayers()) {
                 if (!serverPlayer.isAlive()) return;
                 MusicTracker.onServer.checkAllStructures(serverPlayer.serverLevel(), serverPlayer);
             }
@@ -172,6 +170,7 @@ public class CServerEvents {
 
         @SubscribeEvent
         private static void commandRegistry(RegisterCommandsEvent event) {
+            ChrysalisCommand.register(event.getDispatcher());
             CameraShakeCommand.register(event.getDispatcher());
             ClearSpawnpointCommand.register(event.getDispatcher());
             CooldownCommand.register(event.getDispatcher(), event.getBuildContext());
