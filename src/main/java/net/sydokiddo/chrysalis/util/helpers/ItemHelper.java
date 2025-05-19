@@ -8,6 +8,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -27,6 +28,7 @@ import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.sydokiddo.chrysalis.common.CRegistry;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 import java.util.Objects;
 
@@ -248,6 +250,15 @@ public class ItemHelper {
 
     public static Component addTooltipWithIconOnBothSides(Component icon, Component tooltip) {
         return Component.translatable("gui.chrysalis.item.tooltip_with_icon.both_sides", icon, tooltip, icon);
+    }
+
+    public static void addModNameTooltip(Item.TooltipContext tooltipContext, ItemStack itemStack, String modId, MutableComponent modIcon, int color, CallbackInfoReturnable<List<Component>> cir) {
+        if (tooltipContext.registries() != null && Objects.equals(itemStack.getItem().getCreatorModId(Objects.requireNonNull(tooltipContext.registries()), itemStack), modId) && !itemStack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) && !cir.getReturnValue().isEmpty()) {
+            cir.getReturnValue().add(CommonComponents.EMPTY);
+            ComponentHelper.setIconsFont(modIcon, modId);
+            Component tooltip = addTooltipWithIcon(modIcon, Component.translatable("mod." + modId).withStyle(style -> style.withFont(ComponentHelper.FIVE_FONT).withColor(color)));
+            cir.getReturnValue().add(tooltip);
+        }
     }
 
     // endregion

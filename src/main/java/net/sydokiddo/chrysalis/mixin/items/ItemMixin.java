@@ -140,13 +140,7 @@ public class ItemMixin {
         @OnlyIn(Dist.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
         private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
-            if (tooltipContext.registries() != null && Objects.equals(this.getItem().getCreatorModId(Objects.requireNonNull(tooltipContext.registries()), this.copy()), Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) && CConfigOptions.CHRYSALIS_TOOLTIP.get()) {
-                if (!cir.getReturnValue().isEmpty()) cir.getReturnValue().add(CommonComponents.EMPTY);
-                MutableComponent chrysalisIcon = ComponentHelper.CHRYSALIS_ICON;
-                ComponentHelper.setIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
-                Component chrysalisTooltip = ItemHelper.addTooltipWithIcon(chrysalisIcon, Component.translatable("mod.chrysalis").withStyle(style -> style.withFont(ComponentHelper.FIVE_FONT).withColor(ComponentHelper.CHRYSALIS_COLOR.getRGB())));
-                cir.getReturnValue().add(chrysalisTooltip);
-            }
+            if (!tooltipFlag.isAdvanced() && CConfigOptions.CHRYSALIS_TOOLTIP.get()) ItemHelper.addModNameTooltip(tooltipContext, this.copy(), Chrysalis.MOD_ID, ComponentHelper.CHRYSALIS_ICON, ComponentHelper.CHRYSALIS_COLOR.getRGB(), cir);
         }
 
         @Inject(method = "getItemName", at = @At("RETURN"), cancellable = true)
