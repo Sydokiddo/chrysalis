@@ -59,7 +59,7 @@ public class CClientEvents {
         }
 
         @SubscribeEvent
-        private static void onScreenShot(ScreenshotEvent event) {
+        private static void onScreenshot(ScreenshotEvent event) {
             if (canPlayScreenshotEvents(event, true)) playScreenshotSound(Minecraft.getInstance());
         }
 

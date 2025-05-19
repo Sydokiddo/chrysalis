@@ -131,15 +131,16 @@ public class ItemMixin {
     public static abstract class ItemStackMixin implements DataComponentHolder {
 
         @Shadow public abstract Item getItem();
+        @Shadow public abstract ItemStack copy();
 
         /**
-         * Adds a Chrysalis tooltip to any new item registered by the mod.
+         * Adds a chrysalis tooltip to any new item registered by the mod.
          **/
 
         @OnlyIn(Dist.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
         private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
-            if (this.getItem().getDescriptionId().contains(Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) && CConfigOptions.CHRYSALIS_TOOLTIP.get()) {
+            if (tooltipContext.registries() != null && Objects.equals(this.getItem().getCreatorModId(Objects.requireNonNull(tooltipContext.registries()), this.copy()), Chrysalis.MOD_ID) && !tooltipFlag.isAdvanced() && !this.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) && CConfigOptions.CHRYSALIS_TOOLTIP.get()) {
                 if (!cir.getReturnValue().isEmpty()) cir.getReturnValue().add(CommonComponents.EMPTY);
                 MutableComponent chrysalisIcon = ComponentHelper.CHRYSALIS_ICON;
                 ComponentHelper.setIconsFont(chrysalisIcon, Chrysalis.MOD_ID);
