@@ -47,16 +47,16 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
     );
 
     static FluidloggedState getStateFromFluid(Fluid fluid) {
-        return STATE_FROM_FLUID.get().get(fluid);
+        return STATE_FROM_FLUID.get().getOrDefault(fluid, FluidloggedState.AIR);
     }
 
     static Fluid getFluidFromState(FluidloggedState fluidloggedState) {
-        return FLUID_FROM_STATE.get().get(fluidloggedState);
+        return FLUID_FROM_STATE.get().getOrDefault(fluidloggedState, Fluids.EMPTY);
     }
 
     @SuppressWarnings("unused")
     static FluidloggedState getStateAtPos(Level level, BlockPos blockPos) {
-        return STATE_FROM_FLUID.get().getOrDefault(level.getFluidState(blockPos).getType(), FluidloggedState.AIR);
+        return getStateFromFluid(level.getFluidState(blockPos).getType());
     }
 
     // endregion
