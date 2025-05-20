@@ -8,10 +8,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -49,12 +46,17 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
         () -> STATE_FROM_FLUID.get().inverse()
     );
 
-    private static FluidloggedState getStateFromFluid(Fluid fluid) {
+    static FluidloggedState getStateFromFluid(Fluid fluid) {
         return STATE_FROM_FLUID.get().get(fluid);
     }
 
-    private static Fluid getFluidFromState(FluidloggedState fluidloggedState) {
+    static Fluid getFluidFromState(FluidloggedState fluidloggedState) {
         return FLUID_FROM_STATE.get().get(fluidloggedState);
+    }
+
+    @SuppressWarnings("unused")
+    static FluidloggedState getStateAtPos(Level level, BlockPos blockPos) {
+        return STATE_FROM_FLUID.get().getOrDefault(level.getFluidState(blockPos).getType(), FluidloggedState.AIR);
     }
 
     // endregion
