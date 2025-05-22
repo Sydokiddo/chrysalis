@@ -52,6 +52,8 @@ public class ItemMixin {
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addTooltipsToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
+        if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
+
         if (itemStack.has(CDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
             MutableComponent remainsOnDeathIcon = ComponentHelper.REMAINS_ON_DEATH_ICON;
             ComponentHelper.setIconsFont(remainsOnDeathIcon, Chrysalis.MOD_ID);
@@ -66,7 +68,6 @@ public class ItemMixin {
             list.add(muffledTooltip);
         }
 
-        if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
         DamageResistant damageResistant = itemStack.get(DataComponents.DAMAGE_RESISTANT);
 
         if (damageResistant != null && damageResistant.types() == DamageTypeTags.IS_FIRE) {
@@ -147,7 +148,7 @@ public class ItemMixin {
 
             if (tooltipFlag.isAdvanced()) return;
 
-            if (this.has(DataComponents.REPAIRABLE) && Minecraft.getInstance().screen instanceof AnvilScreen) {
+            if (CConfigOptions.REWORKED_TOOLTIPS.get() && this.has(DataComponents.REPAIRABLE) && Minecraft.getInstance().screen instanceof AnvilScreen) {
 
                 cir.getReturnValue().add(CommonComponents.EMPTY);
                 cir.getReturnValue().add(Component.translatable("gui.chrysalis.item.repairable_with").withStyle(ChatFormatting.GRAY));
