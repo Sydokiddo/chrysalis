@@ -296,6 +296,9 @@
   "gui.chrysalis.item.enchantment.applies_to": "Applies To:",
   "gui.chrysalis.item.enchantment.level": "%1$s%2$s",
   "gui.chrysalis.item.enchantment.max_level": "/%s",
+  "gui.chrysalis.item.repairable_with": "Repairable With:",
+  "gui.chrysalis.item.amount": "x%s",
+  "gui.chrysalis.item.more_items": "and %s more...",
   "gui.chrysalis.item.tooltip_with_icon": "%1$s %2$s",
   "gui.chrysalis.item.tooltip_with_icon.both_sides": "%1$s %2$s %1$s",
 

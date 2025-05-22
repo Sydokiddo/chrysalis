@@ -1,7 +1,10 @@
 package net.sydokiddo.chrysalis.mixin.items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.inventory.AnvilScreen;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentHolder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
@@ -141,7 +144,31 @@ public class ItemMixin {
         @OnlyIn(Dist.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
         private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
-            if (!tooltipFlag.isAdvanced() && CConfigOptions.CHRYSALIS_TOOLTIP.get()) ItemHelper.addModNameTooltip(tooltipContext, this.copy(), Chrysalis.MOD_ID, ComponentHelper.CHRYSALIS_ICON, ComponentHelper.CHRYSALIS_COLOR.getRGB(), cir);
+
+            if (tooltipFlag.isAdvanced()) return;
+
+            if (this.has(DataComponents.REPAIRABLE) && Minecraft.getInstance().screen instanceof AnvilScreen) {
+
+                cir.getReturnValue().add(CommonComponents.EMPTY);
+                cir.getReturnValue().add(Component.translatable("gui.chrysalis.item.repairable_with").withStyle(ChatFormatting.GRAY));
+
+                int lines = 0;
+                HolderSet<Item> repairItems = Objects.requireNonNull(this.get(DataComponents.REPAIRABLE)).items();
+
+                for (Holder<Item> holder : repairItems) {
+
+                    cir.getReturnValue().add(CommonComponents.space().append(holder.value().getName().copy().withStyle(ChatFormatting.BLUE)));
+                    ++lines;
+
+                    if (lines >= 3) {
+                        int additionalLines = repairItems.size() - 3;
+                        if (additionalLines > 0) cir.getReturnValue().add(CommonComponents.space().append(Component.translatable("gui.chrysalis.item.more_items", additionalLines).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC)));
+                        break;
+                    }
+                }
+            }
+
+            if (CConfigOptions.CHRYSALIS_TOOLTIP.get()) ItemHelper.addModNameTooltip(tooltipContext, this.copy(), Chrysalis.MOD_ID, ComponentHelper.CHRYSALIS_ICON, ComponentHelper.CHRYSALIS_COLOR.getRGB(), cir);
         }
 
         @Inject(method = "getItemName", at = @At("RETURN"), cancellable = true)

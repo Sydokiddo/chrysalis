@@ -196,8 +196,20 @@ public class ComponentHelper {
         "Sculk",
         "warden",
         "Warden",
+        "allay",
+        "Allay",
+        "vex",
+        "Vex",
+        "wisp",
+        "Wisp",
+        "apparition",
+        "Apparition",
         "banshee",
-        "Banshee"
+        "Banshee",
+        "ecto",
+        "Ecto",
+        "ghost",
+        "Ghost"
     );
 
     public static final List<String> MEMORY_FIRE_NAMES = List.of(
@@ -205,12 +217,18 @@ public class ComponentHelper {
         "Memory",
         "memories",
         "Memories",
+        "remember",
+        "Remember",
         "kaleidoscope",
         "Kaleidoscope",
         "ethereal",
         "Ethereal",
         "everlasting",
         "Everlasting",
+        "experience",
+        "Experience",
+        "knowledge",
+        "Knowledge",
         "ichor",
         "Ichor"
     );
