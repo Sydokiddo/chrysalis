@@ -49,12 +49,12 @@ public class AdvancedSplashText implements SplashText {
         underlined,
         strikethrough,
         obfuscated,
-        forTesting
+        debugEnvironmentOnly
     ;
 
     private final int weight;
 
-    public AdvancedSplashText(Component splashText, String font, String color, boolean bold, boolean italic, boolean underlined, boolean strikethrough, boolean obfuscated, int weight, boolean forTesting) {
+    public AdvancedSplashText(Component splashText, String font, String color, boolean bold, boolean italic, boolean underlined, boolean strikethrough, boolean obfuscated, int weight, boolean debugEnvironmentOnly) {
         this.text = (MutableComponent) splashText;
         this.font = font;
         this.color = color;
@@ -64,7 +64,7 @@ public class AdvancedSplashText implements SplashText {
         this.strikethrough = strikethrough;
         this.obfuscated = obfuscated;
         this.weight = weight;
-        this.forTesting = forTesting;
+        this.debugEnvironmentOnly = debugEnvironmentOnly;
     }
 
     public AdvancedSplashText(MutableComponent mutableComponent) {
@@ -78,7 +78,7 @@ public class AdvancedSplashText implements SplashText {
 
     @Override
     public int getWeight() {
-        if (!Chrysalis.IS_DEBUG && this.forTesting) return 0;
+        if (!Chrysalis.IS_DEBUG && this.debugEnvironmentOnly) return 0;
         return Math.min(this.weight * SplashTextLoader.INSTANCE.getTotalWeight(), SplashTextLoader.defaultMaxWeight);
     }
 
