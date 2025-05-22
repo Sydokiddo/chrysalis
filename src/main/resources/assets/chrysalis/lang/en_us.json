@@ -166,9 +166,10 @@
   "gui.chrysalis.commands.camera_shake.reset.success.multiple": "Reset camera shake for %s players",
 
   "gui.chrysalis.commands.clear_spawnpoint.success": "Cleared %s's spawn point",
-  "gui.chrysalis.commands.clear_spawnpoint.fail": "%1$s does not have a specified spawn point",
+  "gui.chrysalis.commands.clear_spawnpoint.fail": "%s does not have a specified spawn point",
 
-  "gui.chrysalis.commands.cooldown.add": "Added a cooldown length of %1$s to %2$s for %3$s",
+  "gui.chrysalis.commands.cooldown.add.success": "Added a cooldown length of %1$s to %2$s for %3$s",
+  "gui.chrysalis.commands.cooldown.add.fail": "Could not add an item cooldown for %s",
   "gui.chrysalis.commands.cooldown.remove": "Removed cooldown of %1$s for %2$s",
 
   "gui.chrysalis.commands.coordinates.copy.success": "Copied %s's current coordinates to clipboard",
@@ -200,7 +201,7 @@
   "gui.chrysalis.commands.durability.fail.generic": "Nothing changed. Targets either have no item in their hands or the item could not have its durability or repair cost adjusted.",
   "gui.chrysalis.commands.durability.fail.no_durability": "%s's held item does not have any durability or repair cost to be adjusted",
 
-  "gui.chrysalis.commands.explosion.success": "Created an explosion with a power of %1$s",
+  "gui.chrysalis.commands.explosion.success": "Created an explosion with a power of %s",
   "gui.chrysalis.commands.explosion.success.entity": "Created an explosion caused by %1$s with a power of %2$s",
 
   "gui.chrysalis.commands.food.add": "Added %1$s nutrition and %2$s saturation to %3$s",

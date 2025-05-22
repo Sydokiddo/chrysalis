@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.UseCooldown;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
 
 public class CooldownCommand {
 
@@ -46,8 +47,14 @@ public class CooldownCommand {
     }
 
     private static int addCooldown(CommandSourceStack commandSourceStack, Player player, ItemInput itemInput, int cooldownLength) {
+
+        if (!commandSourceStack.getLevel().getGameRules().getBoolean(CGameRules.RULE_ITEM_COOLDOWNS)) {
+            commandSourceStack.sendFailure(Component.translatable("gui.chrysalis.commands.cooldown.add.fail", player.getDisplayName()));
+            return 0;
+        }
+
         player.getCooldowns().addCooldown(itemInput.getItem().getDefaultInstance(), cooldownLength);
-        commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.cooldown.add", cooldownLength, itemInput.getItem().getDefaultInstance().getDisplayName(), player.getDisplayName()), true);
+        commandSourceStack.sendSuccess(() -> Component.translatable("gui.chrysalis.commands.cooldown.add.success", cooldownLength, itemInput.getItem().getDefaultInstance().getDisplayName(), player.getDisplayName()), true);
         return 1;
     }
 
