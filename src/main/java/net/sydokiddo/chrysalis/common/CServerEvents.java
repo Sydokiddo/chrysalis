@@ -21,6 +21,7 @@ import net.minecraft.util.Unit;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -48,6 +49,7 @@ import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
+import net.neoforged.neoforge.event.entity.living.MobSplitEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
@@ -59,10 +61,7 @@ import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
-import net.sydokiddo.chrysalis.common.misc.CGameEvents;
-import net.sydokiddo.chrysalis.common.misc.CGameRules;
-import net.sydokiddo.chrysalis.common.misc.CSoundEvents;
-import net.sydokiddo.chrysalis.common.misc.CTags;
+import net.sydokiddo.chrysalis.common.misc.*;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockConversionData;
 import net.sydokiddo.chrysalis.util.blocks.codecs.BlockPropertyData;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
@@ -250,6 +249,12 @@ public class CServerEvents {
 
                 event.cancelWithResult(InteractionResult.SUCCESS);
             }
+        }
+
+        @SubscribeEvent
+        private static void onMobSplit(MobSplitEvent event) {
+            DamageSource damageSource = event.getParent().getLastDamageSource();
+            if (damageSource != null && damageSource.is(CTags.PREVENTS_MOB_SPLITTING)) event.setCanceled(true);
         }
     }
 

@@ -155,7 +155,8 @@ public class CTags {
         BYPASSES_DAMAGE_CAPACITY = registerDamageTypeTag("bypasses_damage_capacity"),
         DOES_NOT_EXPLODE_END_CRYSTALS = registerDamageTypeTag("does_not_explode_end_crystals"),
         IS_MAGIC = registerDamageTypeTag("is_magic"),
-        IS_RANGED = registerDamageTypeTag("is_ranged")
+        IS_RANGED = registerDamageTypeTag("is_ranged"),
+        PREVENTS_MOB_SPLITTING = registerDamageTypeTag("prevents_mob_splitting")
     ;
 
     // endregion

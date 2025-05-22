@@ -48,6 +48,7 @@
     "entities.passive.AxolotlMixin",
     "entities.passive.DolphinMixin",
     "entities.passive.IronGolemMixin",
+    "entities.passive.SquidMixin",
     "items.ArmorStandItemMixin",
     "items.BlockItemMixin",
     "items.BundleItemMixin",

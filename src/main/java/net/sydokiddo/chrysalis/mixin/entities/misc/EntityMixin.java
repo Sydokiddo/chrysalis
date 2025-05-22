@@ -93,6 +93,15 @@ public abstract class EntityMixin {
         if (this.isInWater() && this.isInLava()) info.cancel();
     }
 
+    /**
+     * Prevents living entities from being attacked if they are already playing their dying animation.
+     **/
+
+    @Inject(method = "isAttackable", at = @At("HEAD"), cancellable = true)
+    public void chrysalis$preventLivingEntityAttackingWhenDying(CallbackInfoReturnable<Boolean> cir) {
+        if (this.chrysalis$entity instanceof LivingEntity livingEntity && livingEntity.isDeadOrDying()) cir.setReturnValue(false);
+    }
+
     @Mixin(EntityType.class)
     public static abstract class EntityTypeMixin {
 
