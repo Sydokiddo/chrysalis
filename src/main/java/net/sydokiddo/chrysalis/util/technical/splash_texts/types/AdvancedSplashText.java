@@ -33,7 +33,7 @@ public class AdvancedSplashText implements SplashText {
         Codec.BOOL.optionalFieldOf("strikethrough", false).forGetter(null),
         Codec.BOOL.optionalFieldOf("obfuscated", false).forGetter(null),
         ExtraCodecs.intRange(SplashTextLoader.defaultMinWeight, SplashTextLoader.defaultMaxWeight).orElse(SplashTextLoader.defaultMaxWeight).optionalFieldOf("weight", SplashTextLoader.defaultWeight).forGetter(null),
-        Codec.BOOL.optionalFieldOf("for_testing", false).forGetter(null)
+        Codec.BOOL.optionalFieldOf("debug_environment_only", false).forGetter(null)
     ).apply(instance, AdvancedSplashText::new));
 
     private MutableComponent text;

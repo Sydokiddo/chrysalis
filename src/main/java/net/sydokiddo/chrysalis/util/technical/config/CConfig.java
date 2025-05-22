@@ -24,6 +24,7 @@ public class CConfig {
         CConfigOptions.REWORKED_TOOLTIPS = builder.define("reworked_tooltips", true);
         CConfigOptions.CHRYSALIS_TOOLTIP = builder.define("chrysalis_tooltip", true);
         CConfigOptions.CHRYSALIS_CREATIVE_MODE_TAB = builder.define("chrysalis_creative_mode_tab", true);
+        CConfigOptions.EXPERIMENTAL_WORLD_WARNING = builder.define("experimental_world_warning", true);
     }
 
     static {

@@ -386,7 +386,7 @@
   "chrysalis.configuration.creative_mode_item_deleting_sounds": "Creative Mode Item Deleting Sounds",
   "chrysalis.configuration.creative_mode_item_deleting_sounds.tooltip": "Deleting items in creative mode will play a trash crumbling sound.",
   "chrysalis.configuration.reworked_mob_griefing": "Reworked Mob Griefing",
-  "chrysalis.configuration.reworked_mob_griefing.tooltip": "Passive world interactions from mobs, such as villagers collecting crops or allays picking up items, are now determined by the passiveWorldInteractions game rule instead of the mobGriefing game rule. Bosses now have their own unique game rules for griefing.",
+  "chrysalis.configuration.reworked_mob_griefing.tooltip": "Passive world interactions from mobs, such as villagers collecting crops or allays picking up items, are now determined by the mobWorldInteractions game rule instead of the mobGriefing game rule. Bosses now have their own unique game rules for griefing.",
   "chrysalis.configuration.improved_structure_void_rendering": "Improved Structure Void Rendering",
   "chrysalis.configuration.improved_structure_void_rendering.tooltip": "Structure voids now render similarly to barriers, and now utilize a full hitbox.",
   "chrysalis.configuration.improved_glass_rendering": "Improved Glass Rendering",
@@ -407,6 +407,8 @@
   "chrysalis.configuration.chrysalis_tooltip.tooltip": "All new items added by chrysalis will display a tooltip with the mod's name on them.",
   "chrysalis.configuration.chrysalis_creative_mode_tab": "Chrysalis Creative Mode Tab",
   "chrysalis.configuration.chrysalis_creative_mode_tab.tooltip": "All new items added by chrysalis will be given their own creative mode tab. Requires restarting!",
+  "chrysalis.configuration.experimental_world_warning": "Experimental World Warning",
+  "chrysalis.configuration.experimental_world_warning.tooltip": "Whether or not to show a warning message when creating or entering a world with experimental settings.",
 
   "gamerule.chrysalis:mobWorldInteractions": "Allow non-destructive world interactions from mobs",
   "gamerule.chrysalis:dragonGriefing": "Allow for Ender Dragons to destroy blocks",

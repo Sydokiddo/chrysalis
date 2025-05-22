@@ -15,6 +15,6 @@
     { "text": { "text": "\ua016\ua017\ua018\ua019\ua020\ua021\ua022\ua023\ua024\ua025\ua026", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "\ua035\ua031\ua036\ua033\ua032\ua034\ua037", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "Also try Elysium!" }, "weight": 5 },
-    { "text": { "text": "This only shows if you're in a debug environment!" }, "weight": 5, "for_testing": true }
+    { "text": { "text": "This only shows if you're in a debug environment!" }, "weight": 5, "debug_environment_only": true }
   ]
 }

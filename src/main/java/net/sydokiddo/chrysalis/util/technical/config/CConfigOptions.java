@@ -19,6 +19,7 @@ public class CConfigOptions {
         NAME_TAG_HIDING = () -> true,
         REWORKED_TOOLTIPS = () -> true,
         CHRYSALIS_TOOLTIP = () -> true,
-        CHRYSALIS_CREATIVE_MODE_TAB = () -> true
+        CHRYSALIS_CREATIVE_MODE_TAB = () -> true,
+        EXPERIMENTAL_WORLD_WARNING = () -> true
     ;
 }

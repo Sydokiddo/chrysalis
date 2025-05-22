@@ -26,7 +26,7 @@ public class LevelMixin {
 
     @Inject(method = "isExperimental", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$disableExperimentalWarning(CallbackInfoReturnable<Boolean> cir) {
-        if (Chrysalis.IS_DEBUG) cir.setReturnValue(false);
+        if (Chrysalis.IS_DEBUG || !CConfigOptions.EXPERIMENTAL_WORLD_WARNING.get()) cir.setReturnValue(false);
     }
 
     @Mixin(ServerLevel.class)
