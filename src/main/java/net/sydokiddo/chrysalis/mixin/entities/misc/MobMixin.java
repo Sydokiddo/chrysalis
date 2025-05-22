@@ -93,7 +93,7 @@ public abstract class MobMixin extends LivingEntity {
 
         for (ChargedMobDropData chargedMobDropData : list) {
 
-            if (chargedMobDropData.forTesting() && !Chrysalis.IS_DEBUG || chargedMobDropData.droppedItem() == null) return;
+            if (!CRegistry.isDataEnabled(chargedMobDropData.enabled()) || chargedMobDropData.droppedItem() == null) return;
             ItemStack itemStack = new ItemStack(chargedMobDropData.droppedItem());
 
             if (damageSource.getEntity() instanceof Creeper creeper && creeper.canDropMobsSkull()) {

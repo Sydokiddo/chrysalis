@@ -69,6 +69,20 @@ public class CRegistry {
     public static final ResourceKey<Registry<PlayerLootTableData>> PLAYER_LOOT_TABLE_DATA = RegistryHelper.registerEntityDataType("player_loot_table");
     public static final ResourceKey<Registry<EntitySpawnerData.EntitySpawnerConfig>> ENTITY_SPAWNER_CONFIG_DATA = RegistryHelper.registerEntityDataType("entity_spawner_config");
 
+    public static boolean isDataEnabled(String enabled) {
+
+        boolean returnValue = false;
+
+        switch (enabled) {
+            case "true" -> returnValue = true;
+            case "false" -> {}
+            case "debug_environment_only" -> { if (Chrysalis.IS_DEBUG) returnValue = true; }
+            default -> throw new IllegalArgumentException("Invalid data enabled state '" + enabled + "', must be either 'true', 'false', or 'debug_environment_only'");
+        }
+
+        return returnValue;
+    }
+
     // endregion
 
     public static void registerAll(IEventBus eventBus) {

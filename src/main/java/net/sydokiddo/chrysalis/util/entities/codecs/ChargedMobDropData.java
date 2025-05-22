@@ -10,11 +10,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 
-public record ChargedMobDropData(HolderSet<EntityType<?>> entities, Holder<Item> droppedItem, boolean forTesting) {
+public record ChargedMobDropData(HolderSet<EntityType<?>> entities, Holder<Item> droppedItem, String enabled) {
 
     public static final Codec<ChargedMobDropData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         RegistryCodecs.homogeneousList(Registries.ENTITY_TYPE).fieldOf("entities").forGetter(ChargedMobDropData::entities),
         Item.CODEC.fieldOf("dropped_item").forGetter(ChargedMobDropData::droppedItem),
-        Codec.BOOL.optionalFieldOf(ComponentHelper.forTestingString, false).forGetter(ChargedMobDropData::forTesting)
+        Codec.STRING.optionalFieldOf(ComponentHelper.enabledString, ComponentHelper.trueString).forGetter(ChargedMobDropData::enabled)
     ).apply(instance, ChargedMobDropData::new));
 }

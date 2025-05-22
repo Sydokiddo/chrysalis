@@ -24,7 +24,9 @@ public class ComponentHelper {
     public static final String
         noneString = "none",
         nullString = "null",
-        forTestingString = "for_testing"
+        trueString = "true",
+        falseString = "false",
+        enabledString = "enabled"
     ;
 
     public static Component getWeatherComponent(Level level, Holder<Biome> biome, BlockPos blockPos) {

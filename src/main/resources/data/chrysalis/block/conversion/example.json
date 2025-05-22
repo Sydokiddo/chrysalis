@@ -8,5 +8,5 @@
   "game_event": "minecraft:block_change",
   "particle_state": "minecraft:torch",
   "sneaking_requirement": "not_sneaking",
-  "for_testing": true
+  "enabled": "debug_environment_only"
 }

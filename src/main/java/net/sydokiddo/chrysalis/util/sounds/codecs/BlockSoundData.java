@@ -18,7 +18,7 @@ import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import java.util.Objects;
 import java.util.Optional;
 
-public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSound, Holder<SoundEvent> stepSound, Holder<SoundEvent> placeSound, Holder<SoundEvent> hitSound, Holder<SoundEvent> fallSound, float volume, float pitch, String noteBlockInstrument, boolean forTesting) {
+public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSound, Holder<SoundEvent> stepSound, Holder<SoundEvent> placeSound, Holder<SoundEvent> hitSound, Holder<SoundEvent> fallSound, float volume, float pitch, String noteBlockInstrument, String enabled) {
 
     /**
      * Converts information from a json file into a specified block(s)'s sound group.
@@ -34,7 +34,7 @@ public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSo
         Codec.FLOAT.fieldOf("volume").forGetter(BlockSoundData::volume),
         Codec.FLOAT.fieldOf("pitch").forGetter(BlockSoundData::pitch),
         Codec.STRING.optionalFieldOf("note_block_instrument", ComponentHelper.noneString).forGetter(BlockSoundData::noteBlockInstrument),
-        Codec.BOOL.optionalFieldOf(ComponentHelper.forTestingString, false).forGetter(BlockSoundData::forTesting)
+        Codec.STRING.optionalFieldOf(ComponentHelper.enabledString, ComponentHelper.trueString).forGetter(BlockSoundData::enabled)
     ).apply(instance, BlockSoundData::new));
 
     @SuppressWarnings("deprecation")
@@ -43,15 +43,9 @@ public record BlockSoundData(HolderSet<Block> blocks, Holder<SoundEvent> breakSo
     }
 
     public static SoundType getFinalSoundType(BlockState blockState) {
-
         if (Chrysalis.registryAccess == null) return null;
         Optional<BlockSoundData> optional = Chrysalis.registryAccess.lookupOrThrow(CRegistry.BLOCK_SOUND_DATA).stream().filter(codec -> codec.blocks().contains(blockState.getBlockHolder())).findFirst();
-
-        if (optional.isPresent()) {
-            if (optional.get().forTesting() && !Chrysalis.IS_DEBUG) return null;
-            return optional.get().toSoundType();
-        }
-
+        if (optional.isPresent() && CRegistry.isDataEnabled(optional.get().enabled())) return optional.get().toSoundType();
         return null;
     }
 

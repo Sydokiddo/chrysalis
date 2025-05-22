@@ -235,7 +235,7 @@ public abstract class PlayerMixin extends LivingEntity {
         for (PlayerLootTableData playerLootTableData : list) {
 
             if (list.size() > 1) playerLootTableData = list.getFirst();
-            if (playerLootTableData.forTesting() && !Chrysalis.IS_DEBUG) return;
+            if (!CRegistry.isDataEnabled(playerLootTableData.enabled())) return;
             Optional<ResourceKey<LootTable>> optional = Optional.ofNullable(playerLootTableData.lootTable());
 
             if (optional.isPresent()) {

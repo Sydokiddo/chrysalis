@@ -17,7 +17,7 @@ import net.sydokiddo.chrysalis.common.misc.CGameEvents;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.RegistryHelper;
 
-public record BlockConversionData(HolderSet<Block> startingBlocks, Holder<Block> resultingBlock, HolderSet<Item> usedItems, String useInteraction, Holder<Item> returnedItem, Holder<SoundEvent> soundEvent, boolean randomizeSoundPitch, Holder<GameEvent> gameEvent, Holder<Block> particleState, String sneakingRequirement, boolean forTesting) {
+public record BlockConversionData(HolderSet<Block> startingBlocks, Holder<Block> resultingBlock, HolderSet<Item> usedItems, String useInteraction, Holder<Item> returnedItem, Holder<SoundEvent> soundEvent, boolean randomizeSoundPitch, Holder<GameEvent> gameEvent, Holder<Block> particleState, String sneakingRequirement, String enabled) {
 
     /**
      * Converts information from a json file into specified block conversion data.
@@ -34,6 +34,6 @@ public record BlockConversionData(HolderSet<Block> startingBlocks, Holder<Block>
         GameEvent.CODEC.optionalFieldOf("game_event", CGameEvents.EMPTY).forGetter(BlockConversionData::gameEvent),
         RegistryHelper.SINGULAR_BLOCK_CODEC.optionalFieldOf("particle_state", Blocks.AIR.defaultBlockState().getBlockHolder()).forGetter(BlockConversionData::particleState),
         Codec.STRING.optionalFieldOf("sneaking_requirement", ComponentHelper.noneString).forGetter(BlockConversionData::sneakingRequirement),
-        Codec.BOOL.optionalFieldOf(ComponentHelper.forTestingString, false).forGetter(BlockConversionData::forTesting)
+        Codec.STRING.optionalFieldOf(ComponentHelper.enabledString, ComponentHelper.trueString).forGetter(BlockConversionData::enabled)
     ).apply(instance, BlockConversionData::new));
 }

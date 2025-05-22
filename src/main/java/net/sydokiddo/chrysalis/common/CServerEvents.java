@@ -210,21 +210,15 @@ public class CServerEvents {
                 codec.usedItems().contains(event.getItemStack().getItemHolder())
             ).findFirst();
 
-            if (optional.isPresent() && event.getPlayer() != null) {
+            if (optional.isPresent() && CRegistry.isDataEnabled(optional.get().enabled()) && event.getPlayer() != null) {
 
-                if (optional.get().forTesting() && !Chrysalis.IS_DEBUG || event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getOffhandItem().is(Tags.Items.TOOLS_SHIELD) && !event.getPlayer().isSecondaryUseActive()) return;
+                if (event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getOffhandItem().is(Tags.Items.TOOLS_SHIELD) && !event.getPlayer().isSecondaryUseActive()) return;
 
                 switch (optional.get().sneakingRequirement()) {
-
                     case ComponentHelper.noneString, ComponentHelper.nullString -> {}
-                    case "sneaking" -> {
-                        if (!event.getPlayer().isShiftKeyDown()) return;
-                    }
-                    case "not_sneaking" -> {
-                        if (event.getPlayer().isShiftKeyDown()) return;
-                    }
-
-                    default -> Chrysalis.LOGGER.warn("Unknown Sneaking Requirement: '{}'", optional.get().sneakingRequirement());
+                    case "sneaking" -> { if (!event.getPlayer().isShiftKeyDown()) return; }
+                    case "not_sneaking" -> { if (event.getPlayer().isShiftKeyDown()) return; }
+                    default -> throw new IllegalArgumentException("Invalid sneaking requirement '" + optional.get().sneakingRequirement() + "', must be either 'none', 'null', 'sneaking', or 'not_sneaking'");
                 }
 
                 event.getLevel().setBlockAndUpdate(event.getPos(), optional.get().resultingBlock().value().withPropertiesOf(event.getLevel().getBlockState(event.getPos())));
@@ -242,15 +236,13 @@ public class CServerEvents {
                 }
 
                 switch (optional.get().useInteraction()) {
-
                     case ComponentHelper.noneString, ComponentHelper.nullString -> {}
                     case "consume_item" -> {
                         if (!event.getItemStack().getCraftingRemainder().isEmpty()) event.getPlayer().setItemInHand(event.getHand(), ItemUtils.createFilledResult(event.getItemStack(), event.getPlayer(), event.getItemStack().getCraftingRemainder()));
                         else event.getItemStack().consume(1, event.getPlayer());
                     }
                     case "consume_durability" -> event.getItemStack().hurtAndBreak(1, event.getPlayer(), LivingEntity.getSlotForHand(event.getHand()));
-
-                    default -> Chrysalis.LOGGER.warn("Unknown Use Interaction: {}", optional.get().useInteraction());
+                    default -> throw new IllegalArgumentException("Invalid use interaction '" + optional.get().useInteraction() + "', must be either 'none', 'null', 'consume_item', or 'consume_durability'");
                 }
 
                 event.getPlayer().awardStat(Stats.ITEM_USED.get(event.getItemStack().getItem()));

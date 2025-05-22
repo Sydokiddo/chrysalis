@@ -8,5 +8,5 @@
   "volume": 1.0,
   "pitch": 1.0,
   "note_block_instrument": "guitar",
-  "for_testing": true
+  "enabled": "false"
 }

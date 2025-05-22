@@ -1,5 +1,5 @@
 {
   "uuid": "380df991-f603-344c-a090-369bad2a924a",
   "loot_table": "chrysalis:players/example",
-  "for_testing": true
+  "enabled": "false"
 }

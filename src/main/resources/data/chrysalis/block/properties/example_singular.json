@@ -7,5 +7,5 @@
   "replaceable": false,
   "ignited_by_lava": false,
   "spawns_terrain_particles": true,
-  "for_testing": true
+  "enabled": "false"
 }
