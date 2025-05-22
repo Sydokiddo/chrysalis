@@ -74,6 +74,7 @@
     "misc.LevelMixin",
     "misc.LevelMixin$ServerExplosionMixin",
     "misc.LevelMixin$SnowFixMixin",
+    "misc.LocateCommandMixin",
     "misc.WeavingMobEffectMixin"
   ],
   "client": [
