@@ -1,12 +1,15 @@
 package net.sydokiddo.chrysalis.util.helpers;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -65,5 +68,23 @@ public class ParticleHelper {
 
     public static void emitLargeSmokeParticles(ServerLevel serverLevel, double x, double y, double z, int amount) {
         serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, x, y, z, amount, 0.0D, 0.0D, 0.0D, 0.0D);
+    }
+
+    public static void emitRedstoneParticlesAroundBlock(Level level, BlockPos blockPos, double yHeight) {
+
+        if (level instanceof ServerLevel serverLevel) {
+
+            for (Direction direction : Direction.values()) {
+
+                if (!level.getBlockState(blockPos.relative(direction)).isSolidRender()) {
+
+                    double x = direction.getAxis() == Direction.Axis.X ? 0.5D + (0.5D * (double) direction.getStepX()) : (double) level.getRandom().nextFloat();
+                    double y = direction.getAxis() == Direction.Axis.Y ? 0.5D + (0.5D * (double) direction.getStepY()) : (double) level.getRandom().nextFloat();
+                    double z = direction.getAxis() == Direction.Axis.Z ? 0.5D + (0.5D * (double) direction.getStepZ()) : (double) level.getRandom().nextFloat();
+
+                    serverLevel.sendParticles(DustParticleOptions.REDSTONE, (double) blockPos.getX() + x, ((double) blockPos.getY() + y) + yHeight, (double) blockPos.getZ() + z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                }
+            }
+        }
     }
 }
