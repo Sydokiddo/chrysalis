@@ -54,6 +54,7 @@
     "items.EndCrystalItemMixin",
     "items.EyeOfEnderItemMixin",
     "items.ItemMixin",
+    "items.ItemMixin$ItemCooldownsMixin",
     "items.ItemMixin$ItemStackMixin",
     "items.PotionColorMixin",
     "items.ShearsItemMixin",

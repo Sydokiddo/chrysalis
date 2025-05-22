@@ -51,6 +51,7 @@ import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -91,6 +92,11 @@ public class CServerEvents {
         }
 
         @SubscribeEvent
+        private static void onServerStarted(ServerStartedEvent event) {
+            Chrysalis.gameRules = event.getServer().getGameRules();
+        }
+
+        @SubscribeEvent
         private static void onServerPreTick(ServerTickEvent.Pre event) {
 
             if (Chrysalis.registryAccess == null || Chrysalis.registryAccess != event.getServer().registryAccess()) Chrysalis.registryAccess = event.getServer().registryAccess();
@@ -112,6 +118,7 @@ public class CServerEvents {
         private static void onServerStopping(ServerStoppingEvent event) {
             MusicTracker.onClient.clearMusic(false);
             if (!MusicTracker.onServer.playerStructures.isEmpty()) MusicTracker.onServer.playerStructures.clear();
+            Chrysalis.gameRules = null;
         }
 
         @SubscribeEvent

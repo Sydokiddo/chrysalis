@@ -5,6 +5,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.GameRules;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -25,6 +26,7 @@ public class Chrysalis {
 
     public static final Logger LOGGER = LoggerFactory.getLogger("Chrysalis");
     public static RegistryAccess registryAccess;
+    public static GameRules gameRules;
 
     public static boolean
         registerTestItems = false,

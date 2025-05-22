@@ -21,6 +21,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
+import net.sydokiddo.chrysalis.common.misc.CGameRules;
 import net.sydokiddo.chrysalis.util.helpers.ComponentHelper;
 import net.sydokiddo.chrysalis.util.helpers.ItemHelper;
 import net.sydokiddo.chrysalis.common.misc.CTags;
@@ -156,6 +157,20 @@ public class ItemMixin {
         @Unique
         private MutableComponent chrysalis$nameColorComponent(CallbackInfoReturnable<Component> cir) {
             return cir.getReturnValue().copy().withColor(Objects.requireNonNull(this.get(CDataComponents.NAME_COLOR.get())));
+        }
+    }
+
+    @SuppressWarnings("unused")
+    @Mixin(ItemCooldowns.class)
+    public static class ItemCooldownsMixin {
+
+        /**
+         * Prevents adding cooldowns to items if the itemCooldowns game rule is set to false.
+         **/
+
+        @Inject(method = "addCooldown(Lnet/minecraft/resources/ResourceLocation;I)V", at = @At("HEAD"), cancellable = true)
+        private void chrysalis$preventAddingCooldown(ResourceLocation resourceLocation, int cooldown, CallbackInfo info) {
+            if (Chrysalis.gameRules != null && !Chrysalis.gameRules.getBoolean(CGameRules.RULE_ITEM_COOLDOWNS)) info.cancel();
         }
     }
 }
