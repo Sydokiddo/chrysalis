@@ -162,7 +162,6 @@ public class ComponentHelper {
         FLOWSLUDGE_ICON = Component.translatable("gui.chrysalis.icon.flowsludge"),
         MOLTEN_VOID_ICON = Component.translatable("gui.chrysalis.icon.molten_void"),
         ECTOPLASM_ICON = Component.translatable("gui.chrysalis.icon.ectoplasm"),
-        BIOMIRE_ICON = Component.translatable("gui.chrysalis.icon.biomire"),
         REMAINS_ON_DEATH_ICON = Component.translatable("gui.chrysalis.icon.remains_on_death"),
         VIBRATION_ICON = Component.translatable("gui.chrysalis.icon.vibration"),
         MUFFLED_ICON = Component.translatable("gui.chrysalis.icon.muffled"),

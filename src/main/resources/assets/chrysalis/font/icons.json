@@ -555,20 +555,11 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/biomire.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua061"
-      ]
-    },
-    {
-      "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/remains_on_death.png",
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua062"
+        "\ua061"
       ]
     },
     {
@@ -577,7 +568,7 @@
       "ascent": 10,
       "height": 13,
       "chars": [
-        "\ua063"
+        "\ua062"
       ]
     },
     {
@@ -586,7 +577,7 @@
       "ascent": 10,
       "height": 14,
       "chars": [
-        "\ua064"
+        "\ua063"
       ]
     },
     {
@@ -595,7 +586,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua065"
+        "\ua064"
       ]
     },
     {
@@ -604,7 +595,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua066"
+        "\ua065"
       ]
     }
   ]
