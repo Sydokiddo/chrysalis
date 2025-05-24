@@ -252,6 +252,10 @@ public class ItemHelper {
         return Component.translatable("gui.chrysalis.item.tooltip_with_icon.both_sides", icon, tooltip, icon);
     }
 
+    public static Component addVanillaDescriptionComponent(ItemStack itemStack, String modId, ChatFormatting color) {
+        return CommonComponents.space().append(Component.translatable("item." + modId + "." + itemStack.getItem().getDescriptionId().replace("item.minecraft.", "") + ".description").withStyle(color));
+    }
+
     public static void addModNameTooltip(Item.TooltipContext tooltipContext, ItemStack itemStack, String modId, MutableComponent modIcon, int color, CallbackInfoReturnable<List<Component>> cir) {
         if (tooltipContext.registries() != null && Objects.equals(itemStack.getItem().getCreatorModId(Objects.requireNonNull(tooltipContext.registries()), itemStack), modId) && !itemStack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) && !cir.getReturnValue().isEmpty()) {
             cir.getReturnValue().add(CommonComponents.EMPTY);
