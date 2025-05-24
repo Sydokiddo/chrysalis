@@ -21,6 +21,7 @@
     "blocks.NetherWartBlockMixin",
     "blocks.PortalBlockMixin",
     "blocks.PortalBlockMixin$EndGatewayBlockMixin",
+    "blocks.PortalBlockMixin$EndPortalBlockEntityMixin",
     "blocks.PortalBlockMixin$EndPortalBlockMixin",
     "blocks.PowderSnowBlockMixin",
     "blocks.RespawnBlockMixin",
@@ -78,6 +79,7 @@
     "misc.WeavingMobEffectMixin"
   ],
   "client": [
+    "blocks.PortalBlockMixin$EndPortalRendererMixin",
     "entities.misc.PlayerMixin$AbstractClientPlayerMixin",
     "misc.AWTHackMixin",
     "misc.ClientLevelMixin",

@@ -32,4 +32,8 @@ public class CompatibilityHelper {
     public static boolean hasHominid() {
         return isModLoaded("hominid");
     }
+
+    public static boolean hasRubinatedNether() {
+        return isModLoaded("rubinated_nether");
+    }
 }
