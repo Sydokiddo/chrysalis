@@ -4,6 +4,7 @@
     "#c:barrels",
     "minecraft:decorated_pot",
     "#c:shulker_boxes",
-    "#minecraft:bundles"
+    "#minecraft:bundles",
+    {"id": "netherexp:brazier_chest", "required": false}
   ]
 }

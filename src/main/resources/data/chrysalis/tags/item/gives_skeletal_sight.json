@@ -1,6 +1,10 @@
 {
   "values": [
     "minecraft:skeleton_skull",
-    "minecraft:wither_skeleton_skull"
+    "minecraft:wither_skeleton_skull",
+    {"id": "netherexp:skeleton_skull_candle", "required": false},
+    {"id": "netherexp:soul_skeleton_skull_candle", "required": false},
+    {"id": "netherexp:ancient_skeleton_skull_candle", "required": false},
+    {"id": "netherexp:cerebrage_skull", "required": false}
   ]
 }

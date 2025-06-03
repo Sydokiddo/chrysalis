@@ -5,6 +5,8 @@
     "minecraft:soul_torch",
     "minecraft:soul_wall_torch",
     "minecraft:redstone_torch",
-    "minecraft:redstone_wall_torch"
+    "minecraft:redstone_wall_torch",
+    {"id": "netherexp:ancient_torch", "required": false},
+    {"id": "netherexp:ancient_wall_torch", "required": false}
   ]
 }

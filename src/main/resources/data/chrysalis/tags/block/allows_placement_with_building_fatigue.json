@@ -1,3 +1,5 @@
 {
-  "values": []
+  "values": [
+    {"id": "netherexp:haze_block", "required": false}
+  ]
 }

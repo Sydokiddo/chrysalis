@@ -4,6 +4,7 @@
     "minecraft:honey_bottle",
     "minecraft:dragon_breath",
     "minecraft:ominous_bottle",
-    "minecraft:experience_bottle"
+    "minecraft:experience_bottle",
+    {"id": "netherexp:wisp_bottle", "required": false}
   ]
 }

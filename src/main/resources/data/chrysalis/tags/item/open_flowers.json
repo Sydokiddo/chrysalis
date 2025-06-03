@@ -28,6 +28,7 @@
     "minecraft:pitcher_plant",
     "minecraft:chorus_flower",
     {"id": "minecraft:wildflowers", "required": false},
-    {"id": "minecraft:cactus_flower", "required": false}
+    {"id": "minecraft:cactus_flower", "required": false},
+    {"id": "netherexp:soul_torchflower", "required": false}
   ]
 }

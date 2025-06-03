@@ -1,6 +1,11 @@
 {
   "values": [
     "#c:pumpkins/carved",
-    "#minecraft:skulls"
+    "#minecraft:skulls",
+    {"id": "netherexp:carved_sorrowsquash", "required": false},
+    {"id": "netherexp:skeleton_skull_candle", "required": false},
+    {"id": "netherexp:soul_skeleton_skull_candle", "required": false},
+    {"id": "netherexp:ancient_skeleton_skull_candle", "required": false},
+    {"id": "netherexp:cerebrage_skull", "required": false}
   ]
 }

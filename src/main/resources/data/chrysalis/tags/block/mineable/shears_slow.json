@@ -43,6 +43,19 @@
     {"id": "minecraft:tall_dry_grass", "required": false},
     {"id": "minecraft:bush", "required": false},
     {"id": "minecraft:firefly_bush", "required": false},
-    {"id": "minecraft:leaf_litter", "required": false}
+    {"id": "minecraft:leaf_litter", "required": false},
+    {"id": "netherexp:soul_swirls", "required": false},
+    {"id": "netherexp:enigma_crown", "required": false},
+    {"id": "netherexp:enigma_shelf", "required": false},
+    {"id": "netherexp:igneous_reeds", "required": false},
+    {"id": "netherexp:nether_wart_beard", "required": false},
+    {"id": "netherexp:warped_wart_beard", "required": false},
+    {"id": "netherexp:weeping_ivy", "required": false},
+    {"id": "netherexp:twisting_ivy", "required": false},
+    {"id": "netherexp:red_scale_fungus", "required": false},
+    {"id": "netherexp:blue_scale_fungus", "required": false},
+    {"id": "netherexp:crimson_sprouts", "required": false},
+    {"id": "netherexp:crimson_sporeshroom", "required": false},
+    {"id": "netherexp:warped_sporeshroom", "required": false}
   ]
 }

@@ -1,5 +1,7 @@
 {
   "values": [
-    "#chrysalis:copper_grates"
+    "#chrysalis:copper_grates",
+    {"id": "netherexp:netherite_grate", "required": false},
+    {"id": "netherexp:rusty_netherite_grate", "required": false}
   ]
 }

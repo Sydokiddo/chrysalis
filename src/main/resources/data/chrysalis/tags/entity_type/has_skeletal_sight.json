@@ -1,6 +1,7 @@
 {
   "values": [
     "#minecraft:skeletons",
-    "minecraft:wither"
+    "minecraft:wither",
+    {"id": "netherexp:false_carcass", "required": false}
   ]
 }

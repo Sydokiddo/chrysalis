@@ -1,6 +1,15 @@
 {
   "values": [
     "minecraft:soul_sand",
-    "minecraft:soul_soil"
+    "minecraft:soul_soil",
+    {"id": "netherexp:ecto_soul_sand", "required": false},
+    {"id": "netherexp:suspicious_soul_sand", "required": false},
+    {"id": "netherexp:soul_magma_block", "required": false},
+    {"id": "netherexp:soul_permafrost", "required": false},
+    {"id": "netherexp:fossil_ore", "required": false},
+    {"id": "netherexp:fossil_fuel_ore", "required": false},
+    {"id": "netherexp:sorroweed", "required": false},
+    {"id": "netherexp:soul_soil_layer", "required": false},
+    {"id": "netherexp:soul_path", "required": false}
   ]
 }

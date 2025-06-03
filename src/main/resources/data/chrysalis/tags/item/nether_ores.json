@@ -3,6 +3,8 @@
     "minecraft:nether_gold_ore",
     "minecraft:nether_quartz_ore",
     "minecraft:ancient_debris",
-    "#c:ores_in_ground/netherrack"
+    "#c:ores_in_ground/netherrack",
+    {"id": "netherexp:fossil_ore", "required": false},
+    {"id": "netherexp:fossil_fuel_ore", "required": false}
   ]
 }

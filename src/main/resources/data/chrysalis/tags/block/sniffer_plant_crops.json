@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:torchflower_crop",
-    "minecraft:pitcher_crop"
+    "minecraft:pitcher_crop",
+    {"id": "netherexp:soul_torchflower_crop", "required": false}
   ]
 }

@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:zombified_piglin",
-    "minecraft:zoglin"
+    "minecraft:zoglin",
+    {"id": "#elysium:piglins_afraid_of", "required": false}
   ]
 }
