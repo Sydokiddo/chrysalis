@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:carrot_on_a_stick",
-    "minecraft:warped_fungus_on_a_stick"
+    "minecraft:warped_fungus_on_a_stick",
+    {"id": "netherexp:skull_on_a_stick", "required": false}
   ]
 }

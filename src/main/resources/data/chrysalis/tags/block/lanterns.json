@@ -2,6 +2,7 @@
   "values": [
     "minecraft:lantern",
     "minecraft:soul_lantern",
-    {"id": "netherexp:ancient_lantern", "required": false}
+    {"id": "netherexp:ancient_lantern", "required": false},
+    {"id": "rubinated_nether:ruby_lantern", "required": false}
   ]
 }
