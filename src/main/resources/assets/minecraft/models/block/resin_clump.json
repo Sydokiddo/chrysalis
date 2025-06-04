@@ -1,0 +1,6 @@
+{
+  "parent": "chrysalis:block/templates/template_multiface_block",
+  "textures": {
+    "texture": "minecraft:block/resin_clump"
+  }
+}
