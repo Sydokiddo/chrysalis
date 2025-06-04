@@ -188,7 +188,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public ResourceLocation getCrosshairTextureLocation() {
-        return Chrysalis.resourceLocationId("hud/aggro_wand_crosshair");
+        return Chrysalis.resourceLocationId("hud/crosshair/aggro_wand");
     }
 
     // endregion

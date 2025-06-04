@@ -82,6 +82,6 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public ResourceLocation getCrosshairTextureLocation() {
-        return Chrysalis.resourceLocationId("hud/kill_wand_crosshair");
+        return Chrysalis.resourceLocationId("hud/crosshair/kill_wand");
     }
 }

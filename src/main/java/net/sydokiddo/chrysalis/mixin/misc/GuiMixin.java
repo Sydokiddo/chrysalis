@@ -85,7 +85,7 @@ public class GuiMixin {
         private void chrysalis$renderWaxedIcon(Font font, ItemStack itemStack, int offsetX, int offsetY, String string, CallbackInfo info) {
             if (itemStack.is(CTags.WAXED_BLOCK_ITEMS) && CConfigOptions.REWORKED_TOOLTIPS.get()) {
                 this.pose().pushPose();
-                this.blitSprite(RenderType::guiTexturedOverlay, Chrysalis.resourceLocationId("hud/waxed_icon"), offsetX - 1, offsetY - 1, 8, 8);
+                this.blitSprite(RenderType::guiTexturedOverlay, Chrysalis.resourceLocationId("hud/misc/waxed"), offsetX - 1, offsetY - 1, 8, 8);
                 this.pose().popPose();
             }
         }

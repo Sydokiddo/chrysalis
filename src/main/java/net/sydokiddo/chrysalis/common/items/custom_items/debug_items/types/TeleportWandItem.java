@@ -85,6 +85,6 @@ public class TeleportWandItem extends DebugUtilityItem implements CustomCrosshai
     @OnlyIn(Dist.CLIENT)
     @Override
     public ResourceLocation getCrosshairTextureLocation() {
-        return Chrysalis.resourceLocationId("hud/teleport_wand_crosshair");
+        return Chrysalis.resourceLocationId("hud/crosshair/teleport_wand");
     }
 }
