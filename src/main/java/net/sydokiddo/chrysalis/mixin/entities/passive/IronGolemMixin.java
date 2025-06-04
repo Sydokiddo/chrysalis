@@ -16,7 +16,7 @@ public class IronGolemMixin {
      **/
 
     @Redirect(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
-    private boolean chrysalis$ironGolemRepairMaterialTag(ItemStack itemStack, Item item) {
+    private boolean chrysalis$repairsIronGolemsTag(ItemStack itemStack, Item item) {
         return itemStack.is(CTags.REPAIRS_IRON_GOLEMS);
     }
 }

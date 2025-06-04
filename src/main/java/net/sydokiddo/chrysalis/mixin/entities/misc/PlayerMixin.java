@@ -125,8 +125,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "isSecondaryUseActive", at = @At(value = "RETURN"), cancellable = true)
     private void chrysalis$allowBlockUseWhileSneaking(CallbackInfoReturnable<Boolean> cir) {
-        BlockHitResult blockHitResult = this.chrysalis$getPlayerPOVHitResult();
-        if (this.getMainHandItem().isEmpty() && this.level().getBlockState(blockHitResult.getBlockPos()).is(CTags.ALLOWS_USE_WHILE_SNEAKING)) cir.setReturnValue(false);
+        if (this.getMainHandItem().isEmpty() && this.level().getBlockState(this.chrysalis$getPlayerPOVHitResult().getBlockPos()).is(CTags.ALLOWS_USE_WHILE_SNEAKING)) cir.setReturnValue(false);
     }
 
     /**
@@ -289,7 +288,7 @@ public abstract class PlayerMixin extends LivingEntity {
     public static class InventoryMixin {
 
         @WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"))
-        private boolean chrysalis$keepItemOnDeath(ItemStack itemStack, Operation<Boolean> original) {
+        private boolean chrysalis$keepItemsOnDeath(ItemStack itemStack, Operation<Boolean> original) {
             if (itemStack.has(CDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) return true;
             return itemStack.isEmpty();
         }

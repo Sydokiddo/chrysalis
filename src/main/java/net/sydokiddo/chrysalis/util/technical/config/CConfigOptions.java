@@ -10,6 +10,7 @@ public class CConfigOptions {
         SPAWN_EGG_USE_SOUND = () -> true,
         CREATIVE_MODE_ITEM_DELETING_SOUNDS = () -> true,
         REWORKED_MOB_GRIEFING = () -> true,
+        TELEGRAPHED_ZOMBIE_VILLAGER_CURING = () -> true,
         IMPROVED_STRUCTURE_VOID_RENDERING = () -> true,
         IMPROVED_GLASS_RENDERING = () -> true,
         IMPROVED_GRATE_RENDERING = () -> true,

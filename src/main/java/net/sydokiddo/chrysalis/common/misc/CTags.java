@@ -108,6 +108,7 @@ public class CTags {
         PURPUR_BLOCKS = registerBlockTag("purpur_blocks"),
         SNIFFER_PLANT_CROPS = registerBlockTag("sniffer_plant_crops"),
         SOUL_SANDS = registerBlockTag("soul_sands"),
+        SPEEDS_UP_ZOMBIE_VILLAGER_CURING = registerBlockTag("speeds_up_zombie_villager_curing"),
         TORCHES = registerBlockTag("torches"),
         TURTLE_EGGS_CAN_HATCH_ON = registerBlockTag("turtle_eggs_can_hatch_on"),
         UNBREAKABLE_BLOCKS = registerBlockTag("unbreakable_blocks"),

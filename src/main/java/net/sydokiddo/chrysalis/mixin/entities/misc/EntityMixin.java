@@ -107,7 +107,7 @@ public abstract class EntityMixin {
      **/
 
     @Inject(method = "isAttackable", at = @At("HEAD"), cancellable = true)
-    public void chrysalis$preventLivingEntityAttackingWhenDying(CallbackInfoReturnable<Boolean> cir) {
+    public void chrysalis$preventLivingEntityAttackingWhileDying(CallbackInfoReturnable<Boolean> cir) {
         if (this.chrysalis$entity instanceof LivingEntity livingEntity && livingEntity.isDeadOrDying()) cir.setReturnValue(false);
     }
 

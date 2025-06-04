@@ -14,6 +14,7 @@ public class CConfig {
         CConfigOptions.SPAWN_EGG_USE_SOUND = builder.define("spawn_egg_use_sound", true);
         CConfigOptions.CREATIVE_MODE_ITEM_DELETING_SOUNDS = builder.define("creative_mode_item_deleting_sounds", true);
         CConfigOptions.REWORKED_MOB_GRIEFING = builder.define("reworked_mob_griefing", true);
+        CConfigOptions.TELEGRAPHED_ZOMBIE_VILLAGER_CURING = builder.define("telegraphed_zombie_villager_curing", true);
         CConfigOptions.IMPROVED_STRUCTURE_VOID_RENDERING = builder.define("improved_structure_void_rendering", true);
         CConfigOptions.IMPROVED_GLASS_RENDERING = builder.define("improved_glass_rendering", true);
         CConfigOptions.IMPROVED_GRATE_RENDERING = builder.define("improved_grate_rendering", true);

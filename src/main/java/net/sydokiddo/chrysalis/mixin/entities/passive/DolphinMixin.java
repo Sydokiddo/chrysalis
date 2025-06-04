@@ -17,7 +17,7 @@ public class DolphinMixin {
      **/
 
     @Redirect(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/tags/TagKey;)Z"))
-    private boolean chrysalis$dolphinFoodTag(ItemStack itemStack, TagKey<Item> tagKey) {
+    private boolean chrysalis$dolphinFoodsTag(ItemStack itemStack, TagKey<Item> tagKey) {
         return itemStack.is(CTags.DOLPHIN_FOODS);
     }
 }

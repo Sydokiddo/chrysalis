@@ -35,6 +35,7 @@
     "entities.hostile.EndermanLeaveBlockGoalMixin",
     "entities.hostile.PiglinAiMixin",
     "entities.hostile.WardenMixin",
+    "entities.hostile.ZombieVillagerMixin",
     "entities.misc.AbstractBoatMixin",
     "entities.misc.EndCrystalMixin",
     "entities.misc.EntityMixin",

@@ -20,7 +20,7 @@ public class BundleItemMixin {
      **/
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void chrysalis$preventBundleRightClickWhileEmpty(Level level, Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
+    private void chrysalis$preventBundleRightClickingWhileEmpty(Level level, Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
         BundleContents bundleContents = player.getItemInHand(interactionHand).get(DataComponents.BUNDLE_CONTENTS);
         if (bundleContents != null && bundleContents.isEmpty()) cir.setReturnValue(InteractionResult.PASS);
     }

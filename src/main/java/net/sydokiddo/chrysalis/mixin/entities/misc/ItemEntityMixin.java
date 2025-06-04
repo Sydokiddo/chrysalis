@@ -98,7 +98,7 @@ public abstract class ItemEntityMixin extends Entity {
      **/
 
     @Inject(at = @At("HEAD"), method = "dampensVibrations", cancellable = true)
-    private void chrysalis$makeItemMuffled(CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis$makeItemsMuffled(CallbackInfoReturnable<Boolean> cir) {
         if (this.getItem().has(CDataComponents.MUFFLED)) cir.setReturnValue(true);
     }
 }
