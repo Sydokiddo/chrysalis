@@ -148,8 +148,9 @@
   "effect.chrysalis.building_fatigue": "Building Fatigue",
   "effect.chrysalis.building_fatigue.desc": "Prevents the player from building.",
 
-  "attribute.chrysalis.reduced_detection_range": "Reduced Detection Range",
+  "attribute.chrysalis.bonus_interaction_range": "Bonus Interaction Range",
   "attribute.chrysalis.damage_capacity": "Damage Capacity",
+  "attribute.chrysalis.reduced_detection_range": "Reduced Detection Range",
   "attribute.chrysalis.item_pick_up_range": "Item Pick Up Range",
   "attribute.chrysalis.experience_pick_up_range": "Experience Pick Up Range",
 

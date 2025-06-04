@@ -41,14 +41,15 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     /**
-     * Adds Chrysalis's new attributes to living entities.
+     * Adds chrysalis's new attributes to living entities.
      **/
 
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
     private static void chrysalis$addLivingEntityAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> info) {
         if (info.getReturnValue() != null) {
-            info.getReturnValue().add(CAttributes.REDUCED_DETECTION_RANGE);
+            info.getReturnValue().add(CAttributes.BONUS_INTERACTION_RANGE);
             info.getReturnValue().add(CAttributes.DAMAGE_CAPACITY);
+            info.getReturnValue().add(CAttributes.REDUCED_DETECTION_RANGE);
         }
     }
 

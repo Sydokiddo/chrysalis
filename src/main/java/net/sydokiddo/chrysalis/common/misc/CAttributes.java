@@ -15,8 +15,9 @@ public class CAttributes {
     // region Attributes
 
     public static final DeferredHolder<Attribute, Attribute>
-        REDUCED_DETECTION_RANGE = registerAttribute("reduced_detection_range", 0.0D, 0.0D, 1.0D),
+        BONUS_INTERACTION_RANGE = registerAttribute("bonus_interaction_range", 0.0D, 0.0D, 64.0D),
         DAMAGE_CAPACITY = registerAttribute("damage_capacity", Double.MAX_VALUE, 1.0D, Double.MAX_VALUE),
+        REDUCED_DETECTION_RANGE = registerAttribute("reduced_detection_range", 0.0D, 0.0D, 1.0D),
         ITEM_PICK_UP_RANGE = registerAttribute("item_pick_up_range", 1.0D, 1.0D, 64.0D),
         EXPERIENCE_PICK_UP_RANGE = registerAttribute("experience_pick_up_range", 1.0D, 1.0D, 64.0D)
     ;

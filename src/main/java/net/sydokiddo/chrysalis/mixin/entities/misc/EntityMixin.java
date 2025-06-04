@@ -17,6 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.sydokiddo.chrysalis.Chrysalis;
 import net.sydokiddo.chrysalis.common.items.CDataComponents;
 import net.sydokiddo.chrysalis.common.items.custom_items.debug_items.types.*;
+import net.sydokiddo.chrysalis.common.misc.CAttributes;
 import net.sydokiddo.chrysalis.common.misc.CTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,20 +37,28 @@ public abstract class EntityMixin {
     @Shadow public abstract boolean isInLava();
 
     /**
-     * Allows for items in the increased_pick_radius tag to be able to select entities within a wider range when far away from them.
+     * Modifies the pick radius of entities under certain conditions.
      **/
 
     @OnlyIn(Dist.CLIENT)
     @Inject(method = "getPickRadius", at = @At("RETURN"), cancellable = true)
-    private void chrysalis$increasedPickRadius(CallbackInfoReturnable<Float> cir) {
+    private void chrysalis$modifyPickRadius(CallbackInfoReturnable<Float> cir) {
+
+        float returnValue;
+        if (this.chrysalis$entity instanceof LivingEntity livingEntity && livingEntity.getAttribute(CAttributes.BONUS_INTERACTION_RANGE) != null) returnValue = (float) livingEntity.getAttributeValue(CAttributes.BONUS_INTERACTION_RANGE);
+        else returnValue = cir.getReturnValue();
 
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player == null) return;
         ItemStack mainHandItem = minecraft.player.getMainHandItem();
         ItemStack offHandItem = minecraft.player.getOffhandItem();
 
-        if (mainHandItem.getItem() instanceof KillWandItem && !KillWandItem.canAttack(this.chrysalis$entity, minecraft.player)) return;
-        if (mainHandItem.has(CDataComponents.INCREASED_PICK_RADIUS) || offHandItem.has(CDataComponents.INCREASED_PICK_RADIUS)) cir.setReturnValue(minecraft.player.distanceTo(this.chrysalis$entity) > 8 ? 0.5F : 0.0F);
+        if (mainHandItem.has(CDataComponents.INCREASED_PICK_RADIUS) || offHandItem.has(CDataComponents.INCREASED_PICK_RADIUS)) {
+            if (mainHandItem.getItem() instanceof KillWandItem && !KillWandItem.canAttack(this.chrysalis$entity, minecraft.player)) cir.setReturnValue(returnValue);
+            else cir.setReturnValue(minecraft.player.distanceTo(this.chrysalis$entity) > 8 ? returnValue + 0.5F : returnValue);
+        } else {
+            cir.setReturnValue(returnValue);
+        }
     }
 
     /**
