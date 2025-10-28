@@ -2,7 +2,9 @@
   "total_weight": 1,
   "entries": [
     { "text": { "text": "Powered by Chrysalis!", "color": "#A27FFF" }, "weight": 20 },
+    { "text": { "text": "Junebug Modding!", "color": "#43A0C1" }, "weight": 20 },
     { "text": { "text": "\ua000", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 5 },
+    { "text": { "text": "\ua001", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 5 },
     { "text": "Flutter away!", "weight": 5 },
     { "text": { "text": "Uses custom fonts!", "font": "chrysalis:five" }, "weight": 5 },
     { "text": { "text": "Uses bold text!", "bold": true }, "weight": 5 },
@@ -11,9 +13,9 @@
     { "text": { "text": "Uses strikethrough text!", "strikethrough": true }, "weight": 5 },
     { "text": { "text": "Uses obfuscated text!", "obfuscated": true }, "weight": 5 },
     { "text": "Ooo, secret splash text!" },
-    { "text": { "text": "\ua030", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
-    { "text": { "text": "\ua016\ua017\ua018\ua019\ua020\ua021\ua022\ua023\ua024\ua025\ua026", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
-    { "text": { "text": "\ua035\ua031\ua036\ua033\ua032\ua034\ua037", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
+    { "text": { "text": "\ua040", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
+    { "text": { "text": "\ua008\ua009\ua010\ua011\ua012\ua013\ua014\ua015\ua016\ua017\ua018", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
+    { "text": { "text": "\ua062\ua057\ua063\ua060\ua058\ua061\ua064", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "Also try Elysium!" }, "weight": 5 },
     { "text": { "text": "This only shows if you're in a debug environment!" }, "weight": 5, "debug_environment_only": true }
   ]

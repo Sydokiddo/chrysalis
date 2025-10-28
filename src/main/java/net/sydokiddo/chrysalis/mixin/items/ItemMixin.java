@@ -78,18 +78,21 @@ public class ItemMixin {
             if (ItemHelper.listContainsName(itemStack, ComponentHelper.SOUL_FIRE_NAMES)) {
                 fireproofIcon = ComponentHelper.SOUL_FLAME_ICON;
                 fireproofColor = ComponentHelper.SOUL_FIRE_COLOR.getRGB();
+            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.COPPER_FIRE_NAMES)) {
+                fireproofIcon = ComponentHelper.COPPER_FLAME_ICON;
+                fireproofColor = ComponentHelper.COPPER_FIRE_COLOR.getRGB();
             } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.MEMORY_FIRE_NAMES)) {
                 fireproofIcon = ComponentHelper.MEMORY_FLAME_ICON;
                 fireproofColor = ComponentHelper.MEMORY_FIRE_COLOR.getRGB();
             } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.VOID_FIRE_NAMES)) {
                 fireproofIcon = ComponentHelper.VOID_FLAME_ICON;
                 fireproofColor = ComponentHelper.VOID_FIRE_COLOR.getRGB();
-            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.TREACHEROUS_FIRE_NAMES)) {
-                fireproofIcon = ComponentHelper.TREACHEROUS_FLAME_ICON;
-                fireproofColor = ComponentHelper.TREACHEROUS_FIRE_COLOR.getRGB();
-            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.NECROTIC_FIRE_NAMES)) {
-                fireproofIcon = ComponentHelper.NECROTIC_FLAME_ICON;
-                fireproofColor = ComponentHelper.NECROTIC_FIRE_COLOR.getRGB();
+            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.ANCIENT_FIRE_NAMES)) {
+                fireproofIcon = ComponentHelper.ANCIENT_FLAME_ICON;
+                fireproofColor = ComponentHelper.ANCIENT_FIRE_COLOR.getRGB();
+            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.CORPSE_FIRE_NAMES)) {
+                fireproofIcon = ComponentHelper.CORPSE_FLAME_ICON;
+                fireproofColor = ComponentHelper.CORPSE_FIRE_COLOR.getRGB();
             } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.PURITY_FIRE_NAMES)) {
                 fireproofIcon = ComponentHelper.PURITY_FLAME_ICON;
                 fireproofColor = ComponentHelper.PURITY_FIRE_COLOR.getRGB();

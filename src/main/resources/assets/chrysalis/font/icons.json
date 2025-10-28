@@ -15,7 +15,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/gear.png",
+      "file": "chrysalis:gui/sprites/icons/junebug.png",
       "ascent": 10,
       "height": 13,
       "chars": [
@@ -24,11 +24,20 @@
     },
     {
       "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/gear.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua002"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/warning.png",
       "ascent": 8,
       "height": 9,
       "chars": [
-        "\ua002"
+        "\ua003"
       ]
     },
     {
@@ -37,7 +46,16 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua003"
+        "\ua004"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/exclamation_point.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua005"
       ]
     },
     {
@@ -46,7 +64,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua004"
+        "\ua006"
       ]
     },
     {
@@ -55,97 +73,7 @@
       "ascent": 10,
       "height": 13,
       "chars": [
-        "\ua005"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/tool.png",
-      "ascent": 10,
-      "height": 13,
-      "chars": [
-        "\ua006"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/broken_tool.png",
-      "ascent": 10,
-      "height": 13,
-      "chars": [
         "\ua007"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/sword.png",
-      "ascent": 11,
-      "height": 14,
-      "chars": [
-        "\ua008"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/bow.png",
-      "ascent": 10,
-      "height": 13,
-      "chars": [
-        "\ua009"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/crossbow.png",
-      "ascent": 10,
-      "height": 13,
-      "chars": [
-        "\ua010"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/arrow.png",
-      "ascent": 10,
-      "height": 13,
-      "chars": [
-        "\ua011"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/trident.png",
-      "ascent": 10,
-      "height": 13,
-      "chars": [
-        "\ua012"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/mace.png",
-      "ascent": 10,
-      "height": 13,
-      "chars": [
-        "\ua013"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/armor.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua014"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/potion.png",
-      "ascent": 11,
-      "height": 14,
-      "chars": [
-        "\ua015"
       ]
     },
     {
@@ -154,7 +82,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua016"
+        "\ua008"
       ]
     },
     {
@@ -163,7 +91,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua017"
+        "\ua009"
       ]
     },
     {
@@ -172,7 +100,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua018"
+        "\ua010"
       ]
     },
     {
@@ -181,7 +109,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua019"
+        "\ua011"
       ]
     },
     {
@@ -190,7 +118,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua020"
+        "\ua012"
       ]
     },
     {
@@ -199,7 +127,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua021"
+        "\ua013"
       ]
     },
     {
@@ -208,7 +136,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua022"
+        "\ua014"
       ]
     },
     {
@@ -217,7 +145,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua023"
+        "\ua015"
       ]
     },
     {
@@ -226,7 +154,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua024"
+        "\ua016"
       ]
     },
     {
@@ -235,7 +163,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua025"
+        "\ua017"
       ]
     },
     {
@@ -244,7 +172,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua026"
+        "\ua018"
       ]
     },
     {
@@ -253,7 +181,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua027"
+        "\ua019"
       ]
     },
     {
@@ -262,88 +190,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua028"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/waxed.png",
-      "ascent": 10,
-      "height": 13,
-      "chars": [
-        "\ua029"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/snout.png",
-      "ascent": 8,
-      "height": 10,
-      "chars": [
-        "\ua030"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua031"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/soul_flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua032"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/memory_flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua033"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/void_flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua034"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/treacherous_flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua035"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/necrotic_flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua036"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/purity_flame.png",
-      "ascent": 10,
-      "height": 12,
-      "chars": [
-        "\ua037"
+        "\ua020"
       ]
     },
     {
@@ -352,7 +199,7 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua038"
+        "\ua021"
       ]
     },
     {
@@ -361,196 +208,115 @@
       "ascent": 10,
       "height": 12,
       "chars": [
-        "\ua039"
+        "\ua022"
       ]
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/redstone_dust.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua040"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/copper_ingot.png",
-      "ascent": 9,
-      "height": 10,
-      "chars": [
-        "\ua041"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/resin_brick.png",
-      "ascent": 9,
-      "height": 10,
-      "chars": [
-        "\ua042"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/gold_ingot.png",
-      "ascent": 9,
-      "height": 10,
-      "chars": [
-        "\ua043"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/glowstone_dust.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua044"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/emerald.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua045"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/prismarine_crystals.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua046"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/diamond.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua047"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/lapis_lazuli.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua048"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/echo_shard.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua049"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/amethyst_shard.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua050"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/nether_quartz.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua051"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/iron_ingot.png",
-      "ascent": 9,
-      "height": 10,
-      "chars": [
-        "\ua052"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/coal.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua053"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/netherite_ingot.png",
-      "ascent": 9,
-      "height": 10,
-      "chars": [
-        "\ua054"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/netherite_scrap.png",
-      "ascent": 9,
-      "height": 11,
-      "chars": [
-        "\ua055"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/water.png",
+      "file": "chrysalis:gui/sprites/icons/tool.png",
       "ascent": 10,
-      "height": 12,
+      "height": 13,
       "chars": [
-        "\ua056"
+        "\ua023"
       ]
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/lava.png",
+      "file": "chrysalis:gui/sprites/icons/broken_tool.png",
       "ascent": 10,
-      "height": 12,
+      "height": 13,
       "chars": [
-        "\ua057"
+        "\ua024"
       ]
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/flowsludge.png",
-      "ascent": 10,
-      "height": 12,
+      "file": "chrysalis:gui/sprites/icons/sword.png",
+      "ascent": 11,
+      "height": 14,
       "chars": [
-        "\ua058"
+        "\ua025"
       ]
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/molten_void.png",
-      "ascent": 10,
-      "height": 12,
+      "file": "chrysalis:gui/sprites/icons/spear.png",
+      "ascent": 11,
+      "height": 14,
       "chars": [
-        "\ua059"
+        "\ua026"
       ]
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/ectoplasm.png",
+      "file": "chrysalis:gui/sprites/icons/trident.png",
       "ascent": 10,
-      "height": 12,
+      "height": 13,
       "chars": [
-        "\ua060"
+        "\ua027"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/mace.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua028"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/bow.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua029"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/crossbow.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua030"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/arrow.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua031"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/armor.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua032"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/potion.png",
+      "ascent": 11,
+      "height": 14,
+      "chars": [
+        "\ua033"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/waxed.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua034"
       ]
     },
     {
@@ -559,25 +325,7 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua061"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/vibration.png",
-      "ascent": 10,
-      "height": 13,
-      "chars": [
-        "\ua062"
-      ]
-    },
-    {
-      "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/muffled.png",
-      "ascent": 10,
-      "height": 14,
-      "chars": [
-        "\ua063"
+        "\ua035"
       ]
     },
     {
@@ -586,7 +334,25 @@
       "ascent": 9,
       "height": 11,
       "chars": [
-        "\ua064"
+        "\ua036"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/vibration.png",
+      "ascent": 10,
+      "height": 13,
+      "chars": [
+        "\ua037"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/muffled.png",
+      "ascent": 10,
+      "height": 14,
+      "chars": [
+        "\ua038"
       ]
     },
     {
@@ -595,7 +361,277 @@
       "ascent": 10,
       "height": 12,
       "chars": [
+        "\ua039"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/snout.png",
+      "ascent": 8,
+      "height": 10,
+      "chars": [
+        "\ua040"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/redstone_dust.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua041"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/copper_ingot.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua042"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/resin_brick.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua043"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/gold_ingot.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua044"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/glowstone_dust.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua045"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/emerald.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua046"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/prismarine_crystals.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua047"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/diamond.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua048"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/lapis_lazuli.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua049"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/echo_shard.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua050"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/amethyst_shard.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua051"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/nether_quartz.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua052"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/iron_ingot.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua053"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/coal.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua054"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/netherite_ingot.png",
+      "ascent": 9,
+      "height": 10,
+      "chars": [
+        "\ua055"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/netherite_scrap.png",
+      "ascent": 9,
+      "height": 11,
+      "chars": [
+        "\ua056"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua057"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/soul_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua058"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/copper_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua059"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/memory_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua060"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/void_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua061"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/ancient_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua062"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/corpse_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua063"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/purity_flame.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua064"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/water.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
         "\ua065"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/lava.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua066"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/glister.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua067"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/molten_void.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua068"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/ectoplasm.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua069"
       ]
     }
   ]

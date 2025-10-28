@@ -61,6 +61,7 @@ public class ComponentHelper {
 
     public static final Color
         CHRYSALIS_COLOR = Color.decode("#A27FFF"),
+        JUNEBUG_COLOR = Color.decode("#43A0C1"),
         ENCHANTMENT_COLOR = Color.decode("#964CFF"),
         ENCHANTMENT_DARKER_COLOR = Color.decode("#4A1C8E"),
         CURSE_COLOR = Color.decode("#FF5555"),
@@ -68,13 +69,6 @@ public class ComponentHelper {
         EXPERIENCE_COLOR = Color.decode("#B9E85C"),
         WAXED_COLOR = Color.decode("#FABF29"),
         REMAINS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),
-        FIRE_COLOR = Color.decode("#FF6A00"),
-        SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
-        MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
-        VOID_FIRE_COLOR = Color.decode("#C920D3"),
-        TREACHEROUS_FIRE_COLOR = Color.decode("#FD4D4D"),
-        NECROTIC_FIRE_COLOR = Color.decode("#AFB42B"),
-        PURITY_FIRE_COLOR = Color.decode("#FF8A8A"),
         REDSTONE_COLOR = Color.decode("#971607"),
         COPPER_COLOR = Color.decode("#B4684D"),
         RESIN_COLOR = Color.decode("#FC7812"),
@@ -90,6 +84,14 @@ public class ComponentHelper {
         COAL_COLOR = Color.decode("#393E46"),
         NETHERITE_COLOR = Color.decode("#625859"),
         NETHERITE_SCRAP_COLOR = Color.decode("#7E6059"),
+        FIRE_COLOR = Color.decode("#FF6A00"),
+        SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
+        COPPER_FIRE_COLOR = Color.decode("#99EB99"),
+        MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
+        VOID_FIRE_COLOR = Color.decode("#C920D3"),
+        ANCIENT_FIRE_COLOR = Color.decode("#FD4D4D"),
+        CORPSE_FIRE_COLOR = Color.decode("#E1D657"),
+        PURITY_FIRE_COLOR = Color.decode("#FF8A8A"),
         BLINDNESS_COLOR = Color.decode("#5C4182"),
         HASTE_COLOR = Color.decode("#FFB67F"),
         MINING_FATIGUE_COLOR = Color.decode("#7575B5"),
@@ -102,21 +104,13 @@ public class ComponentHelper {
 
     public static final MutableComponent
         CHRYSALIS_ICON = Component.translatable("gui.chrysalis.icon.mod_icon"),
+        JUNEBUG_ICON = Component.translatable("gui.chrysalis.icon.junebug"),
         GEAR_ICON = Component.translatable("gui.chrysalis.icon.gear"),
         WARNING_ICON = Component.translatable("gui.chrysalis.icon.warning"),
         QUESTION_MARK_ICON = Component.translatable("gui.chrysalis.icon.question_mark"),
+        EXCLAMATION_POINT_ICON = Component.translatable("gui.chrysalis.icon.exclamation_point"),
         STAR_ICON = Component.translatable("gui.chrysalis.icon.star"),
         TOOLTIP_ICON = Component.translatable("gui.chrysalis.icon.tooltip"),
-        TOOL_ICON = Component.translatable("gui.chrysalis.icon.tool"),
-        BROKEN_TOOL_ICON = Component.translatable("gui.chrysalis.icon.broken_tool"),
-        SWORD_ICON = Component.translatable("gui.chrysalis.icon.sword"),
-        BOW_ICON = Component.translatable("gui.chrysalis.icon.bow"),
-        CROSSBOW_ICON = Component.translatable("gui.chrysalis.icon.crossbow"),
-        ARROW_ICON = Component.translatable("gui.chrysalis.icon.arrow"),
-        TRIDENT_ICON = Component.translatable("gui.chrysalis.icon.trident"),
-        MACE_ICON = Component.translatable("gui.chrysalis.icon.mace"),
-        ARMOR_ICON = Component.translatable("gui.chrysalis.icon.armor"),
-        POTION_ICON = Component.translatable("gui.chrysalis.icon.potion"),
         RED_HEART_ICON = Component.translatable("gui.chrysalis.icon.red_heart"),
         ORANGE_HEART_ICON = Component.translatable("gui.chrysalis.icon.orange_heart"),
         YELLOW_HEART_ICON = Component.translatable("gui.chrysalis.icon.yellow_heart"),
@@ -130,17 +124,26 @@ public class ComponentHelper {
         BROWN_HEART_ICON = Component.translatable("gui.chrysalis.icon.brown_heart"),
         BROKEN_HEART_ICON = Component.translatable("gui.chrysalis.icon.broken_heart"),
         HUNGER_POINT_ICON = Component.translatable("gui.chrysalis.icon.hunger_point"),
-        WAXED_ICON = Component.translatable("gui.chrysalis.icon.waxed"),
-        SNOUT_ICON = Component.translatable("gui.chrysalis.icon.snout"),
-        FLAME_ICON = Component.translatable("gui.chrysalis.icon.flame"),
-        SOUL_FLAME_ICON = Component.translatable("gui.chrysalis.icon.soul_flame"),
-        MEMORY_FLAME_ICON = Component.translatable("gui.chrysalis.icon.memory_flame"),
-        VOID_FLAME_ICON = Component.translatable("gui.chrysalis.icon.void_flame"),
-        TREACHEROUS_FLAME_ICON = Component.translatable("gui.chrysalis.icon.treacherous_flame"),
-        NECROTIC_FLAME_ICON = Component.translatable("gui.chrysalis.icon.necrotic_flame"),
-        PURITY_FLAME_ICON = Component.translatable("gui.chrysalis.icon.purity_flame"),
         EXPERIENCE_ORB_ICON = Component.translatable("gui.chrysalis.icon.experience_orb"),
         CURSED_EXPERIENCE_ORB_ICON = Component.translatable("gui.chrysalis.icon.cursed_experience_orb"),
+        TOOL_ICON = Component.translatable("gui.chrysalis.icon.tool"),
+        BROKEN_TOOL_ICON = Component.translatable("gui.chrysalis.icon.broken_tool"),
+        SWORD_ICON = Component.translatable("gui.chrysalis.icon.sword"),
+        SPEAR_ICON = Component.translatable("gui.chrysalis.icon.spear"),
+        TRIDENT_ICON = Component.translatable("gui.chrysalis.icon.trident"),
+        MACE_ICON = Component.translatable("gui.chrysalis.icon.mace"),
+        BOW_ICON = Component.translatable("gui.chrysalis.icon.bow"),
+        CROSSBOW_ICON = Component.translatable("gui.chrysalis.icon.crossbow"),
+        ARROW_ICON = Component.translatable("gui.chrysalis.icon.arrow"),
+        ARMOR_ICON = Component.translatable("gui.chrysalis.icon.armor"),
+        POTION_ICON = Component.translatable("gui.chrysalis.icon.potion"),
+        WAXED_ICON = Component.translatable("gui.chrysalis.icon.waxed"),
+        REMAINS_ON_DEATH_ICON = Component.translatable("gui.chrysalis.icon.remains_on_death"),
+        MUSIC_NOTE_ICON = Component.translatable("gui.chrysalis.icon.music_note"),
+        VIBRATION_ICON = Component.translatable("gui.chrysalis.icon.vibration"),
+        MUFFLED_ICON = Component.translatable("gui.chrysalis.icon.muffled"),
+        EGG_ICON = Component.translatable("gui.chrysalis.icon.egg"),
+        SNOUT_ICON = Component.translatable("gui.chrysalis.icon.snout"),
         REDSTONE_DUST_ICON = Component.translatable("gui.chrysalis.icon.redstone_dust"),
         COPPER_INGOT_ICON = Component.translatable("gui.chrysalis.icon.copper_ingot"),
         RESIN_BRICK_ICON = Component.translatable("gui.chrysalis.icon.resin_brick"),
@@ -157,16 +160,19 @@ public class ComponentHelper {
         COAL_ICON = Component.translatable("gui.chrysalis.icon.coal"),
         NETHERITE_INGOT_ICON = Component.translatable("gui.chrysalis.icon.netherite_ingot"),
         NETHERITE_SCRAP_ICON = Component.translatable("gui.chrysalis.icon.netherite_scrap"),
+        FLAME_ICON = Component.translatable("gui.chrysalis.icon.flame"),
+        SOUL_FLAME_ICON = Component.translatable("gui.chrysalis.icon.soul_flame"),
+        COPPER_FLAME_ICON = Component.translatable("gui.chrysalis.icon.copper_flame"),
+        MEMORY_FLAME_ICON = Component.translatable("gui.chrysalis.icon.memory_flame"),
+        VOID_FLAME_ICON = Component.translatable("gui.chrysalis.icon.void_flame"),
+        ANCIENT_FLAME_ICON = Component.translatable("gui.chrysalis.icon.ancient_flame"),
+        CORPSE_FLAME_ICON = Component.translatable("gui.chrysalis.icon.corpse_flame"),
+        PURITY_FLAME_ICON = Component.translatable("gui.chrysalis.icon.purity_flame"),
         WATER_ICON = Component.translatable("gui.chrysalis.icon.water"),
         LAVA_ICON = Component.translatable("gui.chrysalis.icon.lava"),
-        FLOWSLUDGE_ICON = Component.translatable("gui.chrysalis.icon.flowsludge"),
+        GLISTER_ICON = Component.translatable("gui.chrysalis.icon.glister"),
         MOLTEN_VOID_ICON = Component.translatable("gui.chrysalis.icon.molten_void"),
-        ECTOPLASM_ICON = Component.translatable("gui.chrysalis.icon.ectoplasm"),
-        REMAINS_ON_DEATH_ICON = Component.translatable("gui.chrysalis.icon.remains_on_death"),
-        VIBRATION_ICON = Component.translatable("gui.chrysalis.icon.vibration"),
-        MUFFLED_ICON = Component.translatable("gui.chrysalis.icon.muffled"),
-        MUSIC_NOTE_ICON = Component.translatable("gui.chrysalis.icon.music_note"),
-        EGG_ICON = Component.translatable("gui.chrysalis.icon.egg")
+        ECTOPLASM_ICON = Component.translatable("gui.chrysalis.icon.ectoplasm")
     ;
 
     // endregion
@@ -212,6 +218,21 @@ public class ComponentHelper {
         "Ghost"
     );
 
+    public static final List<String> COPPER_FIRE_NAMES = List.of(
+        "copper",
+        "Copper",
+        "oxidize",
+        "Oxidize",
+        "oxidizing",
+        "Oxidizing",
+        "oxidization",
+        "Oxidization",
+        "patina",
+        "Patina",
+        "cupric",
+        "Cupric"
+    );
+
     public static final List<String> MEMORY_FIRE_NAMES = List.of(
         "memory",
         "Memory",
@@ -219,18 +240,20 @@ public class ComponentHelper {
         "Memories",
         "remember",
         "Remember",
+        "forgotten",
+        "Forgotten",
+        "knowledge",
+        "Knowledge",
+        "experience",
+        "Experience",
+        "ichor",
+        "Ichor",
         "kaleidoscope",
         "Kaleidoscope",
         "ethereal",
         "Ethereal",
         "everlasting",
-        "Everlasting",
-        "experience",
-        "Experience",
-        "knowledge",
-        "Knowledge",
-        "ichor",
-        "Ichor"
+        "Everlasting"
     );
 
     public static final List<String> VOID_FIRE_NAMES = List.of(
@@ -241,10 +264,20 @@ public class ComponentHelper {
         "ender",
         "Ender",
         "endless",
-        "Endless"
+        "Endless",
+        "vengeful",
+        "Vengeful",
+        "teleport",
+        "Teleport",
+        "portal",
+        "Portal",
+        "dimension",
+        "Dimension"
     );
 
-    public static final List<String> TREACHEROUS_FIRE_NAMES = List.of(
+    public static final List<String> ANCIENT_FIRE_NAMES = List.of(
+        "ancient",
+        "Ancient",
         "treacherous",
         "Treacherous",
         "treachery",
@@ -255,7 +288,9 @@ public class ComponentHelper {
         "Carcass"
     );
 
-    public static final List<String> NECROTIC_FIRE_NAMES = List.of(
+    public static final List<String> CORPSE_FIRE_NAMES = List.of(
+        "corpse",
+        "Corpse",
         "necro",
         "Necro",
         "undead",
@@ -263,7 +298,9 @@ public class ComponentHelper {
         "zombie",
         "Zombie",
         "blight",
-        "Blight"
+        "Blight",
+        "mausoleum",
+        "Mausoleum"
     );
 
     public static final List<String> PURITY_FIRE_NAMES = List.of(

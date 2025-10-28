@@ -1,4 +1,6 @@
 {
+  "comment.chrysalis.titles_and_resource_packs": "TITLES/RESOURCE PACKS",
+
   "mod.chrysalis": "Chrysalis",
   "gui.wiki": "Wiki",
   "gui.developer_wiki": "Developer Wiki",
@@ -6,75 +8,85 @@
   "pack.chrysalis.no_carved_pumpkin_overlay.name": "No Carved Pumpkin Overlay",
   "pack.chrysalis.no_carved_pumpkin_overlay.description": "Removes the overlay of carved pumpkins",
 
+  "comment.chrysalis.icons": "ICONS",
+
   "gui.chrysalis.icon.mod_icon": "\ua000",
-  "gui.chrysalis.icon.gear": "\ua001",
-  "gui.chrysalis.icon.warning": "\ua002",
-  "gui.chrysalis.icon.question_mark": "\ua003",
-  "gui.chrysalis.icon.star": "\ua004",
-  "gui.chrysalis.icon.tooltip": "\ua005",
-  "gui.chrysalis.icon.tool": "\ua006",
-  "gui.chrysalis.icon.broken_tool": "\ua007",
-  "gui.chrysalis.icon.sword": "\ua008",
-  "gui.chrysalis.icon.bow": "\ua009",
-  "gui.chrysalis.icon.crossbow": "\ua010",
-  "gui.chrysalis.icon.arrow": "\ua011",
-  "gui.chrysalis.icon.trident": "\ua012",
-  "gui.chrysalis.icon.mace": "\ua013",
-  "gui.chrysalis.icon.armor": "\ua014",
-  "gui.chrysalis.icon.potion": "\ua015",
-  "gui.chrysalis.icon.red_heart": "\ua016",
-  "gui.chrysalis.icon.orange_heart": "\ua017",
-  "gui.chrysalis.icon.yellow_heart": "\ua018",
-  "gui.chrysalis.icon.green_heart": "\ua019",
-  "gui.chrysalis.icon.blue_heart": "\ua020",
-  "gui.chrysalis.icon.purple_heart": "\ua021",
-  "gui.chrysalis.icon.pink_heart": "\ua022",
-  "gui.chrysalis.icon.white_heart": "\ua023",
-  "gui.chrysalis.icon.gray_heart": "\ua024",
-  "gui.chrysalis.icon.black_heart": "\ua025",
-  "gui.chrysalis.icon.brown_heart": "\ua026",
-  "gui.chrysalis.icon.broken_heart": "\ua027",
-  "gui.chrysalis.icon.hunger_point": "\ua028",
-  "gui.chrysalis.icon.waxed": "\ua029",
-  "gui.chrysalis.icon.snout": "\ua030",
-  "gui.chrysalis.icon.flame": "\ua031",
-  "gui.chrysalis.icon.soul_flame": "\ua032",
-  "gui.chrysalis.icon.memory_flame": "\ua033",
-  "gui.chrysalis.icon.void_flame": "\ua034",
-  "gui.chrysalis.icon.treacherous_flame": "\ua035",
-  "gui.chrysalis.icon.necrotic_flame": "\ua036",
-  "gui.chrysalis.icon.purity_flame": "\ua037",
-  "gui.chrysalis.icon.experience_orb": "\ua038",
-  "gui.chrysalis.icon.cursed_experience_orb": "\ua039",
-  "gui.chrysalis.icon.redstone_dust": "\ua040",
-  "gui.chrysalis.icon.copper_ingot": "\ua041",
-  "gui.chrysalis.icon.resin_brick": "\ua042",
-  "gui.chrysalis.icon.gold_ingot": "\ua043",
-  "gui.chrysalis.icon.glowstone_dust": "\ua044",
-  "gui.chrysalis.icon.emerald": "\ua045",
-  "gui.chrysalis.icon.prismarine_crystals": "\ua046",
-  "gui.chrysalis.icon.diamond": "\ua047",
-  "gui.chrysalis.icon.lapis_lazuli": "\ua048",
-  "gui.chrysalis.icon.echo_shard": "\ua049",
-  "gui.chrysalis.icon.amethyst_shard": "\ua050",
-  "gui.chrysalis.icon.nether_quartz": "\ua051",
-  "gui.chrysalis.icon.iron_ingot": "\ua052",
-  "gui.chrysalis.icon.coal": "\ua053",
-  "gui.chrysalis.icon.netherite_ingot": "\ua054",
-  "gui.chrysalis.icon.netherite_scrap": "\ua055",
-  "gui.chrysalis.icon.water": "\ua056",
-  "gui.chrysalis.icon.lava": "\ua057",
-  "gui.chrysalis.icon.flowsludge": "\ua058",
-  "gui.chrysalis.icon.molten_void": "\ua059",
-  "gui.chrysalis.icon.ectoplasm": "\ua060",
-  "gui.chrysalis.icon.remains_on_death": "\ua061",
-  "gui.chrysalis.icon.vibration": "\ua062",
-  "gui.chrysalis.icon.muffled": "\ua063",
-  "gui.chrysalis.icon.music_note": "\ua064",
-  "gui.chrysalis.icon.egg": "\ua065",
+  "gui.chrysalis.icon.junebug": "\ua001",
+  "gui.chrysalis.icon.gear": "\ua002",
+  "gui.chrysalis.icon.warning": "\ua003",
+  "gui.chrysalis.icon.question_mark": "\ua004",
+  "gui.chrysalis.icon.exclamation_point": "\ua005",
+  "gui.chrysalis.icon.star": "\ua006",
+  "gui.chrysalis.icon.tooltip": "\ua007",
+  "gui.chrysalis.icon.red_heart": "\ua008",
+  "gui.chrysalis.icon.orange_heart": "\ua009",
+  "gui.chrysalis.icon.yellow_heart": "\ua010",
+  "gui.chrysalis.icon.green_heart": "\ua011",
+  "gui.chrysalis.icon.blue_heart": "\ua012",
+  "gui.chrysalis.icon.purple_heart": "\ua013",
+  "gui.chrysalis.icon.pink_heart": "\ua014",
+  "gui.chrysalis.icon.white_heart": "\ua015",
+  "gui.chrysalis.icon.gray_heart": "\ua016",
+  "gui.chrysalis.icon.black_heart": "\ua017",
+  "gui.chrysalis.icon.brown_heart": "\ua018",
+  "gui.chrysalis.icon.broken_heart": "\ua019",
+  "gui.chrysalis.icon.hunger_point": "\ua020",
+  "gui.chrysalis.icon.experience_orb": "\ua021",
+  "gui.chrysalis.icon.cursed_experience_orb": "\ua022",
+  "gui.chrysalis.icon.tool": "\ua023",
+  "gui.chrysalis.icon.broken_tool": "\ua024",
+  "gui.chrysalis.icon.sword": "\ua025",
+  "gui.chrysalis.icon.spear": "\ua026",
+  "gui.chrysalis.icon.trident": "\ua027",
+  "gui.chrysalis.icon.mace": "\ua028",
+  "gui.chrysalis.icon.bow": "\ua029",
+  "gui.chrysalis.icon.crossbow": "\ua030",
+  "gui.chrysalis.icon.arrow": "\ua031",
+  "gui.chrysalis.icon.armor": "\ua032",
+  "gui.chrysalis.icon.potion": "\ua033",
+  "gui.chrysalis.icon.waxed": "\ua034",
+  "gui.chrysalis.icon.remains_on_death": "\ua035",
+  "gui.chrysalis.icon.music_note": "\ua036",
+  "gui.chrysalis.icon.vibration": "\ua037",
+  "gui.chrysalis.icon.muffled": "\ua038",
+  "gui.chrysalis.icon.egg": "\ua039",
+  "gui.chrysalis.icon.snout": "\ua040",
+  "gui.chrysalis.icon.redstone_dust": "\ua041",
+  "gui.chrysalis.icon.copper_ingot": "\ua042",
+  "gui.chrysalis.icon.resin_brick": "\ua043",
+  "gui.chrysalis.icon.gold_ingot": "\ua044",
+  "gui.chrysalis.icon.glowstone_dust": "\ua045",
+  "gui.chrysalis.icon.emerald": "\ua046",
+  "gui.chrysalis.icon.prismarine_crystals": "\ua047",
+  "gui.chrysalis.icon.diamond": "\ua048",
+  "gui.chrysalis.icon.lapis_lazuli": "\ua049",
+  "gui.chrysalis.icon.echo_shard": "\ua050",
+  "gui.chrysalis.icon.amethyst_shard": "\ua051",
+  "gui.chrysalis.icon.nether_quartz": "\ua052",
+  "gui.chrysalis.icon.iron_ingot": "\ua053",
+  "gui.chrysalis.icon.coal": "\ua054",
+  "gui.chrysalis.icon.netherite_ingot": "\ua055",
+  "gui.chrysalis.icon.netherite_scrap": "\ua056",
+  "gui.chrysalis.icon.flame": "\ua057",
+  "gui.chrysalis.icon.soul_flame": "\ua058",
+  "gui.chrysalis.icon.copper_flame": "\ua059",
+  "gui.chrysalis.icon.memory_flame": "\ua060",
+  "gui.chrysalis.icon.void_flame": "\ua061",
+  "gui.chrysalis.icon.ancient_flame": "\ua062",
+  "gui.chrysalis.icon.corpse_flame": "\ua063",
+  "gui.chrysalis.icon.purity_flame": "\ua064",
+  "gui.chrysalis.icon.water": "\ua065",
+  "gui.chrysalis.icon.lava": "\ua066",
+  "gui.chrysalis.icon.glister": "\ua067",
+  "gui.chrysalis.icon.molten_void": "\ua068",
+  "gui.chrysalis.icon.ectoplasm": "\ua069",
+
+  "comment.chrysalis.hotkeys": "HOTKEYS",
 
   "key.chrysalis.panoramic_screenshot": "Take Panoramic Screenshot",
   "gui.chrysalis.screenshot_copied": "Screenshot copied to clipboard",
+
+  "comment.chrysalis.items": "ITEMS",
 
   "item.chrysalis.icon": "Chrysalis Icon",
 
@@ -120,11 +132,17 @@
   "item.chrysalis.test_right_click_item": "Test Right Click Item",
   "item.chrysalis.test_right_click_item.description": "An item for testing right-click functionality. Only meant for debug environments!",
 
+  "comment.chrysalis.blocks": "BLOCKS",
+
   "block.chrysalis.podium_spawner": "Podium Spawner",
+
+  "comment.chrysalis.entities": "ENTITIES",
 
   "entity.chrysalis.seat": "Seat",
   "entity.chrysalis.entity_spawner": "Entity Spawner",
   "entity.chrysalis.encounter_spawner": "Encounter Spawner",
+
+  "comment.chrysalis.status_effects": "STATUS EFFECTS",
 
   "effect.chrysalis.radiance": "Radiance",
   "effect.chrysalis.radiance.desc": "Shrouds the player's screen in a blinding light.",
@@ -148,11 +166,15 @@
   "effect.chrysalis.building_fatigue": "Building Fatigue",
   "effect.chrysalis.building_fatigue.desc": "Prevents the player from building.",
 
+  "comment.chrysalis.attributes": "ATTRIBUTES",
+
   "attribute.chrysalis.bonus_interaction_range": "Bonus Interaction Range",
   "attribute.chrysalis.damage_capacity": "Damage Capacity",
   "attribute.chrysalis.reduced_detection_range": "Reduced Detection Range",
   "attribute.chrysalis.item_pick_up_range": "Item Pick Up Range",
   "attribute.chrysalis.experience_pick_up_range": "Experience Pick Up Range",
+
+  "comment.chrysalis.commands": "COMMANDS",
 
   "gui.chrysalis.commands.generic.fail.invalid_entity": "%s is not a valid entity for this command",
   "gui.chrysalis.commands.generic.fail.no_item": "%s is not holding any item",
@@ -264,6 +286,8 @@
   "gui.chrysalis.commands.velocity.set.success.multiple": "Set a velocity of {%1$s, %2$s, %3$s} for %4$s entities",
   "gui.chrysalis.commands.velocity.fail": "Nothing changed. Targets could not have their velocity adjusted.",
 
+  "comment.chrysalis.item_messages": "ITEM MESSAGES",
+
   "gui.chrysalis.heal.message": "Successfully healed %s",
   "gui.chrysalis.fill_hunger.message": "Successfully nourished %s",
   "gui.chrysalis.fill_oxygen.message": "Successfully replenished oxygen for %s",
@@ -277,6 +301,13 @@
   "gui.chrysalis.drain_fluids.message": "Successfully drained nearby fluids",
   "gui.chrysalis.copying_spawn_egg.copy_message": "Copied Entity: %s",
   "gui.chrysalis.copying_spawn_egg.remove_message": "Copied Entity Removed",
+
+  "comment.chrysalis.block_messages": "BLOCK MESSAGES",
+
+  "gui.chrysalis.block.bed.invalid_dimension": "You cannot sleep in this dimension",
+  "gui.chrysalis.block.generic_respawn_block.invalid_dimension": "You cannot set your spawn point using this block in this dimension",
+
+  "comment.chrysalis.tooltips": "TOOLTIPS",
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",
@@ -328,6 +359,8 @@
   "gui.chrysalis.weather.thundering": "Thundering",
   "gui.chrysalis.weather.snowing": "Snowing",
 
+  "comment.chrysalis.death_messages": "DEATH MESSAGES",
+
   "death.attack.chrysalis.crush": "%1$s was crushed by %2$s",
   "death.attack.chrysalis.crush.item": "%1$s was crushed by %2$s using %3$s",
   "death.attack.chrysalis.pulverize": "%1$s was pulverized by %2$s",
@@ -338,6 +371,8 @@
   "death.attack.chrysalis.pelt.item": "%1$s was pelted by %2$s using %3$s",
   "death.attack.chrysalis.splatter": "%1$s was splattered by %2$s",
   "death.attack.chrysalis.splatter.item": "%1$s was splattered by %2$s using %3$s",
+
+  "comment.chrysalis.config_helpers": "CONFIG HELPERS",
 
   "gui.chrysalis.config_controller.blocks_singular": "%s Block",
   "gui.chrysalis.config_controller.blocks_plural": "%s Blocks",
@@ -373,6 +408,8 @@
   "gui.chrysalis.config_category.miscellaneous.description": "Miscellaneous configurable options that don't fit into any other listed categories.",
   "gui.chrysalis.config_category.experimental": "%s Experimental %s",
   "gui.chrysalis.config_category.experimental.description": "Experimental options for a bit more intrusive mechanics.",
+
+  "comment.chrysalis.config": "CONFIG",
 
   "chrysalis.configuration.title": "Chrysalis Config",
   "chrysalis.configuration.section.chrysalis.common.toml": "Chrysalis Config",
@@ -413,6 +450,8 @@
   "chrysalis.configuration.experimental_world_warning": "Experimental World Warning",
   "chrysalis.configuration.experimental_world_warning.tooltip": "Whether or not to show a warning message when creating or entering a world with experimental settings.",
 
+  "comment.chrysalis.game_rules": "GAME RULES",
+
   "gamerule.chrysalis:mobWorldInteractions": "Allow non-destructive world interactions from mobs",
   "gamerule.chrysalis:dragonGriefing": "Allow for Ender Dragons to destroy blocks",
   "gamerule.chrysalis:witherGriefing": "Allow for Withers to destroy blocks",
@@ -430,8 +469,7 @@
   "gamerule.chrysalis:respawnAnchorsExplode": "Respawn Anchors explode",
   "gamerule.chrysalis:respawnAnchorsExplode.description": "Respawn Anchors will explode when used in any dimension outside of the Nether.",
 
-  "gui.chrysalis.block.bed.invalid_dimension": "You cannot sleep in this dimension",
-  "gui.chrysalis.block.generic_respawn_block.invalid_dimension": "You cannot set your spawn point using this block in this dimension",
+  "comment.chrysalis.item_subtitles": "ITEM SUBTITLES",
 
   "subtitles.item.heal.use": "Player heals",
   "subtitles.item.fill_hunger.use": "Player nourishes",
@@ -465,10 +503,14 @@
   "subtitles.item.drink.drink_soft": "Slurping",
   "subtitles.item.drink.drink_harsh": "Gulping",
 
+  "comment.chrysalis.block_subtitles": "BLOCK SUBTITLES",
+
   "subtitles.block.podium_spawner.ambient": "Podium Spawner crackles",
   "subtitles.block.podium_spawner.spawn_mob": "Podium Spawner spawns a mob",
   "subtitles.block.podium_spawner.trigger_countdown": "Podium Spawner ticks",
   "subtitles.block.podium_spawner.end_cooldown": "Podium Spawner reactivates",
+
+  "comment.chrysalis.entity_subtitles": "ENTITY SUBTITLES",
 
   "subtitles.entity.item.drop": "Item dropped",
 
@@ -477,8 +519,12 @@
   "subtitles.entity.entity_spawner.appear": "Entity manifests",
   "subtitles.entity.entity_spawner.about_to_spawn_entity": "Entity prepares",
 
+  "comment.chrysalis.ui_subtitles": "UI SUBTITLES",
+
   "subtitles.ui.creative_mode.delete_item": "Item deleted",
   "subtitles.ui.creative_mode.delete_all_items": "Inventory cleared",
+
+  "comment.chrysalis.item_tags": "ITEM TAGS",
 
   "tag.item.chrysalis.banner_patterns": "Banner Patterns",
   "tag.item.chrysalis.campfires": "Campfires",
@@ -521,6 +567,8 @@
   "tag.item.chrysalis.torches": "Torches",
   "tag.item.chrysalis.waxed_blocks": "Waxed Blocks",
 
+  "comment.chrysalis.block_tags": "BLOCK TAGS",
+
   "tag.block.chrysalis.mineable.shears": "Mineable With Shears",
   "tag.block.chrysalis.mineable.shears_fast": "Mineable With Shears (Fast)",
   "tag.block.chrysalis.mineable.shears_normal": "Mineable With Shears (Normal)",
@@ -556,6 +604,8 @@
   "tag.block.chrysalis.waxable_blocks": "Waxable Blocks",
   "tag.block.chrysalis.waxed_blocks": "Waxed Blocks",
 
+  "comment.chrysalis.entity_type_tags": "ENTITY TYPE TAGS",
+
   "tag.entity_type.chrysalis.always_plays_encounter_music": "Always Plays Encounter Music",
   "tag.entity_type.chrysalis.can_spawn_on_leaves": "Can Spawn On Leaves",
   "tag.entity_type.chrysalis.cannot_ride_boats": "Cannot Ride Boats",
@@ -582,13 +632,19 @@
   "tag.entity_type.chrysalis.villagers": "Villagers",
   "tag.entity_type.chrysalis.warden_ignored": "Warden Ignored",
 
+  "comment.chrysalis.damage_type_tags": "DAMAGE TYPE TAGS",
+
   "tag.damage_type.chrysalis.bypasses_damage_capacity": "Bypasses Damage Capacity",
   "tag.damage_type.chrysalis.does_not_explode_end_crystals": "Does Not Explode End Crystals",
   "tag.damage_type.chrysalis.is_magic": "Is Magic",
   "tag.damage_type.chrysalis.is_ranged": "Is Ranged",
   "tag.damage_type.chrysalis.prevents_mob_splitting": "Prevents Mob Splitting",
 
+  "comment.chrysalis.biome_tags": "BIOME TAGS",
+
   "tag.worldgen.chrysalis.biome.without_mob_spawns": "Biomes Without Mob Spawns",
+
+  "comment.chrysalis.enchantable_tags": "ENCHANTABLE TAGS",
 
   "tag.item.minecraft.enchantable.armor": "Armor",
   "tag.item.minecraft.enchantable.bow": "Bows",
