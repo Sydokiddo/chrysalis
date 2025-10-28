@@ -3,5 +3,5 @@ build/
 .gradle/
 .idea/
 generated/
-src/main/java/net/sydokiddo/chrysalis/testing
-src/main/java/net/sydokiddo/chrysalis/mixin/testing
+src/main/java/net/junebug/chrysalis/testing
+src/main/java/net/junebug/chrysalis/mixin/testing

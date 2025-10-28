@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.sydokiddo.chrysalis.mixin",
+  "package": "net.junebug.chrysalis.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "PlayerManagerMixin",
