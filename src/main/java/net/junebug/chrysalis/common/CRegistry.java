@@ -111,6 +111,7 @@ public class CRegistry {
     @EventBusSubscriber(modid = Chrysalis.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistry {
 
+        public static int devCapeVariant;
         public static final KeyMapping PANORAMIC_SCREENSHOT_KEY = new KeyMapping("key.chrysalis.panoramic_screenshot", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_F6, "key.categories.misc");
 
         @SubscribeEvent
@@ -126,6 +127,7 @@ public class CRegistry {
                 Chrysalis.LOGGER.warn("java.awt.headless property was not set properly!");
             }
 
+            devCapeVariant = (Math.random() <= 0.5D) ? 1 : 2;
             DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.MOD_VERSION, true);
         }
     }

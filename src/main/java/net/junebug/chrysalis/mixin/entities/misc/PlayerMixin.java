@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.Util;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.resources.PlayerSkin;
@@ -48,6 +49,7 @@ import net.junebug.chrysalis.util.helpers.EntityHelper;
 import net.junebug.chrysalis.common.misc.CTags;
 import net.junebug.chrysalis.util.helpers.EventHelper;
 import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -299,6 +301,7 @@ public abstract class PlayerMixin extends LivingEntity {
     public static abstract class AbstractClientPlayerMixin extends Player {
 
         @Shadow @Nullable protected abstract PlayerInfo getPlayerInfo();
+        @Shadow @Final public ClientLevel clientLevel;
 
         private AbstractClientPlayerMixin(Level level, BlockPos blockPos, float yRot, GameProfile gameProfile) {
             super(level, blockPos, yRot, gameProfile);
@@ -306,9 +309,18 @@ public abstract class PlayerMixin extends LivingEntity {
 
         @Inject(at = @At("RETURN"), method = "getSkin", cancellable = true)
         private void chrysalis$customCapes(CallbackInfoReturnable<PlayerSkin> cir) {
+
             if (this.getPlayerInfo() == null) return;
             if (Objects.equals(this.getPlayerInfo().getProfile().getId().toString(), "d92469c6-e198-4db5-99e3-759e84036aea")) cir.setReturnValue(this.chrysalis$setCustomCape(Chrysalis.resourceLocationId("textures/entity/cape/sydokiddo.png")));
-            else if (Chrysalis.IS_DEBUG) cir.setReturnValue(this.chrysalis$setCustomCape(Chrysalis.resourceLocationId("textures/entity/cape/chrysalis.png")));
+
+            else if (Chrysalis.IS_DEBUG) {
+
+                String capeTexture = "";
+                if (CRegistry.ClientRegistry.devCapeVariant == 1) capeTexture = "chrysalis";
+                else if (CRegistry.ClientRegistry.devCapeVariant == 2) capeTexture = "junebug";
+
+                if (!capeTexture.isEmpty()) cir.setReturnValue(this.chrysalis$setCustomCape(Chrysalis.resourceLocationId("textures/entity/cape/" + capeTexture + ".png")));
+            }
         }
 
         @Unique
