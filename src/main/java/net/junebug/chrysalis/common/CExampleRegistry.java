@@ -56,6 +56,7 @@ public class CExampleRegistry {
         registerExampleStructureMusic();
         registerExampleDispenserMethods();
         registerExampleFluidsForFluidLogging();
+        CSharedFeatures.enableExampleFeature();
         Chrysalis.LOGGER.warn("WARNING: {} example registry has been initialized.", Chrysalis.LOGGER.getName());
     }
 
