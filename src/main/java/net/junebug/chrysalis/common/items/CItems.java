@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
@@ -35,6 +36,9 @@ public class CItems {
         GIVE_RESISTANCE = ITEMS.registerItem("give_resistance", GiveResistanceItem::new, RegistryHelper.debugUtilityProperties(1)),
         CLEAR_EFFECTS = ITEMS.registerItem("clear_effects", ClearEffectsItem::new, RegistryHelper.debugUtilityProperties(1)),
         TELEPORT_TO_SPAWNPOINT = ITEMS.registerItem("teleport_to_spawnpoint", TeleportToSpawnpointItem::new, RegistryHelper.debugUtilityProperties(1)),
+        TELEPORT_TO_OVERWORLD = ITEMS.registerItem("teleport_to_overworld", (properties) -> new TeleportToDimensionItem(properties, Level.OVERWORLD), RegistryHelper.debugUtilityProperties(1)),
+        TELEPORT_TO_NETHER = ITEMS.registerItem("teleport_to_nether", (properties) -> new TeleportToDimensionItem(properties, Level.NETHER), RegistryHelper.debugUtilityProperties(1)),
+        TELEPORT_TO_END = ITEMS.registerItem("teleport_to_end", (properties) -> new TeleportToDimensionItem(properties, Level.END), RegistryHelper.debugUtilityProperties(1)),
         TELEPORT_WAND = ITEMS.registerItem("teleport_wand", TeleportWandItem::new, RegistryHelper.debugUtilityProperties(1).useCooldown(3.0F)),
         KILL_WAND = ITEMS.registerItem("kill_wand", KillWandItem::new, RegistryHelper.debugUtilityProperties(1).attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.MAINHAND))),
         AGGRO_WAND = ITEMS.registerItem("aggro_wand", AggroWandItem::new, RegistryHelper.debugUtilityProperties(1).attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.HAND))),

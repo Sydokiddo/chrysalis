@@ -29,7 +29,7 @@ public class CSoundEvents {
         FILL_OXYGEN_USE = SOUND_EVENTS.register("item.fill_oxygen.use", SoundEvent::createVariableRangeEvent),
         GIVE_RESISTANCE_USE = SOUND_EVENTS.register("item.give_resistance.use", SoundEvent::createVariableRangeEvent),
         CLEAR_EFFECTS_USE = SOUND_EVENTS.register("item.clear_effects.use", SoundEvent::createVariableRangeEvent),
-        TELEPORT_TO_SPAWNPOINT_FAIL = SOUND_EVENTS.register("item.teleport_to_spawnpoint.fail", SoundEvent::createVariableRangeEvent),
+        TELEPORTING_ITEM_FAIL = SOUND_EVENTS.register("item.teleporting_item.fail", SoundEvent::createVariableRangeEvent),
         AGGRO_WAND_LINK = SOUND_EVENTS.register("item.aggro_wand.link", SoundEvent::createVariableRangeEvent),
         AGGRO_WAND_SELECT_TARGET_SUCCESS = SOUND_EVENTS.register("item.aggro_wand.select_target.success", SoundEvent::createVariableRangeEvent),
         AGGRO_WAND_SELECT_TARGET_FAIL = SOUND_EVENTS.register("item.aggro_wand.select_target.fail", SoundEvent::createVariableRangeEvent),

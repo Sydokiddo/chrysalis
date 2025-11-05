@@ -1,17 +1,21 @@
 package net.junebug.chrysalis.util.helpers;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.junebug.chrysalis.Chrysalis;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -263,6 +267,19 @@ public class ItemHelper {
             Component tooltip = addTooltipWithIcon(modIcon, Component.translatable("mod." + modId).withStyle(style -> style.withFont(ComponentHelper.FIVE_FONT).withColor(color)));
             cir.getReturnValue().add(tooltip);
         }
+    }
+
+    // endregion
+
+    // region Cooldowns
+
+    /**
+     * Allows for cooldowns to be set for items in specific item tags.
+     **/
+
+    public static void addCooldownToTag(ServerPlayer serverPlayer, TagKey<Item> itemTag, int cooldown) {
+        List<Item> cooldownGroup = Chrysalis.registryAccess.lookupOrThrow(Registries.ITEM).stream().filter(codec -> codec.getDefaultInstance().is(itemTag)).toList();
+        for (Item item : cooldownGroup) serverPlayer.getCooldowns().addCooldown(item.getDefaultInstance(), cooldown);
     }
 
     // endregion

@@ -1,0 +1,6 @@
+{
+  "parent": "chrysalis:block/templates/template_cardinal_cross",
+  "textures": {
+    "all": "endless_encore:block/unknown_plane"
+  }
+}

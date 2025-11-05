@@ -52,6 +52,7 @@ public class CTags {
         REPAIRS_IRON_GOLEMS = registerItemTag("repairs_iron_golems"),
         SOUL_SAND_ITEMS = registerItemTag("soul_sands"),
         STONE_PRESSURE_PLATE_ITEMS = registerItemTag("stone_pressure_plates"),
+        TELEPORT_TO_DIMENSION_ITEMS = registerItemTag("teleport_to_dimension_items"),
         TNT_IGNITERS = registerItemTag("tnt_igniters"),
         TORCH_ITEMS = registerItemTag("torches"),
         WAXED_BLOCK_ITEMS = registerItemTag("waxed_blocks"),

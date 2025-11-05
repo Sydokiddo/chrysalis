@@ -30,6 +30,9 @@ public class CCreativeModeTabs {
             output.accept(CItems.GIVE_RESISTANCE);
             output.accept(CItems.CLEAR_EFFECTS);
             output.accept(CItems.TELEPORT_TO_SPAWNPOINT);
+            output.accept(CItems.TELEPORT_TO_OVERWORLD);
+            output.accept(CItems.TELEPORT_TO_NETHER);
+            output.accept(CItems.TELEPORT_TO_END);
             output.accept(CItems.TELEPORT_WAND);
             output.accept(CItems.KILL_WAND);
             output.accept(CItems.AGGRO_WAND);

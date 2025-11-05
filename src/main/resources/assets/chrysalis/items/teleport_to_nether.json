@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "chrysalis:item/teleport_to_nether"
+  }
+}

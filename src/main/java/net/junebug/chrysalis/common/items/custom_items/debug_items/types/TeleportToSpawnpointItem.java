@@ -1,6 +1,6 @@
 package net.junebug.chrysalis.common.items.custom_items.debug_items.types;
 
-import net.minecraft.ChatFormatting;
+import net.junebug.chrysalis.common.items.custom_items.debug_items.shared_classes.TeleportingDebugUtilityItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -20,11 +20,10 @@ import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 import net.junebug.chrysalis.util.helpers.ItemHelper;
 import net.junebug.chrysalis.common.items.custom_items.debug_items.shared_classes.DebugUtilityItem;
-import net.junebug.chrysalis.common.misc.CSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
-public class TeleportToSpawnpointItem extends DebugUtilityItem {
+public class TeleportToSpawnpointItem extends TeleportingDebugUtilityItem {
 
     public TeleportToSpawnpointItem(Properties properties) {
         super(properties);
@@ -82,7 +81,6 @@ public class TeleportToSpawnpointItem extends DebugUtilityItem {
     }
 
     private void fail(ServerPlayer serverPlayer) {
-        serverPlayer.playNotifySound(CSoundEvents.TELEPORT_TO_SPAWNPOINT_FAIL.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-        DebugUtilityItem.sendFeedbackMessage(false, serverPlayer, Component.translatable("gui.chrysalis.teleport_to_spawnpoint.message.fail").withStyle(ChatFormatting.RED));
+        this.fail(serverPlayer, Component.translatable("gui.chrysalis.teleport_to_spawnpoint.message.fail"));
     }
 }

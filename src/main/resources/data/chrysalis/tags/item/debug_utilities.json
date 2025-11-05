@@ -7,6 +7,7 @@
     "chrysalis:give_resistance",
     "chrysalis:clear_effects",
     "chrysalis:teleport_to_spawnpoint",
+    "#chrysalis:teleport_to_dimension_items",
     "chrysalis:teleport_wand",
     "chrysalis:kill_wand",
     "chrysalis:aggro_wand",
