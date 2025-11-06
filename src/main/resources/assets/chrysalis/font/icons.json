@@ -8,7 +8,7 @@
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/chrysalis.png",
       "ascent": 10,
-      "height": 12,
+      "height": 13,
       "chars": [
         "\ua000"
       ]

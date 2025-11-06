@@ -8,6 +8,8 @@
   "pack.chrysalis.no_carved_pumpkin_overlay.name": "No Carved Pumpkin Overlay",
   "pack.chrysalis.no_carved_pumpkin_overlay.description": "Removes the overlay of carved pumpkins",
 
+  "dimension.minecraft.overworld": "The Overworld",
+
   "comment.chrysalis.icons": "ICONS",
 
   "gui.chrysalis.icon.mod_icon": "\ua000",
