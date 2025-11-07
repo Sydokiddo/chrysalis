@@ -54,6 +54,7 @@
     "items.ArmorStandItemMixin",
     "items.BlockItemMixin",
     "items.BundleItemMixin",
+    "items.DebugStickItemMixin",
     "items.EndCrystalItemMixin",
     "items.EyeOfEnderItemMixin",
     "items.ItemMixin",

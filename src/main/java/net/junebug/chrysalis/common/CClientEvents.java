@@ -135,7 +135,7 @@ public class CClientEvents {
             if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) event.insertAfter(Items.CREAKING_HEART.getDefaultInstance(), CItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
             if (event.getTabKey() == CreativeModeTabs.OP_BLOCKS && event.hasPermissions()) {
-                event.insertAfter(Items.STRUCTURE_BLOCK.getDefaultInstance(), CBlocks.PLACEHOLDER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(Items.STRUCTURE_BLOCK.getDefaultInstance(), CBlocks.PLACEHOLDER_BLOCK.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(Items.DEBUG_STICK.getDefaultInstance(), CItems.HEAL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.HEAL.toStack(), CItems.FILL_HUNGER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.FILL_HUNGER.toStack(), CItems.FILL_OXYGEN.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);

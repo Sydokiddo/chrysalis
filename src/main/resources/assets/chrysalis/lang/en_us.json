@@ -140,9 +140,9 @@
 
   "comment.chrysalis.blocks": "BLOCKS",
 
-  "block.chrysalis.placeholder": "Placeholder",
-  "gui.chrysalis.placeholder.set_block_id": "Set Block ID: '%s'",
-  "gui.chrysalis.placeholder.unknown_block_id": "Block ID '%s' does not exist!",
+  "block.chrysalis.placeholder_block": "Placeholder Block",
+  "gui.chrysalis.placeholder_block.set_block_id": "Set Block ID: '%s'",
+  "gui.chrysalis.placeholder_block.unknown_block_id": "Block ID '%s' does not exist!",
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
   "comment.chrysalis.entities": "ENTITIES",

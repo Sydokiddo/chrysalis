@@ -24,5 +24,5 @@ public class CBlockStateProperties {
     ;
 
     public static final EnumProperty<FluidloggedState> FLUIDLOGGED = EnumProperty.create("fluidlogged", FluidloggedState.class);
-    public static final EnumProperty<PlaceholderBlock.PlaceholderModelState> PLACEHOLDER_MODEL_STATE = EnumProperty.create("model", PlaceholderBlock.PlaceholderModelState.class);
+    public static final EnumProperty<PlaceholderBlock.PlaceholderBlockModelState> PLACEHOLDER_BLOCK_MODEL_STATE = EnumProperty.create("model", PlaceholderBlock.PlaceholderBlockModelState.class);
 }

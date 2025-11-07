@@ -13,11 +13,19 @@ public class CBlockEntities {
 
     private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Chrysalis.MOD_ID);
 
-    public static final Supplier<BlockEntityType<PlaceholderBlockEntity>> PLACEHOLDER = BLOCK_ENTITY_TYPES.register(
-        "placeholder", () -> new BlockEntityType<>(PlaceholderBlockEntity::new, CBlocks.PLACEHOLDER.get())
+    // region Block Entities
+
+    public static final Supplier<BlockEntityType<PlaceholderBlockEntity>> PLACEHOLDER_BLOCK = BLOCK_ENTITY_TYPES.register(
+        "placeholder_block", () -> new BlockEntityType<>(PlaceholderBlockEntity::new, CBlocks.PLACEHOLDER_BLOCK.get())
     );
+
+    // endregion
+
+    // region Registry
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITY_TYPES.register(eventBus);
     }
+
+    // endregion
 }

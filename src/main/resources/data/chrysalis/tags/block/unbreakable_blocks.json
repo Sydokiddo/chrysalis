@@ -9,7 +9,7 @@
     "minecraft:jigsaw",
     "minecraft:structure_block",
     "minecraft:barrier",
-    "chrysalis:placeholder",
+    "chrysalis:placeholder_block",
     {"id": "minecraft:test_block", "required": false}
   ]
 }

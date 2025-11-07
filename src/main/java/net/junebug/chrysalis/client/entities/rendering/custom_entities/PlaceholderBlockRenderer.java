@@ -17,24 +17,24 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class PlaceholderRenderer implements BlockEntityRenderer<PlaceholderBlockEntity> {
+public class PlaceholderBlockRenderer implements BlockEntityRenderer<PlaceholderBlockEntity> {
 
     private final EntityRenderDispatcher entityRenderDispatcher;
 
-    public PlaceholderRenderer(BlockEntityRendererProvider.Context context) {
+    public PlaceholderBlockRenderer(BlockEntityRendererProvider.Context context) {
         this.entityRenderDispatcher = context.getEntityRenderer();
     }
 
     @Override
     public void render(@NotNull PlaceholderBlockEntity placeholderBlockEntity, float v, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
 
-        if (placeholderBlockEntity.getBlockState().getValue(CBlockStateProperties.PLACEHOLDER_MODEL_STATE) == PlaceholderBlock.PlaceholderModelState.BILLBOARD) {
+        if (placeholderBlockEntity.getBlockState().getValue(CBlockStateProperties.PLACEHOLDER_BLOCK_MODEL_STATE) == PlaceholderBlock.PlaceholderBlockModelState.BILLBOARD) {
 
             poseStack.pushPose();
             poseStack.translate(0.5F, 0.25F, 0.5F);
             poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
 
-            VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(Chrysalis.resourceLocationId("textures/entity/block_entities/placeholder.png")));
+            VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(Chrysalis.resourceLocationId("textures/entity/block_entities/placeholder_block.png")));
             PoseStack.Pose lastPoseStack = poseStack.last();
 
             this.vertex(vertexConsumer, lastPoseStack, packedLight, 0.0F, 0, 0, 1);

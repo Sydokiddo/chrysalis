@@ -20,7 +20,7 @@ public class CBlocks {
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Chrysalis.MOD_ID);
 
     public static final DeferredBlock<Block>
-        PLACEHOLDER = registerBlock("placeholder", PlaceholderBlock::new, BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).mapColor(MapColor.COLOR_LIGHT_GRAY).noLootTable().noOcclusion().isValidSpawn(Blocks::never).pushReaction(PushReaction.BLOCK), new Item.Properties().rarity(Rarity.EPIC))
+        PLACEHOLDER_BLOCK = registerBlock("placeholder_block", PlaceholderBlock::new, BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).mapColor(MapColor.COLOR_LIGHT_GRAY).noLootTable().noOcclusion().isValidSpawn(Blocks::never).pushReaction(PushReaction.BLOCK), new Item.Properties().rarity(Rarity.EPIC))
     ;
 
     @SuppressWarnings("all")
