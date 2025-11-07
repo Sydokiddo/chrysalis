@@ -67,7 +67,7 @@ public class PlaceholderBlock extends BaseEntityBlock implements SimpleFluidlogg
 
     @Override
     protected @NotNull VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
-        if (blockState.getValue(CBlockStateProperties.PLACEHOLDER_BLOCK_MODEL_STATE) == PlaceholderBlockModelState.FULL_BLOCK) super.getShape(blockState, blockGetter, blockPos, collisionContext);
+        if (blockState.getValue(CBlockStateProperties.PLACEHOLDER_BLOCK_MODEL_STATE) == PlaceholderBlockModelState.FULL_BLOCK) return super.getShape(blockState, blockGetter, blockPos, collisionContext);
         return Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
     }
 
