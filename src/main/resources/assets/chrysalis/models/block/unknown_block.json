@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "endless_encore:block/unknown_block"
+    "all": "chrysalis:block/unknown_block"
   }
 }

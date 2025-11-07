@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.common.misc;
 
+import net.junebug.chrysalis.common.blocks.CBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
@@ -45,6 +46,7 @@ public class CCreativeModeTabs {
             output.accept(CItems.NETHER_PORTAL);
             output.accept(CItems.END_PORTAL);
             output.accept(CItems.END_GATEWAY);
+            output.accept(CBlocks.PLACEHOLDER.toStack());
             if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) output.accept(CItems.TEST_RIGHT_CLICK_ITEM);
         })
     .build());

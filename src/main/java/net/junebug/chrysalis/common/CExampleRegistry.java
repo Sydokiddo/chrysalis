@@ -57,7 +57,7 @@ public class CExampleRegistry {
         registerExampleDispenserMethods();
         registerExampleFluidsForFluidLogging();
         CSharedFeatures.enableExampleFeature();
-        Chrysalis.LOGGER.warn("WARNING: {} example registry has been initialized.", Chrysalis.LOGGER.getName());
+        Chrysalis.LOGGER.warn("WARNING: {} example registry has been initialized!", Chrysalis.LOGGER.getName());
     }
 
     // region Example Potion Recipe Registries

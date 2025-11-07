@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.common.blocks;
 
+import net.junebug.chrysalis.common.blocks.custom_blocks.PlaceholderBlock;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -23,4 +24,5 @@ public class CBlockStateProperties {
     ;
 
     public static final EnumProperty<FluidloggedState> FLUIDLOGGED = EnumProperty.create("fluidlogged", FluidloggedState.class);
+    public static final EnumProperty<PlaceholderBlock.PlaceholderModelState> PLACEHOLDER_MODEL_STATE = EnumProperty.create("model", PlaceholderBlock.PlaceholderModelState.class);
 }

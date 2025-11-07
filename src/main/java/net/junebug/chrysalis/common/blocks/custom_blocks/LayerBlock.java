@@ -149,8 +149,8 @@ public class LayerBlock extends FallingBlock implements Fallable {
     }
 
     @Override
-    protected boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
-        int layers = state.getValue(BlockStateProperties.LAYERS);
+    protected boolean canBeReplaced(BlockState blockState, BlockPlaceContext useContext) {
+        int layers = blockState.getValue(BlockStateProperties.LAYERS);
         if (!useContext.getItemInHand().is(this.asItem()) || layers >= 8) return layers == 1;
         else return !useContext.replacingClickedOnBlock() || useContext.getClickedFace() == Direction.UP;
     }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "model=full_block": {
+      "model": "chrysalis:block/unknown_block"
+    },
+    "model=cross": {
+      "model": "chrysalis:block/unknown_cross"
+    },
+    "model=billboard": {
+      "model": "chrysalis:block/unknown_invisible_block"
+    }
+  }
+}

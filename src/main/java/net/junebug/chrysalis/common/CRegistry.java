@@ -1,7 +1,11 @@
 package net.junebug.chrysalis.common;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import net.junebug.chrysalis.client.entities.rendering.custom_entities.PlaceholderRenderer;
+import net.junebug.chrysalis.common.blocks.CBlocks;
+import net.junebug.chrysalis.common.entities.registry.CBlockEntities;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -93,6 +97,8 @@ public class CRegistry {
         }
 
         CItems.register(eventBus);
+        CBlocks.register(eventBus);
+        CBlockEntities.register(eventBus);
         CDataComponents.register(eventBus);
         CCreativeModeTabs.register(eventBus);
         CSoundEvents.register(eventBus);
@@ -120,6 +126,7 @@ public class CRegistry {
             EntityRenderers.register(CEntities.SEAT.get(), SeatRenderer::new);
             EntityRenderers.register(CEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
             EntityRenderers.register(CEntities.ENCOUNTER_SPAWNER.get(), EncounterSpawnerRenderer::new);
+            BlockEntityRenderers.register(CBlockEntities.PLACEHOLDER.get(), PlaceholderRenderer::new);
 
             try {
                 Toolkit.getDefaultToolkit().getSystemClipboard();
