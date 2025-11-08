@@ -30,7 +30,8 @@ public class Chrysalis {
 
     public static boolean
         registerTestItems = false,
-        registerExampleRegistry = false
+        registerExampleRegistry = false,
+        enableTestFeatures = false
     ;
 
     public static final String

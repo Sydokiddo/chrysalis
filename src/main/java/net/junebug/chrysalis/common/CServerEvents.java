@@ -40,6 +40,7 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -51,6 +52,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
 import net.neoforged.neoforge.event.entity.living.MobSplitEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
@@ -255,6 +257,26 @@ public class CServerEvents {
         private static void onMobSplit(MobSplitEvent event) {
             DamageSource damageSource = event.getParent().getLastDamageSource();
             if (damageSource != null && damageSource.is(CTags.PREVENTS_MOB_SPLITTING)) event.setCanceled(true);
+        }
+
+        @SuppressWarnings("deprecation")
+        @SubscribeEvent
+        private static void tntElytraInteractionTest(PlayerInteractEvent.RightClickItem event) {
+
+            if (Chrysalis.enableTestFeatures && ItemHelper.isHoldingTwoItems(event.getEntity(), Items.FLINT_AND_STEEL, Items.TNT) && event.getEntity().isFallFlying()) {
+
+                ItemHelper.useBothItems(event.getEntity(), Items.FLINT_AND_STEEL, Items.TNT, true, false, false, true);
+
+                event.getLevel().playSound(event.getEntity(), event.getPos(), SoundEvents.FLINTANDSTEEL_USE, SoundSource.PLAYERS, 1.0F, event.getLevel().getRandom().nextFloat() * 0.4F + 0.8F);
+                event.getLevel().gameEvent(event.getEntity(), GameEvent.ITEM_INTERACT_FINISH, event.getPos());
+                TntBlock.explode(event.getLevel(), event.getPos());
+
+                event.getEntity().getCooldowns().addCooldown(Items.FLINT_AND_STEEL.getDefaultInstance(), 140);
+                event.getEntity().getCooldowns().addCooldown(Items.TNT.getDefaultInstance(), 140);
+
+                event.setCanceled(true);
+                event.setCancellationResult(InteractionResult.SUCCESS);
+            }
         }
     }
 

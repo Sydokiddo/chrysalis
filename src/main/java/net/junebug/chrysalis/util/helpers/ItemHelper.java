@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -69,6 +70,61 @@ public class ItemHelper {
         }
 
         return false;
+    }
+
+    /**
+     * Checks to see if the player is holding two different items in each hand.
+     **/
+
+    public static boolean isHoldingTwoItems(Player player, Item firstItem, Item secondItem) {
+        return player.getMainHandItem().is(firstItem) && player.getOffhandItem().is(secondItem) || player.getMainHandItem().is(secondItem) && player.getOffhandItem().is(firstItem);
+    }
+
+    /**
+     * Allows for the player to use two items in each hand simultaneously.
+     **/
+
+    public static void useBothItems(Player player, Item firstItem, Item secondItem, boolean damageFirstItem, boolean removeFirstItem, boolean damageSecondItem, boolean removeSecondItem) {
+
+        if (player.getMainHandItem().is(firstItem) && !player.getCooldowns().isOnCooldown(firstItem.getDefaultInstance())) {
+
+            if (damageFirstItem && !removeFirstItem) player.getMainHandItem().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+            else if (removeFirstItem && !damageFirstItem) player.getMainHandItem().consume(1, player);
+            else sendUseBothItemsWarningMessage();
+
+            player.awardStat(Stats.ITEM_USED.get(firstItem));
+        }
+
+        if (player.getOffhandItem().is(firstItem) && !player.getCooldowns().isOnCooldown(firstItem.getDefaultInstance())) {
+
+            if (damageFirstItem && !removeFirstItem) player.getOffhandItem().hurtAndBreak(1, player, EquipmentSlot.OFFHAND);
+            else if (removeFirstItem && !damageFirstItem) player.getOffhandItem().consume(1, player);
+            else sendUseBothItemsWarningMessage();
+
+            player.awardStat(Stats.ITEM_USED.get(firstItem));
+        }
+
+        if (player.getMainHandItem().is(secondItem) && !player.getCooldowns().isOnCooldown(secondItem.getDefaultInstance())) {
+
+            if (damageSecondItem && !removeSecondItem) player.getMainHandItem().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+            else if (removeSecondItem && !damageSecondItem) player.getMainHandItem().consume(1, player);
+            else sendUseBothItemsWarningMessage();
+
+            player.awardStat(Stats.ITEM_USED.get(secondItem));
+        }
+
+        if (player.getOffhandItem().is(secondItem) && !player.getCooldowns().isOnCooldown(secondItem.getDefaultInstance())) {
+
+            if (damageSecondItem && !removeSecondItem) player.getOffhandItem().hurtAndBreak(1, player, EquipmentSlot.OFFHAND);
+            else if (removeSecondItem && !damageSecondItem) player.getOffhandItem().consume(1, player);
+            else sendUseBothItemsWarningMessage();
+
+            player.awardStat(Stats.ITEM_USED.get(secondItem));
+        }
+    }
+
+    private static void sendUseBothItemsWarningMessage() {
+        Chrysalis.LOGGER.warn("Did not damage or remove either held item!");
     }
 
     // endregion

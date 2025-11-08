@@ -5,8 +5,13 @@ import net.junebug.chrysalis.Chrysalis;
 @SuppressWarnings("unused")
 public class CSharedFeatures {
 
+    /**
+     * Features shared between various mods that can be enabled through said mods.
+     **/
+
     public static boolean
         EXAMPLE_FEATURE = false,
+        POTION_CHANGES = false,
         EXPERIENCE_BOTTLE_CHANGES = false,
         AMETHYST_CHANGES = false,
         ECHO_SHARD_CHANGES = false,
@@ -29,6 +34,13 @@ public class CSharedFeatures {
         if (!EXAMPLE_FEATURE) {
             EXAMPLE_FEATURE = true;
             sendDebugMessage("Example Feature");
+        }
+    }
+
+    public static void enablePotionChanges() {
+        if (!POTION_CHANGES) {
+            POTION_CHANGES = true;
+            sendDebugMessage("Potion Changes");
         }
     }
 
@@ -74,4 +86,6 @@ public class CSharedFeatures {
             sendDebugMessage("Netherite Horse Armor Backport");
         }
     }
+
+    // endregion
 }

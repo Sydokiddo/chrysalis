@@ -51,12 +51,15 @@ public class CExampleRegistry {
      **/
 
     public static void init(IEventBus eventBus) {
+
         EXAMPLE_ITEMS.register(eventBus);
         EXAMPLE_BLOCKS.register(eventBus);
         registerExampleStructureMusic();
         registerExampleDispenserMethods();
         registerExampleFluidsForFluidLogging();
         CSharedFeatures.enableExampleFeature();
+
+        if (CSharedFeatures.isFeatureEnabled(CSharedFeatures.EXAMPLE_FEATURE)) Chrysalis.LOGGER.info("This message will be displayed when the example shared feature is enabled!");
         Chrysalis.LOGGER.warn("WARNING: {} example registry has been initialized!", Chrysalis.LOGGER.getName());
     }
 
