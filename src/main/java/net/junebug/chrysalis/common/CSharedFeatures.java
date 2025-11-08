@@ -5,18 +5,25 @@ import net.junebug.chrysalis.Chrysalis;
 @SuppressWarnings("unused")
 public class CSharedFeatures {
 
-    private static boolean
+    public static boolean
         EXAMPLE_FEATURE = false,
-        EXPERIENCE_BOTTLE_REWORK = false,
-        ECHO_SHARD_REWORK = false,
+        EXPERIENCE_BOTTLE_CHANGES = false,
+        AMETHYST_CHANGES = false,
+        ECHO_SHARD_CHANGES = false,
         BUNDLE_BACKPORT = false,
         COPPER_GEAR_BACKPORT = false,
         NETHERITE_HORSE_ARMOR_BACKPORT = false
     ;
 
+    public static boolean isFeatureEnabled(boolean feature) {
+        return feature;
+    }
+
     private static void sendDebugMessage(String string) {
         Chrysalis.LOGGER.info("Enabled Shared Feature: {}", string);
     }
+
+    // region Feature Enabling
 
     public static void enableExampleFeature() {
         if (!EXAMPLE_FEATURE) {
@@ -25,17 +32,25 @@ public class CSharedFeatures {
         }
     }
 
-    public static void enableExperienceBottleRework() {
-        if (!EXPERIENCE_BOTTLE_REWORK) {
-            EXPERIENCE_BOTTLE_REWORK = true;
-            sendDebugMessage("Experience Bottle Rework");
+    public static void enableExperienceBottleChanges() {
+        if (!EXPERIENCE_BOTTLE_CHANGES) {
+            EXPERIENCE_BOTTLE_CHANGES = true;
+            sendDebugMessage("Experience Bottle Changes");
         }
     }
 
-    public static void enableEchoShardRework() {
-        if (!ECHO_SHARD_REWORK) {
-            ECHO_SHARD_REWORK = true;
-            sendDebugMessage("Echo Shard Rework");
+    public static void enableAmethystChanges() {
+        if (!AMETHYST_CHANGES) {
+            AMETHYST_CHANGES = true;
+            sendDebugMessage("Amethyst Changes");
+        }
+    }
+
+
+    public static void enableEchoShardChanges() {
+        if (!ECHO_SHARD_CHANGES) {
+            ECHO_SHARD_CHANGES = true;
+            sendDebugMessage("Echo Shard Changes");
         }
     }
 
