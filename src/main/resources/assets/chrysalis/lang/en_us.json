@@ -5,6 +5,8 @@
   "gui.wiki": "Wiki",
   "gui.developer_wiki": "Developer Wiki",
 
+  "pack.chrysalis.asset_backports.name": "Asset Backports",
+  "pack.chrysalis.asset_backports.description": "Backports certain assets from 1.21.2+",
   "pack.chrysalis.no_carved_pumpkin_overlay.name": "No Carved Pumpkin Overlay",
   "pack.chrysalis.no_carved_pumpkin_overlay.description": "Removes the overlay of carved pumpkins",
 

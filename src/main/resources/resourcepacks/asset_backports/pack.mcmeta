@@ -1,0 +1,11 @@
+{
+  "pack": {
+    "pack_format": 46,
+	"description": [
+		{
+          "translate": "pack.chrysalis.asset_backports.description",
+          "color": "gray"
+        }
+	]
+  }
+}

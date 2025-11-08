@@ -263,6 +263,7 @@ public class CServerEvents {
 
         @SubscribeEvent
         private static void resourcePackRegistry(AddPackFindersEvent event) {
+            event.addPackFinders(Chrysalis.resourceLocationId("resourcepacks/asset_backports"), PackType.CLIENT_RESOURCES, Component.translatable("pack.chrysalis.asset_backports.name"), PackSource.BUILT_IN, false, Pack.Position.TOP);
             event.addPackFinders(Chrysalis.resourceLocationId("resourcepacks/no_carved_pumpkin_overlay"), PackType.CLIENT_RESOURCES, Component.translatable("pack.chrysalis.no_carved_pumpkin_overlay.name"), PackSource.BUILT_IN, false, Pack.Position.TOP);
         }
 
