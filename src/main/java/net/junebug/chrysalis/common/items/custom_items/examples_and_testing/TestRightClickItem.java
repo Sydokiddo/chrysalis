@@ -22,6 +22,6 @@ public class TestRightClickItem extends CreativeModeDescriptionItem {
 
     @SuppressWarnings("unused")
     private void doRightClickFunctionality(Level level, Player player, InteractionHand interactionHand) {
-        Earthquake.create(level, player.getOnPos().getBottomCenter());
+        Earthquake.create(level, player, player.getOnPos().above().getBottomCenter(), player.getYRot(), player.getXRot());
     }
 }

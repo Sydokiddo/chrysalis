@@ -1,6 +1,8 @@
 package net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake;
 
 import net.junebug.chrysalis.Chrysalis;
+import net.junebug.chrysalis.client.particles.options.DustCloudParticleOptions;
+import net.junebug.chrysalis.client.particles.types.DustCloudParticle;
 import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.junebug.chrysalis.common.misc.CDamageTypes;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
@@ -26,12 +28,14 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 public class Earthquake extends Entity implements TraceableEntity {
 
@@ -41,21 +45,42 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     // region Initialization
 
-    public Earthquake(EntityType<?> entityType, Level level) {
+    public Earthquake(EntityType<? extends Earthquake> entityType, Level level) {
         super(entityType, level);
         this.hasImpulse = true;
     }
 
-    public static void create(Level level, Vec3 position) {
-        create(level, position, 1.0F, 100, 1.2F, 4.0F, 1.0F, CSoundEvents.EARTHQUAKE_TRAVEL, CSoundEvents.EARTHQUAKE_HIT, ParticleTypes.CAMPFIRE_COSY_SMOKE, true);
+    @Nullable private Entity owner;
+    @Nullable private UUID ownerUUID;
+
+    private static final float
+        defaultScale = 1.0F,
+        defaultSpeed = 1.0F,
+        defaultBaseDamage = 4.0F,
+        defaultBaseKnockback = 4.0F
+    ;
+
+    private static final Holder<SoundEvent>
+        defaultTravelSound = CSoundEvents.EARTHQUAKE_TRAVEL,
+        defaultHitSound = CSoundEvents.EARTHQUAKE_HIT
+    ;
+
+    private static final int defaultLifeTime = 20;
+    private static final ParticleOptions defaultParticle = new DustCloudParticleOptions(DustCloudParticle.defaultColor, false);
+    private static final boolean defaultCanEmitCameraShake = true;
+
+    public static void create(Level level, LivingEntity owner, Vec3 position, float yRot, float xRot) {
+        create(level, owner, position, yRot, xRot, defaultScale, defaultLifeTime, defaultSpeed, defaultBaseDamage, defaultBaseKnockback, defaultTravelSound, defaultHitSound, defaultParticle, defaultCanEmitCameraShake);
     }
 
-    public static void create(Level level, Vec3 position, float scale, int lifeTime, float speed, float baseDamage, float baseKnockback, Holder<SoundEvent> travelSound, Holder<SoundEvent> hitSound, ParticleOptions particle, boolean canEmitCameraShake) {
+    public static void create(Level level, LivingEntity owner, Vec3 position, float yRot, float xRot, float scale, int lifeTime, float speed, float baseDamage, float baseKnockback, Holder<SoundEvent> travelSound, Holder<SoundEvent> hitSound, ParticleOptions particle, boolean canEmitCameraShake) {
 
         if (level.isClientSide()) return;
 
         Earthquake earthquake = new Earthquake(CEntities.EARTHQUAKE.get(), level);
 
+        earthquake.setOwner(owner);
+        earthquake.setRot(yRot, xRot);
         earthquake.setScale(scale);
         earthquake.setLifeTime(lifeTime);
         earthquake.setSpeed(speed);
@@ -83,7 +108,8 @@ public class Earthquake extends Entity implements TraceableEntity {
         travelSoundTag = "travel_sound",
         hitSoundTag = "hit_sound",
         particleTag = "particle",
-        canEmitCameraShakeTag = "can_emit_camera_shake"
+        canEmitCameraShakeTag = "can_emit_camera_shake",
+        ownerTag = "owner"
     ;
 
     private static final EntityDataAccessor<Float>
@@ -105,15 +131,15 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
-        builder.define(SCALE, 1.0F);
-        builder.define(LIFE_TIME, 100);
-        builder.define(SPEED, 1.2F);
-        builder.define(BASE_DAMAGE, 4.0F);
-        builder.define(BASE_KNOCKBACK, 1.0F);
-        builder.define(TRAVEL_SOUND, CSoundEvents.EARTHQUAKE_TRAVEL.get().location().toString());
-        builder.define(HIT_SOUND, CSoundEvents.EARTHQUAKE_HIT.get().location().toString());
-        builder.define(PARTICLE, ParticleTypes.CAMPFIRE_COSY_SMOKE);
-        builder.define(CAN_EMIT_CAMERA_SHAKE, true);
+        builder.define(SCALE, defaultScale);
+        builder.define(LIFE_TIME, defaultLifeTime);
+        builder.define(SPEED, defaultSpeed);
+        builder.define(BASE_DAMAGE, defaultBaseDamage);
+        builder.define(BASE_KNOCKBACK, defaultBaseKnockback);
+        builder.define(TRAVEL_SOUND, defaultTravelSound.value().location().toString());
+        builder.define(HIT_SOUND, defaultHitSound.value().location().toString());
+        builder.define(PARTICLE, defaultParticle);
+        builder.define(CAN_EMIT_CAMERA_SHAKE, defaultCanEmitCameraShake);
     }
 
     @Override
@@ -127,6 +153,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         compoundTag.put(this.hitSoundTag, SoundEvent.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.getHitSound()).getOrThrow());
         compoundTag.put(this.particleTag, ParticleTypes.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.getParticle()).getOrThrow());
         compoundTag.putBoolean(this.canEmitCameraShakeTag, this.canEmitCameraShake());
+        if (this.ownerUUID != null) compoundTag.putUUID(this.ownerTag, this.ownerUUID);
     }
 
     @Override
@@ -162,6 +189,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         }
 
         this.setCanEmitCameraShake(compoundTag.getBoolean(this.canEmitCameraShakeTag));
+        if (compoundTag.hasUUID(this.ownerTag)) this.ownerUUID = compoundTag.getUUID(this.ownerTag);
     }
 
     private float getScale() {
@@ -242,15 +270,14 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     @Override
     public void tick() {
-        super.tick();
         this.serverTick();
         this.clientTick();
+        super.tick();
     }
 
     private void serverTick() {
 
         if (this.level().isClientSide()) return;
-        if (this.getScale() < 1.0F) this.setScale(1.0F);
 
         if (this.canEmitCameraShake()) {
             EventHelper.sendCameraShakeToNearbyPlayers(this, null, 10.0D, this.getLifeTime() + 40, 5, 5);
@@ -261,11 +288,15 @@ public class Earthquake extends Entity implements TraceableEntity {
 
         if (this.getLifeTime() > 0) {
 
+            if (this.getScale() < 1.0F) this.setScale(1.0F);
+
             this.setDeltaMovement(this.getLookAngle().horizontal().normalize().scale(this.getSpeed()));
-            this.setPos(this.position().add(this.getDeltaMovement()));
+            if (this.horizontalCollision) this.setDeltaMovement(this.getDeltaMovement().x(), this.maxUpStep(), this.getDeltaMovement().z());
+            if (this.getBlockStateOn().getCollisionShape(this.level(), this.getOnPos()).isEmpty()) this.setDeltaMovement(this.getDeltaMovement().x(), -this.getDefaultGravity(), this.getDeltaMovement().z());
+            this.move(MoverType.SELF, this.getDeltaMovement());
 
             this.playSound(this.getTravelSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
-            this.gameEvent(GameEvent.ENTITY_ACTION);
+            this.gameEvent(GameEvent.BLOCK_DESTROY);
 
             if (this.level() instanceof ServerLevel serverLevel) {
 
@@ -276,15 +307,16 @@ public class Earthquake extends Entity implements TraceableEntity {
 
                     livingEntity = nearbyEntities.next();
 
-                    if (!livingEntity.getType().is(CTags.IMMUNE_TO_EARTHQUAKES)) {
-                        livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(CDamageTypes.EARTHQUAKE, this), Math.min(this.getBaseDamage() * this.getScale(), Float.MAX_VALUE));
+                    if (!livingEntity.getType().is(CTags.IMMUNE_TO_EARTHQUAKES) && this.getOwner() != livingEntity) {
+                        livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(CDamageTypes.EARTHQUAKE, this.getOwner()), Math.min(this.getBaseDamage() * this.getScale(), Float.MAX_VALUE));
                         this.playSound(this.getHitSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
                     }
                 }
             }
 
         } else {
-            this.discard();
+            if (this.getScale() > 0.0D) this.setScale(this.getScale() - 0.1F);
+            else this.discard();
         }
     }
 
@@ -293,9 +325,13 @@ public class Earthquake extends Entity implements TraceableEntity {
     }
 
     private void clientTick() {
+
         if (!this.level().isClientSide()) return;
-        if (this.getBlockStateOn().getRenderShape() != RenderShape.INVISIBLE) this.addParticle(20, 100, new BlockParticleOption(ParticleTypes.BLOCK, this.getBlockStateOn()), 0.0D, 0.0D, 0.0D);
-        if (this.tickCount % 2 == 0) this.addParticle(1, 5, this.getParticle(), (Math.random() <= 0.5D) ? 0.025D : -0.025D, 0.025D, (Math.random() <= 0.5D) ? 0.025D : -0.025D);
+
+        if (this.getBlockStateOn().getRenderShape() != RenderShape.INVISIBLE) {
+            this.addParticle(20, 100, new BlockParticleOption(ParticleTypes.BLOCK, this.getBlockStateOn()), 0.0D, 0.0D, 0.0D);
+            if (this.tickCount % 2 == 0) this.addParticle(1, 5, this.getParticle(), (Math.random() <= 0.5D) ? 0.025D : -0.025D, 0.025D, (Math.random() <= 0.5D) ? 0.025D : -0.025D);
+        }
     }
 
     private void addParticle(int minAmount, int maxAmount, ParticleOptions particle, double xSpeed, double ySpeed, double zSpeed) {
@@ -304,12 +340,6 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     @Override
     public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
-
-        if (damageSource.is(CDamageTypes.KILL_WAND)) {
-            this.kill(serverLevel);
-            return true;
-        }
-
         return false;
     }
 
@@ -319,12 +349,50 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     @Override
     public @Nullable Entity getOwner() {
-        return null;
+        if (this.owner != null && !this.owner.isRemoved()) {
+            return this.owner;
+        } else if (this.ownerUUID != null && this.level() instanceof ServerLevel serverLevel) {
+
+            Entity owner;
+
+            if (serverLevel.getEntity(this.ownerUUID) instanceof LivingEntity livingEntity) owner = livingEntity;
+            else owner = this;
+
+            this.owner = owner;
+        }
+
+        return this.owner;
+    }
+
+    public void setOwner(@Nullable LivingEntity owner) {
+        this.owner = owner;
+        this.ownerUUID = owner == null ? this.getUUID() : owner.getUUID();
     }
 
     @Override
     protected @NotNull AABB makeBoundingBox(@NotNull Vec3 position) {
         return EntityHelper.setHitboxSize(this, this.getScale(), 0.5F);
+    }
+
+    @Override
+    public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
+        if (SCALE.equals(key)) this.refreshDimensions();
+        super.onSyncedDataUpdated(key);
+    }
+
+    @Override
+    public float maxUpStep() {
+        return 1.0F;
+    }
+
+    @Override
+    protected double getDefaultGravity() {
+        return 1.0F;
+    }
+
+    @Override
+    public @NotNull PushReaction getPistonPushReaction() {
+        return PushReaction.IGNORE;
     }
 
     private Holder<SoundEvent> getSound(EntityDataAccessor<String> soundString) {

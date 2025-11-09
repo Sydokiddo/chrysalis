@@ -43,6 +43,7 @@ public class CParticles {
     public static final DeferredHolder<ParticleType<?>, ParticleType<SmallPulsationParticleOptions>> SMALL_PULSATION = PARTICLE_TYPES.register("small_pulsation", () -> RegistryHelper.registerAdvancedParticle(SmallPulsationParticleOptions.CODEC, SmallPulsationParticleOptions.STREAM_CODEC, true));
     public static final DeferredHolder<ParticleType<?>, ParticleType<LargePulsationParticleOptions>> LARGE_PULSATION = PARTICLE_TYPES.register("large_pulsation", () -> RegistryHelper.registerAdvancedParticle(LargePulsationParticleOptions.CODEC, LargePulsationParticleOptions.STREAM_CODEC, true));
     public static final DeferredHolder<ParticleType<?>, ParticleType<MusicNoteParticleOptions>> MUSIC_NOTE = PARTICLE_TYPES.register("music_note", () -> RegistryHelper.registerAdvancedParticle(MusicNoteParticleOptions.CODEC, MusicNoteParticleOptions.STREAM_CODEC, false));
+    public static final DeferredHolder<ParticleType<?>, ParticleType<DustCloudParticleOptions>> DUST_CLOUD = PARTICLE_TYPES.register("dust_cloud", () -> RegistryHelper.registerAdvancedParticle(DustCloudParticleOptions.CODEC, DustCloudParticleOptions.STREAM_CODEC, true));
 
     // endregion
 

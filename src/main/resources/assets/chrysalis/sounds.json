@@ -193,20 +193,43 @@
   },
   "entity.earthquake.travel": {
     "sounds": [
-      "minecraft:block/deepslate/break1",
-      "minecraft:block/deepslate/break2",
-      "minecraft:block/deepslate/break3",
-      "minecraft:block/deepslate/break4"
+      {
+        "name": "chrysalis:entity/earthquake/travel1",
+        "attenuation_distance": 32.0
+      },
+      {
+        "name": "chrysalis:entity/earthquake/travel2",
+        "attenuation_distance": 32.0
+      },
+      {
+        "name": "chrysalis:entity/earthquake/travel3",
+        "attenuation_distance": 32.0
+      },
+      {
+        "name": "chrysalis:entity/earthquake/travel4",
+        "attenuation_distance": 32.0
+      }
     ],
     "subtitle": "subtitles.entity.earthquake.travel"
   },
   "entity.earthquake.hit": {
     "sounds": [
-      "minecraft:block/basalt/break1",
-      "minecraft:block/basalt/break2",
-      "minecraft:block/basalt/break3",
-      "minecraft:block/basalt/break4",
-      "minecraft:block/basalt/break5"
+      {
+        "name": "chrysalis:entity/earthquake/hit1",
+        "attenuation_distance": 32.0
+      },
+      {
+        "name": "chrysalis:entity/earthquake/hit2",
+        "attenuation_distance": 32.0
+      },
+      {
+        "name": "chrysalis:entity/earthquake/hit3",
+        "attenuation_distance": 32.0
+      },
+      {
+        "name": "chrysalis:entity/earthquake/hit4",
+        "attenuation_distance": 32.0
+      }
     ],
     "subtitle": "subtitles.entity.earthquake.hit"
   },

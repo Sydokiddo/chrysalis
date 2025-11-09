@@ -202,6 +202,7 @@ public class CExampleRegistry {
     private static final SmallPulsationParticleOptions EXAMPLE_SMALL_PULSATION_PARTICLES = new SmallPulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 10);
     private static final LargePulsationParticleOptions EXAMPLE_LARGE_PULSATION_PARTICLES = new LargePulsationParticleOptions(ComponentHelper.CHRYSALIS_COLOR.getRGB(), false, Direction.UP.get3DDataValue(), 20);
     private static final MusicNoteParticleOptions EXAMPLE_MUSIC_NOTE_PARTICLES = new MusicNoteParticleOptions(ComponentHelper.AMETHYST_COLOR.getRGB(), false, true, 1.0F);
+    private static final DustCloudParticleOptions EXAMPLE_DUST_CLOUD_PARTICLES = new DustCloudParticleOptions(ComponentHelper.VOID_FIRE_COLOR.getRGB(), true);
 
     // endregion
 }

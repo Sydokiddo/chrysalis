@@ -120,6 +120,7 @@ public class CClientEvents {
             event.registerSpriteSet(CParticles.SMALL_PULSATION.get(), PulsationParticle.SmallProvider::new);
             event.registerSpriteSet(CParticles.LARGE_PULSATION.get(), PulsationParticle.LargeProvider::new);
             event.registerSpriteSet(CParticles.MUSIC_NOTE.get(), MusicNoteParticle.Provider::new);
+            event.registerSpriteSet(CParticles.DUST_CLOUD.get(), DustCloudParticle.Provider::new);
         }
 
         @SubscribeEvent
