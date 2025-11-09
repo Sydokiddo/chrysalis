@@ -289,11 +289,11 @@ public class Earthquake extends Entity implements TraceableEntity {
 
         if (this.getLifeTime() > 0) {
 
-            this.shrink(0.025F);
             this.setDeltaMovement(this.getLookAngle().horizontal().normalize().scale(this.getSpeed()));
             if (this.horizontalCollision) this.setDeltaMovement(this.getDeltaMovement().x(), this.maxUpStep(), this.getDeltaMovement().z());
             if (this.getBlockStateOn().getCollisionShape(this.level(), this.getOnPos()).isEmpty()) this.setDeltaMovement(this.getDeltaMovement().x(), -this.getDefaultGravity(), this.getDeltaMovement().z());
             this.move(MoverType.SELF, this.getDeltaMovement());
+            this.shrink(0.025F);
 
             this.playSound(this.getTravelSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
             this.gameEvent(GameEvent.BLOCK_DESTROY);
@@ -339,7 +339,7 @@ public class Earthquake extends Entity implements TraceableEntity {
     }
 
     private void addParticle(int minAmount, int maxAmount, ParticleOptions particle, double xSpeed, double ySpeed, double zSpeed) {
-        for (int particleAmount = 0; particleAmount < this.getRandom().nextIntBetweenInclusive(minAmount * (int) this.getScale(), maxAmount * (int) this.getScale()); ++particleAmount) this.level().addAlwaysVisibleParticle(particle, this.getRandomX(0.5D * this.getScale()), this.getY(), this.getRandomZ(0.5D * this.getScale()), xSpeed, ySpeed, zSpeed);
+        for (int particleAmount = 0; particleAmount < this.getRandom().nextIntBetweenInclusive(Math.max(minAmount * (int) this.getScale(), 1), Math.max(maxAmount * (int) this.getScale(), 1)); ++particleAmount) this.level().addAlwaysVisibleParticle(particle, this.getRandomX(0.5D * this.getScale()), this.getY(), this.getRandomZ(0.5D * this.getScale()), xSpeed, ySpeed, zSpeed);
     }
 
     @Override
