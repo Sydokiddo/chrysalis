@@ -349,6 +349,9 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     @Override
     public @Nullable Entity getOwner() {
+
+        if (this.owner == null && this.ownerUUID == null) this.owner = this;
+
         if (this.owner != null && !this.owner.isRemoved()) {
             return this.owner;
         } else if (this.ownerUUID != null && this.level() instanceof ServerLevel serverLevel) {
