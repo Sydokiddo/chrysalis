@@ -7,7 +7,9 @@
     "chrysalis:mob_attack_no_knockback",
     "chrysalis:crush",
     "chrysalis:pulverize",
+    "chrysalis:stab",
     "chrysalis:pelt",
-    "chrysalis:splatter"
+    "chrysalis:splatter",
+    "chrysalis:earthquake"
   ]
 }

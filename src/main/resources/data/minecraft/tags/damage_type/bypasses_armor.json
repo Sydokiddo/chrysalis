@@ -3,6 +3,7 @@
   "values": [
     "chrysalis:mob_attack_bypasses_armor",
     "chrysalis:kill_wand",
-    "chrysalis:crush"
+    "chrysalis:crush",
+    "chrysalis:earthquake"
   ]
 }

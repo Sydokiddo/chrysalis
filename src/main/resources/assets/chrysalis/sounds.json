@@ -191,6 +191,25 @@
     ],
     "subtitle": "subtitles.entity.generic_spawner.change_entity"
   },
+  "entity.earthquake.travel": {
+    "sounds": [
+      "minecraft:block/deepslate/break1",
+      "minecraft:block/deepslate/break2",
+      "minecraft:block/deepslate/break3",
+      "minecraft:block/deepslate/break4"
+    ],
+    "subtitle": "subtitles.entity.earthquake.travel"
+  },
+  "entity.earthquake.hit": {
+    "sounds": [
+      "minecraft:block/basalt/break1",
+      "minecraft:block/basalt/break2",
+      "minecraft:block/basalt/break3",
+      "minecraft:block/basalt/break4",
+      "minecraft:block/basalt/break5"
+    ],
+    "subtitle": "subtitles.entity.earthquake.hit"
+  },
   "item.armor.equip_shield": {
     "sounds": [
       "chrysalis:item/equipment/shield/equip1",

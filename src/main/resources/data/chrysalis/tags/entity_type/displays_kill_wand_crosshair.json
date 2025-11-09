@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:end_crystal",
-    "chrysalis:encounter_spawner"
+    "chrysalis:encounter_spawner",
+    "chrysalis:earthquake"
   ]
 }

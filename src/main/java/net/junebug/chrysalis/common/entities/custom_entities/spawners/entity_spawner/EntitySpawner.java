@@ -150,21 +150,21 @@ public class EntitySpawner extends AbstractSpawnerEntity {
         if (compoundTag.contains(this.appearSoundTag, this.tagType)) {
             SoundEvent.CODEC
             .parse(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), compoundTag.get(this.appearSoundTag))
-            .resultOrPartial(particle -> Chrysalis.LOGGER.warn("Failed to parse entity spawner appear sound: '{}'", particle))
+            .resultOrPartial(soundEvent -> Chrysalis.LOGGER.warn("Failed to parse entity spawner appear sound: '{}'", soundEvent))
             .ifPresent(this::setAppearSound);
         }
 
         if (compoundTag.contains(this.aboutToSpawnEntitySoundTag, this.tagType)) {
             SoundEvent.CODEC
             .parse(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), compoundTag.get(this.aboutToSpawnEntitySoundTag))
-            .resultOrPartial(particle -> Chrysalis.LOGGER.warn("Failed to parse entity spawner about to spawn entity sound: '{}'", particle))
+            .resultOrPartial(soundEvent -> Chrysalis.LOGGER.warn("Failed to parse entity spawner about to spawn entity sound: '{}'", soundEvent))
             .ifPresent(this::setAboutToSpawnEntitySound);
         }
 
         if (compoundTag.contains(this.spawnEntitySoundTag, this.tagType)) {
             SoundEvent.CODEC
             .parse(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), compoundTag.get(this.spawnEntitySoundTag))
-            .resultOrPartial(particle -> Chrysalis.LOGGER.warn("Failed to parse entity spawner spawn entity sound: '{}'", particle))
+            .resultOrPartial(soundEvent -> Chrysalis.LOGGER.warn("Failed to parse entity spawner spawn entity sound: '{}'", soundEvent))
             .ifPresent(this::setSpawnEntitySound);
         }
 
@@ -258,14 +258,14 @@ public class EntitySpawner extends AbstractSpawnerEntity {
 
         if (this.getEntityToSpawn().isEmpty()) {
             Chrysalis.LOGGER.info("{} has no assigned entity to spawn, despawning it", this.getName().getString());
-            this.kill(serverLevel);
+            this.discard();
         }
 
         if ((long) this.tickCount == this.getSpawnEntityAfterTicks() - 36L) this.playSpawnerSound(serverLevel, this, this.getAboutToSpawnEntitySound().value(), 1.0F, false);
 
         if ((long) this.tickCount >= this.getSpawnEntityAfterTicks()) {
             this.trySpawningEntity(serverLevel);
-            this.kill(serverLevel);
+            this.discard();
         }
     }
 

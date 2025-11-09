@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "chrysalis:mob_attack_bypasses_enchantments",
-    "chrysalis:kill_wand",
-    "chrysalis:crush"
+    "chrysalis:kill_wand"
   ]
 }

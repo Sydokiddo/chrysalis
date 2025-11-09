@@ -73,7 +73,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
         if (compoundTag.contains(this.spawnEntitySoundTag, this.tagType)) {
             SoundEvent.CODEC
             .parse(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), compoundTag.get(this.spawnEntitySoundTag))
-            .resultOrPartial(particle -> Chrysalis.LOGGER.warn("Failed to parse encounter spawner spawn entity sound: '{}'", particle))
+            .resultOrPartial(soundEvent -> Chrysalis.LOGGER.warn("Failed to parse encounter spawner spawn entity sound: '{}'", soundEvent))
             .ifPresent(this::setSpawnEntitySound);
         }
 
@@ -109,8 +109,8 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
         return this.getEntityData().get(PARTICLE);
     }
 
-    private void setParticle(ParticleOptions spawnParticle) {
-        this.getEntityData().set(PARTICLE, spawnParticle);
+    private void setParticle(ParticleOptions particle) {
+        this.getEntityData().set(PARTICLE, particle);
     }
 
     // endregion
@@ -124,7 +124,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
 
         if (this.hasNearbyPlayer() && !this.getEntityToSpawn().isEmpty()) {
             this.trySpawningEntity(serverLevel);
-            this.kill(serverLevel);
+            this.discard();
         }
     }
 

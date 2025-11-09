@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.common.entities.registry;
 
+import net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake.Earthquake;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
@@ -27,6 +28,9 @@ public class CEntities {
 
     public static final DeferredHolder<EntityType<?>, EntityType<EncounterSpawner>> ENCOUNTER_SPAWNER = registerEntityType("encounter_spawner",
         EntityType.Builder.of(EncounterSpawner::new, MobCategory.MISC).sized(0.75F, 0.75F).noLootTable().clientTrackingRange(8));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<Earthquake>> EARTHQUAKE = registerEntityType("earthquake",
+        EntityType.Builder.of(Earthquake::new, MobCategory.MISC).sized(1.5F, 0.5F).noLootTable().clientTrackingRange(10).updateInterval(Integer.MAX_VALUE));
 
     // endregion
 

@@ -259,6 +259,8 @@ public class CServerEvents {
             if (damageSource != null && damageSource.is(CTags.PREVENTS_MOB_SPLITTING)) event.setCanceled(true);
         }
 
+        // region Test Features
+
         @SuppressWarnings("deprecation")
         @SubscribeEvent
         private static void tntElytraInteractionTest(PlayerInteractEvent.RightClickItem event) {
@@ -278,6 +280,8 @@ public class CServerEvents {
                 event.setCancellationResult(InteractionResult.SUCCESS);
             }
         }
+
+        // endregion
     }
 
     @EventBusSubscriber(modid = Chrysalis.MOD_ID, bus = EventBusSubscriber.Bus.MOD)

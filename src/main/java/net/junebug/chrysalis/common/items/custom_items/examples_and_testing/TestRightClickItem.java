@@ -1,11 +1,10 @@
 package net.junebug.chrysalis.common.items.custom_items.examples_and_testing;
 
+import net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake.Earthquake;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.junebug.chrysalis.Chrysalis;
-import net.junebug.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
 import net.junebug.chrysalis.common.items.custom_items.CreativeModeDescriptionItem;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,6 +22,6 @@ public class TestRightClickItem extends CreativeModeDescriptionItem {
 
     @SuppressWarnings("unused")
     private void doRightClickFunctionality(Level level, Player player, InteractionHand interactionHand) {
-        EntitySpawner.create(level, Chrysalis.stringId("example"), player.getOnPos().getCenter());
+        Earthquake.create(level, player.getOnPos().getBottomCenter());
     }
 }

@@ -140,6 +140,7 @@ public class CTags {
         HAS_ZOMBIE_SIGHT = registerEntityTag("has_zombie_sight"),
         HIDDEN_FROM_STATISTICS_MENU = registerEntityTag("hidden_from_statistics_menu"),
         HIDDEN_FROM_SUMMON_COMMAND = registerEntityTag("hidden_from_summon_command"),
+        IMMUNE_TO_EARTHQUAKES = registerEntityTag("immune_to_earthquakes"),
         NON_LIVING_ATTACKABLES = registerEntityTag("non_living_attackables"),
         PIGLIN_AVOIDED = registerEntityTag("piglin_avoided"),
         PIGLINS = registerEntityTag("piglins"),

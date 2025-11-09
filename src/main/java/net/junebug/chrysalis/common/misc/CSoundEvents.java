@@ -49,6 +49,9 @@ public class CSoundEvents {
         ENCOUNTER_SPAWNER_SPAWN_ENTITY = SOUND_EVENTS.register("entity.encounter_spawner.spawn_entity", SoundEvent::createVariableRangeEvent),
         GENERIC_SPAWNER_CHANGE_ENTITY = SOUND_EVENTS.register("entity.generic_spawner.change_entity", SoundEvent::createVariableRangeEvent),
 
+        EARTHQUAKE_TRAVEL = SOUND_EVENTS.register("entity.earthquake.travel", SoundEvent::createVariableRangeEvent),
+        EARTHQUAKE_HIT = SOUND_EVENTS.register("entity.earthquake.hit", SoundEvent::createVariableRangeEvent),
+
         EQUIP_SHIELD = SOUND_EVENTS.register("item.armor.equip_shield", SoundEvent::createVariableRangeEvent),
         EQUIP_TOTEM_OF_UNDYING = SOUND_EVENTS.register("item.armor.equip_totem_of_undying", SoundEvent::createVariableRangeEvent),
         EQUIP_CARVED_PUMPKIN = SOUND_EVENTS.register("item.armor.equip_carved_pumpkin", SoundEvent::createVariableRangeEvent),

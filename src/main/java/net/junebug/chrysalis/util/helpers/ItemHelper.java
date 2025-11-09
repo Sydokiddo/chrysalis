@@ -17,6 +17,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -233,6 +234,11 @@ public class ItemHelper {
     public static void addUseTooltip(List<Component> tooltip) {
         tooltip.add(CommonComponents.EMPTY);
         tooltip.add(Component.translatable("gui.chrysalis.item.when_used", Minecraft.getInstance().options.keyUse.getTranslatedKeyMessage()).withStyle(ChatFormatting.GRAY));
+    }
+
+    public static void addUseOnEntityTooltip(List<Component> tooltip, Entity entity) {
+        tooltip.add(CommonComponents.EMPTY);
+        tooltip.add(Component.translatable("gui.chrysalis.item.when_used_on_entity", entity.getType().getDescription()).withStyle(ChatFormatting.GRAY));
     }
 
     public static void addAttackTooltip(List<Component> tooltip) {

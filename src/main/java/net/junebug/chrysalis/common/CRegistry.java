@@ -7,6 +7,7 @@ import net.junebug.chrysalis.common.entities.registry.CBlockEntities;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -126,6 +127,7 @@ public class CRegistry {
             EntityRenderers.register(CEntities.SEAT.get(), SeatRenderer::new);
             EntityRenderers.register(CEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
             EntityRenderers.register(CEntities.ENCOUNTER_SPAWNER.get(), EncounterSpawnerRenderer::new);
+            EntityRenderers.register(CEntities.EARTHQUAKE.get(), NoopRenderer::new);
             BlockEntityRenderers.register(CBlockEntities.PLACEHOLDER_BLOCK.get(), PlaceholderBlockRenderer::new);
 
             try {

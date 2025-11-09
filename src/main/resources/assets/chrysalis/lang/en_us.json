@@ -147,11 +147,17 @@
   "gui.chrysalis.placeholder_block.unknown_block_id": "Block ID '%s' does not exist!",
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
+  "block.chrysalis.refined_amethyst_block": "Refined Block of Amethyst",
+  "block.chrysalis.echo_block": "Echo Block",
+
   "comment.chrysalis.entities": "ENTITIES",
 
   "entity.chrysalis.seat": "Seat",
   "entity.chrysalis.entity_spawner": "Entity Spawner",
   "entity.chrysalis.encounter_spawner": "Encounter Spawner",
+  "entity.chrysalis.falling_debris": "Falling Debris",
+  "entity.chrysalis.collapsable_block": "Collapsable Block",
+  "entity.chrysalis.earthquake": "Earthquake",
 
   "comment.chrysalis.status_effects": "STATUS EFFECTS",
 
@@ -175,7 +181,7 @@
   "effect.chrysalis.health_reduction": "Health Reduction",
   "effect.chrysalis.health_reduction.desc": "Decreases the maximum amount of health.",
   "effect.chrysalis.building_fatigue": "Building Fatigue",
-  "effect.chrysalis.building_fatigue.desc": "Prevents the player from building.",
+  "effect.chrysalis.building_fatigue.desc": "Prevents players and endermen from building.",
 
   "comment.chrysalis.attributes": "ATTRIBUTES",
 
@@ -325,6 +331,7 @@
 
   "gui.chrysalis.item.when_held": "When Held:",
   "gui.chrysalis.item.when_used": "When Used with %s:",
+  "gui.chrysalis.item.when_used_on_entity": "When Used on %s:",
   "gui.chrysalis.item.when_eaten": "When Eaten:",
   "gui.chrysalis.item.when_drank": "When Drank:",
   "gui.chrysalis.item.when_thrown": "When Thrown:",
@@ -385,6 +392,8 @@
   "death.attack.chrysalis.pelt.item": "%1$s was pelted by %2$s using %3$s",
   "death.attack.chrysalis.splatter": "%1$s was splattered by %2$s",
   "death.attack.chrysalis.splatter.item": "%1$s was splattered by %2$s using %3$s",
+  "death.attack.chrysalis.earthquake": "%1$s was shaken into the earth by %2$s",
+  "death.attack.chrysalis.earthquake.item": "%1$s was shaken into the earth by %2$s using %3$s",
 
   "comment.chrysalis.config_helpers": "CONFIG HELPERS",
 
@@ -533,6 +542,15 @@
   "subtitles.entity.entity_spawner.appear": "Entity manifests",
   "subtitles.entity.entity_spawner.about_to_spawn_entity": "Entity prepares",
 
+  "subtitles.entity.falling_debris.prepare": "Debris prepares to fall",
+  "subtitles.entity.falling_debris.fall": "Debris falls",
+  "subtitles.entity.falling_debris.hit": "Debris crushes",
+  "subtitles.entity.collapsable_block.activate": "Block becomes unsteady",
+  "subtitles.entity.collapsable_block.fall": "Block falls",
+  "subtitles.entity.collapsable_block.crumble": "Block crumbles",
+  "subtitles.entity.earthquake.travel": "Earthquake rumbles",
+  "subtitles.entity.earthquake.hit": "Earthquake strikes",
+
   "comment.chrysalis.ui_subtitles": "UI SUBTITLES",
 
   "subtitles.ui.creative_mode.delete_item": "Item deleted",
@@ -639,6 +657,7 @@
   "tag.entity_type.chrysalis.has_zombie_sight": "Has Zombie Sight",
   "tag.entity_type.chrysalis.hidden_from_statistics_menu": "Hidden from Statistics Menu",
   "tag.entity_type.chrysalis.hidden_from_summon_command": "Hidden from Summon Command",
+  "tag.entity_type.chrysalis.immune_to_earthquakes": "Immune to Earthquakes",
   "tag.entity_type.chrysalis.non_living_attackables": "Non-Living Attackables",
   "tag.entity_type.chrysalis.piglin_avoided": "Piglin Avoided",
   "tag.entity_type.chrysalis.piglins": "Piglins",

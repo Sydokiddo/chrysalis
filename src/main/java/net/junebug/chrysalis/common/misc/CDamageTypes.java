@@ -24,7 +24,8 @@ public class CDamageTypes {
         PULVERIZE = registerDamageType("pulverize"),
         STAB = registerDamageType("stab"),
         PELT = registerDamageType("pelt"),
-        SPLATTER = registerDamageType("splatter")
+        SPLATTER = registerDamageType("splatter"),
+        EARTHQUAKE = registerDamageType("earthquake")
     ;
 
     // endregion
