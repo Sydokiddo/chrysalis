@@ -278,6 +278,7 @@ public class Earthquake extends Entity implements TraceableEntity {
     private void serverTick() {
 
         if (this.level().isClientSide()) return;
+        if (this.firstTick && this.getScale() < 1.0F) this.setScale(1.0F);
 
         if (this.canEmitCameraShake()) {
             EventHelper.sendCameraShakeToNearbyPlayers(this, null, 10.0D, this.getLifeTime() + 40, 5, 5);
@@ -288,8 +289,7 @@ public class Earthquake extends Entity implements TraceableEntity {
 
         if (this.getLifeTime() > 0) {
 
-            if (this.getScale() < 1.0F) this.setScale(1.0F);
-
+            this.shrink(0.025F);
             this.setDeltaMovement(this.getLookAngle().horizontal().normalize().scale(this.getSpeed()));
             if (this.horizontalCollision) this.setDeltaMovement(this.getDeltaMovement().x(), this.maxUpStep(), this.getDeltaMovement().z());
             if (this.getBlockStateOn().getCollisionShape(this.level(), this.getOnPos()).isEmpty()) this.setDeltaMovement(this.getDeltaMovement().x(), -this.getDefaultGravity(), this.getDeltaMovement().z());
@@ -315,13 +315,17 @@ public class Earthquake extends Entity implements TraceableEntity {
             }
 
         } else {
-            if (this.getScale() > 0.0D) this.setScale(this.getScale() - 0.1F);
-            else this.discard();
+            this.shrink(0.1F);
         }
     }
 
     private void dealKnockback(LivingEntity livingEntity) {
         if (livingEntity.getLastDamageSource() != null && !livingEntity.getLastDamageSource().is(DamageTypeTags.NO_KNOCKBACK)) livingEntity.knockback(Math.min(this.getBaseKnockback() * this.getScale(), 20.0F), Mth.sin(this.getYRot() * ((float) Math.PI / 180.0F)), -Mth.cos(this.getYRot() * ((float) Math.PI / 180.0F)));
+    }
+
+    private void shrink(float shrinkAmount) {
+        if (this.getScale() > 0.0D) this.setScale(this.getScale() - shrinkAmount);
+        else this.discard();
     }
 
     private void clientTick() {
