@@ -56,7 +56,7 @@ public class Earthquake extends Entity implements TraceableEntity {
     private static final float
         defaultScale = 1.0F,
         defaultSpeed = 1.0F,
-        defaultBaseDamage = 1.0F,
+        defaultBaseDamage = 4.0F,
         defaultBaseKnockback = 1.0F
     ;
 
