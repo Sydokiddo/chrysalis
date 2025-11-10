@@ -56,8 +56,13 @@ public class Earthquake extends Entity implements TraceableEntity {
     private static final float
         defaultScale = 1.0F,
         defaultSpeed = 1.0F,
-        defaultBaseDamage = 4.0F,
-        defaultBaseKnockback = 4.0F
+        defaultBaseDamage = 1.0F,
+        defaultBaseKnockback = 1.0F
+    ;
+
+    private static final boolean
+        defaultDamageScalesFromDifficulty = true,
+        defaultCanEmitCameraShake = true
     ;
 
     private static final Holder<SoundEvent>
@@ -67,13 +72,12 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     private static final int defaultLifeTime = 20;
     private static final ParticleOptions defaultParticle = new DustCloudParticleOptions(DustCloudParticle.defaultColor, false);
-    private static final boolean defaultCanEmitCameraShake = true;
 
     public static void create(Level level, LivingEntity owner, Vec3 position, float yRot, float xRot) {
-        create(level, owner, position, yRot, xRot, defaultScale, defaultLifeTime, defaultSpeed, defaultBaseDamage, defaultBaseKnockback, defaultTravelSound, defaultHitSound, defaultParticle, defaultCanEmitCameraShake);
+        create(level, owner, position, yRot, xRot, defaultScale, defaultLifeTime, defaultSpeed, defaultBaseDamage, defaultDamageScalesFromDifficulty, defaultBaseKnockback, defaultTravelSound, defaultHitSound, defaultParticle, defaultCanEmitCameraShake);
     }
 
-    public static void create(Level level, LivingEntity owner, Vec3 position, float yRot, float xRot, float scale, int lifeTime, float speed, float baseDamage, float baseKnockback, Holder<SoundEvent> travelSound, Holder<SoundEvent> hitSound, ParticleOptions particle, boolean canEmitCameraShake) {
+    public static void create(Level level, LivingEntity owner, Vec3 position, float yRot, float xRot, float scale, int lifeTime, float speed, float baseDamage, boolean damageScalesFromDifficulty, float baseKnockback, Holder<SoundEvent> travelSound, Holder<SoundEvent> hitSound, ParticleOptions particle, boolean canEmitCameraShake) {
 
         if (level.isClientSide()) return;
 
@@ -85,6 +89,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         earthquake.setLifeTime(lifeTime);
         earthquake.setSpeed(speed);
         earthquake.setBaseDamage(baseDamage);
+        earthquake.setDamageScalesFromDifficulty(damageScalesFromDifficulty);
         earthquake.setBaseKnockback(baseKnockback);
         earthquake.setTravelSound(travelSound);
         earthquake.setHitSound(hitSound);
@@ -104,6 +109,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         lifeTimeTag = "life_time",
         speedTag = "speed",
         baseDamageTag = "base_damage",
+        damageScalesFromDifficultyTag = "damage_scales_from_difficulty",
         baseKnockbackTag = "base_knockback",
         travelSoundTag = "travel_sound",
         hitSoundTag = "hit_sound",
@@ -119,15 +125,18 @@ public class Earthquake extends Entity implements TraceableEntity {
         BASE_KNOCKBACK = SynchedEntityData.defineId(Earthquake.class, EntityDataSerializers.FLOAT)
     ;
 
-    private static final EntityDataAccessor<Integer> LIFE_TIME = SynchedEntityData.defineId(Earthquake.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean>
+        DAMAGE_SCALES_FROM_DIFFICULTY = SynchedEntityData.defineId(Earthquake.class, EntityDataSerializers.BOOLEAN),
+        CAN_EMIT_CAMERA_SHAKE = SynchedEntityData.defineId(Earthquake.class, EntityDataSerializers.BOOLEAN)
+    ;
 
     private static final EntityDataAccessor<String>
         TRAVEL_SOUND = SynchedEntityData.defineId(Earthquake.class, EntityDataSerializers.STRING),
         HIT_SOUND = SynchedEntityData.defineId(Earthquake.class, EntityDataSerializers.STRING)
     ;
 
+    private static final EntityDataAccessor<Integer> LIFE_TIME = SynchedEntityData.defineId(Earthquake.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<ParticleOptions> PARTICLE = SynchedEntityData.defineId(Earthquake.class, EntityDataSerializers.PARTICLE);
-    private static final EntityDataAccessor<Boolean> CAN_EMIT_CAMERA_SHAKE = SynchedEntityData.defineId(Earthquake.class, EntityDataSerializers.BOOLEAN);
 
     @Override
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
@@ -135,6 +144,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         builder.define(LIFE_TIME, defaultLifeTime);
         builder.define(SPEED, defaultSpeed);
         builder.define(BASE_DAMAGE, defaultBaseDamage);
+        builder.define(DAMAGE_SCALES_FROM_DIFFICULTY, defaultDamageScalesFromDifficulty);
         builder.define(BASE_KNOCKBACK, defaultBaseKnockback);
         builder.define(TRAVEL_SOUND, defaultTravelSound.value().location().toString());
         builder.define(HIT_SOUND, defaultHitSound.value().location().toString());
@@ -148,6 +158,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         compoundTag.putInt(this.lifeTimeTag, this.getLifeTime());
         compoundTag.putFloat(this.speedTag, this.getSpeed());
         compoundTag.putFloat(this.baseDamageTag, this.getBaseDamage());
+        compoundTag.putBoolean(this.damageScalesFromDifficultyTag, this.damageScalesFromDifficulty());
         compoundTag.putFloat(this.baseKnockbackTag, this.getBaseKnockback());
         compoundTag.put(this.travelSoundTag, SoundEvent.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.getTravelSound()).getOrThrow());
         compoundTag.put(this.hitSoundTag, SoundEvent.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.getHitSound()).getOrThrow());
@@ -163,6 +174,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         this.setLifeTime(compoundTag.getInt(this.lifeTimeTag));
         this.setSpeed(compoundTag.getFloat(this.speedTag));
         this.setBaseDamage(compoundTag.getFloat(this.baseDamageTag));
+        this.setDamageScalesFromDifficulty(compoundTag.getBoolean(this.damageScalesFromDifficultyTag));
         this.setBaseKnockback(compoundTag.getFloat(this.baseKnockbackTag));
 
         int tagType = 10;
@@ -206,6 +218,14 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     private void setLifeTime(int lifeTime) {
         this.getEntityData().set(LIFE_TIME, lifeTime);
+    }
+
+    private boolean damageScalesFromDifficulty() {
+        return this.getEntityData().get(DAMAGE_SCALES_FROM_DIFFICULTY);
+    }
+
+    private void setDamageScalesFromDifficulty(boolean damageScalesFromDifficulty) {
+        this.getEntityData().set(DAMAGE_SCALES_FROM_DIFFICULTY, damageScalesFromDifficulty);
     }
 
     private float getSpeed() {
@@ -275,10 +295,16 @@ public class Earthquake extends Entity implements TraceableEntity {
         super.tick();
     }
 
+    private float startingScale;
+
     private void serverTick() {
 
         if (this.level().isClientSide()) return;
-        if (this.firstTick && this.getScale() < 1.0F) this.setScale(1.0F);
+
+        if (this.firstTick) {
+            if (this.getScale() < 1.0F) this.setScale(1.0F);
+            this.startingScale = this.getScale();
+        }
 
         if (this.canEmitCameraShake()) {
             EventHelper.sendCameraShakeToNearbyPlayers(this, null, 10.0D, this.getLifeTime() + 40, 5, 5);
@@ -287,13 +313,16 @@ public class Earthquake extends Entity implements TraceableEntity {
 
         this.setLifeTime(this.getLifeTime() - 1);
 
-        if (this.getLifeTime() > 0) {
+        float damageAmount = Math.max(Math.min(Math.round((this.getBaseDamage() * this.getScale()) * (this.getLifeTime() / 20.0F)) * (this.damageScalesFromDifficulty() ? this.level().getDifficulty().getId() / 2.0F : 1.0F), Float.MAX_VALUE), 1.0F);
+        float knockbackAmount = Math.max(Math.min(Math.round((this.getBaseKnockback() * this.getScale()) * (this.getLifeTime() / 20.0F)), 20.0F), 0.0F);
+
+        if (this.getLifeTime() >= 0) {
 
             this.setDeltaMovement(this.getLookAngle().horizontal().normalize().scale(this.getSpeed()));
             if (this.horizontalCollision) this.setDeltaMovement(this.getDeltaMovement().x(), this.maxUpStep(), this.getDeltaMovement().z());
             if (this.getBlockStateOn().getCollisionShape(this.level(), this.getOnPos()).isEmpty()) this.setDeltaMovement(this.getDeltaMovement().x(), -this.getDefaultGravity(), this.getDeltaMovement().z());
             this.move(MoverType.SELF, this.getDeltaMovement());
-            this.shrink(0.025F);
+            this.scaleSize(false, 0.05F * this.startingScale);
 
             this.playSound(this.getTravelSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
             this.gameEvent(GameEvent.BLOCK_DESTROY);
@@ -303,29 +332,34 @@ public class Earthquake extends Entity implements TraceableEntity {
                 List<? extends LivingEntity> damageRange = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox(), EntitySelector.NO_CREATIVE_OR_SPECTATOR);
                 LivingEntity livingEntity;
 
-                for (Iterator<? extends LivingEntity> nearbyEntities = damageRange.iterator(); nearbyEntities.hasNext(); this.dealKnockback(livingEntity)) {
+                for (Iterator<? extends LivingEntity> nearbyEntities = damageRange.iterator(); nearbyEntities.hasNext(); this.dealKnockback(livingEntity, knockbackAmount)) {
 
                     livingEntity = nearbyEntities.next();
 
                     if (!livingEntity.getType().is(CTags.IMMUNE_TO_EARTHQUAKES) && this.getOwner() != livingEntity) {
-                        livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(CDamageTypes.EARTHQUAKE, this.getOwner()), Math.min(this.getBaseDamage() * this.getScale(), Float.MAX_VALUE));
+                        livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(CDamageTypes.EARTHQUAKE, this.getOwner()), damageAmount);
                         this.playSound(this.getHitSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
+                        if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Dealt {} earthquake damage to {}", damageAmount, livingEntity.getName().getString());
                     }
                 }
             }
 
         } else {
-            this.shrink(0.1F);
+            this.scaleSize(true, 0.35F * this.startingScale);
         }
     }
 
-    private void dealKnockback(LivingEntity livingEntity) {
-        if (livingEntity.getLastDamageSource() != null && !livingEntity.getLastDamageSource().is(DamageTypeTags.NO_KNOCKBACK)) livingEntity.knockback(Math.min(this.getBaseKnockback() * this.getScale(), 20.0F), Mth.sin(this.getYRot() * ((float) Math.PI / 180.0F)), -Mth.cos(this.getYRot() * ((float) Math.PI / 180.0F)));
+    private void dealKnockback(LivingEntity livingEntity, float knockbackAmount) {
+        if (livingEntity.getLastDamageSource() != null && !livingEntity.getLastDamageSource().is(DamageTypeTags.NO_KNOCKBACK)) livingEntity.knockback(knockbackAmount, Mth.sin(this.getYRot() * ((float) Math.PI / 180.0F)), -Mth.cos(this.getYRot() * ((float) Math.PI / 180.0F)));
     }
 
-    private void shrink(float shrinkAmount) {
-        if (this.getScale() > 0.0D) this.setScale(this.getScale() - shrinkAmount);
-        else this.discard();
+    private void scaleSize(boolean shrink, float scaleAmount) {
+        if (this.getScale() > 0.05F) {
+            if (shrink) this.setScale(this.getScale() - scaleAmount);
+            else this.setScale(this.getScale() + scaleAmount);
+        } else {
+            this.discard();
+        }
     }
 
     private void clientTick() {
@@ -339,7 +373,12 @@ public class Earthquake extends Entity implements TraceableEntity {
     }
 
     private void addParticle(int minAmount, int maxAmount, ParticleOptions particle, double xSpeed, double ySpeed, double zSpeed) {
-        for (int particleAmount = 0; particleAmount < this.getRandom().nextIntBetweenInclusive(Math.max(minAmount * (int) this.getScale(), 1), Math.max(maxAmount * (int) this.getScale(), 1)); ++particleAmount) this.level().addAlwaysVisibleParticle(particle, this.getRandomX(0.5D * this.getScale()), this.getY(), this.getRandomZ(0.5D * this.getScale()), xSpeed, ySpeed, zSpeed);
+
+        int multiplier;
+        if (this.getScale() < 1.0F) multiplier = 1;
+        else multiplier = (int) this.getScale();
+
+        for (int particleAmount = 0; particleAmount < this.getRandom().nextIntBetweenInclusive(minAmount * multiplier, maxAmount * multiplier); ++particleAmount) this.level().addAlwaysVisibleParticle(particle, this.getRandomX(0.5D * this.getScale()), this.getY(), this.getRandomZ(0.5D * this.getScale()), xSpeed, ySpeed, zSpeed);
     }
 
     @Override
