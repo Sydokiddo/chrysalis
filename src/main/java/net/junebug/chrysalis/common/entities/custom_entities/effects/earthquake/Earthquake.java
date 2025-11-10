@@ -336,7 +336,7 @@ public class Earthquake extends Entity implements TraceableEntity {
 
                     livingEntity = nearbyEntities.next();
 
-                    if (!livingEntity.getType().is(CTags.IMMUNE_TO_EARTHQUAKES) && !livingEntity.isDeadOrDying() && this.getOwner() != livingEntity) {
+                    if (!livingEntity.getType().is(CTags.IMMUNE_TO_EARTHQUAKES) && this.getOwner() != livingEntity) {
                         livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(CDamageTypes.EARTHQUAKE, this.getOwner()), damageAmount);
                         this.playSound(this.getHitSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
                         if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Dealt {} earthquake damage to {}", damageAmount, livingEntity.getName().getString());
@@ -350,7 +350,7 @@ public class Earthquake extends Entity implements TraceableEntity {
     }
 
     private void dealKnockback(LivingEntity livingEntity, float knockbackAmount) {
-        if (livingEntity.getLastDamageSource() != null && !livingEntity.getLastDamageSource().is(DamageTypeTags.NO_KNOCKBACK)) livingEntity.knockback(knockbackAmount, Mth.sin(this.getYRot() * ((float) Math.PI / 180.0F)), -Mth.cos(this.getYRot() * ((float) Math.PI / 180.0F)));
+        if (livingEntity.getLastDamageSource() != null && !livingEntity.getLastDamageSource().is(DamageTypeTags.NO_KNOCKBACK) && !livingEntity.isDeadOrDying()) livingEntity.knockback(knockbackAmount, Mth.sin(this.getYRot() * ((float) Math.PI / 180.0F)), -Mth.cos(this.getYRot() * ((float) Math.PI / 180.0F)));
     }
 
     private void scaleSize(boolean shrink, float scaleAmount) {
