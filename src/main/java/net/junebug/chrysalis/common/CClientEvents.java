@@ -133,7 +133,12 @@ public class CClientEvents {
             }
 
             if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) event.insertBefore(Items.TRIAL_KEY.getDefaultInstance(), CItems.KEY.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) event.insertAfter(Items.CREAKING_HEART.getDefaultInstance(), CItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+            if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+                event.insertAfter(Items.CREAKING_HEART.getDefaultInstance(), CItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(Items.GHAST_SPAWN_EGG.getDefaultInstance(), CItems.GIANT_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(Items.HUSK_SPAWN_EGG.getDefaultInstance(), CItems.ILLUSIONER_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            }
 
             if (event.getTabKey() == CreativeModeTabs.OP_BLOCKS && event.hasPermissions()) {
                 event.insertAfter(Items.STRUCTURE_BLOCK.getDefaultInstance(), CBlocks.PLACEHOLDER_BLOCK.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);

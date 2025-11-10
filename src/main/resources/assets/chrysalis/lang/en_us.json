@@ -137,6 +137,9 @@
   "item.chrysalis.debug_stick.description": "Cycles Between Block States",
   "item.chrysalis.light.description": "Light Level: %s",
 
+  "item.chrysalis.giant_spawn_egg": "Giant Spawn Egg",
+  "item.chrysalis.illusioner_spawn_egg": "Illusioner Spawn Egg",
+
   "item.chrysalis.test_right_click_item": "Test Right Click Item",
   "item.chrysalis.test_right_click_item.description": "An item for testing right-click functionality. Only meant for debug environments!",
 

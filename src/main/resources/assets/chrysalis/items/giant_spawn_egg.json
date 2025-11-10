@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "chrysalis:item/giant_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 5086107
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 7173463
+      }
+    ]
+  }
+}

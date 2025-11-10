@@ -2,9 +2,11 @@ package net.junebug.chrysalis.common.items;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -26,7 +28,7 @@ public class CItems {
         TEST_ITEMS = DeferredRegister.createItems(Chrysalis.MOD_ID)
     ;
 
-    // region Debug Items
+    // region Items
 
     public static final DeferredItem<Item>
         ICON = ITEMS.registerItem("icon", IconItem::new, RegistryHelper.iconProperties()),
@@ -48,6 +50,8 @@ public class CItems {
         COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEggItem::new, RegistryHelper.debugUtilityProperties(1)),
         KEY = ITEMS.registerItem("key", CreativeModeDescriptionItem::new, new Item.Properties()),
         ADMIN_KEY = ITEMS.registerItem("admin_key", CreativeModeDescriptionItem::new, RegistryHelper.debugUtilityProperties(64)),
+        GIANT_SPAWN_EGG = ITEMS.registerItem("giant_spawn_egg", (properties) -> new SpawnEggItem(EntityType.GIANT, properties)),
+        ILLUSIONER_SPAWN_EGG = ITEMS.registerItem("illusioner_spawn_egg", (properties) -> new SpawnEggItem(EntityType.ILLUSIONER, properties)),
         TEST_RIGHT_CLICK_ITEM = TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
     ;
 
