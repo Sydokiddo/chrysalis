@@ -307,7 +307,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         }
 
         if (this.canEmitCameraShake()) {
-            EventHelper.sendCameraShakeToNearbyPlayers(this, null, 10.0D, this.getLifeTime() + 40, 5, 5);
+            EventHelper.sendCameraShakeToNearbyPlayers(this, null, 10.0D, this.getLifeTime() + 100, 5, 5);
             this.setCanEmitCameraShake(false);
         }
 
