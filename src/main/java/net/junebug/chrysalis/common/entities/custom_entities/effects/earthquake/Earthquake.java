@@ -336,10 +336,7 @@ public class Earthquake extends Entity implements TraceableEntity {
 
                     livingEntity = nearbyEntities.next();
 
-                    boolean canBeDamaged = !livingEntity.getType().is(CTags.IMMUNE_TO_EARTHQUAKES) && !livingEntity.isAlliedTo(this.getOwner()) &&
-                    !EntityHelper.targetIsImmunePlayer(this.getOwner(), livingEntity) && !EntityHelper.targetIsLinkedAllay(this.getOwner(), livingEntity);
-
-                    if (canBeDamaged) {
+                    if (!livingEntity.getType().is(CTags.IMMUNE_TO_EARTHQUAKES) && EntityHelper.canBeDamagedByFoe(this.getOwner(), livingEntity)) {
                         livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(CDamageTypes.EARTHQUAKE, this.getOwner()), damageAmount);
                         this.playSound(this.getHitSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
                         if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Dealt {} earthquake damage to {}", damageAmount, livingEntity.getName().getString());

@@ -97,6 +97,10 @@ public class EntityHelper {
         return optional.isPresent() && player.getUUID() == optional.get();
     }
 
+    public static boolean canBeDamagedByFoe(Entity attacker, Entity target) {
+        return !target.isAlliedTo(attacker) && !EntityHelper.targetIsImmunePlayer(attacker, target) && !EntityHelper.targetIsLinkedAllay(attacker, target);
+    }
+
     // endregion
 
     // region Loot Tables
