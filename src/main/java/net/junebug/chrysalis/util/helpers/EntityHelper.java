@@ -90,6 +90,7 @@ public class EntityHelper {
         return !playerOwner.canHarmPlayer(playerTarget);
     }
 
+    @SuppressWarnings("all")
     public static boolean targetIsLinkedAllay(Entity owner, Entity target) {
         if (!(target instanceof Allay allay) || !(owner instanceof Player player)) return false;
         Optional<UUID> optional = allay.getBrain().getMemory(MemoryModuleType.LIKED_PLAYER);
