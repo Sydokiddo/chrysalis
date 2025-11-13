@@ -15,6 +15,7 @@
     "chrysalis:ride_mob",
     "chrysalis:drain_fluids",
     "chrysalis:copying_spawn_egg",
-    "chrysalis:admin_key"
+    "chrysalis:admin_key",
+    "#chrysalis:event_test_items"
   ]
 }

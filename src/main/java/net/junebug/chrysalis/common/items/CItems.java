@@ -1,9 +1,16 @@
 package net.junebug.chrysalis.common.items;
 
+import net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake.Earthquake;
+import net.junebug.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
+import net.junebug.chrysalis.util.helpers.EventHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
@@ -20,6 +27,7 @@ import net.junebug.chrysalis.common.items.custom_items.debug_items.shared_classe
 import net.junebug.chrysalis.common.items.custom_items.debug_items.types.*;
 import net.junebug.chrysalis.common.items.custom_items.examples_and_testing.TestRightClickItem;
 import net.junebug.chrysalis.util.helpers.RegistryHelper;
+import org.jetbrains.annotations.NotNull;
 
 public class CItems {
 
@@ -50,8 +58,66 @@ public class CItems {
         COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEggItem::new, RegistryHelper.debugUtilityProperties(1)),
         KEY = ITEMS.registerItem("key", CreativeModeDescriptionItem::new, new Item.Properties()),
         ADMIN_KEY = ITEMS.registerItem("admin_key", CreativeModeDescriptionItem::new, RegistryHelper.debugUtilityProperties(64)),
+
+        MUSIC_EVENT_TEST = ITEMS.registerItem("music_event_test", (properties) -> new EventTestItem("music_event_test") {
+
+            @Override
+            public boolean emitEvent(Level level, Player player, @NotNull InteractionHand interactionHand) {
+
+                if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+                    EventHelper.sendMusic(serverPlayer, SoundEvents.MUSIC_MENU, 10, 10, true);
+                    return true;
+                }
+
+                return super.emitEvent(level, player, interactionHand);
+            }
+        }),
+
+        CAMERA_SHAKE_EVENT_TEST = ITEMS.registerItem("camera_shake_event_test", (properties) -> new EventTestItem("camera_shake_event_test") {
+
+            @Override
+            public boolean emitEvent(Level level, Player player, @NotNull InteractionHand interactionHand) {
+
+                if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+                    EventHelper.sendCameraShake(serverPlayer, 100, 5, 5);
+                    return true;
+                }
+
+                return super.emitEvent(level, player, interactionHand);
+            }
+        }),
+
+        EARTHQUAKE_EVENT_TEST = ITEMS.registerItem("earthquake_event_test", (properties) -> new EventTestItem("earthquake_event_test") {
+
+            @Override
+            public boolean emitEvent(Level level, Player player, @NotNull InteractionHand interactionHand) {
+
+                if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+                    Earthquake.create(level, serverPlayer, player.getOnPos().above().getBottomCenter(), player.getYRot(), player.getXRot());
+                    return true;
+                }
+
+                return super.emitEvent(level, player, interactionHand);
+            }
+        }),
+
+        ENTITY_SPAWNER_EVENT_TEST = ITEMS.registerItem("entity_spawner_event_test", (properties) -> new EventTestItem("entity_spawner_event_test") {
+
+            @Override
+            public boolean emitEvent(Level level, Player player, @NotNull InteractionHand interactionHand) {
+
+                if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+                    EntitySpawner.create(level, Chrysalis.stringId("example"), serverPlayer.position());
+                    return true;
+                }
+
+                return super.emitEvent(level, player, interactionHand);
+            }
+        }),
+
         GIANT_SPAWN_EGG = ITEMS.registerItem("giant_spawn_egg", (properties) -> new SpawnEggItem(EntityType.GIANT, properties)),
         ILLUSIONER_SPAWN_EGG = ITEMS.registerItem("illusioner_spawn_egg", (properties) -> new SpawnEggItem(EntityType.ILLUSIONER, properties)),
+
         TEST_RIGHT_CLICK_ITEM = TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
     ;
 

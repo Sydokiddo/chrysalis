@@ -134,12 +134,16 @@
   "item.chrysalis.key.description": "A generic key item used as a fallback for all unlockable blocks.",
   "item.chrysalis.admin_key": "Admin Key",
   "item.chrysalis.admin_key.description": "A key item that can be used to unlock any unlockable block.",
+  "item.chrysalis.event_test": "Event Test (%s)",
+  "item.chrysalis.event_test.description": "Emits Specified Event",
+  "item.chrysalis.music_event_test.description": "Music",
+  "item.chrysalis.camera_shake_event_test.description": "Camera Shake",
+  "item.chrysalis.earthquake_event_test.description": "Earthquake",
+  "item.chrysalis.entity_spawner_event_test.description": "Entity Spawner",
   "item.chrysalis.debug_stick.description": "Cycles Between Block States",
   "item.chrysalis.light.description": "Light Level: %s",
-
   "item.chrysalis.giant_spawn_egg": "Giant Spawn Egg",
   "item.chrysalis.illusioner_spawn_egg": "Illusioner Spawn Egg",
-
   "item.chrysalis.test_right_click_item": "Test Right Click Item",
   "item.chrysalis.test_right_click_item.description": "An item for testing right-click functionality. Only meant for debug environments!",
 
@@ -161,6 +165,10 @@
   "entity.chrysalis.falling_debris": "Falling Debris",
   "entity.chrysalis.collapsable_block": "Collapsable Block",
   "entity.chrysalis.earthquake": "Earthquake",
+  "entity.chrysalis.geyser": "Geyser",
+  "entity.chrysalis.laser_blast": "Laser Blast",
+  "entity.chrysalis.small_laser_blast": "Small Laser Blast",
+  "entity.chrysalis.key_golem": "Key Golem",
 
   "comment.chrysalis.status_effects": "STATUS EFFECTS",
 
@@ -324,6 +332,7 @@
   "gui.chrysalis.drain_fluids.message": "Successfully drained nearby fluids",
   "gui.chrysalis.copying_spawn_egg.copy_message": "Copied Entity: %s",
   "gui.chrysalis.copying_spawn_egg.remove_message": "Copied Entity Removed",
+  "gui.chrysalis.event_test.message": "Emitted Event Test: %s",
 
   "comment.chrysalis.block_messages": "BLOCK MESSAGES",
 
@@ -397,6 +406,8 @@
   "death.attack.chrysalis.splatter.item": "%1$s was splattered by %2$s using %3$s",
   "death.attack.chrysalis.earthquake": "%1$s was shaken into the earth by %2$s",
   "death.attack.chrysalis.earthquake.item": "%1$s was shaken into the earth by %2$s using %3$s",
+  "death.attack.chrysalis.laser_blast": "%1$s was blasted by %2$s",
+  "death.attack.chrysalis.laser_blast.item": "%1$s was blasted by %2$s using %3$s",
 
   "comment.chrysalis.config_helpers": "CONFIG HELPERS",
 
@@ -512,6 +523,7 @@
   "subtitles.item.drain_fluids.use": "Fluids drained",
   "subtitles.item.copying_spawn_egg.copy_entity": "Entity copied",
   "subtitles.item.copying_spawn_egg.remove_copied_entity": "Copied entity removed",
+  "subtitles.item.event_test.use": "Event Test emits",
 
   "subtitles.item.armor.equip_shield": "Shield clunks",
   "subtitles.item.armor.equip_totem_of_undying": "Totem of Undying oscillates",
@@ -553,6 +565,12 @@
   "subtitles.entity.collapsable_block.crumble": "Block crumbles",
   "subtitles.entity.earthquake.travel": "Earthquake rumbles",
   "subtitles.entity.earthquake.hit": "Earthquake strikes",
+  "subtitles.entity.geyser.prepare": "Geyser prepares to spout",
+  "subtitles.entity.geyser.spout": "Geyser spouts",
+  "subtitles.entity.geyser.hit": "Geyser splatters",
+  "subtitles.entity.geyser.dissipate": "Geyser dissipates",
+  "subtitles.entity.laser_blast.hit": "Laser Blast sparks",
+  "subtitles.entity.laser_blast.deflect": "Laser Blast ricochets",
 
   "subtitles.entity.key_golem.ambient": "Key Golem mumbles",
   "subtitles.entity.key_golem.ambient_scared": "Key Golem flees",
@@ -583,6 +601,7 @@
   "tag.item.chrysalis.disc_fragments": "Disc Fragments",
   "tag.item.chrysalis.dolphin_foods": "Dolphin Foods",
   "tag.item.chrysalis.end_ores": "End Ores",
+  "tag.item.chrysalis.event_test_items": "Event Test Items",
   "tag.item.chrysalis.filled_bottles": "Filled Bottles",
   "tag.item.chrysalis.filled_bowls": "Filled Bowls",
   "tag.item.chrysalis.fish_buckets": "Fish Buckets",
@@ -631,11 +650,13 @@
   "tag.block.chrysalis.containers": "Containers",
   "tag.block.chrysalis.copper_blocks": "Copper Blocks",
   "tag.block.chrysalis.copper_grates": "Copper Grates",
+  "tag.block.chrysalis.dampens_block_ambient_sounds": "Dampens Block Ambient Sounds",
   "tag.block.chrysalis.end_crystal_base_blocks": "End Crystal Base Blocks",
   "tag.block.chrysalis.end_ores": "End Ores",
   "tag.block.chrysalis.grates": "Grates",
   "tag.block.chrysalis.inherently_waterlogged": "Inherently Waterlogged",
   "tag.block.chrysalis.lanterns": "Lanterns",
+  "tag.block.chrysalis.laser_blasts_ricochet_from": "Laser Blasts Ricochet From",
   "tag.block.chrysalis.nether_ores": "Nether Ores",
   "tag.block.chrysalis.nether_warts_can_grow_on": "Nether Warts Can Grow On",
   "tag.block.chrysalis.open_flowers": "Open Flowers",

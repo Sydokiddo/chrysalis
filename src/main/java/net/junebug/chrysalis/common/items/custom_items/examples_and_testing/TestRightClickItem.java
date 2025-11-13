@@ -1,6 +1,5 @@
 package net.junebug.chrysalis.common.items.custom_items.examples_and_testing;
 
-import net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake.Earthquake;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -21,7 +20,5 @@ public class TestRightClickItem extends CreativeModeDescriptionItem {
     }
 
     @SuppressWarnings("unused")
-    private void doRightClickFunctionality(Level level, Player player, InteractionHand interactionHand) {
-        Earthquake.create(level, player, player.getOnPos().above().getBottomCenter(), player.getYRot(), player.getXRot());
-    }
+    private void doRightClickFunctionality(Level level, Player player, InteractionHand interactionHand) {}
 }

@@ -1,0 +1,8 @@
+{
+  "values": [
+    "chrysalis:music_event_test",
+    "chrysalis:camera_shake_event_test",
+    "chrysalis:earthquake_event_test",
+    "chrysalis:entity_spawner_event_test"
+  ]
+}

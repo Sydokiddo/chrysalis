@@ -40,8 +40,8 @@ public class CSoundEvents {
         DRAIN_FLUIDS_USE = SOUND_EVENTS.register("item.drain_fluids.use", SoundEvent::createVariableRangeEvent),
         COPYING_SPAWN_EGG_COPY_ENTITY = SOUND_EVENTS.register("item.copying_spawn_egg.copy_entity", SoundEvent::createVariableRangeEvent),
         COPYING_SPAWN_EGG_REMOVE_COPIED_ENTITY = SOUND_EVENTS.register("item.copying_spawn_egg.remove_copied_entity", SoundEvent::createVariableRangeEvent),
-
         SPAWN_EGG_USE = SOUND_EVENTS.register("item.spawn_egg.use", SoundEvent::createVariableRangeEvent),
+        EVENT_TEST_USE = SOUND_EVENTS.register("item.event_test.use", SoundEvent::createVariableRangeEvent),
         ITEM_DROP = SOUND_EVENTS.register("entity.item.drop", SoundEvent::createVariableRangeEvent),
 
         ENTITY_SPAWNER_APPEAR = SOUND_EVENTS.register("entity.entity_spawner.appear", SoundEvent::createVariableRangeEvent),

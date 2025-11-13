@@ -146,6 +146,15 @@
     ],
     "subtitle": "subtitles.entity.generic_spawner.spawn_entity"
   },
+  "item.event_test.use": {
+    "sounds": [
+      "chrysalis:item/event_test/use1",
+      "chrysalis:item/event_test/use2",
+      "chrysalis:item/event_test/use3",
+      "chrysalis:item/event_test/use4"
+    ],
+    "subtitle": "subtitles.item.event_test.use"
+  },
   "entity.item.drop": {
     "sounds": [
       "minecraft:random/pop"
