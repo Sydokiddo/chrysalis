@@ -523,7 +523,7 @@
   "subtitles.item.drain_fluids.use": "Fluids drained",
   "subtitles.item.copying_spawn_egg.copy_entity": "Entity copied",
   "subtitles.item.copying_spawn_egg.remove_copied_entity": "Copied entity removed",
-  "subtitles.item.event_test.use": "Event Test emits",
+  "subtitles.item.event_test.use": "Event emitted",
 
   "subtitles.item.armor.equip_shield": "Shield clunks",
   "subtitles.item.armor.equip_totem_of_undying": "Totem of Undying oscillates",
@@ -651,6 +651,7 @@
   "tag.block.chrysalis.copper_blocks": "Copper Blocks",
   "tag.block.chrysalis.copper_grates": "Copper Grates",
   "tag.block.chrysalis.dampens_block_ambient_sounds": "Dampens Block Ambient Sounds",
+  "tag.block.chrysalis.earthquake_breakable_blocks": "Earthquake Breakable Blocks",
   "tag.block.chrysalis.end_crystal_base_blocks": "End Crystal Base Blocks",
   "tag.block.chrysalis.end_ores": "End Ores",
   "tag.block.chrysalis.grates": "Grates",

@@ -25,11 +25,14 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -318,11 +321,22 @@ public class Earthquake extends Entity implements TraceableEntity {
 
         if (this.getLifeTime() >= 0) {
 
-            this.setDeltaMovement(this.getLookAngle().horizontal().normalize().scale(this.getSpeed()));
-            if (this.horizontalCollision) this.setDeltaMovement(this.getDeltaMovement().x(), this.maxUpStep(), this.getDeltaMovement().z());
-            if (this.getBlockStateOn().getCollisionShape(this.level(), this.getOnPos()).isEmpty()) this.setDeltaMovement(this.getDeltaMovement().x(), -this.getDefaultGravity(), this.getDeltaMovement().z());
+            if (this.getBlockStateOn().getBlock() instanceof FallingBlock fallingBlock) this.level().scheduleTick(this.getOnPos(), fallingBlock, fallingBlock.getDelayAfterPlace());
+
+            float xRot = this.getXRot() * (float) (Math.PI / 180.0D);
+            float yRot = -this.getYRot() * (float) (Math.PI / 180.0D);
+            HitResult hitResult = this.level().clipIncludingBorder(new ClipContext(this.position(), this.position().add(new Vec3(Mth.sin(yRot) * Mth.cos(xRot), -Mth.sin(xRot), Mth.cos(yRot) * Mth.cos(xRot))), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+
+            if (this.horizontalCollision && hitResult.getType() == HitResult.Type.BLOCK) {
+                this.setDeltaMovement(0.0D, 0.0D, 0.0D);
+                this.dissipate();
+            } else {
+                this.setDeltaMovement(this.getLookAngle().horizontal().normalize().scale(this.getSpeed()));
+                this.scaleSize(false, 0.05F * this.startingScale);
+            }
+
+            this.applyGravity();
             this.move(MoverType.SELF, this.getDeltaMovement());
-            this.scaleSize(false, 0.05F * this.startingScale);
 
             this.playSound(this.getTravelSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
             this.gameEvent(GameEvent.BLOCK_DESTROY);
@@ -337,6 +351,7 @@ public class Earthquake extends Entity implements TraceableEntity {
                     livingEntity = nearbyEntities.next();
 
                     if (!livingEntity.getType().is(CTags.IMMUNE_TO_EARTHQUAKES) && EntityHelper.canBeDamagedByFoe(this.getOwner(), livingEntity)) {
+                        EntityHelper.stunShield(livingEntity);
                         livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(CDamageTypes.EARTHQUAKE, this.getOwner()), damageAmount);
                         this.playSound(this.getHitSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
                         if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Dealt {} earthquake damage to {}", damageAmount, livingEntity.getName().getString());
@@ -345,12 +360,8 @@ public class Earthquake extends Entity implements TraceableEntity {
             }
 
         } else {
-            this.scaleSize(true, 0.35F * this.startingScale);
+            this.dissipate();
         }
-    }
-
-    private void dealKnockback(LivingEntity livingEntity, float knockbackAmount) {
-        if (livingEntity.getLastDamageSource() != null && !livingEntity.getLastDamageSource().is(DamageTypeTags.NO_KNOCKBACK) && !livingEntity.isDeadOrDying()) livingEntity.knockback(knockbackAmount, Mth.sin(this.getYRot() * ((float) Math.PI / 180.0F)), -Mth.cos(this.getYRot() * ((float) Math.PI / 180.0F)));
     }
 
     private void scaleSize(boolean shrink, float scaleAmount) {
@@ -360,6 +371,14 @@ public class Earthquake extends Entity implements TraceableEntity {
         } else {
             this.discard();
         }
+    }
+
+    private void dealKnockback(LivingEntity livingEntity, float knockbackAmount) {
+        if (livingEntity.getLastDamageSource() != null && !livingEntity.getLastDamageSource().is(DamageTypeTags.NO_KNOCKBACK) && !livingEntity.isDeadOrDying()) livingEntity.knockback(knockbackAmount, Mth.sin(this.getYRot() * ((float) Math.PI / 180.0F)), -Mth.cos(this.getYRot() * ((float) Math.PI / 180.0F)));
+    }
+
+    private void dissipate() {
+        this.scaleSize(true, 0.35F * this.startingScale);
     }
 
     private void clientTick() {
@@ -383,6 +402,7 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     @Override
     public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
+        if (!this.isInvulnerableToBase(damageSource)) this.markHurt();
         return false;
     }
 
@@ -439,6 +459,11 @@ public class Earthquake extends Entity implements TraceableEntity {
     @Override
     public @NotNull PushReaction getPistonPushReaction() {
         return PushReaction.IGNORE;
+    }
+
+    @Override
+    public boolean displayFireAnimation() {
+        return false;
     }
 
     private Holder<SoundEvent> getSound(EntityDataAccessor<String> soundString) {

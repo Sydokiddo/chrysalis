@@ -101,6 +101,11 @@ public class EntityHelper {
         return !target.isAlliedTo(attacker) && !EntityHelper.targetIsImmunePlayer(attacker, target) && !EntityHelper.targetIsLinkedAllay(attacker, target);
     }
 
+    public static void stunShield(LivingEntity livingEntity) {
+        ItemStack blockingItem = livingEntity.getItemBlockingWith();
+        if (livingEntity instanceof Player player && player.isBlocking() && blockingItem != null) player.disableShield(blockingItem);
+    }
+
     // endregion
 
     // region Loot Tables

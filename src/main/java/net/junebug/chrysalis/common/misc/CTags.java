@@ -98,6 +98,7 @@ public class CTags {
         COPPER_BLOCKS = registerBlockTag("copper_blocks"),
         COPPER_GRATES = registerBlockTag("copper_grates"),
         DAMPENS_BLOCK_AMBIENT_SOUNDS = registerBlockTag("dampens_block_ambient_sounds"),
+        EARTHQUAKE_BREAKABLE_BLOCKS = registerBlockTag("earthquake_breakable_blocks"),
         END_CRYSTAL_BASE_BLOCKS = registerBlockTag("end_crystal_base_blocks"),
         END_ORES = registerBlockTag("end_ores"),
         GRATES = registerBlockTag("grates"),

@@ -54,7 +54,7 @@ public class EventTestItem extends DebugUtilityItem {
             serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
             DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.event_test.message", Component.translatable(this.description)));
-            ItemHelper.addCooldownToTag(serverPlayer, CTags.EVENT_TEST_ITEMS, 20);
+            ItemHelper.addCooldownToTag(serverPlayer, CTags.EVENT_TEST_ITEMS, 25);
 
             return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
         }

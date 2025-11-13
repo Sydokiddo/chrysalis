@@ -167,7 +167,7 @@ public class LayerBlock extends FallingBlock implements Fallable {
     // region Miscellaneous
 
     @Override
-    protected int getDelayAfterPlace() {
+    public int getDelayAfterPlace() {
         return this.fallDelay;
     }
 
