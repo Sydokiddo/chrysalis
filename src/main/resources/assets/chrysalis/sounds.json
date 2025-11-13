@@ -233,6 +233,102 @@
     ],
     "subtitle": "subtitles.entity.earthquake.hit"
   },
+  "entity.key_golem.ambient": {
+    "sounds": [
+      "chrysalis:entity/key_golem/ambient1",
+      "chrysalis:entity/key_golem/ambient2",
+      "chrysalis:entity/key_golem/ambient3",
+      "chrysalis:entity/key_golem/ambient4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.ambient"
+  },
+  "entity.key_golem.ambient_scared": {
+    "sounds": [
+      "chrysalis:entity/key_golem/ambient_scared1",
+      "chrysalis:entity/key_golem/ambient_scared2",
+      "chrysalis:entity/key_golem/ambient_scared3",
+      "chrysalis:entity/key_golem/ambient_scared4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.ambient_scared"
+  },
+  "entity.key_golem.ambient_carrying": {
+    "sounds": [
+      "chrysalis:entity/key_golem/ambient_carrying1",
+      "chrysalis:entity/key_golem/ambient_carrying2",
+      "chrysalis:entity/key_golem/ambient_carrying3",
+      "chrysalis:entity/key_golem/ambient_carrying4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.ambient_carrying"
+  },
+  "entity.key_golem.step": {
+    "sounds": [
+      "chrysalis:entity/key_golem/step1",
+      "chrysalis:entity/key_golem/step2",
+      "chrysalis:entity/key_golem/step3",
+      "chrysalis:entity/key_golem/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.key_golem.death": {
+    "sounds": [
+      "chrysalis:entity/key_golem/death1",
+      "chrysalis:entity/key_golem/death2",
+      "chrysalis:entity/key_golem/death3"
+    ],
+    "subtitle": "subtitles.entity.key_golem.death"
+  },
+  "entity.key_golem.sleep": {
+    "sounds": [
+      "chrysalis:entity/key_golem/sleep1",
+      "chrysalis:entity/key_golem/sleep2",
+      "chrysalis:entity/key_golem/sleep3",
+      "chrysalis:entity/key_golem/sleep4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.sleep"
+  },
+  "entity.key_golem.wake_up": {
+    "sounds": [
+      "chrysalis:entity/key_golem/wake_up1",
+      "chrysalis:entity/key_golem/wake_up2",
+      "chrysalis:entity/key_golem/wake_up3",
+      "chrysalis:entity/key_golem/wake_up4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.wake_up"
+  },
+  "entity.key_golem.notice": {
+    "sounds": [
+      "chrysalis:entity/key_golem/notice1",
+      "chrysalis:entity/key_golem/notice2",
+      "chrysalis:entity/key_golem/notice3"
+    ],
+    "subtitle": "subtitles.entity.key_golem.notice"
+  },
+  "entity.key_golem.grab": {
+    "sounds": [
+      "chrysalis:entity/key_golem/grab1",
+      "chrysalis:entity/key_golem/grab2",
+      "chrysalis:entity/key_golem/grab3",
+      "chrysalis:entity/key_golem/grab4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.grab"
+  },
+  "entity.key_golem.pant": {
+    "sounds": [
+      "chrysalis:entity/key_golem/pant"
+    ],
+    "subtitle": "subtitles.entity.key_golem.pant"
+  },
+  "entity.key_golem.rattle": {
+    "sounds": [
+      "chrysalis:entity/key_golem/rattle1",
+      "chrysalis:entity/key_golem/rattle2",
+      "chrysalis:entity/key_golem/rattle3",
+      "chrysalis:entity/key_golem/rattle4",
+      "chrysalis:entity/key_golem/rattle5",
+      "chrysalis:entity/key_golem/rattle6"
+    ],
+    "subtitle": "subtitles.entity.key_golem.rattle"
+  },
   "item.armor.equip_shield": {
     "sounds": [
       "chrysalis:item/equipment/shield/equip1",

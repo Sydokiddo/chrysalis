@@ -17,6 +17,7 @@ public class CSoundEvents {
 
     // region Sound Events
 
+    @SuppressWarnings("unused")
     public static final DeferredHolder<SoundEvent, SoundEvent>
 
         SCREENSHOT_SUCCESS = SOUND_EVENTS.register("ui.screenshot.success", SoundEvent::createVariableRangeEvent),
@@ -51,6 +52,18 @@ public class CSoundEvents {
 
         EARTHQUAKE_TRAVEL = SOUND_EVENTS.register("entity.earthquake.travel", SoundEvent::createVariableRangeEvent),
         EARTHQUAKE_HIT = SOUND_EVENTS.register("entity.earthquake.hit", SoundEvent::createVariableRangeEvent),
+
+        KEY_GOLEM_AMBIENT = SOUND_EVENTS.register("entity.key_golem.ambient", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_AMBIENT_SCARED = SOUND_EVENTS.register("entity.key_golem.ambient_scared", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_AMBIENT_CARRYING = SOUND_EVENTS.register("entity.key_golem.ambient_carrying", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_STEP = SOUND_EVENTS.register("entity.key_golem.step", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_DEATH = SOUND_EVENTS.register("entity.key_golem.death", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_SLEEP = SOUND_EVENTS.register("entity.key_golem.sleep", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_WAKE_UP = SOUND_EVENTS.register("entity.key_golem.wake_up", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_NOTICE = SOUND_EVENTS.register("entity.key_golem.notice", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_GRAB = SOUND_EVENTS.register("entity.key_golem.grab", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_PANT = SOUND_EVENTS.register("entity.key_golem.pant", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_RATTLE = SOUND_EVENTS.register("entity.key_golem.rattle", SoundEvent::createVariableRangeEvent),
 
         EQUIP_SHIELD = SOUND_EVENTS.register("item.armor.equip_shield", SoundEvent::createVariableRangeEvent),
         EQUIP_TOTEM_OF_UNDYING = SOUND_EVENTS.register("item.armor.equip_totem_of_undying", SoundEvent::createVariableRangeEvent),

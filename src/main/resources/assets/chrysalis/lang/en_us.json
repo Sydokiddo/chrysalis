@@ -554,6 +554,17 @@
   "subtitles.entity.earthquake.travel": "Earthquake rumbles",
   "subtitles.entity.earthquake.hit": "Earthquake strikes",
 
+  "subtitles.entity.key_golem.ambient": "Key Golem mumbles",
+  "subtitles.entity.key_golem.ambient_scared": "Key Golem flees",
+  "subtitles.entity.key_golem.ambient_carrying": "Key Golem panics",
+  "subtitles.entity.key_golem.death": "Key Golem dies",
+  "subtitles.entity.key_golem.sleep": "Key Golem snores",
+  "subtitles.entity.key_golem.wake_up": "Key Golem wakes up",
+  "subtitles.entity.key_golem.notice": "Key Golem notices",
+  "subtitles.entity.key_golem.grab": "Key Golem is grabbed",
+  "subtitles.entity.key_golem.pant": "Key Golem hyperventilates",
+  "subtitles.entity.key_golem.rattle": "Key Golem rattles",
+
   "comment.chrysalis.ui_subtitles": "UI SUBTITLES",
 
   "subtitles.ui.creative_mode.delete_item": "Item deleted",
