@@ -321,14 +321,6 @@ public class Earthquake extends Entity implements TraceableEntity {
             if (this.getBlockStateOn().getBlock() instanceof FallingBlock fallingBlock) this.level().scheduleTick(this.getOnPos(), fallingBlock, fallingBlock.getDelayAfterPlace());
             if (this.getInBlockState().is(CTags.EARTHQUAKE_IGNORED_BLOCKS) && this.getInBlockState().getBlock() instanceof BellBlock bellBlock) bellBlock.attemptToRing(this.level(), this.blockPosition(), this.getMotionDirection().getOpposite());
 
-            if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().is(CTags.EARTHQUAKE_BREAKABLE_BLOCKS)) {
-
-                if (this.getInBlockState().getBlock() instanceof DecoratedPotBlock) this.level().setBlockAndUpdate(this.blockPosition(), this.getInBlockState().setValue(BlockStateProperties.CRACKED, true));
-
-                if (this.getInBlockState().getBlock() instanceof TurtleEggBlock turtleEggBlock) turtleEggBlock.decreaseEggs(this.level(), this.blockPosition(), this.getInBlockState());
-                else this.level().destroyBlock(this.blockPosition(), true);
-            }
-
             float xRot = this.getXRot() * (float) (Math.PI / 180.0D);
             float yRot = -this.getYRot() * (float) (Math.PI / 180.0D);
             HitResult hitResult = this.level().clipIncludingBorder(new ClipContext(this.position(), this.position().add(new Vec3(Mth.sin(yRot) * Mth.cos(xRot), -Mth.sin(xRot), Mth.cos(yRot) * Mth.cos(xRot))), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
@@ -344,10 +336,20 @@ public class Earthquake extends Entity implements TraceableEntity {
             this.applyGravity();
             this.move(MoverType.SELF, this.getDeltaMovement());
 
-            this.playSound(this.getTravelSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
-            this.gameEvent(GameEvent.BLOCK_DESTROY);
+            if (this.onGround()) {
+                this.playSound(this.getTravelSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
+                this.gameEvent(GameEvent.BLOCK_DESTROY);
+            }
 
             if (this.level() instanceof ServerLevel serverLevel) {
+
+                if (serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().is(CTags.EARTHQUAKE_BREAKABLE_BLOCKS)) {
+
+                    if (this.getInBlockState().getBlock() instanceof DecoratedPotBlock) this.level().setBlockAndUpdate(this.blockPosition(), this.getInBlockState().setValue(BlockStateProperties.CRACKED, true));
+
+                    if (this.getInBlockState().getBlock() instanceof TurtleEggBlock turtleEggBlock) turtleEggBlock.decreaseEggs(this.level(), this.blockPosition(), this.getInBlockState());
+                    else this.level().destroyBlock(this.blockPosition(), true);
+                }
 
                 List<? extends LivingEntity> damageRange = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox(), EntitySelector.NO_CREATIVE_OR_SPECTATOR);
                 LivingEntity livingEntity;
