@@ -461,7 +461,7 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     @Override
     protected double getDefaultGravity() {
-        return 1.0F;
+        return 5.0D;
     }
 
     @Override
