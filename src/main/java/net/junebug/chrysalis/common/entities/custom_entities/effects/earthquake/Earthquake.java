@@ -9,6 +9,7 @@ import net.junebug.chrysalis.common.misc.CSoundEvents;
 import net.junebug.chrysalis.common.misc.CTags;
 import net.junebug.chrysalis.util.helpers.EntityHelper;
 import net.junebug.chrysalis.util.helpers.EventHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -21,6 +22,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -318,7 +320,10 @@ public class Earthquake extends Entity implements TraceableEntity {
 
         if (this.getLifeTime() >= 0) {
 
-            if (this.getBlockStateOn().getBlock() instanceof FallingBlock fallingBlock) this.level().scheduleTick(this.getOnPos(), fallingBlock, fallingBlock.getDelayAfterPlace());
+            this.tryUpdatingFallingBlock(this.blockPosition());
+            this.tryUpdatingFallingBlock(this.blockPosition().below());
+            this.tryUpdatingFallingBlock(this.blockPosition().below().below());
+
             if (this.getInBlockState().is(CTags.EARTHQUAKE_IGNORED_BLOCKS) && this.getInBlockState().getBlock() instanceof BellBlock bellBlock) bellBlock.attemptToRing(this.level(), this.blockPosition(), this.getMotionDirection().getOpposite());
 
             float xRot = this.getXRot() * (float) (Math.PI / 180.0D);
@@ -387,6 +392,10 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     private void dissipate() {
         this.scaleSize(true, 0.35F * this.startingScale);
+    }
+
+    private void tryUpdatingFallingBlock(BlockPos blockPos) {
+        if (this.level().getBlockState(blockPos).getBlock() instanceof FallingBlock fallingBlock) this.level().scheduleTick(blockPos, fallingBlock, fallingBlock.getDelayAfterPlace());
     }
 
     private void clientTick() {
@@ -480,6 +489,11 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     private void setSound(EntityDataAccessor<String> entityDataAccessor, Holder<SoundEvent> soundEvent) {
         this.getEntityData().set(entityDataAccessor, soundEvent.value().location().toString());
+    }
+
+    @Override
+    public @NotNull SoundSource getSoundSource() {
+        return SoundSource.BLOCKS;
     }
 
     // endregion
