@@ -1,6 +1,8 @@
 package net.junebug.chrysalis.mixin.blocks;
 
+import net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake.Earthquake;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
@@ -13,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.extensions.IBlockExtension;
@@ -45,6 +48,7 @@ public class BlockMixin {
     public static abstract class BlockStateBaseMixin {
 
         @Shadow protected abstract BlockState asState();
+        @Shadow public abstract boolean is(TagKey<Block> tag);
 
         /**
          * Pulls the specified note block instrument from the json file and applies it as the block's note block instrument.
@@ -129,11 +133,15 @@ public class BlockMixin {
         }
 
         @Inject(method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", at = @At("RETURN"), cancellable = true)
-        private void chrysalis$fixFluidHitboxes(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-            FluidState fluidState = blockGetter.getFluidState(blockPos);
-            int amount = fluidState.getAmount();
-            if (amount == 0) return;
-            if (collisionContext.isAbove(chrysalis$voxelShapes[amount - 1], blockPos, true) && collisionContext.canStandOnFluid(blockGetter.getFluidState(blockPos.above()), fluidState)) cir.setReturnValue(Shapes.or(cir.getReturnValue(), chrysalis$voxelShapes[amount]));
+        private void chrysalis$modifyCollisionShapes(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
+            if (collisionContext instanceof EntityCollisionContext entityCollisionContext && entityCollisionContext.getEntity() instanceof Earthquake && (blockGetter.getBlockState(blockPos).is(CTags.EARTHQUAKE_BREAKABLE_BLOCKS) || blockGetter.getBlockState(blockPos).is(CTags.EARTHQUAKE_IGNORED_BLOCKS))) {
+                cir.setReturnValue(Shapes.empty());
+            } else {
+                FluidState fluidState = blockGetter.getFluidState(blockPos);
+                int amount = fluidState.getAmount();
+                if (amount == 0) return;
+                if (collisionContext.isAbove(chrysalis$voxelShapes[amount - 1], blockPos, true) && collisionContext.canStandOnFluid(blockGetter.getFluidState(blockPos.above()), fluidState)) cir.setReturnValue(Shapes.or(cir.getReturnValue(), chrysalis$voxelShapes[amount]));
+            }
         }
     }
 

@@ -26,7 +26,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BellBlock;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -307,11 +309,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         if (this.firstTick) {
             if (this.getScale() < 1.0F) this.setScale(1.0F);
             this.startingScale = this.getScale();
-        }
-
-        if (this.canEmitCameraShake()) {
-            EventHelper.sendCameraShakeToNearbyPlayers(this, null, 10.0D, this.getLifeTime() + 60, 5, 5);
-            this.setCanEmitCameraShake(false);
+            if (this.canEmitCameraShake()) EventHelper.sendCameraShakeToNearbyPlayers(this, null, 10.0D, this.getLifeTime() * 5, 5, 5);
         }
 
         this.setLifeTime(this.getLifeTime() - 1);
@@ -322,6 +320,8 @@ public class Earthquake extends Entity implements TraceableEntity {
         if (this.getLifeTime() >= 0) {
 
             if (this.getBlockStateOn().getBlock() instanceof FallingBlock fallingBlock) this.level().scheduleTick(this.getOnPos(), fallingBlock, fallingBlock.getDelayAfterPlace());
+            if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().is(CTags.EARTHQUAKE_BREAKABLE_BLOCKS)) this.level().destroyBlock(this.blockPosition(), true);
+            if (this.getInBlockState().is(CTags.EARTHQUAKE_IGNORED_BLOCKS) && this.getInBlockState().getBlock() instanceof BellBlock bellBlock) bellBlock.attemptToRing(this.level(), this.blockPosition(), this.getMotionDirection().getOpposite());
 
             float xRot = this.getXRot() * (float) (Math.PI / 180.0D);
             float yRot = -this.getYRot() * (float) (Math.PI / 180.0D);

@@ -151,7 +151,7 @@ public class CServerEvents {
             if (encounteredMobUuid.isPresent()) {
 
                 List<? extends Mob> nearbyEncounteredMobs = event.getEntity().level().getEntitiesOfClass(Mob.class, event.getEntity().getBoundingBox().inflate(128.0D), entity -> {
-                    boolean defaultReturnValue = entity instanceof EncounterMusicMob encounterMusicMob && entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(event.getEntity()) <= encounterMusicMob.chrysalis$getFinalEncounterMusicRange();
+                    boolean defaultReturnValue = entity instanceof EncounterMusicMob encounterMusicMob && entity.isAlive() && entity.getUUID() == encounteredMobUuid.get() && entity.distanceTo(event.getEntity()) <= encounterMusicMob.getFinalEncounterMusicRange();
                     if (entity.getType().is(CTags.ALWAYS_PLAYS_ENCOUNTER_MUSIC)) return defaultReturnValue;
                     else return defaultReturnValue && entity.getTarget() != null;
                 });

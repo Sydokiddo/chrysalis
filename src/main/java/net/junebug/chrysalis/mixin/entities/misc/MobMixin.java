@@ -58,7 +58,7 @@ public abstract class MobMixin extends LivingEntity {
     @Unique
     private void chrysalis$tryToSendEncounterMusic(boolean playOnFirstTick) {
         if (!this.level().isClientSide() && this.chrysalis$mob instanceof EncounterMusicMob encounterMusicMob &&
-        (playOnFirstTick ? encounterMusicMob.chrysalis$shouldStartEncounterMusic() : encounterMusicMob.chrysalis$shouldRefreshEncounterMusic())) encounterMusicMob.chrysalis$sendEncounterMusic(this.chrysalis$mob, playOnFirstTick);
+        (playOnFirstTick ? encounterMusicMob.shouldStartEncounterMusic() : encounterMusicMob.shouldRefreshEncounterMusic())) encounterMusicMob.sendEncounterMusic(this.chrysalis$mob, playOnFirstTick);
     }
 
     /**

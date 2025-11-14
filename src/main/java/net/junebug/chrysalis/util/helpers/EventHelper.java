@@ -105,7 +105,7 @@ public class EventHelper {
 
         if (!(mob instanceof EncounterMusicMob encounterMusicMob) || !playOnFirstTick && !checkEncounterMusicRefreshing(mob)) return;
 
-        for (ServerPlayer serverPlayer : getNearbyPlayers(mob, encounterMusicMob.chrysalis$getFinalEncounterMusicRange())) {
+        for (ServerPlayer serverPlayer : getNearbyPlayers(mob, encounterMusicMob.getFinalEncounterMusicRange())) {
             if (EntityHelper.getEncounteredMobUUID(serverPlayer).isPresent()) return;
             EntityHelper.setEncounteredMobUUID(serverPlayer, mob.getUUID());
             sendMusic(serverPlayer, soundEvent, 10, 10, true);
@@ -117,7 +117,7 @@ public class EventHelper {
     private static boolean checkEncounterMusicRefreshing(Mob mob) {
 
         if (!(mob instanceof EncounterMusicMob encounterMusicMob)) return false;
-        List<? extends ServerPlayer> nearbyPlayers = getNearbyPlayers(mob, encounterMusicMob.chrysalis$getFinalEncounterMusicRange());
+        List<? extends ServerPlayer> nearbyPlayers = getNearbyPlayers(mob, encounterMusicMob.getFinalEncounterMusicRange());
 
         if (nearbyPlayers.isEmpty()) {
             ticksWithinRange = 0;
