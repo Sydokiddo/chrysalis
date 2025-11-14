@@ -1,10 +1,14 @@
 package net.junebug.chrysalis.common.blocks.custom_blocks.interfaces;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.junebug.chrysalis.common.blocks.CBlockStateProperties;
 import net.junebug.chrysalis.common.entities.registry.CEntities;
@@ -24,9 +28,18 @@ public interface SittableBlock {
         return !level.getEntitiesOfClass(Seat.class, new AABB(blockPos)).isEmpty();
     }
 
-    static void startSitting(Level level, BlockPos blockPos, Entity entity, double seatYHeight) {
+    default SoundEvent getSittingSound() {
+        return SoundEvents.EMPTY;
+    }
+
+    static void startSitting(SittableBlock sittableBlock, Level level, BlockPos blockPos, Entity entity, double seatYHeight) {
 
         if (level.isClientSide()) return;
+
+        if (sittableBlock.getSittingSound() != null && sittableBlock.getSittingSound() != SoundEvents.EMPTY) {
+            level.playSound(null, blockPos, sittableBlock.getSittingSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.gameEvent(null, GameEvent.ENTITY_MOUNT, blockPos);
+        }
 
         Seat seat = CEntities.SEAT.get().create(level, EntitySpawnReason.TRIGGERED);
         assert seat != null;

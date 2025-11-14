@@ -1,6 +1,8 @@
 package net.junebug.chrysalis.common.blocks.custom_blocks.examples_and_testing;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -35,10 +37,15 @@ public class ExampleSeatBlock extends Block implements SittableBlock {
     protected @NotNull InteractionResult useItemOn(@NotNull ItemStack itemStack, @NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull InteractionHand interactionHand, @NotNull BlockHitResult blockHitResult) {
 
         if (SittableBlock.isSittable(blockState) && !SittableBlock.isSeatOccupied(level, blockPos)) {
-            SittableBlock.startSitting(level, blockPos, player, 0.5D);
+            SittableBlock.startSitting(this, level, blockPos, player, 0.5D);
             return InteractionResult.SUCCESS;
         }
 
         return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
+    }
+
+    @Override
+    public SoundEvent getSittingSound() {
+        return SoundEvents.WOOD_HIT;
     }
 }
