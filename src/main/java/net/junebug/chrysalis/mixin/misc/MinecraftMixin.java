@@ -44,7 +44,7 @@ public class MinecraftMixin {
     @Shadow @Nullable public Screen screen;
 
     /**
-     * Replaces the vanilla splash text manager with Chrysalis's custom one.
+     * Replaces the vanilla splash text manager with chrysalis's custom one.
      **/
 
     @Inject(method = "getSplashManager", at = @At("RETURN"), cancellable = true)
@@ -53,7 +53,7 @@ public class MinecraftMixin {
     }
 
     /**
-     * Gets situational music from Chrysalis's custom queued music system.
+     * Gets situational music from chrysalis's custom queued music system.
      **/
 
     @Inject(method = "getSituationalMusic", at = @At("RETURN"), cancellable = true)
@@ -112,6 +112,10 @@ public class MinecraftMixin {
     @OnlyIn(Dist.CLIENT)
     @Mixin(Screenshot.class)
     public static class ScreenshotMixin {
+
+        /**
+         * Copies screenshots to the computer's clipboard.
+         **/
 
         @Inject(method = "lambda$_grab$2", at = @At("TAIL"))
         private static void chrysalis$copyScreenshotToClipboard(NativeImage nativeimage, File file, ScreenshotEvent event, Consumer<?> messageConsumer, CallbackInfo info) {

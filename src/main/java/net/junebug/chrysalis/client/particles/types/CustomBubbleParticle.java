@@ -15,13 +15,17 @@ import org.jetbrains.annotations.NotNull;
 @OnlyIn(Dist.CLIENT)
 public class CustomBubbleParticle extends BubbleParticle implements ParticleCommonMethods {
 
+    /**
+     * Vanilla's bubble particles with an option to make it tied to a specific fluid type as well as making it emissive.
+     **/
+
     // region Initialization and Ticking
 
     private final TagKey<Fluid> fluidType;
     private final boolean emissive;
 
-    public CustomBubbleParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, TagKey<Fluid> fluidType, boolean emissive) {
-        super(clientLevel, x, y, z, velocityX, velocityY, velocityZ);
+    public CustomBubbleParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, TagKey<Fluid> fluidType, boolean emissive) {
+        super(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed);
         this.fluidType = fluidType;
         this.emissive = emissive;
     }
@@ -37,11 +41,11 @@ public class CustomBubbleParticle extends BubbleParticle implements ParticleComm
             this.remove();
         } else {
 
-            this.yd += 0.002;
+            this.yd += 0.002D;
             this.move(this.xd, this.yd, this.zd);
-            this.xd *= 0.8500000238418579;
-            this.yd *= 0.8500000238418579;
-            this.zd *= 0.8500000238418579;
+            this.xd *= 0.85D;
+            this.yd *= 0.85D;
+            this.zd *= 0.85D;
 
             if (!this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(this.fluidType)) this.remove();
         }
@@ -77,8 +81,8 @@ public class CustomBubbleParticle extends BubbleParticle implements ParticleComm
         }
 
         @Override
-        public Particle createParticle(@NotNull SimpleParticleType particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            CustomBubbleParticle particle = new CustomBubbleParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, FluidTags.WATER, false);
+        public Particle createParticle(@NotNull SimpleParticleType particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            CustomBubbleParticle particle = new CustomBubbleParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, FluidTags.WATER, false);
             particle.pickSprite(this.spriteSet);
             return particle;
         }
@@ -94,8 +98,8 @@ public class CustomBubbleParticle extends BubbleParticle implements ParticleComm
         }
 
         @Override
-        public Particle createParticle(@NotNull SimpleParticleType particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            CustomBubbleParticle particle = new CustomBubbleParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, FluidTags.LAVA, true);
+        public Particle createParticle(@NotNull SimpleParticleType particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            CustomBubbleParticle particle = new CustomBubbleParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, FluidTags.LAVA, true);
             particle.pickSprite(this.spriteSet);
             return particle;
         }

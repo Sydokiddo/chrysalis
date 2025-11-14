@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class CCreativeModeTabs {
 
     /**
-     * Registers the debug utility items in the creative mode inventory.
+     * Registers all items added by chrysalis in the creative mode inventory.
      **/
 
     private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Chrysalis.MOD_ID);

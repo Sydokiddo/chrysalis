@@ -13,7 +13,7 @@ import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.junebug.chrysalis.common.blocks.custom_blocks.interfaces.SittableBlockInterface;
+import net.junebug.chrysalis.common.blocks.custom_blocks.interfaces.SittableBlock;
 import org.jetbrains.annotations.NotNull;
 
 public class Seat extends Entity {
@@ -42,8 +42,7 @@ public class Seat extends Entity {
         if (this.level().isClientSide()) return;
 
         BlockState blockState = this.level().getBlockState(this.blockPosition());
-        boolean canSit = blockState.getBlock() instanceof SittableBlockInterface && SittableBlockInterface.isSittable(blockState);
-        if (this.isVehicle() && canSit) return;
+        if (this.isVehicle() && (blockState.getBlock() instanceof SittableBlock && SittableBlock.isSittable(blockState))) return;
 
         this.discard();
         this.level().updateNeighbourForOutputSignal(this.blockPosition(), blockState.getBlock());
@@ -83,6 +82,7 @@ public class Seat extends Entity {
 
     @Override
     public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
+        if (!this.isInvulnerableToBase(damageSource)) this.markHurt();
         return false;
     }
 }

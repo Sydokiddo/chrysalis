@@ -11,6 +11,10 @@ import java.util.function.Supplier;
 
 public class CBlockEntities {
 
+    /**
+     * The registry for block entities added by chrysalis.
+     **/
+
     private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Chrysalis.MOD_ID);
 
     // region Block Entities

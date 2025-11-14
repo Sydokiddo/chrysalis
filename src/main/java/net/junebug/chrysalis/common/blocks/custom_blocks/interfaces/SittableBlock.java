@@ -10,7 +10,7 @@ import net.junebug.chrysalis.common.blocks.CBlockStateProperties;
 import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.junebug.chrysalis.common.entities.custom_entities.Seat;
 
-public interface SittableBlockInterface {
+public interface SittableBlock {
 
     /**
      * Any block that integrates this interface can be sat on by utilizing the seat entity.

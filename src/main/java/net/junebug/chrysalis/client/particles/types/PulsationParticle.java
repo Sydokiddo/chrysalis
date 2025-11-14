@@ -22,7 +22,7 @@ import org.joml.Vector3f;
 public class PulsationParticle extends FadingEmissiveParticle {
 
     /**
-     * A directional pulsation ring particle effect with the ability to configure the color.
+     * A directional pulsation ring particle with the ability to configure the color.
      **/
 
     // region Initialization and Ticking
@@ -103,7 +103,7 @@ public class PulsationParticle extends FadingEmissiveParticle {
         }
 
         @Override
-        public Particle createParticle(@NotNull SmallPulsationParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(@NotNull SmallPulsationParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             PulsationParticle particle = new PulsationParticle(clientLevel, x, y, z, particleOptions, this.spriteSet);
             particle.scale(8.0F);
             return particle;
@@ -120,7 +120,7 @@ public class PulsationParticle extends FadingEmissiveParticle {
         }
 
         @Override
-        public Particle createParticle(@NotNull LargePulsationParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(@NotNull LargePulsationParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             PulsationParticle particle = new PulsationParticle(clientLevel, x, y, z, particleOptions, this.spriteSet);
             particle.scale(32.0F);
             return particle;

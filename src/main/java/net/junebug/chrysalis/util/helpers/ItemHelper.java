@@ -305,7 +305,7 @@ public class ItemHelper {
     }
 
     public static void addItalicDescriptionTooltip(List<Component> tooltip, Item item, ChatFormatting color, boolean addSpace) {
-        Component component = Component.translatable(item.getDescriptionId() + ".description").withStyle(color).withStyle(ChatFormatting.ITALIC);
+        Component component = Component.translatable(item.getDescriptionId() + ".description").withStyle(ChatFormatting.ITALIC, color);
         if (addSpace) tooltip.add(CommonComponents.space().append(component));
         else tooltip.add(component);
     }

@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public class DissipatingMultifaceBlock extends MultifaceBlock implements DissipatingBlockInterface {
 
     /**
-     * A class for multiface blocks (such as resin clumps, glow lichen, etc.) that dissipate after a given period of time.
+     * A class for blocks that dissipate much like the normal DissipatingBlock class, but for multiface blocks (such as glow lichen, sculk veins, etc.).
      **/
 
     // region Initialization

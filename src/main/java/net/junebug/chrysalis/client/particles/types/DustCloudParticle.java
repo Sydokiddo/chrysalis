@@ -25,8 +25,8 @@ public class DustCloudParticle extends CampfireSmokeParticle implements Particle
     public static final int defaultColor = Color.decode("#685C53").getRGB();
     private final SpriteSet spriteSet;
 
-    public DustCloudParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, DustCloudParticleOptions particleOptions, SpriteSet spriteSet) {
-        super(level, x, y, z, velocityX, velocityY, velocityZ, false);
+    public DustCloudParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, DustCloudParticleOptions particleOptions, SpriteSet spriteSet) {
+        super(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, false);
 
         this.lifetime = 10;
         this.spriteSet = spriteSet;
@@ -52,9 +52,9 @@ public class DustCloudParticle extends CampfireSmokeParticle implements Particle
         this.zo = this.z;
 
         if (this.age++ < this.lifetime && this.alpha > 0.0F) {
-            this.xd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
-            this.zd += this.random.nextFloat() / 5000.0F * (float) (this.random.nextBoolean() ? 1 : -1);
+            this.xd += this.random.nextFloat() / 5000.0F * (this.random.nextBoolean() ? 1.0F : -1.0F);
             this.yd -= this.gravity;
+            this.zd += this.random.nextFloat() / 5000.0F * (this.random.nextBoolean() ? 1.0F : -1.0F);
             this.move(this.xd, this.yd, this.zd);
             this.setSpriteFromAge(this.spriteSet);
         } else {
@@ -78,8 +78,8 @@ public class DustCloudParticle extends CampfireSmokeParticle implements Particle
         }
 
         @Override
-        public Particle createParticle(@NotNull DustCloudParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new DustCloudParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions, this.spriteSet);
+        public Particle createParticle(@NotNull DustCloudParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new DustCloudParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, particleOptions, this.spriteSet);
         }
     }
 

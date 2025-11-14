@@ -104,7 +104,7 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     /**
-     * Allows for blocks in the allows_use_while_sneaking to be interacted with the maximum priority even while sneaking.
+     * Allows for blocks in the allows_use_while_sneaking tag to be interacted with the maximum priority even while sneaking.
      **/
 
     @Unique

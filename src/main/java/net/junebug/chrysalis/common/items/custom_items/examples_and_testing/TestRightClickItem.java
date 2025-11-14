@@ -9,6 +9,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class TestRightClickItem extends CreativeModeDescriptionItem {
 
+    /**
+     * A test item for testing out right-click functionality.
+     **/
+
     public TestRightClickItem(Properties properties) {
         super(properties);
     }

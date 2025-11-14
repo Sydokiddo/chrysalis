@@ -9,6 +9,10 @@ import net.junebug.chrysalis.common.blocks.CBlockStateProperties;
 
 public interface DissipatingBlockInterface {
 
+    /**
+     * An interface for blocks that dissipate after a given amount of time, measured in ticks.
+     **/
+
     default void scheduleTick(ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Block block, int delay) {
         scheduledTickAccess.scheduleTick(blockPos, block, delay);
     }

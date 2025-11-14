@@ -1,8 +1,10 @@
 package net.junebug.chrysalis.mixin.blocks;
 
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.PowderSnowBlock;
 import net.junebug.chrysalis.common.misc.CGameRules;
@@ -28,11 +30,12 @@ public class PowderSnowBlockMixin {
     }
 
     /**
-     * Any items in the powder_snow_walkable_items tag that can be equipped in the feet slot will allow for the user to walk on powder snow.
+     * Any items in the powder_snow_walkable_items tag that can be equipped in the feet or body slot will allow for the user to walk on powder snow.
      **/
 
     @Inject(method = "canEntityWalkOnPowderSnow", at = @At("HEAD"), cancellable = true)
     private static void chrysalis$powderSnowWalkableItemsTag(Entity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.FEET).is(CTags.POWDER_SNOW_WALKABLE_ITEMS)) cir.setReturnValue(true);
+        TagKey<Item> powderSnowWalkableItems = CTags.POWDER_SNOW_WALKABLE_ITEMS;
+        if (entity instanceof LivingEntity livingEntity && (livingEntity.getItemBySlot(EquipmentSlot.FEET).is(powderSnowWalkableItems) || livingEntity.getItemBySlot(EquipmentSlot.BODY).is(powderSnowWalkableItems))) cir.setReturnValue(true);
     }
 }

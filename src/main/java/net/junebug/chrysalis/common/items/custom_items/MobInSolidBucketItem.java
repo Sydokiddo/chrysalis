@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.common.items.custom_items;
 
+import net.junebug.chrysalis.util.helpers.BlockHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -34,8 +35,8 @@ public class MobInSolidBucketItem extends MobInContainerItem {
 
         super.checkExtraContent(player, level, itemStack, blockPos);
 
-        if (level.isInWorldBounds(blockPos) && level.isEmptyBlock(blockPos)) {
-            level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos);
+        if (BlockHelper.isFree(level, blockPos)) {
+            level.gameEvent(player, GameEvent.BLOCK_PLACE, blockPos);
             if (!level.isClientSide()) level.setBlockAndUpdate(blockPos, this.blockType.defaultBlockState());
         }
     }

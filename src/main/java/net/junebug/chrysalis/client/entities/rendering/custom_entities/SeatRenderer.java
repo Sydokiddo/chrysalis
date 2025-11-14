@@ -15,6 +15,10 @@ import org.jetbrains.annotations.NotNull;
 @OnlyIn(Dist.CLIENT)
 public class SeatRenderer extends EntityRenderer<Seat, ChrysalisEntityRenderState> {
 
+    /**
+     * The entity rendering class for seats.
+     **/
+
     public SeatRenderer(EntityRendererProvider.Context context) {
         super(context);
     }

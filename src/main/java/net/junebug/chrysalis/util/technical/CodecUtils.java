@@ -4,6 +4,10 @@ import com.mojang.serialization.Codec;
 
 public class CodecUtils {
 
+    /**
+     * Merges two codecs into one.
+     **/
+
     public static <Type> Codec<Type> merge(Codec<? extends Type> codec1, Codec<? extends Type> codec2) {
         return Codec.either(codec1, codec2).flatComapMap(
             either -> {

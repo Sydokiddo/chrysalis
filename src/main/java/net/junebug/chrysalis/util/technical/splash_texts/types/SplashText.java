@@ -10,6 +10,10 @@ import net.junebug.chrysalis.util.technical.CodecUtils;
 @OnlyIn(Dist.CLIENT)
 public interface SplashText {
 
+    /**
+     * The base class for loading all splash texts.
+     **/
+
     Codec<SplashText> CODEC = CodecUtils.merge(SimpleSplashText.CODEC, AdvancedSplashText.CODEC);
 
     boolean validate();

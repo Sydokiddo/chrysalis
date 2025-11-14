@@ -22,6 +22,10 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 public interface ContainerMob {
 
+    /**
+     * An interface for mobs that can be picked up using any item.
+     **/
+
     boolean fromItem();
     void setFromItem(boolean fromItem);
     void saveToItemTag(ItemStack itemStack);

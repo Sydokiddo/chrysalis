@@ -12,6 +12,10 @@ import net.junebug.chrysalis.Chrysalis;
 @SuppressWarnings("unused")
 public class CTags {
 
+    /**
+     * The registry for tags added by chrysalis.
+     **/
+
     // region Item Tags
 
     public static final TagKey<Item>

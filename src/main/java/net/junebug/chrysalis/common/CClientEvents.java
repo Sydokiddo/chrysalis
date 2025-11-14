@@ -38,6 +38,10 @@ import java.io.File;
 @SuppressWarnings("unused")
 public class CClientEvents {
 
+    /**
+     * Executes mod events on the client.
+     **/
+
     @EventBusSubscriber(modid = Chrysalis.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
     public static class GameEventBus {
 

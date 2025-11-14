@@ -43,7 +43,7 @@ public class TeleportWandItem extends DebugUtilityItem implements CustomCrosshai
     }
 
     /**
-     * Teleports the player to the position they are looking at when right-clicked with the Teleport Wand.
+     * Teleports the player to the position they are looking at when right-clicked with the item.
      **/
 
     private HitResult getHitResult(Player player) {

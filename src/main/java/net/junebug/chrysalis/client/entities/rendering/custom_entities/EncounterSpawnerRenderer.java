@@ -8,17 +8,19 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.junebug.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
 import net.junebug.chrysalis.common.entities.custom_entities.spawners.encounter_spawner.EncounterSpawner;
 import org.jetbrains.annotations.NotNull;
-import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class EncounterSpawnerRenderer extends EntityRenderer<EncounterSpawner, ChrysalisEntityRenderState> {
+
+    /**
+     * The entity rendering class for encounter spawners.
+     **/
 
     private final EntityRenderDispatcher entityRenderer;
 
@@ -41,8 +43,7 @@ public class EncounterSpawnerRenderer extends EntityRenderer<EncounterSpawner, C
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(Mth.wrapDegrees(renderState.ageInTicks * 10.0F)));
 
-        Optional<Entity> entity = EncounterSpawner.createEntity(encounterSpawner);
-        entity.ifPresent(value -> this.entityRenderer.render(value, 0.0D, 0.0D, 0.0D, renderState.partialTick, poseStack, bufferSource, packedLight));
+        EncounterSpawner.createEntity(encounterSpawner).ifPresent(value -> this.entityRenderer.render(value, 0.0D, 0.0D, 0.0D, renderState.partialTick, poseStack, bufferSource, packedLight));
         poseStack.popPose();
     }
 }

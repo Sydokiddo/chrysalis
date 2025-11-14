@@ -9,7 +9,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class CameraSetup {
 
     /**
-     * Gets various pieces of information about the client's camera.
+     * Gets various types of information about the client's camera.
      **/
 
     private final Camera camera;

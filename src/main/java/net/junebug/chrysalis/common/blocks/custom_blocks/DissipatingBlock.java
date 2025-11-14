@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 public class DissipatingBlock extends Block implements DissipatingBlockInterface {
 
     /**
-     * A class for blocks that dissipate after a given period of time.
+     * A class for blocks that dissipate after a given amount of time, measured in ticks.
      **/
 
     // region Initialization

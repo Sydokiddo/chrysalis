@@ -16,7 +16,7 @@ import org.joml.Vector3f;
 public class DustExplosionParticle extends ExplodeParticle implements ParticleCommonMethods {
 
     /**
-     * A fading dust cloud explosion particle effect, with options to set the starting color, the color to fade into, and whether the particle is emissive.
+     * A fading dust explosion particle, with options to set the starting color, the color to fade into, and whether the particle is emissive.
      **/
 
     // region Initialization and Ticking
@@ -28,8 +28,8 @@ public class DustExplosionParticle extends ExplodeParticle implements ParticleCo
 
     private final boolean emissive;
 
-    public DustExplosionParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, DustExplosionParticleOptions particleOptions, SpriteSet spriteSet) {
-        super(clientLevel, x, y, z, velocityX, velocityY, velocityZ, spriteSet);
+    public DustExplosionParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, DustExplosionParticleOptions particleOptions, SpriteSet spriteSet) {
+        super(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, spriteSet);
         this.gravity = 0.5F;
         this.startingColor = particleOptions.getFinalStartingColor();
         this.endingColor = particleOptions.getFinalEndingColor();
@@ -83,8 +83,8 @@ public class DustExplosionParticle extends ExplodeParticle implements ParticleCo
         }
 
         @Override
-        public Particle createParticle(@NotNull DustExplosionParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new DustExplosionParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions, this.spriteSet);
+        public Particle createParticle(@NotNull DustExplosionParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new DustExplosionParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, particleOptions, this.spriteSet);
         }
     }
 

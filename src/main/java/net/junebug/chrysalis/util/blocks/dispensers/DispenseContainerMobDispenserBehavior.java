@@ -29,7 +29,7 @@ public class DispenseContainerMobDispenserBehavior implements DispenseItemBehavi
         BlockPos blockPos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
         ServerLevel level = blockSource.level();
 
-        if (BlockHelper.isFree(level.getBlockState(blockPos))) {
+        if (BlockHelper.isFree(level, blockPos)) {
 
             BlockHelper.playDispenserSound(blockSource);
             BlockHelper.playDispenserAnimation(blockSource, blockSource.state().getValue(DispenserBlock.FACING));

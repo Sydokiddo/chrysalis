@@ -18,6 +18,10 @@ import net.junebug.chrysalis.util.technical.splash_texts.SplashTextLoader;
 @OnlyIn(Dist.CLIENT)
 public class AdvancedSplashText implements SplashText {
 
+    /**
+     * The base class for loading advanced splash texts.
+     **/
+
     private static final String
         defaultFont = "minecraft:default",
         defaultColor = "#FFFF55"

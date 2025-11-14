@@ -8,6 +8,10 @@ import net.minecraft.sounds.SoundSource;
 
 public class TeleportingDebugUtilityItem extends DebugUtilityItem {
 
+    /**
+     * The base class that teleporting debug utility items use.
+     **/
+
     public TeleportingDebugUtilityItem(Properties properties) {
         super(properties);
     }

@@ -7,6 +7,10 @@ import net.junebug.chrysalis.Chrysalis;
 
 public class CDamageTypes {
 
+    /**
+     * The registry for damage types added by chrysalis.
+     **/
+
     // region Damage Types
 
     @SuppressWarnings("unused")

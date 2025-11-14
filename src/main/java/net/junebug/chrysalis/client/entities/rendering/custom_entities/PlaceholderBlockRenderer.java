@@ -19,6 +19,10 @@ import org.jetbrains.annotations.NotNull;
 @OnlyIn(Dist.CLIENT)
 public class PlaceholderBlockRenderer implements BlockEntityRenderer<PlaceholderBlockEntity> {
 
+    /**
+     * The block entity rendering class for placeholder blocks.
+     **/
+
     private final EntityRenderDispatcher entityRenderDispatcher;
 
     public PlaceholderBlockRenderer(BlockEntityRendererProvider.Context context) {

@@ -46,6 +46,10 @@ import java.util.*;
 
 public class CRegistry {
 
+    /**
+     * The base registry for chrysalis, which initializes all other registries.
+     **/
+
     // region Entity Data
 
     public static final EntityDataAccessor<Integer>

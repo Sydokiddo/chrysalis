@@ -19,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
 public class ParticleHelper {
 
     /**
-     * Common particle effect methods used by a variety of sources.
+     * Common particle methods used by a variety of sources.
      **/
 
     public static void emitBlockParticles(ServerLevel serverLevel, BlockState blockState, double x, double y, double z, int amount, double speed) {

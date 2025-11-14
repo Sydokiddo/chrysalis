@@ -24,6 +24,10 @@ import org.slf4j.LoggerFactory;
 @Mod(Chrysalis.MOD_ID)
 public class Chrysalis {
 
+    /**
+     * The initializer class for chrysalis.
+     **/
+
     public static final Logger LOGGER = LoggerFactory.getLogger("Chrysalis");
     public static RegistryAccess registryAccess;
     public static GameRules gameRules;

@@ -10,7 +10,7 @@ import org.joml.Vector3f;
 public interface ParticleCommonMethods {
 
     /**
-     * Common methods utilized by multiple custom particle effects.
+     * Common methods utilized by multiple custom particles.
      **/
 
     String

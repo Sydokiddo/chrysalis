@@ -26,6 +26,10 @@ import java.util.List;
 
 public class EventTestItem extends DebugUtilityItem {
 
+    /**
+     * The base class for event test items, items that can be used to test out various specified events added by chrysalis.
+     **/
+
     private final String description;
 
     public EventTestItem(String name) {

@@ -6,6 +6,10 @@ import net.junebug.chrysalis.util.helpers.RegistryHelper;
 
 public class CGameRules {
 
+    /**
+     * The registry for game rules added by chrysalis.
+     **/
+
     // region Game Rules
 
     public static GameRules.Key<GameRules.BooleanValue>

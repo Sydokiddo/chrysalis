@@ -48,7 +48,7 @@ public class PortalBlockMixin extends Block {
     }
 
     /**
-     * Middle-clicking on a nether portal gives the nether portal block item.
+     * Picking block on a nether portal gives the nether portal block item.
      **/
 
     @SuppressWarnings("deprecation")
@@ -76,7 +76,7 @@ public class PortalBlockMixin extends Block {
         }
 
         /**
-         * Middle-clicking on an end portal gives the end portal block item.
+         * Picking block on an end portal gives the end portal block item.
          **/
 
         @SuppressWarnings("deprecation")
@@ -152,7 +152,7 @@ public class PortalBlockMixin extends Block {
         }
 
         /**
-         * Middle-clicking on an end gateway gives the end gateway block item.
+         * Picking block on an end gateway gives the end gateway block item.
          **/
 
         @SuppressWarnings("deprecation")

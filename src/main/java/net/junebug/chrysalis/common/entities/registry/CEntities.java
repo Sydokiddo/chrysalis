@@ -16,6 +16,10 @@ import net.junebug.chrysalis.common.entities.custom_entities.Seat;
 
 public class CEntities {
 
+    /**
+     * The registry for entities added by chrysalis.
+     **/
+
     private static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.createEntities(Chrysalis.MOD_ID);
 
     // region Entities

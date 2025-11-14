@@ -10,6 +10,10 @@ import net.junebug.chrysalis.Chrysalis;
 
 public class CCriteriaTriggers {
 
+    /**
+     * The registry for criteria triggers added by chrysalis.
+     **/
+
     private static final DeferredRegister<CriterionTrigger<?>> CRITERIA_TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, Chrysalis.MOD_ID);
 
     // region Criteria Triggers

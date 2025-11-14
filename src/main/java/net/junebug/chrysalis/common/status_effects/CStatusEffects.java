@@ -16,6 +16,10 @@ import java.awt.*;
 
 public class CStatusEffects {
 
+    /**
+     * The registry for status effects added by chrysalis.
+     **/
+
     private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, Chrysalis.MOD_ID);
 
     // region Status Effects

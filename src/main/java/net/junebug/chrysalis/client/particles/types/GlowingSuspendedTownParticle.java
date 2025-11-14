@@ -12,12 +12,12 @@ import org.jetbrains.annotations.NotNull;
 public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
 
     /**
-     * An emissive version of the vanilla suspended town particles (the green particles you see from bone-mealing and other things).
+     * An emissive version of the vanilla suspended town particles (the green particles you see from bone-mealing and various other things).
      **/
 
     // region Initialization and Ticking
 
-    public GlowingSuspendedTownParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteSet spriteSet, boolean animateTextures) {
+    public GlowingSuspendedTownParticle(ClientLevel clientLevel, double x, double y, double z, SpriteSet spriteSet, boolean animateTextures) {
         super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet, animateTextures);
         this.setSize(0.02F, 0.02F);
         this.quadSize = this.quadSize * (this.random.nextFloat() * 0.6F + 0.5F);
@@ -25,10 +25,10 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
         this.xd *= 0.02D;
         this.yd *= 0.02D;
         this.zd *= 0.02D;
-        float random = this.random.nextFloat() * 0.1F + 0.2F;
-        this.rCol = random;
-        this.gCol = random;
-        this.bCol = random;
+        float colorRandomizer = this.random.nextFloat() * 0.1F + 0.2F;
+        this.rCol = colorRandomizer;
+        this.gCol = colorRandomizer;
+        this.bCol = colorRandomizer;
     }
 
     @Override
@@ -68,8 +68,8 @@ public class GlowingSuspendedTownParticle extends FadingEmissiveParticle {
         }
 
         @Override
-        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            GlowingSuspendedTownParticle particle = new GlowingSuspendedTownParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, this.spriteSet, false);
+        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            GlowingSuspendedTownParticle particle = new GlowingSuspendedTownParticle(clientLevel, x, y, z, this.spriteSet, false);
             particle.pickSprite(this.spriteSet);
             particle.setColor(1.0F, 1.0F, 1.0F);
             return particle;

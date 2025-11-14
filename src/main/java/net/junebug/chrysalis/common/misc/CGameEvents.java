@@ -9,6 +9,10 @@ import net.junebug.chrysalis.Chrysalis;
 
 public class CGameEvents {
 
+    /**
+     * The registry for game events added by chrysalis.
+     **/
+
     private static final DeferredRegister<GameEvent> GAME_EVENTS = DeferredRegister.create(Registries.GAME_EVENT, Chrysalis.MOD_ID);
 
     // region Game Events

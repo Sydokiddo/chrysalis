@@ -9,12 +9,16 @@ import java.awt.*;
 
 public class CreeperSightEffect extends MobSightEffect {
 
+    /**
+     * A status effect that renders the player's screen with the creeper shader.
+     **/
+
     public CreeperSightEffect() {
         super(Color.decode("#459333").getRGB());
     }
 
     @Override
-    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance effect) {
+    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance mobEffectInstance) {
         return CParticles.CREEPER_SIGHT.get();
     }
 }

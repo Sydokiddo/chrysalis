@@ -9,12 +9,16 @@ import java.awt.*;
 
 public class ArthropodSightEffect extends MobSightEffect {
 
+    /**
+     * A status effect that renders the player's screen with the arthropod shader.
+     **/
+
     public ArthropodSightEffect() {
         super(Color.decode("#A80E0E").getRGB());
     }
 
     @Override
-    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance effect) {
+    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance mobEffectInstance) {
         return CParticles.ARTHROPOD_SIGHT.get();
     }
 }

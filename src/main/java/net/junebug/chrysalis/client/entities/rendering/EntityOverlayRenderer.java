@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class EntityOverlayRenderer<E extends LivingEntityRenderState, M extends EntityModel<E>> extends RenderLayer<E, M> {
 
     /**
-     * A template renderer class for entity texture overlays.
+     * A template rendering class for entity overlay textures.
      **/
 
     private final boolean hideWhenInvisible;

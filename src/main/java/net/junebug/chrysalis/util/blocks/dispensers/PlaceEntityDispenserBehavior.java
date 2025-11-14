@@ -60,7 +60,7 @@ public class PlaceEntityDispenserBehavior implements DispenseItemBehavior {
         double z = blockPos.getZ();
         List<Entity> entitiesOnBlock = serverLevel.getEntities(null, new AABB(x, y, z, x + this.requiredRange.x(), y + this.requiredRange.y(), z + this.requiredRange.z()));
 
-        if (BlockHelper.isFree(serverLevel.getBlockState(blockPos)) && entitiesOnBlock.isEmpty()) {
+        if (BlockHelper.isFree(serverLevel, blockPos) && entitiesOnBlock.isEmpty()) {
 
             if (this.requiredBaseBlock != null && !serverLevel.getBlockState(blockPos.below()).is(this.requiredBaseBlock)) return BlockHelper.defaultDispenseItemBehavior.dispense(blockSource, itemStack);
 

@@ -12,6 +12,10 @@ import net.junebug.chrysalis.util.helpers.RegistryHelper;
 
 public class CParticles {
 
+    /**
+     * The registry for particles added by chrysalis.
+     **/
+
     private static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, Chrysalis.MOD_ID);
 
     // region Simple Particles

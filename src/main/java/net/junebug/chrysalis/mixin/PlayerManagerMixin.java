@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PlayerManagerMixin {
 
     /**
-     * Puts a message in the server console with the specific Chrysalis version the user has upon joining a world.
+     * Puts a message in the server console with the specific chrysalis version the user has upon joining a world.
      **/
 
     @Inject(method = "placeNewPlayer", at = @At(value = "TAIL"))

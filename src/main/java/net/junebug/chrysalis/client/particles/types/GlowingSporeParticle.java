@@ -13,19 +13,19 @@ import org.jetbrains.annotations.NotNull;
 public class GlowingSporeParticle extends FadingEmissiveParticle implements ParticleCommonMethods {
 
     /**
-     * A floating spore particle effect that shrinks over time.
+     * A glowing spore particle that shrinks over time.
      **/
 
     // region Initialization and Ticking
 
-    public GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+    public GlowingSporeParticle(ClientLevel clientLevel, SpriteSet spriteSet, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
         super(clientLevel, x, y, z, 1.0F, 0.0F, spriteSet, false);
         this.setSize(0.001F, 0.001F);
         this.lifetime = (int) (8.0D / (this.random.nextDouble() * 0.8D + 0.2D)) + 4;
         this.hasPhysics = true;
-        this.xd = velocityX;
-        this.yd = velocityY;
-        this.zd = velocityZ;
+        this.xd = xSpeed;
+        this.yd = ySpeed;
+        this.zd = zSpeed;
         this.pickSprite(spriteSet);
     }
 
@@ -52,8 +52,8 @@ public class GlowingSporeParticle extends FadingEmissiveParticle implements Part
         }
 
         @Override
-        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new GlowingSporeParticle(clientLevel, this.spriteSet, x, y, z, velocityX, velocityY, velocityZ);
+        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new GlowingSporeParticle(clientLevel, this.spriteSet, x, y, z, xSpeed, ySpeed, zSpeed);
         }
     }
 

@@ -9,12 +9,16 @@ import java.awt.*;
 
 public class BlindSightEffect extends MobSightEffect {
 
+    /**
+     * A status effect that renders the player's screen with the blind shader.
+     **/
+
     public BlindSightEffect() {
         super(Color.decode("#05625D").getRGB());
     }
 
     @Override
-    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance effect) {
+    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance mobEffectInstance) {
         return CParticles.BLIND_SIGHT.get();
     }
 }

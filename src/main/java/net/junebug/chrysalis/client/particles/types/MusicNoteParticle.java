@@ -14,7 +14,7 @@ import org.joml.Vector3f;
 public class MusicNoteParticle extends NoteParticle implements ParticleCommonMethods {
 
     /**
-     * A rising music note particle effect that rotates over time, with options to configure the color and scale.
+     * A rising music note particle that rotates over time, with options to configure the color and scale.
      **/
 
     // region Initialization and Ticking
@@ -95,7 +95,7 @@ public class MusicNoteParticle extends NoteParticle implements ParticleCommonMet
         }
 
         @Override
-        public Particle createParticle(@NotNull MusicNoteParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(@NotNull MusicNoteParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new MusicNoteParticle(clientLevel, x, y, z, particleOptions, this.spriteSet);
         }
     }

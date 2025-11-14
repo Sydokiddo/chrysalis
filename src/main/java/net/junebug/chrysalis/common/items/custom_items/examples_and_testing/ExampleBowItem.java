@@ -14,6 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class ExampleBowItem extends CustomBowItem {
 
+    /**
+     * An example class to show how to set up a custom bow item.
+     **/
+
     public ExampleBowItem(Properties properties) {
         super(
             itemStack -> itemStack.is(Items.SNOWBALL),

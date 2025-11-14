@@ -35,7 +35,7 @@ import java.util.UUID;
 public class EntityHelper {
 
     /**
-     * Accesses various pieces of information from entities.
+     * Accesses various types of information from entities.
      **/
 
     // region Movement Checks

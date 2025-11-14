@@ -84,6 +84,10 @@ import java.util.UUID;
 @SuppressWarnings("unused")
 public class CServerEvents {
 
+    /**
+     * Executes mod events on the server.
+     **/
+
     @EventBusSubscriber(modid = Chrysalis.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
     public static class GameEventBus {
 

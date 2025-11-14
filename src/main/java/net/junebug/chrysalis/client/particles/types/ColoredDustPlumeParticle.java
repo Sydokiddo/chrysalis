@@ -20,8 +20,8 @@ public class ColoredDustPlumeParticle extends DustPlumeParticle implements Parti
 
     private final boolean emissive;
 
-    public ColoredDustPlumeParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, ColoredDustPlumeParticleOptions particleOptions, SpriteSet spriteSet) {
-        super(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions.getScale(), spriteSet);
+    public ColoredDustPlumeParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, ColoredDustPlumeParticleOptions particleOptions, SpriteSet spriteSet) {
+        super(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, particleOptions.getScale(), spriteSet);
 
         Vector3f color = particleOptions.getFinalColor();
 
@@ -67,8 +67,8 @@ public class ColoredDustPlumeParticle extends DustPlumeParticle implements Parti
         }
 
         @Override
-        public Particle createParticle(@NotNull ColoredDustPlumeParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new ColoredDustPlumeParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions, this.spriteSet);
+        public Particle createParticle(@NotNull ColoredDustPlumeParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new ColoredDustPlumeParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, particleOptions, this.spriteSet);
         }
     }
 

@@ -5,6 +5,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class CConfig {
 
+    /**
+     * The registry for chrysalis's config options.
+     **/
+
     public static final CConfig CONFIG;
     public static final ModConfigSpec CONFIG_SPEC;
 

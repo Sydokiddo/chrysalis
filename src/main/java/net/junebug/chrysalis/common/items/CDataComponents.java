@@ -13,6 +13,10 @@ import net.junebug.chrysalis.Chrysalis;
 
 public class CDataComponents {
 
+    /**
+     * The registry for item data components added by chrysalis.
+     **/
+
     private static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Chrysalis.MOD_ID);
 
     // region Data Components

@@ -12,15 +12,15 @@ import org.jetbrains.annotations.NotNull;
 public class RotatingGravityParticle extends RisingParticle {
 
     /**
-     * A particle effect that rotates and either falls or rises, with custom physics for colliding with a block.
+     * A particle that rotates and either falls or rises, with custom physics for colliding with a block.
      **/
 
     // region Initialization and Ticking
 
     private final boolean hasGravity;
 
-    public RotatingGravityParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, boolean hasGravity) {
-        super(clientLevel, x, y, z, velocityX, velocityY, velocityZ);
+    public RotatingGravityParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, boolean hasGravity) {
+        super(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed);
         this.hasGravity = hasGravity;
         this.scale(1.1F + (float) this.random.nextInt(6) / 10.0F);
         this.lifetime = (int) (8.0D / (this.random.nextDouble() * 0.8D + 0.2D)) + 12;
@@ -72,8 +72,8 @@ public class RotatingGravityParticle extends RisingParticle {
         }
 
         @Override
-        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            RotatingGravityParticle particle = new RotatingGravityParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, true);
+        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            RotatingGravityParticle particle = new RotatingGravityParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, true);
             particle.pickSprite(this.spriteSet);
             return particle;
         }
@@ -90,8 +90,8 @@ public class RotatingGravityParticle extends RisingParticle {
         }
 
         @Override
-        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            RotatingGravityParticle particle = new RotatingGravityParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, false);
+        public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            RotatingGravityParticle particle = new RotatingGravityParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, false);
             particle.pickSprite(this.spriteSet);
             return particle;
         }

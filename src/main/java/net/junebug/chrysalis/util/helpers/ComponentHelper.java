@@ -14,6 +14,10 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class ComponentHelper {
 
+    /**
+     * Methods to get various components to use on items or other things.
+     **/
+
     // region Common Components
 
     public static final Component

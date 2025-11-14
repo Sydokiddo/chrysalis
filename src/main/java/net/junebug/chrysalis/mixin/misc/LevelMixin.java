@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class LevelMixin {
 
     /**
-     * Prevents the experimental warning when starting the world if the user is in a development environment.
+     * Prevents the experimental warning when starting the world if the user is in a development environment, or if chrysalis's experimental world warning config option is disabled.
      **/
 
     @Inject(method = "isExperimental", at = @At(value = "HEAD"), cancellable = true)

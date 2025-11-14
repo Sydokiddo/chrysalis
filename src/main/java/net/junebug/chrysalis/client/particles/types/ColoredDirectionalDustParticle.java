@@ -14,8 +14,12 @@ import org.jetbrains.annotations.NotNull;
 @OnlyIn(Dist.CLIENT)
 public class ColoredDirectionalDustParticle extends FlyStraightTowardsParticle {
 
-    public ColoredDirectionalDustParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, ColoredDirectionalDustParticleOptions particleOptions) {
-        super(level, x, y, z, velocityX, velocityY, velocityZ, particleOptions.startingColor(), particleOptions.endingColor());
+    /**
+     * A version of the ominous item spawner's directional dust particles that can have its color configured.
+     **/
+
+    public ColoredDirectionalDustParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, ColoredDirectionalDustParticleOptions particleOptions) {
+        super(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, particleOptions.startingColor(), particleOptions.endingColor());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -28,9 +32,9 @@ public class ColoredDirectionalDustParticle extends FlyStraightTowardsParticle {
         }
 
         @Override
-        public Particle createParticle(@NotNull ColoredDirectionalDustParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            ColoredDirectionalDustParticle particle = new ColoredDirectionalDustParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions);
-            particle.scale(Mth.randomBetween(clientLevel.getRandom(), 3.0F, 5.0F));
+        public Particle createParticle(@NotNull ColoredDirectionalDustParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            ColoredDirectionalDustParticle particle = new ColoredDirectionalDustParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, particleOptions);
+            particle.scale(Mth.randomBetween(particle.random, 3.0F, 5.0F));
             particle.pickSprite(this.spriteSet);
             return particle;
         }

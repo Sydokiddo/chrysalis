@@ -6,6 +6,10 @@ import net.minecraft.world.level.GameRules;
 
 public interface CommandCommonMethods {
 
+    /**
+     * Common methods used by custom commands.
+     **/
+
     static void sendFeedbackMessage(boolean requiresGameRule, ServerPlayer serverPlayer, Component message) {
         if (requiresGameRule && !serverPlayer.serverLevel().getGameRules().getBoolean(GameRules.RULE_SENDCOMMANDFEEDBACK)) return;
         serverPlayer.sendSystemMessage(message);

@@ -10,13 +10,17 @@ import java.awt.*;
 
 public class RadianceEffect extends GenericStatusEffect {
 
+    /**
+     * A status effect that shrouds the player's screen in a burst of white light.
+     **/
+
     public RadianceEffect() {
         super(MobEffectCategory.HARMFUL, Color.decode("#FFFFB2").getRGB());
         this.setBlendDuration(5);
     }
 
     @Override
-    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance effect) {
+    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance mobEffectInstance) {
         return CParticles.RADIANCE.get();
     }
 }

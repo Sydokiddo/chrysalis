@@ -13,6 +13,10 @@ import java.util.Map;
 
 public class CSoundEvents {
 
+    /**
+     * The registry for sound events added by chrysalis.
+     **/
+
     private static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Chrysalis.MOD_ID);
 
     // region Sound Events

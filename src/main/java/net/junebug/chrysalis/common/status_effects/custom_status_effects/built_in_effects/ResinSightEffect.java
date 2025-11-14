@@ -9,12 +9,16 @@ import java.awt.*;
 
 public class ResinSightEffect extends MobSightEffect {
 
+    /**
+     * A status effect that renders the player's screen with the resin shader.
+     **/
+
     public ResinSightEffect() {
         super(Color.decode("#F3791B").getRGB());
     }
 
     @Override
-    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance effect) {
+    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance mobEffectInstance) {
         return CParticles.RESIN_SIGHT.get();
     }
 }

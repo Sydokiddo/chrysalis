@@ -17,6 +17,10 @@ import java.util.function.Function;
 
 public class CBlocks {
 
+    /**
+     * The registry for blocks added by chrysalis.
+     **/
+
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Chrysalis.MOD_ID);
 
     public static final DeferredBlock<Block>

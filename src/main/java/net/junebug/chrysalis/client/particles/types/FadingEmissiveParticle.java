@@ -14,10 +14,8 @@ import org.jetbrains.annotations.NotNull;
 public class FadingEmissiveParticle extends TextureSheetParticle implements ParticleCommonMethods {
 
     /**
-     * A base class for custom particles that fade out.
+     * The base class for custom particles that fade out.
      **/
-
-    // region Initialization and Ticking
 
     private final SpriteSet spriteSet;
 
@@ -43,10 +41,6 @@ public class FadingEmissiveParticle extends TextureSheetParticle implements Part
         if (this.age > this.lifetime / 2) this.setAlpha(1.0F - Mth.clamp((float) this.age / (float) this.lifetime, 0.0F, 1.0F));
     }
 
-    // endregion
-
-    // region Rendering
-
     @Override
     public int getLightColor(float tickRate) {
         return this.fadeLightColor(this.startingBrightness, this.endingBrightness, this.age, this.lifetime, super.getLightColor(tickRate));
@@ -56,6 +50,4 @@ public class FadingEmissiveParticle extends TextureSheetParticle implements Part
     public @NotNull ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
-
-    // endregion
 }

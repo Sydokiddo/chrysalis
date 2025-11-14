@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 public class DissipatingLayerBlock extends LayerBlock implements DissipatingBlockInterface {
 
     /**
-     * A class for layer blocks that dissipate after a given period of time.
+     * A class for blocks that dissipate much like the normal DissipatingBlock class, but for layer blocks.
      **/
 
     // region Initialization

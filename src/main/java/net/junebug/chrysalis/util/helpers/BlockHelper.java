@@ -8,7 +8,6 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -25,15 +24,15 @@ import java.util.function.ToIntFunction;
 public class BlockHelper {
 
     /**
-     * Methods to get various pieces of information from blocks.
+     * Methods to get various types of information from blocks.
      **/
 
-    public static boolean isFree(BlockState blockState) {
-        return blockState.is(BlockTags.REPLACEABLE) || blockState.isEmpty() || blockState.isAir();
+    public static boolean isFree(Level level, BlockPos blockPos) {
+        return level.isInWorldBounds(blockPos) && (level.isEmptyBlock(blockPos) || level.getBlockState(blockPos).canBeReplaced());
     }
 
-    public static ToIntFunction<BlockState> shouldEmitLight(int lightAmount) {
-        return blockState -> blockState.getValue(BlockStateProperties.LIT) ? lightAmount : 0;
+    public static ToIntFunction<BlockState> shouldEmitLight(int lightLevel) {
+        return blockState -> blockState.getValue(BlockStateProperties.LIT) ? lightLevel : 0;
     }
 
     public static void popResourceBelow(ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, double itemDropOffset) {

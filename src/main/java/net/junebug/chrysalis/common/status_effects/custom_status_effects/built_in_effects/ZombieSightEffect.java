@@ -9,12 +9,16 @@ import java.awt.*;
 
 public class ZombieSightEffect extends MobSightEffect {
 
+    /**
+     * A status effect that renders the player's screen with the zombie shader.
+     **/
+
     public ZombieSightEffect() {
         super(Color.decode("#B44420").getRGB());
     }
 
     @Override
-    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance effect) {
+    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance mobEffectInstance) {
         return CParticles.ZOMBIE_SIGHT.get();
     }
 }

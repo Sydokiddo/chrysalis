@@ -33,7 +33,7 @@ public class ColoredPortalParticle extends TextureSheetParticle implements Parti
         endingColor
     ;
 
-    public ColoredPortalParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, @NotNull ColoredPortalParticleOptions particleOptions) {
+    public ColoredPortalParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, @NotNull ColoredPortalParticleOptions particleOptions) {
         super(clientLevel, x, y, z);
 
         this.particleOptions = particleOptions;
@@ -45,9 +45,9 @@ public class ColoredPortalParticle extends TextureSheetParticle implements Parti
         this.x = x;
         this.y = y;
         this.z = z;
-        this.xd = velocityX;
-        this.yd = velocityY;
-        this.zd = velocityZ;
+        this.xd = xSpeed;
+        this.yd = ySpeed;
+        this.zd = zSpeed;
 
         this.quadSize = 0.1F * (this.random.nextFloat() * 0.2F + 0.5F);
         this.lifetime = (int) (this.random.nextDouble() * 10.0D) + 40;
@@ -158,10 +158,10 @@ public class ColoredPortalParticle extends TextureSheetParticle implements Parti
         }
 
         @Override
-        public Particle createParticle(@NotNull ColoredPortalParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            ColoredPortalParticle coloredPortalParticle = new ColoredPortalParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions);
-            coloredPortalParticle.pickSprite(this.spriteSet);
-            return coloredPortalParticle;
+        public Particle createParticle(@NotNull ColoredPortalParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            ColoredPortalParticle particle = new ColoredPortalParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, particleOptions);
+            particle.pickSprite(this.spriteSet);
+            return particle;
         }
     }
 

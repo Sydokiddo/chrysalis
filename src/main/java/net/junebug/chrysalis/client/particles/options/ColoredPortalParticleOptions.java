@@ -54,11 +54,11 @@ public class ColoredPortalParticleOptions implements ParticleOptions, ParticleCo
         this.reverse = reverse;
     }
 
-    public int getStartingColor() {
+    private int getStartingColor() {
         return this.startingColor;
     }
 
-    public int getEndingColor() {
+    private int getEndingColor() {
         return this.endingColor;
     }
 

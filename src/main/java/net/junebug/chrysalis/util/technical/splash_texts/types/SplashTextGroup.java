@@ -15,6 +15,10 @@ import java.util.stream.Stream;
 @OnlyIn(Dist.CLIENT)
 public record SplashTextGroup(int totalWeight, Style defaultStyle, List<SplashText> splashTexts) {
 
+    /**
+     * The base class for loading splash text groups.
+     **/
+
     public static final Codec<SplashTextGroup> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ExtraCodecs.intRange(SplashTextLoader.defaultMinWeight, SplashTextLoader.defaultMaxWeight).orElse(SplashTextLoader.defaultMaxWeight).optionalFieldOf("total_weight", SplashTextLoader.defaultWeight).forGetter(SplashTextGroup::totalWeight),
         Style.Serializer.CODEC.optionalFieldOf("default_style", Style.EMPTY).forGetter(SplashTextGroup::defaultStyle),

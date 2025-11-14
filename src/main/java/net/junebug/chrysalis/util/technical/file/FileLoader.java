@@ -11,6 +11,10 @@ import java.io.BufferedReader;
 @OnlyIn(Dist.CLIENT)
 public class FileLoader {
 
+    /**
+     * Loads certain json files.
+     **/
+
     private final FileReader<JsonElement> JSON;
     private final FileReader<Stream<String>> RAW;
 

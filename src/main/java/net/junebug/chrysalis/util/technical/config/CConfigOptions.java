@@ -4,6 +4,10 @@ import java.util.function.Supplier;
 
 public class CConfigOptions {
 
+    /**
+     * The base config options for chrysalis.
+     **/
+
     public static Supplier<Boolean>
         ITEM_DROPPING_SOUND = () -> true,
         SCREENSHOT_SOUND = () -> true,

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class EndCrystalMixin {
 
     /**
-     * End Crystals will not explode when receiving any damage type that is in the does_not_explode_end_crystals tag.
+     * End crystals will not explode when receiving any damage type that is in the does_not_explode_end_crystals tag.
      **/
 
     @Redirect(method = "hurtServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/DamageSource;is(Lnet/minecraft/tags/TagKey;)Z"))

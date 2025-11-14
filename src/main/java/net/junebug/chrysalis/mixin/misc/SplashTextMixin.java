@@ -27,7 +27,7 @@ public class SplashTextMixin {
     @Shadow @Final private String splash;
 
     /**
-     * Replaces the vanilla splash text renderer with Chrysalis's custom one.
+     * Replaces the vanilla splash text renderer with chrysalis's custom one.
      **/
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)

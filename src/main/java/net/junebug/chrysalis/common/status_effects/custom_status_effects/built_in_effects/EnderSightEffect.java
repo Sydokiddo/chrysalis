@@ -9,12 +9,16 @@ import java.awt.*;
 
 public class EnderSightEffect extends MobSightEffect {
 
+    /**
+     * A status effect that renders the player's screen with the inverted shader.
+     **/
+
     public EnderSightEffect() {
         super(Color.decode("#E079FA").getRGB());
     }
 
     @Override
-    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance effect) {
+    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance mobEffectInstance) {
         return CParticles.ENDER_SIGHT.get();
     }
 }

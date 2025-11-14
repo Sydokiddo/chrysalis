@@ -33,7 +33,7 @@ public class BaseFireBlockMixin extends Block {
     }
 
     /**
-     * Middle-clicking on a fire block gives flint and steel.
+     * Picking block on a fire block gives flint and steel.
      **/
 
     @SuppressWarnings("deprecation")

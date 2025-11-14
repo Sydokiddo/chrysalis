@@ -16,6 +16,10 @@ import java.io.BufferedReader;
 @OnlyIn(Dist.CLIENT)
 public class FileReader<Value> {
 
+    /**
+     * Reads certain json files.
+     **/
+
     private final Function<BufferedReader, Value> bufferReader;
 
     public FileReader(Function<BufferedReader, Value> bufferReader) {

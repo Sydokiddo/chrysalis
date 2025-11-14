@@ -5,6 +5,10 @@ import net.neoforged.fml.loading.FMLLoader;
 @SuppressWarnings("unused")
 public class CompatibilityHelper {
 
+    /**
+     * Methods to check if other specified mods are installed.
+     **/
+
     public static boolean isModLoaded(String modId) {
         return FMLLoader.getLoadingModList().getModFileById(modId) != null;
     }
@@ -15,6 +19,14 @@ public class CompatibilityHelper {
 
     public static boolean hasMonsterMash() {
         return isModLoaded("monster_mash");
+    }
+
+    public static boolean hasStockpile() {
+        return isModLoaded("stockpile");
+    }
+
+    public static boolean hasRetool() {
+        return isModLoaded("retool");
     }
 
     public static boolean hasNetherExpansion() {

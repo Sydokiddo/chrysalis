@@ -10,6 +10,10 @@ import net.junebug.chrysalis.Chrysalis;
 
 public class CAttributes {
 
+    /**
+     * The registry for entity attributes added by chrysalis.
+     **/
+
     private static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, Chrysalis.MOD_ID);
 
     // region Attributes

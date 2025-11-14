@@ -11,10 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.junebug.chrysalis.common.blocks.CBlockStateProperties;
-import net.junebug.chrysalis.common.blocks.custom_blocks.interfaces.SittableBlockInterface;
+import net.junebug.chrysalis.common.blocks.custom_blocks.interfaces.SittableBlock;
 import org.jetbrains.annotations.NotNull;
 
-public class ExampleSeatBlock extends Block implements SittableBlockInterface {
+public class ExampleSeatBlock extends Block implements SittableBlock {
 
     /**
      * An example class to show how to integrate the ability to sit on a block.
@@ -22,7 +22,7 @@ public class ExampleSeatBlock extends Block implements SittableBlockInterface {
 
     public ExampleSeatBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(CBlockStateProperties.SITTABLE, Boolean.TRUE));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(CBlockStateProperties.SITTABLE, true));
     }
 
     @Override
@@ -34,8 +34,8 @@ public class ExampleSeatBlock extends Block implements SittableBlockInterface {
     @Override
     protected @NotNull InteractionResult useItemOn(@NotNull ItemStack itemStack, @NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull InteractionHand interactionHand, @NotNull BlockHitResult blockHitResult) {
 
-        if (SittableBlockInterface.isSittable(blockState) && !SittableBlockInterface.isSeatOccupied(level, blockPos)) {
-            SittableBlockInterface.startSitting(level, blockPos, player, 0.5D);
+        if (SittableBlock.isSittable(blockState) && !SittableBlock.isSeatOccupied(level, blockPos)) {
+            SittableBlock.startSitting(level, blockPos, player, 0.5D);
             return InteractionResult.SUCCESS;
         }
 

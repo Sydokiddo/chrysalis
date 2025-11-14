@@ -9,6 +9,10 @@ import net.junebug.chrysalis.util.helpers.ComponentHelper;
 
 public record PlayerLootTableData(String uuid, ResourceKey<LootTable> lootTable, String enabled) {
 
+    /**
+     * Converts information from a json file into a loot table that players can drop upon dying.
+     **/
+
     public static final Codec<PlayerLootTableData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Codec.STRING.fieldOf("uuid").forGetter(PlayerLootTableData::uuid),
         ResourceKey.codec(Registries.LOOT_TABLE).fieldOf("loot_table").forGetter(PlayerLootTableData::lootTable),

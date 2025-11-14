@@ -9,12 +9,16 @@ import java.awt.*;
 
 public class SkeletalSightEffect extends MobSightEffect {
 
+    /**
+     * A status effect that renders the player's screen with the grayscale shader.
+     **/
+
     public SkeletalSightEffect() {
         super(Color.decode("#D8D8D8").getRGB());
     }
 
     @Override
-    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance effect) {
+    public @NotNull ParticleOptions createParticleOptions(@NotNull MobEffectInstance mobEffectInstance) {
         return CParticles.SKELETAL_SIGHT.get();
     }
 }

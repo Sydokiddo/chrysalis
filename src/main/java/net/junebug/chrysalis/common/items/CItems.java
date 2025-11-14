@@ -31,6 +31,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class CItems {
 
+    /**
+     * The registry for items added by chrysalis.
+     **/
+
     public static final DeferredRegister.Items
         ITEMS = DeferredRegister.createItems(Chrysalis.MOD_ID),
         TEST_ITEMS = DeferredRegister.createItems(Chrysalis.MOD_ID)

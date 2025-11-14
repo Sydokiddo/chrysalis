@@ -11,6 +11,10 @@ import net.junebug.chrysalis.util.technical.splash_texts.SplashTextLoader;
 @OnlyIn(Dist.CLIENT)
 public class SimpleSplashText implements SplashText {
 
+    /**
+     * The base class for loading simple splash texts.
+     **/
+
     public static final Codec<SimpleSplashText> CODEC = Codec.STRING.xmap(SimpleSplashText::new, null);
     private final String splashText;
 

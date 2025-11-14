@@ -12,6 +12,10 @@ import net.junebug.chrysalis.util.helpers.ComponentHelper;
 
 public record ChargedMobDropData(HolderSet<EntityType<?>> entities, Holder<Item> droppedItem, String enabled) {
 
+    /**
+     * Converts information from a json file into specified mob's drop from charged mobs.
+     **/
+
     public static final Codec<ChargedMobDropData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         RegistryCodecs.homogeneousList(Registries.ENTITY_TYPE).fieldOf("entities").forGetter(ChargedMobDropData::entities),
         Item.CODEC.fieldOf("dropped_item").forGetter(ChargedMobDropData::droppedItem),

@@ -14,7 +14,7 @@ import org.joml.Vector3f;
 public class SparkleParticle extends FadingEmissiveParticle {
 
     /**
-     * A sparkle particle effect with the ability to configure the color.
+     * A sparkle particle with the ability to configure the color.
      **/
 
     // region Initialization
@@ -53,7 +53,7 @@ public class SparkleParticle extends FadingEmissiveParticle {
         }
 
         @Override
-        public Particle createParticle(@NotNull SparkleParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(@NotNull SparkleParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new SparkleParticle(clientLevel, x, y, z, particleOptions, this.spriteSet);
         }
     }

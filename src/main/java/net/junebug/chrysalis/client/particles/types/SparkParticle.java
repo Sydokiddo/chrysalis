@@ -20,8 +20,8 @@ public class SparkParticle extends RotatingGravityParticle implements ParticleCo
 
     // region Initialization and Ticking
 
-    public SparkParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SparkParticleOptions particleOptions, SpriteSet spriteSet) {
-        super(level, x, y, z, velocityX, velocityY, velocityZ, true);
+    public SparkParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, SparkParticleOptions particleOptions, SpriteSet spriteSet) {
+        super(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, true);
 
         this.pickSprite(spriteSet);
         this.scale(particleOptions.getScale());
@@ -67,8 +67,8 @@ public class SparkParticle extends RotatingGravityParticle implements ParticleCo
         }
 
         @Override
-        public Particle createParticle(@NotNull SparkParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new SparkParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, particleOptions, this.spriteSet);
+        public Particle createParticle(@NotNull SparkParticleOptions particleOptions, @NotNull ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new SparkParticle(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, particleOptions, this.spriteSet);
         }
     }
 

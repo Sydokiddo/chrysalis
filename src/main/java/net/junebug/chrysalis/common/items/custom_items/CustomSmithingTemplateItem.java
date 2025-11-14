@@ -11,13 +11,13 @@ import java.util.List;
 
 public class CustomSmithingTemplateItem extends SmithingTemplateItem {
 
+    /**
+     * A class for assisting with the creation of custom smithing template items.
+     **/
+
     public CustomSmithingTemplateItem(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> baseSlotEmptyIcons, List<ResourceLocation> additionalSlotEmptyIcons, Item.Properties properties) {
         super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, baseSlotEmptyIcons, additionalSlotEmptyIcons, properties);
     }
-
-    /**
-     * Class for assisting with the creation of custom smithing template items.
-     **/
 
     public static SmithingTemplateItem createUpgradeTemplate(String modID, String smithingTemplateName, ResourceLocation upgradeIcon, Item.Properties properties) {
         return new SmithingTemplateItem(

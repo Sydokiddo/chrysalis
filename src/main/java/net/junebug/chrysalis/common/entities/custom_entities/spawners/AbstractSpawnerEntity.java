@@ -74,6 +74,7 @@ public abstract class AbstractSpawnerEntity extends Entity {
 
     @Override
     public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
+        if (!this.isInvulnerableToBase(damageSource)) this.markHurt();
         return false;
     }
 

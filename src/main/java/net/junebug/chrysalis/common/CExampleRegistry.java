@@ -45,7 +45,7 @@ import java.util.function.Function;
 public class CExampleRegistry {
 
     /**
-     * A variety of examples for things that can be registered with Chrysalis.
+     * A variety of examples for things that can be registered with chrysalis.
      * <p>
      * Note: Do not initialize any methods in this class unless you want a bunch of broken items, blocks, and other things in your game!
      **/
