@@ -137,7 +137,7 @@ public class PlaceholderBlock extends BaseEntityBlock implements SimpleFluidlogg
 
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
 
-        if (player.canUseGameMasterBlocks() && !player.isCrouching() && blockEntity instanceof PlaceholderBlockEntity placeholderBlockEntity && itemStack.getItem() instanceof BlockItem blockItem) {
+        if (player.canUseGameMasterBlocks() && !player.isCrouching() && blockEntity instanceof PlaceholderBlockEntity placeholderBlockEntity && itemStack.getItem() instanceof BlockItem blockItem && !(blockItem.getBlock() instanceof PlaceholderBlock)) {
 
             BlockState blockToUpdate = blockItem.getBlock().defaultBlockState();
             itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY).apply(blockToUpdate);
