@@ -157,7 +157,7 @@ public class PlaceholderBlock extends BaseEntityBlock implements SimpleFluidlogg
     @Override
     protected void neighborChanged(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Block block, @Nullable Orientation orientation, boolean moved) {
 
-        if (level.isClientSide()) return;
+        if (level.isClientSide() || blockState.getValue(CBlockStateProperties.PLACEHOLDER_UPDATE_WHEN_STATE) != PlaceholderUpdateWhenState.POWERED) return;
 
         if (blockState.getValue(BlockStateProperties.POWERED) != level.hasNeighborSignal(blockPos)) {
             level.setBlockAndUpdate(blockPos, blockState.cycle(BlockStateProperties.POWERED));
