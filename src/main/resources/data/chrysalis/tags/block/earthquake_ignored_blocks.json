@@ -1,5 +1,18 @@
 {
   "values": [
-    "minecraft:bell"
+    "#minecraft:fences",
+    "#minecraft:fence_gates",
+    "#c:chains",
+    "#chrysalis:lanterns",
+    "#chrysalis:bars",
+    "minecraft:end_rod",
+    "minecraft:lightning_rod",
+    "minecraft:bell",
+    "minecraft:cactus",
+    "minecraft:bamboo",
+    "minecraft:azalea",
+    "minecraft:flowering_azalea",
+    "minecraft:chorus_plant",
+    "minecraft:dragon_egg"
   ]
 }

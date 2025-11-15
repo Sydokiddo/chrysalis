@@ -3,6 +3,9 @@
     "minecraft:pointed_dripstone",
     "minecraft:chorus_flower",
     "minecraft:turtle_egg",
-    "minecraft:decorated_pot"
+    "minecraft:decorated_pot",
+    "minecraft:scaffolding",
+    "#c:glass_blocks/cheap",
+    "#c:glass_panes"
   ]
 }

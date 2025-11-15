@@ -595,6 +595,7 @@
   "comment.chrysalis.item_tags": "ITEM TAGS",
 
   "tag.item.chrysalis.banner_patterns": "Banner Patterns",
+  "tag.item.chrysalis.bars": "Bars",
   "tag.item.chrysalis.campfires": "Campfires",
   "tag.item.chrysalis.cannot_give_with_commands": "Cannot Give With Commands",
   "tag.item.chrysalis.charges_respawn_anchors": "Charges Respawn Anchors",
@@ -649,6 +650,7 @@
   "tag.block.chrysalis.allows_beacon_beam_passthrough": "Allows Beacon Beam Passthrough",
   "tag.block.chrysalis.allows_placement_with_building_fatigue": "Allows Placement with Building Fatigue",
   "tag.block.chrysalis.allows_use_while_sneaking": "Allows Use While Sneaking",
+  "tag.block.chrysalis.bars": "Bars",
   "tag.block.chrysalis.base_stone_end": "End Base Stones",
   "tag.block.chrysalis.chorus_plants_can_grow_on": "Chorus Plants Can Grow On",
   "tag.block.chrysalis.containers": "Containers",

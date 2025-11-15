@@ -1,6 +1,6 @@
 {
   "values": [
-    "minecraft:iron_bars",
+    "#chrysalis:bars",
     "#minecraft:beds"
   ]
 }

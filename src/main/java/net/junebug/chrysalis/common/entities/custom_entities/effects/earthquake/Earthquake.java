@@ -324,7 +324,10 @@ public class Earthquake extends Entity implements TraceableEntity {
             this.tryUpdatingFallingBlock(this.blockPosition().below());
             this.tryUpdatingFallingBlock(this.blockPosition().below().below());
 
-            if (this.getInBlockState().is(CTags.EARTHQUAKE_IGNORED_BLOCKS) && this.getInBlockState().getBlock() instanceof BellBlock bellBlock) bellBlock.attemptToRing(this.level(), this.blockPosition(), this.getMotionDirection().getOpposite());
+            if (this.getInBlockState().is(CTags.EARTHQUAKE_IGNORED_BLOCKS)) {
+                if (this.getInBlockState().getBlock() instanceof BellBlock bellBlock) bellBlock.attemptToRing(this.level(), this.blockPosition(), this.getMotionDirection().getOpposite());
+                if (this.getInBlockState().getBlock() instanceof DragonEggBlock dragonEggBlock) dragonEggBlock.teleport(this.getInBlockState(), this.level(), this.blockPosition());
+            }
 
             float xRot = this.getXRot() * (float) (Math.PI / 180.0D);
             float yRot = -this.getYRot() * (float) (Math.PI / 180.0D);

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#chrysalis:bars",
     "minecraft:sea_lantern",
     "#c:glass_blocks",
     "#c:glass_panes",
