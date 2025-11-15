@@ -2,10 +2,7 @@ package net.junebug.chrysalis.util.helpers;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -70,21 +67,27 @@ public class ParticleHelper {
         serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, x, y, z, amount, 0.0D, 0.0D, 0.0D, 0.0D);
     }
 
-    public static void emitRedstoneParticlesAroundBlock(Level level, BlockPos blockPos, double yHeight) {
+    public static void emitParticlesAroundBlock(Level level, BlockPos blockPos, ParticleOptions particleOptions, double yOffset, double radius, int amount) {
 
-        if (level instanceof ServerLevel serverLevel) {
+        if (!(level instanceof ServerLevel serverLevel)) return;
+
+        for (int particleAmount = 0; particleAmount < amount; ++particleAmount) {
 
             for (Direction direction : Direction.values()) {
 
                 if (!level.getBlockState(blockPos.relative(direction)).isSolidRender()) {
 
-                    double x = direction.getAxis() == Direction.Axis.X ? 0.5D + (0.5D * (double) direction.getStepX()) : (double) level.getRandom().nextFloat();
-                    double y = direction.getAxis() == Direction.Axis.Y ? 0.5D + (0.5D * (double) direction.getStepY()) : (double) level.getRandom().nextFloat();
-                    double z = direction.getAxis() == Direction.Axis.Z ? 0.5D + (0.5D * (double) direction.getStepZ()) : (double) level.getRandom().nextFloat();
+                    double x = direction.getAxis() == Direction.Axis.X ? 0.5D + direction.getStepX() * radius : level.getRandom().nextDouble();
+                    double y = direction.getAxis() == Direction.Axis.Y ? 0.5D + direction.getStepY() * radius : level.getRandom().nextDouble();
+                    double z = direction.getAxis() == Direction.Axis.Z ? 0.5D + direction.getStepZ() * radius : level.getRandom().nextDouble();
 
-                    serverLevel.sendParticles(DustParticleOptions.REDSTONE, (double) blockPos.getX() + x, ((double) blockPos.getY() + y) + yHeight, (double) blockPos.getZ() + z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                    serverLevel.sendParticles(particleOptions, blockPos.getX() + x, (blockPos.getY() + y) + yOffset, blockPos.getZ() + z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
                 }
             }
         }
+    }
+
+    public static void emitRedstoneParticlesAroundBlock(Level level, BlockPos blockPos, double yOffset) {
+        emitParticlesAroundBlock(level, blockPos, DustParticleOptions.REDSTONE, yOffset, 0.5D, 1);
     }
 }
