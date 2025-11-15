@@ -48,6 +48,9 @@ public class CSoundEvents {
         EVENT_TEST_USE = SOUND_EVENTS.register("item.event_test.use", SoundEvent::createVariableRangeEvent),
         ITEM_DROP = SOUND_EVENTS.register("entity.item.drop", SoundEvent::createVariableRangeEvent),
 
+        PLACEHOLDER_BLOCK_CHANGE_STATE = SOUND_EVENTS.register("block.placeholder_block.change_state", SoundEvent::createVariableRangeEvent),
+        PLACEHOLDER_BLOCK_UPDATE = SOUND_EVENTS.register("block.placeholder_block.update", SoundEvent::createVariableRangeEvent),
+
         ENTITY_SPAWNER_APPEAR = SOUND_EVENTS.register("entity.entity_spawner.appear", SoundEvent::createVariableRangeEvent),
         ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.about_to_spawn_entity", SoundEvent::createVariableRangeEvent),
         ENTITY_SPAWNER_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.spawn_entity", SoundEvent::createVariableRangeEvent),
@@ -58,16 +61,17 @@ public class CSoundEvents {
         EARTHQUAKE_HIT = SOUND_EVENTS.register("entity.earthquake.hit", SoundEvent::createVariableRangeEvent),
 
         KEY_GOLEM_AMBIENT = SOUND_EVENTS.register("entity.key_golem.ambient", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_AMBIENT_SLEEPING = SOUND_EVENTS.register("entity.key_golem.ambient_sleeping", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_AMBIENT_SCARED = SOUND_EVENTS.register("entity.key_golem.ambient_scared", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_AMBIENT_CARRYING = SOUND_EVENTS.register("entity.key_golem.ambient_carrying", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_STEP = SOUND_EVENTS.register("entity.key_golem.step", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_DEATH = SOUND_EVENTS.register("entity.key_golem.death", SoundEvent::createVariableRangeEvent),
-        KEY_GOLEM_SLEEP = SOUND_EVENTS.register("entity.key_golem.sleep", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_WAKE_UP = SOUND_EVENTS.register("entity.key_golem.wake_up", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_NOTICE = SOUND_EVENTS.register("entity.key_golem.notice", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_GRAB = SOUND_EVENTS.register("entity.key_golem.grab", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_PANT = SOUND_EVENTS.register("entity.key_golem.pant", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_RATTLE = SOUND_EVENTS.register("entity.key_golem.rattle", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_UNLOCK = SOUND_EVENTS.register("entity.key_golem.unlock", SoundEvent::createVariableRangeEvent),
 
         EQUIP_SHIELD = SOUND_EVENTS.register("item.armor.equip_shield", SoundEvent::createVariableRangeEvent),
         EQUIP_TOTEM_OF_UNDYING = SOUND_EVENTS.register("item.armor.equip_totem_of_undying", SoundEvent::createVariableRangeEvent),

@@ -105,7 +105,7 @@ public class PlaceholderBlockEntity extends BlockEntity {
 
         placeholderBlockEntity.setChanged();
         placeholderBlockEntity.getLevel().setBlockAndUpdate(placeholderBlockEntity.getBlockPos(), blockState);
-        placeholderBlockEntity.getLevel().playSound(null, placeholderBlockEntity.getBlockPos(), CSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+        placeholderBlockEntity.getLevel().playSound(null, placeholderBlockEntity.getBlockPos(), CSoundEvents.PLACEHOLDER_BLOCK_UPDATE.get(), SoundSource.BLOCKS, 1.0F, placeholderBlockEntity.getLevel().getRandom().nextFloat() * 0.4F + 0.8F);
         placeholderBlockEntity.getLevel().gameEvent(null, GameEvent.BLOCK_CHANGE, placeholderBlockEntity.getBlockPos());
         ParticleHelper.emitParticlesAroundBlock(placeholderBlockEntity.getLevel(), placeholderBlockEntity.getBlockPos(), ParticleTypes.FLAME, 0.0D, 0.6D, 5);
     }

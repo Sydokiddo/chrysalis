@@ -161,6 +161,18 @@
     ],
     "subtitle": "subtitles.entity.item.drop"
   },
+  "block.placeholder_block.change_state": {
+    "sounds": [
+      "chrysalis:block/placeholder_block/change_state"
+    ],
+    "subtitle": "subtitles.block.placeholder_block.change_state"
+  },
+  "block.placeholder_block.update": {
+    "sounds": [
+      "chrysalis:block/placeholder_block/update"
+    ],
+    "subtitle": "subtitles.block.placeholder_block.update"
+  },
   "entity.entity_spawner.appear": {
     "sounds": [
       "minecraft:block/trial_spawner/spawn_item_begin1",
@@ -251,6 +263,15 @@
     ],
     "subtitle": "subtitles.entity.key_golem.ambient"
   },
+  "entity.key_golem.ambient_sleeping": {
+    "sounds": [
+      "chrysalis:entity/key_golem/ambient_sleeping1",
+      "chrysalis:entity/key_golem/ambient_sleeping2",
+      "chrysalis:entity/key_golem/ambient_sleeping3",
+      "chrysalis:entity/key_golem/ambient_sleeping4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.ambient_sleeping"
+  },
   "entity.key_golem.ambient_scared": {
     "sounds": [
       "chrysalis:entity/key_golem/ambient_scared1",
@@ -285,15 +306,6 @@
       "chrysalis:entity/key_golem/death3"
     ],
     "subtitle": "subtitles.entity.key_golem.death"
-  },
-  "entity.key_golem.sleep": {
-    "sounds": [
-      "chrysalis:entity/key_golem/sleep1",
-      "chrysalis:entity/key_golem/sleep2",
-      "chrysalis:entity/key_golem/sleep3",
-      "chrysalis:entity/key_golem/sleep4"
-    ],
-    "subtitle": "subtitles.entity.key_golem.sleep"
   },
   "entity.key_golem.wake_up": {
     "sounds": [
@@ -337,6 +349,15 @@
       "chrysalis:entity/key_golem/rattle6"
     ],
     "subtitle": "subtitles.entity.key_golem.rattle"
+  },
+  "entity.key_golem.unlock": {
+    "sounds": [
+      "chrysalis:entity/key_golem/unlock1",
+      "chrysalis:entity/key_golem/unlock2",
+      "chrysalis:entity/key_golem/unlock3",
+      "chrysalis:entity/key_golem/unlock4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.unlock"
   },
   "item.armor.equip_shield": {
     "sounds": [

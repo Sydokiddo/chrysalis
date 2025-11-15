@@ -143,7 +143,7 @@ public class PlaceholderBlock extends BaseEntityBlock implements SimpleFluidlogg
             itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY).apply(blockToUpdate);
             placeholderBlockEntity.setBlockStateToUpdate(blockToUpdate);
 
-            level.playSound(null, placeholderBlockEntity.getBlockPos(), CSoundEvents.GENERIC_SPAWNER_CHANGE_ENTITY.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.playSound(null, placeholderBlockEntity.getBlockPos(), CSoundEvents.PLACEHOLDER_BLOCK_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
             level.gameEvent(null, GameEvent.BLOCK_CHANGE, placeholderBlockEntity.getBlockPos());
             ParticleHelper.emitParticlesAroundBlock(placeholderBlockEntity.getLevel(), placeholderBlockEntity.getBlockPos(), ParticleTypes.HAPPY_VILLAGER, 0.0D, 0.6D, 5);
             player.awardStat(Stats.ITEM_USED.get(blockItem));
@@ -161,7 +161,7 @@ public class PlaceholderBlock extends BaseEntityBlock implements SimpleFluidlogg
 
         if (blockState.getValue(BlockStateProperties.POWERED) != level.hasNeighborSignal(blockPos)) {
             level.setBlockAndUpdate(blockPos, blockState.cycle(BlockStateProperties.POWERED));
-            ParticleHelper.emitRedstoneParticlesAroundBlock(level, blockPos, 0.0D);
+            if (!blockState.getValue(BlockStateProperties.POWERED)) ParticleHelper.emitRedstoneParticlesAroundBlock(level, blockPos, 0.0D);
         }
     }
 
