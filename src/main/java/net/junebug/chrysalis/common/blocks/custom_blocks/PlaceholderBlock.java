@@ -12,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -143,9 +142,7 @@ public class PlaceholderBlock extends BaseEntityBlock implements SimpleFluidlogg
             itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY).apply(blockToUpdate);
             placeholderBlockEntity.setBlockStateToUpdate(blockToUpdate);
 
-            level.playSound(null, placeholderBlockEntity.getBlockPos(), CSoundEvents.PLACEHOLDER_BLOCK_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-            level.gameEvent(null, GameEvent.BLOCK_CHANGE, placeholderBlockEntity.getBlockPos());
-            ParticleHelper.emitParticlesAroundBlock(placeholderBlockEntity.getLevel(), placeholderBlockEntity.getBlockPos(), ParticleTypes.HAPPY_VILLAGER, 0.0D, 0.6D, 5);
+            PlaceholderBlockEntity.playSoundQueue(placeholderBlockEntity, CSoundEvents.PLACEHOLDER_BLOCK_CHANGE_STATE.get(), GameEvent.BLOCK_CHANGE, ParticleTypes.HAPPY_VILLAGER);
             player.awardStat(Stats.ITEM_USED.get(blockItem));
 
             return InteractionResult.SUCCESS;
@@ -177,7 +174,7 @@ public class PlaceholderBlock extends BaseEntityBlock implements SimpleFluidlogg
     }
 
     private void updateWhenSteppedOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity, boolean canUpdate) {
-        if (level.getBlockEntity(blockPos) instanceof PlaceholderBlockEntity placeholderBlockEntity && canUpdate && blockState.getValue(CBlockStateProperties.PLACEHOLDER_UPDATE_WHEN_STATE) == PlaceholderUpdateWhenState.WALKED_ON && entity instanceof Player) PlaceholderBlockEntity.updateBlock(placeholderBlockEntity);
+        if (level.getBlockEntity(blockPos) instanceof PlaceholderBlockEntity placeholderBlockEntity && canUpdate && blockState.getValue(CBlockStateProperties.PLACEHOLDER_UPDATE_WHEN_STATE) == PlaceholderUpdateWhenState.WALKED_ON && entity instanceof Player) PlaceholderBlockEntity.tryUpdateBlock(placeholderBlockEntity);
     }
 
     // endregion

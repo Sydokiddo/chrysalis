@@ -3,22 +3,32 @@ package net.junebug.chrysalis.common.entities.custom_entities;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.common.blocks.CBlockStateProperties;
+import net.junebug.chrysalis.common.blocks.CBlocks;
 import net.junebug.chrysalis.common.blocks.custom_blocks.PlaceholderBlock;
 import net.junebug.chrysalis.common.entities.registry.CBlockEntities;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
+import net.junebug.chrysalis.util.helpers.BlockHelper;
 import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,13 +53,13 @@ public class PlaceholderBlockEntity extends BlockEntity {
 
     @SuppressWarnings("unused")
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, PlaceholderBlockEntity placeholderBlockEntity) {
-        if (blockState.getValue(CBlockStateProperties.PLACEHOLDER_UPDATE_WHEN_STATE) == PlaceholderBlock.PlaceholderUpdateWhenState.POWERED && blockState.getValue(BlockStateProperties.POWERED)) PlaceholderBlockEntity.updateBlock(placeholderBlockEntity);
+        if (blockState.getValue(CBlockStateProperties.PLACEHOLDER_UPDATE_WHEN_STATE) == PlaceholderBlock.PlaceholderUpdateWhenState.POWERED && blockState.getValue(BlockStateProperties.POWERED)) PlaceholderBlockEntity.tryUpdateBlock(placeholderBlockEntity);
     }
 
     @Override
     public void onLoad() {
         super.onLoad();
-        if (this.getBlockState().getValue(CBlockStateProperties.PLACEHOLDER_UPDATE_WHEN_STATE) == PlaceholderBlock.PlaceholderUpdateWhenState.LOADED) PlaceholderBlockEntity.updateBlock(this);
+        if (this.getBlockState().getValue(CBlockStateProperties.PLACEHOLDER_UPDATE_WHEN_STATE) == PlaceholderBlock.PlaceholderUpdateWhenState.LOADED) PlaceholderBlockEntity.tryUpdateBlock(this);
     }
 
     @Override
@@ -98,15 +108,68 @@ public class PlaceholderBlockEntity extends BlockEntity {
         return blockState;
     }
 
-    public static void updateBlock(PlaceholderBlockEntity placeholderBlockEntity) {
+    public static void tryUpdateBlock(PlaceholderBlockEntity placeholderBlockEntity) {
 
         BlockState blockState = placeholderBlockEntity.getBlockStateToUpdate();
         if (placeholderBlockEntity.getLevel() == null || blockState.isEmpty()) return;
-
         placeholderBlockEntity.setChanged();
+
+        BlockPos abovePos = placeholderBlockEntity.getBlockPos().above();
+
+        if (blockState.getBlock() instanceof BedBlock) {
+
+            BlockPos blockPos = placeholderBlockEntity.getBlockPos().relative(blockState.getValue(BedBlock.FACING));
+
+            if (BlockHelper.isFree(placeholderBlockEntity.getLevel(), blockPos)) {
+                updateBlock(placeholderBlockEntity, blockState);
+                placeholderBlockEntity.getLevel().setBlockAndUpdate(blockPos, blockState.setValue(BedBlock.PART, BedPart.HEAD));
+                placeholderBlockEntity.getLevel().blockUpdated(placeholderBlockEntity.getBlockPos(), Blocks.AIR);
+                blockState.updateNeighbourShapes(placeholderBlockEntity.getLevel(), placeholderBlockEntity.getBlockPos(), 3);
+            } else {
+                failToUpdate(placeholderBlockEntity);
+            }
+
+        } else if (blockState.getBlock() instanceof DoorBlock) {
+
+            if (BlockHelper.isFree(placeholderBlockEntity.getLevel(), abovePos)) {
+                updateBlock(placeholderBlockEntity, blockState);
+                placeholderBlockEntity.getLevel().setBlockAndUpdate(abovePos, blockState.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
+            } else {
+                failToUpdate(placeholderBlockEntity);
+            }
+
+        } else if (blockState.getBlock() instanceof DoublePlantBlock doublePlantBlock) {
+
+            if (BlockHelper.isFree(placeholderBlockEntity.getLevel(), abovePos)) {
+                updateBlock(placeholderBlockEntity, blockState);
+                placeholderBlockEntity.getLevel().setBlockAndUpdate(abovePos, DoublePlantBlock.copyWaterloggedFrom(placeholderBlockEntity.getLevel(), abovePos, doublePlantBlock.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)));
+            } else {
+                failToUpdate(placeholderBlockEntity);
+            }
+
+        } else {
+            updateBlock(placeholderBlockEntity, blockState);
+        }
+    }
+
+    private static void updateBlock(PlaceholderBlockEntity placeholderBlockEntity, BlockState blockState) {
+        if (placeholderBlockEntity.getLevel() == null) return;
         placeholderBlockEntity.getLevel().setBlockAndUpdate(placeholderBlockEntity.getBlockPos(), blockState);
-        placeholderBlockEntity.getLevel().playSound(null, placeholderBlockEntity.getBlockPos(), CSoundEvents.PLACEHOLDER_BLOCK_UPDATE.get(), SoundSource.BLOCKS, 1.0F, placeholderBlockEntity.getLevel().getRandom().nextFloat() * 0.4F + 0.8F);
-        placeholderBlockEntity.getLevel().gameEvent(null, GameEvent.BLOCK_CHANGE, placeholderBlockEntity.getBlockPos());
-        ParticleHelper.emitParticlesAroundBlock(placeholderBlockEntity.getLevel(), placeholderBlockEntity.getBlockPos(), ParticleTypes.FLAME, 0.0D, 0.6D, 5);
+        playSoundQueue(placeholderBlockEntity, CSoundEvents.PLACEHOLDER_BLOCK_UPDATE.get(), GameEvent.BLOCK_CHANGE, ParticleTypes.FLAME);
+    }
+
+    private static void failToUpdate(PlaceholderBlockEntity placeholderBlockEntity) {
+        if (placeholderBlockEntity.getLevel() == null) return;
+        playSoundQueue(placeholderBlockEntity, CSoundEvents.PLACEHOLDER_BLOCK_UPDATE_FAIL.get(), GameEvent.BLOCK_DEACTIVATE, ParticleTypes.SMOKE);
+        placeholderBlockEntity.getLevel().setBlockAndUpdate(placeholderBlockEntity.getBlockPos(), CBlocks.PLACEHOLDER_BLOCK.get().defaultBlockState());
+    }
+
+    public static void playSoundQueue(PlaceholderBlockEntity placeholderBlockEntity, SoundEvent soundEvent, Holder.Reference<GameEvent> gameEvent, ParticleOptions particleOptions) {
+
+        if (placeholderBlockEntity.getLevel() == null) return;
+
+        placeholderBlockEntity.getLevel().playSound(null, placeholderBlockEntity.getBlockPos(), soundEvent, SoundSource.BLOCKS, 1.0F, placeholderBlockEntity.getLevel().getRandom().nextFloat() * 0.4F + 0.8F);
+        placeholderBlockEntity.getLevel().gameEvent(null, gameEvent, placeholderBlockEntity.getBlockPos());
+        ParticleHelper.emitParticlesAroundBlock(placeholderBlockEntity.getLevel(), placeholderBlockEntity.getBlockPos(), particleOptions, 0.0D, 0.6D, 5);
     }
 }

@@ -50,6 +50,7 @@ public class CSoundEvents {
 
         PLACEHOLDER_BLOCK_CHANGE_STATE = SOUND_EVENTS.register("block.placeholder_block.change_state", SoundEvent::createVariableRangeEvent),
         PLACEHOLDER_BLOCK_UPDATE = SOUND_EVENTS.register("block.placeholder_block.update", SoundEvent::createVariableRangeEvent),
+        PLACEHOLDER_BLOCK_UPDATE_FAIL = SOUND_EVENTS.register("block.placeholder_block.update_fail", SoundEvent::createVariableRangeEvent),
 
         ENTITY_SPAWNER_APPEAR = SOUND_EVENTS.register("entity.entity_spawner.appear", SoundEvent::createVariableRangeEvent),
         ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.about_to_spawn_entity", SoundEvent::createVariableRangeEvent),

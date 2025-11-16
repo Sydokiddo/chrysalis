@@ -546,6 +546,7 @@
 
   "subtitles.block.placeholder_block.change_state": "Placeholder Block changes state",
   "subtitles.block.placeholder_block.update": "Placeholder Block updates",
+  "subtitles.block.placeholder_block.update_fail": "Placeholder Block fails to update",
 
   "subtitles.block.podium_spawner.ambient": "Podium Spawner crackles",
   "subtitles.block.podium_spawner.spawn_mob": "Podium Spawner spawns a mob",

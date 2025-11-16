@@ -173,6 +173,12 @@
     ],
     "subtitle": "subtitles.block.placeholder_block.update"
   },
+  "block.placeholder_block.update_fail": {
+    "sounds": [
+      "chrysalis:block/placeholder_block/update_fail"
+    ],
+    "subtitle": "subtitles.block.placeholder_block.update_fail"
+  },
   "entity.entity_spawner.appear": {
     "sounds": [
       "minecraft:block/trial_spawner/spawn_item_begin1",

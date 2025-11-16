@@ -14,9 +14,12 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.level.block.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.model.data.ModelData;
@@ -31,10 +34,12 @@ public class PlaceholderBlockRenderer implements BlockEntityRenderer<Placeholder
 
     private final EntityRenderDispatcher entityRenderer;
     private final BlockRenderDispatcher blockRenderer;
+    private final ItemRenderer itemRenderer;
 
     public PlaceholderBlockRenderer(BlockEntityRendererProvider.Context context) {
         this.entityRenderer = context.getEntityRenderer();
         this.blockRenderer = context.getBlockRenderDispatcher();
+        this.itemRenderer = context.getItemRenderer();
     }
 
     @Override
@@ -46,12 +51,29 @@ public class PlaceholderBlockRenderer implements BlockEntityRenderer<Placeholder
 
             poseStack.pushPose();
 
-            poseStack.translate(0.5F, (Mth.sin(placeholderBlockEntity.animationTime / 10.0F) * 0.1F) + 1.5F, 0.5F);
-            poseStack.scale(0.45F, 0.45F, 0.45F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(Mth.wrapDegrees(placeholderBlockEntity.animationTime)));
-            poseStack.translate(-0.5F, -0.5F, -0.5F);
+            Block block = placeholderBlockEntity.getBlockStateToUpdate().getBlock();
 
-            this.blockRenderer.renderSingleBlock(placeholderBlockEntity.getBlockStateToUpdate(), poseStack, multiBufferSource, packedLight, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
+            boolean isEndPortalOrGateway = block instanceof EndPortalBlock || block instanceof EndGatewayBlock;
+            boolean isBed = block instanceof BedBlock;
+            boolean isUnconventionalBlockModel = isEndPortalOrGateway || isBed || block instanceof DoorBlock || block instanceof DoublePlantBlock;
+            float scale;
+
+            if (isUnconventionalBlockModel) {
+                if (isEndPortalOrGateway || isBed) scale = 0.9F;
+                else scale = 0.5F;
+            } else {
+                scale = 0.45F;
+            }
+
+            poseStack.translate(0.5F, (Mth.sin(placeholderBlockEntity.animationTime / 10.0F) * 0.1F) + 1.5F, 0.5F);
+            poseStack.scale(scale, scale, scale);
+            poseStack.mulPose(Axis.YP.rotationDegrees(Mth.wrapDegrees(placeholderBlockEntity.animationTime)));
+            if (isBed) poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+            if (!isUnconventionalBlockModel) poseStack.translate(-0.5F, -0.5F, -0.5F);
+
+            if (isUnconventionalBlockModel) this.itemRenderer.renderStatic(block.asItem().getDefaultInstance(), ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, placeholderBlockEntity.getLevel(), 0);
+            else this.blockRenderer.renderSingleBlock(placeholderBlockEntity.getBlockStateToUpdate(), poseStack, multiBufferSource, packedLight, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
+
             poseStack.popPose();
         }
 
