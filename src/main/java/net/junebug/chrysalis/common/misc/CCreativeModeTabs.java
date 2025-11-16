@@ -47,6 +47,7 @@ public class CCreativeModeTabs {
             output.accept(CItems.CAMERA_SHAKE_EVENT_TEST);
             output.accept(CItems.EARTHQUAKE_EVENT_TEST);
             output.accept(CItems.ENTITY_SPAWNER_EVENT_TEST);
+            output.accept(CItems.ENCOUNTER_SPAWNER_EVENT_TEST);
             if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) output.accept(CItems.TEST_RIGHT_CLICK_ITEM);
             output.accept(CItems.GIANT_SPAWN_EGG);
             output.accept(CItems.ILLUSIONER_SPAWN_EGG);

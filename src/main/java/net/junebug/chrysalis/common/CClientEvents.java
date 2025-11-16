@@ -167,7 +167,8 @@ public class CClientEvents {
                 event.insertAfter(CItems.MUSIC_EVENT_TEST.toStack(), CItems.CAMERA_SHAKE_EVENT_TEST.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.CAMERA_SHAKE_EVENT_TEST.toStack(), CItems.EARTHQUAKE_EVENT_TEST.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.EARTHQUAKE_EVENT_TEST.toStack(), CItems.ENTITY_SPAWNER_EVENT_TEST.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) event.insertAfter(CItems.ENTITY_SPAWNER_EVENT_TEST.toStack(), CItems.TEST_RIGHT_CLICK_ITEM.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CItems.ENTITY_SPAWNER_EVENT_TEST.toStack(), CItems.ENCOUNTER_SPAWNER_EVENT_TEST.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) event.insertAfter(CItems.ENCOUNTER_SPAWNER_EVENT_TEST.toStack(), CItems.TEST_RIGHT_CLICK_ITEM.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.accept(Items.ENDER_DRAGON_SPAWN_EGG.getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.accept(Items.WITHER_SPAWN_EGG.getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }

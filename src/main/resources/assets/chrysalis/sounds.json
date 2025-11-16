@@ -290,6 +290,12 @@
     ],
     "subtitle": "subtitles.entity.key_golem.ambient_carrying"
   },
+  "entity.key_golem.novelty": {
+    "sounds": [
+      "chrysalis:entity/key_golem/ambient1"
+    ],
+    "subtitle": "subtitles.entity.key_golem.novelty"
+  },
   "entity.key_golem.step": {
     "sounds": [
       "chrysalis:entity/key_golem/step1",
@@ -306,6 +312,12 @@
       "chrysalis:entity/key_golem/death3"
     ],
     "subtitle": "subtitles.entity.key_golem.death"
+  },
+  "entity.key_golem.fall_asleep": {
+    "sounds": [
+      "chrysalis:entity/key_golem/ambient1"
+    ],
+    "subtitle": "subtitles.entity.key_golem.fall_asleep"
   },
   "entity.key_golem.wake_up": {
     "sounds": [

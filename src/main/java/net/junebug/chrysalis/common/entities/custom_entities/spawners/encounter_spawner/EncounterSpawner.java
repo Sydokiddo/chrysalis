@@ -37,7 +37,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
 
     // region Initialization
 
-    public EncounterSpawner(EntityType<?> entityType, Level level) {
+    public EncounterSpawner(EntityType<? extends EncounterSpawner> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -93,6 +93,12 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
     @Override
     public void setEntityToSpawn(CompoundTag compoundTag) {
         this.getEntityData().set(ENTITY_TO_SPAWN, compoundTag);
+    }
+
+    public static void setEntityToSpawn(EncounterSpawner encounterSpawner, EntityType<?> entityType) {
+        CompoundTag compoundTag = new CompoundTag();
+        compoundTag.putString("id", entityType.toShortString());
+        encounterSpawner.setEntityToSpawn(compoundTag);
     }
 
     @Override
@@ -180,10 +186,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
         if (!player.level().isClientSide() && !player.isSecondaryUseActive() && itemInHand.getItem() instanceof SpawnEggItem spawnEggItem) {
 
             EntityType<?> entityType = spawnEggItem.getType(player.level().registryAccess(), itemInHand);
-            CompoundTag compoundTag = new CompoundTag();
-            compoundTag.putString("id", entityType.toShortString());
-
-            this.setEntityToSpawn(compoundTag);
+            EncounterSpawner.setEntityToSpawn(this, entityType);
             this.playSpawnerSound(player.level(), this, CSoundEvents.GENERIC_SPAWNER_CHANGE_ENTITY.get(), 1.0F, false);
             if (this.level() instanceof ServerLevel serverLevel) ParticleHelper.emitLargeSmokeParticles(serverLevel, this.getX(), this.getY(entityType.getHeight() + 1.0D), this.getZ(), 8);
 

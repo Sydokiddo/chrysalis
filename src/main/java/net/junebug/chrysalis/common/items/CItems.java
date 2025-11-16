@@ -1,7 +1,9 @@
 package net.junebug.chrysalis.common.items;
 
 import net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake.Earthquake;
+import net.junebug.chrysalis.common.entities.custom_entities.spawners.encounter_spawner.EncounterSpawner;
 import net.junebug.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
+import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.junebug.chrysalis.util.helpers.EventHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -112,6 +114,23 @@ public class CItems {
 
                 if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
                     EntitySpawner.create(level, Chrysalis.stringId("example"), serverPlayer.position());
+                    return true;
+                }
+
+                return super.emitEvent(level, player, interactionHand);
+            }
+        }),
+
+        ENCOUNTER_SPAWNER_EVENT_TEST = ITEMS.registerItem("encounter_spawner_event_test", (properties) -> new EventTestItem("encounter_spawner_event_test") {
+
+            @Override
+            public boolean emitEvent(Level level, Player player, @NotNull InteractionHand interactionHand) {
+
+                if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+                    EncounterSpawner encounterSpawner = new EncounterSpawner(CEntities.ENCOUNTER_SPAWNER.get(), level);
+                    EncounterSpawner.setEntityToSpawn(encounterSpawner, EntityType.HUSK);
+                    encounterSpawner.moveTo(serverPlayer.position());
+                    level.addFreshEntity(encounterSpawner);
                     return true;
                 }
 
