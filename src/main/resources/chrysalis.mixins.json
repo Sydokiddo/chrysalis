@@ -16,6 +16,8 @@
     "blocks.ChorusPlantMixin$ChorusFlowerBlockMixin",
     "blocks.ChorusPlantMixin$ChorusPlantFeatureMixin",
     "blocks.DispenserBlockMixin",
+    "blocks.EarthquakeBlockCollisionFixMixin",
+    "blocks.EarthquakeBlockCollisionFixMixin$SoulSandCollisionFixMixin",
     "blocks.HalfTransparentBlockMixin",
     "blocks.HalfTransparentBlockMixin$GlassPaneBlockMixin",
     "blocks.NetherWartBlockMixin",
