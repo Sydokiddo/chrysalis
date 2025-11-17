@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FarmBlock.class)
 public class EarthquakeBlockCollisionFixMixin extends Block {
 
-    public EarthquakeBlockCollisionFixMixin(Properties properties) {
+    private EarthquakeBlockCollisionFixMixin(Properties properties) {
         super(properties);
     }
 

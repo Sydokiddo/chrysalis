@@ -326,7 +326,7 @@
   },
   "entity.key_golem.novelty": {
     "sounds": [
-      "chrysalis:entity/key_golem/ambient1"
+      "chrysalis:entity/key_golem/novelty"
     ],
     "subtitle": "subtitles.entity.key_golem.novelty"
   },
@@ -349,7 +349,8 @@
   },
   "entity.key_golem.fall_asleep": {
     "sounds": [
-      "chrysalis:entity/key_golem/ambient1"
+      "chrysalis:entity/key_golem/fall_asleep1",
+      "chrysalis:entity/key_golem/fall_asleep2"
     ],
     "subtitle": "subtitles.entity.key_golem.fall_asleep"
   },
