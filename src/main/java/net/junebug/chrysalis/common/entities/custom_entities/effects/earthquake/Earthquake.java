@@ -379,8 +379,8 @@ public class Earthquake extends Entity implements TraceableEntity {
 
             BlockPos relativePos = this.blockPosition().relative(this.getMotionDirection());
 
-            if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().getBlock() instanceof FireBlock fireBlock && BlockHelper.isFree(this.level(), relativePos) && this.level().getBlockState(relativePos.below()).isFaceSturdy(this.level(), relativePos.below(), Direction.UP)) {
-                this.level().setBlockAndUpdate(relativePos, fireBlock.defaultBlockState());
+            if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().getBlock() instanceof BaseFireBlock baseFireBlock && BlockHelper.isFree(this.level(), relativePos) && this.level().getBlockState(relativePos.below()).isFaceSturdy(this.level(), relativePos.below(), Direction.UP)) {
+                this.level().setBlockAndUpdate(relativePos, baseFireBlock.defaultBlockState());
                 this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_SPREAD_FIRE.get(), true, GameEvent.BLOCK_PLACE);
             }
 
