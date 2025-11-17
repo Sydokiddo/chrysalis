@@ -3,7 +3,6 @@ package net.junebug.chrysalis.common.entities.custom_entities;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.common.blocks.CBlockStateProperties;
-import net.junebug.chrysalis.common.blocks.CBlocks;
 import net.junebug.chrysalis.common.blocks.custom_blocks.PlaceholderBlock;
 import net.junebug.chrysalis.common.entities.registry.CBlockEntities;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
@@ -26,9 +25,7 @@ import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BedPart;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +35,7 @@ public class PlaceholderBlockEntity extends BlockEntity {
      * The block entity for placeholder blocks. See more in net.junebug.chrysalis.common.blocks.custom_blocks.PlaceholderBlock;
      **/
 
-    public int animationTime;
+    public int clientTick;
     private BlockState blockState;
     private final String cachedBlockStateTag = "cached_block_state";
 
@@ -48,7 +45,7 @@ public class PlaceholderBlockEntity extends BlockEntity {
 
     @SuppressWarnings("unused")
     public static void clientTick(Level level, BlockPos blockPos, BlockState blockState, PlaceholderBlockEntity placeholderBlockEntity) {
-        ++placeholderBlockEntity.animationTime;
+        ++placeholderBlockEntity.clientTick;
     }
 
     @SuppressWarnings("unused")
@@ -159,9 +156,7 @@ public class PlaceholderBlockEntity extends BlockEntity {
     }
 
     private static void failToUpdate(PlaceholderBlockEntity placeholderBlockEntity) {
-        if (placeholderBlockEntity.getLevel() == null) return;
         playSoundQueue(placeholderBlockEntity, CSoundEvents.PLACEHOLDER_BLOCK_UPDATE_FAIL.get(), GameEvent.BLOCK_DEACTIVATE, ParticleTypes.SMOKE);
-        placeholderBlockEntity.getLevel().setBlockAndUpdate(placeholderBlockEntity.getBlockPos(), CBlocks.PLACEHOLDER_BLOCK.get().defaultBlockState());
     }
 
     public static void playSoundQueue(PlaceholderBlockEntity placeholderBlockEntity, SoundEvent soundEvent, Holder.Reference<GameEvent> gameEvent, ParticleOptions particleOptions) {

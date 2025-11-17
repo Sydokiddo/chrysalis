@@ -134,7 +134,7 @@ public class BlockMixin {
 
         @Inject(method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", at = @At("RETURN"), cancellable = true)
         private void chrysalis$modifyCollisionShapes(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-            if (collisionContext instanceof EntityCollisionContext entityCollisionContext && entityCollisionContext.getEntity() instanceof Earthquake && (blockGetter.getBlockState(blockPos).is(CTags.EARTHQUAKE_BREAKABLE_BLOCKS) || blockGetter.getBlockState(blockPos).is(CTags.EARTHQUAKE_IGNORED_BLOCKS))) {
+            if (collisionContext instanceof EntityCollisionContext entityCollisionContext && entityCollisionContext.getEntity() instanceof Earthquake && (blockGetter.getBlockState(blockPos).is(CTags.EARTHQUAKE_BREAKABLE) || blockGetter.getBlockState(blockPos).is(CTags.EARTHQUAKE_COLLISIONS_IGNORED))) {
                 cir.setReturnValue(Shapes.empty());
             } else {
                 FluidState fluidState = blockGetter.getFluidState(blockPos);

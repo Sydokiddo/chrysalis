@@ -1,0 +1,24 @@
+{
+  "values": [
+    "#minecraft:crops",
+    "#c:pumpkins",
+    "minecraft:melon",
+    "minecraft:lily_pad",
+    "minecraft:chorus_flower",
+    "minecraft:turtle_egg",
+    "minecraft:frogspawn",
+    "minecraft:pointed_dripstone",
+    "#c:buds",
+    "#c:clusters",
+    "#chrysalis:infested_blocks",
+    "#chrysalis:suspicious_blocks",
+    "#minecraft:ice",
+    "minecraft:glowstone",
+    "minecraft:redstone_lamp",
+    "minecraft:sea_lantern",
+    "#c:glass_blocks/cheap",
+    "#c:glass_panes",
+    "minecraft:decorated_pot",
+    "minecraft:scaffolding"
+  ]
+}

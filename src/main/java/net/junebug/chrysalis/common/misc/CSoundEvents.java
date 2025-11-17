@@ -59,7 +59,10 @@ public class CSoundEvents {
         GENERIC_SPAWNER_CHANGE_ENTITY = SOUND_EVENTS.register("entity.generic_spawner.change_entity", SoundEvent::createVariableRangeEvent),
 
         EARTHQUAKE_TRAVEL = SOUND_EVENTS.register("entity.earthquake.travel", SoundEvent::createVariableRangeEvent),
-        EARTHQUAKE_HIT = SOUND_EVENTS.register("entity.earthquake.hit", SoundEvent::createVariableRangeEvent),
+        EARTHQUAKE_HIT_ENTITY = SOUND_EVENTS.register("entity.earthquake.hit_entity", SoundEvent::createVariableRangeEvent),
+        EARTHQUAKE_HIT_BARREL = SOUND_EVENTS.register("entity.earthquake.hit_barrel", SoundEvent::createVariableRangeEvent),
+        EARTHQUAKE_HIT_BEEHIVE = SOUND_EVENTS.register("entity.earthquake.hit_beehive", SoundEvent::createVariableRangeEvent),
+        EARTHQUAKE_SPREAD_FIRE = SOUND_EVENTS.register("entity.earthquake.spread_fire", SoundEvent::createVariableRangeEvent),
 
         KEY_GOLEM_AMBIENT = SOUND_EVENTS.register("entity.key_golem.ambient", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_AMBIENT_SLEEPING = SOUND_EVENTS.register("entity.key_golem.ambient_sleeping", SoundEvent::createVariableRangeEvent),

@@ -65,9 +65,9 @@ public class PlaceholderBlockRenderer implements BlockEntityRenderer<Placeholder
                 scale = 0.45F;
             }
 
-            poseStack.translate(0.5F, (Mth.sin(placeholderBlockEntity.animationTime / 10.0F) * 0.1F) + 1.5F, 0.5F);
+            poseStack.translate(0.5F, (Mth.sin(placeholderBlockEntity.clientTick / 10.0F) * 0.1F) + 1.5F, 0.5F);
             poseStack.scale(scale, scale, scale);
-            poseStack.mulPose(Axis.YP.rotationDegrees(Mth.wrapDegrees(placeholderBlockEntity.animationTime)));
+            poseStack.mulPose(Axis.YP.rotationDegrees(Mth.wrapDegrees(placeholderBlockEntity.clientTick)));
             if (isBed) poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
             if (!isUnconventionalBlockModel) poseStack.translate(-0.5F, -0.5F, -0.5F);
 

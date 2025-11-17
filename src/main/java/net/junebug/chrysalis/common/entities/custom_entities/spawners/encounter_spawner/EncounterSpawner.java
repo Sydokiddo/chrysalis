@@ -169,7 +169,7 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
         serverLevel.addFreshEntity(entity.get());
 
         this.emitSpawnParticles(serverLevel, entity.get(), this.getParticle());
-        this.playSpawnerSound(serverLevel, this, this.getSpawnEntitySound().value(), (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.2F + 1.0F, true);
+        this.playSpawnerSound(serverLevel, this, this.getSpawnEntitySound().value(), (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F, true);
     }
 
     public static Optional<Entity> createEntity(EncounterSpawner encounterSpawner) {

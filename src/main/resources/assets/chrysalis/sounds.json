@@ -222,43 +222,71 @@
     "sounds": [
       {
         "name": "chrysalis:entity/earthquake/travel1",
+        "volume": 0.5,
         "attenuation_distance": 32.0
       },
       {
         "name": "chrysalis:entity/earthquake/travel2",
+        "volume": 0.5,
         "attenuation_distance": 32.0
       },
       {
         "name": "chrysalis:entity/earthquake/travel3",
+        "volume": 0.5,
         "attenuation_distance": 32.0
       },
       {
         "name": "chrysalis:entity/earthquake/travel4",
+        "volume": 0.5,
         "attenuation_distance": 32.0
       }
     ],
     "subtitle": "subtitles.entity.earthquake.travel"
   },
-  "entity.earthquake.hit": {
+  "entity.earthquake.hit_entity": {
     "sounds": [
       {
-        "name": "chrysalis:entity/earthquake/hit1",
+        "name": "chrysalis:entity/earthquake/hit_entity1",
+        "volume": 0.5,
         "attenuation_distance": 32.0
       },
       {
-        "name": "chrysalis:entity/earthquake/hit2",
+        "name": "chrysalis:entity/earthquake/hit_entity2",
+        "volume": 0.5,
         "attenuation_distance": 32.0
       },
       {
-        "name": "chrysalis:entity/earthquake/hit3",
+        "name": "chrysalis:entity/earthquake/hit_entity3",
+        "volume": 0.5,
         "attenuation_distance": 32.0
       },
       {
-        "name": "chrysalis:entity/earthquake/hit4",
+        "name": "chrysalis:entity/earthquake/hit_entity4",
+        "volume": 0.5,
         "attenuation_distance": 32.0
       }
     ],
-    "subtitle": "subtitles.entity.earthquake.hit"
+    "subtitle": "subtitles.entity.earthquake.hit_entity"
+  },
+  "entity.earthquake.hit_barrel": {
+    "sounds": [
+      "chrysalis:entity/earthquake/hit_barrel"
+    ],
+    "subtitle": "subtitles.entity.earthquake.hit_barrel"
+  },
+  "entity.earthquake.hit_beehive": {
+    "sounds": [
+      "chrysalis:entity/earthquake/hit_beehive"
+    ],
+    "subtitle": "subtitles.entity.earthquake.hit_beehive"
+  },
+  "entity.earthquake.spread_fire": {
+    "sounds": [
+      "chrysalis:entity/earthquake/spread_fire1",
+      "chrysalis:entity/earthquake/spread_fire2",
+      "chrysalis:entity/earthquake/spread_fire3"
+    ],
+    "subtitle": "subtitles.entity.earthquake.spread_fire"
   },
   "entity.key_golem.ambient": {
     "sounds": [

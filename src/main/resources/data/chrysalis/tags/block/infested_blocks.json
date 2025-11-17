@@ -1,0 +1,24 @@
+{
+  "values": [
+    "minecraft:infested_stone",
+    "minecraft:infested_cobblestone",
+    "minecraft:infested_stone_bricks",
+    "minecraft:infested_mossy_stone_bricks",
+    "minecraft:infested_cracked_stone_bricks",
+    "minecraft:infested_chiseled_stone_bricks",
+    "minecraft:infested_deepslate",
+    {"id": "endless_encore:infested_mossy_chiseled_stone_bricks", "required": false},
+    {"id": "endless_encore:infested_stone_pillar", "required": false},
+    {"id": "endless_encore:infested_mossy_stone_pillar", "required": false},
+    {"id": "endless_encore:infested_deepslate_pillar", "required": false},
+    {"id": "endless_encore:infested_mossy_cobblestone", "required": false},
+    {"id": "endless_encore:infested_smooth_stone", "required": false},
+    {"id": "endless_encore:infested_cobbled_deepslate", "required": false},
+    {"id": "endless_encore:infested_chiseled_deepslate", "required": false},
+    {"id": "endless_encore:infested_polished_deepslate", "required": false},
+    {"id": "endless_encore:infested_deepslate_bricks", "required": false},
+    {"id": "endless_encore:infested_cracked_deepslate_bricks", "required": false},
+    {"id": "endless_encore:infested_deepslate_tiles", "required": false},
+    {"id": "endless_encore:infested_cracked_deepslate_tiles", "required": false}
+  ]
+}

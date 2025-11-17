@@ -5,11 +5,14 @@ import net.junebug.chrysalis.client.particles.options.DustCloudParticleOptions;
 import net.junebug.chrysalis.client.particles.types.DustCloudParticle;
 import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.junebug.chrysalis.common.misc.CDamageTypes;
+import net.junebug.chrysalis.common.misc.CGameEvents;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
 import net.junebug.chrysalis.common.misc.CTags;
+import net.junebug.chrysalis.util.helpers.BlockHelper;
 import net.junebug.chrysalis.util.helpers.EntityHelper;
 import net.junebug.chrysalis.util.helpers.EventHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -22,15 +25,21 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.PushReaction;
@@ -73,7 +82,7 @@ public class Earthquake extends Entity implements TraceableEntity {
 
     private static final Holder<SoundEvent>
         defaultTravelSound = CSoundEvents.EARTHQUAKE_TRAVEL,
-        defaultHitSound = CSoundEvents.EARTHQUAKE_HIT
+        defaultHitSound = CSoundEvents.EARTHQUAKE_HIT_ENTITY
     ;
 
     private static final int defaultLifeTime = 20;
@@ -320,14 +329,96 @@ public class Earthquake extends Entity implements TraceableEntity {
 
         if (this.getLifeTime() >= 0) {
 
+            // region Custom Block Interactions
+
+            // region Falling Blocks
+
             this.tryUpdatingFallingBlock(this.blockPosition());
             this.tryUpdatingFallingBlock(this.blockPosition().below());
             this.tryUpdatingFallingBlock(this.blockPosition().below().below());
 
-            if (this.getInBlockState().is(CTags.EARTHQUAKE_IGNORED_BLOCKS)) {
+            // endregion
+
+            if (this.getInBlockState().is(CTags.EARTHQUAKE_COLLISIONS_IGNORED)) {
+
+                // region Pressure Plates
+
+                if (this.getInBlockState().getBlock() instanceof BasePressurePlateBlock basePressurePlateBlock) basePressurePlateBlock.entityInside(this.getInBlockState(), this.level(), this.blockPosition(), this);
+
+                // endregion
+
+                // region Barrels
+
+                if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().getBlock() instanceof BarrelBlock && this.getInBlockState().getValue(BarrelBlock.FACING) == Direction.UP) {
+                    serverLevel.setBlockAndUpdate(this.blockPosition(), this.getInBlockState().setValue(BarrelBlock.FACING, this.getMotionDirection()));
+                    this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_HIT_BARREL.get(), true, GameEvent.BLOCK_CHANGE);
+                }
+
+                // endregion
+
+                // region Beehives
+
+                if (this.getInBlockState().getBlock() instanceof BeehiveBlock beehiveBlock && this.level().getBlockEntity(this.blockPosition()) instanceof BeehiveBlockEntity beehiveBlockEntity) {
+                    beehiveBlockEntity.emptyAllLivingFromHive(this.getOwner() instanceof Player player ? player : null, this.getInBlockState(), BeehiveBlockEntity.BeeReleaseStatus.EMERGENCY);
+                    this.level().updateNeighbourForOutputSignal(this.blockPosition(), beehiveBlock);
+                    beehiveBlock.angerNearbyBees(this.level(), this.blockPosition());
+                    this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_HIT_BEEHIVE.get(), true, GameEvent.BLOCK_CHANGE);
+                }
+
+                // endregion
+
+                // region Bells and Dragon Eggs
+
                 if (this.getInBlockState().getBlock() instanceof BellBlock bellBlock) bellBlock.attemptToRing(this.level(), this.blockPosition(), this.getMotionDirection().getOpposite());
                 if (this.getInBlockState().getBlock() instanceof DragonEggBlock dragonEggBlock) dragonEggBlock.teleport(this.getInBlockState(), this.level(), this.blockPosition());
+
+                // endregion
             }
+
+            // region Fire
+
+            BlockPos relativePos = this.blockPosition().relative(this.getMotionDirection());
+
+            if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().getBlock() instanceof FireBlock fireBlock && BlockHelper.isFree(this.level(), relativePos) && this.level().getBlockState(relativePos.below()).isFaceSturdy(this.level(), relativePos.below(), Direction.UP)) {
+                this.level().setBlockAndUpdate(relativePos, fireBlock.defaultBlockState());
+                this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_SPREAD_FIRE.get(), true, GameEvent.BLOCK_PLACE);
+            }
+
+            // endregion
+
+            // region Redstone Ore, Tripwires, and Note Blocks
+
+            if (this.getBlockStateOn().getBlock() instanceof RedStoneOreBlock) RedStoneOreBlock.interact(this.getBlockStateOn(), this.level(), this.getOnPos());
+            if (this.getInBlockState().getBlock() instanceof TripWireBlock tripWireBlock) tripWireBlock.entityInside(this.getInBlockState(), this.level(), this.blockPosition(), this);
+            if (this.getBlockStateOn().getBlock() instanceof NoteBlock noteBlock) noteBlock.playNote(this.getOwner() instanceof Player player ? player : this, this.getBlockStateOn(), this.level(), this.getOnPos());
+
+            // endregion
+
+            // region Sweet Berry Bushes
+
+            if (this.getInBlockState().getBlock() instanceof SweetBerryBushBlock) {
+
+                int age = this.getInBlockState().getValue(SweetBerryBushBlock.AGE);
+
+                if (age > 1) {
+
+                    Block.popResource(this.level(), this.blockPosition(), new ItemStack(Items.SWEET_BERRIES, (1 + this.getRandom().nextInt(2)) + (age == 3 ? 1 : 0)));
+                    this.level().playSound(null, this.blockPosition(), SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
+                    BlockState blockState = this.getInBlockState().setValue(SweetBerryBushBlock.AGE, 1);
+                    this.level().setBlockAndUpdate(this.blockPosition(), blockState);
+                    this.level().gameEvent(GameEvent.BLOCK_CHANGE, this.blockPosition(), GameEvent.Context.of(this, blockState));
+                }
+            }
+
+            // endregion
+
+            // region Cave Vines
+
+            if (this.getInBlockState().getBlock() instanceof CaveVines) CaveVines.use(this, this.getInBlockState(), this.level(), this.blockPosition());
+
+            // endregion
+
+            // endregion
 
             float xRot = this.getXRot() * (float) (Math.PI / 180.0D);
             float yRot = -this.getYRot() * (float) (Math.PI / 180.0D);
@@ -343,18 +434,12 @@ public class Earthquake extends Entity implements TraceableEntity {
 
             this.applyGravity();
             this.move(MoverType.SELF, this.getDeltaMovement());
-
-            if (this.onGround()) {
-                this.playSound(this.getTravelSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
-                this.gameEvent(GameEvent.BLOCK_DESTROY);
-            }
+            if (this.onGround()) this.playSoundAndGameEvent(this.getTravelSound().value(), true, GameEvent.BLOCK_DESTROY);
 
             if (this.level() instanceof ServerLevel serverLevel) {
 
-                if (serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().is(CTags.EARTHQUAKE_BREAKABLE_BLOCKS)) {
-
+                if (serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().is(CTags.EARTHQUAKE_BREAKABLE)) {
                     if (this.getInBlockState().getBlock() instanceof DecoratedPotBlock) this.level().setBlockAndUpdate(this.blockPosition(), this.getInBlockState().setValue(BlockStateProperties.CRACKED, true));
-
                     if (this.getInBlockState().getBlock() instanceof TurtleEggBlock turtleEggBlock) turtleEggBlock.decreaseEggs(this.level(), this.blockPosition(), this.getInBlockState());
                     else this.level().destroyBlock(this.blockPosition(), true);
                 }
@@ -369,7 +454,7 @@ public class Earthquake extends Entity implements TraceableEntity {
                     if (!livingEntity.getType().is(CTags.IMMUNE_TO_EARTHQUAKES) && EntityHelper.canBeDamagedByFoe(this.getOwner(), livingEntity)) {
                         EntityHelper.stunShield(livingEntity);
                         livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(CDamageTypes.EARTHQUAKE, this.getOwner()), damageAmount);
-                        this.playSound(this.getHitSound().value(), 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
+                        this.playSoundAndGameEvent(this.getHitSound().value(), false, CGameEvents.EMPTY);
                         if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("Dealt {} earthquake damage to {}", damageAmount, livingEntity.getName().getString());
                     }
                 }
@@ -380,6 +465,24 @@ public class Earthquake extends Entity implements TraceableEntity {
         }
     }
 
+    private void clientTick() {
+
+        if (!this.level().isClientSide()) return;
+
+        if (this.getBlockStateOn().getRenderShape() != RenderShape.INVISIBLE) {
+            this.addParticles(20, 100, new BlockParticleOption(ParticleTypes.BLOCK, this.getBlockStateOn()), 0.0D, 0.0D, 0.0D);
+            if (this.tickCount % 2 == 0) this.addParticles(1, 5, this.getParticle(), (Math.random() <= 0.5D) ? 0.025D : -0.025D, 0.025D, (Math.random() <= 0.5D) ? 0.025D : -0.025D);
+        }
+    }
+
+    @Override
+    public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
+        if (!this.isInvulnerableToBase(damageSource)) this.markHurt();
+        return false;
+    }
+
+    // region Interaction Events
+
     private void scaleSize(boolean shrink, float scaleAmount) {
         if (this.getScale() > 0.05F) {
             if (shrink) this.setScale(this.getScale() - scaleAmount);
@@ -389,29 +492,24 @@ public class Earthquake extends Entity implements TraceableEntity {
         }
     }
 
-    private void dealKnockback(LivingEntity livingEntity, float knockbackAmount) {
-        if (livingEntity.getLastDamageSource() != null && !livingEntity.getLastDamageSource().is(DamageTypeTags.NO_KNOCKBACK) && !livingEntity.isDeadOrDying()) livingEntity.knockback(knockbackAmount, Mth.sin(this.getYRot() * ((float) Math.PI / 180.0F)), -Mth.cos(this.getYRot() * ((float) Math.PI / 180.0F)));
-    }
-
     private void dissipate() {
         this.scaleSize(true, 0.35F * this.startingScale);
+    }
+
+    private void dealKnockback(LivingEntity livingEntity, float knockbackAmount) {
+        if (livingEntity.getLastDamageSource() != null && !livingEntity.getLastDamageSource().is(DamageTypeTags.NO_KNOCKBACK) && !livingEntity.isDeadOrDying()) livingEntity.knockback(knockbackAmount, Mth.sin(this.getYRot() * ((float) Math.PI / 180.0F)), -Mth.cos(this.getYRot() * ((float) Math.PI / 180.0F)));
     }
 
     private void tryUpdatingFallingBlock(BlockPos blockPos) {
         if (this.level().getBlockState(blockPos).getBlock() instanceof FallingBlock fallingBlock) this.level().scheduleTick(blockPos, fallingBlock, fallingBlock.getDelayAfterPlace());
     }
 
-    private void clientTick() {
-
-        if (!this.level().isClientSide()) return;
-
-        if (this.getBlockStateOn().getRenderShape() != RenderShape.INVISIBLE) {
-            this.addParticle(20, 100, new BlockParticleOption(ParticleTypes.BLOCK, this.getBlockStateOn()), 0.0D, 0.0D, 0.0D);
-            if (this.tickCount % 2 == 0) this.addParticle(1, 5, this.getParticle(), (Math.random() <= 0.5D) ? 0.025D : -0.025D, 0.025D, (Math.random() <= 0.5D) ? 0.025D : -0.025D);
-        }
+    private void playSoundAndGameEvent(SoundEvent soundEvent, boolean sendGameEvent, Holder<GameEvent> gameEvent) {
+        this.playSound(soundEvent, 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
+        if (sendGameEvent) this.gameEvent(gameEvent);
     }
 
-    private void addParticle(int minAmount, int maxAmount, ParticleOptions particle, double xSpeed, double ySpeed, double zSpeed) {
+    private void addParticles(int minAmount, int maxAmount, ParticleOptions particle, double xSpeed, double ySpeed, double zSpeed) {
 
         int multiplier;
         if (this.getScale() < 1.0F) multiplier = 1;
@@ -420,11 +518,7 @@ public class Earthquake extends Entity implements TraceableEntity {
         for (int particleAmount = 0; particleAmount < this.getRandom().nextIntBetweenInclusive(minAmount * multiplier, maxAmount * multiplier); ++particleAmount) this.level().addAlwaysVisibleParticle(particle, this.getRandomX(0.5D * this.getScale()), this.getY(), this.getRandomZ(0.5D * this.getScale()), xSpeed, ySpeed, zSpeed);
     }
 
-    @Override
-    public boolean hurtServer(@NotNull ServerLevel serverLevel, @NotNull DamageSource damageSource, float damageAmount) {
-        if (!this.isInvulnerableToBase(damageSource)) this.markHurt();
-        return false;
-    }
+    // endregion
 
     // endregion
 

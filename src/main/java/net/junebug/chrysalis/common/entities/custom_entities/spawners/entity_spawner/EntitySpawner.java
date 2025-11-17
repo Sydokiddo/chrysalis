@@ -69,7 +69,7 @@ public class EntitySpawner extends AbstractSpawnerEntity {
         EntitySpawnerData.EntitySpawnerConfig entitySpawnerConfig = list.getFirst();
 
         EntitySpawner entitySpawner = new EntitySpawner(CEntities.ENTITY_SPAWNER.get(), level);
-        Optional<SpawnData> optionalSpawnData = entitySpawnerConfig.spawnPotentials().getRandomValue(entitySpawner.level().getRandom());
+        Optional<SpawnData> optionalSpawnData = entitySpawnerConfig.spawnPotentials().getRandomValue(level.getRandom());
         if (optionalSpawnData.isEmpty()) return;
 
         entitySpawner.setEntityToSpawn(optionalSpawnData.get().entityToSpawn());
@@ -120,7 +120,7 @@ public class EntitySpawner extends AbstractSpawnerEntity {
     @Override
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         builder.define(ENTITY_TO_SPAWN, new CompoundTag());
-        this.setSpawnAfterEntityTicks(this.level().getRandom().nextIntBetweenInclusive(60, 120));
+        this.setSpawnAfterEntityTicks(this.getRandom().nextIntBetweenInclusive(60, 120));
         builder.define(APPEAR_SOUND, CSoundEvents.ENTITY_SPAWNER_APPEAR.get().location().toString());
         builder.define(ABOUT_TO_SPAWN_ENTITY_SOUND, CSoundEvents.ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY.get().location().toString());
         builder.define(SPAWN_ENTITY_SOUND, CSoundEvents.ENTITY_SPAWNER_SPAWN_ENTITY.get().location().toString());
@@ -299,7 +299,7 @@ public class EntitySpawner extends AbstractSpawnerEntity {
         serverLevel.addFreshEntity(entity.get());
 
         this.emitSpawnParticles(serverLevel, entity.get(), this.getSpawnParticle());
-        this.playSpawnerSound(serverLevel, this, this.getSpawnEntitySound().value(), (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.2F + 1.0F, true);
+        this.playSpawnerSound(serverLevel, this, this.getSpawnEntitySound().value(), (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F, true);
     }
 
     public static Optional<Entity> createEntity(EntitySpawner entitySpawner) {

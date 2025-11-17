@@ -2,6 +2,9 @@
   "values": [
     "#minecraft:fences",
     "#minecraft:fence_gates",
+    "#minecraft:pressure_plates",
+    "#c:barrels",
+    "#minecraft:beehives",
     "#c:chains",
     "#chrysalis:lanterns",
     "#chrysalis:bars",
