@@ -196,8 +196,8 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/experience_orb.png",
-      "ascent": 10,
-      "height": 12,
+      "ascent": 9,
+      "height": 11,
       "chars": [
         "\ua021"
       ]
@@ -205,8 +205,8 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/cursed_experience_orb.png",
-      "ascent": 10,
-      "height": 12,
+      "ascent": 9,
+      "height": 11,
       "chars": [
         "\ua022"
       ]
@@ -385,7 +385,7 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/copper_ingot.png",
-      "ascent": 9,
+      "ascent": 8,
       "height": 10,
       "chars": [
         "\ua042"
@@ -394,7 +394,7 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/resin_brick.png",
-      "ascent": 9,
+      "ascent": 8,
       "height": 10,
       "chars": [
         "\ua043"
@@ -403,7 +403,7 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/gold_ingot.png",
-      "ascent": 9,
+      "ascent": 8,
       "height": 10,
       "chars": [
         "\ua044"
@@ -439,8 +439,8 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/diamond.png",
-      "ascent": 9,
-      "height": 11,
+      "ascent": 10,
+      "height": 12,
       "chars": [
         "\ua048"
       ]
@@ -484,7 +484,7 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/iron_ingot.png",
-      "ascent": 9,
+      "ascent": 8,
       "height": 10,
       "chars": [
         "\ua053"
@@ -502,7 +502,7 @@
     {
       "type": "bitmap",
       "file": "chrysalis:gui/sprites/icons/netherite_ingot.png",
-      "ascent": 9,
+      "ascent": 8,
       "height": 10,
       "chars": [
         "\ua055"
