@@ -375,17 +375,6 @@ public class Earthquake extends Entity implements TraceableEntity {
                 // endregion
             }
 
-            // region Fire
-
-            BlockPos relativePos = this.blockPosition().relative(this.getMotionDirection());
-
-            if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().getBlock() instanceof BaseFireBlock && BlockHelper.isFree(this.level(), relativePos) && this.level().getBlockState(relativePos.below()).isFaceSturdy(this.level(), relativePos.below(), Direction.UP)) {
-                this.level().setBlockAndUpdate(relativePos, BaseFireBlock.getState(this.level(), relativePos));
-                this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_SPREAD_FIRE.get(), true, GameEvent.BLOCK_PLACE);
-            }
-
-            // endregion
-
             // region Redstone Ore, Tripwires, and Note Blocks
 
             if (this.getBlockStateOn().getBlock() instanceof RedStoneOreBlock) RedStoneOreBlock.interact(this.getBlockStateOn(), this.level(), this.getOnPos());
@@ -438,10 +427,35 @@ public class Earthquake extends Entity implements TraceableEntity {
 
             if (this.level() instanceof ServerLevel serverLevel) {
 
-                if (serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().is(CTags.EARTHQUAKE_BREAKABLE)) {
-                    if (this.getInBlockState().getBlock() instanceof DecoratedPotBlock) this.level().setBlockAndUpdate(this.blockPosition(), this.getInBlockState().setValue(BlockStateProperties.CRACKED, true));
-                    if (this.getInBlockState().getBlock() instanceof TurtleEggBlock turtleEggBlock) turtleEggBlock.decreaseEggs(this.level(), this.blockPosition(), this.getInBlockState());
-                    else this.level().destroyBlock(this.blockPosition(), true);
+                if (serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+
+                    if (this.getInBlockState().getBlock() instanceof BaseFireBlock) this.setRemainingFireTicks(this.getLifeTime());
+
+                    if (this.isOnFire()) {
+
+                        for (Direction direction : Direction.values()) {
+
+                            BlockPos blockPos = this.blockPosition();
+                            float fireRadius;
+
+                            for (fireRadius = 0.0F; fireRadius < (this.getScale() / 3.25F); ++fireRadius) {
+
+                                if (fireRadius > 2.0F) break;
+                                if (this.getScale() > 1.5F) blockPos = blockPos.relative(direction);
+
+                                if (BlockHelper.isFree(this.level(), blockPos) && this.level().getBlockState(blockPos.below()).isFaceSturdy(this.level(), blockPos.below(), Direction.UP)) {
+                                    this.level().setBlockAndUpdate(blockPos, BaseFireBlock.getState(this.level(), blockPos));
+                                    this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_SPREAD_FIRE.get(), true, GameEvent.BLOCK_PLACE);
+                                }
+                            }
+                        }
+                    }
+
+                    if (this.getInBlockState().is(CTags.EARTHQUAKE_BREAKABLE)) {
+                        if (this.getInBlockState().getBlock() instanceof DecoratedPotBlock) this.level().setBlockAndUpdate(this.blockPosition(), this.getInBlockState().setValue(BlockStateProperties.CRACKED, true));
+                        if (this.getInBlockState().getBlock() instanceof TurtleEggBlock turtleEggBlock) turtleEggBlock.decreaseEggs(this.level(), this.blockPosition(), this.getInBlockState());
+                        else this.level().destroyBlock(this.blockPosition(), true);
+                    }
                 }
 
                 List<? extends LivingEntity> damageRange = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox(), EntitySelector.NO_CREATIVE_OR_SPECTATOR);

@@ -155,9 +155,6 @@
   "gui.chrysalis.placeholder_block.unknown_block_id": "Block ID '%s' does not exist!",
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
-  "block.chrysalis.refined_amethyst_block": "Refined Block of Amethyst",
-  "block.chrysalis.echo_block": "Echo Block",
-
   "comment.chrysalis.entities": "ENTITIES",
 
   "entity.chrysalis.seat": "Seat",
@@ -771,5 +768,105 @@
   "tag.item.chrysalis.enchantable.shulker_box": "Shulker Boxes",
   "tag.item.chrysalis.enchantable.spyglass": "Spyglasses",
   "tag.item.chrysalis.enchantable.storage": "Storage Items",
-  "tag.item.chrysalis.enchantable.wolf_armor": "Wolf Armor"
+  "tag.item.chrysalis.enchantable.wolf_armor": "Wolf Armor",
+
+  "comment.chrysalis.shared_features.experience_bottle_changes": "SHARED FEATURES - EXPERIENCE BOTTLE CHANGES",
+
+  "item.chrysalis.experience_bottle": "Bottle of Experience",
+  "item.chrysalis.experience_bottle.granted_experience": "Grants %1$s to %2$s Experience Points",
+  "item.chrysalis.inexperience_bottle": "Bottle of Inexperience",
+  "item.chrysalis.inexperience_bottle.removed_experience": "Removes %1$s to %2$s Experience Points",
+
+  "comment.chrysalis.shared_features.amethyst_changes": "SHARED FEATURES - AMETHYST CHANGES",
+
+  "block.chrysalis.refined_amethyst_block": "Refined Block of Amethyst",
+  "subtitles.block.amethyst_cluster.ambient": "Amethyst Cluster twinkles",
+
+  "comment.chrysalis.shared_features.echo_shard_changes": "SHARED FEATURES - ECHO SHARD CHANGES",
+
+  "block.chrysalis.echo_block": "Echo Block",
+  "block.chrysalis.budding_echo_block": "Budding Echo Block",
+  "block.chrysalis.refined_echo_block": "Refined Echo Block",
+  "block.chrysalis.small_echo_bud": "Small Echo Bud",
+  "block.chrysalis.medium_echo_bud": "Medium Echo Bud",
+  "block.chrysalis.large_echo_bud": "Large Echo Bud",
+  "block.chrysalis.echo_cluster": "Echo Cluster",
+  "block.chrysalis.echo_repository": "Echo Repository",
+
+  "subtitles.block.amethyst_block.corrupt": "Amethyst corrupts",
+
+  "subtitles.block.echo_block.chime": "Echoing sounds",
+  "subtitles.block.echo_cluster.ambient": "Echo Cluster whispers",
+  "subtitles.block.echo_cluster.absorb_death_sound": "Echo Cluster reacts",
+  "subtitles.block.echo_cluster.release_death_sound": "Echo Cluster imitates",
+
+  "subtitles.block.echo_repository.absorb_vibration": "Echo Repository listens",
+  "subtitles.block.echo_repository.release_vibration": "Echo Repository booms",
+  "subtitles.block.echo_repository.set_capacity": "Vibration capacity set",
+  "subtitles.block.echo_repository.lock": "Echo Repository locks",
+  "subtitles.block.echo_repository.unlock": "Echo Repository unlocks",
+
+  "comment.chrysalis.shared_features.blight_meal": "SHARED FEATURES - BLIGHT MEAL",
+
+  "item.chrysalis.blight_meal": "Blight Meal",
+  "block.chrysalis.blighted_bone_block": "Blighted Bone Block",
+  "subtitles.item.blight_meal.use": "Blight Meal crinkles",
+
+  "comment.chrysalis.shared_features.scoping_stands": "SHARED FEATURES - SCOPING STANDS",
+
+  "item.chrysalis.scoping_stand": "Scoping Stand",
+  "entity.chrysalis.scoping_stand": "Scoping Stand",
+
+  "subtitles.item.spyglass.place_on_scoping_stand": "Spyglass placed",
+  "subtitles.item.spyglass.take_from_scoping_stand": "Spyglass taken",
+
+  "comment.chrysalis.shared_features.bundle_backport": "SHARED FEATURES - BUNDLE BACKPORT",
+
+  "item.chrysalis.bundle": "Bundle",
+  "item.chrysalis.white_bundle": "White Bundle",
+  "item.chrysalis.light_gray_bundle": "Light Gray Bundle",
+  "item.chrysalis.gray_bundle": "Gray Bundle",
+  "item.chrysalis.black_bundle": "Black Bundle",
+  "item.chrysalis.brown_bundle": "Brown Bundle",
+  "item.chrysalis.red_bundle": "Red Bundle",
+  "item.chrysalis.orange_bundle": "Orange Bundle",
+  "item.chrysalis.yellow_bundle": "Yellow Bundle",
+  "item.chrysalis.lime_bundle": "Lime Bundle",
+  "item.chrysalis.green_bundle": "Green Bundle",
+  "item.chrysalis.cyan_bundle": "Cyan Bundle",
+  "item.chrysalis.light_blue_bundle": "Light Blue Bundle",
+  "item.chrysalis.blue_bundle": "Blue Bundle",
+  "item.chrysalis.purple_bundle": "Purple Bundle",
+  "item.chrysalis.magenta_bundle": "Magenta Bundle",
+  "item.chrysalis.pink_bundle": "Pink Bundle",
+
+  "item.chrysalis.bundle.empty": "Empty",
+  "item.chrysalis.bundle.empty.description": "Can hold a mixed stack of items",
+  "item.chrysalis.bundle.full": "Full",
+  "item.chrysalis.bundle.fullness": "%1$s/%2$s",
+
+  "subtitles.item.bundle.insert": "Item packed",
+  "subtitles.item.bundle.insert_fail": "Bundle full",
+  "subtitles.item.bundle.remove_one": "Item unpacked",
+  "subtitles.item.bundle.drop_contents": "Bundle empties",
+
+  "comment.chrysalis.shared_features.copper_gear_backport": "SHARED FEATURES - COPPER GEAR BACKPORT",
+
+  "item.chrysalis.copper_nugget": "Copper Nugget",
+  "item.chrysalis.copper_sword": "Copper Sword",
+  "item.chrysalis.copper_pickaxe": "Copper Pickaxe",
+  "item.chrysalis.copper_axe": "Copper Axe",
+  "item.chrysalis.copper_shovel": "Copper Shovel",
+  "item.chrysalis.copper_hoe": "Copper Hoe",
+  "item.chrysalis.copper_helmet": "Copper Helmet",
+  "item.chrysalis.copper_chestplate": "Copper Chestplate",
+  "item.chrysalis.copper_leggings": "Copper Leggings",
+  "item.chrysalis.copper_boots": "Copper Boots",
+  "item.chrysalis.copper_horse_armor": "Copper Horse Armor",
+
+  "subtitles.item.armor.equip_copper": "Copper armor clonks",
+
+  "comment.chrysalis.shared_features.netherite_horse_armor_backport": "SHARED FEATURES - NETHERITE HORSE ARMOR BACKPORT",
+
+  "item.chrysalis.netherite_horse_armor": "Netherite Horse Armor"
 }
