@@ -7,11 +7,15 @@ import net.junebug.chrysalis.common.blocks.custom_blocks.interfaces.SimpleFluidl
 import net.junebug.chrysalis.common.entities.custom_entities.PlaceholderBlockEntity;
 import net.junebug.chrysalis.common.entities.registry.CBlockEntities;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
+import net.junebug.chrysalis.util.helpers.ItemHelper;
 import net.junebug.chrysalis.util.helpers.ParticleHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -20,7 +24,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -44,6 +50,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class PlaceholderBlock extends BaseEntityBlock implements SimpleFluidloggedBlock {
 
@@ -73,14 +80,24 @@ public class PlaceholderBlock extends BaseEntityBlock implements SimpleFluidlogg
         return createTickerHelper(blockEntityType, CBlockEntities.PLACEHOLDER_BLOCK.get(), level.isClientSide() ? PlaceholderBlockEntity::clientTick : PlaceholderBlockEntity::serverTick);
     }
 
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, Item.@NotNull TooltipContext tooltipContext, @NotNull List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+
+        if (tooltipFlag.isCreative()) {
+            list.add(CommonComponents.EMPTY);
+            ItemHelper.addItalicDescriptionTooltip(list, itemStack.getItem(), ChatFormatting.GRAY, false);
+        }
+
+        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
+    }
+
     // endregion
 
     // region Block States
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(CBlockStateProperties.PLACEHOLDER_BLOCK_MODEL_STATE, CBlockStateProperties.PLACEHOLDER_UPDATE_WHEN_STATE, BlockStateProperties.POWERED, CBlockStateProperties.FLUIDLOGGED);
+        super.createBlockStateDefinition(builder.add(CBlockStateProperties.PLACEHOLDER_BLOCK_MODEL_STATE, CBlockStateProperties.PLACEHOLDER_UPDATE_WHEN_STATE, BlockStateProperties.POWERED, CBlockStateProperties.FLUIDLOGGED));
     }
 
     @Nullable @Override

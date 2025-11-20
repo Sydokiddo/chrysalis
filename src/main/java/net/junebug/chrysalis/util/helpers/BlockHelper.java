@@ -11,6 +11,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -18,6 +20,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import java.util.function.ToIntFunction;
 
 @SuppressWarnings("unused")
@@ -46,6 +50,18 @@ public class BlockHelper {
             itemEntity.setDefaultPickUpDelay();
             serverLevel.addFreshEntity(itemEntity);
         }
+    }
+
+    public static void deflectProjectile(Projectile projectile, double scaleFactor) {
+        projectile.deflect(ProjectileDeflection.REVERSE, null, projectile.getOwner(), false);
+        projectile.setPos(projectile.position().add(projectile.getDeltaMovement()).add(new Vec3(Math.signum(projectile.getDeltaMovement().x()), Math.signum(projectile.getDeltaMovement().y()), Math.signum(projectile.getDeltaMovement().z())).scale(0.05D)));
+        projectile.setDeltaMovement(projectile.getDeltaMovement().scale(scaleFactor));
+    }
+
+    public static void deflectProjectileWithSound(Projectile projectile, double scaleFactor, BlockHitResult blockHitResult, SoundEvent soundEvent, float soundPitch) {
+        projectile.level().playSound(null, blockHitResult.getBlockPos(), soundEvent, SoundSource.BLOCKS, 1.0F, soundPitch);
+        projectile.level().gameEvent(GameEvent.PROJECTILE_LAND, blockHitResult.getLocation(), GameEvent.Context.of(projectile, null));
+        deflectProjectile(projectile, scaleFactor);
     }
 
     public static final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();

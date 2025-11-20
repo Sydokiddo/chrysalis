@@ -9,7 +9,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -18,7 +17,7 @@ import net.junebug.chrysalis.common.blocks.custom_blocks.interfaces.DissipatingB
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class DissipatingMultifaceBlock extends MultifaceBlock implements DissipatingBlockInterface {
+public class DissipatingMultifaceBlock extends FluidloggedMultifaceBlock implements DissipatingBlockInterface {
 
     /**
      * A class for blocks that dissipate much like the normal DissipatingBlock class, but for multiface blocks (such as glow lichen, sculk veins, etc.).
@@ -45,8 +44,7 @@ public class DissipatingMultifaceBlock extends MultifaceBlock implements Dissipa
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(CBlockStateProperties.DISSIPATES, CBlockStateProperties.DESTROYED);
+        super.createBlockStateDefinition(builder.add(CBlockStateProperties.DISSIPATES, CBlockStateProperties.DESTROYED));
     }
 
     // endregion

@@ -73,6 +73,7 @@ public class ComponentHelper {
         EXPERIENCE_COLOR = Color.decode("#B9E85C"),
         WAXED_COLOR = Color.decode("#FABF29"),
         REMAINS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),
+        BARRICADE_COLOR = Color.decode("#A5F0FF"),
         REDSTONE_COLOR = Color.decode("#971607"),
         COPPER_COLOR = Color.decode("#B4684D"),
         RESIN_COLOR = Color.decode("#FC7812"),

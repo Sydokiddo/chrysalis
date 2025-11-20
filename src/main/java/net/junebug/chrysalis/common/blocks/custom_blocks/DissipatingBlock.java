@@ -44,8 +44,7 @@ public class DissipatingBlock extends Block implements DissipatingBlockInterface
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(CBlockStateProperties.DISSIPATES, CBlockStateProperties.DESTROYED);
+        super.createBlockStateDefinition(builder.add(CBlockStateProperties.DISSIPATES, CBlockStateProperties.DESTROYED));
     }
 
     // endregion

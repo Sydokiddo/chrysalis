@@ -77,10 +77,14 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
     }
 
     static BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos) {
+        scheduleShapeTick(blockState, levelReader, scheduledTickAccess, blockPos);
+        return blockState;
+    }
+
+    static void scheduleShapeTick(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos) {
         FluidState fluidState = levelReader.getFluidState(blockPos);
         Fluid fluidFromState = getFluidFromState(getStateFromFluid(fluidState.getType()));
         if (blockState.getValue(CBlockStateProperties.FLUIDLOGGED) == getStateFromFluid(fluidState.getType())) scheduledTickAccess.scheduleTick(blockPos, fluidFromState, fluidFromState.getTickDelay(levelReader));
-        return blockState;
     }
 
     static int getLightEmission(BlockState blockState) {

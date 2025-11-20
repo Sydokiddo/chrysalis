@@ -20,6 +20,7 @@ public class CTags {
 
     public static final TagKey<Item>
         BANNER_PATTERNS = registerItemTag("banner_patterns"),
+        BARRICADE_ITEMS = registerItemTag("barricades"),
         BAR_ITEMS = registerItemTag("bars"),
         CAMPFIRES = registerItemTag("campfires"),
         CANNOT_GIVE_WITH_COMMANDS = registerItemTag("cannot_give_with_commands"),
@@ -99,6 +100,7 @@ public class CTags {
         ALLOWS_BEACON_BEAM_PASSTHROUGH = registerBlockTag("allows_beacon_beam_passthrough"),
         ALLOWS_PLACEMENT_WITH_BUILDING_FATIGUE = registerBlockTag("allows_placement_with_building_fatigue"),
         ALLOWS_USE_WHILE_SNEAKING = registerBlockTag("allows_use_while_sneaking"),
+        BARRICADES = registerBlockTag("barricades"),
         BARS = registerBlockTag("bars"),
         BASE_STONE_END = registerBlockTag("base_stone_end"),
         CHORUS_PLANTS_CAN_GROW_ON = registerBlockTag("chorus_plants_can_grow_on"),

@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:bedrock",
+    "#chrysalis:barricades",
     "chrysalis:placeholder_block"
   ]
 }

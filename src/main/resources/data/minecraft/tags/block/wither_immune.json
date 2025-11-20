@@ -4,6 +4,7 @@
     "#chrysalis:unbreakable_blocks",
     "minecraft:dragon_egg",
     "minecraft:trial_spawner",
-    "minecraft:vault"
+    "minecraft:vault",
+    "#chrysalis:barricades"
   ]
 }

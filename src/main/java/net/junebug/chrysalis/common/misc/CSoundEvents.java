@@ -48,6 +48,9 @@ public class CSoundEvents {
         EVENT_TEST_USE = SOUND_EVENTS.register("item.event_test.use", SoundEvent::createVariableRangeEvent),
         ITEM_DROP = SOUND_EVENTS.register("entity.item.drop", SoundEvent::createVariableRangeEvent),
 
+        BARRICADE_AMBIENT = SOUND_EVENTS.register("block.barricade.ambient", SoundEvent::createVariableRangeEvent),
+        BARRICADE_DEFLECT = SOUND_EVENTS.register("block.barricade.deflect", SoundEvent::createVariableRangeEvent),
+
         PLACEHOLDER_BLOCK_CHANGE_STATE = SOUND_EVENTS.register("block.placeholder_block.change_state", SoundEvent::createVariableRangeEvent),
         PLACEHOLDER_BLOCK_UPDATE = SOUND_EVENTS.register("block.placeholder_block.update", SoundEvent::createVariableRangeEvent),
         PLACEHOLDER_BLOCK_UPDATE_FAIL = SOUND_EVENTS.register("block.placeholder_block.update_fail", SoundEvent::createVariableRangeEvent),

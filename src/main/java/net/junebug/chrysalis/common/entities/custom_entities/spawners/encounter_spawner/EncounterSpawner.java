@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -207,6 +208,12 @@ public class EncounterSpawner extends AbstractSpawnerEntity {
     @Override
     public float getPickRadius() {
         return 0.5F;
+    }
+
+    @Override
+    public boolean shouldRenderAtSqrDistance(double distance) {
+        if (distance < Mth.square(1.8F)) return false;
+        return super.shouldRenderAtSqrDistance(distance);
     }
 
     @Override

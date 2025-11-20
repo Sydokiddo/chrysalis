@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#chrysalis:unbreakable_blocks"
+    "#chrysalis:unbreakable_blocks",
+    "#chrysalis:barricades"
   ]
 }

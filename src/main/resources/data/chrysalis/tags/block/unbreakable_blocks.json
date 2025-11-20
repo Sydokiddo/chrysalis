@@ -9,6 +9,8 @@
     "minecraft:jigsaw",
     "minecraft:structure_block",
     "minecraft:barrier",
+    "chrysalis:unbreakable_barricade",
+    "chrysalis:unbreakable_barricade_block",
     "chrysalis:placeholder_block",
     {"id": "minecraft:test_block", "required": false}
   ]

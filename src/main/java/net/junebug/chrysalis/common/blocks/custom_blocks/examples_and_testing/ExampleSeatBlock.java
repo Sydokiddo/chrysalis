@@ -29,8 +29,7 @@ public class ExampleSeatBlock extends Block implements SittableBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(CBlockStateProperties.SITTABLE);
+        super.createBlockStateDefinition(builder.add(CBlockStateProperties.SITTABLE));
     }
 
     @Override

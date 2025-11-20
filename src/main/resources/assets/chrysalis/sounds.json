@@ -161,6 +161,20 @@
     ],
     "subtitle": "subtitles.entity.item.drop"
   },
+  "block.barricade.ambient": {
+    "sounds": [
+      "chrysalis:block/barricade/ambient"
+    ],
+    "subtitle": "subtitles.block.barricade.ambient"
+  },
+  "block.barricade.deflect": {
+    "sounds": [
+      "chrysalis:block/barricade/deflect1",
+      "chrysalis:block/barricade/deflect2",
+      "chrysalis:block/barricade/deflect3"
+    ],
+    "subtitle": "subtitles.block.barricade.deflect"
+  },
   "block.placeholder_block.change_state": {
     "sounds": [
       "chrysalis:block/placeholder_block/change_state"

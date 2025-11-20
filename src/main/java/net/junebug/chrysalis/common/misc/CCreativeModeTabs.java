@@ -54,6 +54,10 @@ public class CCreativeModeTabs {
             output.accept(CItems.NETHER_PORTAL);
             output.accept(CItems.END_PORTAL);
             output.accept(CItems.END_GATEWAY);
+            output.accept(CBlocks.BARRICADE.toStack());
+            output.accept(CBlocks.UNBREAKABLE_BARRICADE.toStack());
+            output.accept(CBlocks.BARRICADE_BLOCK.toStack());
+            output.accept(CBlocks.UNBREAKABLE_BARRICADE_BLOCK.toStack());
             output.accept(CBlocks.PLACEHOLDER_BLOCK.toStack());
         })
     .build());

@@ -150,9 +150,28 @@
 
   "comment.chrysalis.blocks": "BLOCKS",
 
+  "block.chrysalis.barricade": "Barricade",
+  "block.chrysalis.barricade_block": "Barricade Block",
+  "block.chrysalis.unbreakable_barricade": "Unbreakable Barricade",
+  "block.chrysalis.unbreakable_barricade_block": "Unbreakable Barricade Block",
+  "block.chrysalis.barricade.description": "A block that can be used to block off areas and deflect projectiles off of it.",
+  "block.chrysalis.barricade.description_secondary": "Can be interacted with any block to disguise itself as said block.",
+
   "block.chrysalis.placeholder_block": "Placeholder Block",
+  "block.chrysalis.placeholder_block.description": "A block that can be set to a specific block state (existing or not), and can be updated to said block state as long as it is registered.",
   "gui.chrysalis.placeholder_block.set_block_id": "Set Block ID: '%s'",
   "gui.chrysalis.placeholder_block.unknown_block_id": "Block ID '%s' does not exist!",
+
+  "block.chrysalis.vault_door": "Vault Door",
+  "block.endless_encore.vault_door_frame": "Vault Door Frame",
+
+  "gui.chrysalis.unlockable_block.required_items_title.singular": "Required Item:",
+  "gui.chrysalis.unlockable_block.required_items_title.plural": "Required Items:",
+  "gui.chrysalis.unlockable_block.required_entities_title.singular": "Required Entity:",
+  "gui.chrysalis.unlockable_block.required_entities_title.plural": "Required Entities:",
+  "gui.chrysalis.unlockable_block.requirement_description.singular": "%s",
+  "gui.chrysalis.unlockable_block.requirement_description.plural": "%1$s (x%2$s)",
+
   "block.chrysalis.podium_spawner": "Podium Spawner",
 
   "comment.chrysalis.entities": "ENTITIES",
@@ -172,6 +191,17 @@
 
   "effect.chrysalis.radiance": "Radiance",
   "effect.chrysalis.radiance.desc": "Shrouds the player's screen in a blinding light.",
+  "effect.minecraft.health_boost.desc": "Increases the maximum amount of health.",
+  "effect.chrysalis.health_reduction": "Health Reduction",
+  "effect.chrysalis.health_reduction.desc": "Decreases the maximum amount of health.",
+  "effect.chrysalis.building_fatigue": "Building Fatigue",
+  "effect.chrysalis.building_fatigue.desc": "Prevents players and endermen from building.",
+  "effect.chrysalis.heaviness": "Heaviness",
+  "effect.chrysalis.heaviness.desc": "Causes the target to fall at a faster speed, which deals extra fall damage.",
+  "effect.chrysalis.wounded": "Wounded",
+  "effect.chrysalis.wounded.desc": "Causes the target to take bonus damage if they are not at full health.",
+  "effect.chrysalis.electrocuted": "Electrocuted",
+  "effect.chrysalis.electrocuted.desc": "Causes the target to take damage as they move or come into contact with water.",
   "effect.chrysalis.arthropod_sight": "Arthropod Sight",
   "effect.chrysalis.arthropod_sight.desc": "Transforms the player's vision into the vision of an arthropod.",
   "effect.chrysalis.blind_sight": "Blind Sight",
@@ -186,11 +216,6 @@
   "effect.chrysalis.skeletal_sight.desc": "Transforms the player's vision into the vision of a Skeleton.",
   "effect.chrysalis.zombie_sight": "Zombie Sight",
   "effect.chrysalis.zombie_sight.desc": "Transforms the player's vision into the vision of a Zombie.",
-  "effect.minecraft.health_boost.desc": "Increases the maximum amount of health.",
-  "effect.chrysalis.health_reduction": "Health Reduction",
-  "effect.chrysalis.health_reduction.desc": "Decreases the maximum amount of health.",
-  "effect.chrysalis.building_fatigue": "Building Fatigue",
-  "effect.chrysalis.building_fatigue.desc": "Prevents players and endermen from building.",
 
   "comment.chrysalis.attributes": "ATTRIBUTES",
 
@@ -199,6 +224,7 @@
   "attribute.chrysalis.reduced_detection_range": "Reduced Detection Range",
   "attribute.chrysalis.item_pick_up_range": "Item Pick Up Range",
   "attribute.chrysalis.experience_pick_up_range": "Experience Pick Up Range",
+  "attribute.chrysalis.electrocution_resistance": "Electrocution Resistance",
 
   "comment.chrysalis.commands": "COMMANDS",
 
@@ -354,6 +380,11 @@
   "gui.chrysalis.item.remains_on_death": "Remains on Death",
   "gui.chrysalis.item.muffled": "Muffled",
   "gui.chrysalis.item.waxed": "Waxed",
+  "gui.chrysalis.item.broken": "Broken",
+  "gui.chrysalis.item.low_durability.singular": "%1$s has low durability! (%2$s)",
+  "gui.chrysalis.item.low_durability.plural": "%1$s have low durability! (%2$s)",
+  "gui.chrysalis.item.uses_left": "Uses Left: %s",
+  "gui.chrysalis.item.infinite_uses": "Infinite Uses",
 
   "gui.chrysalis.item.armor_trim": "%1$s (%2$s)",
   "gui.chrysalis.item.enchantment.applies_to": "Applies To:",
@@ -402,6 +433,8 @@
   "death.attack.chrysalis.pelt.item": "%1$s was pelted by %2$s using %3$s",
   "death.attack.chrysalis.splatter": "%1$s was splattered by %2$s",
   "death.attack.chrysalis.splatter.item": "%1$s was splattered by %2$s using %3$s",
+  "death.attack.chrysalis.electrocute": "%1$s was electrocuted",
+  "death.attack.chrysalis.electrocute.player": "%1$s was electrocuted while trying to escape %2$s",
   "death.attack.chrysalis.earthquake": "%1$s was shaken into the earth by %2$s",
   "death.attack.chrysalis.earthquake.item": "%1$s was shaken into the earth by %2$s using %3$s",
   "death.attack.chrysalis.laser_blast": "%1$s was blasted by %2$s",
@@ -541,9 +574,19 @@
 
   "comment.chrysalis.block_subtitles": "BLOCK SUBTITLES",
 
+  "subtitles.block.barricade.ambient": "Barricade hums",
+  "subtitles.block.barricade.deflect": "Barricade deflects",
+
   "subtitles.block.placeholder_block.change_state": "Placeholder Block changes state",
   "subtitles.block.placeholder_block.update": "Placeholder Block updates",
   "subtitles.block.placeholder_block.update_fail": "Placeholder Block fails to update",
+
+  "subtitles.block.vault_door.insert": "Vault Door advances",
+  "subtitles.block.vault_door.insert_item_fail": "Vault Door rejects item",
+  "subtitles.block.vault_door.insert_entity_fail": "Vault Door rejects entity",
+  "subtitles.block.vault_door.insert_final": "Vault Door unlocks",
+  "subtitles.block.vault_door.open": "Vault Door opens",
+  "subtitles.block.vault_door_frame.change_state": "Vault Door Frame changes state",
 
   "subtitles.block.podium_spawner.ambient": "Podium Spawner crackles",
   "subtitles.block.podium_spawner.spawn_mob": "Podium Spawner spawns a mob",
@@ -591,6 +634,17 @@
   "subtitles.entity.key_golem.rattle": "Key Golem rattles",
   "subtitles.entity.key_golem.unlock": "Key Golem unlocks",
 
+  "subtitles.entity.player.hurt_electrocuted": "Player electrocutes",
+
+  "subtitles.entity.generic.run": "Running",
+  "subtitles.entity.generic.crawl": "Crawling",
+  "subtitles.entity.generic.jump": "Jumping",
+  "subtitles.entity.generic.bounce": "Bouncing",
+  "subtitles.entity.generic.hop": "Hopping",
+  "subtitles.entity.generic.fall": "Falling",
+  "subtitles.entity.generic.fly": "Flying",
+  "subtitles.entity.generic.glide": "Gliding",
+
   "comment.chrysalis.ui_subtitles": "UI SUBTITLES",
 
   "subtitles.ui.creative_mode.delete_item": "Item deleted",
@@ -599,6 +653,7 @@
   "comment.chrysalis.item_tags": "ITEM TAGS",
 
   "tag.item.chrysalis.banner_patterns": "Banner Patterns",
+  "tag.item.chrysalis.barricades": "Barricades",
   "tag.item.chrysalis.bars": "Bars",
   "tag.item.chrysalis.campfires": "Campfires",
   "tag.item.chrysalis.cannot_give_with_commands": "Cannot Give With Commands",
@@ -656,6 +711,7 @@
   "tag.block.chrysalis.allows_beacon_beam_passthrough": "Allows Beacon Beam Passthrough",
   "tag.block.chrysalis.allows_placement_with_building_fatigue": "Allows Placement with Building Fatigue",
   "tag.block.chrysalis.allows_use_while_sneaking": "Allows Use While Sneaking",
+  "tag.block.chrysalis.barricades": "Barricades",
   "tag.block.chrysalis.bars": "Bars",
   "tag.block.chrysalis.base_stone_end": "End Base Stones",
   "tag.block.chrysalis.chorus_plants_can_grow_on": "Chorus Plants Can Grow On",
@@ -780,7 +836,18 @@
   "comment.chrysalis.shared_features.amethyst_changes": "SHARED FEATURES - AMETHYST CHANGES",
 
   "block.chrysalis.refined_amethyst_block": "Refined Block of Amethyst",
+  "block.chrysalis.amethyst_bricks": "Amethyst Bricks",
+  "block.chrysalis.amethyst_brick_stairs": "Amethyst Brick Stairs",
+  "block.chrysalis.amethyst_brick_slab": "Amethyst Brick Slab",
+  "block.chrysalis.amethyst_brick_wall": "Amethyst Brick Wall",
+  "block.chrysalis.chiseled_amethyst": "Chiseled Amethyst",
+  "block.chrysalis.amethyst_pillar": "Amethyst Pillar",
+  "block.chrysalis.amethyst_lamp": "Amethyst Lamp",
+
   "subtitles.block.amethyst_cluster.ambient": "Amethyst Cluster twinkles",
+  "subtitles.block.amethyst_lamp.ambient": "Amethyst Lamp flickers",
+  "subtitles.block.amethyst_lamp.turn_on": "Amethyst Lamp turns on",
+  "subtitles.block.amethyst_lamp.turn_off": "Amethyst Lamp turns off",
 
   "comment.chrysalis.shared_features.echo_shard_changes": "SHARED FEATURES - ECHO SHARD CHANGES",
 
@@ -791,17 +858,27 @@
   "block.chrysalis.medium_echo_bud": "Medium Echo Bud",
   "block.chrysalis.large_echo_bud": "Large Echo Bud",
   "block.chrysalis.echo_cluster": "Echo Cluster",
+  "block.chrysalis.echo_bricks": "Echo Bricks",
+  "block.chrysalis.echo_brick_stairs": "Echo Brick Stairs",
+  "block.chrysalis.echo_brick_slab": "Echo Brick Slab",
+  "block.chrysalis.echo_brick_wall": "Echo Brick Wall",
+  "block.chrysalis.chiseled_echo_block": "Chiseled Echo Block",
+  "block.chrysalis.echo_pillar": "Echo Pillar",
+  "block.chrysalis.echo_lamp": "Echo Lamp",
   "block.chrysalis.echo_repository": "Echo Repository",
 
   "subtitles.block.amethyst_block.corrupt": "Amethyst corrupts",
-
   "subtitles.block.echo_block.chime": "Echoing sounds",
   "subtitles.block.echo_cluster.ambient": "Echo Cluster whispers",
-  "subtitles.block.echo_cluster.absorb_death_sound": "Echo Cluster reacts",
-  "subtitles.block.echo_cluster.release_death_sound": "Echo Cluster imitates",
+  "subtitles.block.echo_cluster.absorb": "Echo Cluster listens",
+  "subtitles.block.echo_cluster.release": "Echo Cluster imitates",
 
-  "subtitles.block.echo_repository.absorb_vibration": "Echo Repository listens",
-  "subtitles.block.echo_repository.release_vibration": "Echo Repository booms",
+  "subtitles.block.echo_lamp.ambient": "Echo Lamp flickers",
+  "subtitles.block.echo_lamp.turn_on": "Echo Lamp turns on",
+  "subtitles.block.echo_lamp.turn_off": "Echo Lamp turns off",
+
+  "subtitles.block.echo_repository.absorb": "Echo Repository absorbs vibration",
+  "subtitles.block.echo_repository.release": "Echo Repository releases vibration",
   "subtitles.block.echo_repository.set_capacity": "Vibration capacity set",
   "subtitles.block.echo_repository.lock": "Echo Repository locks",
   "subtitles.block.echo_repository.unlock": "Echo Repository unlocks",
@@ -810,6 +887,7 @@
 
   "item.chrysalis.blight_meal": "Blight Meal",
   "block.chrysalis.blighted_bone_block": "Blighted Bone Block",
+
   "subtitles.item.blight_meal.use": "Blight Meal crinkles",
 
   "comment.chrysalis.shared_features.scoping_stands": "SHARED FEATURES - SCOPING STANDS",

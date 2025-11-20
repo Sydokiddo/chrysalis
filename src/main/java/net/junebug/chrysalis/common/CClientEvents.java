@@ -134,6 +134,10 @@ public class CClientEvents {
                 event.insertAfter(Items.ENDER_EYE.getDefaultInstance(), CItems.NETHER_PORTAL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.NETHER_PORTAL.toStack(), CItems.END_PORTAL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.END_PORTAL.toStack(), CItems.END_GATEWAY.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(Items.VAULT.getDefaultInstance(), CBlocks.BARRICADE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CBlocks.BARRICADE.toStack(), CBlocks.UNBREAKABLE_BARRICADE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CBlocks.UNBREAKABLE_BARRICADE.toStack(), CBlocks.BARRICADE_BLOCK.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CBlocks.BARRICADE_BLOCK.toStack(), CBlocks.UNBREAKABLE_BARRICADE_BLOCK.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
 
             if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) event.insertBefore(Items.TRIAL_KEY.getDefaultInstance(), CItems.KEY.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
@@ -146,6 +150,10 @@ public class CClientEvents {
 
             if (event.getTabKey() == CreativeModeTabs.OP_BLOCKS && event.hasPermissions()) {
                 event.insertAfter(Items.STRUCTURE_BLOCK.getDefaultInstance(), CBlocks.PLACEHOLDER_BLOCK.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(Items.BARRIER.getDefaultInstance(), CBlocks.BARRICADE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CBlocks.BARRICADE.toStack(), CBlocks.UNBREAKABLE_BARRICADE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CBlocks.UNBREAKABLE_BARRICADE.toStack(), CBlocks.BARRICADE_BLOCK.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(CBlocks.BARRICADE_BLOCK.toStack(), CBlocks.UNBREAKABLE_BARRICADE_BLOCK.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(Items.DEBUG_STICK.getDefaultInstance(), CItems.HEAL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.HEAL.toStack(), CItems.FILL_HUNGER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(CItems.FILL_HUNGER.toStack(), CItems.FILL_OXYGEN.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);

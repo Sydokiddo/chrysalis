@@ -30,8 +30,7 @@ public class ExampleFluidloggedBlock extends Block implements SimpleFluidloggedB
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(CBlockStateProperties.FLUIDLOGGED);
+        super.createBlockStateDefinition(builder.add(CBlockStateProperties.FLUIDLOGGED));
     }
 
     @Nullable @Override
