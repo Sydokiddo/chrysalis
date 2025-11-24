@@ -84,7 +84,7 @@ public class BarricadeFullBlock extends BaseEntityBlock implements Barricade, Si
         return new BarricadeBlockEntity(blockPos, blockState);
     }
 
-    private Optional<BarricadeBlockEntity> getBarricadeBlockEntity(BlockGetter blockGetter, BlockPos blockPos) {
+    public Optional<BarricadeBlockEntity> getBarricadeBlockEntity(BlockGetter blockGetter, BlockPos blockPos) {
         if (blockGetter.getBlockEntity(blockPos) instanceof BarricadeBlockEntity barricadeBlockEntity) return Optional.of(barricadeBlockEntity);
         return Optional.empty();
     }

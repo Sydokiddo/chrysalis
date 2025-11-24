@@ -7,11 +7,12 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.RenderTypeHelper;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,14 +32,34 @@ public class BarricadeBlockRenderer implements BlockEntityRenderer<BarricadeBloc
     @Override
     public void render(@NotNull BarricadeBlockEntity barricadeBlockEntity, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
 
-        if (barricadeBlockEntity.getLevel() != null && !barricadeBlockEntity.getDisguisedBlockState().isEmpty()) {
+        BlockState disguisedState = barricadeBlockEntity.getDisguisedBlockState();
 
-            boolean isVisible = barricadeBlockEntity.getDisguisedBlockState().getRenderShape() != RenderShape.INVISIBLE;
-            boolean canRender = this.canRenderWithInvisibleRenderShape(barricadeBlockEntity.getDisguisedBlockState()) || isVisible;
+        if (barricadeBlockEntity.getLevel() != null && !disguisedState.isEmpty()) {
+
+            boolean isVisible = disguisedState.getRenderShape() != RenderShape.INVISIBLE;
+            boolean canRender = this.canRenderWithInvisibleRenderShape(disguisedState) || isVisible;
             if (!canRender) return;
 
             poseStack.pushPose();
-            this.blockRenderer.renderSingleBlock(isVisible ? barricadeBlockEntity.getDisguisedBlockState() : Blocks.STONE.defaultBlockState(), poseStack, multiBufferSource, packedLight, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, this.getBlockRenderType(barricadeBlockEntity.getDisguisedBlockState()));
+            var blockModel = this.blockRenderer.getBlockModel(isVisible ? disguisedState : Blocks.STONE.defaultBlockState());
+
+            for (var renderType : blockModel.getRenderTypes(disguisedState, RandomSource.create(disguisedState.getSeed(barricadeBlockEntity.getBlockPos())), ModelData.EMPTY))
+
+                this.blockRenderer.getModelRenderer().tesselateBlock(
+                    barricadeBlockEntity.getLevel(),
+                    blockModel,
+                    barricadeBlockEntity.getBlockState(),
+                    barricadeBlockEntity.getBlockPos(),
+                    poseStack,
+                    multiBufferSource.getBuffer(RenderTypeHelper.getMovingBlockRenderType(this.getBlockRenderType(disguisedState))),
+                    true,
+                    RandomSource.create(),
+                    disguisedState.getSeed(barricadeBlockEntity.getBlockPos()),
+                    packedOverlay,
+                    ModelData.EMPTY,
+                    renderType
+                );
+
             poseStack.popPose();
         }
     }
@@ -50,7 +71,7 @@ public class BarricadeBlockRenderer implements BlockEntityRenderer<BarricadeBloc
     private RenderType getBlockRenderType(BlockState blockState) {
         if (blockState.getBlock() instanceof EndPortalBlock) return RenderType.endPortal();
         else if (blockState.getBlock() instanceof EndGatewayBlock) return RenderType.endGateway();
-        else return null;
+        else return RenderType.translucentMovingBlock();
     }
 
     @Override

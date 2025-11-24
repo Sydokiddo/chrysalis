@@ -1,7 +1,9 @@
 package net.junebug.chrysalis.mixin.blocks;
 
+import net.junebug.chrysalis.common.blocks.custom_blocks.BarricadeFullBlock;
 import net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake.Earthquake;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -32,16 +34,33 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Optional;
 
-@Mixin(BlockBehaviour.class)
+@Mixin(Block.class)
 public class BlockMixin {
 
     /**
-     * Pulls information from the data-driven block sound group system and applies it as the block's sound group.
+     * Occludes barricade block faces if the disguised block state is the same as an adjacent barricade block's one.
      **/
 
-    @Inject(at = @At("HEAD"), method = "getSoundType", cancellable = true)
-    private void chrysalis$vanillaBlockSoundData(BlockState blockState, CallbackInfoReturnable<SoundType> cir) {
-        if (BlockSoundData.getFinalSoundType(blockState) != null) cir.setReturnValue(BlockSoundData.getFinalSoundType(blockState));
+    @Inject(at = @At("HEAD"), method = "shouldRenderFace(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;)Z", cancellable = true)
+    private static void chrysalis$occludeSameBarricadeStates(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, BlockState adjacentState, Direction direction, CallbackInfoReturnable<Boolean> cir) {
+        if (blockState.getBlock() instanceof BarricadeFullBlock barricade && barricade.getBarricadeBlockEntity(blockGetter, blockPos).isPresent() && adjacentState.getBlock() instanceof BarricadeFullBlock adjacentBarricade && adjacentBarricade.getBarricadeBlockEntity(blockGetter, blockPos).isPresent()) {
+            BlockState disguisedState = barricade.getBarricadeBlockEntity(blockGetter, blockPos).get().getDisguisedBlockState();
+            BlockState adjacentDisguisedState = adjacentBarricade.getBarricadeBlockEntity(blockGetter, blockPos).get().getDisguisedBlockState();
+            if (!disguisedState.isEmpty() && !adjacentDisguisedState.isEmpty() && disguisedState == adjacentDisguisedState) cir.setReturnValue(false);
+        }
+    }
+
+    @Mixin(BlockBehaviour.class)
+    public static class BlockBehaviourMixin {
+
+        /**
+         * Pulls information from the data-driven block sound group system and applies it as the block's sound group.
+         **/
+
+        @Inject(at = @At("HEAD"), method = "getSoundType", cancellable = true)
+        private void chrysalis$vanillaBlockSoundData(BlockState blockState, CallbackInfoReturnable<SoundType> cir) {
+            if (BlockSoundData.getFinalSoundType(blockState) != null) cir.setReturnValue(BlockSoundData.getFinalSoundType(blockState));
+        }
     }
 
     @Mixin(BlockBehaviour.BlockStateBase.class)
@@ -146,7 +165,7 @@ public class BlockMixin {
     }
 
     @Mixin(Blocks.class)
-    public static class BlocksRegistryMixin {
+    public static class BlockRegistryMixin {
 
         /**
          * Allows for any mobs in the can_spawn_on_leaves tag to be able to spawn on leaves, instead of just the previously hard-coded ocelots or parrots.
