@@ -50,10 +50,15 @@ public class CSoundEvents {
 
         BARRICADE_AMBIENT = SOUND_EVENTS.register("block.barricade.ambient", SoundEvent::createVariableRangeEvent),
         BARRICADE_DEFLECT = SOUND_EVENTS.register("block.barricade.deflect", SoundEvent::createVariableRangeEvent),
+        BARRICADE_DISGUISE = SOUND_EVENTS.register("block.barricade.disguise", SoundEvent::createVariableRangeEvent),
+        BARRICADE_MAKE_VISIBLE = SOUND_EVENTS.register("block.barricade.make_visible", SoundEvent::createVariableRangeEvent),
+        BARRICADE_MAKE_INVISIBLE = SOUND_EVENTS.register("block.barricade.make_invisible", SoundEvent::createVariableRangeEvent),
 
         PLACEHOLDER_BLOCK_CHANGE_STATE = SOUND_EVENTS.register("block.placeholder_block.change_state", SoundEvent::createVariableRangeEvent),
         PLACEHOLDER_BLOCK_UPDATE = SOUND_EVENTS.register("block.placeholder_block.update", SoundEvent::createVariableRangeEvent),
         PLACEHOLDER_BLOCK_UPDATE_FAIL = SOUND_EVENTS.register("block.placeholder_block.update_fail", SoundEvent::createVariableRangeEvent),
+
+        WORLD_BORDER_DEFLECT = SOUND_EVENTS.register("block.world_border.deflect", SoundEvent::createVariableRangeEvent),
 
         ENTITY_SPAWNER_APPEAR = SOUND_EVENTS.register("entity.entity_spawner.appear", SoundEvent::createVariableRangeEvent),
         ENTITY_SPAWNER_ABOUT_TO_SPAWN_ENTITY = SOUND_EVENTS.register("entity.entity_spawner.about_to_spawn_entity", SoundEvent::createVariableRangeEvent),

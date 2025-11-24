@@ -2,10 +2,12 @@ package net.junebug.chrysalis.common.blocks;
 
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.common.blocks.custom_blocks.BarricadeFullBlock;
-import net.junebug.chrysalis.common.blocks.custom_blocks.BarricadeBlock;
+import net.junebug.chrysalis.common.blocks.custom_blocks.BarricadeMultifaceBlock;
 import net.junebug.chrysalis.common.blocks.custom_blocks.PlaceholderBlock;
 import net.junebug.chrysalis.common.blocks.custom_blocks.interfaces.Barricade;
 import net.junebug.chrysalis.common.items.CItems;
+import net.junebug.chrysalis.util.helpers.ComponentHelper;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
@@ -27,10 +29,10 @@ public class CBlocks {
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Chrysalis.MOD_ID);
 
     public static final DeferredBlock<Block>
-        BARRICADE = registerBlock("barricade", BarricadeBlock::new, Barricade.defaultProperties(), new Item.Properties().rarity(Rarity.EPIC)),
-        BARRICADE_BLOCK = registerBlock("barricade_block", BarricadeFullBlock::new, Barricade.defaultProperties(), new Item.Properties().rarity(Rarity.EPIC)),
-        UNBREAKABLE_BARRICADE = registerBlock("unbreakable_barricade", BarricadeBlock::new, Barricade.unbreakableProperties(), new Item.Properties().rarity(Rarity.EPIC)),
-        UNBREAKABLE_BARRICADE_BLOCK = registerBlock("unbreakable_barricade_block", BarricadeFullBlock::new, Barricade.unbreakableProperties(), new Item.Properties().rarity(Rarity.EPIC)),
+        BARRICADE = registerBlock("barricade", properties -> new BarricadeMultifaceBlock(ComponentHelper.BARRICADE_COLOR.getRGB(), properties), Barricade.defaultProperties(), new Item.Properties().rarity(Rarity.EPIC)),
+        BARRICADE_BLOCK = registerBlock("barricade_block", properties -> new BarricadeFullBlock(ComponentHelper.BARRICADE_COLOR.getRGB(), ParticleTypes.SOUL_FIRE_FLAME, properties), Barricade.defaultProperties(), new Item.Properties().rarity(Rarity.EPIC)),
+        UNBREAKABLE_BARRICADE = registerBlock("unbreakable_barricade", properties -> new BarricadeMultifaceBlock(ComponentHelper.UNBREAKABLE_BARRICADE_COLOR.getRGB(), properties), Barricade.unbreakableProperties(), new Item.Properties().rarity(Rarity.EPIC)),
+        UNBREAKABLE_BARRICADE_BLOCK = registerBlock("unbreakable_barricade_block", properties -> new BarricadeFullBlock(ComponentHelper.UNBREAKABLE_BARRICADE_COLOR.getRGB(), ParticleTypes.FLAME, properties), Barricade.unbreakableProperties(), new Item.Properties().rarity(Rarity.EPIC)),
         PLACEHOLDER_BLOCK = registerBlock("placeholder_block", PlaceholderBlock::new, BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).mapColor(MapColor.COLOR_LIGHT_GRAY).noLootTable().noOcclusion().isValidSpawn(Blocks::never).pushReaction(PushReaction.BLOCK), new Item.Properties().rarity(Rarity.EPIC))
     ;
 

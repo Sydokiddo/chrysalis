@@ -25,7 +25,9 @@ public class CBlockStateProperties {
         SITTABLE = BooleanProperty.create("sittable"),
         DISSIPATES = BooleanProperty.create("dissipates"),
         DESTROYED = BooleanProperty.create("destroyed"),
-        EMITS_AMBIENT_SOUNDS = BooleanProperty.create("emits_ambient_sounds")
+        INVISIBLE = BooleanProperty.create("invisible"),
+        EMITS_AMBIENT_SOUNDS = BooleanProperty.create("emits_ambient_sounds"),
+        EMITS_PARTICLES = BooleanProperty.create("emits_particles")
     ;
 
     public static final EnumProperty<FluidloggedState> FLUIDLOGGED = EnumProperty.create("fluidlogged", FluidloggedState.class);

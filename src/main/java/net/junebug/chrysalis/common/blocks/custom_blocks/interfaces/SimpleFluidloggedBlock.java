@@ -87,8 +87,8 @@ public interface SimpleFluidloggedBlock extends SimpleWaterloggedBlock {
         if (blockState.getValue(CBlockStateProperties.FLUIDLOGGED) == getStateFromFluid(fluidState.getType())) scheduledTickAccess.scheduleTick(blockPos, fluidFromState, fluidFromState.getTickDelay(levelReader));
     }
 
-    static int getLightEmission(BlockState blockState) {
-        return getFluidFromState(blockState.getValue(CBlockStateProperties.FLUIDLOGGED)).getFluidType().getLightLevel();
+    static int getLightEmission(int originalLightLevel, BlockState blockState) {
+        return Math.max(originalLightLevel, getFluidFromState(blockState.getValue(CBlockStateProperties.FLUIDLOGGED)).getFluidType().getLightLevel());
     }
 
     // endregion

@@ -74,6 +74,7 @@ public class ComponentHelper {
         WAXED_COLOR = Color.decode("#FABF29"),
         REMAINS_ON_DEATH_COLOR = Color.decode("#8EB4DB"),
         BARRICADE_COLOR = Color.decode("#A5F0FF"),
+        UNBREAKABLE_BARRICADE_COLOR = Color.decode("#FFA5C3"),
         REDSTONE_COLOR = Color.decode("#971607"),
         COPPER_COLOR = Color.decode("#B4684D"),
         RESIN_COLOR = Color.decode("#FC7812"),

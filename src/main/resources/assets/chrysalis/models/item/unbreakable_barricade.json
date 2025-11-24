@@ -1,0 +1,7 @@
+{
+  "render_type": "minecraft:translucent",
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "chrysalis:block/unbreakable_barricade"
+  }
+}

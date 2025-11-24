@@ -50,6 +50,6 @@ public class ExampleFluidloggedBlock extends Block implements SimpleFluidloggedB
 
     @Override
     public int getLightEmission(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
-        return SimpleFluidloggedBlock.getLightEmission(blockState);
+        return SimpleFluidloggedBlock.getLightEmission(super.getLightEmission(blockState, blockGetter, blockPos), blockState);
     }
 }

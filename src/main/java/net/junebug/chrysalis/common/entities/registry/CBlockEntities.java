@@ -2,7 +2,8 @@ package net.junebug.chrysalis.common.entities.registry;
 
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.common.blocks.CBlocks;
-import net.junebug.chrysalis.common.entities.custom_entities.PlaceholderBlockEntity;
+import net.junebug.chrysalis.common.entities.custom_entities.block_entities.BarricadeBlockEntity;
+import net.junebug.chrysalis.common.entities.custom_entities.block_entities.PlaceholderBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -18,6 +19,10 @@ public class CBlockEntities {
     private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Chrysalis.MOD_ID);
 
     // region Block Entities
+
+    public static final Supplier<BlockEntityType<BarricadeBlockEntity>> BARRICADE_BLOCK = BLOCK_ENTITY_TYPES.register(
+        "barricade_block", () -> new BlockEntityType<>(BarricadeBlockEntity::new, CBlocks.BARRICADE_BLOCK.get(), CBlocks.UNBREAKABLE_BARRICADE_BLOCK.get())
+    );
 
     public static final Supplier<BlockEntityType<PlaceholderBlockEntity>> PLACEHOLDER_BLOCK = BLOCK_ENTITY_TYPES.register(
         "placeholder_block", () -> new BlockEntityType<>(PlaceholderBlockEntity::new, CBlocks.PLACEHOLDER_BLOCK.get())

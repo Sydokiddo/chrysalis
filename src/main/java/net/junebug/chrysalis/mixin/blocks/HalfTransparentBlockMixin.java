@@ -27,15 +27,15 @@ public class HalfTransparentBlockMixin extends Block {
      **/
 
     @Inject(at = @At("HEAD"), method = "skipRendering", cancellable = true)
-    private void chrysalis$occludeBlockFaces(BlockState blockState, BlockState adjacentBlock, Direction direction, CallbackInfoReturnable<Boolean> cir) {
+    private void chrysalis$occludeBlockFaces(BlockState blockState, BlockState adjacentBlockState, Direction direction, CallbackInfoReturnable<Boolean> cir) {
 
-        boolean original = super.skipRendering(blockState, adjacentBlock, direction);
+        boolean original = super.skipRendering(blockState, adjacentBlockState, direction);
 
         TagKey<Block> glassBlocks = Tags.Blocks.GLASS_BLOCKS;
-        if (blockState.is(glassBlocks) && CConfigOptions.IMPROVED_GLASS_RENDERING.get()) cir.setReturnValue(adjacentBlock.is(glassBlocks) || original);
+        if (blockState.is(glassBlocks) && CConfigOptions.IMPROVED_GLASS_RENDERING.get()) cir.setReturnValue(adjacentBlockState.is(glassBlocks) || original);
 
         TagKey<Block> grates = CTags.GRATES;
-        if (blockState.is(grates) && CConfigOptions.IMPROVED_GRATE_RENDERING.get()) cir.setReturnValue(adjacentBlock.is(grates) || original);
+        if (blockState.is(grates) && CConfigOptions.IMPROVED_GRATE_RENDERING.get()) cir.setReturnValue(adjacentBlockState.is(grates) || original);
     }
 
     @SuppressWarnings("unused")

@@ -49,6 +49,7 @@
     "entities.misc.PlayerMixin$InventoryMixin",
     "entities.misc.PlayerMixin$ServerPlayerMixin",
     "entities.misc.ProjectileMixin",
+    "entities.misc.ProjectileMixin$WindChargeMixin",
     "entities.passive.AllayMixin",
     "entities.passive.ArmadilloMixin",
     "entities.passive.AxolotlMixin",

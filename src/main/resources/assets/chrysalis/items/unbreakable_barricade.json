@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "chrysalis:item/barricade"
+    "model": "chrysalis:item/unbreakable_barricade"
   }
 }

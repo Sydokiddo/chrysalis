@@ -21,6 +21,10 @@ import java.util.Iterator;
 
 public class FluidloggedMultifaceBlock extends MultifaceBlock implements SimpleFluidloggedBlock {
 
+    /**
+     * A version of the MultifaceBlock class that allows for the block to be fluidlogged instead of exclusively waterlogged.
+     **/
+
     // region Initialization
 
     public FluidloggedMultifaceBlock(Properties properties) {
@@ -60,7 +64,7 @@ public class FluidloggedMultifaceBlock extends MultifaceBlock implements SimpleF
 
     @Override
     public int getLightEmission(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
-        return SimpleFluidloggedBlock.getLightEmission(blockState);
+        return SimpleFluidloggedBlock.getLightEmission(super.getLightEmission(blockState, blockGetter, blockPos), blockState);
     }
 
     public static @NotNull BlockState getDefaultMultifaceState(StateDefinition<Block, BlockState> stateDefinition) {

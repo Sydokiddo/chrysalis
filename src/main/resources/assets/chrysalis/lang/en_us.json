@@ -576,6 +576,9 @@
 
   "subtitles.block.barricade.ambient": "Barricade hums",
   "subtitles.block.barricade.deflect": "Barricade deflects",
+  "subtitles.block.barricade.disguise": "Barricade disguises",
+  "subtitles.block.barricade.make_visible": "Barricade overlay appears",
+  "subtitles.block.barricade.make_invisible": "Barricade overlay disappears",
 
   "subtitles.block.placeholder_block.change_state": "Placeholder Block changes state",
   "subtitles.block.placeholder_block.update": "Placeholder Block updates",
@@ -592,6 +595,8 @@
   "subtitles.block.podium_spawner.spawn_mob": "Podium Spawner spawns a mob",
   "subtitles.block.podium_spawner.trigger_countdown": "Podium Spawner ticks",
   "subtitles.block.podium_spawner.end_cooldown": "Podium Spawner reactivates",
+
+  "subtitles.block.world_border.deflect": "World Border deflects",
 
   "comment.chrysalis.entity_subtitles": "ENTITY SUBTITLES",
 

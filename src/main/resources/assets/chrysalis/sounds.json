@@ -175,6 +175,24 @@
     ],
     "subtitle": "subtitles.block.barricade.deflect"
   },
+  "block.barricade.disguise": {
+    "sounds": [
+      "chrysalis:block/placeholder_block/update"
+    ],
+    "subtitle": "subtitles.block.barricade.disguise"
+  },
+  "block.barricade.make_visible": {
+    "sounds": [
+      "chrysalis:block/barricade/deflect1"
+    ],
+    "subtitle": "subtitles.block.barricade.make_visible"
+  },
+  "block.barricade.make_invisible": {
+    "sounds": [
+      "chrysalis:block/barricade/deflect1"
+    ],
+    "subtitle": "subtitles.block.barricade.make_invisible"
+  },
   "block.placeholder_block.change_state": {
     "sounds": [
       "chrysalis:block/placeholder_block/change_state"
@@ -192,6 +210,14 @@
       "chrysalis:block/placeholder_block/update_fail"
     ],
     "subtitle": "subtitles.block.placeholder_block.update_fail"
+  },
+  "block.world_border.deflect": {
+    "sounds": [
+      "chrysalis:block/barricade/deflect1",
+      "chrysalis:block/barricade/deflect2",
+      "chrysalis:block/barricade/deflect3"
+    ],
+    "subtitle": "subtitles.block.world_border.deflect"
   },
   "entity.entity_spawner.appear": {
     "sounds": [

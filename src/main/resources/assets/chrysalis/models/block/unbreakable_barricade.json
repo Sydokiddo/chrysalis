@@ -1,0 +1,7 @@
+{
+  "parent": "chrysalis:block/templates/template_barricade",
+  "textures": {
+    "texture": "chrysalis:block/unbreakable_barricade",
+    "particle": "chrysalis:block/unbreakable_barricade_particle"
+  }
+}

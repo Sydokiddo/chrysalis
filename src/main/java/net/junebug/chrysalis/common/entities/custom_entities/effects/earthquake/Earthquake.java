@@ -443,7 +443,7 @@ public class Earthquake extends Entity implements TraceableEntity {
                                 if (fireRadius > 2.0F) break;
                                 if (this.getScale() > 1.5F) blockPos = blockPos.relative(direction);
 
-                                if (BlockHelper.isFree(this.level(), blockPos) && this.level().getBlockState(blockPos.below()).isFaceSturdy(this.level(), blockPos.below(), Direction.UP)) {
+                                if (BlockHelper.isFree(this.level(), blockPos) && this.level().getFluidState(blockPos).isEmpty() && this.level().getBlockState(blockPos.below()).isFaceSturdy(this.level(), blockPos.below(), Direction.UP)) {
                                     this.level().setBlockAndUpdate(blockPos, BaseFireBlock.getState(this.level(), blockPos));
                                     this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_SPREAD_FIRE.get(), true, GameEvent.BLOCK_PLACE);
                                 }

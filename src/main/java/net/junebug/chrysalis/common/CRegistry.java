@@ -1,7 +1,7 @@
 package net.junebug.chrysalis.common;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import net.junebug.chrysalis.client.entities.rendering.custom_entities.PlaceholderBlockRenderer;
+import net.junebug.chrysalis.client.entities.rendering.custom_entities.*;
 import net.junebug.chrysalis.common.blocks.CBlocks;
 import net.junebug.chrysalis.common.entities.registry.CBlockEntities;
 import net.minecraft.client.KeyMapping;
@@ -23,9 +23,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.junebug.chrysalis.Chrysalis;
-import net.junebug.chrysalis.client.entities.rendering.custom_entities.EncounterSpawnerRenderer;
-import net.junebug.chrysalis.client.entities.rendering.custom_entities.EntitySpawnerRenderer;
-import net.junebug.chrysalis.client.entities.rendering.custom_entities.SeatRenderer;
 import net.junebug.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawnerData;
 import net.junebug.chrysalis.common.items.CDataComponents;
 import net.junebug.chrysalis.util.blocks.codecs.BlockConversionData;
@@ -132,6 +129,7 @@ public class CRegistry {
             EntityRenderers.register(CEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
             EntityRenderers.register(CEntities.ENCOUNTER_SPAWNER.get(), EncounterSpawnerRenderer::new);
             EntityRenderers.register(CEntities.EARTHQUAKE.get(), NoopRenderer::new);
+            BlockEntityRenderers.register(CBlockEntities.BARRICADE_BLOCK.get(), BarricadeBlockRenderer::new);
             BlockEntityRenderers.register(CBlockEntities.PLACEHOLDER_BLOCK.get(), PlaceholderBlockRenderer::new);
 
             try {
