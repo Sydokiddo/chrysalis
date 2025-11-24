@@ -2,7 +2,6 @@ package net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake
 
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.client.particles.options.DustCloudParticleOptions;
-import net.junebug.chrysalis.client.particles.types.DustCloudParticle;
 import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.junebug.chrysalis.common.misc.CDamageTypes;
 import net.junebug.chrysalis.common.misc.CGameEvents;
@@ -86,7 +85,7 @@ public class Earthquake extends Entity implements TraceableEntity {
     ;
 
     private static final int defaultLifeTime = 20;
-    private static final ParticleOptions defaultParticle = new DustCloudParticleOptions(DustCloudParticle.defaultColor, false);
+    private static final ParticleOptions defaultParticle = new DustCloudParticleOptions(DustCloudParticleOptions.defaultColor, false);
 
     public static void create(Level level, LivingEntity owner, Vec3 position, float yRot, float xRot) {
         create(level, owner, position, yRot, xRot, defaultScale, defaultLifeTime, defaultSpeed, defaultBaseDamage, defaultDamageScalesFromDifficulty, defaultBaseKnockback, defaultTravelSound, defaultHitSound, defaultParticle, defaultCanEmitCameraShake);

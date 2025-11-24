@@ -81,12 +81,12 @@ public class BarricadeBlockEntity extends BlockEntity {
         barricadeBlockEntity.setChanged();
 
         ParticleOptions disguiseParticles = barricadeBlockEntity.getLevel().getBlockState(barricadeBlockEntity.getBlockPos()).getBlock() instanceof BarricadeFullBlock barricadeFullBlock ? barricadeFullBlock.disguiseParticles : ParticleTypes.FLAME;
-        emitSoundAndParticles(barricadeBlockEntity.getLevel(), player, barricadeBlockEntity.getBlockPos(), CSoundEvents.BARRICADE_DISGUISE.get(), GameEvent.BLOCK_CHANGE, disguiseParticles, 0.6D, 5);
+        emitSoundAndParticles(barricadeBlockEntity.getLevel(), player, barricadeBlockEntity.getBlockPos(), CSoundEvents.BARRICADE_DISGUISE.get(), true, GameEvent.BLOCK_CHANGE, disguiseParticles, 0.6D, 5);
     }
 
-    public static void emitSoundAndParticles(Level level, Player player, BlockPos blockPos, SoundEvent soundEvent, Holder.Reference<GameEvent> gameEvent, ParticleOptions particleOptions, double particleRadius, int particleAmount) {
+    public static void emitSoundAndParticles(Level level, Player player, BlockPos blockPos, SoundEvent soundEvent, boolean randomizeSoundPitch, Holder.Reference<GameEvent> gameEvent, ParticleOptions particleOptions, double particleRadius, int particleAmount) {
         if (level == null) return;
-        level.playSound(null, blockPos, soundEvent, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+        level.playSound(null, blockPos, soundEvent, SoundSource.BLOCKS, 1.0F, randomizeSoundPitch ? level.getRandom().nextFloat() * 0.4F + 0.8F : 1.0F);
         level.gameEvent(player, gameEvent, blockPos);
         if (particleOptions != null) ParticleHelper.emitParticlesAroundBlock(level, blockPos, particleOptions, 0.0D, particleRadius, particleAmount);
     }

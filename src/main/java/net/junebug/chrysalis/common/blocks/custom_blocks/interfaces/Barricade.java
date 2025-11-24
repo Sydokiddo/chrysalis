@@ -95,7 +95,7 @@ public interface Barricade extends AmbientSoundEmittingBlock {
             }
 
             level.setBlockAndUpdate(blockPos, blockState.cycle(CBlockStateProperties.INVISIBLE));
-            BarricadeBlockEntity.emitSoundAndParticles(level, player, blockPos, soundEvent, GameEvent.BLOCK_CHANGE, particleOptions, particleRadius, particleAmount);
+            BarricadeBlockEntity.emitSoundAndParticles(level, player, blockPos, soundEvent, false, GameEvent.BLOCK_CHANGE, particleOptions, particleRadius, particleAmount);
             return InteractionResult.SUCCESS;
         }
 

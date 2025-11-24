@@ -74,7 +74,7 @@ public class FluidloggedMultifaceBlock extends MultifaceBlock implements SimpleF
         return blockState;
     }
 
-    public BlockState removeFace(BlockState blockState, BooleanProperty faceProp) {
+    private BlockState removeFace(BlockState blockState, BooleanProperty faceProp) {
         BlockState faceState = blockState.setValue(faceProp, false);
         return hasAnyFace(faceState) ? faceState : Blocks.AIR.defaultBlockState();
     }

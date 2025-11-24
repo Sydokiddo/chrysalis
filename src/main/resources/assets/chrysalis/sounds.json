@@ -177,19 +177,22 @@
   },
   "block.barricade.disguise": {
     "sounds": [
-      "chrysalis:block/placeholder_block/update"
+      "chrysalis:block/barricade/disguise"
     ],
     "subtitle": "subtitles.block.barricade.disguise"
   },
   "block.barricade.make_visible": {
     "sounds": [
-      "chrysalis:block/barricade/deflect1"
+      "chrysalis:block/barricade/toggle"
     ],
     "subtitle": "subtitles.block.barricade.make_visible"
   },
   "block.barricade.make_invisible": {
     "sounds": [
-      "chrysalis:block/barricade/deflect1"
+      {
+        "name": "chrysalis:block/barricade/toggle",
+        "pitch": 0.9
+      }
     ],
     "subtitle": "subtitles.block.barricade.make_invisible"
   },

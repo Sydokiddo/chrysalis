@@ -12,8 +12,8 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
-import java.awt.*;
 
+@OnlyIn(Dist.CLIENT)
 public class DustCloudParticle extends CampfireSmokeParticle implements ParticleCommonMethods {
 
     /**
@@ -22,7 +22,6 @@ public class DustCloudParticle extends CampfireSmokeParticle implements Particle
 
     // region Initialization and Ticking
 
-    public static final int defaultColor = Color.decode("#685C53").getRGB();
     private final SpriteSet spriteSet;
 
     public DustCloudParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, DustCloudParticleOptions particleOptions, SpriteSet spriteSet) {

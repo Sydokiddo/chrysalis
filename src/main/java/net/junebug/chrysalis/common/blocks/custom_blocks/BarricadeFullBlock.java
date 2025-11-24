@@ -58,7 +58,7 @@ public class BarricadeFullBlock extends BaseEntityBlock implements Barricade, Si
     public int particleColor = Color.LIGHT_GRAY.getRGB();
     public ParticleOptions disguiseParticles = ParticleTypes.FLAME;
 
-    public BarricadeFullBlock(Properties properties) {
+    private BarricadeFullBlock(Properties properties) {
         super(properties);
         this.registerDefaultState();
     }
