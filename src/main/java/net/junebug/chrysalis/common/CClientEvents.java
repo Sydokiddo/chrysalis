@@ -1,6 +1,8 @@
 package net.junebug.chrysalis.common;
 
 import net.junebug.chrysalis.common.blocks.CBlocks;
+import net.junebug.chrysalis.util.helpers.ComponentHelper;
+import net.junebug.chrysalis.util.helpers.ItemHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.FlameParticle;
@@ -16,6 +18,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.junebug.chrysalis.Chrysalis;
@@ -61,6 +64,11 @@ public class CClientEvents {
                 minecraft.gui.getChat().addMessage(message);
                 minecraft.getNarrator().sayNow(message);
             }
+        }
+
+        @SubscribeEvent
+        private static void addModNameTooltip(ItemTooltipEvent event) {
+            ItemHelper.addModNameTooltip(CConfigOptions.CHRYSALIS_TOOLTIP.get(), Chrysalis.MOD_ID, ComponentHelper.CHRYSALIS_ICON, ComponentHelper.CHRYSALIS_COLOR.getRGB(), event.getItemStack(), event.getToolTip(), event.getContext());
         }
 
         @SubscribeEvent

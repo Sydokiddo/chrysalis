@@ -121,39 +121,39 @@ public class TooltipMixin extends Item {
     public static class EnchantmentMixin {
 
         /**
-         * Changes the color of non-curse enchantment tooltips to a purple color, and adds an experience icon next to max-level enchantments.
+         * Changes the color and font of enchantment tooltips, and adds a warning icon to them if the level is above the maximum level.
          **/
 
         @Inject(method = "getFullname", at = @At("HEAD"), cancellable = true)
         private static void chrysalis$changeEnchantmentNameTooltip(Holder<Enchantment> enchantment, int level, CallbackInfoReturnable<Component> cir) {
-            if (CConfigOptions.REWORKED_TOOLTIPS.get()) {
 
-                int color;
-                int darkerColor;
+            if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
 
-                if (enchantment.is(EnchantmentTags.CURSE)) {
-                    color = ComponentHelper.CURSE_COLOR.getRGB();
-                    darkerColor = ComponentHelper.CURSE_DARKER_COLOR.getRGB();
-                } else {
-                    color = ComponentHelper.ENCHANTMENT_COLOR.getRGB();
-                    darkerColor = ComponentHelper.ENCHANTMENT_DARKER_COLOR.getRGB();
-                }
+            int color;
+            int darkerColor;
 
-                MutableComponent warningIcon = ComponentHelper.WARNING_ICON;
-                ComponentHelper.setIconsFont(warningIcon, Chrysalis.MOD_ID);
-
-                MutableComponent defaultComponent = enchantment.value().description().copy().withColor(color);
-                MutableComponent mainComponent;
-
-                if (level > enchantment.value().getMaxLevel()) mainComponent = (MutableComponent) ItemHelper.addTooltipWithIcon(warningIcon, defaultComponent);
-                else mainComponent = defaultComponent;
-
-                if (level != 1 || enchantment.value().getMaxLevel() != 1) mainComponent.append(CommonComponents.space()).append(Component.translatable("gui.chrysalis.item.enchantment.level",
-                chrysalis$enchantmentLevelComponent(level).copy().withColor(color), Component.translatable("gui.chrysalis.item.enchantment.max_level", chrysalis$enchantmentLevelComponent(enchantment.value().getMaxLevel())).copy()
-                .withStyle(mainComponent.getStyle().withFont(ComponentHelper.FIVE_LOWERED_FONT).withColor(darkerColor)).copy()));
-
-                cir.setReturnValue(mainComponent);
+            if (enchantment.is(EnchantmentTags.CURSE)) {
+                color = ComponentHelper.CURSE_COLOR.getRGB();
+                darkerColor = ComponentHelper.CURSE_DARKER_COLOR.getRGB();
+            } else {
+                color = ComponentHelper.ENCHANTMENT_COLOR.getRGB();
+                darkerColor = ComponentHelper.ENCHANTMENT_DARKER_COLOR.getRGB();
             }
+
+            MutableComponent warningIcon = ComponentHelper.WARNING_ICON;
+            ComponentHelper.setIconsFont(warningIcon, Chrysalis.MOD_ID);
+
+            MutableComponent defaultComponent = enchantment.value().description().copy().withColor(color);
+            MutableComponent mainComponent;
+
+            if (level > enchantment.value().getMaxLevel()) mainComponent = (MutableComponent) ItemHelper.addTooltipWithIcon(warningIcon, defaultComponent);
+            else mainComponent = defaultComponent;
+
+            if (level != 1 || enchantment.value().getMaxLevel() != 1) mainComponent.append(CommonComponents.space()).append(Component.translatable("gui.chrysalis.item.enchantment.level",
+            chrysalis$enchantmentLevelComponent(level).copy().withColor(color), Component.translatable("gui.chrysalis.item.enchantment.max_level", chrysalis$enchantmentLevelComponent(enchantment.value().getMaxLevel())).copy()
+            .withStyle(mainComponent.getStyle().withFont(ComponentHelper.FIVE_LOWERED_FONT).withColor(darkerColor)).copy()));
+
+            cir.setReturnValue(mainComponent);
         }
 
         @Unique

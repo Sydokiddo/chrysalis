@@ -34,7 +34,6 @@ import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.junebug.chrysalis.common.CRegistry;
 import net.junebug.chrysalis.common.items.CDataComponents;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 import java.util.Objects;
 
@@ -322,12 +321,12 @@ public class ItemHelper {
         return CommonComponents.space().append(Component.translatable("item." + modId + "." + itemStack.getItem().getDescriptionId().replace("item.minecraft.", "") + ".description").withStyle(color));
     }
 
-    public static void addModNameTooltip(Item.TooltipContext tooltipContext, ItemStack itemStack, String modId, MutableComponent modIcon, int color, CallbackInfoReturnable<List<Component>> cir) {
-        if (tooltipContext.registries() != null && Objects.equals(itemStack.getItem().getCreatorModId(Objects.requireNonNull(tooltipContext.registries()), itemStack), modId) && !itemStack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) && !cir.getReturnValue().isEmpty()) {
-            cir.getReturnValue().add(CommonComponents.EMPTY);
+    public static void addModNameTooltip(boolean canDisplay, String modId, MutableComponent modIcon, int textColor, ItemStack itemStack, List<Component> tooltip, Item.TooltipContext tooltipContext) {
+        if (tooltipContext.registries() != null && Objects.equals(itemStack.getItem().getCreatorModId(Objects.requireNonNull(tooltipContext.registries()), itemStack), modId) && !itemStack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP) && !tooltip.isEmpty()) {
+            tooltip.add(CommonComponents.EMPTY);
             ComponentHelper.setIconsFont(modIcon, modId);
-            Component tooltip = addTooltipWithIcon(modIcon, Component.translatable("mod." + modId).withStyle(style -> style.withFont(ComponentHelper.FIVE_FONT).withColor(color)));
-            cir.getReturnValue().add(tooltip);
+            Component tooltipWithIcon = addTooltipWithIcon(modIcon, Component.translatable("mod." + modId).withStyle(style -> style.withFont(ComponentHelper.FIVE_FONT).withColor(textColor)));
+            tooltip.add(tooltipWithIcon);
         }
     }
 

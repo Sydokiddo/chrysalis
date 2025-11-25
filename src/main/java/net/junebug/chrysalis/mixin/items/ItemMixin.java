@@ -6,7 +6,9 @@ import net.minecraft.client.gui.screens.inventory.AnvilScreen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentHolder;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -29,12 +31,16 @@ import net.junebug.chrysalis.util.helpers.ComponentHelper;
 import net.junebug.chrysalis.util.helpers.ItemHelper;
 import net.junebug.chrysalis.common.misc.CTags;
 import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Arrays;
@@ -45,12 +51,11 @@ import java.util.Objects;
 public class ItemMixin {
 
     /**
-     * Adds tooltips to various items.
+     * Adds various server-side tooltips.
      **/
 
-    @SuppressWarnings("deprecation")
     @Inject(method = "appendHoverText", at = @At("RETURN"))
-    private void chrysalis$addTooltipsToItems(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
+    private void chrysalis$addServerSideTooltips(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
         if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
 
@@ -123,19 +128,6 @@ public class ItemMixin {
             BlockItemStateProperties blockItemStateProperties = itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
             list.add(Component.translatable("item.chrysalis.light.description", blockItemStateProperties.get(LightBlock.LEVEL) != null ? blockItemStateProperties.get(LightBlock.LEVEL) : 15).withStyle(ChatFormatting.GRAY));
         }
-
-        if (itemStack.has(DataComponents.STORED_ENCHANTMENTS)) {
-
-            list.add(CommonComponents.EMPTY);
-            list.add(Component.translatable("gui.chrysalis.item.enchantment.applies_to").withStyle(ChatFormatting.GRAY));
-
-            for (Holder<Enchantment> holder : Objects.requireNonNull(itemStack.get(DataComponents.STORED_ENCHANTMENTS)).keySet()) {
-                String modId = ResourceLocation.fromNamespaceAndPath(holder.getRegisteredName().split(":")[0], holder.getRegisteredName().split(":")[1]).getNamespace();
-                if (holder.value().getSupportedItems().unwrapKey().isEmpty()) return;
-                String enchantmentTag = Arrays.toString(holder.value().getSupportedItems().unwrapKey().get().location().toString().split(modId + ":enchantable/")).replace("[, ", "").replace("]", "");
-                list.add(CommonComponents.space().append(Component.translatable("tag.item." + modId + ".enchantable." + enchantmentTag).withStyle(ChatFormatting.BLUE)));
-            }
-        }
     }
 
     @Mixin(ItemStack.class)
@@ -143,40 +135,84 @@ public class ItemMixin {
 
         @Shadow public abstract Item getItem();
         @Shadow public abstract ItemStack copy();
+        @Shadow public abstract boolean isDamaged();
+        @Shadow public abstract int getDamageValue();
+        @Shadow public abstract int getMaxDamage();
+        @Shadow public abstract @NotNull DataComponentMap getComponents();
 
         /**
-         * Adds a chrysalis tooltip to any new item registered by the mod.
+         * Adds various client-side tooltips.
          **/
 
+        @SuppressWarnings("deprecation")
         @OnlyIn(Dist.CLIENT)
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
-        private void chrysalis$addModNameTooltip(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
+        private void chrysalis$addClientSideTooltips(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
 
-            if (tooltipFlag.isAdvanced()) return;
+            if (CConfigOptions.REWORKED_TOOLTIPS.get()) {
 
-            if (CConfigOptions.REWORKED_TOOLTIPS.get() && this.has(DataComponents.REPAIRABLE) && Minecraft.getInstance().screen instanceof AnvilScreen) {
+                if (this.has(DataComponents.STORED_ENCHANTMENTS)) {
 
-                cir.getReturnValue().add(CommonComponents.EMPTY);
-                cir.getReturnValue().add(Component.translatable("gui.chrysalis.item.repairable_with").withStyle(ChatFormatting.GRAY));
+                    cir.getReturnValue().add(CommonComponents.EMPTY);
+                    cir.getReturnValue().add(Component.translatable("gui.chrysalis.item.enchantment.applies_to").withStyle(ChatFormatting.GRAY));
 
-                int lines = 0;
-                HolderSet<Item> repairItems = Objects.requireNonNull(this.get(DataComponents.REPAIRABLE)).items();
+                    for (Holder<Enchantment> holder : Objects.requireNonNull(this.get(DataComponents.STORED_ENCHANTMENTS)).keySet()) {
+                        String modId = ResourceLocation.fromNamespaceAndPath(holder.getRegisteredName().split(":")[0], holder.getRegisteredName().split(":")[1]).getNamespace();
+                        if (holder.value().getSupportedItems().unwrapKey().isEmpty()) return;
+                        String enchantmentTag = Arrays.toString(holder.value().getSupportedItems().unwrapKey().get().location().toString().split(modId + ":enchantable/")).replace("[, ", "").replace("]", "");
+                        cir.getReturnValue().add(CommonComponents.space().append(Component.translatable("tag.item." + modId + ".enchantable." + enchantmentTag).withStyle(ChatFormatting.BLUE)));
+                    }
+                }
 
-                for (Holder<Item> holder : repairItems) {
+                if (this.has(DataComponents.REPAIRABLE) && Minecraft.getInstance().screen instanceof AnvilScreen) {
 
-                    cir.getReturnValue().add(CommonComponents.space().append(holder.value().getName().copy().withStyle(ChatFormatting.BLUE)));
-                    ++lines;
+                    cir.getReturnValue().add(CommonComponents.EMPTY);
+                    cir.getReturnValue().add(Component.translatable("gui.chrysalis.item.repairable_with").withStyle(ChatFormatting.GRAY));
 
-                    if (lines >= 3) {
-                        int additionalLines = repairItems.size() - 3;
-                        if (additionalLines > 0) cir.getReturnValue().add(CommonComponents.space().append(Component.translatable("gui.chrysalis.item.more_items", additionalLines).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC)));
-                        break;
+                    int lines = 0;
+                    HolderSet<Item> repairItems = Objects.requireNonNull(this.get(DataComponents.REPAIRABLE)).items();
+
+                    for (Holder<Item> holder : repairItems) {
+
+                        cir.getReturnValue().add(CommonComponents.space().append(holder.value().getName().copy().withStyle(ChatFormatting.BLUE)));
+                        ++lines;
+
+                        if (lines >= 3) {
+                            int additionalLines = repairItems.size() - 3;
+                            if (additionalLines > 0) cir.getReturnValue().add(CommonComponents.space().append(Component.translatable("gui.chrysalis.item.more_items", additionalLines).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC)));
+                            break;
+                        }
                     }
                 }
             }
 
-            if (CConfigOptions.CHRYSALIS_TOOLTIP.get()) ItemHelper.addModNameTooltip(tooltipContext, this.copy(), Chrysalis.MOD_ID, ComponentHelper.CHRYSALIS_ICON, ComponentHelper.CHRYSALIS_COLOR.getRGB(), cir);
+            EventHooks.onItemTooltip(this.copy(), player, cir.getReturnValue(), tooltipFlag, tooltipContext);
+
+            if (tooltipFlag.isAdvanced()) {
+                if (this.isDamaged()) cir.getReturnValue().add(Component.translatable("item.durability", this.getMaxDamage() - this.getDamageValue(), this.getMaxDamage()));
+                cir.getReturnValue().add(Component.literal(BuiltInRegistries.ITEM.getKey(this.getItem()).toString()).withStyle(ChatFormatting.DARK_GRAY));
+                int componentSize = this.getComponents().size();
+                if (componentSize > 0) cir.getReturnValue().add(Component.translatable("item.components", componentSize).withStyle(ChatFormatting.DARK_GRAY));
+            }
         }
+
+        /**
+         * Cancels the default onItemTooltip event hook and advanced tooltip check, as the positioning of them has been moved.
+         **/
+
+        @Redirect(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/event/EventHooks;onItemTooltip(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;Lnet/minecraft/world/item/Item$TooltipContext;)Lnet/neoforged/neoforge/event/entity/player/ItemTooltipEvent;"))
+        private ItemTooltipEvent chrysalis$cancelDefaultOnItemTooltipEvent(ItemStack itemStack, @Nullable Player player, List<Component> list, TooltipFlag tooltipFlag, Item.TooltipContext tooltipContext) {
+            return null;
+        }
+
+        @Redirect(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/TooltipFlag;isAdvanced()Z"))
+        private boolean chrysalis$cancelDefaultAdvancedTooltips(TooltipFlag tooltipFlag) {
+            return false;
+        }
+
+        /**
+         * Allows for items with the name color data component to change the item's name color.
+         **/
 
         @Inject(method = "getItemName", at = @At("RETURN"), cancellable = true)
         private void chrysalis$getItemNameColor(CallbackInfoReturnable<Component> cir) {
