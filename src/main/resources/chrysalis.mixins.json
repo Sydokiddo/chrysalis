@@ -87,6 +87,7 @@
     "misc.WeavingMobEffectMixin"
   ],
   "client": [
+    "blocks.ModelBlockRendererMixin",
     "blocks.PortalBlockMixin$EndPortalRendererMixin",
     "entities.misc.PlayerMixin$AbstractClientPlayerMixin",
     "misc.AWTHackMixin",
