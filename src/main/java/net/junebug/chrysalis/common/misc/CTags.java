@@ -103,6 +103,7 @@ public class CTags {
         BARRICADES = registerBlockTag("barricades"),
         BARS = registerBlockTag("bars"),
         BASE_STONE_END = registerBlockTag("base_stone_end"),
+        CAN_ALWAYS_RENDER_BREAKING_OVERLAY = registerBlockTag("can_always_render_breaking_overlay"),
         CHORUS_PLANTS_CAN_GROW_ON = registerBlockTag("chorus_plants_can_grow_on"),
         CONTAINERS = registerBlockTag("containers"),
         COPPER_BLOCKS = registerBlockTag("copper_blocks"),

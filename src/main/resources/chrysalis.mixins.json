@@ -88,6 +88,7 @@
   ],
   "client": [
     "blocks.ModelBlockRendererMixin",
+    "blocks.ModelBlockRendererMixin$BlockRenderDispatcherMixin",
     "blocks.PortalBlockMixin$EndPortalRendererMixin",
     "entities.misc.PlayerMixin$AbstractClientPlayerMixin",
     "misc.AWTHackMixin",
