@@ -546,7 +546,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/memory_flame.png",
+      "file": "chrysalis:gui/sprites/icons/primordial_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -555,7 +555,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/void_flame.png",
+      "file": "chrysalis:gui/sprites/icons/memory_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -564,7 +564,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/ancient_flame.png",
+      "file": "chrysalis:gui/sprites/icons/void_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -573,7 +573,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/corpse_flame.png",
+      "file": "chrysalis:gui/sprites/icons/ancient_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -582,7 +582,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/purity_flame.png",
+      "file": "chrysalis:gui/sprites/icons/corpse_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -591,7 +591,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/water.png",
+      "file": "chrysalis:gui/sprites/icons/purity_flame.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -600,7 +600,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/lava.png",
+      "file": "chrysalis:gui/sprites/icons/water.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -609,7 +609,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/glister.png",
+      "file": "chrysalis:gui/sprites/icons/lava.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -618,7 +618,7 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/molten_void.png",
+      "file": "chrysalis:gui/sprites/icons/glister.png",
       "ascent": 10,
       "height": 12,
       "chars": [
@@ -627,11 +627,20 @@
     },
     {
       "type": "bitmap",
-      "file": "chrysalis:gui/sprites/icons/ectoplasm.png",
+      "file": "chrysalis:gui/sprites/icons/molten_void.png",
       "ascent": 10,
       "height": 12,
       "chars": [
         "\ua069"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/ectoplasm.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        "\ua070"
       ]
     }
   ]

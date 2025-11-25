@@ -15,7 +15,7 @@
     { "text": "Ooo, secret splash text!" },
     { "text": { "text": "\ua040", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "\ua008\ua009\ua010\ua011\ua012\ua013\ua014\ua015\ua016\ua017\ua018", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
-    { "text": { "text": "\ua062\ua057\ua063\ua060\ua058\ua061\ua064", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
+    { "text": { "text": "\ua063\ua057\ua060\ua064\ua059\ua061\ua058\ua062\ua065", "font": "chrysalis:icons", "color": "#FFFFFF" }, "weight": 1 },
     { "text": { "text": "Also try Elysium!" }, "weight": 5 },
     { "text": { "text": "This only shows if you're in a debug environment!" }, "weight": 5, "debug_environment_only": true }
   ]

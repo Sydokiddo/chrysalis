@@ -93,6 +93,7 @@ public class ComponentHelper {
         FIRE_COLOR = Color.decode("#FF6A00"),
         SOUL_FIRE_COLOR = Color.decode("#01A7AC"),
         COPPER_FIRE_COLOR = Color.decode("#99EB99"),
+        PRIMORDIAL_FIRE_COLOR = Color.decode("#FFFF7F"),
         MEMORY_FIRE_COLOR = Color.decode("#6CD86C"),
         VOID_FIRE_COLOR = Color.decode("#C920D3"),
         ANCIENT_FIRE_COLOR = Color.decode("#FD4D4D"),
@@ -169,6 +170,7 @@ public class ComponentHelper {
         FLAME_ICON = Component.translatable("gui.chrysalis.icon.flame"),
         SOUL_FLAME_ICON = Component.translatable("gui.chrysalis.icon.soul_flame"),
         COPPER_FLAME_ICON = Component.translatable("gui.chrysalis.icon.copper_flame"),
+        PRIMORDIAL_FLAME_ICON = Component.translatable("gui.chrysalis.icon.primordial_flame"),
         MEMORY_FLAME_ICON = Component.translatable("gui.chrysalis.icon.memory_flame"),
         VOID_FLAME_ICON = Component.translatable("gui.chrysalis.icon.void_flame"),
         ANCIENT_FLAME_ICON = Component.translatable("gui.chrysalis.icon.ancient_flame"),
@@ -239,6 +241,19 @@ public class ComponentHelper {
         "Cupric"
     );
 
+    public static final List<String> PRIMORDIAL_FIRE_NAMES = List.of(
+        "primordial",
+        "Primordial",
+        "creation",
+        "Creation",
+        "summon",
+        "Summon",
+        "spawner",
+        "Spawner",
+        "host",
+        "Host"
+    );
+
     public static final List<String> MEMORY_FIRE_NAMES = List.of(
         "memory",
         "Memory",
@@ -259,7 +274,9 @@ public class ComponentHelper {
         "ethereal",
         "Ethereal",
         "everlasting",
-        "Everlasting"
+        "Everlasting",
+        "encore",
+        "Encore"
     );
 
     public static final List<String> VOID_FIRE_NAMES = List.of(
@@ -305,8 +322,8 @@ public class ComponentHelper {
         "Zombie",
         "blight",
         "Blight",
-        "mausoleum",
-        "Mausoleum"
+        "hominid",
+        "Hominid"
     );
 
     public static final List<String> PURITY_FIRE_NAMES = List.of(
@@ -319,9 +336,7 @@ public class ComponentHelper {
         "purification",
         "Purification",
         "gumpkin",
-        "Gumpkin",
-        "hominid",
-        "Hominid"
+        "Gumpkin"
     );
 
     // endregion

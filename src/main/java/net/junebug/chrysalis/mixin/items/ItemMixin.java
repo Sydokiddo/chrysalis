@@ -81,6 +81,9 @@ public class ItemMixin {
             } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.COPPER_FIRE_NAMES)) {
                 fireproofIcon = ComponentHelper.COPPER_FLAME_ICON;
                 fireproofColor = ComponentHelper.COPPER_FIRE_COLOR.getRGB();
+            } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.PRIMORDIAL_FIRE_NAMES)) {
+                fireproofIcon = ComponentHelper.PRIMORDIAL_FLAME_ICON;
+                fireproofColor = ComponentHelper.PRIMORDIAL_FIRE_COLOR.getRGB();
             } else if (ItemHelper.listContainsName(itemStack, ComponentHelper.MEMORY_FIRE_NAMES)) {
                 fireproofIcon = ComponentHelper.MEMORY_FLAME_ICON;
                 fireproofColor = ComponentHelper.MEMORY_FIRE_COLOR.getRGB();
