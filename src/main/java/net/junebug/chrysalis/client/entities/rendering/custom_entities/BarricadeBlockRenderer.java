@@ -48,7 +48,7 @@ public class BarricadeBlockRenderer implements BlockEntityRenderer<BarricadeBloc
                 this.blockRenderer.getModelRenderer().tesselateBlock(
                     barricadeBlockEntity.getLevel(),
                     blockModel,
-                    barricadeBlockEntity.getBlockState(),
+                    barricadeBlockEntity.getDisguisedBlockState(),
                     barricadeBlockEntity.getBlockPos(),
                     poseStack,
                     multiBufferSource.getBuffer(RenderTypeHelper.getMovingBlockRenderType(this.getBlockRenderType(disguisedState))),

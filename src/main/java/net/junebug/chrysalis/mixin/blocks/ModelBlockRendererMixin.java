@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.junebug.chrysalis.common.blocks.custom_blocks.BarricadeFullBlock;
 import net.junebug.chrysalis.common.misc.CTags;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
@@ -61,11 +60,12 @@ public class ModelBlockRendererMixin {
          * Blocks in the can_always_render_breaking_overlay tag can always render the breaking overlay texture even when they're invisible.
          **/
 
+        @SuppressWarnings("all")
         @Inject(at = @At("HEAD"), method = "renderBreakingTexture(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/BlockAndTintGetter;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/neoforged/neoforge/client/model/data/ModelData;)V")
         private void chrysalis$alwaysRenderBreakingOverlay(BlockState blockState, BlockPos blockPos, BlockAndTintGetter blockAndTintGetter, PoseStack poseStack, VertexConsumer vertexConsumer, ModelData modelData, CallbackInfo info) {
             if (blockState.getRenderShape() == RenderShape.INVISIBLE && blockState.is(CTags.CAN_ALWAYS_RENDER_BREAKING_OVERLAY)) {
                 BakedModel bakedModel = this.getBlockModelShaper().getBlockModel(blockState);
-                this.getModelRenderer().tesselateBlock(blockAndTintGetter, bakedModel, blockState, blockPos, poseStack, vertexConsumer, true, this.random, blockState.getSeed(blockPos), OverlayTexture.NO_OVERLAY, bakedModel.getModelData(blockAndTintGetter, blockPos, blockState, modelData), RenderType.translucentMovingBlock());
+                this.getModelRenderer().tesselateBlock(blockAndTintGetter, bakedModel, blockState, blockPos, poseStack, vertexConsumer, true, this.random, blockState.getSeed(blockPos), OverlayTexture.NO_OVERLAY, bakedModel.getModelData(blockAndTintGetter, blockPos, blockState, modelData), null);
             }
         }
     }
