@@ -33,8 +33,8 @@ public class Chrysalis {
     public static GameRules gameRules;
 
     public static boolean
-        registerTestItems = false,
         registerExampleRegistry = false,
+        registerTestItems = false,
         enableTestFeatures = false
     ;
 

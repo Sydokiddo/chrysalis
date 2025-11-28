@@ -8,12 +8,12 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.junebug.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
+import net.junebug.chrysalis.client.entities.rendering.render_states.CEntityRenderState;
 import net.junebug.chrysalis.common.entities.custom_entities.Seat;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class SeatRenderer extends EntityRenderer<Seat, ChrysalisEntityRenderState> {
+public class SeatRenderer extends EntityRenderer<Seat, CEntityRenderState> {
 
     /**
      * The entity rendering class for seats.
@@ -24,8 +24,8 @@ public class SeatRenderer extends EntityRenderer<Seat, ChrysalisEntityRenderStat
     }
 
     @Override
-    public @NotNull ChrysalisEntityRenderState createRenderState() {
-        return new ChrysalisEntityRenderState();
+    public @NotNull CEntityRenderState createRenderState() {
+        return new CEntityRenderState();
     }
 
     @Override
@@ -34,5 +34,5 @@ public class SeatRenderer extends EntityRenderer<Seat, ChrysalisEntityRenderStat
     }
 
     @Override
-    protected void renderNameTag(@NotNull ChrysalisEntityRenderState entityRenderState, @NotNull Component component, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int lightLevel) {}
+    protected void renderNameTag(@NotNull CEntityRenderState renderState, @NotNull Component component, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int lightLevel) {}
 }

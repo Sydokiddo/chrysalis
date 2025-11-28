@@ -1,5 +1,7 @@
 package net.junebug.chrysalis.common;
 
+import net.junebug.chrysalis.common.entities.custom_entities.mobs.key_golem.KeyGolem;
+import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -22,6 +24,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -49,7 +52,9 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobSplitEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -162,7 +167,22 @@ public class CServerEvents {
 
         @SubscribeEvent
         private static void onPlayerPostTick(PlayerTickEvent.Post event) {
-            if (event.getEntity() instanceof ServerPlayer serverPlayer && serverPlayer.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.SKULLS) && serverPlayer.tickCount % 20 == 0) EntityHelper.updateCurrentShader(serverPlayer);
+
+            if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+
+                Entity heldEntity = !serverPlayer.getPassengers().isEmpty() ? serverPlayer.getPassengers().getFirst() : null;
+                KeyGolem heldKeyGolem = heldEntity instanceof KeyGolem keyGolem ? keyGolem : null;
+
+                if (heldKeyGolem != null) EntityHelper.tryDismountingCarriedEntityExtended(serverPlayer, heldKeyGolem);
+                else if (heldEntity != null) EntityHelper.tryDismountingCarriedEntity(serverPlayer, heldEntity);
+
+                if (serverPlayer.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.SKULLS) && serverPlayer.tickCount % 20 == 0) EntityHelper.updateCurrentShader(serverPlayer);
+            }
+        }
+
+        @SubscribeEvent
+        private static void onPlayerPostTick(LivingDamageEvent.Post event) {
+            if (event.getEntity() instanceof ServerPlayer serverPlayer) EntityHelper.tryDismountingCarriedEntityFromDamage(serverPlayer, !serverPlayer.getPassengers().isEmpty() && serverPlayer.getPassengers().getFirst() instanceof KeyGolem keyGolem ? keyGolem : null, event.getOriginalDamage(), 1.0F);
         }
 
         @SubscribeEvent
@@ -305,6 +325,11 @@ public class CServerEvents {
             event.dataPackRegistry(CRegistry.CHARGED_MOB_DROP_DATA, ChargedMobDropData.CODEC);
             event.dataPackRegistry(CRegistry.PLAYER_LOOT_TABLE_DATA, PlayerLootTableData.CODEC);
             event.dataPackRegistry(CRegistry.ENTITY_SPAWNER_CONFIG_DATA, EntitySpawnerData.EntitySpawnerConfig.CODEC);
+        }
+
+        @SubscribeEvent
+        public static void registerAttributes(EntityAttributeCreationEvent event) {
+            CEntities.registerAttributes(event);
         }
 
         @SubscribeEvent

@@ -6,7 +6,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ChrysalisLivingEntityRenderState extends LivingEntityRenderState {
+public class CLivingEntityRenderState extends LivingEntityRenderState {
 
     /**
      * Allows for the livingEntity field to be accessed from living entity renderer classes.

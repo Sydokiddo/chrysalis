@@ -187,5 +187,25 @@ public class EntityHelper {
         return new AABB(x - (double) dividedWidth, y, z - (double) dividedWidth, x + (double) dividedWidth, y + (double) height, z + (double) dividedWidth);
     }
 
+    public static boolean canCarriedEntityDismount(ServerPlayer serverPlayer, Entity carriedEntity) {
+        return serverPlayer.isShiftKeyDown() || serverPlayer.isDeadOrDying() || serverPlayer.isSpectator();
+    }
+
+    public static boolean canCarriedEntityDismountExtended(ServerPlayer serverPlayer, Entity carriedEntity) {
+        return canCarriedEntityDismount(serverPlayer, carriedEntity) || serverPlayer.isFallFlying() || serverPlayer.isAutoSpinAttack();
+    }
+
+    public static void tryDismountingCarriedEntity(ServerPlayer serverPlayer, Entity carriedEntity) {
+        if (carriedEntity != null && canCarriedEntityDismount(serverPlayer, carriedEntity)) carriedEntity.stopRiding();
+    }
+
+    public static void tryDismountingCarriedEntityExtended(ServerPlayer serverPlayer, Entity carriedEntity) {
+        if (carriedEntity != null && canCarriedEntityDismountExtended(serverPlayer, carriedEntity)) carriedEntity.stopRiding();
+    }
+
+    public static void tryDismountingCarriedEntityFromDamage(ServerPlayer serverPlayer, Entity carriedEntity, float damageAmount, float minDamageAmount) {
+        if (carriedEntity != null && damageAmount >= minDamageAmount) carriedEntity.stopRiding();
+    }
+
     // endregion
 }

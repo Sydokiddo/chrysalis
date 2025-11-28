@@ -1,7 +1,9 @@
 package net.junebug.chrysalis.util.entities.interfaces;
 
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 @SuppressWarnings("unused")
 public interface AnimatedEntity {
@@ -54,6 +56,14 @@ public interface AnimatedEntity {
 
     default void playNoveltyAnimation(Entity entity) {
         this.getNoveltyAnimation().start(entity.tickCount);
+    }
+
+    default void tryPlayingNoveltyAnimation(Entity entity, int entityEvent, SoundEvent soundEvent, int chance, boolean canPlay) {
+        if (entity.level().getRandom().nextInt(chance) == 0 && canPlay) {
+            entity.level().broadcastEntityEvent(entity, (byte) entityEvent);
+            entity.playSound(soundEvent);
+            entity.gameEvent(GameEvent.ENTITY_ACTION);
+        }
     }
 
     // endregion

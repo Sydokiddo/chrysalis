@@ -51,6 +51,7 @@ public class CCreativeModeTabs {
             if (Chrysalis.IS_DEBUG && Chrysalis.registerTestItems) output.accept(CItems.TEST_RIGHT_CLICK_ITEM);
             output.accept(CItems.GIANT_SPAWN_EGG);
             output.accept(CItems.ILLUSIONER_SPAWN_EGG);
+            output.accept(CItems.KEY_GOLEM_SPAWN_EGG);
             output.accept(CItems.NETHER_PORTAL);
             output.accept(CItems.END_PORTAL);
             output.accept(CItems.END_GATEWAY);

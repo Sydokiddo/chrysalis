@@ -136,6 +136,11 @@ public class CClientEvents {
         }
 
         @SubscribeEvent
+        private static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            CRegistry.ClientRegistry.registerLayerDefinitions(event);
+        }
+
+        @SubscribeEvent
         private static void addItemsToCreativeTabs(BuildCreativeModeTabContentsEvent event) {
 
             if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
@@ -154,6 +159,7 @@ public class CClientEvents {
                 event.insertAfter(Items.CREAKING_HEART.getDefaultInstance(), CItems.COPYING_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(Items.GHAST_SPAWN_EGG.getDefaultInstance(), CItems.GIANT_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 event.insertAfter(Items.HUSK_SPAWN_EGG.getDefaultInstance(), CItems.ILLUSIONER_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                event.insertAfter(Items.IRON_GOLEM_SPAWN_EGG.getDefaultInstance(), CItems.KEY_GOLEM_SPAWN_EGG.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
 
             if (event.getTabKey() == CreativeModeTabs.OP_BLOCKS && event.hasPermissions()) {

@@ -9,12 +9,12 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.junebug.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
+import net.junebug.chrysalis.client.entities.rendering.render_states.CEntityRenderState;
 import net.junebug.chrysalis.common.entities.custom_entities.spawners.entity_spawner.EntitySpawner;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, ChrysalisEntityRenderState> {
+public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, CEntityRenderState> {
 
     /**
      * The entity rendering class for entity spawners.
@@ -28,12 +28,12 @@ public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, Chrysal
     }
 
     @Override
-    public @NotNull ChrysalisEntityRenderState createRenderState() {
-        return new ChrysalisEntityRenderState();
+    public @NotNull CEntityRenderState createRenderState() {
+        return new CEntityRenderState();
     }
 
     @Override
-    public void render(@NotNull ChrysalisEntityRenderState renderState, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
+    public void render(@NotNull CEntityRenderState renderState, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
 
         poseStack.pushPose();
         float scale;
@@ -46,7 +46,7 @@ public class EntitySpawnerRenderer extends EntityRenderer<EntitySpawner, Chrysal
         scale = Mth.wrapDegrees(renderState.ageInTicks * 40.0F);
         poseStack.mulPose(Axis.YP.rotationDegrees(scale));
 
-        if (!(ChrysalisEntityRenderState.entity instanceof EntitySpawner entitySpawner)) return;
+        if (!(CEntityRenderState.entity instanceof EntitySpawner entitySpawner)) return;
         EntitySpawner.createEntity(entitySpawner).ifPresent(value -> this.entityRenderer.render(value, 0.0D, 0.0D, 0.0D, renderState.partialTick, poseStack, bufferSource, packedLight));
         poseStack.popPose();
     }

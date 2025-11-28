@@ -1,6 +1,7 @@
 package net.junebug.chrysalis.common;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import net.junebug.chrysalis.client.entities.models.KeyGolemModel;
 import net.junebug.chrysalis.client.entities.rendering.custom_entities.*;
 import net.junebug.chrysalis.common.blocks.CBlocks;
 import net.junebug.chrysalis.common.entities.registry.CBlockEntities;
@@ -37,6 +38,7 @@ import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.junebug.chrysalis.common.items.CItems;
 import net.junebug.chrysalis.common.misc.*;
 import net.junebug.chrysalis.common.status_effects.CStatusEffects;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.lwjgl.glfw.GLFW;
 import java.awt.*;
 import java.util.*;
@@ -122,6 +124,10 @@ public class CRegistry {
         public static int devCapeVariant;
         public static final KeyMapping PANORAMIC_SCREENSHOT_KEY = new KeyMapping("key.chrysalis.panoramic_screenshot", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_F6, "key.categories.misc");
 
+        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(KeyGolemModel.LAYER, KeyGolemModel::createBodyLayer);
+        }
+
         @SubscribeEvent
         private static void onClientSetup(FMLClientSetupEvent event) {
 
@@ -129,6 +135,8 @@ public class CRegistry {
             EntityRenderers.register(CEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
             EntityRenderers.register(CEntities.ENCOUNTER_SPAWNER.get(), EncounterSpawnerRenderer::new);
             EntityRenderers.register(CEntities.EARTHQUAKE.get(), NoopRenderer::new);
+            EntityRenderers.register(CEntities.KEY_GOLEM.get(), KeyGolemRenderer::new);
+
             BlockEntityRenderers.register(CBlockEntities.BARRICADE_BLOCK.get(), BarricadeBlockRenderer::new);
             BlockEntityRenderers.register(CBlockEntities.PLACEHOLDER_BLOCK.get(), PlaceholderBlockRenderer::new);
 

@@ -1,15 +1,21 @@
 package net.junebug.chrysalis.mixin.entities.misc;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.junebug.chrysalis.common.entities.custom_entities.mobs.key_golem.KeyGolem;
+import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
+import net.minecraft.server.commands.RideCommand;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -24,6 +30,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
@@ -35,6 +42,8 @@ public abstract class EntityMixin {
     @Shadow public abstract boolean isAlive();
     @Shadow public abstract boolean isInWater();
     @Shadow public abstract boolean isInLava();
+    @Shadow public abstract EntityDimensions getDimensions(Pose pose);
+    @Shadow public abstract Pose getPose();
 
     /**
      * Modifies the pick radius of entities under certain conditions.
@@ -109,6 +118,49 @@ public abstract class EntityMixin {
     @Inject(method = "isAttackable", at = @At("HEAD"), cancellable = true)
     public void chrysalis$preventLivingEntityAttackingWhileDying(CallbackInfoReturnable<Boolean> cir) {
         if (this.chrysalis$entity instanceof LivingEntity livingEntity && livingEntity.isDeadOrDying()) cir.setReturnValue(false);
+    }
+
+    /**
+     * Allows for players to be ridden.
+     **/
+
+    @WrapOperation(method = "startRiding(Lnet/minecraft/world/entity/Entity;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/EntityType;canSerialize()Z"))
+    private boolean chrysalis$allowPlayersToBeRidden(EntityType<?> entityType, Operation<Boolean> original) {
+        if (entityType == EntityType.PLAYER) return true;
+        else return original.call(entityType);
+    }
+
+    @Inject(method = "startRiding*", at = @At("RETURN"))
+    private void chrysalis$startRidingPacket(Entity entity, boolean force, CallbackInfoReturnable<Boolean> cir) {
+        if (entity instanceof ServerPlayer serverPlayer && cir.getReturnValue()) serverPlayer.connection.send(new ClientboundSetPassengersPacket(serverPlayer));
+    }
+
+    @Inject(method = "removePassenger", at = @At("RETURN"))
+    private void chrysalis$removePassengerPacket(Entity passenger, CallbackInfo callbackInfo) {
+        if (this.chrysalis$entity instanceof ServerPlayer serverPlayer) serverPlayer.connection.send(new ClientboundSetPassengersPacket(serverPlayer));
+    }
+
+    @Inject(method = "positionRider(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity$MoveFunction;)V", at = @At("TAIL"))
+    private void chrysalis$positionKeyGolemsOnPlayers(Entity passenger, Entity.MoveFunction moveFunction, CallbackInfo info) {
+        if (this.chrysalis$entity instanceof Player player && player.hasPassenger(passenger) && passenger instanceof KeyGolem keyGolem) {
+            float offset = 0.5F;
+            float mathMultiplier = 0.0175F;
+            keyGolem.setYHeadRot(player.yBodyRot);
+            keyGolem.setPos(player.getX() + (offset * Mth.sin(player.yBodyRot * mathMultiplier)), player.getY() + this.getDimensions(this.getPose()).height() * 0.35F, player.getZ() - (offset * Mth.cos(player.yBodyRot * mathMultiplier)));
+        }
+    }
+
+    @Mixin(RideCommand.class)
+    public static abstract class RideCommandMixin {
+
+        /**
+         * Allows for players to be ridden using the /ride command.
+         **/
+
+        @Redirect(method = "mount", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getType()Lnet/minecraft/world/entity/EntityType;"))
+        private static EntityType<?> chrysalis$allowRidingPlayersWithRideCommand(Entity entity) {
+            return CEntities.EMPTY.get();
+        }
     }
 
     @Mixin(EntityType.class)

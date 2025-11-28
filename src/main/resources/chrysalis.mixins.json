@@ -43,6 +43,7 @@
     "entities.misc.EndCrystalMixin",
     "entities.misc.EntityMixin",
     "entities.misc.EntityMixin$EntityTypeMixin",
+    "entities.misc.EntityMixin$RideCommandMixin",
     "entities.misc.ItemEntityMixin",
     "entities.misc.LivingEntityMixin",
     "entities.misc.MobMixin",

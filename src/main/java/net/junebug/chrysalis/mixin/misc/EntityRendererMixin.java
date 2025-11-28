@@ -28,8 +28,8 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.junebug.chrysalis.Chrysalis;
-import net.junebug.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
-import net.junebug.chrysalis.client.entities.rendering.render_states.ChrysalisLivingEntityRenderState;
+import net.junebug.chrysalis.client.entities.rendering.render_states.CEntityRenderState;
+import net.junebug.chrysalis.client.entities.rendering.render_states.CLivingEntityRenderState;
 import net.junebug.chrysalis.common.misc.CTags;
 import net.junebug.chrysalis.common.status_effects.CStatusEffects;
 import net.junebug.chrysalis.util.technical.config.CConfigOptions;
@@ -51,7 +51,7 @@ public class EntityRendererMixin {
 
     @Inject(method = "extractRenderState", at = @At("HEAD"))
     private void chrysalis$addEntityRenderStates(Entity entity, EntityRenderState renderState, float tickCount, CallbackInfo info) {
-        ChrysalisEntityRenderState.entity = entity;
+        CEntityRenderState.entity = entity;
     }
 
     /**
@@ -80,7 +80,7 @@ public class EntityRendererMixin {
 
         @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("HEAD"))
         private void chrysalis$addLivingEntityRenderStates(LivingEntity livingEntity, LivingEntityRenderState renderState, float tickCount, CallbackInfo info) {
-            ChrysalisLivingEntityRenderState.livingEntity = livingEntity;
+            CLivingEntityRenderState.livingEntity = livingEntity;
         }
 
         /**
@@ -89,8 +89,8 @@ public class EntityRendererMixin {
 
         @Inject(method = "getFlipDegrees", at = @At("HEAD"), cancellable = true)
         private void chrysalis$changeEntityFlippingUponDeath(CallbackInfoReturnable<Float> cir) {
-            if (ChrysalisLivingEntityRenderState.livingEntity.getType().is(CTags.DOES_NOT_FLIP_OVER_UPON_DEATH)) cir.setReturnValue(0.0F);
-            else if (ChrysalisLivingEntityRenderState.livingEntity.getType().is(CTags.FLIPS_OVER_UPON_DEATH)) cir.setReturnValue(180.0F);
+            if (CLivingEntityRenderState.livingEntity.getType().is(CTags.DOES_NOT_FLIP_OVER_UPON_DEATH)) cir.setReturnValue(0.0F);
+            else if (CLivingEntityRenderState.livingEntity.getType().is(CTags.FLIPS_OVER_UPON_DEATH)) cir.setReturnValue(180.0F);
         }
     }
 
@@ -107,9 +107,9 @@ public class EntityRendererMixin {
 
             if (!CConfigOptions.NAME_TAG_HIDING.get()) return;
 
-            for (ItemStack equipmentSlot : ChrysalisLivingEntityRenderState.livingEntity.getArmorSlots()) {
+            for (ItemStack equipmentSlot : CLivingEntityRenderState.livingEntity.getArmorSlots()) {
                 if (equipmentSlot.is(CTags.HIDES_NAME_TAGS)) {
-                    if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("{} is wearing a name tag hiding item!", ChrysalisLivingEntityRenderState.livingEntity.getName().getString());
+                    if (Chrysalis.IS_DEBUG) Chrysalis.LOGGER.info("{} is wearing a name tag hiding item!", CLivingEntityRenderState.livingEntity.getName().getString());
                     info.cancel();
                 }
             }
@@ -127,7 +127,7 @@ public class EntityRendererMixin {
         @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/HumanoidRenderState;FF)V", at = @At("HEAD"), cancellable = true)
         private void chrysalis$hideRenderedArmor(PoseStack poseStack, MultiBufferSource multiBufferSource, int color, HumanoidRenderState humanoidRenderState, float float1, float float2, CallbackInfo info) {
             Holder<MobEffect> invisibility = MobEffects.INVISIBILITY;
-            if (ChrysalisLivingEntityRenderState.livingEntity.hasEffect(invisibility) && Objects.requireNonNull(ChrysalisLivingEntityRenderState.livingEntity.getEffect(invisibility)).getAmplifier() > 0) info.cancel();
+            if (CLivingEntityRenderState.livingEntity.hasEffect(invisibility) && Objects.requireNonNull(CLivingEntityRenderState.livingEntity.getEffect(invisibility)).getAmplifier() > 0) info.cancel();
         }
     }
 
@@ -142,7 +142,7 @@ public class EntityRendererMixin {
         @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/HumanoidRenderState;FF)V", at = @At("HEAD"), cancellable = true)
         private void chrysalis$hideRenderedElytra(PoseStack poseStack, MultiBufferSource multiBufferSource, int color, HumanoidRenderState humanoidRenderState, float float1, float float2, CallbackInfo info) {
             Holder<MobEffect> invisibility = MobEffects.INVISIBILITY;
-            if (ChrysalisLivingEntityRenderState.livingEntity.hasEffect(invisibility) && Objects.requireNonNull(ChrysalisLivingEntityRenderState.livingEntity.getEffect(invisibility)).getAmplifier() > 0) info.cancel();
+            if (CLivingEntityRenderState.livingEntity.hasEffect(invisibility) && Objects.requireNonNull(CLivingEntityRenderState.livingEntity.getEffect(invisibility)).getAmplifier() > 0) info.cancel();
         }
     }
 

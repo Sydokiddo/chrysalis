@@ -11,12 +11,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.junebug.chrysalis.client.entities.rendering.render_states.ChrysalisEntityRenderState;
+import net.junebug.chrysalis.client.entities.rendering.render_states.CEntityRenderState;
 import net.junebug.chrysalis.common.entities.custom_entities.spawners.encounter_spawner.EncounterSpawner;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class EncounterSpawnerRenderer extends EntityRenderer<EncounterSpawner, ChrysalisEntityRenderState> {
+public class EncounterSpawnerRenderer extends EntityRenderer<EncounterSpawner, CEntityRenderState> {
 
     /**
      * The entity rendering class for encounter spawners.
@@ -30,15 +30,15 @@ public class EncounterSpawnerRenderer extends EntityRenderer<EncounterSpawner, C
     }
 
     @Override
-    public @NotNull ChrysalisEntityRenderState createRenderState() {
-        return new ChrysalisEntityRenderState();
+    public @NotNull CEntityRenderState createRenderState() {
+        return new CEntityRenderState();
     }
 
     @Override
-    public void render(@NotNull ChrysalisEntityRenderState renderState, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
+    public void render(@NotNull CEntityRenderState renderState, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
 
         Player player = Minecraft.getInstance().player;
-        if (!(ChrysalisEntityRenderState.entity instanceof EncounterSpawner encounterSpawner) || encounterSpawner.getEntityToSpawn().isEmpty() || player != null && !player.getAbilities().invulnerable) return;
+        if (!(CEntityRenderState.entity instanceof EncounterSpawner encounterSpawner) || encounterSpawner.getEntityToSpawn().isEmpty() || player != null && !player.getAbilities().invulnerable) return;
 
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(Mth.wrapDegrees(renderState.ageInTicks * 10.0F)));

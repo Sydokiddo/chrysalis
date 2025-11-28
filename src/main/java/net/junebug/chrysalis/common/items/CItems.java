@@ -140,6 +140,7 @@ public class CItems {
 
         GIANT_SPAWN_EGG = ITEMS.registerItem("giant_spawn_egg", (properties) -> new SpawnEggItem(EntityType.GIANT, properties)),
         ILLUSIONER_SPAWN_EGG = ITEMS.registerItem("illusioner_spawn_egg", (properties) -> new SpawnEggItem(EntityType.ILLUSIONER, properties)),
+        KEY_GOLEM_SPAWN_EGG = ITEMS.registerItem("key_golem_spawn_egg", (properties) -> new SpawnEggItem(CEntities.KEY_GOLEM.get(), properties)),
 
         TEST_RIGHT_CLICK_ITEM = TEST_ITEMS.registerItem("test_right_click_item", TestRightClickItem::new, new Item.Properties().stacksTo(1))
     ;

@@ -97,44 +97,59 @@
 
   "item.chrysalis.heal": "Heal",
   "item.chrysalis.heal.description": "Sets User to Maximum Health",
+
   "item.chrysalis.fill_hunger": "Fill Hunger",
   "item.chrysalis.fill_hunger.description": "Sets User to Maximum Hunger Value",
+
   "item.chrysalis.fill_oxygen": "Fill Oxygen",
   "item.chrysalis.fill_oxygen.description": "Sets User to Maximum Oxygen Value",
+
   "item.chrysalis.give_resistance": "Give Resistance",
   "item.chrysalis.give_resistance.description": "Gives User Infinite Resistance",
+
   "item.chrysalis.clear_effects": "Clear Effects",
   "item.chrysalis.clear_effects.description": "Clears All Effects",
+
   "item.chrysalis.teleport_to_spawnpoint": "Teleport to Spawnpoint",
   "item.chrysalis.teleport_to_spawnpoint.description": "Teleports User to Spawn Position",
+
   "item.chrysalis.teleport_to_overworld": "Teleport to Overworld",
   "item.chrysalis.teleport_to_nether": "Teleport to Nether",
   "item.chrysalis.teleport_to_end": "Teleport to End",
   "item.chrysalis.teleport_to_dimension.description": "Teleports User to %s",
+
   "item.chrysalis.teleport_wand": "Teleport Wand",
   "item.chrysalis.teleport_wand.description": "Teleports User to Targeted Position",
+
   "item.chrysalis.kill_wand": "Kill Wand",
   "item.chrysalis.kill_wand.description": "Instantly Kills Targeted Mob",
+
   "item.chrysalis.aggro_wand": "Aggro Wand",
   "item.chrysalis.aggro_wand.linked": "Aggro Wand (%s)",
   "item.chrysalis.aggro_wand.linked_mob_tooltip": "Linked Mob: %s",
   "item.chrysalis.aggro_wand.description_unlinked": "Selects Mob to Aggro",
   "item.chrysalis.aggro_wand.description_linked": "Selects Mob to Target",
+
   "item.chrysalis.tame_mob": "Tame Mob",
   "item.chrysalis.tame_mob.description": "Tames Targeted Mob",
+
   "item.chrysalis.ride_mob": "Ride Mob",
   "item.chrysalis.ride_mob.description": "Mounts Targeted Mob",
+
   "item.chrysalis.drain_fluids": "Drain Fluids",
   "item.chrysalis.drain_fluids.description": "Drains Nearby Fluids",
+
   "item.chrysalis.copying_spawn_egg": "Copying Spawn Egg",
   "item.chrysalis.copying_spawn_egg.copied": "Copying Spawn Egg (%s)",
   "item.chrysalis.copying_spawn_egg.copied_entity_tooltip": "Copied Entity: %s",
   "item.chrysalis.copying_spawn_egg.description_uncopied": "Copies Targeted Entity",
   "item.chrysalis.copying_spawn_egg.description_copied": "Spawns Copied Entity",
+
   "item.chrysalis.key": "Key",
   "item.chrysalis.key.description": "A generic key item used as a fallback for all unlockable blocks.",
   "item.chrysalis.admin_key": "Admin Key",
   "item.chrysalis.admin_key.description": "A key item that can be used to unlock any unlockable block.",
+
   "item.chrysalis.event_test": "Event Test (%s)",
   "item.chrysalis.event_test.description": "Emits Specified Event",
   "item.chrysalis.music_event_test.description": "Music",
@@ -142,12 +157,16 @@
   "item.chrysalis.earthquake_event_test.description": "Earthquake",
   "item.chrysalis.entity_spawner_event_test.description": "Entity Spawner",
   "item.chrysalis.encounter_spawner_event_test.description": "Encounter Spawner",
+
   "item.chrysalis.debug_stick.description": "Cycles Between Block States",
   "item.chrysalis.light.description": "Light Level: %s",
-  "item.chrysalis.giant_spawn_egg": "Giant Spawn Egg",
-  "item.chrysalis.illusioner_spawn_egg": "Illusioner Spawn Egg",
+
   "item.chrysalis.test_right_click_item": "Test Right Click Item",
   "item.chrysalis.test_right_click_item.description": "An item for testing right-click functionality. Only meant for debug environments!",
+
+  "item.chrysalis.giant_spawn_egg": "Giant Spawn Egg",
+  "item.chrysalis.illusioner_spawn_egg": "Illusioner Spawn Egg",
+  "item.chrysalis.key_golem_spawn_egg": "Key Golem Spawn Egg",
 
   "comment.chrysalis.blocks": "BLOCKS",
 
@@ -177,6 +196,7 @@
 
   "comment.chrysalis.entities": "ENTITIES",
 
+  "entity.chrysalis.empty": "Empty",
   "entity.chrysalis.seat": "Seat",
   "entity.chrysalis.entity_spawner": "Entity Spawner",
   "entity.chrysalis.encounter_spawner": "Encounter Spawner",
