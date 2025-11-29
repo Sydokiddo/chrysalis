@@ -425,7 +425,10 @@
   },
   "entity.key_golem.pant": {
     "sounds": [
-      "chrysalis:entity/key_golem/pant"
+      {
+        "name": "chrysalis:entity/key_golem/pant",
+        "volume": 0.5
+      }
     ],
     "subtitle": "subtitles.entity.key_golem.pant"
   },

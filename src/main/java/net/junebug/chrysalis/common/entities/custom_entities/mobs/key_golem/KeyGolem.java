@@ -54,6 +54,10 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         return this.getVehicle() instanceof Player;
     }
 
+    public boolean isRidingSpecificPlayer(Player player) {
+        return this.isRidingPlayer() && this.getVehicle() == player;
+    }
+
     // endregion
 
     // region Ticking, AI, and Entity Events
@@ -93,7 +97,8 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
             this.carryAnimationState.animateWhen(this.isRidingPlayer(), this.tickCount);
 
         } else {
-            this.tryPlayingNoveltyAnimation(this, 70, CSoundEvents.KEY_GOLEM_NOVELTY.get(), 1000, !this.getNoveltyAnimation().isStarted() && !this.isDeadOrDying() && !this.isRidingPlayer());
+            if (this.isRidingPlayer() && this.tickCount % 48 == 0) this.playSound(CSoundEvents.KEY_GOLEM_PANT.get(), 1.0F, this.getRandom().triangle(1.0F, 0.2F));
+            this.tryPlayingNoveltyAnimation(this, 70, CSoundEvents.KEY_GOLEM_NOVELTY.get(), 2000, !this.getNoveltyAnimation().isStarted() && !this.isDeadOrDying() && !this.isRidingPlayer());
         }
 
         super.tick();
@@ -146,7 +151,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
     @Override
     public int getAmbientSoundInterval() {
-        if (this.isRidingPlayer()) return 25;
+        if (this.isRidingPlayer()) return 20;
         return 80;
     }
 

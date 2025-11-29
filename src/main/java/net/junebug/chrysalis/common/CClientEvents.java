@@ -1,6 +1,8 @@
 package net.junebug.chrysalis.common;
 
+import net.junebug.chrysalis.client.entities.rendering.custom_entities.KeyGolemRenderer;
 import net.junebug.chrysalis.common.blocks.CBlocks;
+import net.junebug.chrysalis.common.entities.custom_entities.mobs.key_golem.KeyGolem;
 import net.junebug.chrysalis.util.helpers.ComponentHelper;
 import net.junebug.chrysalis.util.helpers.ItemHelper;
 import net.minecraft.ChatFormatting;
@@ -9,6 +11,7 @@ import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
@@ -83,6 +86,20 @@ public class CClientEvents {
 
         private static void playScreenshotSound(Minecraft minecraft) {
             if (CConfigOptions.SCREENSHOT_SOUND.get()) EventHelper.playUIClickSound(minecraft, CSoundEvents.SCREENSHOT_SUCCESS);
+        }
+
+        @SubscribeEvent
+        private static void renderFirstPersonKeyGolem(RenderArmEvent event) {
+
+            KeyGolem heldKeyGolem = (!event.getPlayer().getPassengers().isEmpty() ? event.getPlayer().getPassengers().getFirst() : null) instanceof KeyGolem keyGolem ? keyGolem : null;
+
+            if (heldKeyGolem != null) {
+                event.getPoseStack().pushPose();
+                event.getPoseStack().scale(0.8F, 0.8F, 0.8F);
+                Minecraft.getInstance().getEntityRenderDispatcher().render(heldKeyGolem, event.getArm() == HumanoidArm.RIGHT ? -0.5D : 0.5D, 0.5D, 0.5D, Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false), event.getPoseStack(), event.getMultiBufferSource(), KeyGolemRenderer.firstPersonPackedLight);
+                event.getPoseStack().popPose();
+                event.setCanceled(true);
+            }
         }
     }
 
