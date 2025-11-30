@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.*;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -89,5 +90,17 @@ public class ParticleHelper {
 
     public static void emitRedstoneParticlesAroundBlock(Level level, BlockPos blockPos, double yOffset) {
         emitParticlesAroundBlock(level, blockPos, DustParticleOptions.REDSTONE, yOffset, 0.5D, 1);
+    }
+
+    public static void emitParticlesAroundEntity(Entity entity, ParticleOptions particleType, double radius, int amount) {
+
+        if (!(entity.level() instanceof ServerLevel serverLevel)) return;
+
+        for (int particleAmount = 0; particleAmount < amount; ++particleAmount) {
+            double randomX = serverLevel.getRandom().nextGaussian() * 0.02D;
+            double randomY = serverLevel.getRandom().nextGaussian() * 0.02D;
+            double randomZ = serverLevel.getRandom().nextGaussian() * 0.02D;
+            serverLevel.sendParticles(particleType, entity.getRandomX(radius), entity.getRandomY(), entity.getRandomZ(radius), 1, randomX, randomY, randomZ, 0.0D);
+        }
     }
 }

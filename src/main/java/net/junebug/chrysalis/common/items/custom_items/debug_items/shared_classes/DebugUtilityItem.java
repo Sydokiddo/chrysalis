@@ -1,11 +1,10 @@
 package net.junebug.chrysalis.common.items.custom_items.debug_items.shared_classes;
 
+import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -44,20 +43,8 @@ public class DebugUtilityItem extends Item {
         return !player.isCreative();
     }
 
-    public static void addParticlesAroundEntity(Entity entity, ParticleOptions particleType, int amount, double range) {
-
-        if (!(entity.level() instanceof ServerLevel serverLevel)) return;
-
-        for (int particleAmount = 0; particleAmount < amount; ++particleAmount) {
-            double randomX = serverLevel.getRandom().nextGaussian() * 0.02D;
-            double randomY = serverLevel.getRandom().nextGaussian() * 0.02D;
-            double randomZ = serverLevel.getRandom().nextGaussian() * 0.02D;
-            serverLevel.sendParticles(particleType, entity.getRandomX(range), entity.getRandomY() + 0.5D, entity.getRandomZ(range), 1, randomX, randomY, randomZ, 0.0D);
-        }
-    }
-
     public static void addSparkleParticles(Entity entity) {
-        addParticlesAroundEntity(entity, ParticleTypes.HAPPY_VILLAGER, 10, 0.8D);
+        ParticleHelper.emitParticlesAroundEntity(entity, ParticleTypes.HAPPY_VILLAGER, 0.8D, 10);
     }
 
     public static void sendFeedbackMessage(boolean requiresGameRule, ServerPlayer serverPlayer, Component message) {

@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.common.items.custom_items.debug_items.types;
 
+import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,7 +48,7 @@ public class ClearEffectsItem extends DebugUtilityItem {
 
                 serverPlayer.playNotifySound(CSoundEvents.CLEAR_EFFECTS_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-                addParticlesAroundEntity(serverPlayer, ParticleTypes.EFFECT, 10, 1.0D);
+                ParticleHelper.emitParticlesAroundEntity(serverPlayer, ParticleTypes.EFFECT, 1.0D, 10);
 
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 serverPlayer.removeAllEffects();

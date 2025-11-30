@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.common.items.custom_items.debug_items.types;
 
+import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -51,7 +52,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
 
             serverPlayer.playNotifySound(CSoundEvents.GIVE_RESISTANCE_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
             serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            addParticlesAroundEntity(serverPlayer, new BlockParticleOption(ParticleTypes.BLOCK, Blocks.IRON_BLOCK.defaultBlockState()), 10, 1.0D);
+            ParticleHelper.emitParticlesAroundEntity(serverPlayer, new BlockParticleOption(ParticleTypes.BLOCK, Blocks.IRON_BLOCK.defaultBlockState()), 1.0D, 10);
 
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
             Holder<MobEffect> resistance = MobEffects.DAMAGE_RESISTANCE;

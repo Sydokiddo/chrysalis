@@ -71,6 +71,8 @@ public class KeyGolemModel extends EntityModel<CLivingEntityRenderState> {
         this.animate(keyGolem.wakeUpAnimationState, KeyGolemAnimations.WAKE_UP, renderState.ageInTicks); // Wake Up Animation
         this.animate(keyGolem.noticeAnimationState, KeyGolemAnimations.NOTICE, renderState.ageInTicks); // Notice Animation
         this.animate(keyGolem.carryAnimationState, KeyGolemAnimations.CARRY, renderState.ageInTicks); // Carry Animation
+        this.animate(keyGolem.spawnAnimationState, KeyGolemAnimations.SPAWN, renderState.ageInTicks); // Spawn Animation
+        this.animate(keyGolem.despawnAnimationState, KeyGolemAnimations.DESPAWN, renderState.ageInTicks); // Despawn Animation
 
         AnimationDefinition walkAnimation;
         if (keyGolem.isSprinting()) walkAnimation = KeyGolemAnimations.RUN;

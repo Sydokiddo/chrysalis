@@ -50,7 +50,7 @@ public class EntityHelper {
     }
 
     public static boolean isMobMoving(Mob mob) {
-        return isLivingEntityMoving(mob) && !mob.isNoAi() && !mob.isPassenger();
+        return isLivingEntityMoving(mob) && mob.isEffectiveAi() && !mob.isPassenger();
     }
 
     // endregion

@@ -85,7 +85,7 @@ public class Earthquake extends Entity implements TraceableEntity {
     ;
 
     private static final int defaultLifeTime = 20;
-    private static final ParticleOptions defaultParticle = new DustCloudParticleOptions(DustCloudParticleOptions.defaultColor, false);
+    private static final ParticleOptions defaultParticle = new DustCloudParticleOptions(DustCloudParticleOptions.defaultColor, false, false);
 
     public static void create(Level level, LivingEntity owner, Vec3 position, float yRot, float xRot) {
         create(level, owner, position, yRot, xRot, defaultScale, defaultLifeTime, defaultSpeed, defaultBaseDamage, defaultDamageScalesFromDifficulty, defaultBaseKnockback, defaultTravelSound, defaultHitSound, defaultParticle, defaultCanEmitCameraShake);

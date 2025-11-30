@@ -3,6 +3,7 @@ package net.junebug.chrysalis.util.entities.interfaces;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 @SuppressWarnings("unused")
@@ -12,26 +13,26 @@ public interface AnimatedEntity {
      * An interface for entities with custom keyframe animations.
      **/
 
-    // region Spawning Animation
+    // region Spawn Animation
 
-    default AnimationState getSpawningAnimation() {
+    default AnimationState getSpawnAnimation() {
         return new AnimationState();
     }
 
-    default void playSpawningAnimation(Entity entity) {
-        this.getSpawningAnimation().start(entity.tickCount);
+    default void playSpawnAnimation(LivingEntity livingEntity) {
+        this.getSpawnAnimation().start(livingEntity.tickCount);
     }
 
     // endregion
 
-    // region Despawning Animation
+    // region Despawn Animation
 
-    default AnimationState getDespawningAnimation() {
+    default AnimationState getDespawnAnimation() {
         return new AnimationState();
     }
 
-    default void playDespawningAnimation(Entity entity) {
-        this.getDespawningAnimation().start(entity.tickCount);
+    default void playDespawnAnimation(LivingEntity livingEntity) {
+        this.getDespawnAnimation().start(livingEntity.tickCount);
     }
 
     // endregion
@@ -42,8 +43,8 @@ public interface AnimatedEntity {
         return new AnimationState();
     }
 
-    default void playIdleAnimation(Entity entity, boolean animateWhen) {
-        this.getIdleAnimation().animateWhen(animateWhen, entity.tickCount);
+    default void playIdleAnimation(LivingEntity livingEntity, boolean animateWhen) {
+        this.getIdleAnimation().animateWhen(animateWhen, livingEntity.tickCount);
     }
 
     // endregion
@@ -54,16 +55,28 @@ public interface AnimatedEntity {
         return new AnimationState();
     }
 
-    default void playNoveltyAnimation(Entity entity) {
-        this.getNoveltyAnimation().start(entity.tickCount);
+    default void playNoveltyAnimation(LivingEntity livingEntity) {
+        this.getNoveltyAnimation().start(livingEntity.tickCount);
     }
 
-    default void tryPlayingNoveltyAnimation(Entity entity, int entityEvent, SoundEvent soundEvent, int chance, boolean canPlay) {
-        if (entity.level().getRandom().nextInt(chance) == 0 && canPlay) {
-            entity.level().broadcastEntityEvent(entity, (byte) entityEvent);
-            entity.playSound(soundEvent);
-            entity.gameEvent(GameEvent.ENTITY_ACTION);
+    default boolean canPlayNoveltyAnimation(LivingEntity livingEntity) {
+        return !this.getNoveltyAnimation().isStarted() && !livingEntity.isRemoved() && !livingEntity.isDeadOrDying() && livingEntity.isEffectiveAi();
+    }
+
+    default boolean tryPlayingNoveltyAnimation(LivingEntity livingEntity, int entityEvent, SoundEvent soundEvent, int chance) {
+
+        if (livingEntity.level().getRandom().nextInt(chance) == 0 && this.canPlayNoveltyAnimation(livingEntity)) {
+            livingEntity.level().broadcastEntityEvent(livingEntity, (byte) entityEvent);
+            livingEntity.playSound(soundEvent);
+            livingEntity.gameEvent(GameEvent.ENTITY_ACTION);
+            return true;
         }
+
+        return false;
+    }
+
+    default void tryStoppingNoveltyAnimation(LivingEntity livingEntity, long animationTime) {
+        if (this.getNoveltyAnimation().getTimeInMillis(livingEntity.tickCount) > animationTime) this.getNoveltyAnimation().stop();
     }
 
     // endregion
@@ -80,35 +93,35 @@ public interface AnimatedEntity {
 
     // endregion
 
-    // region Attacking Animations
+    // region Attack Animations
 
-    default AnimationState getAttackingAnimation() {
+    default AnimationState getAttackAnimation() {
         return new AnimationState();
     }
 
-    default void playAttackingAnimation(Entity entity) {
-        this.getAttackingAnimation().start(entity.tickCount);
+    default void playAttackAnimation(Entity entity) {
+        this.getAttackAnimation().start(entity.tickCount);
     }
 
     default void playAlternatingAttackAnimation(Entity entity) {
-        if (entity.level().getRandom().nextFloat() < 0.5F) this.playRightAttackingAnimation(entity);
-        else this.playLeftAttackingAnimation(entity);
+        if (entity.level().getRandom().nextFloat() < 0.5F) this.playRightAttackAnimation(entity);
+        else this.playLeftAttackAnimation(entity);
     }
 
-    default AnimationState getRightAttackingAnimation() {
+    default AnimationState getRightAttackAnimation() {
         return new AnimationState();
     }
 
-    default void playRightAttackingAnimation(Entity entity) {
-        this.getRightAttackingAnimation().start(entity.tickCount);
+    default void playRightAttackAnimation(Entity entity) {
+        this.getRightAttackAnimation().start(entity.tickCount);
     }
 
-    default AnimationState getLeftAttackingAnimation() {
+    default AnimationState getLeftAttackAnimation() {
         return new AnimationState();
     }
 
-    default void playLeftAttackingAnimation(Entity entity) {
-        this.getLeftAttackingAnimation().start(entity.tickCount);
+    default void playLeftAttackAnimation(Entity entity) {
+        this.getLeftAttackAnimation().start(entity.tickCount);
     }
 
     // endregion

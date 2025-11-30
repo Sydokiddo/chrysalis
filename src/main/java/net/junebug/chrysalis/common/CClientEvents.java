@@ -96,7 +96,7 @@ public class CClientEvents {
             if (heldKeyGolem != null) {
                 event.getPoseStack().pushPose();
                 event.getPoseStack().scale(0.8F, 0.8F, 0.8F);
-                Minecraft.getInstance().getEntityRenderDispatcher().render(heldKeyGolem, event.getArm() == HumanoidArm.RIGHT ? -0.5D : 0.5D, 0.5D, 0.5D, Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false), event.getPoseStack(), event.getMultiBufferSource(), KeyGolemRenderer.firstPersonPackedLight);
+                Minecraft.getInstance().getEntityRenderDispatcher().render(heldKeyGolem, event.getArm() == HumanoidArm.RIGHT ? -0.5D : 0.5D, 0.5D, 0.5D, Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false), event.getPoseStack(), event.getMultiBufferSource(), KeyGolemRenderer.getFirstPersonLightLevel(heldKeyGolem));
                 event.getPoseStack().popPose();
                 event.setCanceled(true);
             }

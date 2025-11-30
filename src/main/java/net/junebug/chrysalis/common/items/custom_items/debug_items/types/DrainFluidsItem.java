@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.common.items.custom_items.debug_items.types;
 
+import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -58,7 +59,7 @@ public class DrainFluidsItem extends DebugUtilityItem {
                 if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
                     serverPlayer.playNotifySound(CSoundEvents.DRAIN_FLUIDS_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-                    addParticlesAroundEntity(serverPlayer, ParticleTypes.FALLING_WATER, 10, 1.0D);
+                    ParticleHelper.emitParticlesAroundEntity(serverPlayer, ParticleTypes.FALLING_WATER, 1.0D, 10);
                     serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                     DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.drain_fluids.message"));
                 }

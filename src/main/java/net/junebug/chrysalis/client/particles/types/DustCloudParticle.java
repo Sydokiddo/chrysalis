@@ -23,6 +23,7 @@ public class DustCloudParticle extends CampfireSmokeParticle implements Particle
     // region Initialization and Ticking
 
     private final SpriteSet spriteSet;
+    private final boolean emissive;
 
     public DustCloudParticle(ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, DustCloudParticleOptions particleOptions, SpriteSet spriteSet) {
         super(clientLevel, x, y, z, xSpeed, ySpeed, zSpeed, false);
@@ -41,6 +42,8 @@ public class DustCloudParticle extends CampfireSmokeParticle implements Particle
             this.gCol = color.y();
             this.bCol = color.z();
         }
+
+        this.emissive = particleOptions.isEmissive();
     }
 
     @Override
@@ -61,6 +64,12 @@ public class DustCloudParticle extends CampfireSmokeParticle implements Particle
         }
 
         if (this.age > this.lifetime) this.setAlpha(1.0F - Mth.clamp((float) this.age / (float) this.lifetime, 0.0F, 1.0F));
+    }
+
+    @Override
+    public int getLightColor(float tickRate) {
+        if (this.emissive) return this.fadeLightColor(1.0F, 0.0F, this.age, this.lifetime, super.getLightColor(tickRate));
+        return super.getLightColor(tickRate);
     }
 
     // endregion

@@ -24,21 +24,28 @@ public class DustCloudParticleOptions implements ParticleOptions, ParticleCommon
 
     public static final MapCodec<DustCloudParticleOptions> CODEC = RecordCodecBuilder.mapCodec((instance) ->
         instance.group(ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf(ParticleCommonMethods.colorString, defaultColor).forGetter(ParticleCommonMethods::getColor),
-        Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor))
+        Codec.BOOL.optionalFieldOf(ParticleCommonMethods.randomizeColorString, false).forGetter(ParticleCommonMethods::shouldRandomizeColor),
+        Codec.BOOL.optionalFieldOf(ParticleCommonMethods.emissiveString, false).forGetter(ParticleCommonMethods::isEmissive))
     .apply(instance, DustCloudParticleOptions::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DustCloudParticleOptions> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.INT, ParticleCommonMethods::getColor,
         ByteBufCodecs.BOOL, ParticleCommonMethods::shouldRandomizeColor,
+        ByteBufCodecs.BOOL, ParticleCommonMethods::isEmissive,
         DustCloudParticleOptions::new
     );
 
     private final int color;
-    private final boolean randomizeColor;
 
-    public DustCloudParticleOptions(int color, boolean randomizeColor) {
+    private final boolean
+        randomizeColor,
+        emissive
+    ;
+
+    public DustCloudParticleOptions(int color, boolean randomizeColor, boolean emissive) {
         this.color = color;
         this.randomizeColor = randomizeColor;
+        this.emissive = emissive;
     }
 
     @Override
@@ -49,6 +56,11 @@ public class DustCloudParticleOptions implements ParticleOptions, ParticleCommon
     @Override
     public boolean shouldRandomizeColor() {
         return this.randomizeColor;
+    }
+
+    @Override
+    public boolean isEmissive() {
+        return this.emissive;
     }
 
     @Override

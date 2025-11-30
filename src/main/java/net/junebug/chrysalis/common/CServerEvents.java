@@ -55,6 +55,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.living.MobSplitEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -181,8 +182,19 @@ public class CServerEvents {
         }
 
         @SubscribeEvent
-        private static void onPlayerPostTick(LivingDamageEvent.Post event) {
+        private static void onLivingEntityDamage(LivingDamageEvent.Post event) {
             if (event.getEntity() instanceof ServerPlayer serverPlayer) EntityHelper.tryDismountingCarriedEntityFromDamage(serverPlayer, !serverPlayer.getPassengers().isEmpty() && serverPlayer.getPassengers().getFirst() instanceof KeyGolem keyGolem ? keyGolem : null, event.getOriginalDamage(), 1.0F);
+        }
+
+        @SubscribeEvent
+        private static void onLivingEntityJump(LivingEvent.LivingJumpEvent event) {
+
+            if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+                KeyGolem heldKeyGolem = !serverPlayer.getPassengers().isEmpty() && serverPlayer.getPassengers().getFirst() instanceof KeyGolem keyGolem ? keyGolem : null;
+                if (heldKeyGolem != null) heldKeyGolem.playRattleSound(heldKeyGolem);
+            }
+
+            if (event.getEntity() instanceof KeyGolem keyGolem) keyGolem.playRattleSound(keyGolem);
         }
 
         @SubscribeEvent

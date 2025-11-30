@@ -434,12 +434,30 @@
   },
   "entity.key_golem.rattle": {
     "sounds": [
-      "chrysalis:entity/key_golem/rattle1",
-      "chrysalis:entity/key_golem/rattle2",
-      "chrysalis:entity/key_golem/rattle3",
-      "chrysalis:entity/key_golem/rattle4",
-      "chrysalis:entity/key_golem/rattle5",
-      "chrysalis:entity/key_golem/rattle6"
+      {
+        "name": "chrysalis:entity/key_golem/rattle1",
+        "volume": 0.5
+      },
+      {
+        "name": "chrysalis:entity/key_golem/rattle2",
+        "volume": 0.5
+      },
+      {
+        "name": "chrysalis:entity/key_golem/rattle3",
+        "volume": 0.5
+      },
+      {
+        "name": "chrysalis:entity/key_golem/rattle4",
+        "volume": 0.5
+      },
+      {
+        "name": "chrysalis:entity/key_golem/rattle5",
+        "volume": 0.5
+      },
+      {
+        "name": "chrysalis:entity/key_golem/rattle6",
+        "volume": 0.5
+      }
     ],
     "subtitle": "subtitles.entity.key_golem.rattle"
   },

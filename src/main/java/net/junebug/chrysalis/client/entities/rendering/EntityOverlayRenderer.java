@@ -1,26 +1,25 @@
 package net.junebug.chrysalis.client.entities.rendering;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.junebug.chrysalis.client.entities.rendering.render_states.CLivingEntityRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("unused")
 @OnlyIn(Dist.CLIENT)
-public abstract class EntityOverlayRenderer<E extends LivingEntityRenderState, M extends EntityModel<E>> extends RenderLayer<E, M> {
+public abstract class EntityOverlayRenderer<E extends CLivingEntityRenderState, M extends EntityModel<E>> extends RenderLayer<E, M> {
 
     /**
      * A template rendering class for entity overlay textures.
      **/
 
-    private final boolean hideWhenInvisible;
+    public final boolean hideWhenInvisible;
 
     public EntityOverlayRenderer(RenderLayerParent<E, M> renderLayerParent, boolean hideWhenInvisible) {
         super(renderLayerParent);

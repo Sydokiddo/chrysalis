@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.common.items.custom_items.debug_items.types;
 
+import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
@@ -96,7 +97,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                 if (entity instanceof Mob linkedMob) {
 
                     addSparkleParticles(clickedMob);
-                    addParticlesAroundEntity(linkedMob, ParticleTypes.ANGRY_VILLAGER, 5, 1.5D);
+                    ParticleHelper.emitParticlesAroundEntity(entity, ParticleTypes.ANGRY_VILLAGER, 1.5D, 5);
 
                     linkedMob.setTarget(clickedMob);
 
