@@ -66,8 +66,8 @@ public class ComponentHelper {
     public static final Color
         CHRYSALIS_COLOR = Color.decode("#A27FFF"),
         JUNEBUG_COLOR = Color.decode("#43A0C1"),
-        ENCHANTMENT_COLOR = Color.decode("#964CFF"),
-        ENCHANTMENT_DARKER_COLOR = Color.decode("#4A1C8E"),
+        ENCHANTMENT_COLOR = Color.decode("#994CFF"),
+        ENCHANTMENT_DARKER_COLOR = Color.decode("#4C1C8E"),
         CURSE_COLOR = Color.decode("#FF5555"),
         CURSE_DARKER_COLOR = Color.decode("#8E1C1C"),
         EXPERIENCE_COLOR = Color.decode("#B9E85C"),

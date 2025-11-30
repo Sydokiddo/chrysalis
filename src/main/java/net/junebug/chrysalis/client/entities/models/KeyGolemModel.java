@@ -42,14 +42,14 @@ public class KeyGolemModel extends EntityModel<CLivingEntityRenderState> {
         PartDefinition eyes = body.addOrReplaceChild("Eyes", CubeListBuilder.create(), PartPose.offset(0.0F, -3.5F, -4.1F));
 
         PartDefinition normalEyes = eyes.addOrReplaceChild("Normal_Eyes", CubeListBuilder.create(), PartPose.offset(0.0F, 0.5F, 0.0F));
-        normalEyes.addOrReplaceChild("Right_Eye", CubeListBuilder.create().texOffs(33, 11).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 0.0F, 0.0F));
-        normalEyes.addOrReplaceChild("Left_Eye", CubeListBuilder.create().texOffs(33, 13).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 0.0F, 0.0F));
+        normalEyes.addOrReplaceChild("Right_Eye", CubeListBuilder.create().texOffs(33, 11).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0005F)), PartPose.offset(-2.0F, 0.0F, 0.0F));
+        normalEyes.addOrReplaceChild("Left_Eye", CubeListBuilder.create().texOffs(33, 13).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0005F)), PartPose.offset(2.0F, 0.0F, 0.0F));
 
         PartDefinition wideEyes = eyes.addOrReplaceChild("Wide_Eyes", CubeListBuilder.create(), PartPose.offset(0.0F, -0.5F, 0.0F));
-        wideEyes.addOrReplaceChild("Right_Wide_Eye", CubeListBuilder.create().texOffs(38, 11).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 0.0F, 0.0F));
-        wideEyes.addOrReplaceChild("Left_Wide_Eye", CubeListBuilder.create().texOffs(38, 14).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 0.0F, 0.0F));
+        wideEyes.addOrReplaceChild("Right_Wide_Eye", CubeListBuilder.create().texOffs(38, 11).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0006F)), PartPose.offset(-2.0F, 0.0F, 0.0F));
+        wideEyes.addOrReplaceChild("Left_Wide_Eye", CubeListBuilder.create().texOffs(38, 14).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0006F)), PartPose.offset(2.0F, 0.0F, 0.0F));
 
-        body.addOrReplaceChild("Mouth", CubeListBuilder.create().texOffs(33, 15).addBox(-1.0F, -0.5F, 0.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.5F, -4.1F));
+        body.addOrReplaceChild("Mouth", CubeListBuilder.create().texOffs(33, 15).addBox(-1.0F, -0.5F, 0.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0005F)), PartPose.offset(0.0F, -1.5F, -4.1F));
 
         keyGolem.addOrReplaceChild("Right_Leg", CubeListBuilder.create().texOffs(18, 20).addBox(-1.5F, 0.0F, -3.0F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -5.0F, 0.0F));
         keyGolem.addOrReplaceChild("Left_Leg", CubeListBuilder.create().texOffs(30, 20).addBox(-1.5F, 0.0F, -3.0F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -5.0F, 0.0F));

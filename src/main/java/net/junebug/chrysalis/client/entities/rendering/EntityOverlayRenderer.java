@@ -27,10 +27,10 @@ public abstract class EntityOverlayRenderer<E extends CLivingEntityRenderState, 
     }
 
     @Override
-    public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int color, @NotNull E entityRenderState, float float1, float float2) {
-        if (this.hideWhenInvisible && entityRenderState.isInvisible) return;
+    public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight, @NotNull E renderState, float yRot, float xRot) {
+        if (this.hideWhenInvisible && renderState.isInvisible) return;
         RenderType renderType = this.renderType();
-        if (renderType != null) this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), color, OverlayTexture.NO_OVERLAY);
+        if (renderType != null) this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), packedLight, OverlayTexture.NO_OVERLAY);
     }
 
     public abstract RenderType renderType();

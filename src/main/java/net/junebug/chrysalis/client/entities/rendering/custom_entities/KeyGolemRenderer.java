@@ -3,6 +3,7 @@ package net.junebug.chrysalis.client.entities.rendering.custom_entities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.junebug.chrysalis.Chrysalis;
+import net.junebug.chrysalis.client.CRenderTypes;
 import net.junebug.chrysalis.client.entities.models.KeyGolemModel;
 import net.junebug.chrysalis.client.entities.rendering.EntityOverlayRenderer;
 import net.junebug.chrysalis.client.entities.rendering.render_states.CLivingEntityRenderState;
@@ -29,15 +30,16 @@ public class KeyGolemRenderer extends MobRenderer<KeyGolem, CLivingEntityRenderS
 
     public KeyGolemRenderer(EntityRendererProvider.Context context) {
         super(context, new KeyGolemModel(context.bakeLayer(KeyGolemModel.LAYER)), 0.3F);
-        this.addLayer(new KeyGolemEyesLayer(this));
         this.addLayer(new KeyGolemTranslucentLayer(this));
+        this.addLayer(new KeyGolemGlintLayer(this));
+        this.addLayer(new KeyGolemEyesLayer(this));
     }
 
     // region Base Rendering
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull CLivingEntityRenderState renderState) {
-        return Chrysalis.resourceLocationId("textures/entity/key_golem/key_golem_empty.png");
+        return Chrysalis.resourceLocationId("textures/entity/key_golem/empty.png");
     }
 
     @Override
@@ -53,7 +55,12 @@ public class KeyGolemRenderer extends MobRenderer<KeyGolem, CLivingEntityRenderS
 
     @Override
     public void render(@NotNull CLivingEntityRenderState renderState, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
-        if (CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem && this.isHeldInFirstPerson() && packedLight != getFirstPersonLightLevel(keyGolem)) return;
+
+        if (CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem) {
+            if (this.isHeldInFirstPerson() && packedLight != getFirstPersonLightLevel(keyGolem)) return;
+            if (keyGolem.getVariant().isEnchanted()) poseStack.scale(1.1F, 1.1F, 1.1F);
+        }
+
         super.render(renderState, poseStack, bufferSource, packedLight);
     }
 
@@ -101,43 +108,75 @@ public class KeyGolemRenderer extends MobRenderer<KeyGolem, CLivingEntityRenderS
 
     // endregion
 
-    @OnlyIn(Dist.CLIENT)
-    private static class KeyGolemEyesLayer extends EntityOverlayRenderer<CLivingEntityRenderState, KeyGolemModel> {
-
-        private KeyGolemEyesLayer(RenderLayerParent<CLivingEntityRenderState, KeyGolemModel> renderLayerParent) {
-            super(renderLayerParent, true);
-        }
-
-        @Override
-        public RenderType renderType() {
-            return RenderType.entityCutoutNoCull(Chrysalis.resourceLocationId("textures/entity/key_golem/key_golem_eyes.png"));
-        }
-    }
+    // region Translucent Layer
 
     @OnlyIn(Dist.CLIENT)
     private static class KeyGolemTranslucentLayer extends EntityOverlayRenderer<CLivingEntityRenderState, KeyGolemModel> {
-
-        @SuppressWarnings("unused")
-        private static final RenderType
-            GOLDEN_TEXTURE = RenderType.entityTranslucent(Chrysalis.resourceLocationId("textures/entity/key_golem/key_golem_golden.png")),
-            DIAMOND_TEXTURE = RenderType.entityTranslucent(Chrysalis.resourceLocationId("textures/entity/key_golem/key_golem_diamond.png"))
-        ;
 
         private KeyGolemTranslucentLayer(RenderLayerParent<CLivingEntityRenderState, KeyGolemModel> renderLayerParent) {
             super(renderLayerParent, true);
         }
 
         @Override
-        public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int color, @NotNull CLivingEntityRenderState renderState, float float1, float float2) {
+        public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight, @NotNull CLivingEntityRenderState renderState, float yRot, float xRot) {
             RenderType renderType = this.renderType();
             if (renderType == null || !(CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem) || this.hideWhenInvisible && keyGolem.isInvisible()) return;
-            this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), color, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F), ARGB.colorFromFloat(keyGolem.isFake() ? 0.75F : 1.0F, 1.0F, 1.0F, 1.0F));
+            this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), packedLight, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F), ARGB.colorFromFloat(keyGolem.isFake() ? 0.75F : 1.0F, 1.0F, 1.0F, 1.0F));
         }
 
         @Override
         public RenderType renderType() {
-            if (CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem) return RenderType.entityTranslucent(Chrysalis.resourceLocationId("textures/entity/key_golem/key_golem_" + keyGolem.getVariant().getSerializedName() + ".png"));
+            if (CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem) return RenderType.entityTranslucent(Chrysalis.resourceLocationId("textures/entity/key_golem/" + keyGolem.getVariant().getSerializedName() + ".png"));
             return null;
         }
     }
+
+    // endregion
+
+    // region Glint Layer
+
+    @OnlyIn(Dist.CLIENT)
+    private static class KeyGolemGlintLayer extends EntityOverlayRenderer<CLivingEntityRenderState, KeyGolemModel> {
+
+        private KeyGolemGlintLayer(RenderLayerParent<CLivingEntityRenderState, KeyGolemModel> renderLayerParent) {
+            super(renderLayerParent, true);
+        }
+
+        @Override
+        public RenderType renderType() {
+            if (CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem && keyGolem.getVariant().isEnchanted()) return RenderType.entityGlint();
+            return null;
+        }
+    }
+
+    // endregion
+
+    // region Eyes Layer
+
+    @OnlyIn(Dist.CLIENT)
+    private static class KeyGolemEyesLayer extends EntityOverlayRenderer<CLivingEntityRenderState, KeyGolemModel> {
+
+        private KeyGolemEyesLayer(RenderLayerParent<CLivingEntityRenderState, KeyGolemModel> renderLayerParent) {
+            super(renderLayerParent, false);
+        }
+
+        @Override
+        public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight, @NotNull CLivingEntityRenderState renderState, float yRot, float xRot) {
+            if (CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem && !keyGolem.getVariant().isEnchanted() && renderState.isInvisible) return;
+            super.render(poseStack, multiBufferSource, packedLight, renderState, yRot, xRot);
+        }
+
+        @Override
+        public RenderType renderType() {
+
+            if (CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem) {
+                if (keyGolem.getVariant().isEnchanted()) return CRenderTypes.entityCutoutEmissive(Chrysalis.resourceLocationId("textures/entity/key_golem/enchanted_eyes.png"));
+                return RenderType.entityCutoutNoCull(Chrysalis.resourceLocationId("textures/entity/key_golem/eyes.png"));
+            }
+
+            return null;
+        }
+    }
+
+    // endregion
 }

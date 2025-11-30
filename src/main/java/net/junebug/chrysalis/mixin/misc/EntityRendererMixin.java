@@ -125,7 +125,7 @@ public class EntityRendererMixin {
          **/
 
         @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/HumanoidRenderState;FF)V", at = @At("HEAD"), cancellable = true)
-        private void chrysalis$hideRenderedArmor(PoseStack poseStack, MultiBufferSource multiBufferSource, int color, HumanoidRenderState humanoidRenderState, float float1, float float2, CallbackInfo info) {
+        private void chrysalis$hideRenderedArmor(PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, HumanoidRenderState humanoidRenderState, float yRot, float xRot, CallbackInfo info) {
             Holder<MobEffect> invisibility = MobEffects.INVISIBILITY;
             if (CLivingEntityRenderState.livingEntity.hasEffect(invisibility) && Objects.requireNonNull(CLivingEntityRenderState.livingEntity.getEffect(invisibility)).getAmplifier() > 0) info.cancel();
         }
@@ -140,7 +140,7 @@ public class EntityRendererMixin {
          **/
 
         @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/HumanoidRenderState;FF)V", at = @At("HEAD"), cancellable = true)
-        private void chrysalis$hideRenderedElytra(PoseStack poseStack, MultiBufferSource multiBufferSource, int color, HumanoidRenderState humanoidRenderState, float float1, float float2, CallbackInfo info) {
+        private void chrysalis$hideRenderedElytra(PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, HumanoidRenderState humanoidRenderState, float yRot, float xRot, CallbackInfo info) {
             Holder<MobEffect> invisibility = MobEffects.INVISIBILITY;
             if (CLivingEntityRenderState.livingEntity.hasEffect(invisibility) && Objects.requireNonNull(CLivingEntityRenderState.livingEntity.getEffect(invisibility)).getAmplifier() > 0) info.cancel();
         }

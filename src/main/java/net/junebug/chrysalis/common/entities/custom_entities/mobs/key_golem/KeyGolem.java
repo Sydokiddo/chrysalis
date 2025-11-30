@@ -90,7 +90,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     @SuppressWarnings("deprecation")
     @Override
     public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor serverLevelAccessor, @NotNull DifficultyInstance difficultyInstance, @NotNull EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnGroupData) {
-        this.setVariant(KeyGolemVariant.byRandomId());
+        this.setVariant(KeyGolemVariant.byRandomIdWithoutEnchanted());
         return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, spawnReason, spawnGroupData);
     }
 
@@ -360,13 +360,13 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
             return false;
         } else {
 
-            if (!damageSource.isCreativePlayer()) {
-                if (damageSource.getEntity() instanceof Player player && damageSource.is(DamageTypeTags.IS_PLAYER_ATTACK) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) this.tryRidingPlayer(player);
+            if (!damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && !damageSource.isCreativePlayer()) {
+                if (damageSource.getEntity() instanceof Player player && damageSource.is(DamageTypeTags.IS_PLAYER_ATTACK)) this.tryRidingPlayer(player);
                 return false;
             }
-        }
 
-        return super.hurtServer(serverLevel, damageSource, damageAmount);
+            return super.hurtServer(serverLevel, damageSource, damageAmount);
+        }
     }
 
     @Override

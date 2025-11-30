@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:iron_golem",
-    "minecraft:snow_golem"
+    "minecraft:snow_golem",
+    "chrysalis:key_golem"
   ]
 }

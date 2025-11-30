@@ -1,5 +1,7 @@
 {
+  "replace": false,
   "values": [
-    "#chrysalis:slimes"
+    "#chrysalis:slimes",
+    "chrysalis:key_golem"
   ]
 }

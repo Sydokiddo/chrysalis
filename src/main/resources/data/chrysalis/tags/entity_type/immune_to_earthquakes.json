@@ -5,6 +5,7 @@
     "minecraft:creaking",
     "minecraft:bat",
     "minecraft:silverfish",
+    "chrysalis:key_golem",
     {"id": "minecraft:pilferfish", "required": false}
   ]
 }
