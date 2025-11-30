@@ -47,9 +47,14 @@ public class PickUpMobItem extends DebugUtilityItem {
                 serverPlayer.gameEvent(GameEvent.ENTITY_INTERACT);
                 serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
 
-                if (livingEntity instanceof KeyGolem keyGolem && keyGolem.isFake()) {
-                    keyGolem.despawnFakeKeyGolem();
-                    return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
+                if (livingEntity instanceof KeyGolem keyGolem) {
+                    if (keyGolem.isFake()) {
+                        keyGolem.despawnFakeKeyGolem();
+                        return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
+                    } else {
+                        KeyGolem heldKeyGolem = KeyGolem.getHeldKeyGolem(serverPlayer);
+                        if (heldKeyGolem != null) heldKeyGolem.stopRiding();
+                    }
                 }
 
                 livingEntity.setXRot(player.getXRot());

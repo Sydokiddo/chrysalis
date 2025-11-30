@@ -183,14 +183,14 @@ public class CServerEvents {
 
         @SubscribeEvent
         private static void onLivingEntityDamage(LivingDamageEvent.Post event) {
-            if (event.getEntity() instanceof ServerPlayer serverPlayer) EntityHelper.tryDismountingCarriedEntityFromDamage(serverPlayer, !serverPlayer.getPassengers().isEmpty() && serverPlayer.getPassengers().getFirst() instanceof KeyGolem keyGolem ? keyGolem : null, event.getOriginalDamage(), 1.0F);
+            if (event.getEntity() instanceof ServerPlayer serverPlayer) EntityHelper.tryDismountingCarriedEntityFromDamage(serverPlayer, KeyGolem.getHeldKeyGolem(serverPlayer), event.getOriginalDamage(), 1.0F);
         }
 
         @SubscribeEvent
         private static void onLivingEntityJump(LivingEvent.LivingJumpEvent event) {
 
             if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-                KeyGolem heldKeyGolem = !serverPlayer.getPassengers().isEmpty() && serverPlayer.getPassengers().getFirst() instanceof KeyGolem keyGolem ? keyGolem : null;
+                KeyGolem heldKeyGolem = KeyGolem.getHeldKeyGolem(serverPlayer);
                 if (heldKeyGolem != null) heldKeyGolem.playRattleSound(heldKeyGolem);
             }
 

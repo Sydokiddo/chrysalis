@@ -144,7 +144,7 @@ public abstract class EntityMixin {
     @Inject(method = "positionRider(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity$MoveFunction;)V", at = @At("TAIL"))
     private void chrysalis$positionKeyGolemsOnPlayers(Entity passenger, Entity.MoveFunction moveFunction, CallbackInfo info) {
         if (this.chrysalis$entity instanceof Player player && player.hasPassenger(passenger) && passenger instanceof KeyGolem keyGolem) {
-            float offset = 0.5F;
+            float offset = 0.5F - (player.isVisuallySwimming() ? 0.5F : 0.0F);
             float mathMultiplier = 0.0175F;
             keyGolem.setYHeadRot(player.yBodyRot);
             keyGolem.setPos(player.getX() + (offset * Mth.sin(player.yBodyRot * mathMultiplier)), player.getY() + this.getDimensions(this.getPose()).height() * 0.35F, player.getZ() - (offset * Mth.cos(player.yBodyRot * mathMultiplier)));

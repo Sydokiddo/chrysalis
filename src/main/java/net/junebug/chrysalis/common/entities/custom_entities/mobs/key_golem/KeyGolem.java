@@ -239,6 +239,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
         if (this.getVehicle() instanceof Player player) {
             this.playSound(CSoundEvents.KEY_GOLEM_DROP.get());
+            player.swing(player.getUsedItemHand());
             if (player instanceof ServerPlayer serverPlayer) EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.WARNING_ICON, Component.translatable("gui.chrysalis.key_golem.drop_message", this.getName().getString()).withStyle(ChatFormatting.RED), true);
         }
 
@@ -251,6 +252,10 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
     public boolean isRidingSpecificPlayer(Player player) {
         return this.isRidingPlayer() && this.getVehicle() == player;
+    }
+
+    public static KeyGolem getHeldKeyGolem(Player player) {
+        return !player.getPassengers().isEmpty() && player.getPassengers().getFirst() instanceof KeyGolem keyGolem ? keyGolem : null;
     }
 
     // endregion
@@ -356,7 +361,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         } else {
 
             if (!damageSource.isCreativePlayer()) {
-                if (damageSource.getEntity() instanceof Player player && damageSource.isDirect() && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) this.tryRidingPlayer(player);
+                if (damageSource.getEntity() instanceof Player player && damageSource.is(DamageTypeTags.IS_PLAYER_ATTACK) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) this.tryRidingPlayer(player);
                 return false;
             }
         }

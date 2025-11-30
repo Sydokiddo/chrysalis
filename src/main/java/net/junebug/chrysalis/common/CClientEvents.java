@@ -91,7 +91,7 @@ public class CClientEvents {
         @SubscribeEvent
         private static void renderFirstPersonKeyGolem(RenderArmEvent event) {
 
-            KeyGolem heldKeyGolem = (!event.getPlayer().getPassengers().isEmpty() ? event.getPlayer().getPassengers().getFirst() : null) instanceof KeyGolem keyGolem ? keyGolem : null;
+            KeyGolem heldKeyGolem = KeyGolem.getHeldKeyGolem(event.getPlayer());
 
             if (heldKeyGolem != null) {
                 event.getPoseStack().pushPose();

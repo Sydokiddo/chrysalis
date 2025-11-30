@@ -61,6 +61,7 @@ public class KeyGolemModel extends EntityModel<CLivingEntityRenderState> {
     public void setupAnim(@NotNull CLivingEntityRenderState renderState) {
 
         super.setupAnim(renderState);
+        this.root().setPos(this.root().x, this.root().y - 0.1F, this.root().z);
 
         if (!(CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem)) return;
 
