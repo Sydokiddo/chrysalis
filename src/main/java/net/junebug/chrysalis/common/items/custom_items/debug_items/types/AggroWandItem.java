@@ -3,6 +3,7 @@ package net.junebug.chrysalis.common.items.custom_items.debug_items.types;
 import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.CommonComponents;
@@ -140,7 +141,7 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
                 DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.link_message", clickedMob.getName().getString()));
             }
 
-            return useItem(serverPlayer, itemStack, interactionHand);
+            return useItem(serverPlayer, itemStack, interactionHand, GameEvent.ENTITY_INTERACT);
         }
 
         return InteractionResult.PASS;
@@ -155,14 +156,14 @@ public class AggroWandItem extends ExtraReachDebugUtilityItem {
             removeComponents(itemStack);
             playSound(serverPlayer, CSoundEvents.AGGRO_WAND_REMOVE_LINKED_MOB.get());
             DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.aggro_wand.remove_linked_mob_message").withStyle(ChatFormatting.RED));
-            return useItem(serverPlayer, itemStack, interactionHand);
+            return useItem(serverPlayer, itemStack, interactionHand, GameEvent.ITEM_INTERACT_FINISH);
         }
 
         return super.use(level, player, interactionHand);
     }
 
-    private static InteractionResult useItem(ServerPlayer serverPlayer, ItemStack itemStack, InteractionHand interactionHand) {
-        serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+    private static InteractionResult useItem(ServerPlayer serverPlayer, ItemStack itemStack, InteractionHand interactionHand, Holder<GameEvent> gameEvent) {
+        serverPlayer.gameEvent(gameEvent);
         serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
         return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(serverPlayer.getItemInHand(interactionHand));
     }

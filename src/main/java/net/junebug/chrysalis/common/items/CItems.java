@@ -60,6 +60,7 @@ public class CItems {
         AGGRO_WAND = ITEMS.registerItem("aggro_wand", AggroWandItem::new, RegistryHelper.debugUtilityProperties(1).attributes(ExtraReachDebugUtilityItem.createAttributes(EquipmentSlotGroup.HAND))),
         TAME_MOB = ITEMS.registerItem("tame_mob", TameMobItem::new, RegistryHelper.debugUtilityProperties(1)),
         RIDE_MOB = ITEMS.registerItem("ride_mob", RideMobItem::new, RegistryHelper.debugUtilityProperties(1)),
+        PICK_UP_MOB = ITEMS.registerItem("pick_up_mob", PickUpMobItem::new, RegistryHelper.debugUtilityProperties(1)),
         DRAIN_FLUIDS = ITEMS.registerItem("drain_fluids", DrainFluidsItem::new, RegistryHelper.debugUtilityProperties(1)),
         COPYING_SPAWN_EGG = ITEMS.registerItem("copying_spawn_egg", CopyingSpawnEggItem::new, RegistryHelper.debugUtilityProperties(1)),
         KEY = ITEMS.registerItem("key", CreativeModeDescriptionItem::new, new Item.Properties()),

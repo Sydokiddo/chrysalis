@@ -131,7 +131,7 @@ public class KeyGolemRenderer extends MobRenderer<KeyGolem, CLivingEntityRenderS
         public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int color, @NotNull CLivingEntityRenderState renderState, float float1, float float2) {
             RenderType renderType = this.renderType();
             if (renderType == null || !(CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem) || this.hideWhenInvisible && keyGolem.isInvisible()) return;
-            this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), color, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F), ARGB.colorFromFloat(keyGolem.isFake() ? 0.8F : 1.0F, 1.0F, 1.0F, 1.0F));
+            this.getParentModel().renderToBuffer(poseStack, multiBufferSource.getBuffer(renderType), color, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F), ARGB.colorFromFloat(keyGolem.isFake() ? 0.75F : 1.0F, 1.0F, 1.0F, 1.0F));
         }
 
         @Override

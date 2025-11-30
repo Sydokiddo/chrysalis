@@ -1,19 +1,24 @@
 package net.junebug.chrysalis.common.entities.custom_entities.mobs.key_golem;
 
+import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.client.particles.options.DustCloudParticleOptions;
 import net.junebug.chrysalis.client.particles.options.SparkParticleOptions;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
 import net.junebug.chrysalis.util.entities.interfaces.AnimatedEntity;
+import net.junebug.chrysalis.util.helpers.ComponentHelper;
 import net.junebug.chrysalis.util.helpers.EntityHelper;
+import net.junebug.chrysalis.util.helpers.EventHelper;
 import net.junebug.chrysalis.util.helpers.ParticleHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -224,8 +229,19 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     }
 
     @Override
+    public boolean startRiding(@NotNull Entity entity, boolean force) {
+        if (entity instanceof ServerPlayer serverPlayer) EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.KEY_GOLEM_ICON, Component.translatable("gui.chrysalis.key_golem.grab_message"), true);
+        return super.startRiding(entity, force);
+    }
+
+    @Override
     public void stopRiding() {
-        if (this.getVehicle() instanceof Player player) player.swing(InteractionHand.MAIN_HAND);
+
+        if (this.getVehicle() instanceof Player player) {
+            this.playSound(CSoundEvents.KEY_GOLEM_DROP.get());
+            if (player instanceof ServerPlayer serverPlayer) EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.WARNING_ICON, Component.translatable("gui.chrysalis.key_golem.drop_message", this.getName().getString()).withStyle(ChatFormatting.RED), true);
+        }
+
         super.stopRiding();
     }
 
@@ -364,10 +380,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         this.gameEvent(GameEvent.ENTITY_INTERACT);
 
         if (this.isFake()) {
-            this.playSound(SoundEvents.PLAYER_TELEPORT);
-            ParticleHelper.emitParticlesAroundEntity(this, new DustCloudParticleOptions(this.getVariant().particleColor(), false, true), 1.0D, 5);
-            this.level().broadcastEntityEvent(this, (byte) 72);
-            this.setDespawnTriggered();
+            this.despawnFakeKeyGolem();
         } else {
             this.playSound(CSoundEvents.KEY_GOLEM_GRAB.get());
             ParticleHelper.emitParticlesAroundEntity(this, new SparkParticleOptions(this.getVariant().particleColor(), false, 1.5F), 0.5D, 5);
@@ -376,6 +389,13 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         }
 
         return true;
+    }
+
+    public void despawnFakeKeyGolem() {
+        this.playSound(CSoundEvents.KEY_GOLEM_DISAPPEAR.get());
+        ParticleHelper.emitParticlesAroundEntity(this, new DustCloudParticleOptions(this.getVariant().particleColor(), false, true), 1.0D, 5);
+        this.level().broadcastEntityEvent(this, (byte) 72);
+        this.setDespawnTriggered();
     }
 
     // endregion
@@ -396,7 +416,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
     @Override @Nullable
     protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
-        return SoundEvents.GENERIC_HURT;
+        return CSoundEvents.KEY_GOLEM_HURT.get();
     }
 
     @Override @Nullable

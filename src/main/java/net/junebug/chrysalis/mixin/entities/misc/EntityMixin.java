@@ -100,6 +100,7 @@ public abstract class EntityMixin {
         if (itemStack.getItem() instanceof AggroWandItem) cir.setReturnValue(AggroWandItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof TameMobItem) cir.setReturnValue(TameMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof RideMobItem) cir.setReturnValue(RideMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
+        if (itemStack.getItem() instanceof PickUpMobItem) cir.setReturnValue(PickUpMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
     }
 
     /**

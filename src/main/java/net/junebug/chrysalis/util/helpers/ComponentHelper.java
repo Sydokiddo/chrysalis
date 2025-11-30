@@ -180,7 +180,8 @@ public class ComponentHelper {
         LAVA_ICON = Component.translatable("gui.chrysalis.icon.lava"),
         GLISTER_ICON = Component.translatable("gui.chrysalis.icon.glister"),
         MOLTEN_VOID_ICON = Component.translatable("gui.chrysalis.icon.molten_void"),
-        ECTOPLASM_ICON = Component.translatable("gui.chrysalis.icon.ectoplasm")
+        ECTOPLASM_ICON = Component.translatable("gui.chrysalis.icon.ectoplasm"),
+        KEY_GOLEM_ICON = Component.translatable("gui.chrysalis.icon.key_golem")
     ;
 
     // endregion

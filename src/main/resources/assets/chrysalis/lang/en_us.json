@@ -85,6 +85,7 @@
   "gui.chrysalis.icon.glister": "\ua068",
   "gui.chrysalis.icon.molten_void": "\ua069",
   "gui.chrysalis.icon.ectoplasm": "\ua070",
+  "gui.chrysalis.icon.key_golem": "\ua071",
 
   "comment.chrysalis.hotkeys": "HOTKEYS",
 
@@ -135,6 +136,9 @@
 
   "item.chrysalis.ride_mob": "Ride Mob",
   "item.chrysalis.ride_mob.description": "Mounts Targeted Mob",
+
+  "item.chrysalis.pick_up_mob": "Pick Up Mob",
+  "item.chrysalis.pick_up_mob.description": "Picks Up Targeted Mob",
 
   "item.chrysalis.drain_fluids": "Drain Fluids",
   "item.chrysalis.drain_fluids.description": "Drains Nearby Fluids",
@@ -384,6 +388,11 @@
   "gui.chrysalis.block.bed.invalid_dimension": "You cannot sleep in this dimension",
   "gui.chrysalis.block.generic_respawn_block.invalid_dimension": "You cannot set your spawn point using this block in this dimension",
 
+  "comment.chrysalis.entity_messages": "ENTITY MESSAGES",
+
+  "gui.chrysalis.key_golem.grab_message": "Sneak or Take Damage to Drop",
+  "gui.chrysalis.key_golem.drop_message": "%s Has Been Dropped!",
+
   "comment.chrysalis.tooltips": "TOOLTIPS",
 
   "gui.chrysalis.item.when_held": "When Held:",
@@ -572,6 +581,7 @@
   "subtitles.item.aggro_wand.remove_linked_mob": "Linked mob removed",
   "subtitles.item.tame_mob.use": "Mob tamed",
   "subtitles.item.ride_mob.use": "Mob mounted",
+  "subtitles.item.pick_up_mob.use": "Mob picked up",
   "subtitles.item.drain_fluids.use": "Fluids drained",
   "subtitles.item.copying_spawn_egg.copy_entity": "Entity copied",
   "subtitles.item.copying_spawn_egg.remove_copied_entity": "Copied entity removed",
@@ -651,13 +661,17 @@
   "subtitles.entity.key_golem.ambient_scared": "Key Golem flees",
   "subtitles.entity.key_golem.ambient_carrying": "Key Golem panics",
   "subtitles.entity.key_golem.novelty": "Key Golem looks around",
+  "subtitles.entity.key_golem.hurt": "Key Golem hurts",
   "subtitles.entity.key_golem.death": "Key Golem dies",
   "subtitles.entity.key_golem.fall_asleep": "Key Golem falls asleep",
   "subtitles.entity.key_golem.wake_up": "Key Golem wakes up",
   "subtitles.entity.key_golem.notice": "Key Golem notices",
   "subtitles.entity.key_golem.grab": "Key Golem is grabbed",
+  "subtitles.entity.key_golem.drop": "Key Golem is dropped",
+  "subtitles.entity.key_golem.disappear": "Fake Key Golem disappears",
   "subtitles.entity.key_golem.pant": "Key Golem hyperventilates",
   "subtitles.entity.key_golem.rattle": "Key Golem rattles",
+  "subtitles.entity.key_golem.brighten": "Key Golem brightens",
   "subtitles.entity.key_golem.unlock": "Key Golem unlocks",
 
   "subtitles.entity.player.hurt_electrocuted": "Player electrocutes",

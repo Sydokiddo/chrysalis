@@ -1,12 +1,13 @@
 package net.junebug.chrysalis.common.items.custom_items.debug_items.types;
 
+import net.junebug.chrysalis.util.helpers.EventHelper;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -94,7 +95,7 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
             if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && serverPlayer.isShiftKeyDown()) {
                 itemStack.set(DataComponents.ITEM_NAME, Component.translatable(this.getDescriptionId()));
                 itemStack.remove(DataComponents.ENTITY_DATA);
-                useItem(player, itemStack, CSoundEvents.COPYING_SPAWN_EGG_REMOVE_COPIED_ENTITY.get());
+                useItem(player, itemStack, CSoundEvents.COPYING_SPAWN_EGG_REMOVE_COPIED_ENTITY.get(), GameEvent.ITEM_INTERACT_FINISH);
                 sendMessage(serverPlayer, Component.translatable("gui.chrysalis.copying_spawn_egg.remove_message").withStyle(ChatFormatting.RED));
                 return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
             }
@@ -110,7 +111,7 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
             itemStack.set(DataComponents.ITEM_NAME, Component.translatable(copyingSpawnEggItem.getDescriptionId() + ".copied", entity.getType().getDescription().getString()));
             CustomData.update(DataComponents.ENTITY_DATA, itemStack, (compoundTag) -> compoundTag.putString("id", entity.getType().toShortString()));
 
-            useItem(serverPlayer, itemStack, CSoundEvents.COPYING_SPAWN_EGG_COPY_ENTITY.get());
+            useItem(serverPlayer, itemStack, CSoundEvents.COPYING_SPAWN_EGG_COPY_ENTITY.get(), GameEvent.ENTITY_INTERACT);
             DebugUtilityItem.addSparkleParticles(entity);
             sendMessage(serverPlayer, Component.translatable("gui.chrysalis.copying_spawn_egg.copy_message", entity.getType().getDescription().getString()));
 
@@ -120,20 +121,14 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
         return InteractionResult.PASS;
     }
 
-    private static void useItem(Player player, ItemStack itemStack, SoundEvent soundEvent) {
+    private static void useItem(Player player, ItemStack itemStack, SoundEvent soundEvent, Holder<GameEvent> gameEvent) {
         player.playNotifySound(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
-        player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+        player.gameEvent(gameEvent);
         player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
     }
 
-    private static Component createTextComponent(Component component) {
-        MutableComponent eggIcon = ComponentHelper.EGG_ICON;
-        ComponentHelper.setIconsFont(eggIcon, Chrysalis.MOD_ID);
-        return ItemHelper.addTooltipWithIconOnBothSides(eggIcon, component);
-    }
-
     private static void sendMessage(ServerPlayer serverPlayer, Component component) {
-        if (serverPlayer.serverLevel().getGameRules().getBoolean(CGameRules.RULE_SEND_DEBUG_UTILITY_FEEDBACK)) serverPlayer.sendSystemMessage(createTextComponent(component), true);
+        EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.EGG_ICON, component, serverPlayer.serverLevel().getGameRules().getBoolean(CGameRules.RULE_SEND_DEBUG_UTILITY_FEEDBACK));
     }
 
     // endregion

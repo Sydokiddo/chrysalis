@@ -642,6 +642,15 @@
       "chars": [
         "\ua070"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "chrysalis:gui/sprites/icons/key_golem.png",
+      "ascent": 15,
+      "height": 17,
+      "chars": [
+        "\ua071"
+      ]
     }
   ]
 }

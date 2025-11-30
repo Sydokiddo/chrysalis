@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -191,6 +193,18 @@ public class EventHelper {
     @OnlyIn(Dist.CLIENT)
     public static void playUIClickSound(Minecraft minecraft, Holder<SoundEvent> soundEvent, float pitch) {
         minecraft.getSoundManager().play(SimpleSoundInstance.forUI(soundEvent, pitch));
+    }
+
+    public static void sendSystemMessageWithOneIcon(ServerPlayer serverPlayer, String modId, MutableComponent icon, Component text, boolean canSend) {
+        ComponentHelper.setIconsFont(icon, modId);
+        Component finalComponent = ItemHelper.addTooltipWithIcon(icon, text);
+        if (serverPlayer != null && canSend) serverPlayer.sendSystemMessage(finalComponent, true);
+    }
+
+    public static void sendSystemMessageWithTwoIcons(ServerPlayer serverPlayer, String modId, MutableComponent icon, Component text, boolean canSend) {
+        ComponentHelper.setIconsFont(icon, modId);
+        Component finalComponent = ItemHelper.addTooltipWithIconOnBothSides(icon, text);
+        if (serverPlayer != null && canSend) serverPlayer.sendSystemMessage(finalComponent, true);
     }
 
     // endregion

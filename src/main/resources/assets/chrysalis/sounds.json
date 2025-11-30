@@ -116,6 +116,12 @@
     ],
     "subtitle": "subtitles.item.ride_mob.use"
   },
+  "item.pick_up_mob.use": {
+    "sounds": [
+      "minecraft:mob/horse/leather"
+    ],
+    "subtitle": "subtitles.item.pick_up_mob.use"
+  },
   "item.drain_fluids.use": {
     "sounds": [
       "minecraft:block/sponge/absorb1",
@@ -382,6 +388,15 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.key_golem.hurt": {
+    "sounds": [
+      "chrysalis:entity/key_golem/grab1",
+      "chrysalis:entity/key_golem/grab2",
+      "chrysalis:entity/key_golem/grab3",
+      "chrysalis:entity/key_golem/grab4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.hurt"
+  },
   "entity.key_golem.death": {
     "sounds": [
       "chrysalis:entity/key_golem/death1",
@@ -422,6 +437,23 @@
       "chrysalis:entity/key_golem/grab4"
     ],
     "subtitle": "subtitles.entity.key_golem.grab"
+  },
+  "entity.key_golem.drop": {
+    "sounds": [
+      "chrysalis:entity/key_golem/drop1",
+      "chrysalis:entity/key_golem/drop2",
+      "chrysalis:entity/key_golem/drop3"
+    ],
+    "subtitle": "subtitles.entity.key_golem.drop"
+  },
+  "entity.key_golem.disappear": {
+    "sounds": [
+      "chrysalis:entity/key_golem/unlock1",
+      "chrysalis:entity/key_golem/unlock2",
+      "chrysalis:entity/key_golem/unlock3",
+      "chrysalis:entity/key_golem/unlock4"
+    ],
+    "subtitle": "subtitles.entity.key_golem.disappear"
   },
   "entity.key_golem.pant": {
     "sounds": [
