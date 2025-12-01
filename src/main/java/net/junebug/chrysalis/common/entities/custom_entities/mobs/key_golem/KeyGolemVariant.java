@@ -10,7 +10,7 @@ public enum KeyGolemVariant implements StringRepresentable {
 
     GOLDEN(0, "golden", false, Color.decode("#FFAA00").getRGB()),
     DIAMOND(1, "diamond", false, Color.decode("#00BFFF").getRGB()),
-    ENCHANTED(2, "enchanted", true, Color.decode("#D699FF").getRGB());
+    ENCHANTED(2, "enchanted", true, Color.decode("#D38CFF").getRGB());
 
     private final int
         id,
