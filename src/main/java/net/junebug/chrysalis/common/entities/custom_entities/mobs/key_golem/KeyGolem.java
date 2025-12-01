@@ -267,7 +267,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     }
 
     private MobEffectInstance getGivenEffectInstance(Holder<MobEffect> mobEffect) {
-        return new MobEffectInstance(mobEffect, 200, this.getGivenEffectAmplifier(), true, true);
+        return new MobEffectInstance(mobEffect, 400, this.getGivenEffectAmplifier(), true, true);
     }
 
     // endregion
@@ -466,7 +466,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         if (!this.level().isClientSide()) {
 
             if (EntityHelper.isLivingEntityMoving(this) || this.getVehicle() instanceof Player player && EntityHelper.isLivingEntityMoving(player)) ParticleHelper.emitParticlesAroundEntity(this, new RotatingDustParticleOptions(this.getVariant().particleColor(), false, true, true, 1.0F), 0.5D, 1);
-            else if (this.getVariant().isEnchanted() && this.tickCount % 10 == 0) ParticleHelper.emitParticlesAroundEntity(this, new SparkleParticleOptions(this.getVariant().particleColor(), false), 1.0D, 1);
+            else if (this.getVariant().isEnchanted() && this.tickCount % 10 == 0) ParticleHelper.emitParticlesAroundEntity(this, new SparkleParticleOptions(this.getVariant().particleColor(), false), 0.8D, 1);
 
             Holder<MobEffect> mobEffect = this.getGivenEffect(this.getPersistentData());
             if (mobEffect != null && this.tickCount % 20 == 0) this.addEffect(this.getGivenEffectInstance(mobEffect));
