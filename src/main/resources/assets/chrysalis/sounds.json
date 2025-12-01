@@ -448,10 +448,8 @@
   },
   "entity.key_golem.disappear": {
     "sounds": [
-      "chrysalis:entity/key_golem/unlock1",
-      "chrysalis:entity/key_golem/unlock2",
-      "chrysalis:entity/key_golem/unlock3",
-      "chrysalis:entity/key_golem/unlock4"
+      "chrysalis:entity/key_golem/disappear1",
+      "chrysalis:entity/key_golem/disappear2"
     ],
     "subtitle": "subtitles.entity.key_golem.disappear"
   },
@@ -493,6 +491,12 @@
     ],
     "subtitle": "subtitles.entity.key_golem.rattle"
   },
+  "entity.key_golem.brighten": {
+    "sounds": [
+      "chrysalis:entity/key_golem/brighten"
+    ],
+    "subtitle": "subtitles.entity.key_golem.brighten"
+  },
   "entity.key_golem.unlock": {
     "sounds": [
       "chrysalis:entity/key_golem/unlock1",
@@ -508,6 +512,18 @@
       "chrysalis:entity/key_golem/apply_effect2"
     ],
     "subtitle": "subtitles.entity.key_golem.apply_effect"
+  },
+  "entity.key_golem.add_player_effect": {
+    "sounds": [
+      "chrysalis:entity/key_golem/add_player_effect"
+    ],
+    "subtitle": "subtitles.entity.key_golem.add_player_effect"
+  },
+  "entity.key_golem.remove_player_effect": {
+    "sounds": [
+      "chrysalis:entity/key_golem/remove_player_effect"
+    ],
+    "subtitle": "subtitles.entity.key_golem.remove_player_effect"
   },
   "item.armor.equip_shield": {
     "sounds": [

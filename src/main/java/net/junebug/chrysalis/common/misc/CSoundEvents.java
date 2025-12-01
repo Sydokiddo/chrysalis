@@ -89,8 +89,11 @@ public class CSoundEvents {
         KEY_GOLEM_DISAPPEAR = SOUND_EVENTS.register("entity.key_golem.disappear", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_PANT = SOUND_EVENTS.register("entity.key_golem.pant", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_RATTLE = SOUND_EVENTS.register("entity.key_golem.rattle", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_BRIGHTEN = SOUND_EVENTS.register("entity.key_golem.brighten", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_UNLOCK = SOUND_EVENTS.register("entity.key_golem.unlock", SoundEvent::createVariableRangeEvent),
         KEY_GOLEM_APPLY_EFFECT = SOUND_EVENTS.register("entity.key_golem.apply_effect", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_ADD_PLAYER_EFFECT = SOUND_EVENTS.register("entity.key_golem.add_player_effect", SoundEvent::createVariableRangeEvent),
+        KEY_GOLEM_REMOVE_PLAYER_EFFECT = SOUND_EVENTS.register("entity.key_golem.remove_player_effect", SoundEvent::createVariableRangeEvent),
 
         EQUIP_SHIELD = SOUND_EVENTS.register("item.armor.equip_shield", SoundEvent::createVariableRangeEvent),
         EQUIP_TOTEM_OF_UNDYING = SOUND_EVENTS.register("item.armor.equip_totem_of_undying", SoundEvent::createVariableRangeEvent),

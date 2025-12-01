@@ -676,6 +676,8 @@
   "subtitles.entity.key_golem.brighten": "Key Golem brightens",
   "subtitles.entity.key_golem.unlock": "Key Golem unlocks",
   "subtitles.entity.key_golem.apply_effect": "Key Golem absorbs effect",
+  "subtitles.entity.key_golem.add_player_effect": "Key Golem adds effect",
+  "subtitles.entity.key_golem.remove_player_effect": "Key Golem removes effect",
 
   "subtitles.entity.player.hurt_electrocuted": "Player electrocutes",
 

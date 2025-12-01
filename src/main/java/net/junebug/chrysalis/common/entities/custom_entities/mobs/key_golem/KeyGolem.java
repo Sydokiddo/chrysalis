@@ -331,9 +331,14 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     public boolean startRiding(@NotNull Entity entity, boolean force) {
 
         if (entity instanceof ServerPlayer serverPlayer) {
+
             EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.KEY_GOLEM_ICON, Component.translatable("gui.chrysalis.key_golem.grab_message"), true);
             Holder<MobEffect> mobEffect = this.getGivenEffect(this.getPersistentData());
-            if (mobEffect != null) serverPlayer.addEffect(this.getGivenEffectInstance(mobEffect), this);
+
+            if (mobEffect != null) {
+                serverPlayer.addEffect(this.getGivenEffectInstance(mobEffect), this);
+                this.playEffectChangedSound(CSoundEvents.KEY_GOLEM_ADD_PLAYER_EFFECT.get());
+            }
         }
 
         return super.startRiding(entity, force);
@@ -351,8 +356,13 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
             Holder<MobEffect> mobEffect = this.getGivenEffect(this.getPersistentData());
 
             if (mobEffect != null && player.hasEffect(mobEffect)) {
+
                 MobEffectInstance mobEffectInstance = player.getEffect(mobEffect);
-                if (mobEffectInstance != null && mobEffectInstance.getAmplifier() == this.getGivenEffectAmplifier() && mobEffectInstance.isAmbient()) player.removeEffect(mobEffect);
+
+                if (mobEffectInstance != null && mobEffectInstance.getAmplifier() == this.getGivenEffectAmplifier() && mobEffectInstance.isAmbient()) {
+                    player.removeEffect(mobEffect);
+                    this.playEffectChangedSound(CSoundEvents.KEY_GOLEM_REMOVE_PLAYER_EFFECT.get());
+                }
             }
         }
 
@@ -472,12 +482,8 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     public void aiStep() {
 
         if (!this.level().isClientSide()) {
-
             if (EntityHelper.isLivingEntityMoving(this) || this.getVehicle() instanceof Player player && EntityHelper.isLivingEntityMoving(player)) ParticleHelper.emitParticlesAroundEntity(this, new RotatingDustParticleOptions(this.getVariant().particleColor(), false, true, true, 1.0F), 0.5D, 1);
             else if (this.getVariant().isEnchanted() && this.tickCount % 10 == 0) ParticleHelper.emitParticlesAroundEntity(this, new SparkleParticleOptions(this.getVariant().particleColor(), false), 0.8D, 1);
-
-            Holder<MobEffect> mobEffect = this.getGivenEffect(this.getPersistentData());
-            if (mobEffect != null && this.tickCount % 20 == 0) this.addEffect(this.getGivenEffectInstance(mobEffect));
         }
 
         super.aiStep();
@@ -604,6 +610,11 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     public void playRattleSound(KeyGolem keyGolem) {
         keyGolem.makeSound(CSoundEvents.KEY_GOLEM_RATTLE.get());
         keyGolem.gameEvent(GameEvent.ENTITY_ACTION);
+    }
+
+    private void playEffectChangedSound(SoundEvent soundEvent) {
+        this.playSound(soundEvent);
+        this.gameEvent(GameEvent.ENTITY_ACTION);
     }
 
     // endregion
