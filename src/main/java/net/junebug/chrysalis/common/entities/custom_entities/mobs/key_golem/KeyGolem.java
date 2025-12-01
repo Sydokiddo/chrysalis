@@ -345,7 +345,11 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
             if (player instanceof ServerPlayer serverPlayer) EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.WARNING_ICON, Component.translatable("gui.chrysalis.key_golem.drop_message", this.getName().getString()).withStyle(ChatFormatting.RED), true);
 
             Holder<MobEffect> mobEffect = this.getGivenEffect(this.getPersistentData());
-            for (MobEffectInstance mobEffectInstance : player.getActiveEffects()) if (mobEffectInstance.getEffect() == mobEffect && mobEffectInstance.getAmplifier() == this.getGivenEffectAmplifier() && mobEffectInstance.isAmbient()) player.removeEffect(mobEffectInstance.getEffect());
+
+            if (mobEffect != null && player.hasEffect(mobEffect)) {
+                MobEffectInstance mobEffectInstance = player.getEffect(mobEffect);
+                if (mobEffectInstance != null && mobEffectInstance.getAmplifier() == this.getGivenEffectAmplifier() && mobEffectInstance.isAmbient()) player.removeEffect(mobEffect);
+            }
         }
 
         super.stopRiding();
