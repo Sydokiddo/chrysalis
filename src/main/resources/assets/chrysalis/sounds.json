@@ -502,6 +502,13 @@
     ],
     "subtitle": "subtitles.entity.key_golem.unlock"
   },
+  "entity.key_golem.apply_effect": {
+    "sounds": [
+      "chrysalis:entity/key_golem/apply_effect1",
+      "chrysalis:entity/key_golem/apply_effect2"
+    ],
+    "subtitle": "subtitles.entity.key_golem.apply_effect"
+  },
   "item.armor.equip_shield": {
     "sounds": [
       "chrysalis:item/equipment/shield/equip1",

@@ -392,6 +392,8 @@
 
   "gui.chrysalis.key_golem.grab_message": "Sneak or Take Damage to Drop",
   "gui.chrysalis.key_golem.drop_message": "%s Has Been Dropped!",
+  "gui.chrysalis.key_golem.apply_effect_message": "Effect Applied: %s",
+  "gui.chrysalis.key_golem.apply_stronger_effect_message": "Effect Applied: %1$s %2$s",
 
   "comment.chrysalis.tooltips": "TOOLTIPS",
 
@@ -673,6 +675,7 @@
   "subtitles.entity.key_golem.rattle": "Key Golem rattles",
   "subtitles.entity.key_golem.brighten": "Key Golem brightens",
   "subtitles.entity.key_golem.unlock": "Key Golem unlocks",
+  "subtitles.entity.key_golem.apply_effect": "Key Golem absorbs effect",
 
   "subtitles.entity.player.hurt_electrocuted": "Player electrocutes",
 

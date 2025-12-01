@@ -15,6 +15,8 @@ import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -25,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -38,6 +41,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -506,6 +510,28 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
     @Override
     public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand interactionHand) {
+
+        PotionContents potionContents = player.getMainHandItem().get(DataComponents.POTION_CONTENTS);
+
+        if (this.getVariant().isEnchanted() && player.canUseGameMasterBlocks() && potionContents != null && potionContents.hasEffects()) {
+
+            Holder<MobEffect> mobEffect = potionContents.getAllEffects().iterator().next().getEffect();
+            int amplifier = potionContents.getAllEffects().iterator().next().getAmplifier();
+
+            this.playSound(CSoundEvents.KEY_GOLEM_APPLY_EFFECT.get());
+            this.gameEvent(GameEvent.ENTITY_INTERACT);
+            ParticleHelper.emitParticlesAroundEntity(this, ParticleTypes.EFFECT, 0.5D, 10);
+            this.setGivenEffectWithAmplifier(this.getPersistentData(), mobEffect, amplifier);
+            player.awardStat(Stats.ITEM_USED.get(player.getMainHandItem().getItem()));
+
+            if (player instanceof ServerPlayer serverPlayer) {
+                Component component = amplifier > 0 ? Component.translatable("gui.chrysalis.key_golem.apply_stronger_effect_message", mobEffect.value().getDisplayName(), Component.translatable("potion.potency." + amplifier)) : Component.translatable("gui.chrysalis.key_golem.apply_effect_message", mobEffect.value().getDisplayName());
+                EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.POTION_ICON, component, true);
+            }
+
+            return InteractionResult.SUCCESS_SERVER;
+        }
+
         if (player.getMainHandItem().isEmpty() && this.tryRidingPlayer(player)) return InteractionResult.SUCCESS_SERVER;
         return super.mobInteract(player, interactionHand);
     }
