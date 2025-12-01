@@ -2,8 +2,11 @@ package net.junebug.chrysalis.common.entities.custom_entities.mobs.key_golem;
 
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.client.particles.options.DustCloudParticleOptions;
+import net.junebug.chrysalis.client.particles.options.RotatingDustParticleOptions;
 import net.junebug.chrysalis.client.particles.options.SparkParticleOptions;
+import net.junebug.chrysalis.client.particles.options.SparkleParticleOptions;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
+import net.junebug.chrysalis.common.status_effects.CStatusEffects;
 import net.junebug.chrysalis.util.entities.interfaces.AnimatedEntity;
 import net.junebug.chrysalis.util.helpers.ComponentHelper;
 import net.junebug.chrysalis.util.helpers.EntityHelper;
@@ -11,11 +14,14 @@ import net.junebug.chrysalis.util.helpers.EventHelper;
 import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -24,6 +30,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -38,6 +47,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import java.util.List;
 
 public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
@@ -67,6 +77,39 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         this.setPathfindingMalus(PathType.DAMAGE_CAUTIOUS, -1.0F);
     }
 
+    public final List<Holder<MobEffect>> defaultEffects = List.of(
+        MobEffects.MOVEMENT_SPEED,
+        MobEffects.MOVEMENT_SLOWDOWN,
+        MobEffects.DIG_SPEED,
+        MobEffects.DIG_SLOWDOWN,
+        MobEffects.DAMAGE_BOOST,
+        MobEffects.JUMP,
+        MobEffects.CONFUSION,
+        MobEffects.REGENERATION,
+        MobEffects.DAMAGE_RESISTANCE,
+        MobEffects.FIRE_RESISTANCE,
+        MobEffects.WATER_BREATHING,
+        MobEffects.INVISIBILITY,
+        MobEffects.BLINDNESS,
+        MobEffects.NIGHT_VISION,
+        MobEffects.HUNGER,
+        MobEffects.WEAKNESS,
+        MobEffects.HEALTH_BOOST,
+        MobEffects.ABSORPTION,
+        MobEffects.SATURATION,
+        MobEffects.GLOWING,
+        MobEffects.LEVITATION,
+        MobEffects.SLOW_FALLING,
+        MobEffects.DOLPHINS_GRACE,
+        MobEffects.DARKNESS,
+        MobEffects.WIND_CHARGED,
+        MobEffects.WEAVING,
+        MobEffects.OOZING,
+        MobEffects.INFESTED,
+        CStatusEffects.HEALTH_REDUCTION,
+        CStatusEffects.BUILDING_FATIGUE
+    );
+
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 1.0D).add(Attributes.MOVEMENT_SPEED, 0.3D).add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
@@ -91,7 +134,14 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     @Override
     public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor serverLevelAccessor, @NotNull DifficultyInstance difficultyInstance, @NotNull EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnGroupData) {
         this.setVariant(KeyGolemVariant.byRandomIdWithoutEnchanted());
+        if (this.getVariant().isEnchanted()) this.setRandomGivenEffect();
         return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, spawnReason, spawnGroupData);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean canBeAffected(@NotNull MobEffectInstance mobEffectInstance) {
+        return false;
     }
 
     // endregion
@@ -107,17 +157,18 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     private static final EntityDataAccessor<Integer>
         VARIANT = SynchedEntityData.defineId(KeyGolem.class, EntityDataSerializers.INT),
         BRIGHTNESS = SynchedEntityData.defineId(KeyGolem.class, EntityDataSerializers.INT),
+        GIVEN_EFFECT_AMPLIFIER = SynchedEntityData.defineId(KeyGolem.class, EntityDataSerializers.INT),
         TICKS_UNTIL_DESPAWN = SynchedEntityData.defineId(KeyGolem.class, EntityDataSerializers.INT)
     ;
 
-    private static final EntityDataAccessor<Float>
-        HITBOX_SCALE = SynchedEntityData.defineId(KeyGolem.class, EntityDataSerializers.FLOAT)
-    ;
+    private static final EntityDataAccessor<Float> HITBOX_SCALE = SynchedEntityData.defineId(KeyGolem.class, EntityDataSerializers.FLOAT);
 
     private final String
         variantTag = "variant",
         brightnessTag = "brightness",
-        fakeTag = "fake"
+        fakeTag = "fake",
+        givenEffectTag = "given_effect",
+        givenEffectAmplifierTag = "given_effect_amplifier"
     ;
 
     private final int defaultTicksUntilDespawn = 10;
@@ -129,6 +180,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         builder.define(VARIANT, KeyGolemVariant.GOLDEN.id());
         builder.define(BRIGHTNESS, 15);
         builder.define(FAKE, false);
+        builder.define(GIVEN_EFFECT_AMPLIFIER, 0);
         builder.define(PLAYING_NOVELTY_ANIMATION, false);
         builder.define(DESPAWN_TRIGGERED, false);
         builder.define(TICKS_UNTIL_DESPAWN, this.defaultTicksUntilDespawn);
@@ -141,6 +193,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         compoundTag.putInt(this.variantTag, this.getVariant().id());
         compoundTag.putInt(this.brightnessTag, this.getBrightness());
         compoundTag.putBoolean(this.fakeTag, this.isFake());
+        compoundTag.putInt(this.givenEffectAmplifierTag, this.getGivenEffectAmplifier());
     }
 
     @Override
@@ -149,6 +202,8 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         this.setVariant(KeyGolemVariant.byId(compoundTag.getInt(this.variantTag)));
         this.setBrightness(compoundTag.getInt(this.brightnessTag));
         this.setFake(compoundTag.getBoolean(this.fakeTag));
+        this.setGivenEffect(compoundTag, this.getGivenEffect(compoundTag));
+        this.setGivenEffectAmplifier(compoundTag.getInt(this.givenEffectAmplifierTag));
     }
 
     // region In-Game Accessible Data
@@ -176,6 +231,46 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     private void setFake(boolean fake) {
         this.getEntityData().set(FAKE, fake);
     }
+
+    // region Given Effect
+
+    private Holder<MobEffect> getGivenEffect(CompoundTag compoundTag) {
+        if (compoundTag.contains(this.givenEffectTag, 8)) {
+            ResourceLocation resourceLocation = ResourceLocation.tryParse(compoundTag.getString(this.givenEffectTag));
+            return resourceLocation == null ? null : BuiltInRegistries.MOB_EFFECT.get(resourceLocation).orElse(null);
+        } else {
+            return null;
+        }
+    }
+
+    private void setGivenEffect(CompoundTag compoundTag, @Nullable Holder<MobEffect> mobEffect) {
+        if (mobEffect == null) return;
+        mobEffect.unwrapKey().ifPresent(resourceKey -> compoundTag.putString(this.givenEffectTag, resourceKey.location().toString()));
+    }
+
+    @SuppressWarnings("all")
+    private void setGivenEffectWithAmplifier(CompoundTag compoundTag, @Nullable Holder<MobEffect> mobEffect, int amplifier) {
+        this.setGivenEffect(compoundTag, mobEffect);
+        this.setGivenEffectAmplifier(amplifier);
+    }
+
+    private void setRandomGivenEffect() {
+        this.setGivenEffectWithAmplifier(this.getPersistentData(), this.defaultEffects.get(this.getRandom().nextInt(this.defaultEffects.size())), 0);
+    }
+
+    private int getGivenEffectAmplifier() {
+        return this.getEntityData().get(GIVEN_EFFECT_AMPLIFIER);
+    }
+
+    private void setGivenEffectAmplifier(int amplifier) {
+        this.getEntityData().set(GIVEN_EFFECT_AMPLIFIER, amplifier);
+    }
+
+    private MobEffectInstance getGivenEffectInstance(Holder<MobEffect> mobEffect) {
+        return new MobEffectInstance(mobEffect, 200, this.getGivenEffectAmplifier(), true, true);
+    }
+
+    // endregion
 
     // endregion
 
@@ -230,7 +325,13 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
     @Override
     public boolean startRiding(@NotNull Entity entity, boolean force) {
-        if (entity instanceof ServerPlayer serverPlayer) EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.KEY_GOLEM_ICON, Component.translatable("gui.chrysalis.key_golem.grab_message"), true);
+
+        if (entity instanceof ServerPlayer serverPlayer) {
+            EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.KEY_GOLEM_ICON, Component.translatable("gui.chrysalis.key_golem.grab_message"), true);
+            Holder<MobEffect> mobEffect = this.getGivenEffect(this.getPersistentData());
+            if (mobEffect != null) serverPlayer.addEffect(this.getGivenEffectInstance(mobEffect), this);
+        }
+
         return super.startRiding(entity, force);
     }
 
@@ -238,12 +339,23 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     public void stopRiding() {
 
         if (this.getVehicle() instanceof Player player) {
-            this.playSound(CSoundEvents.KEY_GOLEM_DROP.get());
+
+            this.makeSound(CSoundEvents.KEY_GOLEM_DROP.get());
             player.swing(player.getUsedItemHand());
             if (player instanceof ServerPlayer serverPlayer) EventHelper.sendSystemMessageWithTwoIcons(serverPlayer, Chrysalis.MOD_ID, ComponentHelper.WARNING_ICON, Component.translatable("gui.chrysalis.key_golem.drop_message", this.getName().getString()).withStyle(ChatFormatting.RED), true);
+
+            Holder<MobEffect> mobEffect = this.getGivenEffect(this.getPersistentData());
+            for (MobEffectInstance mobEffectInstance : player.getActiveEffects()) if (mobEffectInstance.getEffect() == mobEffect && mobEffectInstance.getAmplifier() == this.getGivenEffectAmplifier() && mobEffectInstance.isAmbient()) player.removeEffect(mobEffectInstance.getEffect());
         }
 
         super.stopRiding();
+    }
+
+    @Override
+    public void rideTick() {
+        Holder<MobEffect> mobEffect = this.getGivenEffect(this.getPersistentData());
+        if (this.getVehicle() instanceof Player player && mobEffect != null && this.tickCount % 20 == 0) player.addEffect(this.getGivenEffectInstance(mobEffect), this);
+        super.rideTick();
     }
 
     public boolean isRidingPlayer() {
@@ -321,8 +433,12 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
         } else {
 
-            if (this.firstTick) this.setHitboxScale(this.defaultHitboxWidth);
-            if (this.isRidingPlayer() && this.tickCount % 48 == 0) this.playSound(CSoundEvents.KEY_GOLEM_PANT.get(), 1.0F, this.getRandom().triangle(1.0F, 0.2F));
+            if (this.firstTick) {
+                this.setHitboxScale(this.defaultHitboxWidth);
+                if (this.getVariant().isEnchanted() && this.getGivenEffect(this.getPersistentData()) == null) this.setRandomGivenEffect();
+            }
+
+            if (this.isRidingPlayer() && this.tickCount % 48 == 0) this.playSound(CSoundEvents.KEY_GOLEM_PANT.get(), 1.0F, this.getRandom().triangle(this.getVariant().isEnchanted() ? 0.8F : 1.0F, 0.2F));
             if (this.tryPlayingNoveltyAnimation(this, 70, CSoundEvents.KEY_GOLEM_NOVELTY.get(), 1000)) this.setPlayingNoveltyAnimation(true);
 
             if (this.isPlayingNoveltyAnimation() && this.noveltyAnimationTicks < 55) {
@@ -342,6 +458,21 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         }
 
         super.tick();
+    }
+
+    @Override
+    public void aiStep() {
+
+        if (!this.level().isClientSide()) {
+
+            if (EntityHelper.isLivingEntityMoving(this) || this.getVehicle() instanceof Player player && EntityHelper.isLivingEntityMoving(player)) ParticleHelper.emitParticlesAroundEntity(this, new RotatingDustParticleOptions(this.getVariant().particleColor(), false, true, true, 1.0F), 0.5D, 1);
+            else if (this.getVariant().isEnchanted() && this.tickCount % 10 == 0) ParticleHelper.emitParticlesAroundEntity(this, new SparkleParticleOptions(this.getVariant().particleColor(), false), 1.0D, 1);
+
+            Holder<MobEffect> mobEffect = this.getGivenEffect(this.getPersistentData());
+            if (mobEffect != null && this.tickCount % 20 == 0) this.addEffect(this.getGivenEffectInstance(mobEffect));
+        }
+
+        super.aiStep();
     }
 
     // endregion
@@ -387,7 +518,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         if (this.isFake()) {
             this.despawnFakeKeyGolem();
         } else {
-            this.playSound(CSoundEvents.KEY_GOLEM_GRAB.get());
+            this.makeSound(CSoundEvents.KEY_GOLEM_GRAB.get());
             ParticleHelper.emitParticlesAroundEntity(this, new SparkParticleOptions(this.getVariant().particleColor(), false, 1.5F), 0.5D, 5);
             player.ejectPassengers();
             this.startRiding(player, true);
@@ -397,7 +528,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     }
 
     public void despawnFakeKeyGolem() {
-        this.playSound(CSoundEvents.KEY_GOLEM_DISAPPEAR.get());
+        this.makeSound(CSoundEvents.KEY_GOLEM_DISAPPEAR.get());
         ParticleHelper.emitParticlesAroundEntity(this, new DustCloudParticleOptions(this.getVariant().particleColor(), false, true), 1.0D, 5);
         this.level().broadcastEntityEvent(this, (byte) 72);
         this.setDespawnTriggered();
@@ -419,6 +550,12 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
         return 80;
     }
 
+    @Override
+    public float getVoicePitch() {
+        if (this.getVariant().isEnchanted()) return (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 0.8F;
+        return super.getVoicePitch();
+    }
+
     @Override @Nullable
     protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
         return CSoundEvents.KEY_GOLEM_HURT.get();
@@ -431,11 +568,11 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
     @Override
     protected void playStepSound(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-        this.playSound(CSoundEvents.KEY_GOLEM_STEP.get());
+        this.makeSound(CSoundEvents.KEY_GOLEM_STEP.get());
     }
 
     public void playRattleSound(KeyGolem keyGolem) {
-        keyGolem.playSound(CSoundEvents.KEY_GOLEM_RATTLE.get());
+        keyGolem.makeSound(CSoundEvents.KEY_GOLEM_RATTLE.get());
         keyGolem.gameEvent(GameEvent.ENTITY_ACTION);
     }
 
