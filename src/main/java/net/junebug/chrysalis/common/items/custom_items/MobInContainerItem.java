@@ -76,17 +76,16 @@ public class MobInContainerItem extends Item implements DispensibleContainerItem
 
     @Override
     public void checkExtraContent(@Nullable Player player, @NotNull Level level, @NotNull ItemStack itemStack, @NotNull BlockPos blockPos) {
-        if (level instanceof ServerLevel serverLevel) {
 
-            Entity entity = this.entityType.spawn(serverLevel, itemStack, null, blockPos, EntitySpawnReason.BUCKET, true, false);
+        if (!(level instanceof ServerLevel serverLevel)) return;
+        Entity entity = this.entityType.spawn(serverLevel, itemStack, null, blockPos, EntitySpawnReason.BUCKET, true, false);
 
-            if (entity instanceof ContainerMob containerMob) {
-                containerMob.loadFromItemTag(itemStack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag());
-                containerMob.setFromItem(true);
-            }
-
-            serverLevel.gameEvent(player, GameEvent.ENTITY_PLACE, blockPos);
+        if (entity instanceof ContainerMob containerMob) {
+            containerMob.loadFromItemTag(itemStack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag());
+            containerMob.setFromItem(true);
         }
+
+        serverLevel.gameEvent(player, GameEvent.ENTITY_PLACE, blockPos);
     }
 
     @Override

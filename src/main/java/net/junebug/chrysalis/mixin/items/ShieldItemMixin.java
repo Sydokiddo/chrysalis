@@ -40,9 +40,7 @@ public class ShieldItemMixin extends Item {
                 list.add(Component.translatable("gui.chrysalis.item.banner_patterns").withStyle(ChatFormatting.GRAY));
             }
 
-            for (int layers = 0; layers < Math.min(bannerPatternLayers.layers().size(), 6); layers++) {
-                list.add(CommonComponents.space().append(bannerPatternLayers.layers().get(layers).description().withStyle(ChatFormatting.BLUE)));
-            }
+            for (int layers = 0; layers < Math.min(bannerPatternLayers.layers().size(), 6); layers++) list.add(CommonComponents.space().append(bannerPatternLayers.layers().get(layers).description().withStyle(ChatFormatting.BLUE)));
         }
     }
 }

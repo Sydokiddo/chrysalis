@@ -95,7 +95,7 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
             if (player instanceof ServerPlayer serverPlayer && !serverPlayer.level().isClientSide() && serverPlayer.isShiftKeyDown()) {
                 itemStack.set(DataComponents.ITEM_NAME, Component.translatable(this.getDescriptionId()));
                 itemStack.remove(DataComponents.ENTITY_DATA);
-                useItem(player, itemStack, CSoundEvents.COPYING_SPAWN_EGG_REMOVE_COPIED_ENTITY.get(), GameEvent.ITEM_INTERACT_FINISH);
+                useItem(serverPlayer, itemStack, CSoundEvents.COPYING_SPAWN_EGG_REMOVE_COPIED_ENTITY.get(), GameEvent.ITEM_INTERACT_FINISH);
                 sendMessage(serverPlayer, Component.translatable("gui.chrysalis.copying_spawn_egg.remove_message").withStyle(ChatFormatting.RED));
                 return InteractionResult.SUCCESS_SERVER.heldItemTransformedTo(player.getItemInHand(interactionHand));
             }
@@ -121,10 +121,10 @@ public class CopyingSpawnEggItem extends CustomSpawnEggItem {
         return InteractionResult.PASS;
     }
 
-    private static void useItem(Player player, ItemStack itemStack, SoundEvent soundEvent, Holder<GameEvent> gameEvent) {
-        player.playNotifySound(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
-        player.gameEvent(gameEvent);
-        player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
+    private static void useItem(ServerPlayer serverPlayer, ItemStack itemStack, SoundEvent soundEvent, Holder<GameEvent> gameEvent) {
+        serverPlayer.playNotifySound(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
+        serverPlayer.gameEvent(gameEvent);
+        serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
     }
 
     private static void sendMessage(ServerPlayer serverPlayer, Component component) {

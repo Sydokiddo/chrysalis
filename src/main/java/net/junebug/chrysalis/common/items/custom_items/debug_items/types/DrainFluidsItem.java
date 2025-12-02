@@ -1,12 +1,12 @@
 package net.junebug.chrysalis.common.items.custom_items.debug_items.types;
 
+import net.junebug.chrysalis.util.helpers.EntityHelper;
 import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.junebug.chrysalis.common.blocks.CBlockStateProperties;
 import net.junebug.chrysalis.common.blocks.custom_blocks.interfaces.FluidloggedState;
 import net.junebug.chrysalis.common.items.custom_items.debug_items.shared_classes.DebugUtilityItem;
@@ -57,8 +56,7 @@ public class DrainFluidsItem extends DebugUtilityItem {
             if (this.tryDrainingFluids(level, blockPos)) {
 
                 if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
-                    serverPlayer.playNotifySound(CSoundEvents.DRAIN_FLUIDS_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-                    serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+                    EntityHelper.playItemUseNotifySound(serverPlayer, CSoundEvents.DRAIN_FLUIDS_USE.get());
                     ParticleHelper.emitParticlesAroundEntity(serverPlayer, ParticleTypes.FALLING_WATER, 1.0D, 10);
                     serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                     DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.drain_fluids.message"));

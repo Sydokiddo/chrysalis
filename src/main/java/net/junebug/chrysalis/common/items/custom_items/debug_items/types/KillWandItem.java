@@ -43,18 +43,18 @@ public class KillWandItem extends ExtraReachDebugUtilityItem {
      **/
 
     @Override
-    public boolean hurtEnemy(@NotNull ItemStack itemStack, @NotNull LivingEntity target, LivingEntity self) {
+    public boolean hurtEnemy(@NotNull ItemStack itemStack, @NotNull LivingEntity target, @NotNull LivingEntity self) {
 
-        if (self.level() instanceof ServerLevel serverLevel && self instanceof Player player && canAttack(target, player)) {
+        if (!self.level().isClientSide() && self instanceof Player player && canAttack(target, player)) {
 
-            target.hurtServer(serverLevel, target.damageSources().source(CDamageTypes.KILL_WAND, player), Float.MAX_VALUE);
+            if (self.level() instanceof ServerLevel serverLevel) target.hurtServer(serverLevel, target.damageSources().source(CDamageTypes.KILL_WAND, player), Float.MAX_VALUE);
 
-            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverLevel, EntitySpawnReason.TRIGGERED);
+            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(self.level(), EntitySpawnReason.TRIGGERED);
             assert lightningBolt != null;
 
             lightningBolt.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
             lightningBolt.setVisualOnly(true);
-            serverLevel.addFreshEntity(lightningBolt);
+            self.level().addFreshEntity(lightningBolt);
 
             return true;
         }

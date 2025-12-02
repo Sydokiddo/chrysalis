@@ -47,8 +47,8 @@ public class RideMobItem extends DebugUtilityItem {
                 serverPlayer.setYRot(livingEntity.getYRot());
                 serverPlayer.startRiding(livingEntity);
 
-                serverPlayer.gameEvent(GameEvent.ENTITY_INTERACT);
                 serverPlayer.playNotifySound(CSoundEvents.RIDE_MOB_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                serverPlayer.gameEvent(GameEvent.ENTITY_INTERACT);
                 serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
                 DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("commands.ride.mount.success", serverPlayer.getName().getString(), livingEntity.getName().getString()));
             }

@@ -5,6 +5,8 @@ import net.minecraft.network.protocol.game.ClientboundSetCameraPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -140,6 +143,45 @@ public class EntityHelper {
 
     public static boolean isInDimension(Entity entity, ResourceKey<Level> dimension) {
         return entity.level().dimension() == dimension;
+    }
+
+    // endregion
+
+    // region Sounds
+
+    public static void playActionSound(Entity entity, SoundEvent soundEvent) {
+        entity.playSound(soundEvent);
+        entity.gameEvent(GameEvent.ENTITY_ACTION);
+    }
+
+    public static void playActionSoundWithVoicePitch(LivingEntity livingEntity, SoundEvent soundEvent) {
+        livingEntity.makeSound(soundEvent);
+        livingEntity.gameEvent(GameEvent.ENTITY_ACTION);
+    }
+
+    public static void playActionSoundWithCustomPitch(Entity entity, SoundEvent soundEvent, float soundPitch) {
+        entity.playSound(soundEvent, 1.0F, soundPitch);
+        entity.gameEvent(GameEvent.ENTITY_ACTION);
+    }
+
+    public static void playInteractSound(Entity entity, SoundEvent soundEvent) {
+        entity.playSound(soundEvent);
+        entity.gameEvent(GameEvent.ENTITY_INTERACT);
+    }
+
+    public static void playInteractSoundWithVoicePitch(LivingEntity livingEntity, SoundEvent soundEvent) {
+        livingEntity.makeSound(soundEvent);
+        livingEntity.gameEvent(GameEvent.ENTITY_INTERACT);
+    }
+
+    public static void playInteractSoundWithCustomPitch(Entity entity, SoundEvent soundEvent, float soundPitch) {
+        entity.playSound(soundEvent, 1.0F, soundPitch);
+        entity.gameEvent(GameEvent.ENTITY_INTERACT);
+    }
+
+    public static void playItemUseNotifySound(ServerPlayer serverPlayer, SoundEvent soundEvent) {
+        serverPlayer.playNotifySound(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
+        serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
     }
 
     // endregion

@@ -62,11 +62,10 @@ public class ItemHelper {
 
             ItemStack itemStack = player.getInventory().getItem(slots);
             BundleContents bundleContents = itemStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-            ItemContainerContents itemContainerContents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
 
             if (itemStack.is(item) || player.getOffhandItem().is(item) || player.getItemBySlot(EquipmentSlot.HEAD).is(item) || player.getItemBySlot(EquipmentSlot.CHEST).is(item) ||
             player.getItemBySlot(EquipmentSlot.LEGS).is(item) || player.getItemBySlot(EquipmentSlot.FEET).is(item) || !bundleContents.isEmpty() && bundleContents.itemCopyStream().anyMatch(matchingItems -> matchingItems.is(item)) ||
-            itemContainerContents.nonEmptyStream().anyMatch(matchingItems -> matchingItems.is(item))) return true;
+            itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).nonEmptyStream().anyMatch(matchingItems -> matchingItems.is(item))) return true;
         }
 
         return false;

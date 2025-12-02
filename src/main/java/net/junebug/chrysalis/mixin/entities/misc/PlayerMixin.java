@@ -62,7 +62,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
@@ -86,8 +85,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))
     private void chrysalis$addPlayerTags(CompoundTag compoundTag, CallbackInfo info) {
-        Optional<UUID> uUID = EntityHelper.getEncounteredMobUUID(this.chrysalis$player);
-        uUID.ifPresent(value -> compoundTag.putUUID(this.chrysalis$encounteredMobUuidTag, value));
+        EntityHelper.getEncounteredMobUUID(this.chrysalis$player).ifPresent(value -> compoundTag.putUUID(this.chrysalis$encounteredMobUuidTag, value));
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("RETURN"))

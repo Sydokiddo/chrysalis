@@ -4,6 +4,7 @@ import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.common.items.custom_items.debug_items.shared_classes.DebugUtilityItem;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
 import net.junebug.chrysalis.common.misc.CTags;
+import net.junebug.chrysalis.util.helpers.EntityHelper;
 import net.junebug.chrysalis.util.helpers.ItemHelper;
 import net.junebug.chrysalis.util.helpers.RegistryHelper;
 import net.minecraft.ChatFormatting;
@@ -12,7 +13,6 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,7 +20,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
@@ -54,8 +53,7 @@ public class EventTestItem extends DebugUtilityItem {
 
         if (this.emitEvent(level, player, interactionHand) && player instanceof ServerPlayer serverPlayer) {
 
-            serverPlayer.playNotifySound(CSoundEvents.EVENT_TEST_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-            serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+            EntityHelper.playItemUseNotifySound(serverPlayer, CSoundEvents.EVENT_TEST_USE.get());
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
             DebugUtilityItem.sendFeedbackMessage(true, serverPlayer, Component.translatable("gui.chrysalis.event_test.message", Component.translatable(this.description)));
             ItemHelper.addCooldownToTag(serverPlayer, CTags.EVENT_TEST_ITEMS, 25);
@@ -66,7 +64,6 @@ public class EventTestItem extends DebugUtilityItem {
         else return super.use(level, player, interactionHand);
     }
 
-    @SuppressWarnings("unused")
     public boolean emitEvent(Level level, Player player, @NotNull InteractionHand interactionHand) {
         return false;
     }

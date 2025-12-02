@@ -131,7 +131,7 @@ public class CRegistry {
         @SubscribeEvent
         private static void onClientSetup(FMLClientSetupEvent event) {
 
-            EntityRenderers.register(CEntities.SEAT.get(), SeatRenderer::new);
+            EntityRenderers.register(CEntities.SEAT.get(), NoopRenderer::new);
             EntityRenderers.register(CEntities.ENTITY_SPAWNER.get(), EntitySpawnerRenderer::new);
             EntityRenderers.register(CEntities.ENCOUNTER_SPAWNER.get(), EncounterSpawnerRenderer::new);
             EntityRenderers.register(CEntities.EARTHQUAKE.get(), NoopRenderer::new);

@@ -66,7 +66,7 @@ public class KeyGolemModel extends EntityModel<CLivingEntityRenderState> {
         if (!(CLivingEntityRenderState.livingEntity instanceof KeyGolem keyGolem)) return;
 
         this.animate(keyGolem.getIdleAnimation(), KeyGolemAnimations.IDLE, renderState.ageInTicks); // Idle Animation
-        this.animate(keyGolem.getNoveltyAnimation(), KeyGolemAnimations.NOVELTY, renderState.ageInTicks); // Novelty Animation
+        this.animate(keyGolem.getNoveltyAnimation(), KeyGolemAnimations.NOVELTY, renderState.ageInTicks, keyGolem.getVariant().isEnchanted() ? 0.8F : 1.0F); // Novelty Animation
         this.animate(keyGolem.fallAsleepAnimationState, KeyGolemAnimations.FALL_ASLEEP, renderState.ageInTicks); // Fall Asleep Animation
         this.animate(keyGolem.sleepAnimationState, KeyGolemAnimations.SLEEP, renderState.ageInTicks); // Sleep Animation
         this.animate(keyGolem.wakeUpAnimationState, KeyGolemAnimations.WAKE_UP, renderState.ageInTicks); // Wake Up Animation

@@ -7,7 +7,6 @@ import net.minecraft.client.animation.KeyframeAnimations;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@SuppressWarnings("unused")
 @OnlyIn(Dist.CLIENT)
 public class KeyGolemAnimations {
 

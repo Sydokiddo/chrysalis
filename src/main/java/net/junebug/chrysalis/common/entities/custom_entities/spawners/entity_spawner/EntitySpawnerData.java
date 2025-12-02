@@ -40,7 +40,7 @@ public class EntitySpawnerData {
 
         public static final Codec<DelayData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.optionalFieldOf("min", 60).forGetter(DelayData::min),
-            Codec.INT.optionalFieldOf("max", 129).forGetter(DelayData::max)
+            Codec.INT.optionalFieldOf("max", 128).forGetter(DelayData::max)
         ).apply(instance, DelayData::new));
     }
 

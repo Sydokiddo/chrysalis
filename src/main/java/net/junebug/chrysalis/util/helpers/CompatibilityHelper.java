@@ -37,10 +37,6 @@ public class CompatibilityHelper {
         return isModLoaded("hominid");
     }
 
-    public static boolean hasMausoleum() {
-        return isModLoaded("mausoleum");
-    }
-
     public static boolean hasRubinatedNether() {
         return isModLoaded("rubinated_nether");
     }

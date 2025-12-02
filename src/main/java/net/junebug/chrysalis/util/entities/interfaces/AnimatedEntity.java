@@ -1,10 +1,10 @@
 package net.junebug.chrysalis.util.entities.interfaces;
 
+import net.junebug.chrysalis.util.helpers.EntityHelper;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.gameevent.GameEvent;
 
 @SuppressWarnings("unused")
 public interface AnimatedEntity {
@@ -63,12 +63,22 @@ public interface AnimatedEntity {
         return !this.getNoveltyAnimation().isStarted() && !livingEntity.isRemoved() && !livingEntity.isDeadOrDying() && livingEntity.isEffectiveAi();
     }
 
-    default boolean tryPlayingNoveltyAnimation(LivingEntity livingEntity, int entityEvent, SoundEvent soundEvent, int chance) {
+    default boolean playNoveltyAnimation(LivingEntity livingEntity, int entityEvent, SoundEvent soundEvent, int chance) {
+        boolean success = this.tryPlayingNoveltyAnimation(livingEntity, entityEvent, chance);
+        if (success) EntityHelper.playActionSound(livingEntity, soundEvent);
+        return success;
+    }
+
+    default boolean playNoveltyAnimationWithCustomPitch(LivingEntity livingEntity, int entityEvent, SoundEvent soundEvent, float soundPitch, int chance) {
+        boolean success = this.tryPlayingNoveltyAnimation(livingEntity, entityEvent, chance);
+        if (success) EntityHelper.playActionSoundWithCustomPitch(livingEntity, soundEvent, soundPitch);
+        return success;
+    }
+
+    private boolean tryPlayingNoveltyAnimation(LivingEntity livingEntity, int entityEvent, int chance) {
 
         if (livingEntity.level().getRandom().nextInt(chance) == 0 && this.canPlayNoveltyAnimation(livingEntity)) {
             livingEntity.level().broadcastEntityEvent(livingEntity, (byte) entityEvent);
-            livingEntity.playSound(soundEvent);
-            livingEntity.gameEvent(GameEvent.ENTITY_ACTION);
             return true;
         }
 

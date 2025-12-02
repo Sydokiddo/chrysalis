@@ -1,12 +1,12 @@
 package net.junebug.chrysalis.common.items.custom_items.debug_items.types;
 
+import net.junebug.chrysalis.util.helpers.EntityHelper;
 import net.junebug.chrysalis.util.helpers.ParticleHelper;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.junebug.chrysalis.util.helpers.ItemHelper;
 import net.junebug.chrysalis.common.items.custom_items.debug_items.shared_classes.DebugUtilityItem;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
@@ -50,8 +49,7 @@ public class GiveResistanceItem extends DebugUtilityItem {
 
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 
-            serverPlayer.playNotifySound(CSoundEvents.GIVE_RESISTANCE_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-            serverPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+            EntityHelper.playItemUseNotifySound(serverPlayer, CSoundEvents.GIVE_RESISTANCE_USE.get());
             ParticleHelper.emitParticlesAroundEntity(serverPlayer, new BlockParticleOption(ParticleTypes.BLOCK, Blocks.IRON_BLOCK.defaultBlockState()), 1.0D, 10);
 
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));

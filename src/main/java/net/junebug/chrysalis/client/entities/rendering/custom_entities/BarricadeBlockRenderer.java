@@ -37,8 +37,7 @@ public class BarricadeBlockRenderer implements BlockEntityRenderer<BarricadeBloc
         if (barricadeBlockEntity.getLevel() != null && !disguisedState.isEmpty()) {
 
             boolean isVisible = disguisedState.getRenderShape() != RenderShape.INVISIBLE;
-            boolean canRender = this.canRenderWithInvisibleRenderShape(disguisedState) || isVisible;
-            if (!canRender) return;
+            if (!(this.canRenderWithInvisibleRenderShape(disguisedState) || isVisible)) return;
 
             poseStack.pushPose();
             var blockModel = this.blockRenderer.getBlockModel(isVisible ? disguisedState : Blocks.STONE.defaultBlockState());

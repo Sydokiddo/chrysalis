@@ -46,7 +46,6 @@ public interface Barricade extends AmbientSoundEmittingBlock {
     static void emitAmbientSoundsAndParticles(Level level, BlockPos blockPos, BlockState blockState, RandomSource randomSource, int particleColor, double particleOffset) {
 
         AmbientSoundEmittingBlock.playAmbientSound(level, blockPos, randomSource, CSoundEvents.BARRICADE_AMBIENT.get(), blockState.getValue(CBlockStateProperties.EMITS_AMBIENT_SOUNDS), 6000);
-
         if (!blockState.getValue(CBlockStateProperties.EMITS_PARTICLES) || randomSource.nextInt(20) != 0) return;
 
         for (int particleAmount = 0; particleAmount < 3; ++particleAmount) {

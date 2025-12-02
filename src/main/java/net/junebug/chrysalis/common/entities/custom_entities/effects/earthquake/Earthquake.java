@@ -94,7 +94,6 @@ public class Earthquake extends Entity implements TraceableEntity {
     public static void create(Level level, LivingEntity owner, Vec3 position, float yRot, float xRot, float scale, int lifeTime, float speed, float baseDamage, boolean damageScalesFromDifficulty, float baseKnockback, Holder<SoundEvent> travelSound, Holder<SoundEvent> hitSound, ParticleOptions particle, boolean canEmitCameraShake) {
 
         if (level.isClientSide()) return;
-
         Earthquake earthquake = new Earthquake(CEntities.EARTHQUAKE.get(), level);
 
         earthquake.setOwner(owner);
