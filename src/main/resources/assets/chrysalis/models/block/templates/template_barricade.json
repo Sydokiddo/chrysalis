@@ -1,6 +1,9 @@
 {
   "render_type": "minecraft:translucent",
   "ambientocclusion": false,
+  "textures": {
+    "particle": "#texture"
+  },
   "elements": [
     {
       "name": "Plane",

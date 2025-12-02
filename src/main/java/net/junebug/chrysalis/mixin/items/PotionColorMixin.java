@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.mixin.items;
 
+import net.junebug.chrysalis.common.CConfig;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -30,6 +31,7 @@ public abstract class PotionColorMixin {
 
     @Inject(at = @At("RETURN"), method = "getColor", cancellable = true)
     private void chrysalis$changeEffectColors(CallbackInfoReturnable<Integer> cir) {
+        if (!CConfig.MODIFIED_EFFECT_COLORS.get()) return;
         if (this.chrysalis$isEffect(MobEffects.BLINDNESS)) cir.setReturnValue(ComponentHelper.BLINDNESS_COLOR.getRGB());
         if (this.chrysalis$isEffect(MobEffects.DIG_SPEED)) cir.setReturnValue(ComponentHelper.HASTE_COLOR.getRGB());
         if (this.chrysalis$isEffect(MobEffects.DIG_SLOWDOWN)) cir.setReturnValue(ComponentHelper.MINING_FATIGUE_COLOR.getRGB());
@@ -38,6 +40,7 @@ public abstract class PotionColorMixin {
 
     @Inject(at = @At("RETURN"), method = "createParticleOptions", cancellable = true)
     private void chrysalis$changeEffectParticles(MobEffectInstance effect, CallbackInfoReturnable<ParticleOptions> cir) {
+        if (!CConfig.MODIFIED_EFFECT_COLORS.get()) return;
         if (this.chrysalis$isEffect(MobEffects.BLINDNESS)) cir.setReturnValue(this.chrysalis$createDefaultParticle(effect, ComponentHelper.BLINDNESS_COLOR.getRGB()));
         if (this.chrysalis$isEffect(MobEffects.DIG_SPEED)) cir.setReturnValue(this.chrysalis$createDefaultParticle(effect, ComponentHelper.HASTE_COLOR.getRGB()));
         if (this.chrysalis$isEffect(MobEffects.DIG_SLOWDOWN)) cir.setReturnValue(this.chrysalis$createDefaultParticle(effect, ComponentHelper.MINING_FATIGUE_COLOR.getRGB()));

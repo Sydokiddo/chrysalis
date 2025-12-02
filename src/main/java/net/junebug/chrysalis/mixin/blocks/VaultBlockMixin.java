@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.VaultBlock;
 import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
 import net.minecraft.world.level.block.entity.vault.VaultConfig;
 import net.junebug.chrysalis.common.items.CItems;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -35,9 +35,9 @@ public class VaultBlockMixin {
          **/
 
         @ModifyArg(method = "<init>()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;<init>(Lnet/minecraft/world/level/ItemLike;)V"))
-        private static ItemLike chrysalis$changeDefaultVaultKey(ItemLike original) {
-            if (CConfigOptions.CHANGE_DEFAULT_VAULT_KEY.get()) return CItems.KEY;
-            else return original;
+        private static ItemLike chrysalis$changeDefaultVaultKey(ItemLike oldValue) {
+            if (CConfig.CHANGE_DEFAULT_VAULT_KEY.get()) return CItems.KEY;
+            else return oldValue;
         }
     }
 }

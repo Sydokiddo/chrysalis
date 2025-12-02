@@ -1,5 +1,6 @@
 package net.junebug.chrysalis;
 
+import net.junebug.chrysalis.common.CConfig;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -17,7 +18,6 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.junebug.chrysalis.common.CRegistry;
 import net.junebug.chrysalis.util.helpers.CompatibilityHelper;
 import net.junebug.chrysalis.util.helpers.DebugHelper;
-import net.junebug.chrysalis.util.technical.config.CConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +51,7 @@ public class Chrysalis {
 
     public Chrysalis(ModContainer container, IEventBus eventBus) {
         CRegistry.registerAll(eventBus);
-        container.registerConfig(ModConfig.Type.COMMON, CConfig.CONFIG_SPEC);
+        container.registerConfig(ModConfig.Type.COMMON, CConfig.CConfigBuilder.CONFIG_SPEC);
         DebugHelper.sendInitializedMessage(Chrysalis.LOGGER, Chrysalis.MOD_VERSION, false);
     }
 

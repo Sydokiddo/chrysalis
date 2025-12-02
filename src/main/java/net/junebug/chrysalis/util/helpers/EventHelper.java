@@ -25,7 +25,7 @@ import net.junebug.chrysalis.util.entities.interfaces.EncounterMusicMob;
 import net.junebug.chrysalis.util.sounds.music.payloads.ClearMusicPayload;
 import net.junebug.chrysalis.util.sounds.music.payloads.QueuedMusicPayload;
 import net.junebug.chrysalis.util.sounds.music.payloads.ResetMusicFadePayload;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.joml.Vector4f;
 import java.util.List;
 
@@ -177,7 +177,7 @@ public class EventHelper {
      **/
 
     public static void playItemDroppingSound(Player player) {
-        if (CConfigOptions.ITEM_DROPPING_SOUND.get()) player.playNotifySound(CSoundEvents.ITEM_DROP.get(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
+        if (CConfig.ITEM_DROPPING_SOUND.get()) player.playNotifySound(CSoundEvents.ITEM_DROP.get(), player.getSoundSource(), 0.2F, 0.5F + player.level().getRandom().nextFloat() * 0.5F);
     }
 
     @OnlyIn(Dist.CLIENT)

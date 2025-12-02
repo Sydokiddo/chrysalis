@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.mixin.items;
 
+import net.junebug.chrysalis.common.CConfig;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -50,8 +51,9 @@ public abstract class ToolMaterialMixin {
          **/
 
         @ModifyConstant(method = "postHurtEnemy", constant = @Constant(intValue = 2))
-        private int chrysalis$changeAxeDurabilityLoss(int constant) {
-            return 1;
+        private int chrysalis$changeAxeDurabilityLoss(int oldValue) {
+            if (CConfig.REMOVE_TOOL_COMBAT_PENALTY.get()) return 1;
+            return oldValue;
         }
     }
 }

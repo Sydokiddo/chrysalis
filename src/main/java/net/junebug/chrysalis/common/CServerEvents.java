@@ -82,7 +82,6 @@ import net.junebug.chrysalis.util.helpers.ItemHelper;
 import net.junebug.chrysalis.util.sounds.codecs.BlockSoundData;
 import net.junebug.chrysalis.util.sounds.music.*;
 import net.junebug.chrysalis.util.technical.commands.*;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -177,7 +176,7 @@ public class CServerEvents {
                 if (heldKeyGolem != null) EntityHelper.tryDismountingCarriedEntityExtended(serverPlayer, heldKeyGolem);
                 else if (heldEntity != null) EntityHelper.tryDismountingCarriedEntity(serverPlayer, heldEntity);
 
-                if (serverPlayer.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.SKULLS) && serverPlayer.tickCount % 20 == 0) EntityHelper.updateCurrentShader(serverPlayer);
+                if (CConfig.MOB_HEAD_SHADERS.get() && serverPlayer.getItemBySlot(EquipmentSlot.HEAD).is(ItemTags.SKULLS) && serverPlayer.tickCount % 20 == 0) EntityHelper.updateCurrentShader(serverPlayer);
             }
         }
 
@@ -199,7 +198,7 @@ public class CServerEvents {
 
         @SubscribeEvent
         private static void mobGriefingEvents(EntityMobGriefingEvent event) {
-            if (!CConfigOptions.REWORKED_MOB_GRIEFING.get()) return;
+            if (!CConfig.REWORKED_MOB_GRIEFING.get()) return;
             if (event.getEntity() instanceof Allay allay && allay.getServer() != null) event.setCanGrief(allay.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
             if (event.getEntity() instanceof Evoker evoker && evoker.getServer() != null) event.setCanGrief(evoker.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));
             if (event.getEntity() instanceof Fox fox && fox.getServer() != null) event.setCanGrief(fox.getServer().getGameRules().getBoolean(CGameRules.RULE_MOB_WORLD_INTERACTIONS));

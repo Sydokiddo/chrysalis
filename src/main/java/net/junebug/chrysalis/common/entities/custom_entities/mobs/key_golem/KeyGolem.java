@@ -450,8 +450,8 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
                 if (this.getVariant().isEnchanted() && this.getGivenEffect(this.getPersistentData()) == null) this.setRandomGivenEffect();
             }
 
-            if (this.isRidingPlayer() && this.tickCount % 48 == 0) this.playSound(CSoundEvents.KEY_GOLEM_PANT.get(), 1.0F, this.getRandom().triangle(this.getVariant().isEnchanted() ? 0.8F : 1.0F, 0.2F));
-            if (this.playNoveltyAnimationWithCustomPitch(this, 70, CSoundEvents.KEY_GOLEM_NOVELTY.get(), this.getVariant().isEnchanted() ? 0.8F : 1.0F, 1000)) this.setPlayingNoveltyAnimation(true);
+            if (this.isRidingPlayer() && this.tickCount % 48 == 0) this.playSound(CSoundEvents.KEY_GOLEM_PANT.get(), 1.0F, this.getRandom().triangle(this.getBaseVoicePitch(), 0.2F));
+            if (this.playNoveltyAnimationWithCustomPitch(this, 70, CSoundEvents.KEY_GOLEM_NOVELTY.get(), this.getBaseVoicePitch(), 1000)) this.setPlayingNoveltyAnimation(true);
 
             if (this.isPlayingNoveltyAnimation() && this.noveltyAnimationTicks < 55) {
                 ++this.noveltyAnimationTicks;
@@ -536,7 +536,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
     }
 
     private boolean canRidePlayer(Player player) {
-        return !this.isRemoved() && !this.isDeadOrDying() && !this.isRidingPlayer() && !player.isCrouching() && player.hurtTime <= 0;
+        return !this.isRemoved() && !this.isDeadOrDying() && !this.isRidingPlayer() && !player.isShiftKeyDown() && player.hurtTime <= 0;
     }
 
     private boolean tryRidingPlayer(Player player) {
@@ -581,8 +581,12 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
 
     @Override
     public float getVoicePitch() {
-        if (this.getVariant().isEnchanted()) return (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 0.8F;
-        return super.getVoicePitch();
+        return (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + this.getBaseVoicePitch();
+    }
+
+    public float getBaseVoicePitch() {
+        if (this.getVariant().isEnchanted()) return 0.8F;
+        return 1.0F;
     }
 
     @Override @Nullable

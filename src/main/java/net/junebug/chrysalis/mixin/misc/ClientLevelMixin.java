@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.WeatherEffectRenderer;
 import net.minecraft.server.level.ParticleStatus;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -16,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.junebug.chrysalis.util.helpers.WorldGenHelper;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -38,13 +37,9 @@ public class ClientLevelMixin {
     @Inject(method = "getMarkerParticleTarget", at = @At("HEAD"), cancellable = true)
     private void chrysalis$renderStructureVoidParticle(CallbackInfoReturnable<Block> cir) {
 
-        assert this.minecraft.gameMode != null;
-        if (this.minecraft.gameMode.getPlayerMode() != GameType.CREATIVE || !CConfigOptions.IMPROVED_STRUCTURE_VOID_RENDERING.get()) return;
+        if (!CConfig.IMPROVED_STRUCTURE_VOID_RENDERING.get() || this.minecraft.gameMode == null || this.minecraft.player == null || this.minecraft.gameMode.getPlayerMode() != GameType.CREATIVE) return;
 
-        assert this.minecraft.player != null;
-        Item item = this.minecraft.player.getMainHandItem().getItem();
-
-        if (item instanceof BlockItem blockItem) {
+        if (this.minecraft.player.getMainHandItem().getItem() instanceof BlockItem blockItem) {
             Block block = blockItem.getBlock();
             if (block == Blocks.STRUCTURE_VOID) cir.setReturnValue(block);
         }

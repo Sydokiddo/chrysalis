@@ -11,10 +11,13 @@ public class CSharedFeatures {
 
     public static boolean
         EXAMPLE_FEATURE = false,
-        POTION_CHANGES = false,
         EXPERIENCE_BOTTLE_CHANGES = false,
+        POTION_CHANGES = false,
         AMETHYST_CHANGES = false,
         ECHO_SHARD_CHANGES = false,
+        ELECTROCUTED_EFFECT_SOURCES = false,
+        BLIGHT_MEAL = false,
+        SCOPING_STANDS = false,
         BUNDLE_BACKPORT = false,
         COPPER_GEAR_BACKPORT = false,
         NETHERITE_HORSE_ARMOR_BACKPORT = false
@@ -37,17 +40,17 @@ public class CSharedFeatures {
         }
     }
 
-    public static void enablePotionChanges() {
-        if (!POTION_CHANGES) {
-            POTION_CHANGES = true;
-            sendDebugMessage("Potion Changes");
-        }
-    }
-
     public static void enableExperienceBottleChanges() {
         if (!EXPERIENCE_BOTTLE_CHANGES) {
             EXPERIENCE_BOTTLE_CHANGES = true;
             sendDebugMessage("Experience Bottle Changes");
+        }
+    }
+
+    public static void enablePotionChanges() {
+        if (!POTION_CHANGES) {
+            POTION_CHANGES = true;
+            sendDebugMessage("Potion Changes");
         }
     }
 
@@ -63,6 +66,27 @@ public class CSharedFeatures {
         if (!ECHO_SHARD_CHANGES) {
             ECHO_SHARD_CHANGES = true;
             sendDebugMessage("Echo Shard Changes");
+        }
+    }
+
+    public static void enableElectrocutedEffectSources() {
+        if (!ELECTROCUTED_EFFECT_SOURCES) {
+            ELECTROCUTED_EFFECT_SOURCES = true;
+            sendDebugMessage("Electrocuted Effect Sources");
+        }
+    }
+
+    public static void enableBlightMeal() {
+        if (!BLIGHT_MEAL) {
+            BLIGHT_MEAL = true;
+            sendDebugMessage("Blight Meal");
+        }
+    }
+
+    public static void enableScopingStands() {
+        if (!SCOPING_STANDS) {
+            SCOPING_STANDS = true;
+            sendDebugMessage("Scoping Stands");
         }
     }
 

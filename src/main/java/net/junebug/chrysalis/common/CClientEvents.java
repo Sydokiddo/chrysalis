@@ -37,7 +37,6 @@ import net.junebug.chrysalis.util.sounds.music.payloads.ResetMusicFadePayload;
 import net.junebug.chrysalis.util.sounds.music.payloads.StructureChangedPayload;
 import net.junebug.chrysalis.util.technical.camera.CameraShakePayload;
 import net.junebug.chrysalis.util.technical.camera.CameraShakeResetPayload;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
 import net.junebug.chrysalis.util.technical.splash_texts.SplashTextLoader;
 import java.io.File;
 
@@ -71,7 +70,7 @@ public class CClientEvents {
 
         @SubscribeEvent
         private static void addModNameTooltip(ItemTooltipEvent event) {
-            ItemHelper.addModNameTooltip(CConfigOptions.CHRYSALIS_TOOLTIP.get(), Chrysalis.MOD_ID, ComponentHelper.CHRYSALIS_ICON, ComponentHelper.CHRYSALIS_COLOR.getRGB(), event.getItemStack(), event.getToolTip(), event.getContext());
+            ItemHelper.addModNameTooltip(CConfig.CHRYSALIS_TOOLTIP.get(), Chrysalis.MOD_ID, ComponentHelper.CHRYSALIS_ICON, ComponentHelper.CHRYSALIS_COLOR.getRGB(), event.getItemStack(), event.getToolTip(), event.getContext());
         }
 
         @SubscribeEvent
@@ -85,7 +84,7 @@ public class CClientEvents {
         }
 
         private static void playScreenshotSound(Minecraft minecraft) {
-            if (CConfigOptions.SCREENSHOT_SOUND.get()) EventHelper.playUIClickSound(minecraft, CSoundEvents.SCREENSHOT_SUCCESS);
+            if (CConfig.SCREENSHOT_SOUND.get()) EventHelper.playUIClickSound(minecraft, CSoundEvents.SCREENSHOT_SUCCESS);
         }
 
         @SubscribeEvent
@@ -93,7 +92,7 @@ public class CClientEvents {
 
             KeyGolem heldKeyGolem = KeyGolem.getHeldKeyGolem(event.getPlayer());
 
-            if (heldKeyGolem != null) {
+            if (CConfig.RENDER_KEY_GOLEMS_IN_FIRST_PERSON.get() && heldKeyGolem != null) {
                 event.getPoseStack().pushPose();
                 event.getPoseStack().scale(0.8F, 0.8F, 0.8F);
                 Minecraft.getInstance().getEntityRenderDispatcher().render(heldKeyGolem, event.getArm() == HumanoidArm.RIGHT ? -0.5D : 0.5D, 0.5D, 0.5D, Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false), event.getPoseStack(), event.getMultiBufferSource(), KeyGolemRenderer.getFirstPersonLightLevel(heldKeyGolem));
@@ -159,6 +158,8 @@ public class CClientEvents {
 
         @SubscribeEvent
         private static void addItemsToCreativeTabs(BuildCreativeModeTabContentsEvent event) {
+
+            if (!CConfig.ADD_CHRYSALIS_ITEMS_TO_VANILLA_TABS.get()) return;
 
             if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
                 event.insertAfter(Items.ENDER_EYE.getDefaultInstance(), CItems.NETHER_PORTAL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);

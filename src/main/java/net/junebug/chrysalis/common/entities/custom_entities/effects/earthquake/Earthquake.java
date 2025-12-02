@@ -2,6 +2,7 @@ package net.junebug.chrysalis.common.entities.custom_entities.effects.earthquake
 
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.client.particles.options.DustCloudParticleOptions;
+import net.junebug.chrysalis.common.CConfig;
 import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.junebug.chrysalis.common.misc.CDamageTypes;
 import net.junebug.chrysalis.common.misc.CGameEvents;
@@ -329,81 +330,80 @@ public class Earthquake extends Entity implements TraceableEntity {
 
             // region Custom Block Interactions
 
-            // region Falling Blocks
+            if (CConfig.EARTHQUAKES_INTERACTING_WITH_BLOCKS.get()) {
 
-            this.tryUpdatingFallingBlock(this.blockPosition());
-            this.tryUpdatingFallingBlock(this.blockPosition().below());
-            this.tryUpdatingFallingBlock(this.blockPosition().below().below());
+                // region Falling Blocks
 
-            // endregion
-
-            if (this.getInBlockState().is(CTags.EARTHQUAKE_COLLISIONS_IGNORED)) {
-
-                // region Pressure Plates
-
-                if (this.getInBlockState().getBlock() instanceof BasePressurePlateBlock basePressurePlateBlock) basePressurePlateBlock.entityInside(this.getInBlockState(), this.level(), this.blockPosition(), this);
+                this.tryUpdatingFallingBlock(this.blockPosition());
+                this.tryUpdatingFallingBlock(this.blockPosition().below());
+                this.tryUpdatingFallingBlock(this.blockPosition().below().below());
 
                 // endregion
 
-                // region Barrels
+                if (this.getInBlockState().is(CTags.EARTHQUAKE_COLLISIONS_IGNORED)) {
 
-                if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().getBlock() instanceof BarrelBlock && this.getInBlockState().getValue(BarrelBlock.FACING) == Direction.UP) {
-                    serverLevel.setBlockAndUpdate(this.blockPosition(), this.getInBlockState().setValue(BarrelBlock.FACING, this.getMotionDirection()));
-                    this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_HIT_BARREL.get(), true, GameEvent.BLOCK_CHANGE);
+                    // region Pressure Plates
+
+                    if (this.getInBlockState().getBlock() instanceof BasePressurePlateBlock basePressurePlateBlock) basePressurePlateBlock.entityInside(this.getInBlockState(), this.level(), this.blockPosition(), this);
+
+                    // endregion
+
+                    // region Barrels
+
+                    if (this.level() instanceof ServerLevel serverLevel && serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && this.getInBlockState().getBlock() instanceof BarrelBlock && this.getInBlockState().getValue(BarrelBlock.FACING) == Direction.UP) {
+                        serverLevel.setBlockAndUpdate(this.blockPosition(), this.getInBlockState().setValue(BarrelBlock.FACING, this.getMotionDirection()));
+                        this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_HIT_BARREL.get(), true, GameEvent.BLOCK_CHANGE);
+                    }
+
+                    // endregion
+
+                    // region Beehives
+
+                    if (this.getInBlockState().getBlock() instanceof BeehiveBlock beehiveBlock && this.level().getBlockEntity(this.blockPosition()) instanceof BeehiveBlockEntity beehiveBlockEntity) {
+                        beehiveBlockEntity.emptyAllLivingFromHive(this.getOwner() instanceof Player player ? player : null, this.getInBlockState(), BeehiveBlockEntity.BeeReleaseStatus.EMERGENCY);
+                        this.level().updateNeighbourForOutputSignal(this.blockPosition(), beehiveBlock);
+                        beehiveBlock.angerNearbyBees(this.level(), this.blockPosition());
+                        this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_HIT_BEEHIVE.get(), true, GameEvent.BLOCK_CHANGE);
+                    }
+
+                    // endregion
+
+                    // region Bells and Dragon Eggs
+
+                    if (this.getInBlockState().getBlock() instanceof BellBlock bellBlock) bellBlock.attemptToRing(this.level(), this.blockPosition(), this.getMotionDirection().getOpposite());
+                    if (this.getInBlockState().getBlock() instanceof DragonEggBlock dragonEggBlock) dragonEggBlock.teleport(this.getInBlockState(), this.level(), this.blockPosition());
+
+                    // endregion
                 }
 
+                // region Redstone Ore, Tripwires, and Note Blocks
+
+                if (this.getBlockStateOn().getBlock() instanceof RedStoneOreBlock) RedStoneOreBlock.interact(this.getBlockStateOn(), this.level(), this.getOnPos());
+                if (this.getInBlockState().getBlock() instanceof TripWireBlock tripWireBlock) tripWireBlock.entityInside(this.getInBlockState(), this.level(), this.blockPosition(), this);
+                if (this.getBlockStateOn().getBlock() instanceof NoteBlock noteBlock) noteBlock.playNote(this.getOwner() instanceof Player player ? player : this, this.getBlockStateOn(), this.level(), this.getOnPos());
+
                 // endregion
 
-                // region Beehives
+                // region Sweet Berry Bushes and Cave Vines
 
-                if (this.getInBlockState().getBlock() instanceof BeehiveBlock beehiveBlock && this.level().getBlockEntity(this.blockPosition()) instanceof BeehiveBlockEntity beehiveBlockEntity) {
-                    beehiveBlockEntity.emptyAllLivingFromHive(this.getOwner() instanceof Player player ? player : null, this.getInBlockState(), BeehiveBlockEntity.BeeReleaseStatus.EMERGENCY);
-                    this.level().updateNeighbourForOutputSignal(this.blockPosition(), beehiveBlock);
-                    beehiveBlock.angerNearbyBees(this.level(), this.blockPosition());
-                    this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_HIT_BEEHIVE.get(), true, GameEvent.BLOCK_CHANGE);
+                if (this.getInBlockState().getBlock() instanceof SweetBerryBushBlock) {
+
+                    int age = this.getInBlockState().getValue(SweetBerryBushBlock.AGE);
+
+                    if (age > 1) {
+
+                        Block.popResource(this.level(), this.blockPosition(), new ItemStack(Items.SWEET_BERRIES, (1 + this.getRandom().nextInt(2)) + (age == 3 ? 1 : 0)));
+                        this.level().playSound(null, this.blockPosition(), SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
+                        BlockState blockState = this.getInBlockState().setValue(SweetBerryBushBlock.AGE, 1);
+                        this.level().setBlockAndUpdate(this.blockPosition(), blockState);
+                        this.level().gameEvent(GameEvent.BLOCK_CHANGE, this.blockPosition(), GameEvent.Context.of(this, blockState));
+                    }
                 }
 
-                // endregion
-
-                // region Bells and Dragon Eggs
-
-                if (this.getInBlockState().getBlock() instanceof BellBlock bellBlock) bellBlock.attemptToRing(this.level(), this.blockPosition(), this.getMotionDirection().getOpposite());
-                if (this.getInBlockState().getBlock() instanceof DragonEggBlock dragonEggBlock) dragonEggBlock.teleport(this.getInBlockState(), this.level(), this.blockPosition());
+                if (this.getInBlockState().getBlock() instanceof CaveVines) CaveVines.use(this, this.getInBlockState(), this.level(), this.blockPosition());
 
                 // endregion
             }
-
-            // region Redstone Ore, Tripwires, and Note Blocks
-
-            if (this.getBlockStateOn().getBlock() instanceof RedStoneOreBlock) RedStoneOreBlock.interact(this.getBlockStateOn(), this.level(), this.getOnPos());
-            if (this.getInBlockState().getBlock() instanceof TripWireBlock tripWireBlock) tripWireBlock.entityInside(this.getInBlockState(), this.level(), this.blockPosition(), this);
-            if (this.getBlockStateOn().getBlock() instanceof NoteBlock noteBlock) noteBlock.playNote(this.getOwner() instanceof Player player ? player : this, this.getBlockStateOn(), this.level(), this.getOnPos());
-
-            // endregion
-
-            // region Sweet Berry Bushes
-
-            if (this.getInBlockState().getBlock() instanceof SweetBerryBushBlock) {
-
-                int age = this.getInBlockState().getValue(SweetBerryBushBlock.AGE);
-
-                if (age > 1) {
-
-                    Block.popResource(this.level(), this.blockPosition(), new ItemStack(Items.SWEET_BERRIES, (1 + this.getRandom().nextInt(2)) + (age == 3 ? 1 : 0)));
-                    this.level().playSound(null, this.blockPosition(), SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + this.getRandom().nextFloat() * 0.4F);
-                    BlockState blockState = this.getInBlockState().setValue(SweetBerryBushBlock.AGE, 1);
-                    this.level().setBlockAndUpdate(this.blockPosition(), blockState);
-                    this.level().gameEvent(GameEvent.BLOCK_CHANGE, this.blockPosition(), GameEvent.Context.of(this, blockState));
-                }
-            }
-
-            // endregion
-
-            // region Cave Vines
-
-            if (this.getInBlockState().getBlock() instanceof CaveVines) CaveVines.use(this, this.getInBlockState(), this.level(), this.blockPosition());
-
-            // endregion
 
             // endregion
 
@@ -427,29 +427,32 @@ public class Earthquake extends Entity implements TraceableEntity {
 
                 if (serverLevel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
 
-                    if (this.getInBlockState().getBlock() instanceof BaseFireBlock) this.setRemainingFireTicks(this.getLifeTime());
+                    if (CConfig.EARTHQUAKES_SPREADING_FIRE.get()) {
 
-                    if (this.isOnFire()) {
+                        if (this.getInBlockState().getBlock() instanceof BaseFireBlock) this.setRemainingFireTicks(this.getLifeTime());
 
-                        for (Direction direction : Direction.values()) {
+                        if (this.isOnFire()) {
 
-                            BlockPos blockPos = this.blockPosition();
-                            float fireRadius;
+                            for (Direction direction : Direction.values()) {
 
-                            for (fireRadius = 0.0F; fireRadius < (this.getScale() / 3.25F); ++fireRadius) {
+                                BlockPos blockPos = this.blockPosition();
+                                float fireRadius;
 
-                                if (fireRadius > 2.0F) break;
-                                if (this.getScale() > 1.5F) blockPos = blockPos.relative(direction);
+                                for (fireRadius = 0.0F; fireRadius < (this.getScale() / 3.25F); ++fireRadius) {
 
-                                if (BlockHelper.isFree(this.level(), blockPos) && this.level().getFluidState(blockPos).isEmpty() && this.level().getBlockState(blockPos.below()).isFaceSturdy(this.level(), blockPos.below(), Direction.UP)) {
-                                    this.level().setBlockAndUpdate(blockPos, BaseFireBlock.getState(this.level(), blockPos));
-                                    this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_SPREAD_FIRE.get(), true, GameEvent.BLOCK_PLACE);
+                                    if (fireRadius > 2.0F) break;
+                                    if (this.getScale() > 1.5F) blockPos = blockPos.relative(direction);
+
+                                    if (BlockHelper.isFree(this.level(), blockPos) && this.level().getFluidState(blockPos).isEmpty() && this.level().getBlockState(blockPos.below()).isFaceSturdy(this.level(), blockPos.below(), Direction.UP)) {
+                                        this.level().setBlockAndUpdate(blockPos, BaseFireBlock.getState(this.level(), blockPos));
+                                        this.playSoundAndGameEvent(CSoundEvents.EARTHQUAKE_SPREAD_FIRE.get(), true, GameEvent.BLOCK_PLACE);
+                                    }
                                 }
                             }
                         }
                     }
 
-                    if (this.getInBlockState().is(CTags.EARTHQUAKE_BREAKABLE)) {
+                    if (CConfig.EARTHQUAKES_BREAKING_BLOCKS.get() && this.getInBlockState().is(CTags.EARTHQUAKE_BREAKABLE)) {
                         if (this.getInBlockState().getBlock() instanceof DecoratedPotBlock) this.level().setBlockAndUpdate(this.blockPosition(), this.getInBlockState().setValue(BlockStateProperties.CRACKED, true));
                         if (this.getInBlockState().getBlock() instanceof TurtleEggBlock turtleEggBlock) turtleEggBlock.decreaseEggs(this.level(), this.blockPosition(), this.getInBlockState());
                         else this.level().destroyBlock(this.blockPosition(), true);

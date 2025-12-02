@@ -9,7 +9,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.PowderSnowBlock;
 import net.junebug.chrysalis.common.misc.CGameRules;
 import net.junebug.chrysalis.common.misc.CTags;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,7 +25,7 @@ public class PowderSnowBlockMixin {
 
     @ModifyArg(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
     private GameRules.Key<GameRules.BooleanValue> chrysalis$powderSnowWorldInteractionsGameRule(GameRules.Key<GameRules.BooleanValue> oldValue) {
-        if (!CConfigOptions.REWORKED_MOB_GRIEFING.get()) return oldValue;
+        if (!CConfig.REWORKED_MOB_GRIEFING.get()) return oldValue;
         return CGameRules.RULE_MOB_WORLD_INTERACTIONS;
     }
 

@@ -162,7 +162,7 @@ public class BarricadeFullBlock extends BaseEntityBlock implements Barricade, Si
 
         InteractionResult original = super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
 
-        if (player.canUseGameMasterBlocks() && !player.isCrouching() && level.getBlockEntity(blockPos) instanceof BarricadeBlockEntity barricadeBlockEntity && itemStack.getItem() instanceof BlockItem blockItem && !blockItem.getBlock().defaultBlockState().is(CTags.BARRICADES)) {
+        if (player.canUseGameMasterBlocks() && !player.isShiftKeyDown() && level.getBlockEntity(blockPos) instanceof BarricadeBlockEntity barricadeBlockEntity && itemStack.getItem() instanceof BlockItem blockItem && !blockItem.getBlock().defaultBlockState().is(CTags.BARRICADES)) {
 
             BlockState disguisedBlockState = blockItem.getBlock().defaultBlockState();
             if (disguisedBlockState == barricadeBlockEntity.getDisguisedBlockState()) return original;

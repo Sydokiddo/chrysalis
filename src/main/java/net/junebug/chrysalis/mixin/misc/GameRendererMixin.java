@@ -29,7 +29,7 @@ import net.junebug.chrysalis.util.technical.camera.CameraShakeHandler;
 import net.junebug.chrysalis.util.helpers.EventHelper;
 import net.junebug.chrysalis.common.misc.CTags;
 import net.junebug.chrysalis.common.status_effects.CStatusEffects;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -69,7 +69,7 @@ public abstract class GameRendererMixin {
 
     @Unique
     private boolean chrysalis$shouldDisplayShader(EntityType<?> entityType, LivingEntity livingEntity, TagKey<EntityType<?>> entityWithShader, Holder<MobEffect> shaderEffect, TagKey<Item> itemWithShader) {
-        return entityType.is(entityWithShader) || livingEntity.hasEffect(shaderEffect) || CConfigOptions.MOB_HEAD_SHADERS.get() && livingEntity.getItemBySlot(EquipmentSlot.HEAD).is(itemWithShader);
+        return entityType.is(entityWithShader) || livingEntity.hasEffect(shaderEffect) || CConfig.MOB_HEAD_SHADERS.get() && livingEntity.getItemBySlot(EquipmentSlot.HEAD).is(itemWithShader);
     }
 
     /**

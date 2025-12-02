@@ -3,6 +3,7 @@
     "minecraft:warden",
     "minecraft:armor_stand",
     "minecraft:bat",
-    "minecraft:creaking"
+    "minecraft:creaking",
+    "chrysalis:key_golem"
   ]
 }

@@ -2,6 +2,7 @@ package net.junebug.chrysalis.mixin.entities.misc;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.junebug.chrysalis.common.CConfig;
 import net.junebug.chrysalis.common.entities.custom_entities.mobs.key_golem.KeyGolem;
 import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.minecraft.client.Minecraft;
@@ -97,6 +98,12 @@ public abstract class EntityMixin {
         // Living Entity Interactions
 
         if (!(this.chrysalis$entity instanceof LivingEntity livingEntity)) return;
+
+        if (CConfig.DISMOUNTING_MOBS_FROM_VEHICLES.get() && livingEntity.getVehicle() != null && livingEntity.getVehicle().getType().is(CTags.VEHICLES) && player.isShiftKeyDown()) {
+            livingEntity.stopRiding();
+            cir.setReturnValue(InteractionResult.SUCCESS);
+        }
+
         if (itemStack.getItem() instanceof AggroWandItem) cir.setReturnValue(AggroWandItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof TameMobItem) cir.setReturnValue(TameMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));
         if (itemStack.getItem() instanceof RideMobItem) cir.setReturnValue(RideMobItem.doInteraction(itemStack, player, livingEntity, interactionHand));

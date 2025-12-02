@@ -1,6 +1,9 @@
 {
   "render_type": "minecraft:translucent",
   "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#texture"
+  },
   "elements": [
     {
       "name": "Block",

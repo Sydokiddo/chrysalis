@@ -8,7 +8,7 @@ import net.minecraft.world.level.storage.LevelSummary;
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.common.misc.CGameRules;
 import net.junebug.chrysalis.util.helpers.WorldGenHelper;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,7 +26,7 @@ public class LevelMixin {
 
     @Inject(method = "isExperimental", at = @At(value = "HEAD"), cancellable = true)
     private void chrysalis$disableExperimentalWorldWarning(CallbackInfoReturnable<Boolean> cir) {
-        if (Chrysalis.IS_DEBUG || !CConfigOptions.EXPERIMENTAL_WORLD_WARNING.get()) cir.setReturnValue(false);
+        if (Chrysalis.IS_DEBUG || !CConfig.EXPERIMENTAL_WORLD_WARNING.get()) cir.setReturnValue(false);
     }
 
     @Mixin(ServerLevel.class)
@@ -53,7 +53,7 @@ public class LevelMixin {
 
         @ModifyArg(method = "canTriggerBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
         private GameRules.Key<GameRules.BooleanValue> chrysalis$explosionBlockTriggerWorldInteractionsGameRule(GameRules.Key<GameRules.BooleanValue> oldValue) {
-            if (!CConfigOptions.REWORKED_MOB_GRIEFING.get()) return oldValue;
+            if (!CConfig.REWORKED_MOB_GRIEFING.get()) return oldValue;
             return CGameRules.RULE_MOB_WORLD_INTERACTIONS;
         }
     }

@@ -3,6 +3,7 @@ package net.junebug.chrysalis.common.misc;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
@@ -141,8 +142,11 @@ public class CTags {
 
     public static final TagKey<EntityType<?>>
         ALWAYS_PLAYS_ENCOUNTER_MUSIC = registerEntityTag("always_plays_encounter_music"),
+        CAN_ALWAYS_RIDE_BOATS = registerEntityTag("can_always_ride_boats"),
         CAN_SPAWN_ON_LEAVES = registerEntityTag("can_spawn_on_leaves"),
         CANNOT_RIDE_BOATS = registerEntityTag("cannot_ride_boats"),
+        CANNOT_RIDE_MINECARTS = registerEntityTag("cannot_ride_minecarts"),
+        CANNOT_RIDE_VEHICLES = registerEntityTag("cannot_ride_vehicles"),
         COPYING_SPAWN_EGG_BLACKLISTED = registerEntityTag("copying_spawn_egg_blacklisted"),
         DISPLAYS_KILL_WAND_CROSSHAIR = registerEntityTag("displays_kill_wand_crosshair"),
         DOES_NOT_FLIP_OVER_UPON_DEATH = registerEntityTag("does_not_flip_over_upon_death"),
@@ -182,6 +186,14 @@ public class CTags {
 
     // endregion
 
+    // region Mob Effect Tags
+
+    public static final TagKey<MobEffect>
+        ENCHANTED_KEY_GOLEM_DEFAULT_EFFECTS = registerMobEffectTag("enchanted_key_golem_default_effects")
+    ;
+
+    // endregion
+
     // region Biome Tags
 
     public static final TagKey<Biome>
@@ -206,6 +218,11 @@ public class CTags {
 
     private static TagKey<DamageType> registerDamageTypeTag(String name) {
         return TagKey.create(Registries.DAMAGE_TYPE, Chrysalis.resourceLocationId(name));
+    }
+
+    @SuppressWarnings("all")
+    private static TagKey<MobEffect> registerMobEffectTag(String name) {
+        return TagKey.create(Registries.MOB_EFFECT, Chrysalis.resourceLocationId(name));
     }
 
     @SuppressWarnings("all")

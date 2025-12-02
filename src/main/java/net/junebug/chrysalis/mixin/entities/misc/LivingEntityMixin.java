@@ -17,7 +17,7 @@ import net.junebug.chrysalis.common.misc.CAttributes;
 import net.junebug.chrysalis.common.misc.CDamageTypes;
 import net.junebug.chrysalis.common.status_effects.custom_status_effects.MobSightEffect;
 import net.junebug.chrysalis.util.helpers.EntityHelper;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
@@ -107,7 +107,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "onEquipItem", at = @At(value = "HEAD"))
     private void chrysalis$updateHeadItemShader(EquipmentSlot equipmentSlot, ItemStack oldItem, ItemStack newItem, CallbackInfo info) {
-        if (CConfigOptions.MOB_HEAD_SHADERS.get() && this.chrysalis$livingEntity instanceof ServerPlayer serverPlayer && equipmentSlot == EquipmentSlot.HEAD) EntityHelper.updateCurrentShader(serverPlayer);
+        if (CConfig.MOB_HEAD_SHADERS.get() && this.chrysalis$livingEntity instanceof ServerPlayer serverPlayer && equipmentSlot == EquipmentSlot.HEAD) EntityHelper.updateCurrentShader(serverPlayer);
     }
 
     /**

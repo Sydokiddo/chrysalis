@@ -27,7 +27,8 @@ import net.junebug.chrysalis.common.items.custom_items.CustomCrosshairItem;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
 import net.junebug.chrysalis.common.misc.CTags;
 import net.junebug.chrysalis.util.helpers.EventHelper;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -39,9 +40,10 @@ import java.util.function.Function;
 
 @OnlyIn(Dist.CLIENT)
 @Mixin(Gui.class)
-public class GuiMixin {
+public abstract class GuiMixin {
 
     @Shadow @Final private Minecraft minecraft;
+    @Shadow protected abstract int getVehicleMaxHearts(@Nullable LivingEntity vehicle);
 
     /**
      * Renders a custom crosshair if the player is holding an item that is an instance of the CustomCrosshairItem interface.
@@ -67,7 +69,8 @@ public class GuiMixin {
 
     @Redirect(method = "renderFoodLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int chrysalis$renderHungerBarWhileOnVehicle(Gui gui, LivingEntity livingEntity) {
-        return 0;
+        if (CConfig.RENDER_HUNGER_BAR_WHILE_RIDING_MOBS.get()) return 0;
+        return this.getVehicleMaxHearts(livingEntity);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -83,7 +86,7 @@ public class GuiMixin {
 
         @Inject(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V"))
         private void chrysalis$renderWaxedIcon(Font font, ItemStack itemStack, int offsetX, int offsetY, String string, CallbackInfo info) {
-            if (itemStack.is(CTags.WAXED_BLOCK_ITEMS) && CConfigOptions.REWORKED_TOOLTIPS.get()) {
+            if (CConfig.REWORKED_TOOLTIPS.get() && itemStack.is(CTags.WAXED_BLOCK_ITEMS)) {
                 this.pose().pushPose();
                 this.blitSprite(RenderType::guiTexturedOverlay, Chrysalis.resourceLocationId("hud/misc/waxed"), offsetX - 1, offsetY - 1, 8, 8);
                 this.pose().popPose();
@@ -134,7 +137,7 @@ public class GuiMixin {
 
         @Unique
         private void chrysalis$tryPlayingSound(Holder<SoundEvent> soundEvent, ClientLevel level) {
-            if (CConfigOptions.CREATIVE_MODE_ITEM_DELETING_SOUNDS.get()) EventHelper.playUIClickSound(Minecraft.getInstance(), soundEvent, 0.8F + level.getRandom().nextFloat() * 0.4F);
+            if (CConfig.CREATIVE_MODE_ITEM_DELETING_SOUND.get()) EventHelper.playUIClickSound(Minecraft.getInstance(), soundEvent, 0.8F + level.getRandom().nextFloat() * 0.4F);
         }
     }
 

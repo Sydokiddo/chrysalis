@@ -8,7 +8,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.common.items.CItems;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import java.util.function.Supplier;
 
 public class CCreativeModeTabs {
@@ -24,7 +24,7 @@ public class CCreativeModeTabs {
         .icon(() -> new ItemStack(CItems.ICON.get()))
         .title(Component.translatable("mod.chrysalis"))
         .displayItems((parameters, output) -> {
-            if (!CConfigOptions.CHRYSALIS_CREATIVE_MODE_TAB.get()) return;
+            if (!CConfig.CHRYSALIS_CREATIVE_MODE_TAB.get()) return;
             output.accept(CItems.HEAL);
             output.accept(CItems.FILL_HUNGER);
             output.accept(CItems.FILL_OXYGEN);

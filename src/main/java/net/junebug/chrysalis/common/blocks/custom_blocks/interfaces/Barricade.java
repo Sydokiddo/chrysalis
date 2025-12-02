@@ -80,7 +80,7 @@ public interface Barricade extends AmbientSoundEmittingBlock {
 
     static InteractionResult toggleVisibility(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Player player, double particleRadius, int particleAmount, InteractionResult defaultInteraction) {
 
-        if (player.canUseGameMasterBlocks() && player.isCrouching()) {
+        if (player.canUseGameMasterBlocks() && player.isShiftKeyDown()) {
 
             SoundEvent soundEvent;
             ParticleOptions particleOptions;

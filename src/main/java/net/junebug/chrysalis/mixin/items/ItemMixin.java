@@ -30,7 +30,7 @@ import net.junebug.chrysalis.common.misc.CGameRules;
 import net.junebug.chrysalis.util.helpers.ComponentHelper;
 import net.junebug.chrysalis.util.helpers.ItemHelper;
 import net.junebug.chrysalis.common.misc.CTags;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +57,7 @@ public class ItemMixin {
     @Inject(method = "appendHoverText", at = @At("RETURN"))
     private void chrysalis$addServerSideTooltips(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo info) {
 
-        if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
+        if (!CConfig.REWORKED_TOOLTIPS.get()) return;
 
         if (itemStack.has(CDataComponents.REMAINS_ON_DEATH) && !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
             MutableComponent remainsOnDeathIcon = ComponentHelper.REMAINS_ON_DEATH_ICON;
@@ -149,7 +149,7 @@ public class ItemMixin {
         @Inject(method = "getTooltipLines", at = @At("TAIL"))
         private void chrysalis$addClientSideTooltips(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir) {
 
-            if (CConfigOptions.REWORKED_TOOLTIPS.get()) {
+            if (CConfig.REWORKED_TOOLTIPS.get()) {
 
                 if (this.has(DataComponents.STORED_ENCHANTMENTS)) {
 

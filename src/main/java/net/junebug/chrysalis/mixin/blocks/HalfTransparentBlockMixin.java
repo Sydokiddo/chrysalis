@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.Tags;
 import net.junebug.chrysalis.common.misc.CTags;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,10 +32,10 @@ public class HalfTransparentBlockMixin extends Block {
         boolean original = super.skipRendering(blockState, adjacentBlockState, direction);
 
         TagKey<Block> glassBlocks = Tags.Blocks.GLASS_BLOCKS;
-        if (blockState.is(glassBlocks) && CConfigOptions.IMPROVED_GLASS_RENDERING.get()) cir.setReturnValue(adjacentBlockState.is(glassBlocks) || original);
+        if (CConfig.IMPROVED_GLASS_RENDERING.get() && blockState.is(glassBlocks)) cir.setReturnValue(adjacentBlockState.is(glassBlocks) || original);
 
         TagKey<Block> grates = CTags.GRATES;
-        if (blockState.is(grates) && CConfigOptions.IMPROVED_GRATE_RENDERING.get()) cir.setReturnValue(adjacentBlockState.is(grates) || original);
+        if (CConfig.IMPROVED_GRATE_RENDERING.get() && blockState.is(grates)) cir.setReturnValue(adjacentBlockState.is(grates) || original);
     }
 
     @SuppressWarnings("unused")
@@ -55,7 +55,7 @@ public class HalfTransparentBlockMixin extends Block {
 
             TagKey<Block> glassPanes = Tags.Blocks.GLASS_PANES;
 
-            if (blockState.is(glassPanes) && adjacentBlock.is(glassPanes) && CConfigOptions.IMPROVED_GLASS_RENDERING.get()) {
+            if (CConfig.IMPROVED_GLASS_RENDERING.get() && blockState.is(glassPanes) && adjacentBlock.is(glassPanes)) {
                 if (!direction.getAxis().isHorizontal()) cir.setReturnValue(true);
                 if (blockState.getValue(PROPERTY_BY_DIRECTION.get(direction)) && adjacentBlock.getValue(PROPERTY_BY_DIRECTION.get(direction.getOpposite()))) cir.setReturnValue(true);
             }

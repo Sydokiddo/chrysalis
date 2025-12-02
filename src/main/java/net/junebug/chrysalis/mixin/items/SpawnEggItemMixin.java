@@ -13,7 +13,7 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.junebug.chrysalis.common.misc.CSoundEvents;
 import net.junebug.chrysalis.util.helpers.ParticleHelper;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -50,6 +50,6 @@ public class SpawnEggItemMixin {
 
     @Unique
     private void chrysalis$playSpawnEggSound(Level level, BlockPos blockPos) {
-        if (CConfigOptions.SPAWN_EGG_USE_SOUND.get()) level.playSound(null, blockPos, CSoundEvents.SPAWN_EGG_USE.get(), SoundSource.NEUTRAL);
+        if (CConfig.SPAWN_EGG_USE_SOUND.get()) level.playSound(null, blockPos, CSoundEvents.SPAWN_EGG_USE.get(), SoundSource.NEUTRAL);
     }
 }

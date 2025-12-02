@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.mixin.misc;
 
+import net.junebug.chrysalis.common.CConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -50,7 +51,7 @@ public class SplashTextMixin {
         private void chrysalis$splashTextRefreshing(double x, double y, int keyPressed, CallbackInfoReturnable<Boolean> cir) {
 
             Minecraft minecraft = Minecraft.getInstance();
-            if (minecraft.screen == null || keyPressed != 0) return;
+            if (!CConfig.SPLASH_TEXT_REFRESHING.get() || minecraft.screen == null || keyPressed != 0) return;
 
             float splashTextX = minecraft.screen.width / 2.0F + 123.0F;
             float splashTextY = 69.0F;

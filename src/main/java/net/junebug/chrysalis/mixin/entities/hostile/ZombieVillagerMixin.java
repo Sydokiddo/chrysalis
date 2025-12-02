@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.junebug.chrysalis.common.misc.CTags;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,6 +38,6 @@ public class ZombieVillagerMixin extends Zombie {
 
     @Inject(method = "getConversionProgress", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextFloat()F", ordinal = 1))
     private void chrysalis$addConversionProgressSpeedUpParticles(CallbackInfoReturnable<Integer> cir) {
-        if (CConfigOptions.TELEGRAPHED_ZOMBIE_VILLAGER_CURING.get() && this.level() instanceof ServerLevel serverLevel) serverLevel.sendParticles(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 1.0D, this.getRandomZ(1.0D), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+        if (CConfig.TELEGRAPHED_ZOMBIE_VILLAGER_CURING.get() && this.level() instanceof ServerLevel serverLevel) serverLevel.sendParticles(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 1.0D, this.getRandomZ(1.0D), 1, 0.0D, 0.0D, 0.0D, 0.0D);
     }
 }

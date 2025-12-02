@@ -1,5 +1,6 @@
 package net.junebug.chrysalis.mixin.blocks;
 
+import net.junebug.chrysalis.common.CConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -28,6 +29,8 @@ public class CakeBlockMixin {
     @Inject(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/LevelAccessor;gameEvent(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/Holder;Lnet/minecraft/core/BlockPos;)V", ordinal = 0))
     private static void chrysalis$playCakeEatingSound(LevelAccessor level, BlockPos blockPos, BlockState blockState, Player player, CallbackInfoReturnable<InteractionResult> cir) {
 
+        if (!CConfig.CAKE_EATING_SOUND.get()) return;
+
         SoundEvent soundEvent;
         float volume;
 
@@ -44,6 +47,6 @@ public class CakeBlockMixin {
 
     @Inject(method = "useWithoutItem", at = @At("RETURN"))
     private void chrysalis$emitCakeEatingParticles(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        if (level instanceof ServerLevel serverLevel && player.canEat(false)) ParticleHelper.emitBlockParticlesAtHitPosition(serverLevel, blockState, blockHitResult, 0.0D, 8, 0.0D);
+        if (CConfig.CAKE_EATING_SOUND.get() && level instanceof ServerLevel serverLevel && player.canEat(false)) ParticleHelper.emitBlockParticlesAtHitPosition(serverLevel, blockState, blockHitResult, 0.0D, 8, 0.0D);
     }
 }

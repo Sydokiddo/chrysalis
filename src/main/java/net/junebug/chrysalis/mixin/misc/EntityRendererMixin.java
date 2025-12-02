@@ -32,7 +32,7 @@ import net.junebug.chrysalis.client.entities.rendering.render_states.CEntityRend
 import net.junebug.chrysalis.client.entities.rendering.render_states.CLivingEntityRenderState;
 import net.junebug.chrysalis.common.misc.CTags;
 import net.junebug.chrysalis.common.status_effects.CStatusEffects;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -105,7 +105,7 @@ public class EntityRendererMixin {
         @Inject(method = "renderNameTag(Lnet/minecraft/client/renderer/entity/state/PlayerRenderState;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At("HEAD"), cancellable = true)
         private void chrysalis$hidePlayerNameTag(PlayerRenderState playerRenderState, Component component, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, CallbackInfo info) {
 
-            if (!CConfigOptions.NAME_TAG_HIDING.get()) return;
+            if (!CConfig.NAME_TAG_HIDING.get()) return;
 
             for (ItemStack equipmentSlot : CLivingEntityRenderState.livingEntity.getArmorSlots()) {
                 if (equipmentSlot.is(CTags.HIDES_NAME_TAGS)) {
@@ -156,7 +156,7 @@ public class EntityRendererMixin {
 
         @ModifyArg(method = "createLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/geom/builders/CubeListBuilder;addBox(FFFFFFLnet/minecraft/client/model/geom/builders/CubeDeformation;)Lnet/minecraft/client/model/geom/builders/CubeListBuilder;"), index = 6)
         private static CubeDeformation chrysalis$fixElytraUVs(CubeDeformation cubeDeformation) {
-            if (CConfigOptions.FIXED_ELYTRA_MODEL.get()) return new CubeDeformation(1.0F, 1.0F, 0.2F);
+            if (CConfig.FIXED_ELYTRA_MODEL.get()) return new CubeDeformation(1.0F, 1.0F, 0.2F);
             return new CubeDeformation(1.0F);
         }
     }

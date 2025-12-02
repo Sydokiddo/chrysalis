@@ -19,7 +19,7 @@ import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.junebug.chrysalis.Chrysalis;
 import net.junebug.chrysalis.util.helpers.ComponentHelper;
 import net.junebug.chrysalis.util.helpers.ItemHelper;
-import net.junebug.chrysalis.util.technical.config.CConfigOptions;
+import net.junebug.chrysalis.common.CConfig;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -62,7 +62,7 @@ public class TooltipMixin extends Item {
 
         @Inject(method = "addToTooltip", at = @At("HEAD"), cancellable = true)
         private void chrysalis$changeArmorTrimTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, CallbackInfo info) {
-            if (this.showInTooltip() && CConfigOptions.REWORKED_TOOLTIPS.get()) {
+            if (CConfig.REWORKED_TOOLTIPS.get() && this.showInTooltip()) {
                 info.cancel();
                 consumer.accept(Component.translatable("gui.chrysalis.item.armor_trim", this.pattern().value().description().copy().withStyle(ChatFormatting.GRAY), this.material().value().description()).withStyle(this.material().value().description().getStyle()));
             }
@@ -82,7 +82,7 @@ public class TooltipMixin extends Item {
         @Inject(method = "addToTooltip", at = @At("HEAD"), cancellable = true)
         private void chrysalis$changeEnchantmentTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, CallbackInfo info) {
 
-            if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
+            if (!CConfig.REWORKED_TOOLTIPS.get()) return;
             info.cancel();
 
             if (this.showInTooltip) {
@@ -127,7 +127,7 @@ public class TooltipMixin extends Item {
         @Inject(method = "getFullname", at = @At("HEAD"), cancellable = true)
         private static void chrysalis$changeEnchantmentNameTooltip(Holder<Enchantment> enchantment, int level, CallbackInfoReturnable<Component> cir) {
 
-            if (!CConfigOptions.REWORKED_TOOLTIPS.get()) return;
+            if (!CConfig.REWORKED_TOOLTIPS.get()) return;
 
             int color;
             int darkerColor;

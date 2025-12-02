@@ -27,15 +27,15 @@ public class CStatusEffects {
     @SuppressWarnings("unused")
     public static final DeferredHolder<MobEffect, MobEffect>
         RADIANCE = MOB_EFFECTS.register("radiance", RadianceEffect::new),
+        HEALTH_REDUCTION = MOB_EFFECTS.register("health_reduction", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#B53F6B").getRGB()).addAttributeModifier(Attributes.MAX_HEALTH, Chrysalis.resourceLocationId("effect.health_reduction"), -4.0D, AttributeModifier.Operation.ADD_VALUE)),
+        BUILDING_FATIGUE = MOB_EFFECTS.register("building_fatigue", () -> new BuildPreventingEffect(MobEffectCategory.HARMFUL, Color.decode("#79553A").getRGB())),
         ARTHROPOD_SIGHT = MOB_EFFECTS.register("arthropod_sight", ArthropodSightEffect::new),
         BLIND_SIGHT = MOB_EFFECTS.register("blind_sight", BlindSightEffect::new),
         CREEPER_SIGHT = MOB_EFFECTS.register("creeper_sight", CreeperSightEffect::new),
         ENDER_SIGHT = MOB_EFFECTS.register("ender_sight", EnderSightEffect::new),
         RESIN_SIGHT = MOB_EFFECTS.register("resin_sight", ResinSightEffect::new),
         SKELETAL_SIGHT = MOB_EFFECTS.register("skeletal_sight", SkeletalSightEffect::new),
-        ZOMBIE_SIGHT = MOB_EFFECTS.register("zombie_sight", ZombieSightEffect::new),
-        HEALTH_REDUCTION = MOB_EFFECTS.register("health_reduction", () -> new GenericStatusEffect(MobEffectCategory.HARMFUL, Color.decode("#B53F6B").getRGB()).addAttributeModifier(Attributes.MAX_HEALTH, Chrysalis.resourceLocationId("effect.health_reduction"), -4.0D, AttributeModifier.Operation.ADD_VALUE)),
-        BUILDING_FATIGUE = MOB_EFFECTS.register("building_fatigue", () -> new BuildPreventingEffect(MobEffectCategory.HARMFUL, Color.decode("#79553A").getRGB()))
+        ZOMBIE_SIGHT = MOB_EFFECTS.register("zombie_sight", ZombieSightEffect::new)
     ;
 
     // endregion
