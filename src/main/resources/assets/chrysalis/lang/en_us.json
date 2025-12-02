@@ -486,6 +486,14 @@
   "chrysalis.configuration.client_side.tooltip": "Options that are applied on the client.",
   "chrysalis.configuration.client_side.button": "Edit",
 
+  "chrysalis.configuration.accessibility": "Accessibility Options",
+  "chrysalis.configuration.accessibility.tooltip": "Options related to accessibility, most of which are client-side.",
+  "chrysalis.configuration.accessibility.button": "Edit",
+
+  "chrysalis.configuration.debug_rendering": "Debug Rendering Options",
+  "chrysalis.configuration.debug_rendering.tooltip": "Options for debug rendering to display various pieces of information, all of which are client-side.",
+  "chrysalis.configuration.debug_rendering.button": "Edit",
+
   "chrysalis.configuration.items": "Items",
   "chrysalis.configuration.items.tooltip": "Options related to items.",
   "chrysalis.configuration.items.button": "Edit",
@@ -569,6 +577,9 @@
   "chrysalis.configuration.experimental_world_warning.tooltip": "Whether or not to show a warning message when creating or entering a world with experimental settings.",
   "chrysalis.configuration.splash_text_refreshing": "Splash Text Refreshing",
   "chrysalis.configuration.splash_text_refreshing.tooltip": "Clicking on the main menu's splash text will refresh it and display a different splash text.",
+
+  "chrysalis.configuration.camera_shake_intensity": "Camera Shake Intensity",
+  "chrysalis.configuration.camera_shake_intensity.tooltip": "The intensity of camera shakes.",
 
   "comment.chrysalis.game_rules": "GAME RULES",
 

@@ -450,7 +450,7 @@ public class KeyGolem extends AbstractGolem implements AnimatedEntity {
                 if (this.getVariant().isEnchanted() && this.getGivenEffect(this.getPersistentData()) == null) this.setRandomGivenEffect();
             }
 
-            if (this.isRidingPlayer() && this.tickCount % 48 == 0) this.playSound(CSoundEvents.KEY_GOLEM_PANT.get(), 1.0F, this.getRandom().triangle(this.getBaseVoicePitch(), 0.2F));
+            if (this.isRidingPlayer() && this.tickCount % 48 == 0) this.playSound(CSoundEvents.KEY_GOLEM_PANT.get(), 1.0F, Math.max(this.getRandom().triangle(this.getBaseVoicePitch(), 0.2F), 0.8F));
             if (this.playNoveltyAnimationWithCustomPitch(this, 70, CSoundEvents.KEY_GOLEM_NOVELTY.get(), this.getBaseVoicePitch(), 1000)) this.setPlayingNoveltyAnimation(true);
 
             if (this.isPlayingNoveltyAnimation() && this.noveltyAnimationTicks < 55) {

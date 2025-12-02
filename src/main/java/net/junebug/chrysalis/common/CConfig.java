@@ -127,6 +127,12 @@ public class CConfig {
                 builder.pop();
 
             builder.pop();
+
+            builder.push("accessibility");
+            builder.pop();
+
+            builder.push("debug_rendering");
+            builder.pop();
         }
 
         static {
