@@ -1,6 +1,8 @@
-package net.junebug.chrysalis.common;
+package net.junebug.chrysalis.common.events;
 
 import net.junebug.chrysalis.client.entities.rendering.custom_entities.KeyGolemRenderer;
+import net.junebug.chrysalis.common.CConfig;
+import net.junebug.chrysalis.common.CRegistry;
 import net.junebug.chrysalis.common.blocks.CBlocks;
 import net.junebug.chrysalis.common.entities.custom_entities.mobs.key_golem.KeyGolem;
 import net.junebug.chrysalis.util.helpers.ComponentHelper;

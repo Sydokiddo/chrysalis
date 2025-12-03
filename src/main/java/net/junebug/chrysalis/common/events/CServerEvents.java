@@ -1,5 +1,7 @@
-package net.junebug.chrysalis.common;
+package net.junebug.chrysalis.common.events;
 
+import net.junebug.chrysalis.common.CConfig;
+import net.junebug.chrysalis.common.CRegistry;
 import net.junebug.chrysalis.common.entities.custom_entities.mobs.key_golem.KeyGolem;
 import net.junebug.chrysalis.common.entities.registry.CEntities;
 import net.minecraft.advancements.CriteriaTriggers;

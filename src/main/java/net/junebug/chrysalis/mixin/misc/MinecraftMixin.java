@@ -17,7 +17,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.ScreenshotEvent;
 import net.junebug.chrysalis.Chrysalis;
-import net.junebug.chrysalis.common.CClientEvents;
+import net.junebug.chrysalis.common.events.CClientEvents;
 import net.junebug.chrysalis.util.helpers.EventHelper;
 import net.junebug.chrysalis.util.sounds.music.MusicTracker;
 import net.junebug.chrysalis.util.technical.ClipboardImage;
