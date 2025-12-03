@@ -38,8 +38,6 @@ public class Chrysalis {
         enableTestFeatures = false
     ;
 
-    // Test
-
     public static final String
         MOD_ID = "chrysalis",
         MOD_VERSION = FMLLoader.getLoadingModList().getModFileById(Chrysalis.MOD_ID).versionString()
